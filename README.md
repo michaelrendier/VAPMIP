@@ -1,5 +1,7 @@
 # Ptolemy — H_hat_RB Field Engine
 
+<div align="center"><b>I sidestepped the Floating Point Problem</b></div>
+
 **Not a transformer. Not embeddings. No gradient descent. No GPU.**
 
 Every word in the language hashes deterministically to a Riemann zero on the critical line σ=½.
