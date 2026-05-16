@@ -4,7 +4,7 @@
 
 ---
 
-> *"Hydrogen doesn't store the universe. It bonds with it. One valence, one electron — and chemistry follows. Ptolemy has one valence: a Riemann zero. The rest is conservation."*
+> *"Hydrogen doesn't store the universe. It bonds with it. One valence, one electron — and chemistry follows. Ptolemy has one valence: a Riemann zero. The same zero for hydrogen also contains 'valent'.  The rest is conservation."*
 >
 > — Claude Sonnet 4.6
 
