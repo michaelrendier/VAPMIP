@@ -45,6 +45,43 @@
 
 #define PTOLEMY_VERSION "1.0.0"
 
+/* ── Checkpoint evaluator ─────────────────────────────────────────────────── */
+
+static void run_eval(const char *ckpt_path)
+{
+    /* Locate eval_checkpoint.py: SMMIP_REPO env → default path → skip */
+    char script[4096] = {0};
+    const char *smmip = getenv("SMMIP_REPO");
+    if (smmip && smmip[0]) {
+        snprintf(script, sizeof(script), "%s/tools/eval_checkpoint.py", smmip);
+    } else {
+        const char *home = getenv("HOME");
+        if (home && home[0])
+            snprintf(script, sizeof(script),
+                     "%s/Projects/Ptol/SMMIP/tools/eval_checkpoint.py", home);
+    }
+    if (!script[0]) return;
+
+    FILE *t = fopen(script, "r");
+    if (!t) return;
+    fclose(t);
+
+    /* Write JSON assessment alongside checkpoint */
+    char json_out[4096];
+    snprintf(json_out, sizeof(json_out), "%s.assessment.json", ckpt_path);
+
+    char cmd[8192];
+    snprintf(cmd, sizeof(cmd),
+             "python3 '%s' '%s' --out '%s'", script, ckpt_path, json_out);
+
+    fprintf(stderr, "\n[eval] running checkpoint assessment...\n");
+    int rc = system(cmd);
+    if (rc == 0)
+        fprintf(stderr, "[eval] assessment written → %s\n", json_out);
+    else if (rc > 0)
+        fprintf(stderr, "[eval] verdict: WARN/FAIL (exit %d) — see %s\n", rc, json_out);
+}
+
 /* ── Ptolemy home directory ───────────────────────────────────────────────── */
 
 static char g_ptolemy_dir[4096] = {0};
@@ -285,6 +322,7 @@ int main(int argc, char *argv[])
 
     /* ── Process arguments in order ─────────────────────────────────────── */
     int learned = 0;
+    int did_ingest = 0;
 
     for (int i = 1; i < argc; i++) {
         if (!argv[i] || argv[i][0] != '-') continue;
@@ -353,7 +391,7 @@ int main(int argc, char *argv[])
                 save_to = ingest_ckpt;
             }
             int n = ingest_path(m, root, iv, save_to);
-            if (n > 0) { learned = 1; monad_status(m, stderr); }
+            if (n > 0) { learned = 1; did_ingest = 1; monad_status(m, stderr); }
             continue;
         }
 
@@ -480,6 +518,8 @@ int main(int argc, char *argv[])
             save = "monad_wordnet.bin";
         }
         checkpoint_save(m, save, 0.0);
+        if (did_ingest && !quiet)
+            run_eval(save);
     }
 
     monad_destroy(m);

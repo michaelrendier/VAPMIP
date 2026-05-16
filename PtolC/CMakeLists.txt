@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(ptolemy
     VERSION     1.0.0
-    DESCRIPTION "RedBlue Geometries Engine Field Engine — C Monad (Native Space)"
+    DESCRIPTION "H_hat_RB Field Engine — C Monad (Native Space)"
     LANGUAGES   C
 )
 
@@ -143,7 +143,7 @@ message(STATUS "Override with: PTOLEMY_HOME or PTOLEMY_CHECKPOINT env vars")
 
 # ── Summary ───────────────────────────────────────────────────────────────────
 message(STATUS "")
-message(STATUS "ptolemy ${PROJECT_VERSION} — RedBlue Geometries Engine Field Engine")
+message(STATUS "ptolemy ${PROJECT_VERSION} — H_hat_RB Field Engine")
 message(STATUS "  N = 25000 Riemann zeros")
 message(STATUS "  Native Space: radial complex spherical polar (σ₀–σ₄)")
 message(STATUS "  σ = ½ forced by Noether balance")

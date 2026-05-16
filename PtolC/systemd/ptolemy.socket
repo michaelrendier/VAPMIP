@@ -1,5 +1,5 @@
 [Unit]
-Description=Ptolemy RedBlue Geometries Engine Field Engine Socket
+Description=Ptolemy H_hat_RB Field Engine Socket
 Documentation=man:ptolemy(1)
 
 [Socket]

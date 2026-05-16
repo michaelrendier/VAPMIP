@@ -1,7 +1,7 @@
 /*
  * PtolC/monad.h — C Monad struct and API.
  *
- * Implements RedBlue Geometries Engine field engine: learn(), hear(), speak().
+ * Implements H_hat_RB field engine: learn(), hear(), speak().
  * speak() is Ptolemy's prerogative — called internally by hear output.
  * External CLI exposes: -l (learn) and -h (hear→speak).
  *

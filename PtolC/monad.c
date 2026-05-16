@@ -1,5 +1,5 @@
 /*
- * PtolC/monad.c — C Monad: RedBlue Geometries Engine field engine.
+ * PtolC/monad.c — C Monad: H_hat_RB field engine.
  *
  * learn()  deepens the beta field.
  * hear()   projects text onto the zero basis (internal).

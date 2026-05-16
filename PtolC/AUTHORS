@@ -1,4 +1,4 @@
-PtolC — RedBlue Geometries Engine Field Engine (C Monad)
+PtolC — H_hat_RB Field Engine (C Monad)
 
 Primary author:
   Michael Rendier <the.wandering.god@gmail.com>
@@ -8,7 +8,7 @@ Development session:
   CLAUDE-SMMNIP-00729-56714-24600
 
 Mathematical foundation:
-  SMIP — Standard Model Noether Network Information Propagation
+  SMNNIP — Standard Model Noether Network Information Propagation
   Ainulindalë conjecture: https://github.com/michaelrendier/Ainulindale
 
 The Monad is named after Ptolemy II Philadelphos, who commissioned the

@@ -1,5 +1,5 @@
 [Unit]
-Description=Ptolemy RedBlue Geometries Engine Field Engine Daemon
+Description=Ptolemy H_hat_RB Field Engine Daemon
 Documentation=man:ptolemy(1)
 Requires=ptolemy.socket
 After=ptolemy.socket

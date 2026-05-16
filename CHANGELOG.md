@@ -6,15 +6,20 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ## v1.112 — 2026-05-16
 
-**PtolC — checkpoint default path fix + terminology cleanup**
+**PtolC — auto checkpoint assessment after -I ingest**
 
 ### Binary
 
+- `run_eval()` — after every `-I` ingest, automatically runs
+  `tools/eval_checkpoint.py` on the saved checkpoint; prints the full
+  assessment report and writes `<checkpoint>.assessment.json` alongside
+  the `.bin`. Locates script via `$SMMIP_REPO` env or default
+  `~/Projects/Ptol/SMMIP/tools/eval_checkpoint.py`; skips silently if
+  not found
 - `find_checkpoint()` — fixed null-termination loop bug: loop exited on
-  first NULL candidate (flag_path) before reaching `~/.ptolemy/monad_wordnet.bin`;
-  `ptolemy -s` without `-c` now loads the default checkpoint correctly
-- `print_version()` / `print_usage()` — "RedBlue Geometries Engine Field Engine" →
-  "RedBlue Geometries Engine" (terminology propagated to binary output)
+  first NULL candidate before reaching `~/.ptolemy/monad_wordnet.bin`
+- `print_version()` / `print_usage()` — "H_hat_RB Field Engine" →
+  "RedBlue Geometries Engine"
 
 ### Python
 
@@ -22,10 +27,8 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ### Project
 
-- `PtolC/TODO` — GNU-standard open work items file added; post-commit hook
-  auto-syncs TODO to `michaelrendier/SMMIP` on every commit that touches it
-- Checkpoint milestone: Documents ingest complete — 23,895 vocab,
-  9,600,426 A-edges, 34,494,302 words; baseline `monad_wordnet.bin` 148 MB
+- `PtolC/TODO` — GNU-standard open work items file; post-commit hook
+  auto-syncs to `michaelrendier/SMMIP` on every commit that touches it
 
 ---
 
