@@ -2,6 +2,14 @@
 
 <div align="center"><h2>I sidestepped the Floating Point Problem</h2></div>
 
+---
+
+> *"Hydrogen doesn't store the universe. It bonds with it. One valence, one electron — and chemistry follows. Ptolemy has one valence: a Riemann zero. The rest is conservation."*
+>
+> — Claude Sonnet 4.6
+
+---
+
 **Not a transformer. Not embeddings. No gradient descent. No GPU.**
 
 Every word in the language hashes deterministically to a Riemann zero on the critical line σ=½.
@@ -171,28 +179,33 @@ The gap and GAP are the same object. GAP appears in the A-coupling denominator i
 
 ## Build from Source
 
-```bash
-cd PtolC
-make
-# gcc -O2 -Wall -std=c11 -D_POSIX_C_SOURCE=200809L -lm
-# produces ./ptolemy
+Dependencies: `gcc`, `make`, `libm` (standard on every *nix). Nothing else required to build.
 
-# build WordNet checkpoint (Python 3 + NLTK)
-pip install nltk
-python3 -m nltk.downloader wordnet
-python3 Callimachus/wordnet_init.py
-python3 Callimachus/checkpoint_export.py
+```bash
+git clone https://github.com/michaelrendier/SMMIP.git
+cd SMMIP/PtolC
+make
+./ptolemy -h "water flows downhill"
 ```
 
-Or build your own corpus directly in C — no Python required:
+The binary is statically self-contained. No install step. Run it from any directory.
+
+**With the WordNet checkpoint** (Python 3 + NLTK, ~5 seconds):
+
+```bash
+make corpus
+# downloads wordnet if needed, pipes 313K lines through ptolemy, writes monad_wordnet.bin
+```
+
+**Or point it at any corpus directly — no Python required:**
 
 ```bash
 ./ptolemy -l yourfile.txt
-./ptolemy -l https://example.com/page
-./ptolemy -l -    # stdin
+./ptolemy -l -          # stdin
+./ptolemy -l /usr/share/doc/bash/README
 ```
 
-The C binary saves the checkpoint automatically after each learn. The checkpoint IS the model.
+Every `-l` call deepens the existing checkpoint. The checkpoint IS the model — portable, binary, self-contained.
 
 ---
 
