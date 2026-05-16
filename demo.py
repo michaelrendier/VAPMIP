@@ -34,10 +34,10 @@ def demo_H():
 
 
 def demo_S_adjoint():
-    """S — Self-Adjoint: H_hat_RB = H_hat_RB†"""
+    """S — Self-Adjoint: RedBlue Geometries Engine = RedBlue Geometries Engine†"""
     print(SEP)
     print('S — Self-Adjoint Hamiltonian')
-    print('H_hat_RB = Σ_p p^{−σ} [R̂_p ⊗ ∂̂ + ∂̂† ⊗ B̂_p]')
+    print('RedBlue Geometries Engine = Σ_p p^{−σ} [R̂_p ⊗ ∂̂ + ∂̂† ⊗ B̂_p]')
     print()
     print('Facet projections by σ:')
     facets = [

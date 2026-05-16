@@ -13,7 +13,7 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 - `find_checkpoint()` — fixed null-termination loop bug: loop exited on
   first NULL candidate (flag_path) before reaching `~/.ptolemy/monad_wordnet.bin`;
   `ptolemy -s` without `-c` now loads the default checkpoint correctly
-- `print_version()` / `print_usage()` — "H_hat_RB Field Engine" →
+- `print_version()` / `print_usage()` — "RedBlue Geometries Engine Field Engine" →
   "RedBlue Geometries Engine" (terminology propagated to binary output)
 
 ### Python

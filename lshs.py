@@ -8,7 +8,7 @@ Lagrange · Self-Adjoint · Hyperindexing · Speaking
 Single file. Pure Python. Zero external dependencies.
 
 L  Lagrangian field evolution    — learn() deepens V(β), Yang-Mills A field
-S  Self-Adjoint Hamiltonian      — H_hat_RB = H_hat_RB†, σ forced to ½
+S  Self-Adjoint Hamiltonian      — RedBlue Geometries Engine = RedBlue Geometries Engine†, σ forced to ½
 H  HyperIndex                    — word → Riemann zero, Noether balance
 S  Speaking                      — J^μ Noether current as audible response
 
@@ -147,8 +147,8 @@ def hyperindex(word: str, zeros: List[float]) -> SemanticZero:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# S — Self-Adjoint Hamiltonian H_hat_RB
-# H_hat_RB = Σ_p p^{−σ} [R̂_p ⊗ ∂̂_∂M + ∂̂_∂M† ⊗ B̂_p]
+# S — Self-Adjoint Hamiltonian RedBlue Geometries Engine
+# RedBlue Geometries Engine = Σ_p p^{−σ} [R̂_p ⊗ ∂̂_∂M + ∂̂_∂M† ⊗ B̂_p]
 # R̂_p† = B̂_p  (functional equation ξ(s)=ξ(1−s) as operator identity)
 # Self-adjoint = truth-preserving, not form-preserving
 # ─────────────────────────────────────────────────────────────────────────────
@@ -176,7 +176,7 @@ def blue_energy(x: float, p: float, g2: float = 1.0) -> float:
 def self_adjoint_check(sigma: float, x: float, p: float,
                         n_primes: int = 20) -> Dict[str, Any]:
     """
-    S: Evaluate H_hat_RB at (σ, x, p). Verify self-adjointness.
+    S: Evaluate RedBlue Geometries Engine at (σ, x, p). Verify self-adjointness.
     At σ=½: E_Red = E_Blue on the critical line (balance = 0).
     Self-adjoint means the operator preserves truth across representations.
     '1 = 1' and 'A! = A' are self-adjoint: different forms, identical truth.
@@ -352,7 +352,7 @@ class LSHS:
 
     def S_check(self, x: float = 1.5, p: float = 0.3) -> Dict[str, Any]:
         """
-        Verify H_hat_RB = H_hat_RB† at σ=½.
+        Verify RedBlue Geometries Engine = RedBlue Geometries Engine† at σ=½.
         Returns balance (should be ~0 on critical line) and self_adjoint flag.
         """
         return self_adjoint_check(0.5, x, p)
@@ -516,7 +516,7 @@ if __name__ == '__main__':
     print('  Same γ, different languages. Not by coordination. Forced.')
 
     # S: Self-adjoint check
-    print('\nS — Self-Adjoint (H_hat_RB = H_hat_RB†)')
+    print('\nS — Self-Adjoint (RedBlue Geometries Engine = RedBlue Geometries Engine†)')
     r = m.S_check(x=1.5, p=0.3)
     print(f'  σ=½  x={r["x"]}  p={r["p"]}')
     print(f'  E_red={r["E_red"]:.6f}  E_blue={r["E_blue"]:.6f}')
