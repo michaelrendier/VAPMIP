@@ -24,9 +24,12 @@ EVAL_SCRIPT="${SMMIP_DIR}/tools/eval_checkpoint.py"
 CKPT_DIR="${SMMIP_DIR}/checkpoints"
 README="${CKPT_DIR}/README.md"
 
+DIRTY_DIR="${PTOLEMY_DIR}/dirty"
+mkdir -p "${DIRTY_DIR}"
+
 WORDNET_BIN="${PTOLEMY_DIR}/monad_wordnet.bin"
 ENGLISH_BIN="${PTOLEMY_DIR}/monad_English.bin"
-ARCHIVE_BIN="${PTOLEMY_DIR}/${SLUG}.bin"
+ARCHIVE_BIN="${DIRTY_DIR}/${SLUG}.bin"
 ASSESSMENT_JSON="${CKPT_DIR}/${SLUG}.assessment.json"
 
 # ── Preflight ──────────────────────────────────────────────────────────────────
@@ -144,7 +147,8 @@ echo ""
 echo "Done. Baseline restored:"
 ls -lh "${WORDNET_BIN}"
 echo ""
-echo "Archive kept at: ${ARCHIVE_BIN}"
+echo "Archive kept at: ${DIRTY_DIR}/"
+ls -lh "${DIRTY_DIR}/"
 echo ""
 echo "To begin a fresh ingest:"
 echo "  ptolemy -I ~/Documents"
