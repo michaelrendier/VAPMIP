@@ -2,6 +2,13 @@ PtolC NEWS — user-visible changes by release
 
 See CHANGELOG.md in the repository root for full detail.
 
+Version 1.114 (2026-05-17)
+  * -W <prompt>: Wick-rotated speak mode.  Applies σ → iσ to the Noether
+    current: J_wick = β × E² × sin(σ·E).  Selects words by the imaginary
+    (oscillatory) component of the field.  Run alongside -h to measure
+    the divergence between real and imaginary Noether currents.
+  * monad_speak_wick() added to monad.c / monad.h.
+
 Version 1.113 (2026-05-17)
   * monad_speak() output filtered through token_accept(NS_FT_PROSE):
     consonant clusters, apostrophe fragments, and hex strings are now

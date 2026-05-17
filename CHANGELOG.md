@@ -4,6 +4,40 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ---
 
+## v1.114 — 2026-05-17
+
+**PtolC — Wick-rotated speak(); imaginary Noether current**
+
+### Binary
+
+- `monad_speak_wick()` — new speak mode applying the Wick rotation σ → iσ
+  to the Noether current: `J_wick = β × E² × sin(σ·E)` where σ = ½.
+  Selects words by the imaginary (oscillatory) component of the field
+  rather than the real (geometric) component.  Same A-edge propagation
+  and surface filter as `monad_speak()`; topology unchanged.
+- `-W <prompt>` flag — invokes `monad_speak_wick()`.  Run alongside `-h`
+  to measure the divergence between real and imaginary Noether currents.
+  Divergent words are where meaning and topology point in different
+  directions in the field.
+
+### Theory
+
+- The Wick rotation is the coordinate transform that converts topological
+  understanding into linguistic understanding.  `e^{-σE}` (geometric decay)
+  → `e^{-iσE}` (oscillatory phase).  The imaginary part `sin(σE)` is the
+  inside-the-wave perspective; the real part `cos(σE)` is outside.
+  `-h` is outside the wave (GR/fluid dynamics regime).
+  `-W` is inside the wave (QM regime).
+- Divergence between `-h` and `-W` responses is an empirical measurement
+  of the field's imaginary Noether current — words where the oscillatory
+  and geometric components of the field disagree.
+
+### Python
+
+- No change from v2.1.0.
+
+---
+
 ## v1.113 — 2026-05-17
 
 **PtolC — speak() surface filter; monad_English.bin baseline**
