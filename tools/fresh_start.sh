@@ -25,11 +25,12 @@ CKPT_DIR="${SMMIP_DIR}/checkpoints"
 README="${CKPT_DIR}/README.md"
 
 DIRTY_DIR="${PTOLEMY_DIR}/dirty"
-mkdir -p "${DIRTY_DIR}"
+CLEAN_DIR="${PTOLEMY_DIR}/clean"
+mkdir -p "${DIRTY_DIR}" "${CLEAN_DIR}"
 
 WORDNET_BIN="${PTOLEMY_DIR}/monad_wordnet.bin"
 ENGLISH_BIN="${PTOLEMY_DIR}/monad_English.bin"
-ARCHIVE_BIN="${DIRTY_DIR}/${SLUG}.bin"
+ARCHIVE_BIN="${DIRTY_DIR}/${SLUG}.bin"  # tentative; may move to clean/ after assessment
 ASSESSMENT_JSON="${CKPT_DIR}/${SLUG}.assessment.json"
 
 # ── Preflight ──────────────────────────────────────────────────────────────────
@@ -119,6 +120,15 @@ PYEOF
     printf '%s\n' "${NEW_BLOCK}" >> "${README}"
 
     COMMIT_MSG="archive ${SLUG}: ${SIZE_MB}MB vocab=${VOCAB} A-edges=${A_EDGES} entropy=${ENTROPY_H}/${ENTROPY_MAX}bits pollution=${POLLUTION_PCT}% — ${VERDICT}"
+
+    # Route to clean/ or dirty/ based on verdict
+    if [ "${VERDICT}" = "PASS" ]; then
+        mv "${ARCHIVE_BIN}" "${CLEAN_DIR}/${SLUG}.bin"
+        ARCHIVE_BIN="${CLEAN_DIR}/${SLUG}.bin"
+        echo "      verdict PASS → ${CLEAN_DIR}/"
+    else
+        echo "      verdict ${VERDICT} → ${DIRTY_DIR}/"
+    fi
 else
     ARCHIVE_SIZE=$(du -h "${ARCHIVE_BIN}" | cut -f1)
     COMMIT_MSG="archive ${SLUG}: ${ARCHIVE_SIZE} (assessment unavailable)"
@@ -147,8 +157,9 @@ echo ""
 echo "Done. Baseline restored:"
 ls -lh "${WORDNET_BIN}"
 echo ""
-echo "Archive kept at: ${DIRTY_DIR}/"
-ls -lh "${DIRTY_DIR}/"
+echo "Archives:"
+echo "  clean/  $(ls -1 ${CLEAN_DIR}/*.bin 2>/dev/null | wc -l) checkpoints"
+echo "  dirty/  $(ls -1 ${DIRTY_DIR}/*.bin 2>/dev/null | wc -l) checkpoints"
 echo ""
 echo "To begin a fresh ingest:"
 echo "  ptolemy -I ~/Documents"
