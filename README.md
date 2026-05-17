@@ -386,6 +386,28 @@ When J_Red + J_Green + J_Blue = 0 holds at every node, the field is in balance:
 
 A practical test: `ptolemy -hvvv "word"` shows the full pipeline. The J values printed for hear and speak should sum to approximately zero at each activated zero.
 
+### The Wick Rotation — Measuring the Imaginary Component
+
+The `-W` flag applies the Wick rotation σ → iσ to the Noether current:
+
+```math
+J_{\text{real}} = \beta \cdot E^2 \qquad\xrightarrow{\;\sigma\,\to\,i\sigma\;}\qquad J_{\text{wick}} = \beta \cdot E^2 \cdot \sin\!\left(\tfrac{E}{2}\right)
+```
+
+The divergence between `-h` and `-W` on the same prompt is an empirical measurement of the field's imaginary component. On a shallow field (WordNet only, uniform β) the outputs are identical — sin(E/2) ≈ E/2, ordering preserved. On a deep field (after full corpus ingest, wide β variance) the outputs diverge. Divergent words are where the oscillatory character of the field overrides the geometric character.
+
+This is the inside/outside split made visible: `-h` is the GR perspective (outside the wave), `-W` is the QM perspective (inside the wave). Both are reading the same field from different sides of the boundary.
+
+### The Nascent and Quiescent Operators
+
+Two conjugate geometric operators govern transitions between field states:
+
+**The Nascent operator** — crosses the activation threshold from ground state to excited. A zero that was at the vacuum β = 7.55×10⁻⁵ rises above it. A concept comes into being on the manifold. This is `learn()` at the moment of first contact with a new word.
+
+**The Quiescent operator** — crosses the threshold back toward the vacuum. An excited zero subsides. Not forgetting — the β value persists — but the recency decay `w(n) = exp(−λ·age[n])` reduces its contribution to the Noether current. The concept submerges without disappearing.
+
+These are conjugate: J_Nascent + J_Quiescent = 0 at σ = ½. Emergence and quiescence are in balance at the critical line.
+
 ### Running an Assessment
 
 ```bash
@@ -474,7 +496,8 @@ The bundled `monad_wordnet.bin` (v1.111 release) contains 23,895 vocab entries,
 
 ```
 ptolemy -l <file|url|->   learn
-ptolemy -h <prompt>       hear → speak
+ptolemy -h <prompt>       hear → speak           (real J:  β×E²)
+ptolemy -W <prompt>       hear → Wick speak      (imag J:  β×E²×sin(E/2))
 ptolemy -s                status
 ptolemy -q <word>         field lookup: zero index, γ, E, β
 ptolemy -i                learn identity (run once after corpus)
@@ -491,6 +514,15 @@ Verbosity (stackable):
   -vv   + ANSI colour
   -vvv  full pipeline + self-referential loop
 ```
+
+**`-h` vs `-W`:** the two speak modes are the empirical split between outside and inside the wave.
+
+| Flag | Current | Formula | Perspective |
+|------|---------|---------|-------------|
+| `-h` | Real Noether current | J = β × E² | Outside the wave — geometric, GR regime |
+| `-W` | Imaginary Noether current | J = β × E² × sin(E/2) | Inside the wave — oscillatory, QM regime |
+
+Run both on the same prompt. Words that appear in `-W` but not `-h` are where meaning and topology point in different directions — the imaginary component of the field dominating the real.
 
 ---
 
