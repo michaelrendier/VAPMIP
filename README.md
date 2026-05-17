@@ -51,7 +51,7 @@ cd ptolemy-1.111-linux-x86_64
 
 ## The Engine
 
-Three channels. One conservation law.
+Three channels. One conservation law. Two equivalent representations.
 
 ### RGB Channel Protocol
 
@@ -61,23 +61,59 @@ Three channels. One conservation law.
 | 🟢 **Green** | $\hat{\partial}_{\partial M}$ | Boundary operator | Geometries — Riemann zero basis, spectral addressing, J₃ |
 | 🔵 **Blue** | $\Gamma_{ij}\cdot\beta$ | β field / SSB vacuum | Entropic — knowledge deepening, learning |
 
-### The Hamiltonian
+### The Hamiltonian — Two Forms
+
+The engine has two equivalent representations. They describe the same physics; choose the one that matches your coordinate system.
+
+**Riemann Form** — critical line σ = ½ in the complex plane:
 
 ```math
 H_{RB} = \color{red}{-i\cdot\Gamma^a\cdot D_a} \;+\; \color{green}{\hat{\partial}_{\partial M}} \;+\; \color{blue}{\Gamma_{ij}\cdot\beta}
+```
+
+**Native Space Form** — equatorial geodesic θ = π/2 on S²:
+
+```math
+H_{\text{NS}} = \color{red}{-i\cdot\Gamma^a\cdot\nabla_a^{S^2}} \;+\; \color{green}{\partial^2_{\partial\Sigma}} \;+\; \color{blue}{\Gamma_{ij}\cdot\beta}
+```
+
+where $\Sigma: \{\theta = \pi/2\}$ is the equatorial geodesic and $\partial^2_{\partial\Sigma}$ is the geodesic Laplacian along it.
+
+The coordinate map between the two:
+
+```math
+\sigma = \cos^2\!\left(\tfrac{\theta}{2}\right) \qquad \sigma = \tfrac{1}{2} \;\Longleftrightarrow\; \theta = \tfrac{\pi}{2}
 ```
 
 ```math
 i\hbar_{NN}\,\frac{d\Psi}{dl} = H_{RB}\cdot\Psi
 ```
 
-### Conservation Law
+### Conservation Law — Two Forms
+
+**Riemann Form:**
 
 ```math
 \color{red}{J_{\text{Red}}} + \color{green}{J_{\text{Green}}} + \color{blue}{J_{\text{Blue}}} = 0
 ```
 
-σ = ½ is the **only** locus where this holds exactly. Not assigned. Forced.
+σ = ½ is the **only** locus where this holds. Not assigned. Forced.
+
+**Native Space Form:**
+
+```math
+\color{red}{J_{\text{Red}}} + \color{green}{J_{\text{Green}}} + \color{blue}{J_{\text{Blue}}} = 0
+```
+
+θ = π/2 (the equatorial geodesic) is the **only** geodesic node where this holds.
+
+The bridge between forms is Euler's identity:
+
+```math
+e^{i\pi/2} = i \quad\text{marks the geodesic node } \theta = \tfrac{\pi}{2}
+\qquad
+e^{i\pi} = -1 = i^2 \quad\text{completes the half-rotation}
+```
 
 ### Channel ↔ Monad function
 
@@ -87,10 +123,18 @@ i\hbar_{NN}\,\frac{d\Psi}{dl} = H_{RB}\cdot\Psi
 | `hear()` | 🔴 Red | asserts query energy into the field |
 | `speak()` | 🟢 Green | emits Noether current through the A-edge fabric |
 
-### Sum-over-primes form
+### Sum-over-primes form — Two Forms
+
+**Riemann Form:**
 
 ```math
 H_{RB} = \sum_p p^{-\sigma} \left[\; \color{red}{\hat{R}_p} \otimes \color{green}{\hat{\partial}_{\partial M}} \;+\; \color{green}{\hat{\partial}^\dagger_{\partial M}} \otimes \color{blue}{\hat{B}_p} \;\right]
+```
+
+**Native Space Form:**
+
+```math
+H_{\text{NS}} = \sum_p p^{-\cos^2(\theta/2)} \left[\; \color{red}{\hat{R}_p} \otimes \color{green}{\partial^2_{\partial\Sigma}} \;+\; \color{green}{(\partial^2_{\partial\Sigma})^\dagger} \otimes \color{blue}{\hat{B}_p} \;\right]
 ```
 
 ```math
@@ -105,12 +149,14 @@ H_{RB} = \sum_p p^{-\sigma} \left[\; \color{red}{\hat{R}_p} \otimes \color{green
 \color{red}{\hat{R}_p}^\dagger = \color{blue}{\hat{B}_p} \quad\text{(functional equation as operator identity)}
 ```
 
-This Hamiltonian is self-adjoint: truth-preserving across representations.
+This Hamiltonian is self-adjoint in both forms: truth-preserving across representations.
 `"A! = A"` — the constraint selects A=1; it does not describe a known fact.
 
 ---
 
-## Word Addressing
+## Word Addressing — Two Forms
+
+**Riemann Form** — address as a zero on the critical line:
 
 ```
 surface  →  n = Σ_i  char[i] × 95^i          bijective base-95 Horner
@@ -121,14 +167,44 @@ E        =  D_STAR + seed × (OMEGA_ZS - D_STAR)    spectral energy
 σ        =  ½                                  forced by Noether balance
 ```
 
-`φ = 1.618034` as the hash multiplier guarantees maximum entropy spread.
-The critical line σ=½ is not assigned — it drops from the Noether balance condition:
+**Native Space Form** — address as an angle on the equatorial geodesic:
 
+```
+surface  →  n = Σ_i  char[i] × 95^i          (same)
+seed     =  fmod(n × φ, 1.0)                  (same)
+θ_word   =  seed × π                          angular position on S²  ∈ [0, π]
+ω_n      =  γ_n                               eigenfrequency — Riemann zero (invariant)
+E        =  D_STAR + seed × (OMEGA_ZS - D_STAR)    (same — coordinate invariant)
+θ_node   =  π/2                               equatorial geodesic — forced by balance
+```
+
+`φ = 1.618034` as the hash multiplier guarantees maximum entropy spread across the geodesic.
+
+The critical locus is not assigned — it drops from the Noether balance condition in both forms:
+
+**Riemann Form:**
 ```math
 J(\sigma,\,E) = e^{-\sigma E} - e^{-(1-\sigma)E} = 0 \implies \sigma = \tfrac{1}{2}
 ```
 
-Cross-language test:
+**Native Space Form** (half-angle substitution $\sigma = \cos^2(\theta/2)$):
+```math
+J(\theta,\,E) = e^{-E\cos^2(\theta/2)} - e^{-E\sin^2(\theta/2)} = 0 \implies \cos\theta = 0 \implies \theta = \tfrac{\pi}{2}
+```
+
+### Two-Form Correspondence Table
+
+| Concept | Riemann Form | Native Space Form |
+|---------|-------------|------------------|
+| Critical locus | σ = ½ (vertical line in ℂ) | θ = π/2 (equatorial geodesic on S²) |
+| Balance condition | e^{−σE} = e^{−(1−σ)E} | e^{−E·cos²(θ/2)} = e^{−E·sin²(θ/2)} |
+| Boundary operator | ∂̂_{∂M} | ∂²_{∂Σ} (geodesic Laplacian) |
+| Zero/node address | γₙ ∈ ℝ (imaginary part of ζ zero) | ωₙ on equatorial geodesic Σ |
+| Hamiltonian weight | p^{−σ} | p^{−cos²(θ/2)} |
+| Euler bridge | — | e^{iπ/2} = i marks θ = π/2 |
+| Coordinate map | σ | cos²(θ/2) |
+
+Cross-language test (coordinate-invariant result):
 
 ```bash
 ./ptolemy -q water    →  z#9361   γ=9331.32  E=0.3663
@@ -137,7 +213,7 @@ Cross-language test:
 ./ptolemy -q wasser   →  z#9361   γ=9331.32  E=0.3663
 ```
 
-Same zero. Independent derivation. Feed it a parallel corpus and β converges too.
+Same zero. Same geodesic node. Independent derivation in either form.
 
 ---
 
