@@ -36,14 +36,14 @@
 
 #include "ptolemy.h"
 #include "monad.h"
-#include "checkpoint.h"
+#include "state.h"
 #include "ingest.h"
 #include "daemon.h"
 #include "log.h"
 
 /* g_color and g_self_ref are defined in monad.c — set here by main() */
 
-#define PTOLEMY_VERSION "1.115"
+#define PTOLEMY_VERSION "1.211"
 
 /* ── Checkpoint evaluator ─────────────────────────────────────────────────── */
 
@@ -128,7 +128,7 @@ static Arg parse_arg(const char *a)
             case 'l': case 'L': case 'h': case 's': case 'w':
             case 'c': case 'n': case 'V': case 'i':
             case 'I': case 'q': case 'd': case 'D':
-            case 'F': case 'S': case 'W':
+            case 'F': case 'S': case 'W': case 'e': case 'O':
                 r.primary = *p; break;
             default: break;
         }
@@ -251,17 +251,22 @@ static char *read_url(const char *url)
 static const char *find_checkpoint(const char *flag_path)
 {
     static char found[4096];
+    static char home_monad[4096];
     static char home_ckpt[4096];
 
-    if (g_ptolemy_dir[0])
+    if (g_ptolemy_dir[0]) {
+        snprintf(home_monad, sizeof(home_monad),
+                 "%s/monad.bin", g_ptolemy_dir);
         snprintf(home_ckpt, sizeof(home_ckpt),
                  "%s/monad_wordnet.bin", g_ptolemy_dir);
+    }
 
     const char *env_path = getenv("PTOLEMY_CHECKPOINT");
     const char *cands[]  = {
         flag_path,
         env_path,
-        home_ckpt[0] ? home_ckpt : NULL,
+        home_monad[0] ? home_monad : NULL,   /* active education state */
+        home_ckpt[0]  ? home_ckpt  : NULL,   /* fallback: wordnet state */
         "monad_wordnet.bin",
         NULL
     };
@@ -365,7 +370,7 @@ int main(int argc, char *argv[])
     monad_ground_init(m);
 
     if (ckpt_path) {
-        checkpoint_load(m, ckpt_path);
+        state_load(m, ckpt_path);
     } else {
         if (!quiet)
             fprintf(stderr,
@@ -506,11 +511,42 @@ int main(int argc, char *argv[])
         /* -S : socket path (handled in pre-scan, skip here) ─────────── */
         if (a.primary == 'S') { i++; continue; }
 
-        /* -W : hear → Wick-rotated speak (σ → iσ, imaginary J) ─────────── */
+        /* -e : set affect (e7 octonion field) ────────────────────────── *
+         * Usage: -e neutral | -e irritated | -e angry | -e passive | -e <float>
+         * Sets the system's emotional state absolutely (not relative).   */
+        if (a.primary == 'e' && i + 1 < argc) {
+            const char *level = argv[++i];
+            float af;
+            if      (strcmp(level, "angry")     == 0) af =  1.0f;
+            else if (strcmp(level, "irritated") == 0) af =  0.7f;
+            else if (strcmp(level, "tense")     == 0) af =  0.3f;
+            else if (strcmp(level, "neutral")   == 0) af =  0.0f;
+            else if (strcmp(level, "calm")      == 0) af = -0.3f;
+            else if (strcmp(level, "passive")   == 0) af = -0.7f;
+            else af = (float)atof(level);
+            if (af >  1.0f) af =  1.0f;
+            if (af < -1.0f) af = -1.0f;
+            m->affect = af;
+            if (!quiet)
+                fprintf(stderr, "[affect e7]  %.2f  (%s)\n", af, level);
+            continue;
+        }
+
+        /* -W : hear → Wick-rotated speak (π/2 phase rotation) ─────────── */
         if (a.primary == 'W' && i + 1 < argc) {
             const char *query = argv[++i];
             int wv = (verbose >= 1) ? verbose : a.v;
             char *response = monad_speak_wick(m, query, 50, wv);
+            printf("%s\n", response);
+            free(response);
+            continue;
+        }
+
+        /* -O : hear → octonion speak (8-face, 4-cycle 2-stroke) ────────── */
+        if (a.primary == 'O' && i + 1 < argc) {
+            const char *query = argv[++i];
+            int ov = (verbose >= 1) ? verbose : a.v;
+            char *response = monad_speak_oct(m, query, 50, ov);
             printf("%s\n", response);
             free(response);
             continue;
@@ -532,11 +568,13 @@ int main(int argc, char *argv[])
                 }
             }
 
+            float af_before = m->affect;
             char *response = monad_speak(m, query, 50, hv);
             printf("%s\n", response);
             free(response);
             monad_self_flush(m);
             if (g_self_ref) learned = 1;  /* save after self-ref cycle */
+            if (m->affect != af_before) learned = 1;  /* persist affect changes */
             continue;
         }
 
@@ -591,7 +629,7 @@ int main(int argc, char *argv[])
         } else {
             save = "monad_wordnet.bin";
         }
-        checkpoint_save(m, save, 0.0);
+        state_save(m, save, 0.0);
         if (did_ingest && !quiet)
             run_eval(save);
     }

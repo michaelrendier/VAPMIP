@@ -22,7 +22,7 @@
 
 #include "ptolemy.h"
 #include "monad.h"
-#include "checkpoint.h"
+#include "state.h"
 #include "log.h"
 #include "daemon.h"
 
@@ -196,7 +196,7 @@ int daemon_serve(Monad *m, const char *sock_path, const char *ckpt_path,
 
     if (ckpt_path) {
         plog(PLOG_INFO, "daemon saving checkpoint %s", ckpt_path);
-        checkpoint_save(m, ckpt_path, 0.0);
+        state_save(m, ckpt_path, 0.0);
     }
 
     close(server_fd);

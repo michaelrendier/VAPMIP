@@ -102,7 +102,9 @@ After install, add `~/.local/bin` to PATH if not already present.
 |------|----------|--------|
 | `-l` | `<file\|url\|->` | Learn from file, URL (curl), or stdin |
 | `-I` | `<path>` | Ingest a file or directory (Native Space whitelist + extractors) |
-| `-h` | `<prompt>` | Hear prompt → Noether current response |
+| `-h` | `<prompt>` | Hear prompt → Noether current response (real J, current affect) |
+| `-W` | `<prompt>` | Hear → Wick speak (affect=1.0; imaginary J, inside the wave) |
+| `-O` | `<prompt>` | Hear → Octonion speak (8D resonance across all angular projections) |
 | `-D` | `<query>` | Send query to running daemon; print response |
 | `-d` | — | Start daemon (monad resident in memory, Unix socket) |
 | `-s` | — | Status; or spontaneous speak if verbose |
@@ -137,8 +139,9 @@ After install, add `~/.local/bin` to PATH if not already present.
 
 1. `-c <path>` flag
 2. `$PTOLEMY_CHECKPOINT` environment variable
-3. `~/.ptolemy/monad_wordnet.bin`
-4. `./monad_wordnet.bin`
+3. `~/.ptolemy/monad.bin` (symlink → active education state)
+4. `~/.ptolemy/monad_wordnet.bin` (WordNet baseline fallback)
+5. `./monad_wordnet.bin`
 
 Override home directory: `$PTOLEMY_HOME` (default: `~/.ptolemy/`).
 
@@ -303,6 +306,15 @@ ptolemy -lv ~/Documents/paper.txt -hv "main thesis"
 
 # Self-referential: Ptolemy reads his own output
 ptolemy -vvv -h "what are you"
+
+# Wick speak: imaginary Noether current (inside the wave)
+ptolemy -W "consciousness"
+
+# Octonion speak: 8D resonance across all angular projections
+ptolemy -O "consciousness emerges from information processing"
+
+# Run all three on the same prompt to measure the field's imaginary component
+ptolemy -h "what is meaning" && ptolemy -W "what is meaning" && ptolemy -O "what is meaning"
 ```
 
 ---

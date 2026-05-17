@@ -53,9 +53,10 @@
 /* Max word/token byte length stored in vocab */
 #define MAX_WORD_LEN         256
 
-/* Binary checkpoint magic and version */
-#define CKPT_MAGIC           "PTOL"
-#define CKPT_VERSION         3   /* v3: VocabEntry adds prose_seen flag */
+/* Monad state file magic and version.
+ * States of an education — not training checkpoints. */
+#define STATE_MAGIC          "PTOL"
+#define STATE_VERSION        4   /* v4: affect field (e7 octonion slot) */
 
 /* Native Space — Dixon tower strata (Cayley-Dickson doubling: ℝ→ℂ→ℍ→𝕆→𝕊).
  * All Hamiltonian expressions live in Native Space (radial complex spherical

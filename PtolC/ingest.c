@@ -39,7 +39,7 @@
 
 #include "monad.h"
 #include "filter.h"
-#include "checkpoint.h"
+#include "state.h"
 #include "log.h"
 #include "ingest.h"
 
@@ -498,7 +498,7 @@ static void walk_dir(const char *path, WalkState *ws)
                     ws->files_done % INGEST_SAVE_EVERY == 0) {
                     plog(PLOG_INFO, "checkpoint after %d files — %s",
                          ws->files_done, ws->ckpt_path);
-                    checkpoint_save(ws->m, ws->ckpt_path, 0.0);
+                    state_save(ws->m, ws->ckpt_path, 0.0);
                 }
             }
         }
@@ -534,7 +534,7 @@ int ingest_path(Monad *m, const char *root, int verbose, const char *ckpt_path)
         monad_learn_ex(m, text, verbose, filetype_from_ext(root));
         monad_self_flush(m);
         free(text);
-        if (ckpt_path) checkpoint_save(m, ckpt_path, 0.0);
+        if (ckpt_path) state_save(m, ckpt_path, 0.0);
 #ifdef HAVE_LIBXML2
         xmlCleanupParser();
 #endif

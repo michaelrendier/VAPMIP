@@ -33,7 +33,7 @@ typedef struct {
     int     present;        /* 1 if this zero has been assigned a word */
     uint8_t home_stratum;   /* NS_SIGMA_* — where the result lives     */
     uint8_t gen_stratum;    /* NS_SIGMA_* — where generation happens   */
-    uint8_t prose_seen;     /* 1 if learned from prose context (not code/noise) */
+    uint8_t prose_seen;     /* 0=none 1=prose 2=wordnet 3=wordnet+prose (preferred for translation) */
 } VocabEntry;
 
 /* Open-addressing slot for word → zero_idx hash map. */
@@ -63,6 +63,16 @@ typedef struct {
     VocabEntry *vocab;         /* N vocab entries, indexed by zero_idx */
 
     int    rejected_count;      /* tokens refused by learn-time filter */
+
+    /* Octonion e7 — affect field (emotional state of the system).
+     * Range [-1, +1]: -1=passive/calm, 0=neutral, +1=angry/irritated.
+     * Persisted in state v4.  Modulates speak() phase gate:
+     *   affect > 0: Phase 1 (RevEmrg/reactive) zeros lifted into output
+     *   affect < 0: Phase 3 gate tightened (measured, quieter response)
+     * Auto-updated each speak(): same Fermat Pointer region → +0.2;
+     * novel region → −0.1 decay toward 0. */
+    float affect;
+    int   last_pointer;        /* Fermat Pointer from previous speak() */
 
     /* word → zero_idx map */
     WMSlot *wm;
@@ -103,10 +113,15 @@ void   monad_learn_ex(Monad *m, const char *text, int verbose, NSFiletype ft);
  * Caller owns returned string.  Returns "" (not NULL) on empty field. */
 char  *monad_speak(Monad *m, const char *query, int max_tokens, int verbose);
 
-/* Wick-rotated speak: J_wick = β × E² × sin(σ·E)  — imaginary Noether current.
- * Applies σ → iσ rotation; selects words by oscillatory rather than geometric
- * component of the field.  Inside-the-wave perspective.  Invoked by -W flag. */
+/* Wick-rotated speak: π/2 phase rotation onto imaginary axis.
+ * Thin wrapper: affect temporarily set to 1.0.  Invoked by -W flag. */
 char  *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose);
+
+/* Octonion speak: 8 independent J fields at k×π/4 (k=0..7).
+ * "4-cycle 2-stroke" — 4 opposite-face pairs × 2-pass propagation.
+ * Each angle IS a dimension; words scoring across ≥3 faces are emitted.
+ * Conservation: Σ cos(γ/2 + k×π/4) = 0 for all γ.  Invoked by -O flag. */
+char  *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose);
 
 /* ── Word addressing ──────────────────────────────────────────────────────── */
 
@@ -127,6 +142,10 @@ void   monad_a_add(Monad *m, int i, int j, double delta);
 
 /* Get A[(i,j)], 0.0 if absent. */
 double monad_a_get(const Monad *m, int i, int j);
+
+/* Apply a delta to affect, clamped to [-1, +1].
+ * Positive delta = more irritated; negative = calmer. */
+void   monad_emote(Monad *m, float delta);
 
 /* ── Self-referential identity ────────────────────────────────────────────── */
 

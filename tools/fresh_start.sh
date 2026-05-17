@@ -71,7 +71,7 @@ echo "[3/5] updating checkpoints/README.md..."
 if [ -f "${ASSESSMENT_JSON}" ]; then
     read -r VOCAB A_EDGES WORD_COUNT SIZE_MB ENTROPY_H ENTROPY_MAX ENTROPY_PCT \
              CLEAN_COUNT POLLUTED_COUNT POLLUTION_PCT VERDICT \
-             DEEPEST_WORD < <(python3 - <<'PYEOF'
+             DEEPEST_WORD < <(python3 - "${ASSESSMENT_JSON}" <<'PYEOF'
 import json, sys
 d = json.load(open(sys.argv[1]))
 top = sorted(d['top_beta'], key=lambda e: e['beta'], reverse=True)
@@ -91,7 +91,7 @@ print(
     deepest,
 )
 PYEOF
-    "${ASSESSMENT_JSON}")
+)
 
     DATE_STR=$(date +%Y-%m-%d)
 

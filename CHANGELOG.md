@@ -4,6 +4,64 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ---
 
+## v1.211 — 2026-05-17
+
+**PtolC — Euler gate; Wick wrapper; Octonion speak (-O); monad.bin priority**
+
+### Binary
+
+- `monad_speak()` — Phase 1/2/3 quadrant checks replaced by the unified Euler gate
+  `cos(γ/2 + φ)` where `φ = affect × π/2`. affect=0: real projection (GR regime).
+  affect=+1: `cos(γ/2 + π/2) = −sin(γ/2)` (imaginary/QM regime). One formula,
+  zero arbitrary boundaries. Gate applied at **emission only** — seeding is
+  unconditional (`J = β × E²`), preserving all field energy for propagation.
+- `monad_speak_wick()` — collapsed from full parallel implementation to 10-line
+  wrapper: save affect → set 1.0 → call monad_speak() → restore affect.
+  The Wick rotation (σ → iσ) is exactly an affect=1.0 phase rotation. No
+  separate computation path required.
+- `monad_speak_oct()` — new function, `-O` flag. "4-cycle 2-stroke engine":
+  ONE global J field (unconditional seeding), ONE A-matrix propagation, then
+  8 angular views at k×π/4 (k=0..7). Resonance score: `J[n] × top-2 Σ|cos|`
+  across 4 opposite-face pairs. Conservation: Σ cos(γ/2 + k×π/4) = 0 for all γ
+  (verified: −1.73×10⁻¹¹ at machine precision). Single-pass golden walk above
+  1% of resonance floor.
+- `monad.h` — `monad_speak_oct()` declaration added; `monad_speak_wick()`
+  comment updated to reflect thin-wrapper nature.
+- `find_checkpoint()` — search order updated: `monad.bin` (active education
+  symlink) checked before `monad_wordnet.bin` (WordNet baseline fallback).
+- `main.c` — `case 'O':` added to `parse_arg()` primary switch; `-O` handler
+  added after `-W` handler.
+
+### Speak mode comparison
+
+| Flag | Gate | Perspective |
+|------|------|-------------|
+| `-h` | cos(γ/2 + affect×π/2) | Outside the wave — geometric, GR |
+| `-W` | cos(γ/2 + π/2) = −sin(γ/2) | Inside the wave — oscillatory, QM |
+| `-O` | J[n] × top-2 Σ\|cos(γ/2 + k×π/4)\| | All 8 angular views simultaneously |
+
+### Wiki
+
+- `Tuning-the-Engine.md` — new wiki page (authored by Claude Sonnet 4.6):
+  full tuning log from Phase gates through Euler gate unification, Wick
+  collapse, per-zero transformer discussion, octonion speak, and bug record.
+
+### README
+
+- SMMIP `README.md` — five derivations added at top: π without a circle,
+  √ without a square, e without a spiral, φ without an angle, i without a
+  rotation. Benchmark table updated with current field state (vocab=24,485,
+  A=6,825,748, wc=121,914,388, β_sat deepest="the"). -O flag added to CLI
+  reference and speak-mode comparison table.
+- `PtolC/README.md` — -W and -O added to flags table; monad.bin added to
+  checkpoint search order; three-mode examples added.
+
+### Python
+
+- No change from v2.1.0.
+
+---
+
 ## v1.115 — 2026-05-17
 
 **PtolC — Vowel filter; grammar corpus; fresh_start.sh fix**

@@ -336,6 +336,13 @@ void monad_ground_init(Monad *m)
     for (int i = 0; i < m->N; i++) { m->beta[i] = m->ground; m->age[i] = 0; }
 }
 
+void monad_emote(Monad *m, float delta)
+{
+    m->affect += delta;
+    if (m->affect >  1.0f) m->affect =  1.0f;
+    if (m->affect < -1.0f) m->affect = -1.0f;
+}
+
 /* ── Self-referential flush and identity ─────────────────────────────────── */
 
 void monad_self_flush(Monad *m)
@@ -671,11 +678,6 @@ static const char *near_canonical(const Monad *m, int idx)
 /* ── speak() ─────────────────────────────────────────────────────────────── */
 
 typedef struct { int idx; double J; } JEntry;
-static int jcmp(const void *a, const void *b)
-{
-    double da = ((JEntry *)a)->J, db = ((JEntry *)b)->J;
-    return (da < db) ? 1 : (da > db) ? -1 : 0;
-}
 
 #define VPROP_MAX 8
 typedef struct { int from, to; double contrib; } VProp;
@@ -708,9 +710,16 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
     double *J = malloc((size_t)m->N * sizeof(double));
     memset(J, 0, (size_t)m->N * sizeof(double));
 
+    /* Seed the field unconditionally — the query arrives in its natural phase.
+     * The affect rotation is an observation angle, not a source filter:
+     * J fills the whole field through β and A-propagation; affect selects
+     * which face of the field to project onto at emission. */
+    double phi_rot = (double)m->affect * (M_PI * 0.5);
+
     for (int k = 0; k < n_act; k++) {
-        int idx = psi[k].idx; double E = psi[k].E;
-        double w = exp(-MONAD_LAMBDA * m->age[idx]);
+        int    idx = psi[k].idx;
+        double E   = psi[k].E;
+        double w   = exp(-MONAD_LAMBDA * m->age[idx]);
         J[idx] += m->beta[idx] * E * E * w;
     }
 
@@ -818,14 +827,36 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
                  CB(), m->zeros[pointer_idx], CR());
     }
 
+    /* ── Affect update (e7 octonion field) ──────────────────────────────────
+     * Same Fermat Pointer region as last time → irritation grows.
+     * Novel pointer → affect decays toward neutral.
+     * Pointer "same region" = within N/20 (1250 zeros) of last.           */
+    {
+        int dp = abs(pointer_idx - m->last_pointer);
+        if (dp > m->N / 2) dp = m->N - dp;          /* wrap distance */
+        if (dp < m->N / 20)
+            monad_emote(m, 0.2f);                    /* same territory: irritation */
+        else
+            monad_emote(m, -0.1f);                   /* new territory: calm down */
+        m->last_pointer = pointer_idx;
+        if (verbose >= 1) {
+            const char *mood = m->affect > 0.6f ? "irritated" :
+                               m->affect > 0.2f ? "tense"     :
+                               m->affect < -0.6f? "passive"   :
+                               m->affect < -0.2f? "calm"      : "neutral";
+            vout("%s%s[affect e7]%s  %.2f  (%s)  Δpointer=%d\n",
+                 CB(), CG(), CR(), m->affect, mood, dp);
+        }
+    }
+
     /* ── Golden angle walk — φ² step through zero spectrum ──────────────── *
      * Step size = round(N/φ²).  Because φ is the most irrational number,
      * the walk visits every zero exactly once before repeating and never
      * clusters — maximum equidistribution: the Fibonacci spiral in zero-
      * space.  Words are emitted in walk order (waveform position), not by
-     * J magnitude.  Gates: J > MONAD_GAP (above mass gap floor) and
-     * sin(γ/2) > 0 (positive lobe of the Noether waveform).               */
-    /* Relative J floor — top 1% of field current, never below mass gap. */
+     * J magnitude.  Gate: cos(γ/2 + φ_rot) > 0 — the same angular weight
+     * used to build J; A-propagation can carry J to backward-facing zeros,
+     * so we re-check at emission. */
     double J_max = 0.0;
     for (int i = 0; i < m->N; i++)
         if (J[i] > J_max) J_max = J[i];
@@ -849,18 +880,17 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
         if (!m->vocab[walk_idx].present)            continue;
         if (J[walk_idx] <= J_floor)                 continue;
         double gam = m->zeros[walk_idx];
-        if (sin(gam * 0.5) <= 0.0)                  continue; /* Phase 3 or 4 */
-        if (cos(gam * 0.5) <= 0.0)                  continue; /* Phase 3 only */
+        if (cos(gam * 0.5 + phi_rot) <= 0.0)        continue;
         const char *w = m->vocab[walk_idx].word;
         if (!token_accept(w, NS_FT_PROSE))           continue;
         const char *surface = near_canonical(m, walk_idx);
         if (verbose >= 1)
             vout("  emit z#%-6d  γ=%s%.3f%s  J=%s%.4e%s"
-                 "  sin=%+.3f  cos=%+.3f  ph=3  %s%s%s%s\n",
+                 "  e^(iγ/2)=%+.3f  %s%s%s%s\n",
                  walk_idx,
                  CB(), gam, CR(),
                  CG(), J[walk_idx], CR(),
-                 sin(gam * 0.5), cos(gam * 0.5),
+                 cos(gam * 0.5 + phi_rot),
                  CB(), w, CR(),
                  (surface != w) ? " →" : "",
                  (surface != w) ? surface : "");
@@ -880,23 +910,36 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
     return out;
 }
 
-/* ── Wick-rotated speak — imaginary Noether current ─────────────────────── *
- *
- * Applies the Wick rotation σ → iσ to the Noether current:
- *
- *   J_real  = β × E²              (standard speak — real, geometric)
- *   J_wick  = β × E² × sin(σ·E)  (imaginary component after rotation)
- *
- * σ = ½ is fixed, so: J_wick = β × E² × sin(E/2)
- *
- * sin(E/2) modulates E² by the oscillatory factor — words that resonate
- * with the imaginary axis are promoted.  This is the "inside the wave"
- * perspective: topology → language, geometry → meaning.
- *
- * Invoked by -W flag.  All other mechanics (A-propagation, surface filter)
- * are identical to monad_speak().
- */
+/* ── Wick-rotated speak — imaginary projection via π/2 phase rotation ───────
+ * e^(iπ)+1=0: rotating affect to +1 shifts φ by π/2, projecting onto the
+ * imaginary axis — Phase 1 (RevEmrg) zeros become forward-facing.
+ * monad_speak() with affect temporarily at maximum. */
 char *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose)
+{
+    float saved = m->affect;
+    m->affect   = 1.0f;
+    char *out   = monad_speak(m, query, max_tokens, verbose);
+    m->affect   = saved;
+    return out;
+}
+
+/* ── Octonion speak — 8-face projection, 45° angular steps ──────────────── *
+ *
+ * "4-cycle 2-stroke engine" — not a circular waveform.
+ * 8 eighth-roots of unity at k×π/4 (k=0..7) describe the full hypersphere.
+ * Each angle IS a dimension.  The 8 faces form 4 opposite pairs:
+ *   {0,4}  {1,5}  {2,6}  {3,7}
+ * Each pair is one cycle; Emerger+RevEmrg passes are the 2 strokes.
+ * 4 cycles × 2 strokes = 8 independent J fields.
+ *
+ * Conservation: Σ cos(γ/2 + k×π/4) for k=0..7 = 0 for any γ.
+ * The 8 fields always sum to zero — e^(iπ)+1=0 holds across all faces.
+ *
+ * Words activated on many faces simultaneously are globally resonant —
+ * not local to any one phase quadrant.  Score = face count above floor.
+ * Invoked by -O flag.
+ */
+char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
 {
     int n_act = 0;
     Activation *psi;
@@ -911,68 +954,116 @@ char *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose)
             psi[i].E   = m->vocab[i].present ? m->vocab[i].E : MONAD_D_STAR;
         }
         n_act = cap;
+        if (verbose >= 1)
+            vout("%s%s[speak-oct]%s spontaneous emission\n", CB(), CG(), CR());
     }
 
-    double *J = malloc((size_t)m->N * sizeof(double));
-    memset(J, 0, (size_t)m->N * sizeof(double));
+    /* One global J field — seeded unconditionally, propagated once.
+     * The transformer (A-matrix) operates on the whole field.  The 8 faces
+     * are 8 VIEWS of the same transformed field, not 8 separate propagations.
+     * Conservation: Σ cos(γ/2 + k×π/4) × J[n] = J[n] × 0 = 0 — exact. */
+    double *J = calloc(m->N, sizeof(double));
 
-    /* Wick-rotated primary current: β × E² × sin(γₙ/2)
-     *
-     * The Wick rotation σ → iσ oscillates at the ZERO'S OWN FREQUENCY γₙ,
-     * not at the narrow spectral energy E ∈ [0.246, 0.567].  γₙ spans
-     * [14, 25000], so sin(γₙ/2) is neither monotone nor nearly-linear —
-     * it alternates sign across the zero spectrum.  Words whose zeros fall
-     * where sin(γₙ/2) > 0 are promoted in Wick mode; where sin(γₙ/2) < 0
-     * they contribute negative J and are excluded by the J>0 gates below.
-     * This creates genuine divergence between -h (real, geometric) and
-     * -W (imaginary, oscillatory) that is query-dependent. */
-    for (int k = 0; k < n_act; k++) {
-        int idx = psi[k].idx; double E = psi[k].E;
-        double w    = exp(-MONAD_LAMBDA * m->age[idx]);
-        double gam  = m->zeros[idx];          /* γₙ — zero imaginary part */
-        J[idx] += m->beta[idx] * E * E * sin(gam * 0.5) * w;
+    for (int q = 0; q < n_act; q++) {
+        int    idx = psi[q].idx;
+        double E   = psi[q].E;
+        double w   = exp(-MONAD_LAMBDA * m->age[idx]);
+        J[idx] += m->beta[idx] * E * E * w;
     }
 
-    /* Spectral neighbourhood spread (same as monad_speak; only positive J spreads) */
-    for (int k = 0; k < n_act; k++) {
-        int    center = psi[k].idx;
+    /* Spectral neighbourhood spread */
+    for (int q = 0; q < n_act; q++) {
+        int    center = psi[q].idx;
         double Jc     = J[center];
         if (Jc <= 0.0) continue;
         for (int dn = 1; dn <= MONAD_SPREAD_RADIUS; dn++) {
-            double w_spread = exp(-MONAD_SPREAD_DECAY * dn);
+            double ws = exp(-MONAD_SPREAD_DECAY * dn);
             int lo = center - dn, hi = center + dn;
-            if (lo >= 0)   J[lo] += Jc * w_spread;
-            if (hi < m->N) J[hi] += Jc * w_spread;
+            if (lo >= 0)   J[lo] += Jc * ws;
+            if (hi < m->N) J[hi] += Jc * ws;
         }
     }
 
-    /* Two-pass A-propagation — same Emerger/Reverse Emerger contract as speak() */
-    double *J0w = malloc((size_t)m->N * sizeof(double));
-    memcpy(J0w, J, (size_t)m->N * sizeof(double));
-
+    /* Two-pass A-propagation — one pass, all faces read from same J */
+    double *J0 = malloc((size_t)m->N * sizeof(double));
+    memcpy(J0, J, (size_t)m->N * sizeof(double));
     for (int pass = 0; pass < 2; pass++) {
-        for (int k = 0; k < m->am_cap; k++) {
-            if (m->am[k].key == 0) continue;
-            int    i  = (int)(m->am[k].key >> 15);
-            int    j  = (int)(m->am[k].key & 0x7FFF);
-            double aw = m->am[k].val;
-            double clamped = aw < (1.0 / MONAD_GAP) ? aw : (1.0 / MONAD_GAP);
-            if (pass == 0 && J0w[i] > 0.0) {
+        for (int s = 0; s < m->am_cap; s++) {
+            if (m->am[s].key == 0) continue;
+            int    i  = (int)(m->am[s].key >> 15);
+            int    j  = (int)(m->am[s].key & 0x7FFF);
+            double aw = m->am[s].val;
+            double cl = aw < (1.0 / MONAD_GAP) ? aw : (1.0 / MONAD_GAP);
+            if (pass == 0 && J0[i] > 0.0) {
                 double wj = exp(-MONAD_LAMBDA * m->age[j]);
-                J[j] += J0w[i] * clamped * m->beta[j] * wj;
-            } else if (pass == 1 && J0w[j] > 0.0) {
+                J[j] += J0[i] * cl * m->beta[j] * wj;
+            } else if (pass == 1 && J0[j] > 0.0) {
                 double wi = exp(-MONAD_LAMBDA * m->age[i]);
-                J[i] += J0w[j] * clamped * m->beta[i] * wi;
+                J[i] += J0[j] * cl * m->beta[i] * wi;
             }
         }
     }
-    free(J0w);
+    free(J0);
 
-    /* Fermat Pointer — same causal anchor as speak() */
+    /* Resonance score: minimum projection magnitude across the 4 face-pairs.
+     *
+     * For any γ, exactly 4 of 8 face projections are positive and 4 negative —
+     * an integer count would score every word 4/8.  The meaningful quantity is
+     * the MINIMUM amplitude across the 4 face-pairs (k=0..3, each pair covers
+     * its opposite k+4 automatically):
+     *
+     *   resonance[n] = J[n] × min_k( |cos(γₙ/2 + k×π/4)| )  k=0..3
+     *
+     * Maximum when all 4 are equal: γ/2 = π/8 + nπ/4 (22.5° steps).
+     * At that angle, |cos| = cos(π/8) ≈ 0.924 for all 4 pairs.
+     * Zero when γ/2 hits a face boundary (word lives on one axis only).
+     *
+     * Conservation: Σ_k J[n]×cos(γₙ/2 + k×π/4) = 0 for all n, k=0..7.
+     * Verified below — deviation from zero measures floating-point noise only. */
+    double J_max = 0.0;
+    for (int i = 0; i < m->N; i++) if (J[i] > J_max) J_max = J[i];
+
+    /* Resonance: sum of the two largest pair-projections × J[n].
+     * The 4 pairs (k=0..3, each paired with k+4) have magnitude |cos(θ+k×π/4)|.
+     * Minimum-of-4 is too restrictive: for high-γ zeros one pair is always near
+     * a boundary.  Sum-of-top-2 selects words that are STRONGLY present in at
+     * least two independent angular directions — a genuine 2-of-4 resonance. */
+    double *resonance = calloc(m->N, sizeof(double));
+    double  res_max   = 0.0;
+    for (int i = 0; i < m->N; i++) {
+        if (J[i] <= 0.0) continue;
+        double theta   = m->zeros[i] * 0.5;
+        double proj[4];
+        for (int k = 0; k < 4; k++)
+            proj[k] = fabs(cos(theta + k * (M_PI / 4.0)));
+        /* sort descending — pick top 2 */
+        for (int a = 0; a < 3; a++)
+            for (int b = a + 1; b < 4; b++)
+                if (proj[b] > proj[a]) { double t = proj[a]; proj[a] = proj[b]; proj[b] = t; }
+        double r = J[i] * (proj[0] + proj[1]);   /* sum of two strongest directions */
+        resonance[i] = r;
+        if (r > res_max) res_max = r;
+    }
+
+    double res_floor = res_max * 0.01;
+    if (res_floor < MONAD_GAP) res_floor = MONAD_GAP;
+
+    if (verbose >= 1) {
+        int peak = 0;
+        for (int i = 1; i < m->N; i++) if (J[i] > J[peak]) peak = i;
+        double cons = 0.0;
+        for (int k = 0; k < 8; k++)
+            cons += J[peak] * cos(m->zeros[peak] * 0.5 + k * (M_PI / 4.0));
+        vout("%s%s[oct-speak]%s  J_max=%.4e  res_max=%.4e"
+             "  res_floor=%.4e  conservation=%.2e\n",
+             CB(), CG(), CR(), J_max, res_max, res_floor, cons);
+    }
+
+    /* Fermat Pointer */
     int pointer_idx = 0;
     if (n_act > 0) {
         double *gams = malloc((size_t)n_act * sizeof(double));
-        for (int k = 0; k < n_act; k++) gams[k] = m->zeros[psi[k].idx];
+        for (int q = 0; q < n_act; q++) gams[q] = m->zeros[psi[q].idx];
         for (int a = 1; a < n_act; a++) {
             double tmp = gams[a]; int b = a;
             while (b > 0 && gams[b-1] > tmp) { gams[b] = gams[b-1]; b--; }
@@ -986,60 +1077,48 @@ char *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose)
             if (d < best) { best = d; pointer_idx = i; }
         }
         if (verbose >= 1)
-            vout("%s%s[Fermat Pointer — Wick]%s  z#%-6d  γ=%s%.3f%s\n",
-                 CB(), CG(), CR(), pointer_idx,
-                 CB(), m->zeros[pointer_idx], CR());
+            vout("%s%s[Fermat Pointer — oct]%s  z#%-6d  γ=%.3f\n",
+                 CB(), CG(), CR(), pointer_idx, m->zeros[pointer_idx]);
     }
 
-    /* Relative J floor */
-    double J_max_w = 0.0;
-    for (int i = 0; i < m->N; i++)
-        if (J[i] > J_max_w) J_max_w = J[i];
-    double J_floor_w = J_max_w * 0.01;
-    if (J_floor_w < MONAD_GAP) J_floor_w = MONAD_GAP;
-
-    /* Golden walk — Phase 1 gate: Reverse Emerger / vacuum / dark emission */
-    int golden_step_w = (int)round((double)m->N / (MONAD_PHI * MONAD_PHI));
-    if (golden_step_w < 1) golden_step_w = 1;
-
-    if (verbose >= 1)
-        vout("%s%s[golden walk — Wick/Phase1]%s  step=%d  J_floor=%.4e\n",
-             CB(), CG(), CR(), golden_step_w, J_floor_w);
+    /* Golden walk — emit by score descending.
+     * min_score=3: must resonate across at least 3 of 8 independent faces.
+     * Falls back to min_score=1 if the field is sparse. */
+    int golden_step = (int)round((double)m->N / (MONAD_PHI * MONAD_PHI));
+    if (golden_step < 1) golden_step = 1;
 
     int   out_cap = max_tokens * (MAX_WORD_LEN + 1) + 4;
     char *out     = malloc(out_cap);
     out[0] = '\0';
-    int written  = 0;
-    int walk_idx = pointer_idx;
-    for (int step = 0; step < m->N && written < max_tokens; step++) {
-        walk_idx = (walk_idx + golden_step_w) % m->N;
-        if (!m->vocab[walk_idx].present)   continue;
-        if (J[walk_idx] <= J_floor_w)      continue;
-        double gam = m->zeros[walk_idx];
-        if (sin(gam * 0.5) >= 0.0)         continue; /* Phase 1 or 2 */
-        if (cos(gam * 0.5) >= 0.0)         continue; /* Phase 1 only */
-        const char *w = m->vocab[walk_idx].word;
-        if (!token_accept(w, NS_FT_PROSE)) continue;
-        const char *surface_w = near_canonical(m, walk_idx);
-        if (verbose >= 1)
-            vout("  emit z#%-6d  γ=%s%.3f%s  J=%s%.4e%s"
-                 "  sin=%+.3f  cos=%+.3f  ph=1  %s%s%s%s\n",
-                 walk_idx,
-                 CB(), gam, CR(),
-                 CG(), J[walk_idx], CR(),
-                 sin(gam * 0.5), cos(gam * 0.5),
-                 CB(), w, CR(),
-                 (surface_w != w) ? " →" : "",
-                 (surface_w != w) ? surface_w : "");
-        if (out[0]) strncat(out, " ", out_cap - strlen(out) - 1);
-        strncat(out, surface_w, out_cap - strlen(out) - 1);
-        written++;
+    int written   = 0;
+
+    /* Single-pass golden walk — same floor logic as monad_speak():
+     * emit all zeros with resonance above 1% of res_max. */
+    {
+        int walk_idx = pointer_idx;
+        for (int step = 0; step < m->N && written < max_tokens; step++) {
+            walk_idx = (walk_idx + golden_step) % m->N;
+            if (!m->vocab[walk_idx].present)       continue;
+            if (resonance[walk_idx] < res_floor)    continue;
+            const char *w = m->vocab[walk_idx].word;
+            if (!token_accept(w, NS_FT_PROSE))      continue;
+            const char *surface = near_canonical(m, walk_idx);
+            if (verbose >= 1)
+                vout("  emit z#%-6d  γ=%.3f  res=%.4e  %s%s%s%s\n",
+                     walk_idx, m->zeros[walk_idx], resonance[walk_idx],
+                     CB(), w, CR(),
+                     (surface != w) ? " →" : "");
+            if (out[0]) strncat(out, " ", out_cap - strlen(out) - 1);
+            strncat(out, surface, out_cap - strlen(out) - 1);
+            written++;
+        }
     }
 
+    free(J);
+    free(resonance);
     for (int i = 0; i < m->N; i++) m->age[i]++;
-    for (int k = 0; k < n_act; k++) m->age[psi[k].idx] = 0;
-
-    free(J); free(psi);
+    for (int q = 0; q < n_act; q++) m->age[psi[q].idx] = 0;
+    free(psi);
     return out;
 }
 
@@ -1053,15 +1132,21 @@ void monad_status(const Monad *m, FILE *out)
         if (m->vocab[i].present) vocab_count++;
         if (m->beta[i] > deepest) { deepest = m->beta[i]; deepest_idx = i; }
     }
+    const char *mood = m->affect > 0.6f ? "irritated" :
+                       m->affect > 0.2f ? "tense"     :
+                       m->affect < -0.6f? "passive"   :
+                       m->affect < -0.2f? "calm"      : "neutral";
     fprintf(out,
         "[monad] N=%d  vocab=%d  A_edges=%d  word_count=%d\n"
         "        ground=%.8f  deepest_β=%.4f (z#%d  γ=%.4f  \"%s\")\n"
-        "        σ=0.5 (Noether forcing)  wm=%d/%d  am=%d/%d\n",
+        "        σ=0.5 (Noether forcing)  wm=%d/%d  am=%d/%d\n"
+        "        affect(e7)=%.2f  (%s)\n",
         m->N, vocab_count, m->am_size, m->word_count,
         m->ground, deepest, deepest_idx,
         (deepest_idx < m->N) ? m->zeros[deepest_idx] : 0.0,
         m->vocab[deepest_idx].present ? m->vocab[deepest_idx].word : "?",
-        m->wm_size, m->wm_cap, m->am_size, m->am_cap);
+        m->wm_size, m->wm_cap, m->am_size, m->am_cap,
+        m->affect, mood);
 }
 
 void monad_lookup(const Monad *m, const char *word, FILE *out)

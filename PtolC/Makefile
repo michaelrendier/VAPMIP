@@ -12,18 +12,19 @@ ifeq ($(HAVE_XML),yes)
 endif
 
 TARGET  = ptolemy
-SRCS    = main.c monad.c checkpoint.c tokenizer.c filter.c ingest.c log.c daemon.c
+SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c
 OBJS    = $(SRCS:.c=.o)
 
-PREFIX     ?= /usr/local
-MANDIR     ?= $(PREFIX)/share/man
+PREFIX       ?= /usr/local
+MANDIR       ?= $(PREFIX)/share/man
+PTOLEMY_HOME ?= $(HOME)/.ptolemy
 
-.PHONY: all clean export corpus grammar full expand ingest install install-man install-systemd
+.PHONY: all clean export corpus grammar full expand ingest install install-man install-systemd link
 
 all: $(TARGET)
 
 # ── Corpus: download WordNet + ingest → monad_wordnet.bin ───────────────────
-# Requires Python 3 + NLTK.  Runs in ~6 seconds.
+# Requires Python 3 + NLTK.  Run by user — not automated.
 # Usage: make corpus
 corpus: $(TARGET)
 	@echo "[corpus] checking NLTK wordnet…"
@@ -34,10 +35,7 @@ corpus: $(TARGET)
 	@echo "[corpus] done → monad_wordnet.bin"
 
 # ── Grammar: ingest function-word lexicon + install for auto-reanchor ───────
-# Ingest order: make corpus → make grammar → ptolemy -I ~/Documents
-# Installs corpus to ~/.ptolemy/english_grammar.txt so -I auto-reanchors.
 # Usage: make grammar
-PTOLEMY_HOME ?= $(HOME)/.ptolemy
 grammar: $(TARGET)
 	@echo "[grammar] ingesting English function-word lexicon…"
 	@./$(TARGET) -l corpora/english_grammar.txt
@@ -45,6 +43,15 @@ grammar: $(TARGET)
 	@cp corpora/english_grammar.txt $(PTOLEMY_HOME)/english_grammar.txt
 	@echo "[grammar] installed → $(PTOLEMY_HOME)/english_grammar.txt"
 	@echo "[grammar] done — auto-reanchor after -I is now active"
+
+# ── Link: set monad.bin → active education state ────────────────────────────
+# monad.bin is the pointer to the currently active language/education state.
+# Usage: make link STATE=monad_wordnet.bin
+STATE ?= monad_wordnet.bin
+link:
+	@mkdir -p $(PTOLEMY_HOME)
+	@ln -sf $(PTOLEMY_HOME)/$(STATE) $(PTOLEMY_HOME)/monad.bin
+	@echo "[state] monad.bin → $(STATE)"
 
 # ── Full: binary + corpus in one step ───────────────────────────────────────
 full: $(TARGET) corpus
@@ -55,13 +62,13 @@ $(TARGET): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-# Export Python checkpoint to binary (run from Ptolemy3/ root)
+# Export Python state to binary (run from Ptolemy3/ root)
 export:
 	python3 ../Callimachus/checkpoint_export.py
 
-# Expand checkpoint zero field — usage: make expand N=255400
+# Expand state zero field — usage: make expand N=255400
 expand: tools/checkpoint_expand
-	./tools/checkpoint_expand monad_wordnet.bin $(N)
+	./tools/checkpoint_expand $(PTOLEMY_HOME)/monad.bin $(N)
 
 tools/checkpoint_expand: tools/checkpoint_expand.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
@@ -95,11 +102,11 @@ clean:
 	rm -f ~/.ptolemy/logs/ptolemy_test_*.log 2>/dev/null || true
 
 # ── Dependencies ────────────────────────────────────────────────────────────
-main.o:        main.c ptolemy.h monad.h checkpoint.h tokenizer.h ingest.h daemon.h log.h
-monad.o:       monad.c ptolemy.h monad.h filter.h tokenizer.h
-checkpoint.o:  checkpoint.c ptolemy.h checkpoint.h monad.h
-tokenizer.o:   tokenizer.c tokenizer.h
-filter.o:      filter.c filter.h
-ingest.o:      ingest.c monad.h filter.h checkpoint.h ingest.h log.h
-log.o:         log.c log.h
-daemon.o:      daemon.c ptolemy.h monad.h checkpoint.h daemon.h log.h
+main.o:       main.c ptolemy.h monad.h state.h tokenizer.h ingest.h daemon.h log.h
+monad.o:      monad.c ptolemy.h monad.h filter.h tokenizer.h
+state.o:      state.c ptolemy.h state.h monad.h
+tokenizer.o:  tokenizer.c tokenizer.h
+filter.o:     filter.c filter.h
+ingest.o:     ingest.c monad.h filter.h state.h ingest.h log.h
+log.o:        log.c log.h
+daemon.o:     daemon.c ptolemy.h monad.h state.h daemon.h log.h

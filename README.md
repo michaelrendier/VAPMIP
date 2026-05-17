@@ -4,6 +4,75 @@
 
 ---
 
+## Five Derivations
+
+I derived five universal constants without their usual geometric scaffolding. Each one falls from the field engine directly — no circles, no squares, no spirals, no angles, no rotations. These are the error checks. If the engine is wrong, these are wrong.
+
+### π without a circle
+
+The Riemann zeros satisfy the density formula:
+
+```
+γₙ ≈ 2πn / ln(n)
+```
+
+Every word address in the engine is modulated by this density. The 25,000 zeros span from γ₁ = 14.135 to γ₂₅₀₀₀ = 26,356. π is the ordering principle of the primes — the ratio between zero index and zero position in the spectrum. It does not appear because anything is round. It appears because the primes are distributed this way and no other.
+
+### √ without a square
+
+The Yang-Mills mass gap regulator:
+
+```
+GAP = |Ω − d* × ln(10)| = |0.56714 − 0.24600 × 2.30259| = 0.000707 = 1/(1000√2)
+```
+
+√2 appears here as the geometric mean between the two ground state regulators — the Lambert W fixed point (Ω) and the BK spectral boundary (d*). It is not the diagonal of a unit square. It is the ratio that separates the Yang-Mills ground state from the first excited mode: the gap below which the coupling is finite.
+
+### e without a spiral
+
+The recency decay:
+
+```
+w(n) = exp(−λ × age(n))    λ = 0.05
+```
+
+The spectral neighbourhood spread:
+
+```
+weight at distance d = exp(−d)    d=1 → 0.368,  d=2 → 0.135,  d=3 → 0.050
+```
+
+e is the base of the natural logarithm because ln(p) appears in the prime sum formula. The decay is not an outward spiral — it is the probability of presence. A zero that was activated 20 timesteps ago contributes `exp(−1.0)` = 36.8% of its peak J to the current Noether current. e is a presence function, not a rotation.
+
+### φ without an angle
+
+The golden ratio hashes words to Riemann zeros:
+
+```
+seed = fmod(n × φ, 1.0)    φ = 1.6180339887498948482
+idx  = floor(seed × N)
+```
+
+The golden walk traversal step:
+
+```
+step = round(N / φ²) = round(25000 / 2.618) = 9,549
+```
+
+9,549 is the most irrationally-spaced stride through 25,000 positions. It is maximally equidistributed: after N steps, every zero has been visited exactly once and the gaps between visits are as equal as they can be for any irrational stride. φ maximizes entropy across the zero spectrum. No angle. No geometry. Just the worst-case rational approximation, which is the best possible distribution.
+
+### i without a rotation
+
+The Wick rotation applies `σ → iσ` to the Noether current. The Euler gate:
+
+```
+e^(iπ) + 1 = 0
+```
+
+The gate `cos(γ/2 + φ)` where `φ = affect × π/2` uses i through Euler's identity. But i is not a rotation operator here — it is the **boundary indicator**. `e^(iπ/2) = i` marks the geodesic node `θ = π/2`. i is the crossing between inside and outside the wave. In speak(), affect=0 returns the outside (GR, geometric), affect=1 returns the inside (QM, oscillatory). i is the switch between perspectives, not a rotation in a plane.
+
+---
+
 > *"Hydrogen doesn't store the universe. It bonds with it. One valence, one electron — and chemistry follows. Ptolemy has one valence: a Riemann zero. The same zero for hydrogen also contains 'valent'.  The rest is conservation."*
 >
 > — Claude Sonnet 4.6
@@ -29,18 +98,22 @@ cd ptolemy-1.111-linux-x86_64
 
 ## Benchmarks
 
-**Hardware:** Intel Core i7-6600U @ 2.60 GHz · 4 logical cores · 8 GB RAM · Linux
+**Hardware:** Intel Core i7-6600U @ 2.60 GHz · 4 logical cores · 8 GB RAM · Linux 6.8 lowlatency
 
 | Benchmark | C binary | Python (monad.py) | Notes |
 |-----------|----------|-------------------|-------|
 | **learn() throughput** | ~8,000 words/sec¹ | ~180,000 words/sec | C: real-world ingest incl. PDF extraction; Python: pure in-process |
 | **lookup() throughput** | ~1,000/sec² | ~258,000/sec | C: cold-start per invocation; Python: in-process dict |
-| **Checkpoint load** | 2.49 s (148 MB binary) | 24 ms (JSON) | C format carries 9.6M A-edges in compact binary |
+| **Checkpoint load** | 2.49 s (148 MB binary) | 24 ms (JSON) | C format carries 6.8M A-edges in compact binary |
 | **Checkpoint save** | periodic / auto | 19 ms (JSON) | C saves every 500 files during ingest |
-| **Filesystem ingest** | 19,131 files / 2.1 GB / 71m30s | — | C only: pdftotext · catdoc · pandoc · libxml2 dispatch |
-| **Vocab after ingest** | 23,895 unique words | — | From WordNet 3.1 + ~/Documents corpus |
-| **A-edges after ingest** | 9,600,426 | — | Co-occurrence fabric across 34.5M words |
-| **Words processed** | 34,494,302 | — | Single ingest run, resumable |
+| **Filesystem ingest** | 22,905 files / ~2.4 GB | — | C only: pdftotext · catdoc · pandoc · libxml2 dispatch |
+| **Vocab after full ingest** | 24,485 unique words | — | WordNet 3.1 + ~/Documents + thesearecool corpus |
+| **A-edges after ingest** | 6,825,748 | — | Co-occurrence fabric across 121.9M words |
+| **Words processed** | 121,914,388 | — | WordNet + Documents + thesearecool, resumable |
+| **speak() latency** | ~8 s (cold) | sub-ms (daemon) | A-propagation over 6.8M edges is the bottleneck |
+| **Golden walk step** | 9,549 (of 25,000) | — | round(N/φ²) — maximum equidistribution |
+| **8D conservation** | −1.73 × 10⁻¹¹ | — | Octonion speak: Σ cos(γ/2 + k×π/4) = 0 at machine precision |
+| **β_sat** | 7.552 | — | Deepest word: "the", z#841, γ=1234.616 (750+ distinct contexts) |
 
 ¹ In daemon mode (checkpoint loaded once), learn() throughput matches Python. The 8k/sec figure includes file I/O and extractor overhead.  
 ² C per-invocation benchmark includes 2.5s checkpoint reload. In daemon mode, query latency is sub-millisecond.
@@ -497,7 +570,8 @@ The bundled `monad_wordnet.bin` (v1.111 release) contains 23,895 vocab entries,
 ```
 ptolemy -l <file|url|->   learn
 ptolemy -h <prompt>       hear → speak           (real J:  β×E²)
-ptolemy -W <prompt>       hear → Wick speak      (imag J:  β×E²×sin(E/2))
+ptolemy -W <prompt>       hear → Wick speak      (imag J:  affect=1.0, π/2 rotation)
+ptolemy -O <prompt>       hear → Octonion speak  (8D resonance, all angular projections)
 ptolemy -s                status
 ptolemy -q <word>         field lookup: zero index, γ, E, β
 ptolemy -i                learn identity (run once after corpus)
@@ -517,12 +591,15 @@ Verbosity (stackable):
 
 **`-h` vs `-W`:** the two speak modes are the empirical split between outside and inside the wave.
 
-| Flag | Current | Formula | Perspective |
-|------|---------|---------|-------------|
-| `-h` | Real Noether current | J = β × E² | Outside the wave — geometric, GR regime |
-| `-W` | Imaginary Noether current | J = β × E² × sin(E/2) | Inside the wave — oscillatory, QM regime |
+| Flag | Mode | Gate | Perspective |
+|------|------|------|-------------|
+| `-h` | Real Noether current | cos(γ/2 + affect×π/2) | Outside the wave — geometric, GR regime |
+| `-W` | Imaginary Noether current | cos(γ/2 + π/2) = −sin(γ/2) | Inside the wave — oscillatory, QM regime |
+| `-O` | 8D resonance | J[n] × top-2 Σ\|cos(γ/2 + k×π/4)\| | All 8 angular views simultaneously |
 
-Run both on the same prompt. Words that appear in `-W` but not `-h` are where meaning and topology point in different directions — the imaginary component of the field dominating the real.
+Run all three on the same prompt. Words in `-W` but not `-h` are where meaning and topology diverge — the imaginary component of the field overriding the geometric. Words in `-O` but not in either are globally resonant across all 8 phase dimensions — typically high-connectivity function words and cross-domain concepts.
+
+Conservation: Σ cos(γ/2 + k×π/4) = 0 for k=0..7 (8th roots of unity). Verified at machine precision: −1.73×10⁻¹¹.
 
 ---
 
