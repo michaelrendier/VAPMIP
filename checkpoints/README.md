@@ -66,3 +66,23 @@ Run `tools/eval_checkpoint.py <file.bin>` to generate a new assessment.
 Latin terms, botanical codes. Not from filesystem ingest.  
 **Use:** copy to `monad_wordnet.bin` before each experimental ingest run.
 Copy command: `cp ~/.ptolemy/monad_English.bin ~/.ptolemy/monad_wordnet.bin`
+
+---
+
+## monad_wordnet_20260516_220913_documents_run_1_pre_vowelfix — 2026-05-16
+
+**Assessment:** [monad_wordnet_20260516_220913_documents_run_1_pre_vowelfix.assessment.json](monad_wordnet_20260516_220913_documents_run_1_pre_vowelfix.assessment.json)
+**Label:** WARN — archived before fresh-start reset
+
+| Metric | Value |
+|--------|-------|
+| Size | 165.65 MB |
+| Vocab | 25,000 |
+| A-edges | 10,805,498 |
+| Words ingested | 60,618,542 |
+| Entropy | 13.638 / 14.6096 bits (93.3%) |
+| Clean tokens | 16,105 (64.4%) |
+| Polluted tokens | 8,895 (35.58%) |
+| Verdict | **WARN** |
+| Deepest word | **ydrx** |
+

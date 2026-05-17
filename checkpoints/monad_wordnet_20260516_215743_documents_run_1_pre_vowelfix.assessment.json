@@ -1,0 +1,290 @@
+{
+  "timestamp": "2026-05-17T04:57:59.970887+00:00",
+  "path": "/home/rendier/.ptolemy/dirty/monad_wordnet_20260516_215743_documents_run_1_pre_vowelfix.bin",
+  "size_bytes": 173692467,
+  "size_mb": 165.65,
+  "version": 2,
+  "N": 25000,
+  "vocab_size": 25000,
+  "A_size": 10805498,
+  "word_count": 60618542,
+  "threshold": 3.776,
+  "entropy_H": 13.638,
+  "entropy_H_max": 14.6096,
+  "entropy_pct": 93.3,
+  "entropy_band": "HIGH",
+  "gini": 0.615,
+  "gini_band": "NATURAL",
+  "beta_dist": {
+    "sat": 2293,
+    "low": 18767,
+    "high": 1538,
+    "mid": 2402
+  },
+  "clean_count": 16105,
+  "polluted_count": 8895,
+  "pollution_pct": 35.58,
+  "pollution_by_category": {
+    "no-vowel": 8455,
+    "consonant-only": 8692,
+    "consonant-cluster-3": 290,
+    "hex-string": 93,
+    "low-vowel-ratio": 1,
+    "trailing-apostrophe": 43,
+    "apostrophe-fragment": 30
+  },
+  "top_beta": [
+    {
+      "word": "ydrx",
+      "beta": 7.552,
+      "E": 0.246,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "retp",
+      "beta": 7.552,
+      "E": 0.2464,
+      "labels": []
+    },
+    {
+      "word": "shrub",
+      "beta": 7.552,
+      "E": 0.2467,
+      "labels": []
+    },
+    {
+      "word": "db",
+      "beta": 7.552,
+      "E": 0.247,
+      "labels": []
+    },
+    {
+      "word": "ggxg",
+      "beta": 7.552,
+      "E": 0.247,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "tbgn",
+      "beta": 7.552,
+      "E": 0.2477,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "nnwq",
+      "beta": 7.552,
+      "E": 0.2477,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "yhhh",
+      "beta": 7.552,
+      "E": 0.248,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "uqfr",
+      "beta": 7.552,
+      "E": 0.2481,
+      "labels": []
+    },
+    {
+      "word": "plkk",
+      "beta": 7.552,
+      "E": 0.2483,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "sump",
+      "beta": 7.552,
+      "E": 0.2485,
+      "labels": []
+    },
+    {
+      "word": "ymmv",
+      "beta": 7.552,
+      "E": 0.2487,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "pins'",
+      "beta": 7.552,
+      "E": 0.2495,
+      "labels": [
+        "trailing-apostrophe"
+      ]
+    },
+    {
+      "word": "lcsd",
+      "beta": 7.552,
+      "E": 0.2497,
+      "labels": [
+        "no-vowel",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "oqzw",
+      "beta": 7.552,
+      "E": 0.2507,
+      "labels": []
+    },
+    {
+      "word": "nkd",
+      "beta": 7.552,
+      "E": 0.2508,
+      "labels": [
+        "consonant-cluster-3",
+        "consonant-only"
+      ]
+    },
+    {
+      "word": "hlve",
+      "beta": 7.552,
+      "E": 0.251,
+      "labels": []
+    },
+    {
+      "word": "vtix",
+      "beta": 7.552,
+      "E": 0.251,
+      "labels": []
+    },
+    {
+      "word": "copel",
+      "beta": 7.552,
+      "E": 0.2512,
+      "labels": []
+    },
+    {
+      "word": "udzf",
+      "beta": 7.552,
+      "E": 0.2514,
+      "labels": []
+    }
+  ],
+  "top_edges": [
+    {
+      "word_i": "ban'",
+      "word_j": "hgzg",
+      "weight": 3845.4679
+    },
+    {
+      "word_i": "spvi",
+      "word_j": "ban'",
+      "weight": 1231.0743
+    },
+    {
+      "word_i": "ragu",
+      "word_j": "llcc",
+      "weight": 805.0242
+    },
+    {
+      "word_i": "mzgf",
+      "word_j": "xwsa",
+      "weight": 780.9315
+    },
+    {
+      "word_i": "spvi",
+      "word_j": "holia",
+      "weight": 632.8379
+    },
+    {
+      "word_i": "holia",
+      "word_j": "ban'",
+      "weight": 346.3448
+    },
+    {
+      "word_i": "ydrx",
+      "word_j": "eiqa",
+      "weight": 317.9962
+    },
+    {
+      "word_i": "xwsa",
+      "word_j": "tja",
+      "weight": 281.1112
+    },
+    {
+      "word_i": "etdq",
+      "word_j": "mcany",
+      "weight": 237.8607
+    },
+    {
+      "word_i": "mcany",
+      "word_j": "xwsa",
+      "weight": 230.2888
+    },
+    {
+      "word_i": "xwsa",
+      "word_j": "vhyd",
+      "weight": 148.0901
+    },
+    {
+      "word_i": "uscf",
+      "word_j": "mcany",
+      "weight": 145.2761
+    },
+    {
+      "word_i": "inqlv",
+      "word_j": "xwsa",
+      "weight": 129.4737
+    },
+    {
+      "word_i": "swqr",
+      "word_j": "ltca",
+      "weight": 125.3243
+    },
+    {
+      "word_i": "muido",
+      "word_j": "cldr",
+      "weight": 124.1022
+    },
+    {
+      "word_i": "dayly",
+      "word_j": "eiqa",
+      "weight": 118.6595
+    },
+    {
+      "word_i": "lrkq",
+      "word_j": "mtvol",
+      "weight": 115.941
+    },
+    {
+      "word_i": "uscf",
+      "word_j": "mpyl",
+      "weight": 97.3907
+    },
+    {
+      "word_i": "bbay",
+      "word_j": "rdyi",
+      "weight": 94.4983
+    },
+    {
+      "word_i": "ejbt",
+      "word_j": "quxn",
+      "weight": 94.3448
+    }
+  ],
+  "verdict": "WARN"
+}
