@@ -4,6 +4,46 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ---
 
+## v1.212 — 2026-05-17
+
+**PtolC — sin = content, cos = observer; -W and -O corrected**
+
+### Binary
+
+- `monad_speak_wick()` — affect flipped from +1.0 to **−1.0**.
+  `cos(γ/2 + π/2) = −sin(γ/2)` was the trough.
+  `cos(γ/2 − π/2) = +sin(γ/2)` is the crest — the content at its peak.
+  The minus sign is load-bearing. sin = content; cos = observer.
+  With affect=+1.0 the engine was reading the inside of the trough, not the
+  inside of the wave. Fixed.
+- `monad_speak_oct()` — resonance scoring replaced with interference score:
+  `J[n] × |sin(γₙ/2) × cos(γₙ/2)| = J[n] × |sin(γₙ)| / 2`.
+  This is the beat frequency — energy transfer between content (sin) and
+  observer (cos). Peak at γ/2 = π/4 (45°, equal contribution). Zero at axis
+  crossings where the word is pure observer or pure content with no overlap.
+  Conservation: sin²(γ/2) + cos²(γ/2) = 1.000000000000000 (verified).
+- Comments, verbose labels (`sin×cos=`, `sin²+cos²=`), and monad.h
+  declarations updated to match.
+
+### Theory
+
+The three speak modes now map exactly onto the wave:
+
+| Flag | Gate | What |
+|------|------|------|
+| `-h` | `cos(γ/2 + affect×π/2)` | Observer — projection onto measurement axis |
+| `-W` | `cos(γ/2 − π/2) = +sin(γ/2)` | Content — the wave at its crest |
+| `-O` | `J × \|sin(γ/2)·cos(γ/2)\|` | Interference — content × observer overlap |
+
+`e^(iγ/2) = cos(γ/2) + i·sin(γ/2)` — seeding fills the full waveform;
+each mode selects a different projection.
+
+### Python
+
+- No change from v2.1.0.
+
+---
+
 ## v1.211 — 2026-05-17
 
 **PtolC — Euler gate; Wick wrapper; Octonion speak (-O); monad.bin priority**

@@ -113,14 +113,16 @@ void   monad_learn_ex(Monad *m, const char *text, int verbose, NSFiletype ft);
  * Caller owns returned string.  Returns "" (not NULL) on empty field. */
 char  *monad_speak(Monad *m, const char *query, int max_tokens, int verbose);
 
-/* Wick-rotated speak: π/2 phase rotation onto imaginary axis.
- * Thin wrapper: affect temporarily set to 1.0.  Invoked by -W flag. */
+/* Content-channel speak: sin(γ/2) projection — the wave at its crest.
+ * cos(γ/2 − π/2) = +sin(γ/2).  affect = −1.  sin = content; cos = observer.
+ * The minus sign is load-bearing: +1 gives −sin (trough), −1 gives +sin (crest).
+ * Invoked by -W flag. */
 char  *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose);
 
-/* Octonion speak: 8 independent J fields at k×π/4 (k=0..7).
- * "4-cycle 2-stroke" — 4 opposite-face pairs × 2-pass propagation.
- * Each angle IS a dimension; words scoring across ≥3 faces are emitted.
- * Conservation: Σ cos(γ/2 + k×π/4) = 0 for all γ.  Invoked by -O flag. */
+/* Interference speak: J[n] × |sin(γₙ/2) × cos(γₙ/2)| = J[n] × |sin(γₙ)|/2.
+ * Beat frequency — energy transfer between content (sin) and observer (cos).
+ * Peaks at γ/2 = π/4 (45°, equal contribution); zero at axis crossings.
+ * Conservation: sin²(γ/2) + cos²(γ/2) = 1.  Invoked by -O flag. */
 char  *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose);
 
 /* ── Word addressing ──────────────────────────────────────────────────────── */

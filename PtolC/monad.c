@@ -910,34 +910,34 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
     return out;
 }
 
-/* ── Wick-rotated speak — imaginary projection via π/2 phase rotation ───────
- * e^(iπ)+1=0: rotating affect to +1 shifts φ by π/2, projecting onto the
- * imaginary axis — Phase 1 (RevEmrg) zeros become forward-facing.
- * monad_speak() with affect temporarily at maximum. */
+/* ── Wick-rotated speak — content channel, sin(γ/2) projection ─────────────
+ * e^(iγ/2) = cos(γ/2) + i·sin(γ/2).
+ *   -h uses cos(γ/2 + φ)         — the observer (real projection).
+ *   -W uses cos(γ/2 − π/2)       — the content  (imaginary projection).
+ * cos(γ/2 − π/2) = +sin(γ/2): content at its crest (sin > 0).
+ * affect = −1 → φ = −π/2 → the positive-sin half, not the trough.
+ * sin = content.  cos = observer.  The minus sign is load-bearing. */
 char *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose)
 {
     float saved = m->affect;
-    m->affect   = 1.0f;
+    m->affect   = -1.0f;
     char *out   = monad_speak(m, query, max_tokens, verbose);
     m->affect   = saved;
     return out;
 }
 
-/* ── Octonion speak — 8-face projection, 45° angular steps ──────────────── *
+/* ── Octonion speak — content × observer interference ───────────────────── *
  *
- * "4-cycle 2-stroke engine" — not a circular waveform.
- * 8 eighth-roots of unity at k×π/4 (k=0..7) describe the full hypersphere.
- * Each angle IS a dimension.  The 8 faces form 4 opposite pairs:
- *   {0,4}  {1,5}  {2,6}  {3,7}
- * Each pair is one cycle; Emerger+RevEmrg passes are the 2 strokes.
- * 4 cycles × 2 strokes = 8 independent J fields.
+ * sin(γ/2) = content  (imaginary, the wave itself).
+ * cos(γ/2) = observer (real, the measurement axis).
+ * Together: e^(iγ/2) = cos(γ/2) + i·sin(γ/2).
  *
- * Conservation: Σ cos(γ/2 + k×π/4) for k=0..7 = 0 for any γ.
- * The 8 fields always sum to zero — e^(iπ)+1=0 holds across all faces.
+ * Score = J[n] × |sin(γₙ/2) × cos(γₙ/2)| = J[n] × |sin(γₙ)| / 2.
+ * This is the beat frequency — energy transfer between content and observer.
+ * Peak at γ/2 = π/4 (equal contribution); zero at axis (pure one or other).
  *
- * Words activated on many faces simultaneously are globally resonant —
- * not local to any one phase quadrant.  Score = face count above floor.
- * Invoked by -O flag.
+ * Conservation: sin²(γ/2) + cos²(γ/2) = 1 for all γ — Pythagoras.
+ * Content and observer together account for everything.  Invoked by -O flag.
  */
 char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
 {
@@ -1005,42 +1005,30 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
     }
     free(J0);
 
-    /* Resonance score: minimum projection magnitude across the 4 face-pairs.
+    /* Interference score: content × observer overlap.
      *
-     * For any γ, exactly 4 of 8 face projections are positive and 4 negative —
-     * an integer count would score every word 4/8.  The meaningful quantity is
-     * the MINIMUM amplitude across the 4 face-pairs (k=0..3, each pair covers
-     * its opposite k+4 automatically):
+     * sin(γ/2) = content  — the wave itself, imaginary projection.
+     * cos(γ/2) = observer — the measurement axis, real projection.
      *
-     *   resonance[n] = J[n] × min_k( |cos(γₙ/2 + k×π/4)| )  k=0..3
+     *   resonance[n] = J[n] × |sin(γₙ/2) × cos(γₙ/2)|
+     *                = J[n] × |sin(γₙ)| / 2      (double-angle identity)
      *
-     * Maximum when all 4 are equal: γ/2 = π/8 + nπ/4 (22.5° steps).
-     * At that angle, |cos| = cos(π/8) ≈ 0.924 for all 4 pairs.
-     * Zero when γ/2 hits a face boundary (word lives on one axis only).
+     * This is the beat frequency — the rate of energy transfer between
+     * content and observer.  Maximum at γ/2 = π/4 (45°): equal contribution
+     * from both.  Zero at axis crossings (γ/2 = 0, π/2, π, ...): the word
+     * is pure observer or pure content with no overlap.
      *
-     * Conservation: Σ_k J[n]×cos(γₙ/2 + k×π/4) = 0 for all n, k=0..7.
-     * Verified below — deviation from zero measures floating-point noise only. */
+     * Conservation: sin²(γ/2) + cos²(γ/2) = 1 for all γ.
+     * Together content and observer account for everything — verified below. */
     double J_max = 0.0;
     for (int i = 0; i < m->N; i++) if (J[i] > J_max) J_max = J[i];
 
-    /* Resonance: sum of the two largest pair-projections × J[n].
-     * The 4 pairs (k=0..3, each paired with k+4) have magnitude |cos(θ+k×π/4)|.
-     * Minimum-of-4 is too restrictive: for high-γ zeros one pair is always near
-     * a boundary.  Sum-of-top-2 selects words that are STRONGLY present in at
-     * least two independent angular directions — a genuine 2-of-4 resonance. */
     double *resonance = calloc(m->N, sizeof(double));
     double  res_max   = 0.0;
     for (int i = 0; i < m->N; i++) {
         if (J[i] <= 0.0) continue;
-        double theta   = m->zeros[i] * 0.5;
-        double proj[4];
-        for (int k = 0; k < 4; k++)
-            proj[k] = fabs(cos(theta + k * (M_PI / 4.0)));
-        /* sort descending — pick top 2 */
-        for (int a = 0; a < 3; a++)
-            for (int b = a + 1; b < 4; b++)
-                if (proj[b] > proj[a]) { double t = proj[a]; proj[a] = proj[b]; proj[b] = t; }
-        double r = J[i] * (proj[0] + proj[1]);   /* sum of two strongest directions */
+        double theta = m->zeros[i] * 0.5;
+        double r = J[i] * fabs(sin(theta) * cos(theta));  /* |sin(γ)| / 2 */
         resonance[i] = r;
         if (r > res_max) res_max = r;
     }
@@ -1051,12 +1039,11 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
     if (verbose >= 1) {
         int peak = 0;
         for (int i = 1; i < m->N; i++) if (J[i] > J[peak]) peak = i;
-        double cons = 0.0;
-        for (int k = 0; k < 8; k++)
-            cons += J[peak] * cos(m->zeros[peak] * 0.5 + k * (M_PI / 4.0));
+        double tp   = m->zeros[peak] * 0.5;
+        double pyth = sin(tp) * sin(tp) + cos(tp) * cos(tp);   /* always 1.0 */
         vout("%s%s[oct-speak]%s  J_max=%.4e  res_max=%.4e"
-             "  res_floor=%.4e  conservation=%.2e\n",
-             CB(), CG(), CR(), J_max, res_max, res_floor, cons);
+             "  res_floor=%.4e  sin²+cos²=%.15f\n",
+             CB(), CG(), CR(), J_max, res_max, res_floor, pyth);
     }
 
     /* Fermat Pointer */
@@ -1104,7 +1091,7 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
             if (!token_accept(w, NS_FT_PROSE))      continue;
             const char *surface = near_canonical(m, walk_idx);
             if (verbose >= 1)
-                vout("  emit z#%-6d  γ=%.3f  res=%.4e  %s%s%s%s\n",
+                vout("  emit z#%-6d  γ=%.3f  sin×cos=%.4e  %s%s%s%s\n",
                      walk_idx, m->zeros[walk_idx], resonance[walk_idx],
                      CB(), w, CR(),
                      (surface != w) ? " →" : "");
