@@ -246,7 +246,9 @@ class LSHS:
     L  learn(text)          Lagrangian field evolution
     S  S_check(x, p)        Self-adjoint Hamiltonian verification
     H  H(word)              HyperIndex: word → Riemann zero
-    S  speak(prompt)        Speaking: J^μ Noether current as response
+    S  S_raw(prompt)        Speaking: prompt → J^μ prime charge distribution
+       render(charges)      Project charge distribution → words (one Face)
+       speak(prompt)        S_raw → render (backward-compatible)
 
     β field  — BLUE, inertia, knowledge, SSB vacuum deepened by learn()
     A field  — RED, kinetic, gauge connections, co-activation weighted by
@@ -383,9 +385,13 @@ class LSHS:
                 J[i] = J.get(i, 0.0) + J[j] * w_reg * self.beta.get(i, self._gvev)
         return J
 
-    def S(self, prompt: str, max_words: int = 50) -> str:
+    def S_raw(self, prompt: str) -> List[Tuple[float, float]]:
         """
-        Speaking: prompt → Ψ → J^μ → words.
+        Speaking: prompt → Ψ → J^μ prime charge distribution.
+
+        Returns [(gamma, charge), ...] sorted by charge descending.
+        The response stays in zero space. The prime charge IS the sentence.
+        Words are one Face — render() projects to them when a human needs to read.
 
         The response is not generated.
         The response is the Noether current, forced by conservation.
@@ -399,11 +405,22 @@ class LSHS:
             sz  = self.H(surface)
             psi.append((self._idx(sz.gamma), sz.E))
         if not psi:
-            return ''
+            return []
         J = self._J(psi)
+        return [(self.zeros[idx], charge)
+                for idx, charge in sorted(J.items(), key=lambda kv: kv[1], reverse=True)]
+
+    def render(self, charges: List[Tuple[float, float]], max_words: int = 50) -> str:
+        """
+        Project prime charge distribution → words.
+
+        One Face of the response. Language is SSB on prime space.
+        charges: [(gamma, J_charge), ...] as returned by S_raw().
+        """
         words: List[str] = []
-        seen: set = set()
-        for idx, _ in sorted(J.items(), key=lambda kv: kv[1], reverse=True):
+        seen:  set        = set()
+        for gamma, _ in charges:
+            idx = self._idx(gamma)
             if idx in self.vocab:
                 w = self.vocab[idx][0]
                 if w not in seen:
@@ -412,6 +429,10 @@ class LSHS:
             if len(words) >= max_words:
                 break
         return ' '.join(words)
+
+    def S(self, prompt: str, max_words: int = 50) -> str:
+        """Speaking: prompt → J^μ → words. S_raw → render."""
+        return self.render(self.S_raw(prompt), max_words)
 
     def speak(self, prompt: str, max_words: int = 50) -> str:
         """Alias for S."""

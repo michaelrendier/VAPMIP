@@ -24,4 +24,11 @@ int state_load(Monad *m, const char *path);
  * Returns 0 on success, -1 on error. */
 int state_save(const Monad *m, const char *path, double min_weight);
 
+/* Load only the vocab section from path into m, replacing m->vocab and wm.
+ * β, A, age, affect, and word_count are untouched.
+ * Call state_load() first for the field state, then state_load_vocab() for
+ * the Face layer:  state_load(m, "monad.bin"); state_load_vocab(m, "monad_wordnet.bin")
+ * Returns 0 on success, -1 on error (N mismatch, bad magic, read failure). */
+int state_load_vocab(Monad *m, const char *path);
+
 #endif /* STATE_H */

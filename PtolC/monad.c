@@ -207,9 +207,15 @@ int monad_wm_get(const Monad *m, const char *word, int *idx, double *E)
         WMSlot *s = &m->wm[slot];
         if (!s->key) break;
         if (strcmp(s->key, word) == 0) {
-            int dummy;
-            monad_word_coords(word, m->N, &dummy, E);
             *idx = (int)s->idx;
+            /* Use stored E when available — preserves prime-addressed or
+             * any non-Horner mapping written into the checkpoint. */
+            if (*idx < m->N && m->vocab[*idx].present)
+                *E = m->vocab[*idx].E;
+            else {
+                int dummy;
+                monad_word_coords(word, m->N, &dummy, E);
+            }
             return 1;
         }
         slot = (slot + 1) & mask;
@@ -334,6 +340,25 @@ void monad_ground_init(Monad *m)
 {
     generate_zeros(m->zeros, m->N);
     for (int i = 0; i < m->N; i++) { m->beta[i] = m->ground; m->age[i] = 0; }
+}
+
+int monad_resize(Monad *m, int N)
+{
+    free(m->zeros); free(m->beta); free(m->age); free(m->vocab);
+    m->N      = N;
+    m->ground = fabs(MONAD_L_GROUND) / N;
+    m->zeros  = malloc((size_t)N * sizeof(double));
+    m->beta   = malloc((size_t)N * sizeof(double));
+    m->age    = calloc((size_t)N, sizeof(int));
+    m->vocab  = calloc((size_t)N, sizeof(VocabEntry));
+    if (!m->zeros || !m->beta || !m->age || !m->vocab) {
+        fprintf(stderr, "[monad] OOM: cannot resize to N=%d\n", N);
+        return -1;
+    }
+    generate_zeros(m->zeros, N);
+    for (int i = 0; i < N; i++) m->beta[i] = m->ground;
+    /* wm and am are cleared in state_load via re-expansion; leave them. */
+    return 0;
 }
 
 void monad_emote(Monad *m, float delta)

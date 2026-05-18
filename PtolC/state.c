@@ -72,8 +72,11 @@ int state_load(Monad *m, const char *path)
     }
 
     if ((int)N != m->N) {
-        fprintf(stderr, "[state] N mismatch: file=%u monad=%d\n", N, m->N);
-        fclose(f); return -1;
+        /* File N is authoritative — resize the monad to match. */
+        fprintf(stderr, "[state] resizing monad: %d → %u\n", m->N, N);
+        if (monad_resize(m, (int)N) != 0) {
+            fclose(f); return -1;
+        }
     }
 
     m->word_count         = (int)word_count;
@@ -269,5 +272,114 @@ int state_save(const Monad *m, const char *path, double min_weight)
     fclose(f);
     fprintf(stderr, "[state] saved %s  vocab=%d  A=%d\n",
             path, vocab_count, a_count);
+    return 0;
+}
+
+/* ── Load vocab only ──────────────────────────────────────────────────────── */
+
+int state_load_vocab(Monad *m, const char *path)
+{
+    FILE *f = fopen(path, "rb");
+    if (!f) {
+        fprintf(stderr, "[state] cannot open %s\n", path);
+        return -1;
+    }
+
+    /* Magic */
+    char magic[5] = {0};
+    if (fread(magic, 1, 4, f) != 4 || strncmp(magic, STATE_MAGIC, 4) != 0) {
+        fprintf(stderr, "[state] bad magic in %s\n", path);
+        fclose(f); return -1;
+    }
+
+    /* Header */
+    uint32_t version, N, vocab_size, A_size, word_count;
+    double   threshold;
+    if (read32(f, &version)    || read32(f, &N)          ||
+        read32(f, &vocab_size) || read32(f, &A_size)     ||
+        read32(f, &word_count) || read64d(f, &threshold)) {
+        fprintf(stderr, "[state] header read error\n");
+        fclose(f); return -1;
+    }
+
+    if ((int)N != m->N) {
+        fprintf(stderr, "[state] vocab load: N mismatch — file=%u monad=%d\n", N, m->N);
+        fclose(f); return -1;
+    }
+
+    /* v4: affect — present but we leave m->affect untouched */
+    if (version >= 4) {
+        float af;
+        if (fread(&af, sizeof(float), 1, f) != 1) {
+            fprintf(stderr, "[state] affect read error\n");
+            fclose(f); return -1;
+        }
+    }
+
+    /* Skip β and age — field state is untouched */
+    long beta_bytes = (long)N * (long)sizeof(double);
+    long age_bytes  = (long)N * (long)sizeof(int);
+    if (fseek(f, beta_bytes, SEEK_CUR) != 0 ||
+        fseek(f, age_bytes,  SEEK_CUR) != 0) {
+        fprintf(stderr, "[state] seek past field error\n");
+        fclose(f); return -1;
+    }
+
+    /* Clear existing vocab array and wm hash */
+    for (int i = 0; i < m->N; i++)
+        m->vocab[i].present = 0;
+    for (int i = 0; i < m->wm_cap; i++) {
+        if (m->wm[i].key) { free(m->wm[i].key); m->wm[i].key = NULL; }
+        m->wm[i].idx = 0;
+    }
+    m->wm_size = 0;
+
+    /* Read vocab entries — identical to state_load vocab loop */
+    for (uint32_t i = 0; i < vocab_size; i++) {
+        uint32_t idx;
+        uint16_t wlen;
+        double   E;
+        if (read32(f, &idx) || read16(f, &wlen) || read64d(f, &E)) {
+            fprintf(stderr, "[state] vocab entry %u read error\n", i);
+            fclose(f); return -1;
+        }
+        uint8_t hs = NS_SIGMA_TEXT, gs = NS_SIGMA_TEXT, ps = 0;
+        if (version >= 2) {
+            if (fread(&hs, 1, 1, f) != 1 || fread(&gs, 1, 1, f) != 1) {
+                fprintf(stderr, "[state] vocab stratum read error at entry %u\n", i);
+                fclose(f); return -1;
+            }
+        }
+        if (version >= 3) {
+            if (fread(&ps, 1, 1, f) != 1) {
+                fprintf(stderr, "[state] vocab prose_seen read error at entry %u\n", i);
+                fclose(f); return -1;
+            }
+        }
+        if (wlen >= MAX_WORD_LEN) wlen = MAX_WORD_LEN - 1;
+        char word[MAX_WORD_LEN];
+        if (fread(word, 1, wlen, f) != wlen) {
+            fprintf(stderr, "[state] vocab word read error\n");
+            fclose(f); return -1;
+        }
+        word[wlen] = '\0';
+
+        if ((int)idx < m->N) {
+            m->vocab[idx].E            = E;
+            m->vocab[idx].present      = 1;
+            m->vocab[idx].home_stratum = hs;
+            m->vocab[idx].gen_stratum  = gs;
+            m->vocab[idx].prose_seen   = ps;
+            memcpy(m->vocab[idx].word, word, wlen);
+            m->vocab[idx].word[wlen] = '\0';
+            monad_wm_set(m, word, idx);
+        }
+    }
+
+    fclose(f);
+
+    int vocab_count = 0;
+    for (int i = 0; i < m->N; i++) if (m->vocab[i].present) vocab_count++;
+    fprintf(stderr, "[state] vocab loaded from %s  vocab=%d\n", path, vocab_count);
     return 0;
 }

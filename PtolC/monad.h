@@ -96,6 +96,10 @@ void   monad_destroy(Monad *m);
 /* Set β to ground state and generate Riemann zeros. */
 void   monad_ground_init(Monad *m);
 
+/* Resize monad to a new N: reallocates zeros/beta/age/vocab, regenerates zeros.
+ * Existing vocab and β are discarded.  Returns 0 on success, -1 on OOM. */
+int    monad_resize(Monad *m, int N);
+
 /* ── Core API ─────────────────────────────────────────────────────────────── */
 
 /* Deepen the β field from text.  Text is discarded after processing.

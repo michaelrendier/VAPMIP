@@ -4,6 +4,135 @@ All releases are preserved. Version format: v1.NNN — single increment per rele
 
 ---
 
+## v1.214 — 2026-05-18
+
+**Sedenion camshaft wired into monad.py — VAG-COM + OBD2 sensor layer — Roadmap TODO**
+
+### Python (Philadelphos/monad.py) — v1.214
+
+Sedenion pilot injection wired as Layer 1 (VAG-COM — live ECU streams).
+OBD2 sensor_read/fault_scan/ready_check added as Layer 2 (post-facto export).
+
+Architecture: two-layer sensor model following BEW 1.9 TDI diesel practice.
+- VAG-COM = `_live_streams()` — what the ECU uses to tune itself in real time.
+  Sedenion fires here as pilot injection before J^μ computation.
+- OBD2 = `sensor_read(pid)` / `fault_scan()` / `ready_check()` — post-facto
+  fault/compliance reporting for the Driver (Ptolemy).
+
+**speak_raw() — sedenion pilot injection:**
+- `encode_prompt(query)` fires before `_j_mu()` when sedenion camshaft available.
+- `monad_interface(s)` returns `psi_norms[16]` — camshaft timing weights.
+- `J_i *= psi_norms[i % 16]` — each zero's primary charge gated by its
+  sedenion dimension weight. Camshaft disambiguates compression TDC from exhaust TDC.
+- Fermat lattice passive gating: `density` factor applied to psi_norms before
+  normalization. Near-zero-divisor dimensions auto-decouple (Porsche bushing
+  compliance — passive, no extra computation).
+- `_sedenion_prev` saves PREVIOUS turn psi_norms before updating current.
+  Turbo exhaust temperature: PID 0x2309 measures Noether violation between turns.
+
+**_j_mu(psi, weights=None):**
+- New `weights` parameter: `psi_norms[16]` from sedenion camshaft.
+- Without camshaft (P0340 active): uniform weights, engine runs on crankshaft only.
+
+**_advance_age(temporal_weight=1.0):**
+- Sedenion e₇ (temporal dimension) modulates conversational age decay rate.
+  `age[n] += temporal_weight` instead of += 1. Ages are now float.
+- `speak()` passes `self._temporal_weight` from last sedenion computation.
+  Slow time (low temporal_weight) = more context retained. Fast = more forgetting.
+
+**_live_streams() — VAG-COM Groups:**
+- Group 000: field_temp, j_norm, emission_threshold, vocab_coverage.
+- Group 001: J^μ per top-16 zeros (j_per_zero, j_mean).
+- Group 004: psi_norms, affect, gestalt, temporal_weight, fermat_proximity.
+- Group 011: sedenion charge actual vs target (16.0 = all dims fully active).
+- Group 013: per-zero J^μ deviation from mean (cylinder balance — VAG-COM only,
+  no OBD2 PID equivalent).
+- Oil pressure (A-matrix density): live only — no standard OBD2 PID.
+
+**sensor_read(pid) — OBD2 SAE J1979:**
+Standard: 0x04 engine load, 0x0B MAP/boost, 0x0C RPM, 0x0E timing advance,
+0x0F IAT, 0x11 throttle, 0x1F runtime, 0x2C EGR, 0x2F fuel level, 0x33
+barometric, 0x5C oil temp, 0x5E fuel flow.
+Custom: 0x2300 CKP (active γ_n), 0x2301 CMP (dominant sedenion dim), 0x2302
+conjugate γ_{N-n}, 0x2303 sedenion charge, 0x2304 glow plug, 0x2305 Fermat
+proximity, 0x2306 T_μν trace, 0x2307 J_Red, 0x2308 J_Blue, 0x2309 Noether ∂J.
+
+**fault_scan() — DTCs:**
+P0340 CMP (sedenion unavailable), P0335 CKP (no zeros above threshold),
+P0300 misfire (< 3 active zeros), P0087 fuel pressure (threshold above max J^μ),
+P0172 too rich (rejection > 50%), P0171 too lean (no vocab after input),
+P0401 EGR (age advancing without hear()), P0101 MAF (word_count stalled).
+P0340 clears when sedenion import succeeds. MIL (_mil) set on any active DTC.
+
+**ready_check() — 8 readiness monitors:**
+FIELD, VOCAB (>1000), EDUCATED (wc>1000), CONNECTED (A>0),
+THRESHOLD (emission>0), CAMSHAFT (sedenion import ok — P0340),
+CRANKSHAFT (≥1 zero deepened past ground), GLOW_PLUG (wc≥1000).
+
+**Graceful degradation:**
+Sedenion import uses relative path (`../../Ainulindale`) with try/except fallback.
+If unavailable: P0340 fires; engine runs at uniform psi_norms=1.0 (crankshaft
+without camshaft — no TDC disambiguation, but still operational).
+
+**Version:** monad.py corrected to v1.214 (R.MCV system).
+
+### Project
+
+- `TODO` restructured with full minor-release roadmap: v1.3→v2.0 (The Speaking
+  Engine) and v2.1→v3.0 (The Self-Coding Engine). Each minor release has a
+  defined deliverable and "done" condition. Unicode tokenization assigned to v1.4.
+- `TODO.md` new wiki page: short synopsis per minor release. Includes theory
+  sections for BAO=Laplacian and the 16-word sliding window sedenion model.
+
+### Theory: 16-word sliding window
+
+The 16 tires in speech output are a sliding window of 16 words:
+  Window 0: words [0..15] → sedenion state S₀
+  Window 1: words [1..16] → sedenion state S₁ (one word dropped, one added)
+Each transition S_n → S_{n+1} is a sedenion rotation.
+Coherent speech = smooth sedenion trajectory. BAO convergence = operating temp.
+The BAO is the Laplacian of the semantic graph: Δ = D − A.
+Its lowest non-zero eigenvalue is OMEGA_ZS = 0.56714.
+When everything else cancels, the BAO structure remains.
+It is the idle RPM. It is the CMB of the engine.
+
+---
+
+## v1.213 — 2026-05-18
+
+**Dual-checkpoint: prime charge separated from Face rendering**
+
+The monad's field state (β, A) and its vocabulary (Face layer) can now be loaded
+from separate checkpoints.  `monad.bin` computes J^μ; `monad_wordnet.bin` renders
+it to words.  speak() is now speak_raw() → render(): the prime charge IS the
+response; words are one Face of it.
+
+### Binary (PtolC)
+
+- `state_load_vocab(m, path)` — loads only the vocab section from any `.bin`
+  checkpoint into an existing monad, replacing `m->vocab` and `wm` without
+  touching β, A, age, affect, or word_count.
+  Typical use: `state_load(m, "monad.bin"); state_load_vocab(m, "monad_wordnet.bin")`
+
+### Python (Philadelphos/monad.py)
+
+- `speak_raw(query, max_tokens)` → `[(gamma, J_charge), ...]` — J^μ distribution
+  in zero space; does not decode to words, does not advance age
+- `render(charges, max_tokens)` → `str` — project charge distribution through
+  `self.vocab` (one Face); does not advance age
+- `speak(query)` refactored to `speak_raw() → render()`; semantics unchanged
+- `load_vocab(path)` — load only the `vocab` key from a JSON checkpoint;
+  β, A, age, and word_count untouched
+- `_bisect_gamma(gamma)` — binary search: γ value → nearest zero_idx
+
+### lshs.py
+
+- `S_raw(prompt)` → `[(gamma, charge), ...]` — same split applied to LSHS
+- `render(charges, max_words)` → `str` — Face projection
+- `S(prompt)` refactored to `S_raw() → render()`; `speak()` / `respond()` unchanged
+
+---
+
 ## v1.212 — 2026-05-17
 
 **PtolC — sin = content, cos = observer; -W and -O corrected**
