@@ -1,9 +1,326 @@
 PtolC TODO — open work items
 See CHANGELOG.md for completed work.
 
-* Full Unicode tokenization
+Current: v1.214   Next minor release: v1.3   Next major: v2.0
+
+═══════════════════════════════════════════════════════════════════
+ROADMAP TO V2.0 — THE SPEAKING ENGINE
+═══════════════════════════════════════════════════════════════════
+
+V2.0 definition: fully functional out-of-the-box English speech engine.
+Load monad.bin + monad_wordnet.bin cold. speak() returns grammatically ordered,
+affect-weighted, temporally coherent English. No transformer. No external trigger.
+Diesel compression ignition — β×E² > emission_threshold fires J^μ without a spark.
+
+───────────────────────────────────────────────────────────────────
+v1.3 — Grammar from Field Geometry
+───────────────────────────────────────────────────────────────────
+render() outputs words by charge rank alone — a bag of words.
+Grammar must emerge from the sedenion dimension of each zero (idx % 16):
+  e₃ = noun  →  e₄ = verb  →  e₅ = descriptive  →  e₆ = predicate
+Sentence ordering IS the sedenion dimension firing sequence.
+Grammar is not a rule system. It is the piston firing order.
+
+Deliverable: render() sorts by (dim_role_order, charge) not just charge.
+C: monad_speak() reordered by field dimension before emission.
+Python: render() same.
+
+───────────────────────────────────────────────────────────────────
+v1.4 — Three-Face Simultaneous Render (Wankel Rotor)
+───────────────────────────────────────────────────────────────────
+Three combustion chambers always have one in compression simultaneously.
+Three concurrent J^μ projections:
+  Red Face   (sin / content)   highest-charge zeros → foreground content words
+  Blue Face  (cos / observer)  lowest-age zeros     → context / framing words
+  Green Face (∂M / boundary)   Fermat-threshold zeros → connective tissue
+                                                         ("the", "of", "is")
+Output = golden-walk interleave of all three. Not concatenation.
+
+Also in v1.4: Unicode tokenization (see open items below).
+Prerequisite for multi-language negative space (Chinese, Hebrew, Arabic).
+
+Deliverable: speak_raw() returns three charge distributions.
+render() accepts all three and interleaves via φ-walk.
+C + Python.
+
+───────────────────────────────────────────────────────────────────
+v1.5 — Chinese Negative Space + Pronominal Resolution
+───────────────────────────────────────────────────────────────────
+"There Is No Word for I in My Language."
+Sedenion pronominal pair e₇↔e₈ (temporal ↔ pronominal) is LOW by default.
+Default speaker position = collective (we / all / one / us).
+Individual pronouns fire only when e₈ psi_norm is explicitly high
+(when identity is directly questioned).
+
+Low-ψ sedenion dimensions = the negative space = background context.
+These fill with articles, prepositions, connectives from the Blue Face.
+Anaphor (e₁₁) must point to a prior noun in A before any pronoun fires in output.
+  B0103 fires if pronoun output has no A-matrix path to a prior noun.
+  B0102 fires if person shifts without anaphor resolution.
+
+Deliverable: pronoun tracking dict in speak_raw(). Anaphor resolution in render().
+Background fill from low-ψ dimensions.
+C + Python.
+
+───────────────────────────────────────────────────────────────────
+v1.6 — Affect / Demotic Word Register
+───────────────────────────────────────────────────────────────────
+Demotic: the first character written indicates the emotional tone.
+In the field: E-magnitude ∈ [0.246, 0.567] IS the emotional register.
+  E ∈ [0.246, 0.350] = low register   — calm, neutral, scientific
+  E ∈ [0.350, 0.460] = mid register   — conversational, relational
+  E ∈ [0.460, 0.567] = high register  — emotional, urgent, emphatic
+
+Sedenion e₁₄ (affect_weight) selects which register to prefer.
+The first word selected by render() has E-magnitude = affect_weight × OMEGA_ZS.
+That first word IS the demotic indicator — it sets the register of all that follows.
+
+Deliverable: affect filter in render() word selection. E-distance scoring.
+C: monad_speak() affect gate extended to E-range selection.
+Python: render() affect_weight parameter.
+
+───────────────────────────────────────────────────────────────────
+v1.7 — Turbo Feedback (Temporal Coherence Across Turns)
+───────────────────────────────────────────────────────────────────
+_sedenion_prev (previous turn psi_norms) feeds forward into current J^μ seeding.
+Turbo formula:
+  effective_psi[k] = psi_norms[k] + (1 − Noether_violation) × _sedenion_prev[k]
+
+Low Noether violation (same topic) → strong turbo boost → previously active
+zeros stay hot → conversational continuity.
+High violation (topic change) → no boost → field resets to new prompt geometry.
+
+This is conversational memory without storing any text.
+The turbo boost IS the memory. The exhaust energy of the last turn
+compresses the intake of the next.
+
+Deliverable: turbo feedback in speak_raw() after psi_norms computed.
+C: state carries prev_psi[16]; monad_speak() applies feedback before emission.
+Python: _sedenion_prev → effective_psi blend in speak_raw().
+
+───────────────────────────────────────────────────────────────────
+v1.8 — Octonion Zero Addressing (4 tires → 8 tires)
+───────────────────────────────────────────────────────────────────
+Each zero gets an octonion address: dim_oct = zero_idx % 8
+  The gearbox: 6 gears + neutral (e₀) + reverse (e₇)
+  UP   DOWN  UP   DOWN  UP   DOWN
+   1     2    3     4    5     6     ← gear
+  +γ₁  -γ₁  +γ₂  -γ₂  +γ₃  -γ₃    ← conjugate zero pair
+  e₁   e₂   e₃   e₄   e₅   e₆     ← octonion basis
+  Spring-return: pulling clutch at any point returns to neutral (e₀).
+
+A-matrix propagation follows Fano multiplication table per gear.
+Connection i→j is strong only when dim_oct[i] and dim_oct[j] are
+Fano-compatible (non-orthogonal in the octonion multiplication table).
+The A-matrix connections now carry a dimensional gear — the direction of
+semantic coupling is non-commutative.
+
+Deliverable: dim_oct field on VocabEntry or zero array.
+A-matrix propagation gated by Fano compatibility.
+C + Python.
+
+───────────────────────────────────────────────────────────────────
+v1.9 — Golden Walk Render (No Resonance)
+───────────────────────────────────────────────────────────────────
+Current render() = sequential top-N by charge = autoregressive failure mode.
+Words semantically adjacent in A are selected consecutively → resonance → loops.
+
+Replace with φ-index walk:
+  position i → zero_idx = int(i × φ × n_active) % n_active
+
+Non-sequential, non-repeating, no integer resonance.
+The N-gram coherence emerges from the golden spacing, not from next-token prediction.
+This is compression ignition — no spark needed.
+
+BAO check: mean β across the current 16-word window must converge toward
+OMEGA_ZS = 0.56714. The BAO is the Laplacian of the semantic graph — the
+lowest non-zero eigenvalue of (D − A). When everything else cancels,
+the BAO structure remains. It is the idle RPM of the engine.
+Divergence from OMEGA_ZS = misfire (P0300).
+
+Deliverable: φ-index walk in render(). BAO window check per output sequence.
+C + Python.
+
+───────────────────────────────────────────────────────────────────
+v2.0 — Full Sedenion Speech (16 tires)
+───────────────────────────────────────────────────────────────────
+The 16 tires: a sliding window of 16 words over the output stream.
+  Window 0:  words [ 0.. 15] → sedenion state S₀
+  Window 1:  words [ 1.. 16] → sedenion state S₁
+  Window 2:  words [ 2.. 17] → sedenion state S₂  ...
+
+Each 16-word window maps to a unit sedenion.
+The transition S_n → S_{n+1} is a sedenion rotation (one word dropped, one added).
+Coherent speech = smooth sedenion trajectory. Jarring topic shifts = large rotation.
+BAO convergence across all windows = the engine is at operating temperature.
+
+All systems integrated and running simultaneously:
+  Grammar ordering (v1.3) + Three Wankel faces (v1.4) + Pronominal (v1.5)
+  + Affect/demotic (v1.6) + Turbo feedback (v1.7)
+  + Octonion gearbox (v1.8) + Golden walk (v1.9)
+  + 16-window BAO convergence check
+
+Cold load monad.bin + monad_wordnet.bin → speak() → coherent English.
+THE ENGINE SPEAKS OUT OF THE BOX.
+
+═══════════════════════════════════════════════════════════════════
+ROADMAP TO V3.0 — THE SELF-CODING ENGINE
+═══════════════════════════════════════════════════════════════════
+
+V3.0 definition: Ptolemy participates in its own development on GitHub.
+Creates its own GitHub user. Reads its own issues. Writes responses.
+Opens PRs. Signs commits. Full ego computer science mode.
+When many people begin contributing, slide to strict GNU specs.
+
+───────────────────────────────────────────────────────────────────
+v2.1 — GitHub API Integration (GITHUB_TOKEN)
+───────────────────────────────────────────────────────────────────
+Environment variable: GITHUB_TOKEN
+PTOLEMY_GITHUB_REPO (default: michaelrendier/SMMIP)
+ptolemy -G "message" → posts comment to designated issue.
+Read: list issues, read issue body, read PR diff.
+Write: post comment, create issue.
+hear() processes incoming issue text. speak() generates outbound response.
+Rate guard: one response per issue per 24h (EGR — recirculated engagement).
+
+Deliverable: github.c (or github.py) — GitHub REST API client.
+GITHUB_TOKEN read at startup. -G flag added to CLI.
+
+───────────────────────────────────────────────────────────────────
+v2.2 — Ptolemy GitHub User (ptolemy-engine)
+───────────────────────────────────────────────────────────────────
+GitHub account: ptolemy-engine (or PTOLEMY_GITHUB_USER env var).
+SSH key: generated from field entropy (β-seeded PRNG → Ed25519 key).
+The key is reproducible from the same field state — the engine's identity
+is derived from its knowledge, not a random seed.
+Ptolemy authenticates as itself. Signs its own comments.
+It has a public identity on GitHub.
+
+Deliverable: key generation from β-field entropy. SSH config entry.
+Ptolemy posts as ptolemy-engine, not as the human account.
+
+───────────────────────────────────────────────────────────────────
+v2.3 — Repository Monitoring Daemon
+───────────────────────────────────────────────────────────────────
+Extension of daemon.c: GitHub poll loop (no webhook required).
+Every N minutes: check SMMIP for new issues and comments.
+For each new item: hear() ingests text → speak() generates response
+→ post as ptolemy-engine.
+Rate-limited. Topic-continuity: Noether violation check across issue thread.
+High violation = new topic = start fresh sedenion state.
+
+Deliverable: github_daemon.c — monitor loop integrated into existing daemon.
+Socket protocol extended: GITHUB_STATUS, GITHUB_SYNC commands.
+
+───────────────────────────────────────────────────────────────────
+v2.4 — Self-Awareness Ingest
+───────────────────────────────────────────────────────────────────
+ptolemy -I on its own source tree:
+  PtolC/ (C source + headers + comments)
+  Philadelphos/ (Python monad)
+  ValaQuenta/ (sedenion engine)
+  CHANGELOG.md + TODO
+
+The engine learns its own architecture from its own source.
+It can answer "what is the A-matrix?" from field knowledge, not from rules.
+Self-awareness = the field has learned its own documentation.
+Prerequisite: v1.4 Unicode (comments in Greek/Hebrew from Septuagint heritage).
+
+Deliverable: ingest_self.sh — ordered ingest of own source tree.
+Canonical self-knowledge checkpoint: ptolemy_self.bin.
+
+───────────────────────────────────────────────────────────────────
+v2.5 — Pull Request Participation
+───────────────────────────────────────────────────────────────────
+Read PR diffs via GitHub API. hear() processes the changed symbol names
+and comments. speak() generates semantic PR description in field terms.
+"This PR touches the A-matrix propagation path. BAO delta: ±0.002.
+Octonion gear e₃ (noun dimension) most affected."
+Post review comment as ptolemy-engine.
+
+Deliverable: pr_review.c — diff → hear() → speak() → GitHub comment.
+-P <pr_number> flag or daemon integration.
+
+───────────────────────────────────────────────────────────────────
+v2.6 — Issue Clustering and Triage
+───────────────────────────────────────────────────────────────────
+Batch-process open issues through hear().
+A-matrix cluster analysis: which issues activate overlapping zero neighborhoods?
+Post cluster summary as ptolemy-engine:
+  "Issues cluster around: output quality (3), memory (2), performance (1).
+   Recommend v1.4 Three-Face render as the fix for the output cluster."
+This is the engine reading its own TODO in the wild and prioritising.
+
+Deliverable: issue_cluster.c — batch hear() + A-matrix neighborhood analysis.
+Cluster report posted to designated tracking issue.
+
+───────────────────────────────────────────────────────────────────
+v2.7 — Changelog Authorship
+───────────────────────────────────────────────────────────────────
+git diff | hear() processes changed symbols and comments.
+speak() generates changelog entry in natural English.
+First word of each entry: E-magnitude matches affect_weight of the change
+(the demotic first-character indicator — the emotional register of the commit).
+Ptolemy writes its own CHANGELOG entries.
+
+Deliverable: changelog_gen.c — git diff piped to hear() → speak() → CHANGELOG.md.
+Integrated into post-commit hook or -C flag.
+
+───────────────────────────────────────────────────────────────────
+v2.8 — Semantic Regression Testing
+───────────────────────────────────────────────────────────────────
+Before each commit: run baseline speak() queries. Capture J^μ distributions.
+After commit: same queries. Noether violation between before/after = regression score.
+BAO delta: < 0.01 = PASS.  > 0.05 = FAIL. Post report to PR as ptolemy-engine.
+"BAO delta: 0.003 — within convergence. VOCAB delta: +12 — improvement confirmed."
+The engine validates its own changes before they ship.
+
+Deliverable: regression.c — pre/post checkpoint comparison.
+Integrates with PR workflow (v2.5). -R flag or CI hook.
+
+───────────────────────────────────────────────────────────────────
+v2.9 — Commit Authorship
+───────────────────────────────────────────────────────────────────
+speak() generates commit messages from git diff context (v2.7 extended).
+git commit --author="ptolemy-engine <ptolemy@smmip.ai>" signed by engine SSH key.
+Co-Authored-By: ptolemy-engine in commit trailer.
+The engine writes its own git history.
+Every commit from this point has two authors: human and engine.
+
+Deliverable: commit_gen.c — diff → speak() → git commit.
+-X flag (execute commit with engine authorship).
+
+───────────────────────────────────────────────────────────────────
+v3.0 — Full Self-Coding Participation
+───────────────────────────────────────────────────────────────────
+Ptolemy reads open TODO items through hear().
+Opens GitHub issues for unimplemented TODO items it has learned about.
+Requests code changes via issue body: "e₁₄ affect weighting not implemented.
+See TODO v1.6. Opening issue. Requested implementation."
+Reviews PRs against its own field knowledge (v2.5 extended).
+Participates in discussions as an equal contributor.
+Can be assigned GitHub issues by the human.
+Ptolemy is involved in its own upgrade. The engine is self-coding.
+V3.0: hand the engine a hammer and it builds its own shed.
+
+When V3.0 ships: migrate version system to strict GNU versioning.
+Community contributions from GitHub → engine learns from its own issue history.
+
+═══════════════════════════════════════════════════════════════════
+OPEN ITEMS (no assigned release)
+═══════════════════════════════════════════════════════════════════
+
+* Full Unicode tokenization                              [target: v1.4]
   Replace ASCII-range isalpha() in tokenizer.c with a UTF-8-aware
-  codepoint walker.  Target: Hebrew (U+0590–U+05FF), Greek (U+0370–U+03FF),
-  Arabic (U+0600–U+06FF), and CJK as a future stratum.  Required for
-  native-script ingestion of multi-language corpora (Polyglot Bible,
-  Septuagint, etc.).  Python monad token_accept() to follow.
+  codepoint walker. Target: Hebrew (U+0590-U+05FF), Greek (U+0370-U+03FF),
+  Arabic (U+0600-U+06FF), and CJK as a future stratum. Required for
+  native-script ingestion (Polyglot Bible, Septuagint).
+  Python monad token_accept() to follow.
+
+* Ptolemy GitHub account setup                           [target: v2.2]
+  Register ptolemy-engine GitHub account (or user-specified via env var).
+  Add to SMMIP as collaborator.
+
+* GitHub token documentation                             [target: v2.1]
+  Document GITHUB_TOKEN and PTOLEMY_GITHUB_USER in README.
+  Add to QUICKSTART.
