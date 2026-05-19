@@ -153,6 +153,10 @@ double monad_a_get(const Monad *m, int i, int j);
  * Positive delta = more irritated; negative = calmer. */
 void   monad_emote(Monad *m, float delta);
 
+/* Decode Fermat spaces from incoming text, inject charges into β field,
+ * then call monad_learn().  Closes the Wernicke feedback loop. */
+void   monad_hear_fermat(Monad *m, const char *text, int verbose);
+
 /* ── Self-referential identity ────────────────────────────────────────────── */
 
 /* Drain the captured verbose buffer back through learn() — silent pass.

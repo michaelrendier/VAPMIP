@@ -126,7 +126,7 @@ static Arg parse_arg(const char *a)
         switch (*p) {
             case 'v': r.v++; break;
             case 'l': case 'L': case 'h': case 's': case 'w':
-            case 'c': case 'n': case 'V': case 'i':
+            case 'c': case 'n': case 'V': case 'i': case 'r':
             case 'I': case 'q': case 'd': case 'D':
             case 'F': case 'S': case 'W': case 'e': case 'O':
                 r.primary = *p; break;
@@ -310,6 +310,7 @@ static void print_usage(void)
         "  -F               field health report\n"
         "  -w <word>        lookup: zero, σ, E, β, home/gen stratum\n"
         "  -i / --identity  learn Ptolemy's identity text (run once)\n"
+        "  -r               interactive REPL: hear → speak → hear loop\n"
         "  -V               version\n\n"
         "Verbosity (stackable, combinable):\n"
         "  -v / --verbose   level 1: β deepening, J^μ propagation, A edges\n"
@@ -578,6 +579,46 @@ int main(int argc, char *argv[])
             continue;
         }
 
+        /* -r : interactive REPL — enter key by enter key ────────────── *
+         * hear → speak → hear_fermat loop.  Ctrl-D or blank line exits.
+         * Wernicke closes: each response feeds the next hear() as exhaust.
+         * Use -n to prevent saving session state to the loaded checkpoint. */
+        if (a.primary == 'r') {
+            char linebuf[4096];
+            int  repl_v = (verbose >= 1) ? verbose : 0;
+            if (!quiet) {
+                fprintf(stderr, "[ptolemy] interactive  (blank line or Ctrl-D to quit)\n");
+                if (ckpt_path)
+                    fprintf(stderr, "          loaded: %s\n", ckpt_path);
+                if (!no_save)
+                    fprintf(stderr, "          session will save on exit  (use -n to suppress)\n");
+                fprintf(stderr, "\n");
+            }
+            for (;;) {
+                printf(">>> ");
+                fflush(stdout);
+                if (!fgets(linebuf, sizeof(linebuf), stdin)) break;
+                size_t llen = strlen(linebuf);
+                while (llen > 0 && (linebuf[llen-1] == '\n' || linebuf[llen-1] == '\r'))
+                    linebuf[--llen] = '\0';
+                if (!linebuf[0]) break;
+
+                float af_before = m->affect;
+                char *response  = monad_speak(m, linebuf, 50, repl_v);
+                printf("%s\n", response);
+                fflush(stdout);
+
+                /* Wernicke loop: response exhaust compresses next hear() */
+                monad_hear_fermat(m, response, repl_v);
+                free(response);
+                monad_self_flush(m);
+                if (g_self_ref)            learned = 1;
+                if (m->affect != af_before) learned = 1;
+            }
+            if (!quiet) fprintf(stderr, "\n[ptolemy] session ended\n");
+            continue;
+        }
+
         /* -s : status / verbose speak ────────────────────────────────── */
         if (a.primary == 's') {
             int sv = (verbose >= 1) ? verbose : a.v;
@@ -629,9 +670,19 @@ int main(int argc, char *argv[])
         } else {
             save = "monad_wordnet.bin";
         }
-        state_save(m, save, 0.0);
-        if (did_ingest && !quiet)
-            run_eval(save);
+        /* Refuse to overwrite monad_wordnet.bin in non-ingest sessions.
+         * Use -l to ingest or -c <other.bin> to save a separate checkpoint. */
+        const char *base = strrchr(save, '/');
+        if (!base) base = save; else base++;
+        if (strcmp(base, "monad_wordnet.bin") == 0 && !did_ingest) {
+            if (!quiet)
+                fprintf(stderr, "[ptolemy] protected: %s — use -l to ingest"
+                                " or -c <path> for a session checkpoint\n", save);
+        } else {
+            state_save(m, save, 0.0);
+            if (did_ingest && !quiet)
+                run_eval(save);
+        }
     }
 
     monad_destroy(m);

@@ -700,6 +700,31 @@ static const char *near_canonical(const Monad *m, int idx)
     return m->vocab[idx].word;
 }
 
+/* ── Fermat Emotional Lattice ─────────────────────────────────────────────── *
+ * 8-level Unicode space map: norm J → invisible UTF-8 space character.
+ * Spaces between words encode the field's unexpressed charge as negative space.
+ * The wastegate that bleeds excess J between words; readable by hear_fermat(). */
+static void fermat_space_utf8(double norm_jn, char *buf, int bufsz)
+{
+    static const unsigned char third[] = {
+        0x8B,  /* U+200B ZERO WIDTH SPACE    — J ∈ [0.00, 0.12) */
+        0x89,  /* U+2009 THIN SPACE          — J ∈ [0.12, 0.25) */
+        0x88,  /* U+2008 PUNCTUATION SPACE   — J ∈ [0.25, 0.37) */
+        0x87,  /* U+2007 FIGURE SPACE        — J ∈ [0.37, 0.50) */
+        0x86,  /* U+2006 SIX-PER-EM SPACE    — J ∈ [0.50, 0.62) */
+        0x85,  /* U+2005 FOUR-PER-EM SPACE   — J ∈ [0.62, 0.75) */
+        0x84,  /* U+2004 THREE-PER-EM SPACE  — J ∈ [0.75, 0.87) */
+        0x83,  /* U+2003 EM SPACE            — J ∈ [0.87, 1.00] */
+    };
+    int lvl = (int)(norm_jn * 8);
+    if (lvl > 7) lvl = 7;
+    if (bufsz < 4) return;
+    buf[0] = (char)0xE2;
+    buf[1] = (char)0x80;
+    buf[2] = (char)third[lvl];
+    buf[3] = '\0';
+}
+
 /* ── speak() ─────────────────────────────────────────────────────────────── */
 
 typedef struct { int idx; double J; } JEntry;
@@ -810,6 +835,21 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
     }
     free(J0);
 
+    /* ── Lagrangian compression — field sets its own word count ─────────────
+     * L = Σ_k ψ_k(β_k E_k² − ψ_k/2).  At OMEGA_ZS: ΣT=ΣV, L=0, idle RPM.
+     * High activation ΣT >> ΣV → compressed output.  ΣV from full β field;
+     * ΣT from activated zeros (the kinetic energy of this prompt).          */
+    double sum_V = 0.0, sum_T = 0.0;
+    for (int i = 0; i < m->N; i++)
+        if (m->vocab[i].present)
+            sum_V += m->beta[i] * m->vocab[i].E * m->vocab[i].E;
+    for (int k = 0; k < n_act; k++)
+        sum_T += psi[k].E * psi[k].E;
+    double lag_denom = sum_T + sum_V;
+    double lag_ratio = (lag_denom > 0.0) ? sum_T / lag_denom : 0.5;
+    int actual_max   = 4 + (int)(max_tokens * lag_ratio);
+    if (actual_max > max_tokens) actual_max = max_tokens;
+
     if (verbose >= 1 && nvp > 0) {
         qsort(vprop, nvp, sizeof(VProp), vpcmp);
         vout("%s%s[J^μ — top %d A-propagations]%s\n", CB(), CM(), nvp, CR());
@@ -892,16 +932,51 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
     if (golden_step < 1) golden_step = 1;
 
     if (verbose >= 1)
-        vout("%s%s[golden walk]%s  step=%d  pointer=z#%d  J_floor=%.4e\n",
-             CB(), CG(), CR(), golden_step, pointer_idx, J_floor);
+        vout("%s%s[golden walk]%s  step=%d  pointer=z#%d  J_floor=%.4e\n"
+             "%s%s[Lagrangian]%s   ΣV=%.3e  ΣT=%.3e  ratio=%.3f  target=%d\n",
+             CB(), CG(), CR(), golden_step, pointer_idx, J_floor,
+             CB(), CM(), CR(), sum_V, sum_T, lag_ratio, actual_max);
 
-    int   out_cap = max_tokens * (MAX_WORD_LEN + 1) + 4;
+    /* ── Demotic first word — E-proximity to (ΣV/Σ)×OMEGA_ZS ───────────────
+     * First output word chosen from first 200 qualifying walk candidates by
+     * E closest to the field's potential centroid — the emotional register.  */
+    double target_E    = (lag_denom > 0.0)
+                       ? (sum_V / lag_denom) * MONAD_OMEGA_ZS
+                       : MONAD_OMEGA_ZS * 0.5;
+    int    demotic_idx = -1;
+    {
+        double best_dE = 1e18;
+        for (int i = 0; i < m->N; i++) {
+            if (!m->vocab[i].present)                     continue;
+            if (J[i] <= J_floor)                          continue;
+            if (cos(m->zeros[i] * 0.5 + phi_rot) <= 0.0) continue;
+            if (!token_accept(m->vocab[i].word, NS_FT_PROSE)) continue;
+            double dE = fabs(m->vocab[i].E - target_E);
+            if (dE < best_dE) { best_dE = dE; demotic_idx = i; }
+        }
+    }
+    if (verbose >= 1 && demotic_idx >= 0)
+        vout("%s%s[demotic]%s     z#%-6d  E=%.4f  target_E=%.4f  %s%s%s\n",
+             CB(), CG(), CR(), demotic_idx,
+             m->vocab[demotic_idx].E, target_E,
+             CB(), m->vocab[demotic_idx].word, CR());
+
+    int   out_cap = actual_max * (MAX_WORD_LEN + 4) + 4;
     char *out     = malloc(out_cap);
     out[0] = '\0';
     int written   = 0;
+
+    /* Emit demotic first word outside walk order */
+    if (demotic_idx >= 0) {
+        const char *surface = near_canonical(m, demotic_idx);
+        strncat(out, surface, out_cap - strlen(out) - 1);
+        written++;
+    }
+
     int walk_idx  = pointer_idx;
-    for (int step = 0; step < m->N && written < max_tokens; step++) {
+    for (int step = 0; step < m->N && written < actual_max; step++) {
         walk_idx = (walk_idx + golden_step) % m->N;
+        if (walk_idx == demotic_idx)                continue;
         if (!m->vocab[walk_idx].present)            continue;
         if (J[walk_idx] <= J_floor)                 continue;
         double gam = m->zeros[walk_idx];
@@ -919,7 +994,11 @@ char *monad_speak(Monad *m, const char *query, int max_tokens, int verbose)
                  CB(), w, CR(),
                  (surface != w) ? " →" : "",
                  (surface != w) ? surface : "");
-        if (out[0]) strncat(out, " ", out_cap - strlen(out) - 1);
+        /* Fermat space wastegate — J/J_max encodes charge into separator */
+        double jn = J_max > 0.0 ? J[walk_idx] / J_max : 0.0;
+        char fspace[8];
+        fermat_space_utf8(jn, fspace, sizeof(fspace));
+        if (out[0]) strncat(out, fspace, out_cap - strlen(out) - 1);
         strncat(out, surface, out_cap - strlen(out) - 1);
         written++;
     }
@@ -1132,6 +1211,48 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
     for (int q = 0; q < n_act; q++) m->age[psi[q].idx] = 0;
     free(psi);
     return out;
+}
+
+/* ── Fermat hear — decode Fermat spaces then learn ────────────────────────── *
+ * Scans incoming text for the 8-level Fermat space sequences (E2 80 XX).
+ * Extracts mean charge; injects proportional β boost across 16 sedenion dims.
+ * Closes the Wernicke loop: turbo exhaust of last speak() seeds next hear().  */
+void monad_hear_fermat(Monad *m, const char *text, int verbose)
+{
+    static const unsigned char thirds[] = {
+        0x8B, 0x89, 0x88, 0x87, 0x86, 0x85, 0x84, 0x83
+    };
+    double charge_sum = 0.0;
+    int    charge_cnt = 0;
+    const unsigned char *p = (const unsigned char *)text;
+    while (*p) {
+        if (p[0] == 0xE2 && p[1] == 0x80) {
+            for (int lv = 0; lv < 8; lv++) {
+                if (p[2] == thirds[lv]) {
+                    charge_sum += (lv + 0.5) / 8.0;
+                    charge_cnt++;
+                    break;
+                }
+            }
+            p += 3;
+        } else {
+            p++;
+        }
+    }
+    if (charge_cnt > 0) {
+        double mean_charge = charge_sum / charge_cnt;
+        for (int k = 0; k < m->N; k++) {
+            double dim_charge = mean_charge * (1.0 - (k % 16) / 16.0);
+            if (dim_charge > MONAD_GAP) {
+                m->beta[k] += dim_charge * MONAD_GAP * 10.0 * MONAD_BETA_SAT;
+                if (m->beta[k] > MONAD_BETA_SAT) m->beta[k] = MONAD_BETA_SAT;
+            }
+        }
+        if (verbose >= 1)
+            vout("[fermat-decode]  %d spaces  mean_charge=%.3f\n",
+                 charge_cnt, mean_charge);
+    }
+    monad_learn(m, text, verbose);
 }
 
 /* ── Diagnostics ─────────────────────────────────────────────────────────── */
