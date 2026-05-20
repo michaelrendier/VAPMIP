@@ -1500,10 +1500,15 @@ static void speak_word_annotated(uint32_t idx, FILE *f) {
         }
     }
 
+    /* Annotations in dim gray — only when writing to a terminal */
+    int tty = isatty(fileno(f));
+    const char *DIM = tty ? "\033[2;90m" : "";
+    const char *RST = tty ? "\033[0m"    : "";
+
     if (nbr && best > 0.20f)
-        fprintf(f, "%s (%s, %s)", w->word, OP_GLOSS[dim], nbr);
+        fprintf(f, "%s %s(%s, %s)%s", w->word, DIM, OP_GLOSS[dim], nbr, RST);
     else
-        fprintf(f, "%s (%s)", w->word, OP_GLOSS[dim]);
+        fprintf(f, "%s %s(%s)%s",     w->word, DIM, OP_GLOSS[dim],      RST);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
