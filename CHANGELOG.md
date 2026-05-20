@@ -4,6 +4,32 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v2.2.0 — 2026-05-19
+
+**Two-thread engine + conversational default + annotated output**
+
+### Binary — `monad.c` / `ptolemy-monad` (v1.219)
+
+- **Conversational default**: `ptolemy-monad prompt text here` — no flags, no quotes.
+  First arg not starting with `--` is treated as a plain-English prompt.
+  After responding, drops into REPL if stdin is a tty.
+- **Two-thread architecture**:
+  - Main thread: hear() → learn() → speak() loop. Wernicke always closed.
+  - Background thread (`bg_thread_fn`): auto-saves `.ptol` every 60s to `G_bin_path`.
+    Final save on exit.
+- **Auto-load**: on startup, silently loads `~/.ptolemy/monad-english.ptol` if it exists.
+  `--load-bin` overrides and sets the auto-save target.
+- **Annotated output** (`speak_word_annotated`): each emitted word followed by
+  `(operator_gloss, prime_neighbour)` — the sedenion dimension gloss + strongest
+  A-matrix co-occurrence. e.g. `holcus (the Indexor, indexor)`.
+- **REPL** (`repl_loop`): `>` prompt on tty, each line goes through hear_and_speak.
+- **`--words N`**: set response length (default 24).
+- `OP_GLOSS[16]`: self / negation / binding / the Indexor / action / quality /
+  decision / sequence / depth / allocation / inquiry / reference /
+  composition / parallel / signal / voice.
+
+---
+
 ## v2.1.0 — 2026-05-19
 
 **Standalone C learning engine + Sedenion DNS + Overnight self-teaching**

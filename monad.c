@@ -42,7 +42,7 @@
 #endif
 
 /* ── Constants ──────────────────────────────────────────────────────────── */
-#define PTOL_VERSION      "1.218"
+#define PTOL_VERSION      "1.219"
 #define SED_DIM           16
 #define OMEGA_ZS          0.56714    /* Lambert W(1); BAO spectral gap */
 #define GAP               0.000707   /* Yang-Mills mass gap; semantic vacuum */
@@ -63,6 +63,31 @@
 /* Binary format */
 #define PTOL_MAGIC        0x4C544F50u /* "PTOL" little-endian */
 #define PTOL_BIN_VER      3
+
+/* ── Operator glosses — plain-English sedenion dimension labels ────────── */
+static const char *OP_GLOSS[SED_DIM] = {
+    "self",         /* e0  identity */
+    "negation",     /* e1  negate */
+    "binding",      /* e2  bind */
+    "the Indexor",  /* e3  name */
+    "action",       /* e4  apply */
+    "quality",      /* e5  abstract */
+    "decision",     /* e6  branch */
+    "sequence",     /* e7  iterate */
+    "depth",        /* e8  recurse */
+    "allocation",   /* e9  allocate */
+    "inquiry",      /* e10 query */
+    "reference",    /* e11 dereference */
+    "composition",  /* e12 compose */
+    "parallel",     /* e13 parallelize */
+    "signal",       /* e14 interrupt */
+    "voice",        /* e15 emit */
+};
+
+/* ── Auto-save path and background thread ──────────────────────────────── */
+static char     G_bin_path[4096] = "";   /* path for auto-save; set in main() */
+static pthread_t G_bg_tid;
+static int       G_bg_started = 0;
 
 /* ── Riemann zeros (first 20) ────────────────────────────────────────────── */
 static const double RIEMANN_ZEROS[20] = {
@@ -1414,6 +1439,117 @@ static void print_report(FILE *f) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+ *  BACKGROUND THREAD — auto-save + BAO watchdog
+ *  Runs alongside the hear/speak loop; saves every 60 s if G_bin_path set.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+static void *bg_thread_fn(void *arg) {
+    (void)arg;
+    time_t last_save = time(NULL);
+    while (G.running) {
+        sleep(5);
+        if (!G.running) break;
+        if (!G_bin_path[0]) continue;
+
+        time_t now = time(NULL);
+        if ((now - last_save) >= 60) {
+            pthread_mutex_lock(&G.lock);
+            save_bin(G_bin_path);
+            pthread_mutex_unlock(&G.lock);
+            last_save = now;
+        }
+    }
+    /* Final save on exit */
+    if (G_bin_path[0]) {
+        pthread_mutex_lock(&G.lock);
+        save_bin(G_bin_path);
+        pthread_mutex_unlock(&G.lock);
+    }
+    return NULL;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ *  ANNOTATED OUTPUT — word (operator gloss, prime neighbour)
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+static void speak_word_annotated(uint32_t idx, FILE *f) {
+    if (idx == UINT32_MAX || idx >= G_n) { fprintf(f, "[?]"); return; }
+
+    Word *w   = &G_words[idx];
+    int   dim = (int)(idx % SED_DIM);
+
+    /* Prime A-matrix neighbour — strongest co-occurrence edge */
+    const char *nbr  = NULL;
+    float       best = 0.0f;
+    int j;
+    for (j = 0; j < w->nbr_n; j++) {
+        uint32_t ni = w->nbr[j];
+        if (ni < G_n && w->nbr_w[j] > best) {
+            best = w->nbr_w[j];
+            nbr  = G_words[ni].word;
+        }
+    }
+
+    if (nbr && best > 0.20f)
+        fprintf(f, "%s (%s, %s)", w->word, OP_GLOSS[dim], nbr);
+    else
+        fprintf(f, "%s (%s)", w->word, OP_GLOSS[dim]);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ *  HEAR + SPEAK — the Wernicke loop
+ *  Everything heard is immediately learned. Response is annotated.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+static void hear_and_speak(const char *prompt, int n_words, FILE *out) {
+    /* Hear: learn the prompt (Wernicke loop — always closed) */
+    monad_learn(prompt, 1.0);
+
+    /* Speak: generate annotated response */
+    pthread_mutex_lock(&G.lock);
+    prime_prompt(prompt);
+    int i;
+    for (i = 0; i < n_words; i++) {
+        if (i > 0) fputc(' ', out);
+        uint32_t idx = fire(i < 4);
+        speak_word_annotated(idx, out);
+    }
+    fputc('\n', out);
+    fflush(out);
+    pthread_mutex_unlock(&G.lock);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ *  REPL — interactive conversation loop
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+static void repl_loop(int n_words, FILE *out) {
+    static char line[65536];
+    int interactive = isatty(fileno(stdin));
+
+    if (interactive) {
+        fprintf(stderr, "\n[ptolemy v" PTOL_VERSION "]  vocab=%u  "
+                        "health=%.3f  (Ctrl-D to exit)\n\n",
+                G_n, G.field_health);
+    }
+
+    while (G.running) {
+        if (interactive) fprintf(stderr, "> ");
+        if (!fgets(line, sizeof(line), stdin)) break;
+
+        /* Strip trailing newline / CR */
+        int len = (int)strlen(line);
+        while (len > 0 && (line[len-1] == '\n' || line[len-1] == '\r'))
+            line[--len] = '\0';
+        if (len == 0) continue;
+
+        hear_and_speak(line, n_words, out);
+    }
+
+    if (interactive) fprintf(stderr, "\n[ptolemy] exiting.\n");
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
  *  ENGINE INIT / FREE
  * ══════════════════════════════════════════════════════════════════════════ */
 
@@ -1450,6 +1586,10 @@ static void engine_init(void) {
 
 static void engine_free(void) {
     G.running = 0;
+    if (G_bg_started) {
+        pthread_join(G_bg_tid, NULL);   /* bg_thread_fn does final save */
+        G_bg_started = 0;
+    }
     if (G_words) { free(G_words); G_words = NULL; }
     pthread_mutex_destroy(&G.lock);
 }
@@ -1461,19 +1601,21 @@ static void engine_free(void) {
 static void print_usage(const char *prog) {
     fprintf(stderr,
         "Ptolemy Monad Engine v" PTOL_VERSION "\n\n"
-        "Usage: %s [OPTIONS]\n\n"
-        "  --load-bin PATH        Load .ptol state\n"
-        "  --save-bin PATH        Save .ptol state\n"
-        "  --learn-file PATH      Ingest .txt file into field\n"
+        "  %s prompt text here           (conversational — no quotes needed)\n"
+        "  %s                            (REPL if stdin is a tty)\n\n"
+        "Flags (all optional — engine auto-loads ~/.ptolemy/monad-english.ptol):\n"
+        "  --load-bin PATH        Load .ptol state (also sets auto-save target)\n"
+        "  --save-bin PATH        Save .ptol state immediately\n"
+        "  --learn-file PATH      Ingest .txt file\n"
         "  --url URL              Fetch HTTP URL and ingest\n"
-        "  --teach                Learn from stdin (interactive)\n"
-        "  --generate SEED [N]    Generate N words (default 32)\n"
-        "  --query WORD           Print sedenion for word\n"
-        "  --report               Print Hamiltonian report\n"
-        "  --daemon [PORT]        Start TCP teaching daemon (default 7297)\n\n"
-        "Binary format: .ptol v3 (not compatible with Python .bin pickle)\n"
-        "Build: gcc -O2 -Wall -std=c99 -o ptolemy-monad monad.c -lm -lpthread\n",
-        prog);
+        "  --teach                Learn from stdin (no speak response)\n"
+        "  --words N              Words per response (default 24)\n"
+        "  --generate SEED [N]    Generate N words, plain (no annotations)\n"
+        "  --query WORD           Print sedenion + field state for word\n"
+        "  --report               Hamiltonian report\n"
+        "  --daemon [PORT]        TCP teaching server (default 7297)\n\n"
+        "State: ~/.ptolemy/monad-english.ptol  (auto-loaded, auto-saved every 60s)\n",
+        prog, prog);
 }
 
 static void signal_handler(int sig) {
@@ -1489,18 +1631,74 @@ int main(int argc, char **argv) {
     signal(SIGTERM, signal_handler);
     signal(SIGPIPE, SIG_IGN);
 
-    if (argc < 2) { print_usage(argv[0]); engine_free(); return 0; }
+    /* ── Auto-load default state ──────────────────────────────────────────
+     * Before flag processing so --load-bin can override if given.
+     * Silently skips if the file doesn't exist yet. */
+    {
+        const char *home = getenv("HOME");
+        if (home) {
+            snprintf(G_bin_path, sizeof(G_bin_path),
+                     "%s/.ptolemy/monad-english.ptol", home);
+            if (access(G_bin_path, F_OK) == 0)
+                load_bin(G_bin_path);
+        }
+    }
 
+    /* ── Start background auto-save thread ──────────────────────────────── */
+    pthread_create(&G_bg_tid, NULL, bg_thread_fn, NULL);
+    G_bg_started = 1;
+
+    /* ── Words-per-response (can be overridden by --words) ─────────────── */
+    int n_words = 24;
+
+    /* ── Conversational default ───────────────────────────────────────────
+     * If the first argument doesn't start with '--', treat the entire
+     * command line as a plain-English prompt.
+     *   ptolemy when do you think the sedenion will be mapped?
+     * After responding, drop into the REPL if stdin is a terminal. */
+    if (argc >= 2 && argv[1][0] != '-') {
+        char prompt[65536] = "";
+        int a;
+        for (a = 1; a < argc; a++) {
+            if (a > 1) strncat(prompt, " ", sizeof(prompt) - strlen(prompt) - 1);
+            strncat(prompt, argv[a], sizeof(prompt) - strlen(prompt) - 1);
+        }
+        hear_and_speak(prompt, n_words, stdout);
+        if (isatty(fileno(stdin)))
+            repl_loop(n_words, stdout);
+        engine_free();
+        return 0;
+    }
+
+    /* ── No args: REPL or usage ───────────────────────────────────────── */
+    if (argc == 1) {
+        if (isatty(fileno(stdin)))
+            repl_loop(n_words, stdout);
+        else
+            print_usage(argv[0]);
+        engine_free();
+        return 0;
+    }
+
+    /* ── Flag processing (explicit tool use) ─────────────────────────── */
     int i;
     for (i = 1; i < argc; i++) {
 
         if (!strcmp(argv[i], "--load-bin")) {
             if (i+1 >= argc) { fprintf(stderr, "--load-bin needs PATH\n"); continue; }
-            load_bin(argv[++i]);
+            ++i;
+            load_bin(argv[i]);
+            strncpy(G_bin_path, argv[i], sizeof(G_bin_path)-1);
 
         } else if (!strcmp(argv[i], "--save-bin")) {
             if (i+1 >= argc) { fprintf(stderr, "--save-bin needs PATH\n"); continue; }
             save_bin(argv[++i]);
+
+        } else if (!strcmp(argv[i], "--words")) {
+            if (i+1 >= argc) continue;
+            n_words = atoi(argv[++i]);
+            if (n_words < 1)  n_words = 1;
+            if (n_words > 512) n_words = 512;
 
         } else if (!strcmp(argv[i], "--learn-file")) {
             if (i+1 >= argc) { fprintf(stderr, "--learn-file needs PATH\n"); continue; }
@@ -1523,9 +1721,9 @@ int main(int argc, char **argv) {
         } else if (!strcmp(argv[i], "--generate")) {
             if (i+1 >= argc) { fprintf(stderr, "--generate needs SEED\n"); continue; }
             const char *seed = argv[++i];
-            int n_words = 32;
-            if (i+1 < argc && argv[i+1][0] != '-') n_words = atoi(argv[++i]);
-            generate(seed, n_words, stdout);
+            int nw = n_words;
+            if (i+1 < argc && argv[i+1][0] != '-') nw = atoi(argv[++i]);
+            generate(seed, nw, stdout);
 
         } else if (!strcmp(argv[i], "--query")) {
             if (i+1 >= argc) { fprintf(stderr, "--query needs WORD\n"); continue; }
@@ -1537,28 +1735,21 @@ int main(int argc, char **argv) {
             for (k = 0; k < SED_DIM; k++)
                 printf("%s%.6f", k?", ":"", out[k]);
             printf("]\n");
-            /* Also print field state if word is known */
             uint32_t idx = vocab_find(word);
             if (idx != UINT32_MAX) {
-                static const char *OP[SED_DIM] = {
-                    "identity","negate","bind","name","apply","abstract",
-                    "branch","iterate","recurse","allocate","query","dereference",
-                    "compose","parallelize","interrupt","emit"
-                };
-                printf("  β=%.6f  E=%.6f  age=%.1f  dim=e%u(%s)\n",
+                printf("  \xce\xb2=%.6f  E=%.6f  age=%.1f  dim=e%u (%s)\n",
                        G_words[idx].beta, G_words[idx].E, G_words[idx].age,
-                       idx % SED_DIM, OP[idx % SED_DIM]);
+                       idx % SED_DIM, OP_GLOSS[idx % SED_DIM]);
                 printf("  neighbours[%d]:", G_words[idx].nbr_n);
                 int j;
                 for (j = 0; j < G_words[idx].nbr_n; j++) {
                     uint32_t ni = G_words[idx].nbr[j];
                     if (ni < G_n)
-                        printf(" %s(%.3f)", G_words[ni].word,
-                               G_words[idx].nbr_w[j]);
+                        printf(" %s(%.3f)", G_words[ni].word, G_words[idx].nbr_w[j]);
                 }
                 printf("\n");
             } else {
-                printf("  (unknown word — cam_encode result)\n");
+                printf("  (unknown — cam_encode result)\n");
             }
 
         } else if (!strcmp(argv[i], "--report")) {
@@ -1571,16 +1762,12 @@ int main(int argc, char **argv) {
             *pp = port;
             pthread_t tid;
             pthread_create(&tid, NULL, daemon_thread, pp);
-            fprintf(stderr, "[monad] daemon started. Teaching until Ctrl-C...\n");
-            /* Keep main thread alive, periodically reporting */
+            fprintf(stderr, "[monad] daemon on port %d. Ctrl-C to stop.\n", port);
             while (G.running) {
                 sleep(60);
-                if (G.running) {
-                    fprintf(stderr, "[monad] vocab=%u learned=%llu health=%.3f\n",
-                            G_n,
-                            (unsigned long long)G.words_learned,
-                            G.field_health);
-                }
+                if (G.running)
+                    fprintf(stderr, "[monad] vocab=%u  health=%.3f\n",
+                            G_n, G.field_health);
             }
             pthread_join(tid, NULL);
 
