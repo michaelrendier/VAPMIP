@@ -1012,8 +1012,9 @@ static int monad_learn(const char *text, double weight) {
  *  GENERATE — emit N words from seed
  * ══════════════════════════════════════════════════════════════════════════ */
 
-static void prime_prompt(const char *prompt) {
-    monad_learn(prompt, 1.0);
+/* set_prompt — encode prompt sedenion WITHOUT learning.
+ * Must be called with G.lock held. Use monad_learn() before acquiring lock. */
+static void set_prompt(const char *prompt) {
     cam_encode(prompt, G.prompt_sed);
     int k;
     for (k = 0; k < SED_DIM; k++)
@@ -1024,9 +1025,18 @@ static void prime_prompt(const char *prompt) {
     G.recent_n   = 0;
 }
 
-static void generate(const char *seed, int n_words, FILE *out) {
+/* prime_prompt — learn + set. NOT safe to call while G.lock is held. */
+static void prime_prompt(const char *prompt) {
+    monad_learn(prompt, 1.0);          /* takes/releases G.lock */
     pthread_mutex_lock(&G.lock);
-    prime_prompt(seed);
+    set_prompt(prompt);
+    pthread_mutex_unlock(&G.lock);
+}
+
+static void generate(const char *seed, int n_words, FILE *out) {
+    monad_learn(seed, 1.0);            /* learn outside lock */
+    pthread_mutex_lock(&G.lock);
+    set_prompt(seed);
     int i;
     for (i = 0; i < n_words; i++) {
         uint32_t idx = fire(i < 4);
@@ -1502,12 +1512,9 @@ static void speak_word_annotated(uint32_t idx, FILE *f) {
  * ══════════════════════════════════════════════════════════════════════════ */
 
 static void hear_and_speak(const char *prompt, int n_words, FILE *out) {
-    /* Hear: learn the prompt (Wernicke loop — always closed) */
-    monad_learn(prompt, 1.0);
-
-    /* Speak: generate annotated response */
+    monad_learn(prompt, 1.0);          /* hear — takes/releases G.lock */
     pthread_mutex_lock(&G.lock);
-    prime_prompt(prompt);
+    set_prompt(prompt);                /* encode sedenion inside lock, no learn */
     int i;
     for (i = 0; i < n_words; i++) {
         if (i > 0) fputc(' ', out);
