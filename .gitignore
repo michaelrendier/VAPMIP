@@ -4,3 +4,6 @@ __pycache__/
 monad_wordnet.bin
 *.bin.bak
 PtolC/ptolemy
+ptolemy-monad
+monad_sedenion.bin
+monad_sedenion_addresses.pkl
