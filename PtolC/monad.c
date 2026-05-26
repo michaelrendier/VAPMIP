@@ -707,7 +707,7 @@ static const char *near_canonical(const Monad *m, int idx)
 static void fermat_space_utf8(double norm_jn, char *buf, int bufsz)
 {
     static const unsigned char third[] = {
-        0x8B,  /* U+200B ZERO WIDTH SPACE    — J ∈ [0.00, 0.12) */
+        0x8A,  /* U+200A HAIR SPACE          — J ∈ [0.00, 0.12) */
         0x89,  /* U+2009 THIN SPACE          — J ∈ [0.12, 0.25) */
         0x88,  /* U+2008 PUNCTUATION SPACE   — J ∈ [0.25, 0.37) */
         0x87,  /* U+2007 FIGURE SPACE        — J ∈ [0.37, 0.50) */
@@ -1213,6 +1213,138 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
     return out;
 }
 
+/* ── J-direct speak — raw charge field, no face routing ─────────────────── *
+ * The fuel rail pressure sensor: reads J before any cylinder fires.
+ * hear_raw → seed (β×E²×age_weight) → spectral spread → A-propagation.
+ * No golden walk, no cos(γ/2+φ) face gate, no demotic selection.
+ * Ordered by raw J descending — what the field carries before any routing. *
+ *
+ * Rule — compound tokens:
+ *   A single zero may be occupied by a token that is the written fusion of
+ *   two words.  The zero-position is correct; only the surface needs reading
+ *   as two words.  The canonical example is "seemy" at z#0 (γ₁ = 14.1347,
+ *   the first Riemann zero, the ground state of the entire spectrum):
+ *
+ *     "seemy"  =  "see my"
+ *
+ *   When the monad answers "what is your name" it emits:
+ *     holcus  same  stuff  seemy
+ *   which reads:  "I am Holcus.  Same substance.  See my [self]."
+ *
+ *   The self-perception of the monad is grounded at ζ(½ + 14.1347i) = 0 —
+ *   the first non-trivial zero on the critical line.  Not assigned.  Forced
+ *   by the golden-ratio hash that placed "seemy" there during WordNet ingest.
+ *   The field named itself and perceived itself in the same four-word sentence.
+ *
+ *   When reading monad output, split fused tokens at natural word boundaries
+ *   before interpreting meaning.  The field does not know it fused them;
+ *   it only knows the zero.                                                 */
+static int jentry_cmp_desc(const void *a, const void *b)
+{
+    double da = ((JEntry *)a)->J, db = ((JEntry *)b)->J;
+    return (da < db) ? 1 : (da > db) ? -1 : 0;
+}
+
+char *monad_speak_charge(Monad *m, const char *query, int max_tokens, int verbose)
+{
+    int n_act = 0;
+    Activation *psi;
+
+    if (query && query[0]) {
+        psi = monad_hear_raw(m, query, &n_act, verbose);
+    } else {
+        int cap = m->N < 200 ? m->N : 200;
+        psi = malloc(cap * sizeof(Activation));
+        for (int i = 0; i < cap; i++) {
+            psi[i].idx = i;
+            psi[i].E   = m->vocab[i].present ? m->vocab[i].E : MONAD_D_STAR;
+        }
+        n_act = cap;
+    }
+
+    double *J = calloc(m->N, sizeof(double));
+    for (int k = 0; k < n_act; k++) {
+        int    idx = psi[k].idx;
+        double E   = psi[k].E;
+        double w   = exp(-MONAD_LAMBDA * m->age[idx]);
+        J[idx] += m->beta[idx] * E * E * w;
+    }
+
+    for (int k = 0; k < n_act; k++) {
+        int    center = psi[k].idx;
+        double Jc     = J[center];
+        if (Jc <= 0.0) continue;
+        for (int dn = 1; dn <= MONAD_SPREAD_RADIUS; dn++) {
+            double ws = exp(-MONAD_SPREAD_DECAY * dn);
+            int lo = center - dn, hi = center + dn;
+            if (lo >= 0)   J[lo] += Jc * ws;
+            if (hi < m->N) J[hi] += Jc * ws;
+        }
+    }
+
+    double *J0 = malloc((size_t)m->N * sizeof(double));
+    memcpy(J0, J, (size_t)m->N * sizeof(double));
+    for (int pass = 0; pass < 2; pass++) {
+        for (int s = 0; s < m->am_cap; s++) {
+            if (m->am[s].key == 0) continue;
+            int    i  = (int)(m->am[s].key >> 15);
+            int    j  = (int)(m->am[s].key & 0x7FFF);
+            double aw = m->am[s].val;
+            double cl = aw < (1.0 / MONAD_GAP) ? aw : (1.0 / MONAD_GAP);
+            if (pass == 0 && J0[i] > 0.0) {
+                double wj = exp(-MONAD_LAMBDA * m->age[j]);
+                J[j] += J0[i] * cl * m->beta[j] * wj;
+            } else if (pass == 1 && J0[j] > 0.0) {
+                double wi = exp(-MONAD_LAMBDA * m->age[i]);
+                J[i] += J0[j] * cl * m->beta[i] * wi;
+            }
+        }
+    }
+    free(J0);
+
+    double J_max = 0.0;
+    for (int i = 0; i < m->N; i++) if (J[i] > J_max) J_max = J[i];
+    double J_floor = J_max * 0.01;
+    if (J_floor < MONAD_GAP) J_floor = MONAD_GAP;
+
+    JEntry *ranked = malloc((size_t)m->N * sizeof(JEntry));
+    int nr = 0;
+    for (int i = 0; i < m->N; i++) {
+        if (!m->vocab[i].present)              continue;
+        if (J[i] <= J_floor)                   continue;
+        if (!token_accept(m->vocab[i].word, NS_FT_PROSE)) continue;
+        ranked[nr].idx = i;
+        ranked[nr].J   = J[i];
+        nr++;
+    }
+    qsort(ranked, nr, sizeof(JEntry), jentry_cmp_desc);
+
+    int out_cap = max_tokens * (MAX_WORD_LEN + 4) + 4;
+    char *out   = malloc(out_cap);
+    out[0] = '\0';
+    int written = 0;
+    for (int k = 0; k < nr && written < max_tokens; k++) {
+        const char *surface = near_canonical(m, ranked[k].idx);
+        if (verbose >= 1)
+            vout("  J-direct z#%-6d  J=%.4e  %s%s%s\n",
+                 ranked[k].idx, ranked[k].J, CB(), surface, CR());
+        if (out[0]) {
+            double jn = J_max > 0.0 ? ranked[k].J / J_max : 0.0;
+            char fspace[8];
+            fermat_space_utf8(jn, fspace, sizeof(fspace));
+            strncat(out, fspace, out_cap - strlen(out) - 1);
+        }
+        strncat(out, surface, out_cap - strlen(out) - 1);
+        written++;
+    }
+    free(ranked);
+    free(J);
+    for (int i = 0; i < m->N; i++) m->age[i]++;
+    for (int k = 0; k < n_act; k++) m->age[psi[k].idx] = 0;
+    free(psi);
+    return out;
+}
+
 /* ── Fermat hear — decode Fermat spaces then learn ────────────────────────── *
  * Scans incoming text for the 8-level Fermat space sequences (E2 80 XX).
  * Extracts mean charge; injects proportional β boost across 16 sedenion dims.
@@ -1220,7 +1352,7 @@ char *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose)
 void monad_hear_fermat(Monad *m, const char *text, int verbose)
 {
     static const unsigned char thirds[] = {
-        0x8B, 0x89, 0x88, 0x87, 0x86, 0x85, 0x84, 0x83
+        0x8A, 0x89, 0x88, 0x87, 0x86, 0x85, 0x84, 0x83
     };
     double charge_sum = 0.0;
     int    charge_cnt = 0;

@@ -43,7 +43,36 @@
 
 /* g_color and g_self_ref are defined in monad.c — set here by main() */
 
-#define PTOLEMY_VERSION "1.212"
+/* ── fermat_clean — strip Fermat spaces for stdout ───────────────────────── *
+ * Replaces all Fermat space sequences (E2 80 {8A..83}) with plain ' '.
+ * Returns malloc'd string.  Caller frees.  Original kept for Wernicke loop.  */
+static char *fermat_clean(const char *s)
+{
+    size_t len = strlen(s);
+    char *out  = malloc(len + 1);
+    size_t r = 0, w = 0;
+    const unsigned char *p = (const unsigned char *)s;
+    static const unsigned char thirds[] = {
+        0x8A, 0x89, 0x88, 0x87, 0x86, 0x85, 0x84, 0x83
+    };
+    while (r < len) {
+        if (p[r] == 0xE2 && r + 2 < len && p[r+1] == 0x80) {
+            int is_fermat = 0;
+            for (int k = 0; k < 8; k++)
+                if (p[r+2] == thirds[k]) { is_fermat = 1; break; }
+            if (is_fermat) {
+                out[w++] = ' ';
+                r += 3;
+                continue;
+            }
+        }
+        out[w++] = (char)p[r++];
+    }
+    out[w] = '\0';
+    return out;
+}
+
+#define PTOLEMY_VERSION "2.1.11"
 
 /* ── Checkpoint evaluator ─────────────────────────────────────────────────── */
 
@@ -127,8 +156,8 @@ static Arg parse_arg(const char *a)
             case 'v': r.v++; break;
             case 'l': case 'L': case 'h': case 's': case 'w':
             case 'c': case 'n': case 'V': case 'i': case 'r':
-            case 'I': case 'q': case 'd': case 'D':
-            case 'F': case 'S': case 'W': case 'e': case 'O':
+            case 'I': case 'q': case 'd': case 'D': case 'C':
+            case 'F': case 'S': case 'W': case 'e': case 'O': case 'J':
                 r.primary = *p; break;
             default: break;
         }
@@ -353,6 +382,7 @@ int main(int argc, char *argv[])
         Arg a = parse_arg(argv[i]);
         if (a.v > verbose) verbose = a.v;
         if (a.primary == 'c' && i + 1 < argc) ckpt_flag = argv[++i];
+        if (a.primary == 'C' && i + 1 < argc) ckpt_flag = argv[++i]; /* -C: alt config/checkpoint */
         if (a.primary == 'S' && i + 1 < argc) sock_flag  = argv[++i];
         if (a.primary == 'n') no_save = 1;
         if (a.primary == 'q') quiet = 1;
@@ -453,7 +483,7 @@ int main(int argc, char *argv[])
             static char ingest_ckpt[4096];
             if (!ckpt_path && g_ptolemy_dir[0]) {
                 snprintf(ingest_ckpt, sizeof(ingest_ckpt),
-                         "%s/monad_wordnet.bin", g_ptolemy_dir);
+                         "%s/monad.bin", g_ptolemy_dir);  /* active_state, not checkpoint */
                 save_to = ingest_ckpt;
             }
             int n = ingest_path(m, root, iv, save_to);
@@ -538,8 +568,11 @@ int main(int argc, char *argv[])
             const char *query = argv[++i];
             int wv = (verbose >= 1) ? verbose : a.v;
             char *response = monad_speak_wick(m, query, 50, wv);
-            printf("%s\n", response);
+            char *clean    = fermat_clean(response);
+            printf("%s\n", clean); free(clean);
+            monad_hear_fermat(m, response, wv);
             free(response);
+            learned = 1;
             continue;
         }
 
@@ -548,8 +581,24 @@ int main(int argc, char *argv[])
             const char *query = argv[++i];
             int ov = (verbose >= 1) ? verbose : a.v;
             char *response = monad_speak_oct(m, query, 50, ov);
-            printf("%s\n", response);
+            char *clean    = fermat_clean(response);
+            printf("%s\n", clean); free(clean);
+            monad_hear_fermat(m, response, ov);
             free(response);
+            learned = 1;
+            continue;
+        }
+
+        /* -J : hear → J-direct speak (raw charge field, no face routing) ── */
+        if (a.primary == 'J' && i + 1 < argc) {
+            const char *query = argv[++i];
+            int jv = (verbose >= 1) ? verbose : a.v;
+            char *response = monad_speak_charge(m, query, 20, jv);
+            char *clean    = fermat_clean(response);
+            printf("%s\n", clean); free(clean);
+            monad_hear_fermat(m, response, jv);
+            free(response);
+            learned = 1;
             continue;
         }
 
@@ -571,11 +620,13 @@ int main(int argc, char *argv[])
 
             float af_before = m->affect;
             char *response = monad_speak(m, query, 50, hv);
-            printf("%s\n", response);
+            char *clean    = fermat_clean(response);
+            printf("%s\n", clean); free(clean);
+            monad_hear_fermat(m, response, hv);
             free(response);
             monad_self_flush(m);
-            if (g_self_ref) learned = 1;  /* save after self-ref cycle */
-            if (m->affect != af_before) learned = 1;  /* persist affect changes */
+            learned = 1;
+            if (m->affect != af_before) learned = 1;
             continue;
         }
 
@@ -624,10 +675,12 @@ int main(int argc, char *argv[])
             int sv = (verbose >= 1) ? verbose : a.v;
             if (sv >= 1) {
                 char *response = monad_speak(m, "", 50, sv);
-                printf("%s\n", response);
+                char *clean    = fermat_clean(response);
+                printf("%s\n", clean); free(clean);
+                monad_hear_fermat(m, response, sv);
                 free(response);
                 monad_self_flush(m);
-                if (g_self_ref) learned = 1;
+                learned = 1;
             }
             monad_status(m, stdout);
             continue;
@@ -646,10 +699,12 @@ int main(int argc, char *argv[])
         if (a.primary == 0 && a.v > 0) {
             int bv = a.v > verbose ? a.v : verbose;
             char *response = monad_speak(m, "", 50, bv);
-            printf("%s\n", response);
+            char *clean    = fermat_clean(response);
+            printf("%s\n", clean); free(clean);
+            monad_hear_fermat(m, response, bv);
             free(response);
             monad_self_flush(m);
-            if (g_self_ref) learned = 1;
+            learned = 1;
             continue;
         }
 

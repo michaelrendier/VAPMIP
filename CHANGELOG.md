@@ -4,6 +4,36 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v2.3.0 — 2026-05-26
+
+**φ-walk firing order + Three-Face Wankel + emit-time BAO tracking**
+
+### Binary — `monad.c` / `ptolemy-monad` (v1.220)
+
+- **φ-walk in `fire()`**: output position `i` now passed to `fire(int starter_mode, int pos)`.
+  Fresh candidate selection uses `phi_start = (int)(pos * PHI * fn) % fn` as the stride
+  into the candidate list. Irrational stride eliminates integer resonance with the
+  Bank0/Bank1 boundary — the primary cause of repeating-word loops in prior versions.
+- **Three-Face Wankel**: three firing roles interleaved by `pos % 3`:
+  - Role 0 (intake): Bank0-biased — structural/grammar words (vocab idx % 16 < 8, e0..e7)
+  - Role 1 (power): Bank1-biased — content/affect/pragmatic words (vocab idx % 16 ≥ 8, e8..e15)
+  - Role 2 (bridge): φ-neutral — best candidate regardless of bank
+  Bank selection starts at the φ-position and linearly scans from there for target bank;
+  falls back to φ-position candidate if no bank match found.
+- **All-recent fallback**: when all candidates are in `recent[]`, previously always took
+  `cands[0]` (top J_mu score, guaranteed loop). Now φ-walks into `cands[]` with position
+  `i` — different word on each fallback, no hard repeat.
+- **Emit-time BAO**: `G.bao_mean` now updated during `fire()` via EMA
+  (`G.bao_mean = 0.92 × old + 0.08 × window_bao`) against the current output window's
+  mean β×E². Previously only updated during `learn()`. The report now reflects speak-time
+  field state, not just learn-time state.
+
+### Python
+
+- No change from v2.2.0.
+
+---
+
 ## v2.2.0 — 2026-05-19
 
 **Two-thread engine + conversational default + annotated output**

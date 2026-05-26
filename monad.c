@@ -1,5 +1,5 @@
 /*
- * monad.c — Ptolemy sedenion learning engine  (C canonical, v1.218)
+ * monad.c — Ptolemy sedenion learning engine  (C canonical, v1.220)
  *
  * Self-contained. Deps: libc, libm, pthreads, POSIX sockets.
  * No transformers. No autoregression. No LLMs.
@@ -42,7 +42,7 @@
 #endif
 
 /* ── Constants ──────────────────────────────────────────────────────────── */
-#define PTOL_VERSION      "1.219"
+#define PTOL_VERSION      "1.220"
 #define SED_DIM           16
 #define OMEGA_ZS          0.56714    /* Lambert W(1); BAO spectral gap */
 #define GAP               0.000707   /* Yang-Mills mass gap; semantic vacuum */
@@ -802,7 +802,7 @@ static void recent_push(uint32_t idx) {
  *  FIRE — emit one word from field state
  * ══════════════════════════════════════════════════════════════════════════ */
 
-static uint32_t fire(int starter_mode) {
+static uint32_t fire(int starter_mode, int pos) {
     /* Window geometry */
     Sed ws;
     if (starter_mode || G.win_n < 4) {
@@ -884,28 +884,65 @@ static uint32_t fire(int starter_mode) {
         if (!recent_has(cands[ci].idx)) { fresh_start = ci; break; }
     }
     if (fresh_start >= 0) {
-        /* Use only fresh candidates */
         Candidate *fc = cands + fresh_start;
         int fn = nc - fresh_start;
 
-        /* Three-Face Wankel: interleave by DIM_ROLE */
-        /* Simplified: just pick top candidate from first un-recent entry */
-        uint32_t chosen = fc[0].idx;
+        /* Three-Face Wankel: three roles by output position mod 3.
+         * Role 0 (intake): Bank0-biased  — structural/grammar  (e0..e7, idx%16 < 8)
+         * Role 1 (power):  Bank1-biased  — content/affect/pragma (e8..e15, idx%16 >= 8)
+         * Role 2 (bridge): φ-neutral     — best candidate, any bank */
+        int role = pos % 3;
+        uint32_t chosen;
+        int phi_start = (int)(pos * PHI * fn) % fn;
+        if (role == 2 || fn <= 2) {
+            /* Bridge or too few candidates: pure φ-walk */
+            chosen = fc[phi_start].idx;
+        } else {
+            /* Bank-biased: φ-walk starting position, linear scan for target bank */
+            int target_bank = role; /* 0=Bank0, 1=Bank1 */
+            chosen = fc[phi_start].idx; /* fallback: φ-position regardless of bank */
+            int ci;
+            for (ci = 0; ci < fn; ci++) {
+                int slot = (phi_start + ci) % fn;
+                int bank = ((fc[slot].idx % SED_DIM) >= 8) ? 1 : 0;
+                if (bank == target_bank) { chosen = fc[slot].idx; break; }
+            }
+        }
 
-        /* Save window_psi as psi_prev */
         for (k = 0; k < SED_DIM; k++) G.psi_prev[k] = window_psi[k];
-
         window_push(chosen);
         recent_push(chosen);
         G.words_emitted++;
+
+        /* Emit-time BAO: track output window β×E² mean against OMEGA_ZS */
+        { double eb = 0.0; int wn = 0, wi;
+          for (wi = 0; wi < G.win_n; wi++) {
+              int wslot = (G.win_head - G.win_n + wi + WINDOW_SZ * 2) % WINDOW_SZ;
+              uint32_t wk = G.window[wslot];
+              if (wk < G_n) { eb += G_words[wk].beta * G_words[wk].E * G_words[wk].E; wn++; }
+          }
+          if (wn > 0) G.bao_mean = G.bao_mean * 0.92 + (eb / wn) * 0.08;
+        }
         return chosen;
     }
 
-    /* All candidates recently used — pick top anyway */
+    /* All candidates recently used — φ-walk anyway, don't hard-repeat fc[0] */
     for (k = 0; k < SED_DIM; k++) G.psi_prev[k] = window_psi[k];
-    window_push(cands[0].idx);
+    int phi_top = (int)(pos * PHI * nc) % nc;
+    uint32_t fallback = cands[phi_top].idx;
+    window_push(fallback);
+
+    /* Emit-time BAO update on fallback path too */
+    { double eb = 0.0; int wn = 0, wi;
+      for (wi = 0; wi < G.win_n; wi++) {
+          int wslot = (G.win_head - G.win_n + wi + WINDOW_SZ * 2) % WINDOW_SZ;
+          uint32_t wk = G.window[wslot];
+          if (wk < G_n) { eb += G_words[wk].beta * G_words[wk].E * G_words[wk].E; wn++; }
+      }
+      if (wn > 0) G.bao_mean = G.bao_mean * 0.92 + (eb / wn) * 0.08;
+    }
     G.words_emitted++;
-    return cands[0].idx;
+    return fallback;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -1039,7 +1076,7 @@ static void generate(const char *seed, int n_words, FILE *out) {
     set_prompt(seed);
     int i;
     for (i = 0; i < n_words; i++) {
-        uint32_t idx = fire(i < 4);
+        uint32_t idx = fire(i < 4, i);
         if (idx == UINT32_MAX || idx >= G_n) {
             fprintf(out, "[?] ");
         } else {
@@ -1523,7 +1560,7 @@ static void hear_and_speak(const char *prompt, int n_words, FILE *out) {
     int i;
     for (i = 0; i < n_words; i++) {
         if (i > 0) fputc(' ', out);
-        uint32_t idx = fire(i < 4);
+        uint32_t idx = fire(i < 4, i);
         speak_word_annotated(idx, out);
     }
     fputc('\n', out);

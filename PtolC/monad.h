@@ -129,6 +129,12 @@ char  *monad_speak_wick(Monad *m, const char *query, int max_tokens, int verbose
  * Conservation: sin²(γ/2) + cos²(γ/2) = 1.  Invoked by -O flag. */
 char  *monad_speak_oct(Monad *m, const char *query, int max_tokens, int verbose);
 
+/* J-direct speak: raw charge field, no face routing, no golden walk.
+ * Fuel rail pressure sensor — reads J before any cylinder fires.
+ * hear_raw → seed (β×E²×age_weight) → spectral spread → A-propagation → sort by J.
+ * Invoked by -J flag. */
+char  *monad_speak_charge(Monad *m, const char *query, int max_tokens, int verbose);
+
 /* ── Word addressing ──────────────────────────────────────────────────────── */
 
 /* Compute (idx, E) for a surface form.  Pure function, no side effects. */
