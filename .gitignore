@@ -7,3 +7,5 @@ PtolC/ptolemy
 ptolemy-monad
 monad_sedenion.bin
 monad_sedenion_addresses.pkl
+auth_totp_secret.h
+tools/holcus_totp_enroll.png
