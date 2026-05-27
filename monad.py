@@ -1966,6 +1966,12 @@ class TeachingThread(threading.Thread):
         }
 
     def _should_ingest(self, conf: dict) -> bool:
+        # Bootstrap: a fresh field scores all unseen words as noise (score < 0.05).
+        # The BAO thresholds are meaningless until the field has a vocabulary base.
+        # Ingest everything above min_words until vocab reaches 2000 slots.
+        if self._monad.vocab_size() < 2000:
+            return True
+
         red_min   = self._config.getfloat('redundancy_min',  0.15)
         red_max   = self._config.getfloat('redundancy_max',  0.85)
         nov_min   = self._config.getfloat('novelty_min',     0.05)
@@ -2078,7 +2084,7 @@ class TeachingThread(threading.Thread):
             conf = self._score_chunk(para)
             if conf and self._should_ingest(conf):
                 effective_score = conf['score'] * cite_weight
-                if effective_score > 0.05:
+                if effective_score > 0.05 or self._monad.vocab_size() < 2000:
                     self._monad.ingest(para)
                     ingested    += 1
                     self._words += len(para.split())
@@ -2114,7 +2120,8 @@ class TeachingThread(threading.Thread):
 
             if self._should_ingest(conf):
                 effective = conf['score'] * cite_weight
-                if effective > 0.02:
+                # During bootstrap, composite=0 (all words unknown); bypass gate.
+                if effective > 0.02 or self._monad.vocab_size() < 2000:
                     self._monad.ingest(para)
                     ingested     += 1
                     total_conf   += effective
@@ -2141,6 +2148,12 @@ class TeachingThread(threading.Thread):
             self._config.set_ptolrc('stats', 'vocab',
                                     self._monad.vocab_size())
             self._bao_adapt()
+
+        # Periodic bin checkpoint (every 500 chunks)
+        if self._chunks % 500 == 0 and self._chunks > 0:
+            _sp = os.path.expanduser(
+                self._config.get('active_state', '~/.ptolemy/monad.bin'))
+            self._monad.save(_sp)
 
     def run(self):
         self._t0 = time.time()

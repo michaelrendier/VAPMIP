@@ -22,6 +22,41 @@ _GUTENDEX = 'https://gutendex.com/books/'
 _ARCHIVE  = 'https://archive.org/search'
 _ARCHIVE_DL = 'https://archive.org/download/{ident}/{ident}_djvu.txt'
 
+# Direct Gutenberg cache URLs — used when gutendex.com API is unavailable.
+# Format: /cache/epub/{id}/pg{id}.txt — stable, no redirect required.
+_GUTENBERG_DIRECT = [
+    'https://www.gutenberg.org/cache/epub/2701/pg2701.txt',   # Moby Dick
+    'https://www.gutenberg.org/cache/epub/1342/pg1342.txt',   # Pride and Prejudice
+    'https://www.gutenberg.org/cache/epub/2600/pg2600.txt',   # War and Peace
+    'https://www.gutenberg.org/cache/epub/98/pg98.txt',       # A Tale of Two Cities
+    'https://www.gutenberg.org/cache/epub/84/pg84.txt',       # Frankenstein
+    'https://www.gutenberg.org/cache/epub/11/pg11.txt',       # Alice in Wonderland
+    'https://www.gutenberg.org/cache/epub/1661/pg1661.txt',   # Sherlock Holmes
+    'https://www.gutenberg.org/cache/epub/76/pg76.txt',       # Huckleberry Finn
+    'https://www.gutenberg.org/cache/epub/174/pg174.txt',     # Dorian Gray
+    'https://www.gutenberg.org/cache/epub/1400/pg1400.txt',   # Great Expectations
+    'https://www.gutenberg.org/cache/epub/345/pg345.txt',     # Dracula
+    'https://www.gutenberg.org/cache/epub/4300/pg4300.txt',   # Ulysses
+    'https://www.gutenberg.org/cache/epub/5200/pg5200.txt',   # Metamorphosis
+    'https://www.gutenberg.org/cache/epub/2852/pg2852.txt',   # Hound of the Baskervilles
+    'https://www.gutenberg.org/cache/epub/55/pg55.txt',       # Wizard of Oz
+    'https://www.gutenberg.org/cache/epub/1232/pg1232.txt',   # The Prince (Machiavelli)
+    'https://www.gutenberg.org/cache/epub/1080/pg1080.txt',   # A Modest Proposal
+    'https://www.gutenberg.org/cache/epub/16/pg16.txt',       # Peter Pan
+    'https://www.gutenberg.org/cache/epub/1952/pg1952.txt',   # The Yellow Wallpaper
+    'https://www.gutenberg.org/cache/epub/219/pg219.txt',     # Heart of Darkness
+    'https://www.gutenberg.org/cache/epub/1260/pg1260.txt',   # Jane Eyre
+    'https://www.gutenberg.org/cache/epub/766/pg766.txt',     # David Copperfield
+    'https://www.gutenberg.org/cache/epub/2814/pg2814.txt',   # Dubliners
+    'https://www.gutenberg.org/cache/epub/514/pg514.txt',     # Little Women
+    'https://www.gutenberg.org/cache/epub/1251/pg1251.txt',   # Leviathan (Hobbes)
+    'https://www.gutenberg.org/cache/epub/4363/pg4363.txt',   # Beyond Good and Evil
+    'https://www.gutenberg.org/cache/epub/5827/pg5827.txt',   # Thus Spoke Zarathustra
+    'https://www.gutenberg.org/cache/epub/1184/pg1184.txt',   # The Count of Monte Cristo
+    'https://www.gutenberg.org/cache/epub/2591/pg2591.txt',   # Grimms Fairy Tales
+    'https://www.gutenberg.org/cache/epub/3207/pg3207.txt',   # Critique of Pure Reason
+]
+
 
 class PtolSearch:
     """
@@ -76,6 +111,7 @@ class PtolSearch:
     def seed_gutenberg(self) -> bool:
         """
         Fetch one page of English plain-text books from gutendex.com.
+        Falls back to _GUTENBERG_DIRECT list when gutendex API is unavailable.
         Advances internal page counter on success.
 
         :returns: True if URLs were added, False on error.
@@ -88,7 +124,7 @@ class PtolSearch:
         })
         url = _GUTENDEX + '?' + params
         try:
-            resp = self._opener.open(url, timeout=30)
+            resp = self._opener.open(url, timeout=10)
             data = json.loads(resp.read().decode('utf-8', errors='ignore'))
             added = 0
             for book in data.get('results', []):
@@ -103,7 +139,19 @@ class PtolSearch:
             return added > 0
         except Exception as exc:
             self._logger.skip(url, f"gutendex:{exc}")
-            return False
+
+        # Fallback: direct Gutenberg cache URLs (stable, no API required)
+        direct_idx = getattr(self, '_direct_idx', 0)
+        batch = _GUTENBERG_DIRECT[direct_idx:direct_idx + 5]
+        if not batch:
+            self._direct_idx = 0
+            batch = _GUTENBERG_DIRECT[:5]
+        else:
+            self._direct_idx = direct_idx + 5
+        with self._lock:
+            for link in batch:
+                self._queue.append({'url': link, 'meta': None})
+        return len(batch) > 0
 
     def seed_archive(self, query: str = 'language:english', rows: int = 50):
         """
