@@ -1504,6 +1504,13 @@ def main():
         if args.load_bin:
             r = engine.load_bin(args.load_bin)
             print(f"[bin] {r}", file=sys.stderr)
+        else:
+            # Auto-resume: load active_state if it exists and has content
+            from skills.config import PtolConfig as _Cfg
+            _auto = os.path.expanduser(_Cfg().get('active_state', '~/.ptolemy/monad.bin'))
+            if os.path.exists(_auto) and os.path.getsize(_auto) > 4096:
+                r = engine.load_bin(_auto)
+                print(f'[ptolemy] auto-resume {_auto}: {r}', file=sys.stderr)
         print('[ptolemy] teach mode — speaking + teaching threads starting',
               file=sys.stderr)
         monad, speak, teach, monitor, logger = _build_teach_stack(engine)
@@ -1913,10 +1920,11 @@ class TeachingThread(threading.Thread):
         self._crawler = crawler
         self._staging = staging
         self._monitor = monitor
-        self._halt    = threading.Event()
-        self._words   = 0
-        self._chunks  = 0
-        self._t0      = 0.0
+        self._halt       = threading.Event()
+        self._words      = 0
+        self._chunks     = 0
+        self._t0         = 0.0
+        self._seed_fails = 0   # consecutive offline seed attempts
 
     def stop(self):
         """Signal teaching loop to exit cleanly after current chunk."""
@@ -2168,8 +2176,23 @@ class TeachingThread(threading.Thread):
 
         # Main acquisition loop
         sources = getattr(self, '_sources', None)
+        _was_offline = False
         while not self._halt.is_set():
             if self._search.queue_depth() < 5:
+                if not _net_ok():
+                    # No route to internet — back off exponentially (30s → 60s → … → 30min)
+                    self._seed_fails += 1
+                    wait = min(30 * (2 ** (self._seed_fails - 1)), 1800)
+                    if not _was_offline:
+                        self._logger.skip('connectivity', f'offline — waiting {wait}s')
+                        _was_offline = True
+                    self._halt.wait(wait)   # interruptible: wakes immediately on SIGTERM
+                    continue
+                # Internet restored
+                if _was_offline:
+                    self._logger.skip('connectivity', 'online — resuming')
+                    _was_offline = False
+                self._seed_fails = 0
                 if sources:
                     sources.seed_active(max_queue=20)
                 else:
@@ -2179,7 +2202,7 @@ class TeachingThread(threading.Thread):
 
             item = self._search.next_url()
             if not item:
-                time.sleep(2)
+                self._halt.wait(2)   # interruptible idle
                 continue
 
             url  = item['url']  if isinstance(item, dict) else item
@@ -2290,6 +2313,25 @@ def _build_teach_stack(engine: 'Engine'):
     signal.signal(signal.SIGTERM, _shutdown)
 
     return monad, speak, teach, monitor, logger
+
+
+def _net_ok(host: str = '1.1.1.1', port: int = 53, timeout: float = 2.0) -> bool:
+    """
+    Quick TCP probe to Cloudflare DNS — cheap, no HTTP overhead.
+    Returns True if a route to the internet exists.
+
+    :param host: Host to probe.
+    :param port: Port to probe.
+    :param timeout: Seconds before giving up.
+    :returns: True if reachable.
+    :rtype: bool
+    """
+    import socket
+    try:
+        with socket.create_connection((host, port), timeout=timeout):
+            return True
+    except OSError:
+        return False
 
 
 def urllib_opener():
