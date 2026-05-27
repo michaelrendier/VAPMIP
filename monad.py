@@ -401,14 +401,18 @@ class Crank:
     """
 
     def __init__(self):
-        self._beta:  List[float]              = []
-        self._E:     List[float]              = []
-        self._A:     List[Dict[int, float]]   = []
-        self._age:   List[float]              = []
-        self._vocab: Dict[str, int]           = {}
-        self._words: List[str]                = []
-        self.n:      int                      = 0
-        self.emission_threshold: float        = OMEGA_ZS / 4.0
+        self._beta:             List[float]              = []
+        self._E:                List[float]              = []
+        self._A:                List[Dict[int, float]]   = []
+        self._age:              List[float]              = []
+        self._vocab:            Dict[str, int]           = {}
+        self._words:            List[str]                = []
+        self.n:                 int                      = 0
+        self.emission_threshold: float                   = OMEGA_ZS / 4.0
+        # Sparse edge correction overlay: _correction_mask[src][dst] ∈ (0,1].
+        # Default 1.0 (absent = unmodified). Applied in a_propagate().
+        # Preserved across save/load. The field remembers what it unlearned.
+        self._correction_mask:  Dict[int, Dict[int, float]] = {}
 
     # Sedenion dimension → grammatical role (piston firing order, v1.3)
     _DIM_ROLE: Dict[int, int] = {
@@ -447,18 +451,30 @@ class Crank:
     def _clean(self, w: str) -> str:
         return w.lower().strip('.,!?;:\'"()[]{}—。，！？；：、“”‘’（）【】《》…·')
 
-    def learn(self, text: str) -> int:
-        """e₂ bind — deepen β-field. Build A-matrix connections."""
-        words = [self._clean(w) for w in _cjk_space(text).split()]
-        words = [w for w in words if w and len(w) >= 1]
-        prev  = None
+    def learn(self, text: str, weight: float = 1.0) -> int:
+        """
+        e₂ bind — deepen β-field. Build A-matrix connections.
+
+        :param text: Text to learn.
+        :param weight: Multiplier on beta gain and edge delta (1.0 = normal;
+            >1.0 = authoritative commit; do not use negative values — use
+            retract() to suppress edges).
+        :returns: Number of words processed.
+        :rtype: int
+        """
+        words      = [self._clean(w) for w in _cjk_space(text).split()]
+        words      = [w for w in words if w and len(w) >= 1]
+        beta_mult  = 1.0 + 0.08 * weight   # weight=1 → ×1.08 (unchanged)
+        edge_fwd   = 0.05 * weight
+        edge_back  = 0.02 * weight
+        prev       = None
         for w in words:
             k = self._idx(w)
-            self._beta[k] = min(self._beta[k] * 1.08 + GAP, 1.0)
+            self._beta[k] = min(self._beta[k] * beta_mult + GAP, 1.0)
             self._age[k]  = 0.0
             if prev is not None and prev != k:
-                self._A[prev][k] = min(self._A[prev].get(k, 0.0) + 0.05, 1.0)
-                self._A[k][prev] = min(self._A[k].get(prev, 0.0) + 0.02, 1.0)
+                self._A[prev][k] = min(self._A[prev].get(k, 0.0) + edge_fwd,  1.0)
+                self._A[k][prev] = min(self._A[k].get(prev, 0.0) + edge_back, 1.0)
             prev = k
         return len(words)
 
@@ -539,12 +555,19 @@ class Crank:
         return J_pos, J_neg
 
     def a_propagate(self, J: List[float]) -> List[float]:
-        """Single A-matrix hop: spread J through adjacency (oil pressure)."""
+        """
+        Single A-matrix hop: spread J through adjacency (oil pressure).
+        Retracted edges are multiplied by their correction factor — suppressed
+        but not zeroed, so strong context can still reactivate them.
+        """
         J2 = list(J)
         for src, nbrs in enumerate(self._A):
             if J[src] < GAP: continue
-            for dst, weight in nbrs.items():
-                J2[dst] += J[src] * weight * 0.5
+            src_mask = self._correction_mask.get(src, {})
+            for dst, w in nbrs.items():
+                effective = w * src_mask.get(dst, 1.0)
+                if effective < GAP: continue
+                J2[dst] += J[src] * effective * 0.5
         return J2
 
     def sigma_candidates(self,
@@ -1107,6 +1130,65 @@ class Engine:
             })
         return results
 
+    # ── e₁₄ interrupt / e₁₁ dereference — memory correction ─────────────
+
+    def retract(self, word_a: str, word_b: str,
+                factor: float = 0.1, reason: str = '') -> Dict[str, Any]:
+        """
+        Suppress the A-matrix edge between two words by multiplying its
+        effective weight by *factor* during field propagation.
+
+        The original trained weight in _A is untouched — the edge is masked,
+        not erased. Under strong enough context activation both words can still
+        co-fire; the retraction only raises the threshold. This is LTD, not
+        synaptic pruning.
+
+        :param word_a: First word of the edge to retract.
+        :param word_b: Second word of the edge to retract.
+        :param factor: Suppression factor in (0, 1]. 0.1 = 90% suppressed.
+        :param reason: Human-readable reason (stored in memory log).
+        :returns: Result dict with original edge weights or error.
+        :rtype: dict
+        """
+        c  = self.crank
+        wa = c._clean(word_a)
+        wb = c._clean(word_b)
+        ia = c._vocab.get(wa)
+        ib = c._vocab.get(wb)
+        if ia is None:
+            return {'error': f'unknown word: {word_a}'}
+        if ib is None:
+            return {'error': f'unknown word: {word_b}'}
+        orig_ab = c._A[ia].get(ib, 0.0)
+        orig_ba = c._A[ib].get(ia, 0.0)
+        c._correction_mask.setdefault(ia, {})[ib] = factor
+        c._correction_mask.setdefault(ib, {})[ia] = factor
+        return {
+            'retracted':   (wa, wb),
+            'factor':       factor,
+            'orig_ab':      orig_ab,
+            'orig_ba':      orig_ba,
+            'reason':       reason,
+        }
+
+    def commit(self, text: str, weight: float = 2.0,
+               reason: str = '') -> Dict[str, Any]:
+        """
+        Intentional high-confidence ingest. Bypasses BAO filter and applies
+        *weight* multiplier to both beta gain and edge delta.
+
+        Use for: accredited dataset facts, deliberate self-correction,
+        manually verified knowledge. weight=2.0 = twice normal LTP rate.
+
+        :param text: Text to commit to memory.
+        :param weight: Multiplier on learn() gain (>1 = authoritative).
+        :param reason: Human-readable reason (stored in memory log).
+        :returns: Result dict.
+        :rtype: dict
+        """
+        n = self.crank.learn(text, weight=weight)
+        return {'committed': n, 'weight': weight, 'reason': reason}
+
     # ── e₉ allocate / e₂ bind — persistence ─────────────────────────────
 
     def save_session(self, path: str) -> Dict[str, Any]:
@@ -1118,16 +1200,17 @@ class Engine:
             return {'error': f'Protected: {path} — refusing to overwrite bin file'}
         c     = self.crank
         state = {
-            'version':    self.version,
-            'vocab':      c._vocab,
-            'words':      c._words,
-            'beta':       c._beta,
-            'E':          c._E,
-            'A':          c._A,
-            'age':        c._age,
-            'n':          c.n,
-            'psi_prev':   self._psi_prev,
-            'word_count': self._word_count,
+            'version':          self.version,
+            'vocab':            c._vocab,
+            'words':            c._words,
+            'beta':             c._beta,
+            'E':                c._E,
+            'A':                c._A,
+            'age':              c._age,
+            'n':                c.n,
+            'psi_prev':         self._psi_prev,
+            'word_count':       self._word_count,
+            'correction_mask':  c._correction_mask,
         }
         with open(path, 'wb') as f:
             pickle.dump(state, f)
@@ -1162,13 +1245,14 @@ class Engine:
                 state = pickle.load(f)
             if isinstance(state, dict):
                 c = self.crank
-                if 'vocab' in state: c._vocab = state['vocab']
-                if 'words' in state: c._words = state['words']
-                if 'beta'  in state: c._beta  = state['beta']
-                if 'E'     in state: c._E     = state['E']
-                if 'A'     in state: c._A     = state['A']
-                if 'age'   in state: c._age   = state['age']
-                if 'n'     in state: c.n      = state['n']
+                if 'vocab'           in state: c._vocab           = state['vocab']
+                if 'words'           in state: c._words           = state['words']
+                if 'beta'            in state: c._beta            = state['beta']
+                if 'E'               in state: c._E               = state['E']
+                if 'A'               in state: c._A               = state['A']
+                if 'age'             in state: c._age             = state['age']
+                if 'n'               in state: c.n                = state['n']
+                if 'correction_mask' in state: c._correction_mask = state['correction_mask']
                 if 'psi_prev' in state:
                     self._psi_prev = state['psi_prev']
                 return {'loaded': path, 'vocab': c.n, 'format': 'pickle'}
@@ -1698,16 +1782,121 @@ class _RWLock:
     def writing(self): return self._W(self)
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  MemoryLog — provenance record for retract() and commit() operations
+# ══════════════════════════════════════════════════════════════════════════════
+
+class MemoryLog:
+    """
+    JSON sidecar that records every retraction and intentional commit.
+    Survives bin resets — corrections are replayed onto a freshly loaded field.
+
+    The wrong knowledge is not removed. It is acknowledged:
+    the original A-matrix edge stays at its trained value;
+    the correction_mask is what suppresses it at propagation time.
+    After a wipe + retrain, replay() restores all masks from this log.
+
+    :param path: Path to corrections JSON file.
+    """
+
+    _DEFAULT = os.path.expanduser('~/.ptolemy/memory_corrections.json')
+
+    def __init__(self, path: str = _DEFAULT):
+        self._path = os.path.expanduser(path)
+        self._log: Dict[str, Any] = {'version': 1,
+                                      'retractions': [], 'commits': []}
+        self._lock = threading.Lock()
+        self._load()
+
+    def _load(self):
+        if os.path.exists(self._path):
+            try:
+                with open(self._path, encoding='utf-8') as f:
+                    self._log = json.load(f)
+            except Exception:
+                pass
+
+    def _save(self):
+        try:
+            with open(self._path, 'w', encoding='utf-8') as f:
+                json.dump(self._log, f, indent=2)
+        except Exception:
+            pass
+
+    def record_retraction(self, w1: str, w2: str, factor: float,
+                          orig_ab: float, orig_ba: float, reason: str):
+        """
+        :param w1: First word.
+        :param w2: Second word.
+        :param factor: Suppression multiplier applied.
+        :param orig_ab: A-matrix weight w1→w2 at time of retraction.
+        :param orig_ba: A-matrix weight w2→w1 at time of retraction.
+        :param reason: Why this edge is wrong.
+        """
+        entry = {
+            'w1': w1, 'w2': w2, 'factor': factor,
+            'orig_ab': orig_ab, 'orig_ba': orig_ba,
+            'reason': reason,
+            'ts': time.strftime('%Y-%m-%dT%H:%M:%S'),
+        }
+        with self._lock:
+            self._log.setdefault('retractions', []).append(entry)
+            self._save()
+
+    def record_commit(self, text: str, weight: float,
+                      reason: str, words_added: int):
+        """
+        :param text: Text committed (first 300 chars stored).
+        :param weight: LTP multiplier used.
+        :param reason: Why this is authoritative.
+        :param words_added: Words processed.
+        """
+        entry = {
+            'text_prefix': text[:300],
+            'weight': weight, 'reason': reason,
+            'words_added': words_added,
+            'ts': time.strftime('%Y-%m-%dT%H:%M:%S'),
+        }
+        with self._lock:
+            self._log.setdefault('commits', []).append(entry)
+            self._save()
+
+    def replay(self, engine: 'Engine'):
+        """
+        Re-apply all stored retractions to *engine*'s correction_mask.
+        Call after loading a fresh or reset field so corrections survive wipes.
+
+        :param engine: Engine instance to patch.
+        """
+        with self._lock:
+            for r in self._log.get('retractions', []):
+                engine.retract(r['w1'], r['w2'],
+                                factor=r.get('factor', 0.1),
+                                reason='(replayed)')
+
+    def retractions(self) -> list:
+        """:returns: List of retraction records."""
+        with self._lock:
+            return list(self._log.get('retractions', []))
+
+    def commits(self) -> list:
+        """:returns: List of commit records."""
+        with self._lock:
+            return list(self._log.get('commits', []))
+
+
 class MonadInterface:
     """
     Thread-safe facade over Engine for skills and threads.
 
     :param engine: Engine instance.
+    :param memory_log: MemoryLog instance for retract/commit provenance.
     """
 
-    def __init__(self, engine: 'Engine'):
-        self._engine = engine
-        self._rwlock = _RWLock()
+    def __init__(self, engine: 'Engine', memory_log: 'MemoryLog' = None):
+        self._engine     = engine
+        self._rwlock     = _RWLock()
+        self._memory_log = memory_log
 
     def ingest(self, text: str):
         """
@@ -1717,6 +1906,60 @@ class MonadInterface:
         """
         with self._rwlock.writing():
             self._engine.crank.learn(text)
+
+    def retract(self, word_a: str, word_b: str,
+                factor: float = 0.1, reason: str = '') -> Dict[str, Any]:
+        """
+        Suppress the A-matrix edge between *word_a* and *word_b*.
+        Logs to MemoryLog for persistence across field resets.
+
+        :param word_a: First word.
+        :param word_b: Second word.
+        :param factor: Suppression factor in (0, 1].
+        :param reason: Why this association is being corrected.
+        :returns: Result dict.
+        :rtype: dict
+        """
+        with self._rwlock.writing():
+            r = self._engine.retract(word_a, word_b, factor=factor, reason=reason)
+        if 'error' not in r and self._memory_log:
+            self._memory_log.record_retraction(
+                r['retracted'][0], r['retracted'][1],
+                r['factor'], r['orig_ab'], r['orig_ba'], reason)
+        return r
+
+    def commit(self, text: str, weight: float = 2.0,
+               reason: str = '') -> Dict[str, Any]:
+        """
+        Intentional high-confidence ingest — bypasses BAO filter.
+        Logs to MemoryLog for provenance.
+
+        :param text: Text to commit.
+        :param weight: LTP multiplier (>1 = authoritative, 1 = normal).
+        :param reason: Why this is being committed.
+        :returns: Result dict.
+        :rtype: dict
+        """
+        with self._rwlock.writing():
+            r = self._engine.commit(text, weight=weight, reason=reason)
+        if self._memory_log:
+            self._memory_log.record_commit(
+                text, weight, reason, r.get('committed', 0))
+        return r
+
+    def memory_log(self) -> Dict[str, Any]:
+        """
+        Return the full correction history.
+
+        :returns: Dict with 'retractions' and 'commits' lists.
+        :rtype: dict
+        """
+        if not self._memory_log:
+            return {'retractions': [], 'commits': []}
+        return {
+            'retractions': self._memory_log.retractions(),
+            'commits':     self._memory_log.commits(),
+        }
 
     def query(self, word: str) -> float:
         """
@@ -1888,6 +2131,26 @@ class SpeakingThread(threading.Thread):
             return {'type': 'status', 'vocab': self._monad.vocab_size()}
         if mtype == 'ping':
             return {'type': 'pong', 'vocab': self._monad.vocab_size()}
+        if mtype == 'retract':
+            words  = msg.get('words', [])
+            if len(words) < 2:
+                return {'error': 'retract requires words:[w1, w2]'}
+            r = self._monad.retract(
+                words[0], words[1],
+                factor=float(msg.get('factor', 0.1)),
+                reason=msg.get('reason', ''))
+            return {'type': 'retract', **r}
+        if mtype == 'commit':
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'commit requires text'}
+            r = self._monad.commit(
+                text,
+                weight=float(msg.get('weight', 2.0)),
+                reason=msg.get('reason', ''))
+            return {'type': 'commit', **r}
+        if mtype == 'memory_log':
+            return {'type': 'memory_log', **self._monad.memory_log()}
         return {'error': f"unknown:{mtype}"}
 
 
@@ -2267,12 +2530,17 @@ def _build_teach_stack(engine: 'Engine'):
             print(f'[ptolemy] corpus seed: {len(_corpus_lines)} lines from {_corpus_path}',
                   file=sys.stderr)
 
-    cfg     = PtolConfig()
-    logger  = PtolLogger(cfg.get('log_dir', '~/.ptolemy/logs'))
-    staging = PtolStaging(cfg.get('temp_dir',  '~/.ptolemy/.ptoltemp'),
-                          cfg.get('cache_dir', '~/.ptolemy/cache'))
-    monitor = PtolMonitor(logger, cfg)
-    monad   = MonadInterface(engine)
+    cfg        = PtolConfig()
+    logger     = PtolLogger(cfg.get('log_dir', '~/.ptolemy/logs'))
+    staging    = PtolStaging(cfg.get('temp_dir',  '~/.ptolemy/.ptoltemp'),
+                             cfg.get('cache_dir', '~/.ptolemy/cache'))
+    monitor    = PtolMonitor(logger, cfg)
+    memory_log = MemoryLog(cfg.get('memory_log',
+                                   '~/.ptolemy/memory_corrections.json'))
+    # Replay stored retractions onto the freshly loaded field.
+    # Ensures corrections survive bin wipes and retrains.
+    memory_log.replay(engine)
+    monad      = MonadInterface(engine, memory_log=memory_log)
     opener  = urllib_opener()
     search  = PtolSearch(opener, logger)
     crawler = PtolCrawler(staging, logger, cfg)
