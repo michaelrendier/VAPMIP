@@ -214,6 +214,13 @@ No prime appears anywhere in the code. FNV-1a is for the hash table, not zero ad
 **Side effect:** closes the float64 path in `monad_word_coords`. Prime index is integer,
 zero index is integer. No float until `E = zeros[idx]` at the output boundary.
 
+**State migration:** FNV-1a and prime hash produce different zero-indices for the same
+words. All `.bin` state files trained before P1 are semantically invalid after it.
+**Start fresh — wipe `monad.bin`, `monad_wordnet.bin`, and any `.ptol` checkpoints,
+then re-run `teach_english.sh` from scratch.** This is expected and accepted.
+UDB entries (S6) and compiled β-floors (S5) also reset with the state; redefine
+production UDBs after the corpus is re-settled.
+
 **Files:** `monad.c:monad_word_coords()`, `ptolemy.h:MONAD_PHI` (φ-scatter replaced),
 new `prime.c` (sieve up to N=25000 primes, Miller-Rabin for overflow).
 
@@ -652,6 +659,157 @@ new `auth.c` / `auth.h` (root token verification, dev mode bypass).
 **Dependency:** P1 (prime hash) required for zero_idx resolution. S2 (fire_count),
 S3 (e14_cooling) context used but not blocking. S5 (compiled β-floor) must be in
 place before production UDB repellers are meaningful.
+
+---
+
+### S7 — Authentication Architecture: Ask-and-Wait, Connectivity-Tiered
+
+*Added 2026-05-27 — Threat model design principle for offline operation.*
+
+**The principle:** Holcus is not always connected to the internet. Authentication
+must never be a blocking wall that kills the process when a second factor is
+unavailable. Instead, Holcus **asks for permission and waits**.
+
+Actions requiring auth (UDB condense/repel, corpus write, β-floor override) are
+queued as `AUTH_PENDING` events. The engine continues operating in read-only mode
+while the queue is live. When the user presents credentials — TOTP code, smart
+card, fingerprint — the pending events are processed in order. If the session ends
+without auth, pending events are dropped (not silently executed, not persisted).
+
+**Connectivity is a gradient, not a binary.** The cell phone has email and GSM.
+Even when the laptop has no internet path, the phone always bridges the gap:
+SMS arrives over GSM; Gmail pushes over cellular data. The user reads the code
+on the phone and types it into Holcus. The phone IS the out-of-band channel.
+
+**Connectivity tiers and available auth methods:**
+
+| Tier | Condition | Available methods |
+|---|---|---|
+| 0 | Air-gapped, no signal | TOTP (Authenticator app), Fingerprint (PAM), RFID/smart card |
+| 1 | Cellular / GSM only (no laptop internet) | All of Tier 0 + SMS to phone (GSM modem or phone relay), Email to phone (cellular data) |
+| 2 | Full internet on laptop | All of Tier 1 + Push notification, Twilio SMS, PKCS/CAC online verify |
+
+**Selection logic in `auth.c`:** probe connectivity at auth-request time, descend
+tiers until a method is available, offer the highest available method first.
+User can override downward ("use TOTP instead") but not upward (can't select push
+when offline). The probe is lightweight — one UDP packet to a known address with
+a short timeout; no DNS, no TLS.
+
+**Auth states:**
+```
+AUTH_NONE       — no credential presented yet; load-bearing ops blocked
+AUTH_PENDING    — request queued; engine running read-only
+AUTH_OK         — credential verified; full operation window (30 min TTL, resetable)
+AUTH_TIER1      — cellular only; SMS/email via phone available; push unavailable
+AUTH_TIER0      — no signal; TOTP/fingerprint/card only
+```
+
+`AUTH_TIER0` and `AUTH_TIER1` are not error states. They are the expected normal
+operating modes when in the field. The engine does not degrade — only the available
+delivery channels narrow.
+
+**What is load-bearing (always blocked without auth):**
+- `--condense` / `--repel` / `--uncondense` (UDB, S6)
+- `monad_learn()` write path when called from a non-owner process
+- Any corpus file modification
+- β-floor override (S5 compiled floor cannot be bypassed at any auth level)
+
+**What is NOT blocked (read-only, always available):**
+- `monad_hear()` / `monad_speak()` — the engine talks even without auth
+- `--query` / `-h` / `-W` — all query modes
+- `--list-udb` — status read, no write
+- BAO convergence check, zero inspection flags
+
+---
+
+### S8 — Fingerprint Sensor Authentication
+
+*Added 2026-05-27 — hardware present, Linux integration not yet working.*
+
+**Hardware:** Built-in fingerprint sensor on this machine. Confirmed present.
+Linux enrollment not yet functional.
+
+**Path (when Linux integration is resolved):**
+
+1. **fprintd** — freedesktop fingerprint daemon, DBus interface.
+   `fprintd-enroll` to register fingerprint; `fprintd-verify` to check.
+   Most distributions ship this; enrollment goes into `/var/lib/fprint/`.
+
+2. **PAM integration** — once enrolled:
+   ```
+   /etc/pam.d/holcus-auth:
+       auth  sufficient  pam_fprintd.so
+       auth  sufficient  pam_totp.so  (fallback — same TOTP as now)
+   ```
+   `auth.c` calls `pam_authenticate()` with service name `holcus-auth`.
+   Returns `PAM_SUCCESS` → `AUTH_OK`. Falls through to TOTP on no-reader.
+
+3. **AUTH_METHOD compile flag:** `AUTH_METHOD=FINGERPRINT` in Makefile.
+   Can be OR'd: `AUTH_METHOD=FINGERPRINT|TOTP` means either satisfies the check.
+
+**Debugging steps when ready to attempt:**
+```bash
+lsusb | grep -i finger          # confirm USB sensor visible
+lsmod | grep -i hid             # HID driver loaded
+dmesg | grep -i fprint          # kernel messages at plug time
+fprintd-list-devices            # fprintd sees hardware?
+```
+
+Common Linux fingerprint blockers: missing `libfprint` driver for the specific
+sensor chipset (Synaptics, Goodix, ELAN each need their own libfprint plugin);
+driver present but not upstream yet (check `python-validity` or `libfprint-tod`
+for proprietary-firmware sensors).
+
+**Files when implementing:** `auth.c` (PAM call), `auth.h` (AUTH_METHOD enum
+extended with FINGERPRINT bit), `Makefile` (fprintd build dep conditional).
+
+---
+
+### S9 — SMS and Email OTP Delivery
+
+*Added 2026-05-27 — standard 2FA out-of-band code channels.*
+
+Both share the same code flow: generate a single-use HOTP code → deliver via
+channel → verify within a time window. The code generation reuses `auth_totp.c`
+(`hotp()` with a per-session counter instead of time). Both require connectivity —
+they fall under `AUTH_OFFLINE` awareness alongside push notification.
+
+**Shared code path:**
+```
+1. Generate 6-digit code:  hotp(session_nonce)  — single use, 10-min TTL
+2. Deliver via channel     (SMS or email)
+3. Prompt:                 "Enter the code sent to ..."
+4. Verify:                 auth_totp_verify() with nonce-counter window
+5. Consume:                mark nonce used; replay rejected
+```
+
+**SMS delivery options (pick one at build time):**
+- `TWILIO_SID` + `TWILIO_TOKEN` env vars → POST to Twilio REST API
+- `AWS_SMS` → AWS SNS `publish()` — same credential chain as S3/Lambda if already on AWS
+- Local GSM modem (`/dev/ttyUSB0`, AT+CMGS) — works air-gapped with cellular coverage,
+  no internet path needed. Most useful on the truck.
+
+**Email delivery:**
+- SMTP send (libcurl with `CURLOPT_URL = "smtp://..."`) — no external library beyond
+  curl, which ptolemy already avoids, so use POSIX sockets directly or a sendmail pipe.
+- Simplest production path: `sendmail -t` pipe from `auth.c` — one system call,
+  works with any local MTA configured on the machine.
+- The user's address (`the.wandering.god@gmail.com`) is the default recipient;
+  compiled into `auth.h` at build time, not runtime-configurable (prevents redirect attack).
+
+**AUTH_METHOD flags:**
+```c
+AUTH_SMS    = 0x08   // requires connectivity
+AUTH_EMAIL  = 0x10   // requires connectivity; sendmail path works offline if MTA is local
+```
+
+Both are connectivity-dependent by default. `AUTH_EMAIL` with a local MTA
+(`postfix`/`msmtp` configured for Gmail relay) degrades gracefully — mail queues
+locally and delivers when the network returns. Code TTL must account for the queue
+delay; use 30-minute window for email vs 10-minute for SMS.
+
+**Files:** `auth.c` (generate + verify OTP, SMS/email dispatch), `auth.h`
+(AUTH_SMS / AUTH_EMAIL bits, `HOLCUS_NOTIFY_EMAIL` compiled constant).
 
 ---
 

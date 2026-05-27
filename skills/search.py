@@ -36,7 +36,8 @@ class PtolSearch:
         self._logger = logger
         self._queue  = []
         self._lock   = threading.Lock()
-        self._gutendex_page = 1
+        self._gutendex_page    = 1
+        self._gutendex_zh_page = 1
 
     def queue_depth(self) -> int:
         """
@@ -130,6 +131,44 @@ class PtolSearch:
                         self._queue.append({'url': dl, 'meta': None})
         except Exception as exc:
             self._logger.skip(url, f"archive:{exc}")
+
+    def seed_mandarin(self) -> bool:
+        """
+        Fetch one page of Mandarin (zh) plain-text books from gutendex.com.
+        Falls back to archive.org language:chinese query if gutendex returns nothing.
+        Advances internal zh page counter on success.
+
+        :returns: True if URLs were added, False on error.
+        :rtype: bool
+        """
+        params = urllib.parse.urlencode({
+            'languages': 'zh',
+            'mime_type': 'text/plain',
+            'page':      self._gutendex_zh_page,
+        })
+        url = _GUTENDEX + '?' + params
+        added = 0
+        try:
+            resp = self._opener.open(url, timeout=30)
+            data = json.loads(resp.read().decode('utf-8', errors='ignore'))
+            for book in data.get('results', []):
+                for fmt, link in book.get('formats', {}).items():
+                    if 'text/plain' in fmt and link.lower().endswith('.txt'):
+                        with self._lock:
+                            self._queue.append({'url': link, 'meta': None})
+                        added += 1
+                        break
+            if added:
+                self._gutendex_zh_page += 1
+        except Exception as exc:
+            self._logger.skip(url, f"gutendex_zh:{exc}")
+
+        # Fallback: archive.org Chinese texts
+        if not added:
+            self.seed_archive(query='language:chinese')
+            added = 1   # optimistic — archive may have results
+
+        return added > 0
 
     def seed_ftp_gutenberg(self):
         """

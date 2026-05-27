@@ -221,6 +221,38 @@ def _fermat_space(j_neg: float) -> str:
     High charge → heavier space → negative space carries the message."""
     idx = min(int(j_neg * len(_FERMAT_SPACES)), len(_FERMAT_SPACES) - 1)
     return _FERMAT_SPACES[idx]
+
+
+# ── CJK tokenizer — per-glyph splitting for Mandarin/Chinese ─────────────────
+# Chinese text has no spaces between words. Each CJK character is a morpheme.
+# Insert spaces around CJK glyphs so text.split() produces one token per glyph.
+# Covers: CJK Unified Ideographs (U+4E00-U+9FFF), Extension A (U+3400-U+4DBF),
+#         Katakana/Hiragana (U+3040-U+30FF), Hangul (U+AC00-U+D7A3).
+_CJK_RANGES = (
+    ('぀', 'ヿ'),   # Hiragana + Katakana
+    ('㐀', '䶿'),   # CJK Extension A
+    ('一', '鿿'),   # CJK Unified Ideographs (main block)
+    ('가', '힣'),   # Hangul syllables
+    ('豈', '﫿'),   # CJK Compatibility Ideographs
+)
+
+def _is_cjk(ch: str) -> bool:
+    for lo, hi in _CJK_RANGES:
+        if lo <= ch <= hi:
+            return True
+    return False
+
+def _cjk_space(text: str) -> str:
+    """Insert spaces around CJK glyphs so split() yields one token per character."""
+    if not any(_is_cjk(c) for c in text):
+        return text   # fast path: no CJK present
+    out = []
+    for ch in text:
+        if _is_cjk(ch):
+            out.append(f' {ch} ')
+        else:
+            out.append(ch)
+    return ''.join(out)
 _META        = frozenset('mean means meaning say says said tell tells told explain '
                          'explains clarify summarise summarize rephrase repeat'.split())
 _AFF_POS     = frozenset('good great love like enjoy happy glad pleased wonderful '
@@ -234,7 +266,7 @@ def _whash(w: str) -> float:
 def cam_encode(text: str) -> Sedenion:
     """Encode text as unit sedenion. The prompt IS the sedenion. CAM timing geometry."""
     s = _s0()
-    words = text.lower().split()
+    words = _cjk_space(text).lower().split()
     n = max(len(words), 1)
     s[0] = math.log(n + 1) / math.log(512)
     for w in words:
@@ -413,11 +445,11 @@ class Crank:
         return self._vocab[w]
 
     def _clean(self, w: str) -> str:
-        return w.lower().strip('.,!?;:\'"()[]{}—')
+        return w.lower().strip('.,!?;:\'"()[]{}—。，！？；：、“”‘’（）【】《》…·')
 
     def learn(self, text: str) -> int:
         """e₂ bind — deepen β-field. Build A-matrix connections."""
-        words = [self._clean(w) for w in text.split()]
+        words = [self._clean(w) for w in _cjk_space(text).split()]
         words = [w for w in words if w and len(w) >= 1]
         prev  = None
         for w in words:
@@ -457,7 +489,7 @@ class Crank:
                     self._beta[k] = min(self._beta[k] + dim_charge * GAP * 10, 1.0)
 
         self.learn(text)
-        words = [self._clean(w) for w in text.split() if self._clean(w)]
+        words = [self._clean(w) for w in _cjk_space(text).split() if self._clean(w)]
         return [(self._vocab[w], self._E[self._vocab[w]], w)
                 for w in words if w in self._vocab]
 
@@ -1416,7 +1448,7 @@ class SensorArray:
 
 def main():
     ap = argparse.ArgumentParser(
-        description='segfault-monad v1.217 — one-wire sedenion engine at every scale')
+        description='ptolemy-monad v1.218 — one-wire sedenion engine at every scale')
     ap.add_argument('prompt',          nargs='?', default='',
                     help='Prompt text. Reads stdin if omitted.')
     ap.add_argument('-n', '--words',   type=int,  default=32)
@@ -1428,8 +1460,6 @@ def main():
                     help='Save session state after generation')
     ap.add_argument('--status',        action='store_true')
     ap.add_argument('--faults',        action='store_true')
-    ap.add_argument('--torque',        action='store_true')
-    ap.add_argument('--pid',           type=lambda x: int(x, 0))
     ap.add_argument('--json',          action='store_true')
     ap.add_argument('--explore',       metavar='WORD')
     ap.add_argument('--explore-depth', type=int, default=2)
@@ -1447,60 +1477,13 @@ def main():
                     help='Start autonomous learning + speaking daemon')
     ap.add_argument('--report',        action='store_true',
                     help='Print Hamiltonian Report (UNS + field state) and exit')
-    ap.add_argument('--report-ptolrc', action='store_true',
-                    help='Write full .ptolrc with all defaults and current state')
-    ap.add_argument('--build-sedenion-bin', metavar='OUTPUT',
-                    help='Build monad_sedenion.bin: sniff all code + algebra corpus')
-    ap.add_argument('--sniff-c',       metavar='DIR',
-                    help='C source directory for --build-sedenion-bin')
-    ap.add_argument('--address-map',   action='store_true',
-                    help='Print sedenion address map of all known callables')
-    ap.add_argument('--nearest',       metavar='WORD',
-                    help='Find callables nearest to sedenion state for a prompt')
     args = ap.parse_args()
 
     engine  = Engine()
     sensors = SensorArray(engine)
 
-    # ── Build monad_sedenion.bin ──────────────────────────────────────────
-    if args.build_sedenion_bin:
-        if args.load_bin:
-            r = engine.load_bin(args.load_bin)
-            print(f"[bin] {r}", file=sys.stderr)
-        from skills.apisniff import APISniff
-        sniffer = APISniff(engine)
-        stats   = sniffer.build_sedenion_bin(
-            args.build_sedenion_bin,
-            include_stdlib=True,
-            c_source_dir=args.sniff_c,
-        )
-        print(f"[sedenion-bin] {stats}", file=sys.stderr)
-        if args.address_map:
-            print(sniffer.report())
-        return
-
-    # ── Address map / nearest callable ────────────────────────────────────
-    if args.address_map or args.nearest:
-        if args.load_bin:
-            engine.load_bin(args.load_bin)
-        from skills.apisniff import APISniff
-        sniffer = APISniff(engine)
-        # Try to load existing address book
-        book_path = (args.load_bin or '').replace('.bin', '_addresses.pkl')
-        if not sniffer.address_book.load(book_path):
-            print('[apisniff] no address book found — run --build-sedenion-bin first',
-                  file=sys.stderr)
-        if args.nearest:
-            results = sniffer.nearest_callable(args.nearest)
-            print(f"\nNearest callables to '{args.nearest}':")
-            for name, sim, op in results:
-                print(f"  e={op:13s}  sim={sim:.4f}  {name}")
-        if args.address_map:
-            print(sniffer.report())
-        return
-
     # ── Hamiltonian Report — My Location function ─────────────────────────
-    if args.report or args.report_ptolrc:
+    if args.report:
         if args.load_bin:
             r = engine.load_bin(args.load_bin)
             print(f"[bin] {r}", file=sys.stderr)
@@ -1513,9 +1496,6 @@ def main():
         from skills.config import PtolConfig
         cfg = PtolConfig()
         rpt = HamiltonianReport(engine, cfg, sensors)
-        if args.report_ptolrc:
-            cfg.write_full_ptolrc(engine)
-            print('[ptolemy] full .ptolrc written', file=sys.stderr)
         rpt.print_report()
         return
 
@@ -1572,10 +1552,6 @@ def main():
         print(json.dumps(sensors.status(), indent=2)); return
     if args.faults:
         for dtc in sensors.fault_scan(): print(dtc); return
-    if args.torque:
-        print(sensors.torque_csv()); return
-    if args.pid is not None:
-        print(sensors.sensor_read(args.pid)); return
     if args.self_map:
         sm = engine.self_map()
         if args.json:
@@ -1812,13 +1788,13 @@ class SpeakingThread(threading.Thread):
         self._monad  = monad
         self._config = config
         self._logger = logger
-        self._stop   = threading.Event()
+        self._halt   = threading.Event()
         self._unix   = None
         self._tcp    = None
 
     def stop(self):
         """Signal thread to exit and close sockets."""
-        self._stop.set()
+        self._halt.set()
         for s in (self._unix, self._tcp):
             if s:
                 try: s.close()
@@ -1864,7 +1840,7 @@ class SpeakingThread(threading.Thread):
 
     def _accept_loop(self, sock):
         import socket as _socket
-        while not self._stop.is_set():
+        while not self._halt.is_set():
             try:
                 conn, _ = sock.accept()
                 threading.Thread(target=self._handle, args=(conn,),
@@ -1937,14 +1913,14 @@ class TeachingThread(threading.Thread):
         self._crawler = crawler
         self._staging = staging
         self._monitor = monitor
-        self._stop    = threading.Event()
+        self._halt    = threading.Event()
         self._words   = 0
         self._chunks  = 0
         self._t0      = 0.0
 
     def stop(self):
         """Signal teaching loop to exit cleanly after current chunk."""
-        self._stop.set()
+        self._halt.set()
 
     def _wpm(self) -> float:
         elapsed = (time.time() - self._t0) / 60.0
@@ -1959,8 +1935,9 @@ class TeachingThread(threading.Thread):
         :rtype: dict or None
         """
         min_words = self._config.getint('chunk_min_words', 8)
-        words = [w.strip('.,!?;:\'"()-—') for w in chunk.lower().split()]
-        words = [w for w in words if w.isalpha()]
+        words = [w.strip('.,!?;:\'"()-—。，！？；：、""''（）【】《》…·')
+                 for w in _cjk_space(chunk).lower().split()]
+        words = [w for w in words if w.isalpha() or (_is_cjk(w[0]) if w else False)]
         if len(words) < min_words:
             return None
 
@@ -2096,7 +2073,7 @@ class TeachingThread(threading.Thread):
         cite_weight = meta.weight() if meta and hasattr(meta, 'weight') else 0.5
         ingested = 0
         for para in self._crawler.iter_paragraphs(text):
-            if self._stop.is_set():
+            if self._halt.is_set():
                 break
             conf = self._score_chunk(para)
             if conf and self._should_ingest(conf):
@@ -2122,12 +2099,12 @@ class TeachingThread(threading.Thread):
         total_conf = 0.0
 
         for para in self._crawler.iter_paragraphs(text):
-            if self._stop.is_set():
+            if self._halt.is_set():
                 break
 
             # Yield to system under load
             while (self._monitor.should_throttle()
-                   and not self._stop.is_set()):
+                   and not self._halt.is_set()):
                 time.sleep(self._config.getfloat('throttle_sleep', 0.5))
 
             conf = self._score_chunk(para)
@@ -2171,14 +2148,14 @@ class TeachingThread(threading.Thread):
 
         # Resume staged files from previous crash
         for pending in self._staging.pending():
-            if self._stop.is_set(): break
+            if self._halt.is_set(): break
             ctype = self._crawler._detect_type(pending, str(pending))
             self._process(pending, ctype, str(pending))
             self._staging.remove(pending)
 
         # Main acquisition loop
         sources = getattr(self, '_sources', None)
-        while not self._stop.is_set():
+        while not self._halt.is_set():
             if self._search.queue_depth() < 5:
                 if sources:
                     sources.seed_active(max_queue=20)
@@ -2209,8 +2186,8 @@ class TeachingThread(threading.Thread):
             self._staging.remove(path)
 
         # Save on clean shutdown
-        state_path = self._config.get('active_state',
-                                      os.path.expanduser('~/.ptolemy/monad.bin'))
+        state_path = os.path.expanduser(
+            self._config.get('active_state', '~/.ptolemy/monad.bin'))
         self._monad.save(state_path)
         self._logger.session('teach_stop', words=self._words,
                              chunks=self._chunks, wpm=f"{self._wpm():.1f}")
@@ -2242,6 +2219,17 @@ def _build_teach_stack(engine: 'Engine'):
     from skills.lexicon  import PtolLexicon
     from skills.sources  import PtolSources
     from skills.draw     import HamiltonianReport
+
+    # ── Seed from local corpus first (before any internet fetch) ─────────────
+    _repo_root    = os.path.dirname(os.path.abspath(__file__))
+    _corpus_path  = os.path.join(_repo_root, 'corpus', 'holcus_seed.txt')
+    if os.path.exists(_corpus_path):
+        with open(_corpus_path, encoding='utf-8') as _cf:
+            _corpus_lines = [l for l in _cf if l.strip() and not l.startswith('#')]
+        if _corpus_lines:
+            engine.load('\n'.join(_corpus_lines))
+            print(f'[ptolemy] corpus seed: {len(_corpus_lines)} lines from {_corpus_path}',
+                  file=sys.stderr)
 
     cfg     = PtolConfig()
     logger  = PtolLogger(cfg.get('log_dir', '~/.ptolemy/logs'))

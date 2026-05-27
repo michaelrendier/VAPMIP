@@ -1,0 +1,212 @@
+# HOLCUS LANGUAGE CORPUS — STRUCTURED DUMPS
+# Purpose: Lexical and topological language datasets for sedenion field geometry.
+# Priority: EDGES and PATHWAYS over definitions.
+# The 15-edge window of the 16-word sedenion increment requires
+# structured relational data — hypernym, hyponym, meronym, antonym,
+# cross-language concept divergence — not flat vocabulary lists.
+#
+# TAG SCHEMA:
+# [LIVING]    — living language(s)
+# [DEAD]      — extinct/classical language(s)
+# [MULTI]     — multilingual / cross-language mapping
+# [TOPO]      — topological/relational structure priority (edges, graphs)
+# [LEXICAL]   — lexical content priority (vocabulary, definitions)
+# [DUMP]      — direct downloadable bulk dump available
+# [API]       — API access, may require registration
+# [FREE]      — no registration required
+# [REG]       — registration required, free academic use
+#
+# STRUCTURE: NAME | TAGS | URL | NOTES
+# ============================================================
+
+
+# ============================================================
+# TIER 1 — WORDNET-COMPATIBLE / DIRECT EDGE STRUCTURE
+# Priority ingest. These speak the same relational language as monad_wordnet.bin
+# ============================================================
+
+English WordNet (Princeton) | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://wordnet.princeton.edu/download/current-version
+# The ground truth. 117,000 synsets, full edge graph.
+# Download: WNdb-3.1.tar.gz — flat files, direct ingest
+
+Open Multilingual Wordnet (OMW) | [MULTI][TOPO][LEXICAL][DUMP][FREE]
+https://omwn.org/
+https://github.com/globalwordnet/OMW
+# 40+ languages mapped to Princeton WordNet synset IDs.
+# Edges inherited from PWN structure — cross-language synset alignment.
+# Direct download: https://github.com/globalwordnet/OMW/releases
+# Critical for cross-language concept divergence mapping ("long chair" problem)
+
+Open English WordNet | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://github.com/globalwordnet/english-wordnet
+# Modern maintained fork of PWN. YAML and XML formats.
+# Direct download via git or releases page.
+
+Global WordNet Grid | [MULTI][TOPO][DUMP][FREE]
+http://globalwordnet.org/resources/downloads/
+# Interlingual index — concept-to-concept edges across all WordNet languages
+# The divergence map: where languages disagree on boundaries is the topology
+
+Japanese WordNet | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://bond-lab.github.io/wnja/
+http://compling.hss.ntu.edu.sg/wnja/data/wnjpn-ok.tab.gz
+# Direct download, tab-separated. 93,000 synsets.
+# "Long chair" (nagaisu) mapped to couch/sofa synsets — divergence visible here
+
+Chinese Open WordNet (COW) | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://github.com/globalwordnet/cow
+# Mandarin. Same synset alignment as OMW.
+
+Arabic WordNet | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://github.com/globalwordnet/arabic-wordnet
+
+French WordNet (WOLF) | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://gforge.inria.fr/frs/?group_id=386
+
+German GermaNet | [LIVING][TOPO][LEXICAL][DUMP][REG]
+https://uni-tuebingen.de/en/142806
+# Free academic registration. Most complete Germanic language wordnet.
+
+Spanish MCR WordNet | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://adimen.si.ehu.es/web/MCR/
+# Multilingual Central Repository — Spanish, Catalan, Basque, Galician
+
+Hindi WordNet | [LIVING][TOPO][LEXICAL][DUMP][FREE]
+https://www.cfilt.iitb.ac.in/wordnet/webhwn/
+
+Sanskrit WordNet | [DEAD][TOPO][LEXICAL][DUMP][FREE]
+https://www.cfilt.iitb.ac.in/wordnet/webswn/
+# Dead language with full WordNet-compatible edge structure. Rare.
+
+# ============================================================
+# TIER 2 — CROSS-LANGUAGE CONCEPT MAPPING (TOPOLOGY PRIORITY)
+# Edge divergence between languages — where concept-space folds
+# ============================================================
+
+BabelNet | [MULTI][TOPO][LEXICAL][DUMP][REG]
+https://babelnet.org/download
+# 500+ languages. Concept nodes with cross-language edges.
+# Registration required. RDF and JSON-LD dumps available.
+# The most complete cross-language topology available.
+# Critical: concept divergence edges are explicit in the data structure.
+
+ConceptNet | [MULTI][TOPO][LEXICAL][DUMP][FREE]
+https://conceptnet.io/
+https://github.com/commonsense/conceptnet5/wiki/Downloads
+# Direct download: https://conceptnet.s3.amazonaws.com/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz
+# 35 languages. Commonsense relational edges — IsA, PartOf, UsedFor, HasA
+# Edge-first structure. 34 million edges.
+# Complements WordNet — different edge types, overlapping concept space
+
+NASARI (Unified Semantic Space) | [MULTI][TOPO][DUMP][FREE]
+http://lcl.uniroma1.it/nasari/
+# Vector representations of BabelNet concepts — geometric embedding of edges
+
+UWN (Universal WordNet) | [MULTI][TOPO][DUMP][FREE]
+http://www.h-its.org/en/research/nlp/uwn/
+# 1.5 million concepts, 200+ languages. Lightweight cross-language edge graph.
+
+# ============================================================
+# TIER 3 — DEAD LANGUAGES (structured, edge-compatible)
+# ============================================================
+
+Perseus Digital Library | [DEAD][LEXICAL][TOPO][DUMP][FREE]
+http://www.perseus.tufts.edu/hopper/
+https://github.com/PerseusDL/treebank_data
+# Ancient Greek — lemmatized, syntactic treebank (edges between words)
+# Latin — same structure
+# Classical Arabic, Sanskrit available
+# Treebank = dependency edges — directly useful for sedenion path geometry
+
+ETCSL — Electronic Text Corpus of Sumerian Literature | [DEAD][LEXICAL][DUMP][FREE]
+https://etcsl.orinst.ox.ac.uk/
+https://github.com/etcsl/etcsl
+# Sumerian — transliterated, translated, structured XML
+# Oldest written language with recoverable semantics
+
+CDLI — Cuneiform Digital Library | [DEAD][LEXICAL][DUMP][FREE]
+https://cdli.mpier.org/
+https://github.com/cdli-gh/data
+# Akkadian, Sumerian, Elamite — 334,000+ tablets
+# Direct download: https://cdli.mpier.org/bulk_data
+
+PROIEL Treebanks | [DEAD][TOPO][DUMP][FREE]
+https://github.com/proiel/proiel-treebank
+# Ancient Indo-European dependency treebanks
+# Gothic, Old Church Slavonic, Classical Armenian, Ancient Greek, Latin
+# Dependency edges explicit — syntactic topology preserved
+
+Homer Multitext Project | [DEAD][LEXICAL][DUMP][FREE]
+https://www.homermultitext.org/
+https://github.com/homermultitext/hmt-data
+# Ancient Greek. Variant manuscript tradition — semantic drift across copies visible.
+
+AGDT — Ancient Greek Dependency Treebank | [DEAD][TOPO][DUMP][FREE]
+https://github.com/PerseusDL/treebank_data/tree/master/v2.1/Greek
+# Pure edge structure for Ancient Greek. Syntactic dependency graph.
+
+Latin Dependency Treebank | [DEAD][TOPO][DUMP][FREE]
+https://github.com/PerseusDL/treebank_data/tree/master/v2.1/Latin
+
+Gothic Bible Treebank | [DEAD][TOPO][DUMP][FREE]
+https://github.com/proiel/proiel-treebank
+# Gothic — oldest Germanic language with substantial text corpus
+
+# ============================================================
+# TIER 4 — STRUCTURAL / PHONOLOGICAL (edge topology at sub-word level)
+# ============================================================
+
+PHOIBLE — Phonological database | [MULTI][TOPO][DUMP][FREE]
+https://phoible.org/
+https://github.com/phoible/dev
+# 3,000+ languages. Phoneme inventories and feature edges.
+# Sub-word topology — the sound-level geometry beneath semantics
+
+CLDR — Unicode Common Locale Data Repository | [MULTI][LEXICAL][DUMP][FREE]
+https://cldr.unicode.org/index/downloads
+# Every living language with a writing system. Structural metadata.
+# Script, collation, date/number formatting — cultural topology
+
+Ethnologue language family tree | [MULTI][TOPO][FREE]
+https://www.ethnologue.com/
+# Language family relationships — phylogenetic edges between languages
+# Free browse, bulk data requires subscription — use Glottolog instead
+
+Glottolog | [MULTI][TOPO][DUMP][FREE]
+https://glottolog.org/
+https://github.com/glottolog/glottolog
+# 8,000+ languages and dialects. Full language family tree as graph.
+# Direct download: https://glottolog.org/meta/downloads
+# The phylogenetic edge structure of human language itself
+
+ASJP — Automated Similarity Judgment Program | [MULTI][TOPO][DUMP][FREE]
+https://asjp.clld.org/
+# 40-word lists across 7,600+ languages including dead ones
+# Lexical distance edges between languages — divergence geometry
+
+# ============================================================
+# TIER 5 — SEMANTIC VECTOR SPACES (pre-computed edge geometry)
+# ============================================================
+
+fastText pretrained vectors (157 languages) | [MULTI][TOPO][DUMP][FREE]
+https://fasttext.cc/docs/en/crawl-vectors.html
+# Geometric embedding of word relationships for 157 languages
+# Edges implicit in vector proximity — cross-language alignment possible
+
+MUSE Cross-lingual embeddings | [MULTI][TOPO][DUMP][FREE]
+https://github.com/facebookresearch/MUSE
+# Aligned vector spaces across 30 languages
+# Cross-language semantic edges explicit in alignment matrices
+
+# ============================================================
+# SUMMARY — PRIORITY INGEST ORDER FOR SEDENION EDGE GEOMETRY
+# 1. Princeton WordNet (ground truth edges)
+# 2. Open Multilingual WordNet (cross-language synset alignment)
+# 3. ConceptNet (commonsense edge types, 34M edges, free direct download)
+# 4. Glottolog (language phylogeny — the meta-edge structure)
+# 5. Perseus treebanks (dead language syntactic edges)
+# 6. BabelNet (500+ language concept topology — register when ready)
+# ============================================================
+# END v1.0
+# ============================================================

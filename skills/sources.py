@@ -35,6 +35,17 @@ SOURCES = {
         'method':      'seed_wiktionary',
     },
 
+    # Phase 2 — Mandarin prose (spectral cross-language test — enable after English baseline)
+    'mandarin_zh': {
+        'description': 'Project Gutenberg + archive.org Chinese (zh) texts',
+        'sigma':       1.5,
+        'source_type': 'prose',
+        'bin':         'monad.bin',
+        'phase':       2,
+        'default':     'off',
+        'method':      'seed_mandarin',
+    },
+
     # Phase 2 — English prose core (speaks to monad.bin)
     'gutenberg': {
         'description': 'Project Gutenberg plain-text books via gutendex.com',
@@ -208,7 +219,9 @@ class PtolSources:
 
     def _dispatch_seed(self, name: str, method: str):
         """Route seed call to correct object."""
-        if name == 'gutenberg':
+        if name == 'mandarin_zh':
+            self._search.seed_mandarin()
+        elif name == 'gutenberg':
             self._search.seed_gutenberg()
         elif name == 'archive_org':
             self._search.seed_archive()
