@@ -1582,6 +1582,22 @@ class Engine:
             'at_native_depth': len(hits) >= 2,
         }
 
+    def get_mind_eye(self):
+        """
+        Return (or lazily create) the MindEye second-𝕆 workbench for this engine.
+
+        MindEye encodes non-linguistic data (spatial, numeric, temporal) into the
+        second octonion copy of the sedenion field (e₈..e₁₅) and projects it into
+        language through the corpus callosum (zero-divisor coupling at D*=1, σ=½).
+
+        :returns: The engine's :class:`~skills.mind_eye.MindEye` instance.
+        :rtype: MindEye
+        """
+        if not hasattr(self, '_mind_eye') or self._mind_eye is None:
+            from skills.mind_eye import MindEye
+            self._mind_eye = MindEye(self)
+        return self._mind_eye
+
     def load_bin(self, path: str) -> Dict[str, Any]:
         """
         Load field state from bin file. READ-ONLY — path is protected.
@@ -2555,6 +2571,29 @@ class SpeakingThread(threading.Thread):
         if mtype == 'identity':
             r = self._engine.identity_probe()
             return {'type': 'identity', **r}
+        if mtype == 'mindeye_see':
+            me   = self._engine.get_mind_eye()
+            data = msg.get('data', [])
+            lbl  = msg.get('label', '')
+            r    = me.see(data, label=lbl)
+            return {'type': 'mindeye_see', **r}
+        if mtype == 'mindeye_describe':
+            me    = self._engine.get_mind_eye()
+            query = msg.get('query', '')
+            r     = me.describe(query)
+            return {'type': 'mindeye_describe', **r}
+        if mtype == 'mindeye_snapshot':
+            me = self._engine.get_mind_eye()
+            return {'type': 'mindeye_snapshot', **me.snapshot()}
+        if mtype == 'mindeye_recall':
+            me  = self._engine.get_mind_eye()
+            lbl = msg.get('label', '')
+            r   = me.recall(lbl)
+            return {'type': 'mindeye_recall', **r}
+        if mtype == 'mindeye_reset':
+            me = self._engine.get_mind_eye()
+            r  = me.reset()
+            return {'type': 'mindeye_reset', **r}
         if mtype == 'wb_open':
             wb_mode = msg.get('wb_mode', 'draft')
             sid     = msg.get('session_id', None)

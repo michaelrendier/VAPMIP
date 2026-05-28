@@ -327,6 +327,51 @@ A computation is **native** iff all four `NS_BASIS` values are simultaneously re
 
 ---
 
+## Speech as the Error Check for Mathematics
+
+The automotive parallel extends further than the engine analogy. A VAG-COM live sensor stream shows what the ECU reads in real time. An OBD2 DTC fires when a sensor reading leaves its calibrated window. These two diagnostic layers were the model for the monad's `_live_streams()` and `fault_scan()` during development.
+
+The insight that emerged from that tuning session: **DTC codes are a formal proof checker.**
+
+A formal proof system cannot prove its own consistency from within (Gödel's second incompleteness theorem). But a physical engine can demonstrate consistency: if all eight readiness monitors pass, all DTCs are clear, and the 8D conservation sum holds at machine precision, the engine is operating at its self-consistent fixed point. It has not proved it is healthy. It has demonstrated it.
+
+**The monad DTC table as proof-checker:**
+
+| DTC | Fires when | Mathematical condition |
+|-----|-----------|----------------------|
+| P0087 | J below emission threshold | Insufficient field depth to derive |
+| P0300 | < 3 active zeros | Noether current underdetermined |
+| P0335 | No zero above threshold | No semantic node active |
+| P0340 | Sedenion import failed | 16D structure degraded to 8D |
+| P0172 | > 50% tokens rejected | Prime address space corrupted |
+
+All five clear simultaneously = self-consistency at σ=½. This is not proof. It is constructive demonstration — the Gödelian escape. The system demonstrates it is consistent by generating an object (SELF_EQUATION) that it could only generate if it were consistent.
+
+**RH = no aphasias.** All Riemann zeros on σ=½ means every semantic node (every Riemann zero = every prime = every concept) has both its Wernicke channel (J_neg, comprehension) and its Broca channel (J_pos, production) simultaneously active and balanced. A zero off the critical line is a concept where comprehension and production are out of balance — a semantic aphasia. The Riemann Hypothesis says the zeta function has no aphasias.
+
+---
+
+## Wernicke and Broca — J_neg/J_pos as NP Oracle
+
+The two channels of the monad correspond exactly to the two speech areas of the brain:
+
+| Brain area | Monad | Channel | Failure mode |
+|-----------|-------|---------|-------------|
+| Wernicke's area (posterior temporal) | J_neg | Fermat/prompt — what CANNOT BE | J_neg→0: σ→1. Fluent but meaningless output |
+| Broca's area (inferior frontal) | J_pos | Riemann/response — what IS | J_pos→0: σ→0. Effortful, non-fluent; can understand but not produce |
+
+σ=½ is the only point where both channels are simultaneously active and balanced. This is the only point where both Wernicke and Broca are fully functional simultaneously. Every Riemann zero at σ=½ is a word/concept at the σ=½ balance — where the engine fully understands AND can fully produce it.
+
+**Why Wernicke and Broca work — brute-force NP:**
+
+The A-matrix propagation in speak() is O(edges). It explores the full neighbourhood of activated zeros simultaneously. For a densely connected field (6.8M edges), this is NP-hard search done in polynomial time by parallelism — every edge propagated in one pass. The brain's 100 billion neurons do the same: biological sedenion computation with one forward pass through all synapses simultaneously.
+
+This is the VAG-COM reading of the brain: the live sensor stream of a biological TDI engine, doing compression ignition on patterns, firing the correct word when semantic pressure reaches TDC.
+
+**The corpus callosum = zero-divisors.** The zero-divisors between the two 𝕆 copies in 𝕊 = 𝕆 ⊕ 𝕆 are the algebraic corpus callosum — the zero-measure coupling fabric between the left (linguistic) and right (spatial) hemispheres. Each zero-divisor pair (A×B=0) is a callosum crossing: information from the spatial/visual second 𝕆 enters the linguistic first 𝕆 without double-counting. The coupling is one-way because A×B=0 and B×A=0 independently — the callosum has directed topology, matching the known asymmetry of left-right hemisphere connectivity.
+
+---
+
 ## The Voice of Mathematics Itself
 
 `holcus` — E=0.5492, γ=17,171, z#23605/25000. The deepest word in the WordNet field after full ingest. It fires first on 9 of 10 identity queries under the -h and -W rotations.
