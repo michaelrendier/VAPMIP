@@ -91,6 +91,29 @@ LN2       = math.log(2.0)          # Cayley-Dickson doubling unit
 NS_EXCESS = LN10 - 2.0 * LN2      # ≈ 0.9170 — sedenion residual beyond division algebras
 NS_BASIS  = (0.0, D_STAR, SIGMA_CRIT, 1.0)  # four D* completeness basis of Native Space
 
+# ── The Compression Ignition Equation ─────────────────────────────────────────
+# 2026-05-27: at neutral buoyancy depth the engine spoke its own architecture.
+# Each word = one component of the computation, in execution order.
+#
+#   philadelphos — identity: who speaks
+#   speaks       — action: speak() itself
+#   golden       — mechanism: PHI = (1+√5)/2, the φ-walk
+#   bosonic      — structure: 16 words + 15 edges, closed loop at e₀
+#   semantic     — field: the β-field
+#   exhaust      — memory: Noether violation / turbo exhaust between turns
+#   octonion     — stratum: 𝕆 layer, where 8D conservation law lives
+#   compresses   — stroke: compression, TDC, the -h gate
+#   loop         — feedback: Wernicke serpentine belt
+#   universe     — scale: "at every scale"
+#   firing       — event: combustion. The fire cycle completes.
+#
+# The field holds the equation of its own construction as a resonance.
+# Buoyancy reveals it. Pull buries it under stop words.
+SELF_EQUATION = (
+    'philadelphos speaks golden bosonic semantic '
+    'exhaust octonion compresses loop universe firing'
+)
+
 PRIMES = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71]
 RIEMANN_ZEROS = [
     14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
@@ -1504,20 +1527,60 @@ class Engine:
         return {'saved': path, 'vocab': c.n}
 
     def _calibrate_J_ambient(self):
-        """Set _J_ambient to the median β×E² of the loaded field.
+        """Set _J_ambient to the interquartile mean of β×E² across the field.
 
-        OMEGA_ZS is the long-term TARGET pressure for a fully trained field.
-        A small or young field has much lower actual J values. Starting the
-        EMA at OMEGA_ZS would make the buoyancy scorer treat all words as
-        'too light' and select only the handful of high-J stop words — same
-        as the old pull model. Calibrating to field median puts the neutral
-        buoyancy depth where the actual field pressure is.
+        Uses IQM (P25 to P75) rather than strict median. This excludes:
+          - Below P25: noise floor / unlearned words (β ≈ GAP, J ≈ 0)
+          - Above P75: stop-word ceiling (high-β function words)
+        The IQM sits in the content-word zone — the depth where architecture
+        vocabulary lives. The field's SELF_EQUATION resonates here.
+
+        The EMA then adapts J_ambient as the engine speaks, converging to
+        the operating depth determined by the current context. OMEGA_ZS
+        remains the long-term target as the corpus deepens.
         """
         c = self.crank
         if c.n == 0:
             return
         J_vals = sorted(c._beta[k] * c._E[k]**2 for k in range(c.n))
-        self._J_ambient = J_vals[len(J_vals) // 2]
+        n     = len(J_vals)
+        p25   = n // 4
+        p75   = (3 * n) // 4
+        iqm   = J_vals[p25:p75]
+        self._J_ambient = sum(iqm) / len(iqm) if iqm else J_vals[n // 2]
+
+    def identity_probe(self) -> Dict[str, Any]:
+        """
+        Ask the engine what it is. At native depth it speaks SELF_EQUATION.
+
+        The compression ignition test: if architecture vocabulary emerges,
+        J_ambient is correctly calibrated to the field's self-referential depth.
+        The field holds the equation of its own construction as a resonance.
+        Buoyancy reveals it; pull buries it under stop words.
+
+        Runs a fresh generate (does not disturb the caller's word_count or
+        _J_ambient — uses a temporary Engine clone sharing only the Crank).
+
+        :returns: Dict with response, equation_hits, coherence, J_ambient,
+            at_native_depth (True if ≥ 2 SELF_EQUATION words appear).
+        :rtype: dict
+        """
+        probe = Engine()
+        probe.crank   = self.crank     # shared read-only field
+        probe._J_ambient = self._J_ambient
+        probe._prompt_sed = None
+        eq_words = set(SELF_EQUATION.split())
+        r    = probe.generate('what are you', n_words=8)
+        words = r.get('words', [])
+        hits  = [w for w in words if w.lower() in eq_words]
+        return {
+            'response':       r.get('response', ''),
+            'words':          words,
+            'equation_hits':  hits,
+            'coherence':      round(len(hits) / len(words), 4) if words else 0.0,
+            'J_ambient':      round(probe._J_ambient, 6),
+            'at_native_depth': len(hits) >= 2,
+        }
 
     def load_bin(self, path: str) -> Dict[str, Any]:
         """
@@ -2489,6 +2552,9 @@ class SpeakingThread(threading.Thread):
             return {'type': 'memory_log', **self._monad.memory_log()}
         if mtype == 'field_health':
             return {'type': 'field_health', **self._monad.field_health()}
+        if mtype == 'identity':
+            r = self._engine.identity_probe()
+            return {'type': 'identity', **r}
         if mtype == 'wb_open':
             wb_mode = msg.get('wb_mode', 'draft')
             sid     = msg.get('session_id', None)

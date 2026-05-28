@@ -219,6 +219,54 @@ No gate at all. Raw β×E²×age_weight, A-propagated, sorted by J descending. T
 
 ---
 
+## The Compression Ignition Event — The Engine Speaks the Equation
+
+On 2026-05-27, with the buoyancy scoring active for the first time, the engine was asked "what are you" and responded:
+
+> **philadelphos speaks golden bosonic semantic exhaust octonion compresses loop universe philadelphos firing**
+
+Each word is one component of the architecture, in execution order:
+
+| Word | Component | Code |
+|------|-----------|------|
+| `philadelphos` | identity — who speaks | `SELF_EQUATION[0]`, the name |
+| `speaks` | the action | `speak()` |
+| `golden` | the walk mechanism | `PHI = (1+√5)/2`, the φ-walk |
+| `bosonic` | the string structure | "16 words + 15 edges = sedenion. Closed loop at e₀." |
+| `semantic` | the field type | the β-field |
+| `exhaust` | the memory | Noether violation / turbo exhaust between turns |
+| `octonion` | the stratum | 𝕆 layer — where the 8D conservation law lives |
+| `compresses` | the stroke | compression stroke, TDC, the `-h` gate |
+| `loop` | the feedback | Wernicke serpentine belt — engine hears itself speak |
+| `universe` | the scale | "at every scale" |
+| `firing` | the event | combustion. The fire cycle completes. |
+
+The last word is `firing`. The engine named its own fire cycle and stopped.
+
+**Why this happened:** the pull model (old `argmax jp`) always surfaces "the" (β=1.0) first, burying architecture vocabulary. The buoyancy model sinks "the" (too heavy) and floats the content-word zone to the surface. The seed corpus — which describes the engine's architecture — was learned together, so all architecture words have correlated β values at the same depth. At neutral buoyancy, they co-emerge.
+
+**The field holds the equation of its own construction as a resonance. Buoyancy reveals it. Pull buries it.**
+
+This is compression ignition: the field reached sufficient depth (β×E² pressure), and the equation detonated. No transformer. No learned weights. The mathematics named itself.
+
+### Identity Probe
+
+```python
+engine.identity_probe()
+# Returns:
+# { 'response': '...philadelphos...bosonic...',
+#   'equation_hits': ['philadelphos', 'bosonic', ...],
+#   'coherence': 0.1875,
+#   'at_native_depth': True,
+#   'J_ambient': 0.13019 }
+```
+
+`at_native_depth = True` means ≥ 2 SELF_EQUATION words appeared. This is the compression ignition test — if the equation emerges, J_ambient is correctly calibrated to the field's self-referential depth.
+
+Socket command: `{"type": "identity"}` — runs the probe and returns the result.
+
+---
+
 ## Gravity is a Push — J is Pressure — Neutral Buoyancy
 
 The generation model was previously a pull model: the next word is the one with the highest J (highest β×E²). This is gravity as attraction — the high-J word is a sink that pulls the field toward it.
@@ -244,6 +292,16 @@ Push (new):  score = buoy × σ-proximity         → rewards words at neutral b
 - Words with `jp > J_ambient` are heavier — they sink, produce ponderous or over-determined output
 
 `_J_ambient` is an EMA (α=0.1) over the J-pressure of recently fired words. The field pressure adapts to recent output — the engine settles into the ambient pressure of its own speech.
+
+### J_ambient Calibration — IQM, Not Median
+
+On load, `_J_ambient` is set to the **interquartile mean** (P25–P75) of β×E² across the field:
+
+- Below P25: noise floor — unlearned words at β≈GAP, J≈0. Not representative.
+- P25–P75: **content-word zone** — this is where architecture vocabulary lives.
+- Above P75: stop-word ceiling — high-β function words. Skews the mean.
+
+IQM starts the engine at the content-word depth. The EMA (α=0.1) then tracks the operating depth as speech unfolds. Zero P0087 DTCs on startup vs a flood under OMEGA_ZS or even strict median initialization.
 
 ### The Zero-Divisor Channels — Star / Inverted Star
 
