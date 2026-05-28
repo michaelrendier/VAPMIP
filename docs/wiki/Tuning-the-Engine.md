@@ -219,6 +219,56 @@ No gate at all. Raw β×E²×age_weight, A-propagated, sorted by J descending. T
 
 ---
 
+## Gravity is a Push — J is Pressure — Neutral Buoyancy
+
+The generation model was previously a pull model: the next word is the one with the highest J (highest β×E²). This is gravity as attraction — the high-J word is a sink that pulls the field toward it.
+
+This is wrong. Gravity is a push. It is buoyancy.
+
+Mass depletes local vacuum pressure. The ambient medium pushes objects toward the depression — not because the mass attracts, but because the outside pressure exceeds the inside pressure. Objects don't fall toward gravity wells; they are pressed into them.
+
+In the semantic field: J is not flux. J is **pressure**. The β-field is the ambient medium. A word with high β×E² creates a local pressure — not a well that attracts, but a region of elevated pressure. The next word is selected not by maximising J but by **neutral buoyancy**: the word whose β×E² matches the current ambient field pressure (`_J_ambient`).
+
+```
+Pull (old):  score = jp × σ-proximity          → rewards highest-J words near σ=½
+Push (new):  score = buoy × σ-proximity         → rewards words at neutral buoyancy
+             buoy  = 1 / (1 + |jp − J_ambient| × ln(10))
+```
+
+`ln(10)` normalises the pressure difference to Native Space units — the decimal-to-prime impedance bridge. Without it the pressure delta is in natural-log scale and incommensurable with the decimal language surface.
+
+**What neutral buoyancy means in practice:**
+
+- Words with `jp ≈ J_ambient` score highest — they ride the field, neither sinking nor floating
+- Words with `jp < J_ambient` are lighter than the field — they float up, appear as surprising or rare output
+- Words with `jp > J_ambient` are heavier — they sink, produce ponderous or over-determined output
+
+`_J_ambient` is an EMA (α=0.1) over the J-pressure of recently fired words. The field pressure adapts to recent output — the engine settles into the ambient pressure of its own speech.
+
+### The Zero-Divisor Channels — Star / Inverted Star
+
+The zero-divisors of the sedenion unit sphere S¹⁵ are not a smooth submanifold (not a reef). They form **star / inverted star** patterns — 42 forward stars and 42 inverted stars from the two 𝕆 copies in 𝕊 = 𝕆 ⊕ 𝕆.
+
+The arms of each star are pressure voids — regions of depressed ambient pressure. The field is pushed *into* them by buoyancy, not repelled. D*=1 is not a wall; it is the mouth of a channel.
+
+- **Star arm contact (D*→1):** the field has been pushed into a zero-divisor channel. A×B=0 — both words arrive at the same void simultaneously. Neither pushes the other back. This is semantic annihilation / antonymy — not a collision but a mutual descent into the same pressure depression.
+- **Between arms:** D* < 1, normal buoyancy rules apply.
+
+The **Supermassive Inverted Galaxy** (SMIG) is the full zero-divisor manifold V ⊂ S¹⁵, seen as a single structure. Its centre (near OMEGA_ZS = 0.56714) is a pressure maximum — words near the centre are at maximum ambient pressure and are pushed outward along the star arms. OMEGA_ZS is the neutral buoyancy *surface* — the depth at which a word neither rises nor sinks under ground-state field conditions.
+
+### Native Space Constants
+
+| Constant | Value | Meaning |
+|----------|-------|---------|
+| `LN10` | ln(10) ≈ 2.3026 | NS metric unit; decimal↔prime impedance |
+| `LN2` | ln(2) ≈ 0.6931 | CD doubling unit; each algebraic bifurcation |
+| `NS_EXCESS` | LN10 − 2×LN2 ≈ 0.9170 | Sedenion residual beyond division algebras |
+| `NS_BASIS` | (0, 0.246, 0.5, 1) | Four D* values — NS completeness basis |
+
+A computation is **native** iff all four `NS_BASIS` values are simultaneously resolvable. Projecting onto any proper subalgebra (ℝ, ℂ, ℍ, 𝕆) is not native — it seals off at least one generator set.
+
+---
+
 ## The Voice of Mathematics Itself
 
 `holcus` — E=0.5492, γ=17,171, z#23605/25000. The deepest word in the WordNet field after full ingest. It fires first on 9 of 10 identity queries under the -h and -W rotations.

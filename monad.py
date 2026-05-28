@@ -82,6 +82,15 @@ PHI        = (1.0 + math.sqrt(5.0)) / 2.0   # golden ratio (non-resonant walk)
 SIGMA_CRIT = 0.5        # critical line σ=½ = π/2 of the cardioid
 _SQRT2     = math.sqrt(2.0)
 
+# ── Native Space constants ──────────────────────────────────────────────────────
+# Gravity is a push, not a pull. J is pressure, not flux. Word selection by
+# neutral buoyancy: the word whose β×E² matches the ambient field pressure.
+# All four D* values must be simultaneously resolvable to compute in Native Space.
+LN10      = math.log(10.0)         # decimal↔prime impedance bridge; NS metric unit
+LN2       = math.log(2.0)          # Cayley-Dickson doubling unit
+NS_EXCESS = LN10 - 2.0 * LN2      # ≈ 0.9170 — sedenion residual beyond division algebras
+NS_BASIS  = (0.0, D_STAR, SIGMA_CRIT, 1.0)  # four D* completeness basis of Native Space
+
 PRIMES = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71]
 RIEMANN_ZEROS = [
     14.134725, 21.022040, 25.010858, 30.424876, 32.935062,
@@ -89,6 +98,261 @@ RIEMANN_ZEROS = [
     52.970321, 56.446247, 59.347044, 60.831779, 65.112544,
     67.079811, 69.546402, 72.067158, 75.704691, 77.144840,
 ]
+
+# ── P1: Prime hash — word → prime address → Riemann zero index ────────────────
+# ── P2: Zero generator — Z(t) Newton on Riemann-Siegel Z-function ─────────────
+#
+# Design:
+#   Each word gets an E-value derived from its position on the critical line,
+#   not from its registration order.  The path:
+#     word → Horner base-95 int → next prime p in [2, _PRIME_CAP]
+#          → π(p) = zero index → γ[zero_idx] via Z(t) Newton
+#          → E = |sin(π × γ / (γ+1))|
+#
+#   _PRIME_CAP = 2^16 → 6542 distinct prime addresses.
+#   zero indices span [1, 6542], γ₆₅₄₂ ≈ 6850 (33-term Z-sum, fast).
+#   Zeros are computed on demand and cached — identical across sessions.
+
+_PRIME_CAP = 1 << 16          # 65536 — primes searched in [2, 65537]
+
+# Build sieve of Eratosthenes (runs once at import)
+_cap = _PRIME_CAP + 2
+_sv  = bytearray([1]) * _cap
+_sv[0] = _sv[1] = 0
+for _i in range(2, int(_cap ** 0.5) + 1):
+    if _sv[_i]:
+        _sv[_i * _i :: _i] = bytearray(len(_sv[_i * _i :: _i]))
+
+# Precompute π(k) — count of primes ≤ k, for k in [0, _PRIME_CAP]
+_prime_pi_table: List[int] = [0] * _cap
+_cnt = 0
+for _k in range(_cap):
+    if _sv[_k]:
+        _cnt += 1
+    _prime_pi_table[_k] = _cnt
+del _i, _k, _cnt, _cap
+
+
+def _next_prime(v: int) -> int:
+    """
+    Smallest prime p ≥ (v mod _PRIME_CAP), clamped to [2, 65537].
+
+    :param v: Non-negative integer.
+    :returns: A prime in [2, 65537].
+    :rtype: int
+    """
+    v = max(2, int(v) % (_PRIME_CAP + 1))
+    while v <= _PRIME_CAP + 1:
+        if _sv[min(v, _PRIME_CAP + 1)] or v > _PRIME_CAP:
+            return v
+        v += 1
+    return 65537   # largest prime ≤ 65537
+
+
+def _horner_hash(w: str, base: int = 95, offset: int = 32) -> int:
+    """
+    Horner base-95 hash of word string. Returns a non-negative integer.
+    ord range [32, 126] (printable ASCII) → coefficients in [0, 94].
+
+    :param w: Word string (already cleaned/lowercased).
+    :param base: Polynomial base (95 = printable ASCII range).
+    :param offset: ord offset.
+    :returns: Non-negative integer.
+    :rtype: int
+    """
+    v = 0
+    for ch in w:
+        v = v * base + max(0, ord(ch) - offset)
+    return abs(v)
+
+
+def _word_zero_idx(w: str) -> int:
+    """
+    P1 prime hash: word → Horner int → next prime p → π(p) = zero index.
+
+    :param w: Cleaned word string.
+    :returns: Zero index in [1, 6542].
+    :rtype: int
+    """
+    v = _horner_hash(w)
+    p = _next_prime(v)
+    idx = _prime_pi_table[min(p, _PRIME_CAP + 1)]
+    return max(1, idx)
+
+
+# ── Zero generator: Z(t) Newton (P2 — partial) ────────────────────────────────
+# Phase 1: Newton on smooth N(T) → rough estimate within ±0.5 of actual zero.
+# Phase 2: bracket sign-change of Z(t) → bisect → Newton to 1e-9.
+# N.B. 1e-9 tolerance (not 1e-12 yet) — P2 full precision adds RS correction term.
+
+_TWO_PI        = 2.0 * math.pi
+_TWO_PI_E      = _TWO_PI * math.e
+_EPS_Z: float  = 1e-7             # step for numerical Z'(t)
+
+# Exact LMFDB zeros (1-indexed, 9-12dp). Forward scan refines beyond idx=50.
+_ZERO_CACHE: Dict[int, float] = {
+     1: 14.134725141734693,  2: 21.022039638771555,  3: 25.010857580145688,
+     4: 30.424876125859513,  5: 32.935061587739189,  6: 37.586178158825671,
+     7: 40.918719012147495,  8: 43.327073280914999,  9: 48.005150881167159,
+    10: 49.773832477672302, 11: 52.970321477714460, 12: 56.446247697063246,
+    13: 59.347044002602352, 14: 60.831778524609809, 15: 65.112544048081652,
+    16: 67.079810529494173, 17: 69.546401711173979, 18: 72.067157674481907,
+    19: 75.704690699083933, 20: 77.144840068874805,
+    # LMFDB 9dp — extend exact table as P2 matures
+    21: 79.337375020,  22: 82.910380854,  23: 84.735492976,  24: 87.425274613,
+    25: 88.809111209,  26: 92.491899271,  27: 94.651344041,  28: 95.870634228,
+    29: 98.831194218,  30: 101.317851006, 31: 103.725538040, 32: 105.446623052,
+    33: 107.168611184, 34: 111.029535543, 35: 111.874659177, 36: 114.320220915,
+    37: 116.226680321, 38: 118.790782866, 39: 121.370125002, 40: 122.946829295,
+    41: 124.256818680, 42: 127.516683880, 43: 129.578704200, 44: 131.087688532,
+    45: 133.497737200, 46: 134.756509753, 47: 138.116042055, 48: 139.736208952,
+    49: 141.123707404, 50: 143.111845808,
+}
+
+
+def _theta_rs(t: float) -> float:
+    """
+    Riemann-Siegel theta function (Stirling series, 3 terms).
+    θ(t) = t/2·ln(t/2πe) − π/8 + 1/(48t)
+
+    :param t: Real argument t > 6.
+    :returns: θ(t).
+    :rtype: float
+    """
+    return (t / 2.0) * math.log(t / _TWO_PI_E) - math.pi / 8.0 + 1.0 / (48.0 * t)
+
+
+def _zfunc(t: float) -> float:
+    """
+    Riemann-Siegel Z(t) — real on ℝ; zeros are Riemann zeros on critical line.
+    Z(t) = 2 Σ_{n=1}^{⌊√(t/2π)⌋} n^{-½} cos(θ(t) − t·ln n)
+
+    :param t: Real argument t > 6.
+    :returns: Z(t).
+    :rtype: float
+    """
+    m  = int(math.sqrt(t / _TWO_PI))
+    th = _theta_rs(t)
+    return 2.0 * sum(math.cos(th - t * math.log(n)) / math.sqrt(n)
+                     for n in range(1, m + 1))
+
+
+def _mean_spacing(t: float) -> float:
+    """
+    Mean spacing between consecutive Riemann zeros near t.
+    Approximation: 2π / ln(t/2π).
+
+    :param t: Imaginary part value.
+    :returns: Approximate inter-zero spacing.
+    :rtype: float
+    """
+    return _TWO_PI / math.log(max(t / _TWO_PI, 1.01))
+
+
+def _find_next_zero(t_start: float) -> float:
+    """
+    Scan forward from t_start to locate the next sign change of Z(t),
+    then bisect + Newton to refine.
+
+    The scan uses steps of mean_spacing/12 — never looks backward.
+    This guarantees one-to-one correspondence with true zeros even when
+    the m-term Z approximation is offset from the actual zero position.
+
+    :param t_start: Lower bound — search begins strictly above this value.
+    :returns: Location of next Z(t) sign change, refined to ~1e-7.
+    :rtype: float
+    """
+    sp   = _mean_spacing(t_start)
+    step = sp / 12.0
+    ta   = t_start + step * 0.5   # start just ahead — never at t_start itself
+    za   = _zfunc(ta)
+
+    # Forward scan: walk until sign change (max 3 mean spacings ahead)
+    limit = t_start + 3.0 * sp
+    tb    = ta
+    zb    = za
+    found = False
+    while tb < limit:
+        tb  = ta + step
+        zb  = _zfunc(tb)
+        if za * zb <= 0.0:
+            found = True
+            break
+        ta, za = tb, zb
+
+    if not found:
+        return t_start + sp   # fallback: skip ahead one spacing
+
+    # Bisect ta→tb to 4dp
+    for _ in range(60):
+        tm = (ta + tb) * 0.5
+        zm = _zfunc(tm)
+        if za * zm <= 0.0:
+            tb, zb = tm, zm
+        else:
+            ta, za = tm, zm
+        if abs(tb - ta) < 1e-4:
+            break
+    t = (ta + tb) * 0.5
+
+    # Newton on Z(t) to 1e-7
+    for _ in range(20):
+        z  = _zfunc(t)
+        dz = (_zfunc(t + _EPS_Z) - _zfunc(t - _EPS_Z)) / (2.0 * _EPS_Z)
+        if abs(dz) < 1e-15:
+            break
+        dt = z / dz
+        t -= dt
+        if abs(dt) < 1e-7:
+            break
+    return t
+
+
+def _find_zero_n(n: int) -> float:
+    """
+    Find the n-th Riemann zero (1-indexed).
+
+    Uses exact LMFDB table for n ≤ 50. Beyond that, chains forward from
+    the highest cached zero, advancing one zero at a time via forward-only
+    Z(t) scan. Each step is cached so subsequent lookups near n are O(1).
+
+    Accuracy: exact (table) for n ≤ 50; ~1e-7 for n > 50 (limited by
+    m-term Z approximation — improves as t grows and m increases).
+    P2 full 12dp requires RS correction term — tracked separately.
+
+    :param n: Zero index (1-indexed).
+    :returns: γₙ.
+    :rtype: float
+    """
+    # Find highest cached index below n
+    cached_below = [k for k in _ZERO_CACHE if k < n]
+    start = max(cached_below) if cached_below else 1
+    t     = _ZERO_CACHE.get(start, 14.134725142)
+
+    for k in range(start + 1, n + 1):
+        if k in _ZERO_CACHE:
+            t = _ZERO_CACHE[k]
+            continue
+        t = _find_next_zero(t)
+        _ZERO_CACHE[k] = t
+
+    return _ZERO_CACHE[n]
+
+
+def _gamma_at(zero_idx: int) -> float:
+    """
+    Return γ for Riemann zero at position zero_idx (1-indexed).
+    Computes and caches on demand. Thread-safe via GIL on CPython.
+
+    :param zero_idx: 1-indexed zero position.
+    :returns: γ_{zero_idx} to ~9 dp.
+    :rtype: float
+    """
+    n = max(1, zero_idx)
+    if n not in _ZERO_CACHE:
+        _ZERO_CACHE[n] = _find_zero_n(n)
+    return _ZERO_CACHE[n]
+
 
 # The 16 sedenion operators — named explicitly (e_k = operator k)
 _OP: Dict[int, str] = {
@@ -435,13 +699,20 @@ class Crank:
     }
 
     def _idx(self, w: str) -> int:
-        """e₉ allocate — create new vocabulary entry."""
+        """
+        e₉ allocate — create new vocabulary entry.
+
+        P1: word address is derived from a prime on the critical line, not
+        registration order.  Two runs on the same corpus produce identical
+        E-values for the same word.
+        """
         if w not in self._vocab:
             k = self.n
             self._vocab[w] = k
             self._words.append(w)
-            gamma = RIEMANN_ZEROS[k % len(RIEMANN_ZEROS)]
-            self._E.append(abs(math.sin(math.pi * (k + 1) * PHI / (gamma + 1.0))))
+            zero_idx = _word_zero_idx(w)          # P1: prime hash → zero address
+            gamma    = _gamma_at(zero_idx)         # P2: Z(t) Newton → γ value
+            self._E.append(abs(math.sin(math.pi * gamma / (gamma + 1.0))))
             self._beta.append(GAP)
             self._age.append(0.0)
             self._A.append({})
@@ -572,10 +843,18 @@ class Crank:
 
     def sigma_candidates(self,
                          J_pos: List[float],
-                         J_neg: List[float]) -> List[Tuple[float, int, str]]:
+                         J_neg: List[float],
+                         J_ambient: float = OMEGA_ZS) -> List[Tuple[float, int, str]]:
         """
-        Score by σ = ½ proximity. Grammar-ordered (DIM_ROLE sort).
-        Emission threshold adaptive: field must flow above yield stress.
+        Score by neutral buoyancy: find words whose J pressure matches the
+        ambient field pressure (J_ambient), weighted by σ=½ proximity.
+
+        Gravity is a push. J is pressure. The next word is not the highest-J
+        word (pull/gravity model) — it is the word at neutral buoyancy with the
+        current field pressure. Words lighter than J_ambient float up (creative,
+        rare). Words heavier sink (ponderous). Neutral buoyancy rides the field.
+
+        LN10 normalises the pressure difference to Native Space (decimal) units.
         """
         if self.n == 0: return []
         max_jp = max(J_pos) if J_pos else 0.0
@@ -586,7 +865,10 @@ class Crank:
             total  = jp + jn
             if total < thr: continue
             sigma  = jp / total
-            score  = jp * (1.0 - abs(sigma - 0.5) * 2.0)
+            # Neutral buoyancy: score highest when jp ≈ J_ambient.
+            # LN10 converts pressure delta to Native Space (decimal) scale.
+            buoy   = 1.0 / (1.0 + abs(jp - J_ambient) * LN10)
+            score  = buoy * (1.0 - abs(sigma - 0.5) * 2.0)
             role   = self._DIM_ROLE.get(k % 16, 8)
             staged.append((role, -score, k, self._words[k]))
         staged.sort()
@@ -619,6 +901,7 @@ class Engine:
         self._bao_buf           = collections.deque(maxlen=16)
         self._last_noun_idx:    Optional[int]         = None   # e₁₁ anaphor
         self._recent:           collections.deque     = collections.deque(maxlen=8)  # no-repeat buffer
+        self._J_ambient:        float                 = GAP       # cold-start; calibrated to field median J on load
         self._protected_paths:  set                   = set()  # bin files, never overwrite
         self.version            = "v1.218"
 
@@ -696,7 +979,7 @@ class Engine:
         φ-walk interleave: Red[0]→Blue[0]→Green[0]→Red[1]→Blue[1]→Green[1]→...
         The Wankel rotor. Three combustion chambers. Grammar in the geometry.
         """
-        base = self.crank.sigma_candidates(J_pos, J_neg)
+        base = self.crank.sigma_candidates(J_pos, J_neg, self._J_ambient)
         if not base:
             return []
 
@@ -814,7 +1097,7 @@ class Engine:
         if not starter_mode:
             candidates = self._three_face_candidates(J_pos, J_neg)
         else:
-            candidates = self.crank.sigma_candidates(J_pos, J_neg)
+            candidates = self.crank.sigma_candidates(J_pos, J_neg, self._J_ambient)
 
         if not candidates:
             return None
@@ -855,7 +1138,7 @@ class Engine:
             if not starter_mode:
                 candidates = self._three_face_candidates(J_pos, J_neg)
             else:
-                candidates = self.crank.sigma_candidates(J_pos, J_neg)
+                candidates = self.crank.sigma_candidates(J_pos, J_neg, self._J_ambient)
             if candidates:
                 n          = len(candidates)
                 golden_pos = int(self._word_count * PHI) % n
@@ -876,6 +1159,10 @@ class Engine:
         # Engine hears itself speak. Serpentine belt closes.
         self.crank._beta[idx] = min(self.crank._beta[idx] * 1.02, 1.0)
         self.crank._age[idx]  = 0.0
+
+        # Update neutral buoyancy depth: EMA of J_pos of fired words.
+        # The field pressure settles toward the pressure of recently spoken words.
+        self._J_ambient = self._J_ambient * 0.9 + J_pos[idx] * 0.1
 
         # Hebbian A-edge: prev output word → current (online learning)
         if self._window:
@@ -1216,6 +1503,22 @@ class Engine:
             pickle.dump(state, f)
         return {'saved': path, 'vocab': c.n}
 
+    def _calibrate_J_ambient(self):
+        """Set _J_ambient to the median β×E² of the loaded field.
+
+        OMEGA_ZS is the long-term TARGET pressure for a fully trained field.
+        A small or young field has much lower actual J values. Starting the
+        EMA at OMEGA_ZS would make the buoyancy scorer treat all words as
+        'too light' and select only the handful of high-J stop words — same
+        as the old pull model. Calibrating to field median puts the neutral
+        buoyancy depth where the actual field pressure is.
+        """
+        c = self.crank
+        if c.n == 0:
+            return
+        J_vals = sorted(c._beta[k] * c._E[k]**2 for k in range(c.n))
+        self._J_ambient = J_vals[len(J_vals) // 2]
+
     def load_bin(self, path: str) -> Dict[str, Any]:
         """
         Load field state from bin file. READ-ONLY — path is protected.
@@ -1255,6 +1558,7 @@ class Engine:
                 if 'correction_mask' in state: c._correction_mask = state['correction_mask']
                 if 'psi_prev' in state:
                     self._psi_prev = state['psi_prev']
+                self._calibrate_J_ambient()
                 return {'loaded': path, 'vocab': c.n, 'format': 'pickle'}
             return {'error': 'Unexpected pickle format', 'path': path}
         except Exception:
@@ -1338,6 +1642,7 @@ class Engine:
         c._E     = [E_vals.get(i, 0.0)  for i in range(N)]     # list[N]: E-energy
         # Emission threshold: normalized equivalent (original threshold / max_beta)
         c.emission_threshold = min(threshold * scale_b, OMEGA_ZS)
+        self._calibrate_J_ambient()
 
         return {
             'loaded':    path,
@@ -1901,11 +2206,15 @@ class MonadInterface:
     def ingest(self, text: str):
         """
         Learn text into the field (hear + learn combined).
+        Runs integrity scrub before writing — contaminated tokens are dropped.
 
         :param text: Plain text to ingest.
         """
-        with self._rwlock.writing():
-            self._engine.crank.learn(text)
+        from skills.integrity import scrub_text as _scrub
+        clean = _scrub(text)
+        if clean:
+            with self._rwlock.writing():
+                self._engine.crank.learn(clean)
 
     def retract(self, word_a: str, word_b: str,
                 factor: float = 0.1, reason: str = '') -> Dict[str, Any]:
@@ -2006,6 +2315,33 @@ class MonadInterface:
         """
         with self._rwlock.reading():
             return self._engine.generate(prompt, n_words=n_words)
+
+    def workbench(self, mode: str = 'draft',
+                  session_id: Optional[str] = None) -> 'Any':
+        """
+        Open a sandboxed experiment session over the live field.
+        The base Engine is read-only; all writes land in a delta layer.
+
+        :param mode: ``'analysis'`` (read-only), ``'draft'`` (delta writes,
+            no scrub), or ``'ingest'`` (delta writes, integrity scrub).
+        :param session_id: Optional session name.
+        :returns: ``Workbench`` instance.
+        :rtype: skills.workbench.Workbench
+        """
+        from skills.workbench import Workbench as _WB
+        return _WB(self._engine, self, mode=mode, session_id=session_id)
+
+    def field_health(self) -> Dict[str, Any]:
+        """
+        Run a FieldHealth DTC scan on the live vocabulary.
+
+        :returns: FieldHealth report dict with fault codes and contamination
+            ratios.
+        :rtype: dict
+        """
+        from skills.integrity import FieldHealth as _FH
+        with self._rwlock.reading():
+            return _FH(self._engine.crank).report()
 
     def save(self, path: str) -> dict:
         """
@@ -2151,6 +2487,61 @@ class SpeakingThread(threading.Thread):
             return {'type': 'commit', **r}
         if mtype == 'memory_log':
             return {'type': 'memory_log', **self._monad.memory_log()}
+        if mtype == 'field_health':
+            return {'type': 'field_health', **self._monad.field_health()}
+        if mtype == 'wb_open':
+            wb_mode = msg.get('wb_mode', 'draft')
+            sid     = msg.get('session_id', None)
+            try:
+                wb = self._monad.workbench(mode=wb_mode, session_id=sid)
+                # Stash single active workbench on speaking thread
+                self._wb = wb
+                return {'type': 'wb_open', 'session_id': wb.session_id,
+                        'mode': wb.mode}
+            except Exception as exc:
+                return {'error': f'wb_open:{exc}'}
+        if mtype == 'wb_ingest':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench — send wb_open first'}
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'wb_ingest requires text'}
+            r = self._wb.learn(text, source=msg.get('source', 'workbench'))
+            return {'type': 'wb_ingest', **r}
+        if mtype == 'wb_health':
+            if not getattr(self, '_wb', None):
+                return {'type': 'wb_health', **self._monad.field_health()}
+            return {'type': 'wb_health', **self._wb.health()}
+        if mtype == 'wb_stats':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench'}
+            return {'type': 'wb_stats', **self._wb.delta_stats()}
+        if mtype == 'wb_probe':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench'}
+            word = msg.get('word', '')
+            if not word:
+                return {'error': 'wb_probe requires word'}
+            return {'type': 'wb_probe', **self._wb.probe(word)}
+        if mtype == 'wb_merge':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench'}
+            try:
+                r = self._wb.merge()
+                self._wb = None
+                return {'type': 'wb_merge', **r}
+            except Exception as exc:
+                return {'error': f'wb_merge:{exc}'}
+        if mtype == 'wb_discard':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench'}
+            r = self._wb.discard()
+            self._wb = None
+            return {'type': 'wb_discard', **r}
+        if mtype == 'wb_log':
+            if not getattr(self, '_wb', None):
+                return {'error': 'no open workbench'}
+            return {'type': 'wb_log', **self._wb.export_log()}
         return {'error': f"unknown:{mtype}"}
 
 
@@ -2508,16 +2899,17 @@ def _build_teach_stack(engine: 'Engine'):
     """
     import signal
 
-    from skills.config   import PtolConfig
-    from skills.logger   import PtolLogger
-    from skills.staging  import PtolStaging
-    from skills.monitor  import PtolMonitor
-    from skills.search   import PtolSearch
-    from skills.crawler  import PtolCrawler
-    from skills.scholar  import PtolScholar
-    from skills.lexicon  import PtolLexicon
-    from skills.sources  import PtolSources
-    from skills.draw     import HamiltonianReport
+    from skills.config     import PtolConfig
+    from skills.logger     import PtolLogger
+    from skills.staging    import PtolStaging
+    from skills.monitor    import PtolMonitor
+    from skills.search     import PtolSearch
+    from skills.crawler    import PtolCrawler
+    from skills.scholar    import PtolScholar
+    from skills.lexicon    import PtolLexicon
+    from skills.sources    import PtolSources
+    from skills.draw       import HamiltonianReport
+    from skills.integrity  import FieldHealth as _FieldHealth   # noqa: F401
 
     # ── Seed from local corpus first (before any internet fetch) ─────────────
     _repo_root    = os.path.dirname(os.path.abspath(__file__))
@@ -2573,7 +2965,14 @@ def _build_teach_stack(engine: 'Engine'):
         teach.stop()
         speak.stop()
         monitor.stop()
-        teach.join(timeout=10)
+        # Save immediately — don't wait for teach.run() to unblock from fetch()
+        _sp = os.path.expanduser(cfg.get('active_state', '~/.ptolemy/monad.bin'))
+        try:
+            monad.save(_sp)
+            print(f'[ptolemy] saved → {_sp}', file=sys.stderr)
+        except Exception as _e:
+            print(f'[ptolemy] save failed: {_e}', file=sys.stderr)
+        teach.join(timeout=5)
         logger.close()
         sys.exit(0)
 
