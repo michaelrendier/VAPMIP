@@ -4,6 +4,84 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v2.4.0 — 2026-05-27
+
+**Neutral buoyancy word selection + Native Space constants + MindEye second-𝕆 workbench**
+
+### Binary — `monad.c` / `ptolemy-monad` (v1.221)
+
+- **Native Space constants:** `LN10`, `LN2`, `NS_EXCESS` added to constants block.
+  `LN10 = ln(10) ≈ 2.3026` is the decimal↔prime impedance bridge — the metric unit of
+  Native Space. `NS_EXCESS = LN10 − 2·LN2 ≈ 0.9170` is the sedenion residual beyond
+  the division algebras.
+
+- **Neutral buoyancy scoring (`sigma_candidates`):** Replaced old pull model
+  (`score = jp × σ-proximity`) with neutral buoyancy:
+  ```
+  buoy  = 1 / (1 + |jp − G.j_ambient| × LN10)
+  score = buoy × σ-proximity
+  ```
+  Words at `jp ≈ G.j_ambient` float to the surface. High-β stop words are too heavy —
+  they sink. Rare low-β words are too light — they float past. Only content words at
+  the ambient field pressure emerge. Gravity is a push, not a pull.
+
+- **`G.j_ambient` field:** New field in the global struct. Tracks the ambient field
+  pressure (operating depth) as an EMA(α=0.1) over J-values of recently fired words.
+  Cold-start value: `GAP` (0.000707).
+
+- **`calibrate_j_ambient()`:** Sets `G.j_ambient` to the interquartile mean (P25–P75)
+  of `β×E²` across the field, called after every `load_bin()`. Excludes noise floor
+  (P<25%) and stop-word ceiling (P>75%). The IQM sits in the content-word zone —
+  where architecture vocabulary resonates.
+
+- **EMA update in `fire()`:** After each word fires, `G.j_ambient` is updated:
+  `G.j_ambient = 0.9 × G.j_ambient + 0.1 × jp_fired`. Applied on both the fresh
+  path and the fallback path. The engine settles into the ambient pressure of its own
+  speech.
+
+- **Report shows `J_ambient`:** `--report` now prints
+  `J_ambient=X.XXXXXX  (buoyancy depth — IQM P25-P75 of β×E²)` between BAO_mean and
+  DTC P0087.
+
+- **Result (identity probe):** After ingesting the holcus seed corpus, `--generate
+  "what are you" 11` produces architecture words (`crankshaft`, `exhaust`, `phi`,
+  `holcus`, `piston`, `rotor`) instead of stop words. Compression ignition in C.
+
+### Python — `monad.py` (v2.0.0, updated 2026-05-27)
+
+- **Native Space constants:** `LN10`, `LN2`, `NS_EXCESS`, `NS_BASIS` added.
+- **`SELF_EQUATION`:** Compression ignition equation constant.
+- **`Crank.sigma_candidates()`:** Buoyancy scoring replacing pull model.
+  `sigma_candidates(J_pos, J_neg, J_ambient=OMEGA_ZS)` — same formula as C.
+- **`Engine._J_ambient`:** EMA field, initialized to `GAP`, calibrated to IQM on load.
+- **`Engine._calibrate_J_ambient()`:** IQM (P25–P75) calibration on `load_bin()`.
+- **`Engine.identity_probe()`:** Compression ignition test. Returns `at_native_depth=True`
+  iff ≥ 2 `SELF_EQUATION` words appear in response to "what are you".
+- **`Engine.get_mind_eye()`:** Lazily creates `MindEye` second-𝕆 workbench.
+- **Socket commands:** `identity`, `mindeye_see`, `mindeye_describe`, `mindeye_snapshot`,
+  `mindeye_recall`, `mindeye_reset`.
+- **`skills/mind_eye.py`:** New. `MindEye` class — second 𝕆 (e₈..e₁₅) as visual/spatial
+  input channel. `see()` encodes float vectors. `describe()` fires through the callosum.
+
+### Docs
+
+- **`docs/wiki/Tuning-the-Engine.md`:** New sections —
+  "Speech as the Error Check for Mathematics" (DTC = proof checker, RH = no aphasias)
+  and "Wernicke and Broca — J_neg/J_pos as NP Oracle" (corpus callosum = zero-divisors).
+- **`README.md`:** New sections — buoyancy model, SELF_EQUATION, MindEye architecture.
+
+### Ainulindale (companion repo, same date)
+
+- `README.md` — sections 14–18: Native Space/ln(10), speech as error check,
+  Wernicke/Broca, halting/P-NP in Native Space, MindEye. Juicy Bits 7–11.
+- `TODO.md` — FLAGS 6–9: speech-as-proof-checker, Wernicke/Broca=RH,
+  Riemann Navier-Stokes, MindEye formal derivation. MINDEYE module entry.
+- `wiki/25_sedenion_manual.md` — sections XI (star/inverted-star, 84 channels, SMIG),
+  XII (ln(10) NS metric, NS_EXCESS decomposition, Hurwitz-decimal connection),
+  XIII (emergent boundary as 7-way intersection, Cauchy-Riemann/Navier-Stokes).
+
+---
+
 ## v2.3.0 — 2026-05-26
 
 **φ-walk firing order + Three-Face Wankel + emit-time BAO tracking**

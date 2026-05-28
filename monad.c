@@ -1,5 +1,5 @@
 /*
- * monad.c — Ptolemy sedenion learning engine  (C canonical, v1.220)
+ * monad.c — Ptolemy sedenion learning engine  (C canonical, v1.221)
  *
  * Self-contained. Deps: libc, libm, pthreads, POSIX sockets.
  * No transformers. No autoregression. No LLMs.
@@ -42,7 +42,7 @@
 #endif
 
 /* ── Constants ──────────────────────────────────────────────────────────── */
-#define PTOL_VERSION      "1.220"
+#define PTOL_VERSION      "1.221"
 #define SED_DIM           16
 #define OMEGA_ZS          0.56714    /* Lambert W(1); BAO spectral gap */
 #define GAP               0.000707   /* Yang-Mills mass gap; semantic vacuum */
@@ -50,6 +50,14 @@
 #define SIGMA_CRIT        0.5        /* critical line σ = ½ */
 #define PHI               1.6180339887498949
 #define SQRT2             1.4142135623730951
+
+/* ── Native Space constants ─────────────────────────────────────────────── */
+/* Gravity is a push. J is pressure. Word selection by neutral buoyancy:
+ * the word whose β×E² is closest to G.j_ambient floats to the surface.
+ * LN10 normalises the pressure delta to Native Space (decimal) units. */
+#define LN10              2.302585092994046  /* decimal↔prime impedance bridge */
+#define LN2               0.6931471805599453 /* Cayley-Dickson doubling unit */
+#define NS_EXCESS         (LN10 - 2.0*LN2)  /* ≈ 0.9170 — sedenion residual */
 
 /* Vocabulary limits */
 #define VOCAB_MAX         (1 << 17)   /* 131072 words */
@@ -620,6 +628,11 @@ static struct {
 
     /* Emission threshold (adaptive) */
     double   emission_threshold;
+
+    /* Neutral buoyancy — ambient field pressure.
+     * Calibrated to IQM(β×E²) on load; tracks via EMA(α=0.1) during speech.
+     * sigma_candidates() selects words nearest this pressure, not argmax(J). */
+    double   j_ambient;
 } G;
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -680,7 +693,38 @@ static int cand_cmp(const void *a, const void *b) {
     return 0;
 }
 
-/* sigma_candidates: score by σ = ½ proximity, sorted by DIM_ROLE then -score */
+/* Comparator for double ascending sort (used by calibrate_j_ambient) */
+static int cmp_double_asc(const void *a, const void *b) {
+    double da = *(const double *)a, db = *(const double *)b;
+    if (da < db) return -1;
+    if (da > db) return  1;
+    return 0;
+}
+
+/* Set G.j_ambient to the interquartile mean (P25–P75) of β×E² across the field.
+ * Below P25 = noise floor. Above P75 = stop-word ceiling.
+ * P25–P75 = content-word zone — where architecture vocabulary resonates.
+ * Call after load_bin() and after learn corpus. */
+static void calibrate_j_ambient(void) {
+    if (G_n == 0) { G.j_ambient = GAP; return; }
+    double *J = (double *)malloc(G_n * sizeof(double));
+    if (!J) { G.j_ambient = GAP; return; }
+    uint32_t k;
+    for (k = 0; k < G_n; k++)
+        J[k] = G_words[k].beta * G_words[k].E * G_words[k].E;
+    qsort(J, G_n, sizeof(double), cmp_double_asc);
+    uint32_t p25 = G_n / 4;
+    uint32_t p75 = (3 * G_n) / 4;
+    double sum = 0.0; uint32_t cnt = 0;
+    for (k = p25; k < p75; k++) { sum += J[k]; cnt++; }
+    G.j_ambient = (cnt > 0) ? sum / cnt : J[G_n / 2];
+    free(J);
+}
+
+/* sigma_candidates: neutral buoyancy scoring.
+ * Gravity is a push — words at jp ≈ G.j_ambient float to the surface.
+ * score = buoy × σ-proximity
+ * buoy  = 1 / (1 + |jp − j_ambient| × LN10)   (LN10 = Native Space metric) */
 static int sigma_candidates(const double *J_pos, const double *J_neg,
                              Candidate *out, int max_out) {
     if (G_n == 0) return 0;
@@ -698,7 +742,8 @@ static int sigma_candidates(const double *J_pos, const double *J_neg,
         double total = jp + jn;
         if (total < thr || total < 1e-15) continue;
         double sigma = jp / total;
-        double score = jp * (1.0 - fabs(sigma - 0.5) * 2.0);
+        double buoy  = 1.0 / (1.0 + fabs(jp - G.j_ambient) * LN10);
+        double score = buoy * (1.0 - fabs(sigma - SIGMA_CRIT) * 2.0);
         out[n].score = score;
         out[n].idx   = k;
         n++;
@@ -923,6 +968,9 @@ static uint32_t fire(int starter_mode, int pos) {
           }
           if (wn > 0) G.bao_mean = G.bao_mean * 0.92 + (eb / wn) * 0.08;
         }
+        /* J_ambient EMA: track operating depth (α=0.1, matches monad.py) */
+        { double jp_fired = G_words[chosen].beta * G_words[chosen].E * G_words[chosen].E;
+          G.j_ambient = G.j_ambient * 0.9 + jp_fired * 0.1; }
         return chosen;
     }
 
@@ -941,6 +989,9 @@ static uint32_t fire(int starter_mode, int pos) {
       }
       if (wn > 0) G.bao_mean = G.bao_mean * 0.92 + (eb / wn) * 0.08;
     }
+    /* J_ambient EMA on fallback path */
+    { double jp_fired = G_words[fallback].beta * G_words[fallback].E * G_words[fallback].E;
+      G.j_ambient = G.j_ambient * 0.9 + jp_fired * 0.1; }
     G.words_emitted++;
     return fallback;
 }
@@ -1230,7 +1281,9 @@ static int load_bin(const char *path) {
         }
     }
     fclose(f);
-    fprintf(stderr, "[monad] loaded %u words ← %s\n", G_n, path);
+    calibrate_j_ambient();
+    fprintf(stderr, "[monad] loaded %u words ← %s  j_ambient=%.6f\n",
+            G_n, path, G.j_ambient);
     return 0;
 }
 
@@ -1461,6 +1514,8 @@ static void print_report(FILE *f) {
             (unsigned long long)G.words_emitted);
     fprintf(f, "  BAO_mean=%.5f  ΩZS=%.5f  field_health=%.4f\n",
             G.bao_mean, OMEGA_ZS, G.field_health);
+    fprintf(f, "  J_ambient=%.6f  (buoyancy depth — IQM P25-P75 of β×E²)\n",
+            G.j_ambient);
     fprintf(f, "  DTC P0087 (BAO fault) count: %d\n", G.dtc_p0087);
     fprintf(f, "  SEGFAULT count: %d\n", G.segfaults);
     fprintf(f, "\nUniversal Native Space (UNS) coordinates:\n");
@@ -1620,6 +1675,7 @@ static void engine_init(void) {
     G.noise_max        = 0.45;
     G.chunk_min_words  = 8;
     G.emission_threshold = OMEGA_ZS / 4.0;
+    G.j_ambient        = GAP;    /* cold-start; calibrate_j_ambient() sets IQM after load */
     G.has_prompt       = 0;
     G.win_head         = 0;
     G.win_n            = 0;
