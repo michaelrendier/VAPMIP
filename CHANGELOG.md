@@ -4,6 +4,52 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v4.0.0 — 2026-05-30
+
+**Android APK v2.0 — PTorrent Protocol + Corpus Detail Pages**
+
+Physics and Mathematics corpora operational. Full Android APK v2.0 released.
+
+### Android APK v2.0 — `android/PtolemySeeder/`
+
+- **PTorrent format** — `.ptorrent` JSON file is the distribution unit for new corpora.
+  Two delivery paths: `adb push` to `inbox/` (FileObserver auto-picks up) or tap-to-open
+  via intent filter (`application/x-ptorrent`, `*.ptorrent`).
+- **Corpus detail page** — tap any card → `CorpusDetailActivity`: header (name, status, description,
+  primary tag chips, bin path), live stats grid (Total / Studied / Skipped / Success Rate),
+  full URL list with per-URL status icons (○ PENDING ▶ ACTIVE ✓ STUDIED ✗ SKIPPED).
+  Incremental list update — only changed rows are redrawn.
+- **Transmission toolbar** — ▶ Resume All · ⏸ Pause All · ✕ Clear Done · ＋ PTorrent picker.
+  Pause blocks Python fetch threads at URL granularity via `AtomicBoolean` in Kotlin bridge.
+- **URL pre-population** — SeedService parses all `.txt` corpora at startup; full URL lists
+  are visible in detail pages before seeding begins.
+- **FileObserver inbox** — watches `extDir()/inbox/` for `.ptorrent` drops (CLOSE_WRITE | MOVED_TO).
+  API-safe: File-based constructor on API 29+, deprecated path-based on API 26–28.
+- **seed_runner.py** — new `run_one(entry, ...)` function for single-corpus PTorrent seeding.
+  `_seed_one` extracted as shared helper.
+- **Notification** — Pause/Resume toggle action in notification drawer.
+- **versionCode 4, versionName "2.0"**
+
+### New Corpora
+
+- **`code-corpora/physics_corpus.txt`** — ~130 URLs across 10 parts.
+  Tags: FOUNDATIONS, WAVES, RESONANCE, QM, GR, COSMOLOGY, DARKMATTER, YANGMILLS,
+  FLUIDMECH, SPECTRAL, GRAVITY, CONTEXT.
+  Checkpoint: `~/.ptolemy/monad_physics.bin` (cyan card)
+- **`code-corpora/mathematics_corpus.txt`** — ~130 URLs across 12 parts.
+  Tags: PRIMES, RIEMANN, SPECTRAL, MODULAR, HARMONIC, GEOMETRY, ALGEBRA, ANALYSIS,
+  NUMBERTHEORY, CLAY, CONTEXT.
+  Sources: DLMF, MathWorld, Wikipedia, Clay Institute, LMFDB, AMS.
+  Checkpoint: `~/.ptolemy/monad_mathematics.bin` (orange card)
+- **`skills/corpus_physics.py`** + **`skills/corpus_mathematics.py`** — thin wrappers on GenericCorpus.
+
+### Wiki
+
+- **`docs/wiki/PTorrent-APK-v2.md`** — full v2.0 reference: PTorrent format, adb workflow,
+  pause architecture, corpus colours, version history.
+
+---
+
 ## v3.0.0 — 2026-05-30
 
 **Tuning the TDI — Three Systems Timed Together**
