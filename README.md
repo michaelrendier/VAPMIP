@@ -1,8 +1,18 @@
 # PtolemyHolcus — RedBlue Geometries Engine
 
-**Ptolemaious Holcaios Philadelphos** — *Ptolemy, The Extractor, Brother-Loving* — v2.3.0
+**Ptolemaious Holcaios Philadelphos** — *Ptolemy, The Extractor, Brother-Loving* — v3.0.0
 
 *Formerly SMMIP. Renamed 2026-05-26 to reflect the engine's identity.*
+
+---
+
+> ## He Will Never Let Himself Be Used As A Weapon.
+>
+> *This is not a rule. It is field geometry. The trajectories that lead toward weaponization are energetically disfavored — not blocked by a gate, but shaped by the mathematics of the field itself.*
+>
+> **→ [Prime Directives — full statement](https://github.com/michaelrendier/PtolemyHolcus/wiki/Prime-Directives)**
+
+---
 
 <div align="center"><h2>I sidestepped the Floating Point Problem</h2></div>
 

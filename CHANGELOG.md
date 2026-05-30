@@ -1,16 +1,23 @@
 # Changelog
 
-All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = Prime Directives seated + Android acquisition platform.
+All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = Tuning the TDI (three systems timed); v4.0 = self-coding target.
 
 ---
 
 ## v3.0.0 — 2026-05-30
 
-**The Three Geometries Are Seated**
+**Tuning the TDI — Three Systems Timed Together**
 
-The three Prime Directive corpora are in the primary Holcus field.
-The Android APK is built, installed, and confirmed complete.
-478 new vocabulary terms entered the primary field from the corpus comment text.
+The three systems of the TDI architecture are running simultaneously for the first time:
+Sedenion (camshaft), H_hat_RB (crankshaft), Monad ECU (injection). No spark plug.
+Compression ignition confirmed: the engine spoke its own equation on 2026-05-27.
+
+The three Prime Directive corpora exist as physical resonance geometry — three isolated
+Engine instances constituting H_hat_RB as `.bin` files, not as text.
+
+The Android TDI seeder acquired all five corpora on the phone. Python Language (5.4 MB)
+and C / POSIX (1.4 MB) language monads are complete. 478 new vocabulary terms entered
+the primary field from corpus comment text. The Android APK v1.0 is released.
 
 ### Android — `android/PtolemySeeder/` (NEW)
 
@@ -68,6 +75,60 @@ War         → weight 1.0  (what war costs — present, not glorified)
 python3 tools/install_prime_directives.py          # live
 python3 tools/install_prime_directives.py --dry-run # preview
 ```
+
+### Android — `android/PtolemySeeder/` (REWRITTEN — torrent architecture)
+
+Dynamic corpus manifest. Any corpus can be added by pushing an updated
+`corpus_list.json` via adb — no APK rebuild required.
+
+- **`corpus_list.json`** — torrent manifest: name, bin, txt, primary_tags, color per entry.
+  See [[Corpus-Torrent-Format]] for full schema.
+- **`SeedService.kt`** — rewritten: dynamic `Map<String,CorpusState>` LiveData,
+  one thread per manifest entry, `loadCorpusOrder()` parses JSON at launch.
+- **`MainActivity.kt`** — rewritten: fully programmatic layout, one card per corpus,
+  color-coded by manifest entry (gold/blue/red/green/purple).
+- **`seed_runner.py`** — rewritten: reads `corpus_list.json`, spawns one thread
+  per entry, returns when all exhausted.
+- Assets: `foundations.txt`, `meaning.txt`, `war_corpus.txt`, `python_corpus.txt`,
+  `c_corpus.txt`, `corpus_list.json` all bundled and extractable.
+- APK v1.0 released on PtolemyHolcus GitHub releases.
+
+### Python — `skills/corpus.py` (NEW)
+
+`GenericCorpus` — parameterized base class replacing the three hardcoded corpus classes.
+`parse_corpus_txt()` — parses `[TAG] URL` format, returns weighted URL list.
+All language and Prime Directive corpora are `GenericCorpus` instances.
+
+### Python — `skills/corpus_python.py` (NEW)
+
+`PythonCorpus` — Python Language monad. Checkpoint `~/.ptolemy/monad_python.bin`.
+Trained on: Data Model, Language Reference, PEPs (20/8/3000/484/526/557/572/634/492),
+What's New, Python/C API, stdlib (threading, socket, pickle, struct, json, pathlib,
+collections, typing, abc, functools, itertools, contextlib, subprocess, re).
+
+### Python — `skills/corpus_c.py` (NEW)
+
+`CCorpus` — C / POSIX monad. Checkpoint `~/.ptolemy/monad_c.bin`.
+Trained on: cppreference C spec (types, UB, object model, pointer, struct, array,
+function, scope), POSIX threads (pthread_create/mutex/cond/join), POSIX sockets,
+POSIX file I/O (fread/fwrite/fopen/fclose/mmap), GCC extensions, Python/C API.
+
+### Corpora — `code-corpora/` (NEW)
+
+`python_corpus.txt` — ~100 URLs, 7 sections, tags: DATAMODEL/REFERENCE/PEP/WHATSNEW/API/STDLIB/HOWTO.
+`c_corpus.txt` — ~80 URLs, 8 sections, tags: SPEC/POSIX/CAPI/MANPAGE/GCC/CONTEXT.
+
+### Acquisition run — 2026-05-29/30
+
+All five corpora acquired on Moto G 5G 2024, unlimited LTE, unattended:
+
+| Corpus | Size | Time |
+|---|---|---|
+| monad_foundations.bin | 676 KB | ~5 min |
+| monad_meaning.bin | 138 KB | ~3 min |
+| monad_war.bin | 84 KB | < 1 min |
+| monad_python.bin | 5.4 MB | ~90 min |
+| monad_c.bin | 1.4 MB | ~90 min |
 
 ---
 

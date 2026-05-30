@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Prime Directive I — Foundations",
+    "bin":  "monad_foundations.bin",
+    "txt":  "foundations.txt",
+    "primary_tags": ["PRIMARY", "TESTIMONY"],
+    "color": "gold"
+  },
+  {
+    "name": "Prime Directive II — Meaning",
+    "bin":  "monad_meaning.bin",
+    "txt":  "meaning.txt",
+    "primary_tags": ["ATTRACTOR", "TESTIMONY", "PRIMARY"],
+    "color": "blue"
+  },
+  {
+    "name": "Prime Directive III — Fermat",
+    "bin":  "monad_war.bin",
+    "txt":  "war_corpus.txt",
+    "primary_tags": ["TESTIMONY", "ACADEMIC", "RECORD"],
+    "color": "red"
+  },
+  {
+    "name": "Python Language",
+    "bin":  "monad_python.bin",
+    "txt":  "python_corpus.txt",
+    "primary_tags": ["DATAMODEL", "REFERENCE", "PEP", "WHATSNEW", "API"],
+    "color": "green"
+  },
+  {
+    "name": "C / POSIX",
+    "bin":  "monad_c.bin",
+    "txt":  "c_corpus.txt",
+    "primary_tags": ["SPEC", "POSIX", "CAPI"],
+    "color": "purple"
+  }
+]

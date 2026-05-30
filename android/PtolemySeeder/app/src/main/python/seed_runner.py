@@ -1,61 +1,85 @@
 """
-seed_runner.py — Android bridge for the three Prime Directive seeders.
+seed_runner.py — Dynamic torrent-style corpus seeder for Android.
+
+Reads corpus_list.json from the app files directory.
+Creates one GenericCorpus + Engine per entry, runs all in parallel.
+New corpora can be added by pushing an updated corpus_list.json via adb
+without rebuilding the APK.
 
 Called from SeedService.kt via Chaquopy.
-Runs all three corpus seed() passes in parallel threads.
-Progress and completion reported via callback.
-
-The corpus .txt files are extracted from APK assets to the app's
-files directory by SeedService before calling run_all().
 """
 
+import json
 import os
 import threading
-from typing import Callable, Dict, Any
+from typing import Any, Callable, Dict, List
 
-# Engine and corpus classes are in the parent PtolemyHolcus directory,
-# added to sys.path by Chaquopy via the srcDirs config in build.gradle.
 from monad import Engine
-from skills.foundations import FoundationsCorpus
-from skills.meaning import MeaningCorpus
-from skills.fermat_lattice import FermatLattice
+from skills.corpus import GenericCorpus, parse_corpus_txt
 
 
-def run_all(files_dir: str,
-            on_progress: Callable,
-            check_interval: int = 15) -> Dict[str, Any]:
+def _build_corpus(entry: Dict[str, Any], files_dir: str) -> GenericCorpus:
+    """Construct a GenericCorpus from a corpus_list.json entry.
+
+    :param entry: Dict with name, bin, txt, primary_tags keys.
+    :param files_dir: App external files directory.
+    :returns: Configured GenericCorpus instance.
+    :rtype: GenericCorpus
     """
-    Run all three corpus seed passes in parallel (blocking until all done).
+    txt_path = os.path.join(files_dir, entry['txt']) if entry.get('txt') else None
+    bin_path = os.path.join(files_dir, entry['bin'])
+    primary_tags = set(entry.get('primary_tags', []))
 
-    :param files_dir: Path to app's files directory where .bin files land
-        and where corpus .txt files were extracted from assets.
+    # FermatLattice fallback: war_corpus.txt with its existing content
+    if txt_path is None or not os.path.exists(txt_path):
+        # Try the canonical war corpus path if this is the war entry
+        war_fallback = os.path.join(files_dir, 'war_corpus.txt')
+        if os.path.exists(war_fallback):
+            txt_path = war_fallback
+
+    return GenericCorpus(
+        engine=Engine(),
+        txt_path=txt_path or '',
+        bin_path=bin_path,
+        name=entry.get('name', entry['bin']),
+        interval=entry.get('interval', 60),
+        primary_tags=primary_tags,
+        primary_weight=float(entry.get('primary_weight', 2.0)),
+        context_weight=float(entry.get('context_weight', 1.0)),
+    )
+
+
+def run_all(
+    files_dir: str,
+    on_progress: Callable,
+    check_interval: int = 15,
+) -> Dict[str, Any]:
+    """Run all corpus seed passes defined in corpus_list.json (blocking).
+
+    Reads corpus_list.json from *files_dir*. Each corpus runs in its own
+    thread. Returns when all corpus URL lists are exhausted.
+
+    :param files_dir: App external files directory containing corpus .txt
+        files, corpus_list.json, and where .bin files are written.
     :param on_progress: Callable(name, tag, url, idx, total, studied, skipped).
         Called after each URL. May be called from any thread.
     :param check_interval: Seconds between network retry attempts.
     :returns: Dict of results keyed by corpus name.
+    :rtype: dict
     """
-    engine = Engine()
+    # Load corpus manifest — prefer files_dir copy (adb-pushable), fall back to assets
+    list_path = os.path.join(files_dir, 'corpus_list.json')
+    if not os.path.exists(list_path):
+        raise FileNotFoundError(f'corpus_list.json not found in {files_dir}')
 
-    fc = FoundationsCorpus(
-        engine,
-        txt_path=os.path.join(files_dir, 'foundations.txt'),
-        bin_path=os.path.join(files_dir, 'monad_foundations.bin'),
-    )
-    mc = MeaningCorpus(
-        engine,
-        txt_path=os.path.join(files_dir, 'meaning.txt'),
-        bin_path=os.path.join(files_dir, 'monad_meaning.bin'),
-    )
-    fl = FermatLattice(
-        engine,
-        bin_path=os.path.join(files_dir, 'monad_war.bin'),
-    )
+    with open(list_path, encoding='utf-8') as f:
+        corpus_list: List[Dict[str, Any]] = json.load(f)
 
     results: Dict[str, Any] = {}
-    errors:  Dict[str, str] = {}
 
-    def _seed(corpus, name: str):
-        def _cb(tag, url, idx, total, studied, skipped):
+    def _seed(corpus: GenericCorpus, name: str) -> None:
+        def _cb(tag: str, url: str, idx: int, total: int,
+                studied: int, skipped: int) -> None:
             try:
                 on_progress(name, tag, url, idx, total, studied, skipped)
             except Exception:
@@ -66,14 +90,24 @@ def run_all(files_dir: str,
                 check_interval=check_interval,
             )
         except Exception as e:
-            errors[name]  = str(e)
             results[name] = {'complete': False, 'error': str(e)}
 
-    threads = [
-        threading.Thread(target=_seed, args=(fc, 'foundations'), daemon=True),
-        threading.Thread(target=_seed, args=(mc, 'meaning'),     daemon=True),
-        threading.Thread(target=_seed, args=(fl, 'fermat'),      daemon=True),
-    ]
+    threads = []
+    for entry in corpus_list:
+        try:
+            corpus = _build_corpus(entry, files_dir)
+        except Exception as e:
+            name = entry.get('name', entry.get('bin', '?'))
+            results[name] = {'complete': False, 'error': f'build failed: {e}'}
+            continue
+        name = entry.get('name', entry['bin'])
+        t = threading.Thread(
+            target=_seed,
+            args=(corpus, name),
+            daemon=True,
+            name=f'seed-{name[:16]}',
+        )
+        threads.append(t)
 
     for t in threads:
         t.start()
