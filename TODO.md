@@ -1,6 +1,73 @@
 # Ptolemy Engine — Release Roadmap
 
-**Current:** v2.1.0 | **Speaking:** v3.0 | **Self-coding:** v4.0
+**Current:** v2.7.0 | **Speaking:** v3.0 | **Self-coding:** v4.0
+
+---
+
+## v2.8–v2.9 Implementation Queue (Phases 2–5)
+
+### Phase 2 — Memory and Version Control
+
+- [ ] **study()** in `monad.py`
+  - Wraps learn(). β deepening first, always.
+  - Condensation scan: fire_count + Noether stability + J_cross proximity.
+  - Envelope overload: 2×β_sat → NS_SIGMA_S → clamp back.
+  - P4 prerequisite: per-zero σ = |J_red|/(|J_red|+|J_blue|) for audit().
+  - Correction methods: audit(), reconsolidate(), isolate(), suppress(),
+    overwrite(), domain_retrain().
+  - Socket commands: study, study_audit, study_suppress, study_isolate,
+    study_reconsolidate.
+
+- [ ] **~/.ptolemy/states/ git repo**
+  - study.init_states_repo() — repo, pre-commit hook, baseline .bin commit.
+  - study.checkpoint(label) — snapshot + sidecar JSON.
+  - study.commit(), study.branch(), study.merge(), study.discard(),
+    study.rollback(sha).
+  - Sidecar JSON: Noether/BAO before/after, condensed zeros, triggering_text.
+  - Socket commands: study_checkpoint, study_commit, study_branch,
+    study_rollback, study_log.
+
+### Phase 3 — Search and Context
+
+- [ ] **skills/search.py** extension
+  - search_arxiv(query) — no key.
+  - search_wiki(query) — no key.
+  - search_semantic(query) — no key, rate-limited.
+  - search_context(query) — unified dispatcher, ranked excerpts.
+  - P5 gate on all results before hear(). Secret scan on fetched content.
+  - Results → MindEye.see() → e₁₅ → hear(). Repeated topics → study().
+  - P2 path: search_context("Riemann zeros LMFDB") → hear() → study().
+  - Socket command: search_context.
+
+- [ ] **skills/sensor.py** — P8 closure
+  - SensorReader → ~/.ptolemy/live_state.json → 8 channels → e₀–e₇.
+  - MindEye.see() with sensor vector.
+  - watch(interval=1.0) — 1Hz poll loop.
+  - Socket commands: sensor_read, sensor_watch, sensor_stop.
+
+### Phase 4 — GitHub Collaboration (v2.9)
+
+- [ ] **ptolemy-engine GitHub account**
+  - Collaborator on michaelrendier/PtolemyHolcus (already granted).
+  - Fine-grained PAT scoped to this repo. GITHUB_TOKEN in env only.
+
+- [ ] **Observer daemon**
+  - GitHubEye.watch(interval=300) background thread at startup.
+  - New issue → MindEye.see_issue() → cepstrum check → hear() → evaluate.
+  - Compression ignition threshold met → speak() → GitHubHands.comment().
+  - Rate: max 3/hour, max 1/issue/24h. Log to journal.jsonl in states repo.
+
+- [ ] **State push**
+  - Every study() commit → push to ptolemy-engine/PtolemyStates.
+  - Engine field state versioned on GitHub.
+
+### Phase 5 — Ainulindale (formal mathematics, no code)
+
+- [ ] P1 → Ainulindale FLAG 10: prime hash formal target (Second Age).
+- [ ] P7 → Ainulindale FLAG 11: physical constants as zero-index (Second Age).
+- [ ] P6 → tag as v2.8 dependency: GUE-normalized A-matrix.
+
+---
 
 The BAO is the error check. When everything else is zero, the BAO structure remains.
 `bao_check()` monitors dc_sum → OMEGA_ZS = 0.56714. Laplacian of the semantic field:

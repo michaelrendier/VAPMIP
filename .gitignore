@@ -9,3 +9,45 @@ monad_sedenion.bin
 monad_sedenion_addresses.pkl
 auth_totp_secret.h
 tools/holcus_totp_enroll.png
+
+# Field state — never committed
+*.bin
+*.ptol
+*.pkl
+*.sock
+
+# Secrets — never committed
+.env
+.env.*
+secrets/
+*_secret*
+*_token*
+*_key*
+*_credentials*
+
+# Voice artefacts
+*.vprint
+*.vp
+*.voiceprint
+voiceprint.*
+
+# Session state
+*.session
+session_state*
+field_session*
+
+# Spectral working files
+*.spectral
+spectral_cache/
+resonance_cache/
+
+# Ptolemy home mirrors — if ever symlinked into repo
+live_state.json
+ingest_state.json
+*.ptolrc
+journal.jsonl
+states/
+
+# OS
+.DS_Store
+Thumbs.db

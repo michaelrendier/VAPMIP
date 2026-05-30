@@ -9,6 +9,9 @@
  *     HEAR <query text>\n    — hear/speak, returns response
  *     STATUS\n               — field status
  *     HEALTH\n               — field health report
+ *     SEARCH <query>\n       — arXiv + Wikipedia + LMFDB context search
+ *     SENSOR_READ\n          — read 8 sensor channels from live_state.json
+ *     CODE_READ <path>\n     — profile source file (lower-𝕆 op dims)
  *     QUIT\n                 — close this connection
  *
  *   Server → Client:

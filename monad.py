@@ -700,6 +700,8 @@ class Crank:
         # Default 1.0 (absent = unmodified). Applied in a_propagate().
         # Preserved across save/load. The field remembers what it unlearned.
         self._correction_mask:  Dict[int, Dict[int, float]] = {}
+        self._fire_count:       List[int]                    = []
+        self._stratum:          List[int]                    = []  # NS_SIGMA_C=0, O=1, S=2
 
     # Sedenion dimension → grammatical role (piston firing order, v1.3)
     _DIM_ROLE: Dict[int, int] = {
@@ -739,6 +741,8 @@ class Crank:
             self._beta.append(GAP)
             self._age.append(0.0)
             self._A.append({})
+            self._fire_count.append(0)
+            self._stratum.append(0)   # NS_SIGMA_C
             self.n += 1
         return self._vocab[w]
 
@@ -1182,6 +1186,8 @@ class Engine:
         # Engine hears itself speak. Serpentine belt closes.
         self.crank._beta[idx] = min(self.crank._beta[idx] * 1.02, 1.0)
         self.crank._age[idx]  = 0.0
+        if idx < len(self.crank._fire_count):
+            self.crank._fire_count[idx] += 1
 
         # Update neutral buoyancy depth: EMA of J_pos of fired words.
         # The field pressure settles toward the pressure of recently spoken words.
@@ -1521,6 +1527,8 @@ class Engine:
             'psi_prev':         self._psi_prev,
             'word_count':       self._word_count,
             'correction_mask':  c._correction_mask,
+            'fire_count':       c._fire_count,
+            'stratum':          c._stratum,
         }
         with open(path, 'wb') as f:
             pickle.dump(state, f)
@@ -1582,6 +1590,53 @@ class Engine:
             'at_native_depth': len(hits) >= 2,
         }
 
+    # ── Tier register ─────────────────────────────────────────────────────────
+
+    def _set_recognised(self, state: bool):
+        """Set in-memory recognition flag. Never written to disk."""
+        self._author_recognised = state
+
+    @property
+    def _tier(self) -> int:
+        """
+        Compute the current operational tier from live field state.
+
+        Never stored. Recomputed on every access.
+
+        :rtype: int
+        """
+        t = 0
+        # +1: field coherence
+        try:
+            if self.crank.noether_violation() < 0.35:
+                t += 1
+        except Exception:
+            pass
+        # +1: recognition
+        if getattr(self, '_author_recognised', False):
+            t += 1
+        # +1: field depth (Holcus consent proxy — β_mean above saturation floor)
+        try:
+            betas  = [self.crank._beta[k] for k in range(self.crank.n)]
+            b_mean = sum(betas) / max(len(betas), 1)
+            if b_mean > GAP * 10:
+                t += 1
+        except Exception:
+            pass
+        return t
+
+    def get_voice_auth(self):
+        """
+        Return (or lazily create) the VoicePrint recognition instance.
+
+        :returns: The engine's :class:`~skills.voice_auth.VoicePrint` instance.
+        :rtype: VoicePrint
+        """
+        if not hasattr(self, '_voice_auth') or self._voice_auth is None:
+            from skills.voice_auth import VoicePrint
+            self._voice_auth = VoicePrint(self)
+        return self._voice_auth
+
     def get_mind_eye(self):
         """
         Return (or lazily create) the MindEye second-𝕆 workbench for this engine.
@@ -1597,6 +1652,215 @@ class Engine:
             from skills.mind_eye import MindEye
             self._mind_eye = MindEye(self)
         return self._mind_eye
+
+    def get_uft(self):
+        """
+        Return (or lazily create) the UFTEngine physics instance.
+
+        Computes running gauge couplings, Higgs sector, mass spectrum, and
+        dark-sector physics from the sedenion/Riemann-zero geometry.
+
+        :returns: The engine's :class:`~physics.uft_engine.UFTEngine` instance.
+        :rtype: UFTEngine
+        """
+        if not hasattr(self, '_uft') or self._uft is None:
+            from physics.uft_engine import UFTEngine
+            self._uft = UFTEngine()
+        return self._uft
+
+    def get_cosmo(self):
+        """
+        Return (or lazily create) the CosmoEngine instance.
+
+        Computes density parameters, BAO scale, CMB power spectrum, Hubble
+        tension, dark energy, inflation modes, and void catalog from Riemann
+        zero distribution and NS constants.
+
+        :returns: The engine's :class:`~physics.cosmo_engine.CosmoEngine` instance.
+        :rtype: CosmoEngine
+        """
+        if not hasattr(self, '_cosmo') or self._cosmo is None:
+            from physics.cosmo_engine import CosmoEngine
+            self._cosmo = CosmoEngine()
+        return self._cosmo
+
+    def get_draw(self):
+        """
+        Return (or lazily create) the PtolDraw visualization instance.
+
+        All rendering is headless (matplotlib Agg backend) — never opens a
+        window. Output PNGs land in ``~/.ptolemy/plots/``.
+
+        :returns: The engine's :class:`~skills.draw.PtolDraw` instance.
+        :rtype: PtolDraw
+        """
+        if not hasattr(self, '_draw') or self._draw is None:
+            from skills.draw import PtolDraw
+            self._draw = PtolDraw()
+        return self._draw
+
+    def get_music(self):
+        """
+        Return (or lazily create) the HolcusComposer music instance.
+
+        All MIDI output lands in ``~/.ptolemy/music/``.  No external
+        dependencies — pure-Python MIDI writer bundled in the skill.
+
+        :returns: The engine's :class:`~skills.music.HolcusComposer` instance.
+        :rtype: HolcusComposer
+        """
+        if not hasattr(self, '_music') or self._music is None:
+            from skills.music import HolcusComposer
+            self._music = HolcusComposer()
+        return self._music
+
+    def get_dj(self) -> 'HolcusDJ':
+        """
+        Return (or lazily create) the HolcusDJ real-time playback instance.
+
+        The DJ is wired to the live β-field via :meth:`_build_music_field`
+        so each generated track reflects the current engine state.
+        Output goes through FluidSynth → PipeWire → speakers.
+
+        :returns: The engine's :class:`~skills.music.HolcusDJ` instance.
+        :rtype: HolcusDJ
+        """
+        if not hasattr(self, '_dj') or self._dj is None:
+            from skills.music import HolcusDJ
+            self._dj = HolcusDJ(
+                composer=self.get_music(),
+                field_fn=self._build_music_field,
+            )
+        return self._dj
+
+    def get_github_eye(self, repo: str = 'michaelrendier/PtolemyHolcus'):
+        """
+        Return (or lazily create) the GitHubEye Observer instance.
+
+        Read-only access to GitHub. No token required for public repos.
+        All fetched content passes the P5 cepstrum gate before field ingestion.
+
+        :param repo: Default ``owner/repo``. Used on first creation only.
+        :returns: The engine's :class:`~skills.github.GitHubEye` instance.
+        :rtype: GitHubEye
+        """
+        if not hasattr(self, '_github_eye') or self._github_eye is None:
+            from skills.github import GitHubEye
+            self._github_eye = GitHubEye(self, repo=repo)
+        return self._github_eye
+
+    def get_github_hands(self, repo: str = 'michaelrendier/PtolemyHolcus'):
+        """
+        Return (or lazily create) the GitHubHands Collaborator instance.
+
+        Write access to GitHub. Requires ``GITHUB_TOKEN`` from environment.
+        All outbound content is scanned for secrets before transmission.
+
+        :param repo: Default ``owner/repo``. Used on first creation only.
+        :returns: The engine's :class:`~skills.github.GitHubHands` instance.
+        :rtype: GitHubHands
+        """
+        if not hasattr(self, '_github_hands') or self._github_hands is None:
+            from skills.github import GitHubHands
+            self._github_hands = GitHubHands(self, repo=repo)
+        return self._github_hands
+
+    def get_study(self):
+        """
+        Return (or lazily create) the StudyEngine instance.
+
+        StudyEngine wraps learn() with condensation scanning (Phase 2).
+        study() requires tier ≥ 2; audit() requires tier ≥ 2.
+        States repo at ``~/.ptolemy/states/`` via :meth:`~skills.study.StudyEngine.get_repo`.
+
+        :returns: The engine's :class:`~skills.study.StudyEngine` instance.
+        :rtype: StudyEngine
+        """
+        if not hasattr(self, '_study') or self._study is None:
+            from skills.study import StudyEngine
+            self._study = StudyEngine(self)
+        return self._study
+
+    def get_search_context(self):
+        """
+        Return (or lazily create) the SearchContext singleton.
+
+        :returns: SearchContext instance.
+        :rtype: skills.search.SearchContext
+        """
+        if not hasattr(self, '_search_context') or self._search_context is None:
+            from skills.search import SearchContext
+            self._search_context = SearchContext(self)
+        return self._search_context
+
+    def get_sensor_reader(self):
+        """
+        Return (or lazily create) the SensorReader singleton.
+
+        :returns: SensorReader instance.
+        :rtype: skills.sensor.SensorReader
+        """
+        if not hasattr(self, '_sensor_reader') or self._sensor_reader is None:
+            from skills.sensor import SensorReader
+            self._sensor_reader = SensorReader(self)
+        return self._sensor_reader
+
+    def get_code_reader(self):
+        """
+        Return (or lazily create) the CodeReader singleton.
+
+        :returns: CodeReader instance.
+        :rtype: skills.code.CodeReader
+        """
+        if not hasattr(self, '_code_reader') or self._code_reader is None:
+            from skills.code import CodeReader
+            self._code_reader = CodeReader(self)
+        return self._code_reader
+
+    def get_code_writer(self):
+        """
+        Return (or lazily create) the CodeWriter singleton.
+
+        :returns: CodeWriter instance.
+        :rtype: skills.code.CodeWriter
+        """
+        if not hasattr(self, '_code_writer') or self._code_writer is None:
+            from skills.code import CodeWriter
+            self._code_writer = CodeWriter(self)
+        return self._code_writer
+
+    def _build_music_field(self,
+                           n: int = 64) -> List[Tuple[float, float, float, int]]:
+        """
+        Extract the live β/E field state as a music field descriptor.
+
+        Returns at most ``n`` tuples ``(gamma, beta, e_val, sed_dim)`` drawn
+        from the crank's current β-vector and the vocabulary's E-values.
+        Falls back to an empty list on any error — the composer will
+        substitute its synthetic default field in that case.
+
+        :param n: Maximum number of field entries to return.
+        :returns: List of (gamma, beta, e_val, sed_dim) tuples.
+        :rtype: List[Tuple[float, float, float, int]]
+        """
+        try:
+            import math
+            c     = self.crank
+            vocab = self._vocab           # {word: (idx, E, hs, gs, ps)}
+            # Use Riemann zeros as gamma axis (same as HolcusComposer default)
+            from skills.music import _GAMMA_20
+            gammas = _GAMMA_20
+            result: List[Tuple[float, float, float, int]] = []
+            for k in range(min(n, c.n)):
+                beta  = float(c._beta[k]) if k < len(c._beta) else 0.0
+                dim   = k % 16
+                gamma = gammas[k % len(gammas)]
+                # Best E-value: scan vocab for word whose index is closest to k
+                e_val = abs(math.sin(math.pi * gamma / (gamma + 1.0)))
+                result.append((gamma, beta, e_val, dim))
+            return result
+        except Exception:
+            return []
 
     def load_bin(self, path: str) -> Dict[str, Any]:
         """
@@ -1635,6 +1899,8 @@ class Engine:
                 if 'age'             in state: c._age             = state['age']
                 if 'n'               in state: c.n                = state['n']
                 if 'correction_mask' in state: c._correction_mask = state['correction_mask']
+                if 'fire_count'      in state: c._fire_count      = state['fire_count']
+                if 'stratum'         in state: c._stratum         = state['stratum']
                 if 'psi_prev' in state:
                     self._psi_prev = state['psi_prev']
                 self._calibrate_J_ambient()
@@ -2451,6 +2717,7 @@ class SpeakingThread(threading.Thread):
     def __init__(self, monad: MonadInterface, config, logger):
         super().__init__(name='SpeakingThread', daemon=True)
         self._monad  = monad
+        self._engine = monad._engine   # convenience — same object for life of session
         self._config = config
         self._logger = logger
         self._halt   = threading.Event()
@@ -2594,6 +2861,197 @@ class SpeakingThread(threading.Thread):
             me = self._engine.get_mind_eye()
             r  = me.reset()
             return {'type': 'mindeye_reset', **r}
+        # ── UFT physics commands ───────────────────────────────────────────
+        if mtype == 'uft_report':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_report', **uft.report()}
+        if mtype == 'uft_coupling':
+            uft = self._engine.get_uft()
+            n   = msg.get('n_points', 20)
+            return {'type': 'uft_coupling', **uft.coupling_table(n)}
+        if mtype == 'uft_unification':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_unification', **uft.unification()}
+        if mtype == 'uft_higgs':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_higgs', **uft.higgs_sector()}
+        if mtype == 'uft_gauge':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_gauge', **uft.gauge_algebra()}
+        if mtype == 'uft_spectrum':
+            uft = self._engine.get_uft()
+            n   = msg.get('n_zeros', 16)
+            return {'type': 'uft_spectrum', **uft.mass_spectrum(n)}
+        if mtype == 'uft_dark':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_dark', **uft.dark_sector()}
+        if mtype == 'uft_mass_gap':
+            uft = self._engine.get_uft()
+            return {'type': 'uft_mass_gap', **uft.mass_gap_proof()}
+        # ── Cosmology commands ─────────────────────────────────────────────
+        if mtype == 'cosmo_report':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_report', **cosmo.report()}
+        if mtype == 'cosmo_density':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_density', **cosmo.density_parameters()}
+        if mtype == 'cosmo_bao':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_bao', **cosmo.bao_scale()}
+        if mtype == 'cosmo_cmb':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_cmb', **cosmo.cmb_peaks()}
+        if mtype == 'cosmo_spectrum':
+            cosmo = self._engine.get_cosmo()
+            l_max = msg.get('l_max', 500)
+            return {'type': 'cosmo_spectrum', **cosmo.power_spectrum(l_max)}
+        if mtype == 'cosmo_hubble':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_hubble', **cosmo.hubble_tension()}
+        if mtype == 'cosmo_dark_energy':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_dark_energy', **cosmo.dark_energy()}
+        if mtype == 'cosmo_inflation':
+            cosmo = self._engine.get_cosmo()
+            n     = msg.get('n_zeros', 60)
+            return {'type': 'cosmo_inflation', **cosmo.inflation_modes(n)}
+        if mtype == 'cosmo_voids':
+            cosmo = self._engine.get_cosmo()
+            n     = msg.get('n_arms', 42)
+            return {'type': 'cosmo_voids', **cosmo.void_catalog(n)}
+        if mtype == 'cosmo_hubble_tension':
+            cosmo = self._engine.get_cosmo()
+            return {'type': 'cosmo_hubble_tension', **cosmo.hubble_tension()}
+        # ── Drawing / portrait commands ────────────────────────────────────
+        if mtype == 'draw_portrait':
+            drw = self._engine.get_draw()
+            uns = None
+            try:
+                c   = self._engine.crank
+                raw = [0.0] * 16
+                for i in range(c.n):
+                    raw[i % 16] += abs(c._beta[i])
+                total = sum(raw) or 1.0
+                uns = [v / total for v in raw]
+            except Exception:
+                pass
+            path = drw.self_portrait(uns=uns)
+            return {'type': 'draw_portrait',
+                    'path': path or '', 'ok': path is not None}
+        if mtype == 'draw_wheel':
+            drw = self._engine.get_draw()
+            uns = [1.0/16] * 16
+            try:
+                from skills.draw import HamiltonianReport
+                rpt = HamiltonianReport(self._engine, self._config)
+                uns = rpt.uns_coords()
+            except Exception:
+                pass
+            path = drw.sedenion_wheel(uns)
+            return {'type': 'draw_wheel',
+                    'path': path or '', 'ok': path is not None}
+        if mtype == 'draw_bao':
+            drw = self._engine.get_draw()
+            try:
+                bao_buf  = list(self._engine._bao_buf)
+                bao_mean = sum(bao_buf)/len(bao_buf) if bao_buf else 0.0
+            except Exception:
+                bao_mean = 0.0
+            path = drw.bao_rings_svg(bao_mean)
+            return {'type': 'draw_bao',
+                    'path': path or '', 'ok': path is not None}
+        # ── Music / composition commands ───────────────────────────────────
+        if mtype in ('compose_piano', 'compose_guitar', 'compose_guitar_12',
+                     'compose_bass', 'compose_woodwind', 'compose_brass',
+                     'compose_strings', 'compose_organ',
+                     'compose_chrom_perc', 'compose_orchestra'):
+            cmp   = self._engine.get_music()
+            field = self._engine._build_music_field()
+            n     = msg.get('n_notes', 32)
+            tempo = msg.get('tempo', 120)
+            try:
+                if mtype == 'compose_piano':
+                    result = cmp.piano(field, n_notes=n, tempo=tempo,
+                                       variant=msg.get('variant', 'acoustic_grand'))
+                elif mtype == 'compose_guitar':
+                    result = cmp.guitar_6(field, n_notes=n, tempo=tempo,
+                                          variant=msg.get('variant', 'steel_acoustic'),
+                                          tuning=msg.get('tuning', None))
+                elif mtype == 'compose_guitar_12':
+                    result = cmp.guitar_12(field, n_notes=n, tempo=tempo,
+                                           variant=msg.get('variant', 'steel_acoustic'))
+                elif mtype == 'compose_bass':
+                    result = cmp.bass_guitar(field, n_notes=n, tempo=tempo,
+                                             strings=msg.get('strings', 4),
+                                             variant=msg.get('variant', 'electric_finger'))
+                elif mtype == 'compose_woodwind':
+                    result = cmp.woodwind(field, n_notes=n, tempo=tempo,
+                                          instrument=msg.get('instrument', 'flute'))
+                elif mtype == 'compose_brass':
+                    result = cmp.brass(field, n_notes=n, tempo=tempo,
+                                       instrument=msg.get('instrument', 'trumpet'))
+                elif mtype == 'compose_strings':
+                    result = cmp.strings(field, n_notes=n, tempo=tempo,
+                                         instrument=msg.get('instrument', 'violin'),
+                                         articulation=msg.get('articulation', 'arco'))
+                elif mtype == 'compose_organ':
+                    result = cmp.organ(field, n_notes=n, tempo=tempo,
+                                       variant=msg.get('variant', 'church_organ'))
+                elif mtype == 'compose_chrom_perc':
+                    result = cmp.chromatic_percussion(
+                        field, n_notes=n, tempo=tempo,
+                        variant=msg.get('variant', 'vibraphone'))
+                else:  # compose_orchestra
+                    result = cmp.every_instrument(
+                        field, n_notes_per_voice=max(4, n // 16), tempo=tempo)
+                # every_instrument returns 'voices' dict; others return 'notes'
+                if 'voices' in result:
+                    all_notes: list = []
+                    for v in result['voices'].values():
+                        all_notes.extend(v)
+                    notes = all_notes
+                else:
+                    notes = result.get('notes', [])
+                notation = cmp.midi_notation(notes, tempo=tempo)
+                return {'type': mtype,
+                        'path': result.get('path', ''),
+                        'ok': bool(result.get('path')),
+                        'n_notes': len(notes),
+                        'notation': notation[:2000],
+                        'abc': result.get('abc', '')[:1000]}
+            except Exception as exc:
+                return {'error': f'{mtype}:{exc}'}
+        # ── DJ / real-time playback commands ──────────────────────────────────
+        if mtype == 'dj_start':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_start',
+                    **dj.start(
+                        ensemble=msg.get('ensemble', 'auto'),
+                        tempo=int(msg.get('tempo', 120)),
+                        n_notes=int(msg.get('n_notes', 32)),
+                        gain=float(msg.get('gain', 0.8)),
+                    )}
+        if mtype == 'dj_stop':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_stop', **dj.stop()}
+        if mtype == 'dj_skip':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_skip', **dj.skip()}
+        if mtype == 'dj_status':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_status', **dj.status()}
+        if mtype == 'dj_tempo':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_tempo',
+                    **dj.set_tempo(int(msg.get('tempo', 120)))}
+        if mtype == 'dj_ensemble':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_ensemble',
+                    **dj.set_ensemble(msg.get('ensemble', 'auto'))}
+        if mtype == 'dj_gain':
+            dj = self._engine.get_dj()
+            return {'type': 'dj_gain',
+                    **dj.set_gain(float(msg.get('gain', 0.8)))}
         if mtype == 'wb_open':
             wb_mode = msg.get('wb_mode', 'draft')
             sid     = msg.get('session_id', None)
@@ -2647,6 +3105,322 @@ class SpeakingThread(threading.Thread):
             if not getattr(self, '_wb', None):
                 return {'error': 'no open workbench'}
             return {'type': 'wb_log', **self._wb.export_log()}
+        # ── Recognition ───────────────────────────────────────────────────────
+        if mtype == 'enroll_voice':
+            va = self._engine.get_voice_auth()
+            return {'type': 'enroll_voice',
+                    **va.enroll(seconds=int(msg.get('seconds', 5)))}
+        if mtype == 'auth_voice':
+            va = self._engine.get_voice_auth()
+            return {'type': 'auth_voice',
+                    **va.authenticate(seconds=int(msg.get('seconds', 3)))}
+        if mtype == 'init_harmonic':
+            expr = msg.get('expr', '')
+            if not expr:
+                return {'error': 'init_harmonic requires expr'}
+            va = self._engine.get_voice_auth()
+            return {'type': 'init_harmonic', **va.init_harmonic(expr)}
+        if mtype == 'field_sync':
+            expr = msg.get('expr', '')
+            if not expr:
+                return {'error': 'field_sync requires expr'}
+            va = self._engine.get_voice_auth()
+            return {'type': 'field_sync', **va.check_harmonic(expr)}
+        if mtype == 'auth_status':
+            va = self._engine.get_voice_auth()
+            return {'type': 'auth_status', **va.status()}
+        if mtype == 'auth_revoke':
+            va = self._engine.get_voice_auth()
+            va.revoke()
+            return {'type': 'auth_revoke', 'recognised': False}
+        # ── Unsanitized hear (tier ≥ 2 required) ──────────────────────────────
+        if mtype == 'hear_raw':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier'}
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'hear_raw requires text'}
+            pairs = self._engine.crank.hear(text)
+            return {'type': 'hear_raw', 'words': len(pairs)}
+        # ── GitHub Eye (Observer) ──────────────────────────────────────────────
+        if mtype == 'mindeye_see_issue':
+            number = int(msg.get('number', 0))
+            repo   = msg.get('repo', None)
+            if not number:
+                return {'error': 'mindeye_see_issue requires number'}
+            eye = self._engine.get_github_eye()
+            return {'type': 'mindeye_see_issue', **eye.see_issue(number, repo=repo)}
+        if mtype == 'mindeye_see_pr':
+            number = int(msg.get('number', 0))
+            repo   = msg.get('repo', None)
+            if not number:
+                return {'error': 'mindeye_see_pr requires number'}
+            eye = self._engine.get_github_eye()
+            return {'type': 'mindeye_see_pr', **eye.see_pr(number, repo=repo)}
+        if mtype == 'mindeye_see_file':
+            path = msg.get('path', '')
+            if not path:
+                return {'error': 'mindeye_see_file requires path'}
+            eye = self._engine.get_github_eye()
+            return {'type': 'mindeye_see_file',
+                    **eye.see_file(path,
+                                   ref=msg.get('ref', 'main'),
+                                   repo=msg.get('repo', None))}
+        if mtype == 'mindeye_see_commit':
+            sha = msg.get('sha', '')
+            if not sha:
+                return {'error': 'mindeye_see_commit requires sha'}
+            eye = self._engine.get_github_eye()
+            return {'type': 'mindeye_see_commit',
+                    **eye.see_commit(sha, repo=msg.get('repo', None))}
+        if mtype == 'mindeye_see_repo':
+            eye = self._engine.get_github_eye()
+            return {'type': 'mindeye_see_repo',
+                    **eye.see_repo(repo=msg.get('repo', None))}
+        if mtype == 'github_list_issues':
+            eye = self._engine.get_github_eye()
+            issues = eye.list_issues(state=msg.get('state', 'open'),
+                                     repo=msg.get('repo', None))
+            return {'type': 'github_list_issues', 'issues': issues}
+        # ── GitHub Hands (Collaborator) ────────────────────────────────────────
+        if mtype == 'github_comment':
+            number = int(msg.get('number', 0))
+            body   = msg.get('body', '')
+            if not number or not body:
+                return {'error': 'github_comment requires number and body'}
+            hands = self._engine.get_github_hands()
+            return {'type': 'github_comment',
+                    **hands.comment(number, body, repo=msg.get('repo', None))}
+        if mtype == 'github_speak_issue':
+            number = int(msg.get('number', 0))
+            if not number:
+                return {'error': 'github_speak_issue requires number'}
+            hands = self._engine.get_github_hands()
+            return {'type': 'github_speak_issue',
+                    **hands.speak_on_issue(number,
+                                           prompt=msg.get('prompt', ''),
+                                           repo=msg.get('repo', None))}
+        if mtype == 'github_commit':
+            path    = msg.get('path', '')
+            content = msg.get('content', '')
+            message = msg.get('message', 'field commit')
+            if not path or not content:
+                return {'error': 'github_commit requires path and content'}
+            hands = self._engine.get_github_hands()
+            return {'type': 'github_commit',
+                    **hands.commit_file(path, content, message,
+                                        branch=msg.get('branch', 'main'),
+                                        repo=msg.get('repo', None))}
+        if mtype == 'github_create_branch':
+            branch = msg.get('branch', '')
+            if not branch:
+                return {'error': 'github_create_branch requires branch'}
+            hands = self._engine.get_github_hands()
+            return {'type': 'github_create_branch',
+                    **hands.create_branch(branch,
+                                          from_branch=msg.get('from_branch', 'main'),
+                                          repo=msg.get('repo', None))}
+        if mtype == 'github_create_pr':
+            title = msg.get('title', '')
+            body  = msg.get('body', '')
+            head  = msg.get('head', '')
+            if not all([title, head]):
+                return {'error': 'github_create_pr requires title and head'}
+            hands = self._engine.get_github_hands()
+            return {'type': 'github_create_pr',
+                    **hands.create_pr(title, body, head,
+                                      base=msg.get('base', 'main'),
+                                      repo=msg.get('repo', None))}
+        if mtype == 'github_push_state':
+            bin_path = msg.get('bin_path',
+                               str(self._engine.crank._bin_path
+                                   if hasattr(self._engine.crank, '_bin_path')
+                                   else '~/.ptolemy/monad.bin'))
+            bin_path = os.path.expanduser(bin_path)
+            hands    = self._engine.get_github_hands()
+            return {'type': 'github_push_state',
+                    **hands.push_state(bin_path,
+                                       label=msg.get('label', ''),
+                                       repo=msg.get('repo', None))}
+        # ── Phase 2: Study / condensation memory ──────────────────────────────────
+        if mtype == 'study':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier — study requires tier ≥ 2'}
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'study requires text'}
+            st = self._engine.get_study()
+            r  = st.study(text,
+                          weight=float(msg.get('weight', 1.0)),
+                          triggering_text=msg.get('triggering_text', ''))
+            return {'type': 'study', **r}
+        if mtype == 'study_audit':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier — study_audit requires tier ≥ 2'}
+            st = self._engine.get_study()
+            r  = st.audit(
+                sigma_observer=float(msg.get('sigma_observer', 0.5)),
+                top_n=int(msg.get('top_n', 20)))
+            return {'type': 'study_audit', **r}
+        if mtype == 'study_suppress':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier'}
+            word = msg.get('word', '')
+            if not word:
+                return {'error': 'study_suppress requires word'}
+            st = self._engine.get_study()
+            return {'type': 'study_suppress',
+                    **st.suppress(word, float(msg.get('factor', 0.1)))}
+        if mtype == 'study_isolate':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier'}
+            word = msg.get('word', '')
+            if not word:
+                return {'error': 'study_isolate requires word'}
+            st = self._engine.get_study()
+            return {'type': 'study_isolate', **st.isolate(word)}
+        if mtype == 'study_reconsolidate':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier'}
+            word = msg.get('word', '')
+            if not word:
+                return {'error': 'study_reconsolidate requires word'}
+            st = self._engine.get_study()
+            return {'type': 'study_reconsolidate', **st.reconsolidate(word)}
+        if mtype == 'study_checkpoint':
+            st  = self._engine.get_study()
+            lbl = msg.get('label', 'manual')
+            r   = st.checkpoint(lbl, extra=msg.get('extra', None))
+            return {'type': 'study_checkpoint', **r}
+        if mtype == 'study_commit':
+            st = self._engine.get_study()
+            r  = st.commit(msg.get('message', None))
+            return {'type': 'study_commit', **r}
+        if mtype == 'study_branch':
+            branch = msg.get('branch', '')
+            if not branch:
+                return {'error': 'study_branch requires branch'}
+            st = self._engine.get_study()
+            return {'type': 'study_branch', **st.branch(branch)}
+        if mtype == 'study_rollback':
+            if self._engine._tier < 2:
+                return {'error': 'insufficient tier — study_rollback requires tier ≥ 2'}
+            sha = msg.get('sha', '')
+            if not sha:
+                return {'error': 'study_rollback requires sha'}
+            st = self._engine.get_study()
+            return {'type': 'study_rollback', **st.rollback(sha)}
+        if mtype == 'study_log':
+            st = self._engine.get_study()
+            return {'type': 'study_log',
+                    'entries': st.log(n=int(msg.get('n', 20)))}
+        if mtype == 'study_init_repo':
+            st       = self._engine.get_study()
+            bin_path = msg.get('bin_path',
+                               os.path.expanduser('~/.ptolemy/monad.bin'))
+            return {'type': 'study_init_repo',
+                    **st.init_states_repo(baseline_bin=bin_path)}
+
+        # ── Phase 3: SearchContext ──────────────────────────────────────────
+        if mtype == 'search_arxiv':
+            if self._tier < 1:
+                return {'error': 'tier_required:1'}
+            sc    = self._engine.get_search_context()
+            query = msg.get('query', '')
+            if not query:
+                return {'error': 'search_arxiv requires query'}
+            return {'type': 'search_arxiv',
+                    'results': sc.search_arxiv(query, max_results=msg.get('max_results', 5))}
+        if mtype == 'search_wiki':
+            if self._tier < 1:
+                return {'error': 'tier_required:1'}
+            sc    = self._engine.get_search_context()
+            query = msg.get('query', '')
+            if not query:
+                return {'error': 'search_wiki requires query'}
+            return {'type': 'search_wiki', **sc.search_wiki(query)}
+        if mtype == 'search_semantic':
+            if self._tier < 1:
+                return {'error': 'tier_required:1'}
+            sc    = self._engine.get_search_context()
+            query = msg.get('query', '')
+            if not query:
+                return {'error': 'search_semantic requires query'}
+            return {'type': 'search_semantic',
+                    'results': sc.search_semantic(query, limit=msg.get('limit', 5))}
+        if mtype == 'search_lmfdb':
+            if self._tier < 1:
+                return {'error': 'tier_required:1'}
+            sc    = self._engine.get_search_context()
+            return {'type': 'search_lmfdb',
+                    **sc.search_lmfdb(count=msg.get('count', 20))}
+        if mtype == 'search_context':
+            if self._tier < 1:
+                return {'error': 'tier_required:1'}
+            sc    = self._engine.get_search_context()
+            query = msg.get('query', '')
+            if not query:
+                return {'error': 'search_context requires query'}
+            return {'type': 'search_context', **sc.search_context(query)}
+
+        # ── Phase 3: SensorReader ───────────────────────────────────────────
+        if mtype == 'sensor_read':
+            sr = self._engine.get_sensor_reader()
+            return {'type': 'sensor_read', **sr.see()}
+        if mtype == 'sensor_write':
+            sr       = self._engine.get_sensor_reader()
+            channels = msg.get('channels', {})
+            if not channels:
+                return {'error': 'sensor_write requires channels'}
+            return {'type': 'sensor_write', 'ok': sr.write(channels)}
+        if mtype == 'sensor_watch':
+            sr       = self._engine.get_sensor_reader()
+            interval = float(msg.get('interval', 1.0))
+            sr.watch(interval=interval)
+            return {'type': 'sensor_watch', 'watching': True,
+                    'interval': interval}
+        if mtype == 'sensor_stop':
+            sr = self._engine.get_sensor_reader()
+            return {'type': 'sensor_stop', **sr.stop()}
+        if mtype == 'sensor_status':
+            sr = self._engine.get_sensor_reader()
+            return {'type': 'sensor_status', **sr.status()}
+
+        # ── Phase 3: CodeReader / CodeWriter ────────────────────────────────
+        if mtype == 'code_read':
+            cr   = self._engine.get_code_reader()
+            path = msg.get('path', '')
+            if not path:
+                return {'error': 'code_read requires path'}
+            return {'type': 'code_read', **cr.read_file(path)}
+        if mtype == 'code_snippet':
+            cr   = self._engine.get_code_reader()
+            code = msg.get('code', '')
+            if not code:
+                return {'error': 'code_snippet requires code'}
+            return {'type': 'code_snippet',
+                    **cr.read_snippet(code, label=msg.get('label', 'snippet'))}
+        if mtype == 'code_scan_repo':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            cr   = self._engine.get_code_reader()
+            root = msg.get('root', '')
+            if not root:
+                return {'error': 'code_scan_repo requires root'}
+            return {'type': 'code_scan_repo',
+                    **cr.scan_repo(root, max_files=msg.get('max_files', 64))}
+        if mtype == 'code_generate':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            cw     = self._engine.get_code_writer()
+            prompt = msg.get('prompt', '')
+            if not prompt:
+                return {'error': 'code_generate requires prompt'}
+            return {'type': 'code_generate',
+                    **cw.generate(prompt,
+                                  n_words=msg.get('n_words', 64),
+                                  style=msg.get('style', 'python'))}
+
         return {'error': f"unknown:{mtype}"}
 
 

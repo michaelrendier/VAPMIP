@@ -54,6 +54,9 @@ add_executable(ptolemy
     ingest.c
     log.c
     daemon.c
+    search.c
+    sensor.c
+    code.c
 )
 
 target_link_libraries(ptolemy PRIVATE ${MATH_LIB})

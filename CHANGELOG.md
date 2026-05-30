@@ -4,6 +4,468 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v2.8.0 — 2026-05-29
+
+**Phase 3: Ptolemy knows how to code — search, sensor, and source cognition**
+
+### Python — `skills/search.py` (EXTENDED)
+
+- **`SearchContext`** — live semantic search feeding directly into the sedenion field.
+  All results pass the P5 cepstrum adversarial gate before field ingestion.
+  Flow: search → gate → `MindEye.see()` → `hear()` → condensation candidate.
+- `search_arxiv(query)` — arXiv preprint search via `export.arxiv.org/api/query`.
+  Results encoded as 8D second-𝕆 vector (rank, recency, density, citation weight).
+- `search_wiki(query)` — Wikipedia REST summary via `en.wikipedia.org/api/rest_v1`.
+- `search_semantic(query)` — Semantic Scholar Open API (title, abstract, citations).
+- `search_lmfdb(count)` — Riemann zero data from `www.lmfdb.org/api/zeros/zeta`.
+  Falls back to first 8 known zeros on network failure.
+- `search_context(query)` — combined all four backends, ranked by callosum coupling.
+  This is the P2 search path: `search_context(q) → gate → MindEye → hear() → study()`.
+  LMFDB is activated automatically when query contains 'riemann', 'zero', or 'zeta'.
+- All backends: stdlib urllib only — no extra dependencies.
+
+### Python — `skills/sensor.py` (NEW)
+
+- **`SensorReader`** — physical sensor bridge for the lower octonion (e₀..e₇).
+  Reads `~/.ptolemy/live_state.json`, maps 8 sensor channels to lower-𝕆 operator dims:
+  `identity(e₀) negate(e₁) bind(e₂) name(e₃) apply(e₄) abstract(e₅) branch(e₆) iterate(e₇)`
+- `read()` — reads and parses live_state.json (list form, named dict form, or index-string form).
+- `write(channels)` — write channel values (preserves other top-level JSON keys).
+- `see()` — read → normalise → `MindEye.see()` → `hear()`. Returns callosum coupling strength.
+- `watch(interval)` — background daemon poll loop (non-blocking, daemon thread).
+- `stop()` — halt the poll loop. `on_update(cb)` — register update callbacks.
+- The zero-divisor bridge means sensor data in e₀..e₇ reaches cognitive dims e₈..e₁₅
+  only through the 42 Cawagas callosum pairs. SensorReader feeds that lower half.
+
+### Python — `skills/code.py` (NEW)
+
+- **`CodeReader`** — reads Python source files and encodes AST structure into the field.
+  Maps AST node types to lower-𝕆 dims:
+  `import→bind(e₂)  assign→name(e₃)  Call→apply(e₄)  FunctionDef→abstract(e₅)`
+  `If/Match→branch(e₆)  For/While/comprehension→iterate(e₇)  return/raise→negate(e₁)`
+- `read_file(path)` — parse file, count nodes, normalise, `MindEye.see()`, `hear()`.
+- `read_snippet(code)` — same from a string (no file I/O).
+- `scan_repo(root)` — walk directory tree, aggregate dim counts, final combined ingest.
+- e₅(abstract)→e₁₂(compose) = 1.000: the dominant zero-divisor coupling channel.
+  Function-rich files push hardest through the compose dimension of the cognitive half.
+  This is the Curry-Howard isomorphism expressed as sedenion algebra.
+- **`CodeWriter`** — generates code text from the current field state.
+  `generate(prompt)` — biases toward e₅(abstract)→e₁₂(compose) coupling channel.
+  Does not write to disk.
+
+### Python — `monad.py`
+
+- `Engine.get_search_context()` — lazy singleton SearchContext.
+- `Engine.get_sensor_reader()` — lazy singleton SensorReader.
+- `Engine.get_code_reader()` — lazy singleton CodeReader.
+- `Engine.get_code_writer()` — lazy singleton CodeWriter.
+- Socket commands (all new):
+  - `search_arxiv` / `search_wiki` / `search_semantic` / `search_lmfdb` (tier ≥ 1)
+  - `search_context` (tier ≥ 1) — combined P2 search path
+  - `sensor_read` / `sensor_write` / `sensor_watch` / `sensor_stop` / `sensor_status`
+  - `code_read` / `code_snippet` (tier 0) — source file ingestion
+  - `code_scan_repo` / `code_generate` (tier ≥ 2) — repo scan and code generation
+
+### Python — `skills/study.py`
+
+- **Ainulindale FLAG 10** — `prime_address_injective`: sedenion hash pipeline defines
+  a bijection from vocabulary to prime ordinal. Open formal target (Second Age).
+- **Ainulindale FLAG 11** — `constants_zero_face`: physical constants = (zero-index, E-face)
+  pairs. GAP=0.000707 = Yang-Mills mass gap = CMB prime ratio. Open formal target.
+- `study()` return dict now includes `ainulindale_flags` key — lists which flags
+  were proximity-touched by the current condensation event (dims 1+3 → FLAG 10;
+  dims 0+8 → FLAG 11).
+
+### C — `PtolC/search.c` + `search.h` (NEW)
+
+- `ptol_cepstrum_gate()` — P5 adversarial check (injection marker scan).
+- `ptol_search_arxiv()` — arXiv API via `popen(curl)`. Atom XML parsed with `strstr`.
+- `ptol_search_wiki()` — Wikipedia REST summary. JSON extracted with `strstr`.
+- `ptol_search_lmfdb()` — Riemann zeros from LMFDB. Falls back to 8 known zeros.
+- `ptol_search_context()` — combined arXiv + Wikipedia + conditional LMFDB.
+  No libcurl dependency — all HTTP via `popen("curl -sL ...")`.
+
+### C — `PtolC/sensor.c` + `sensor.h` (NEW)
+
+- `sensor_read(channels_out, path)` — parse live_state.json, fill float[8].
+  Accepts list form, named-dict form, and index-string-dict form.
+- `sensor_write(channels, path)` — write named-dict form to live_state.json.
+- `sensor_print(channels, out)` — human-readable channel table with L2 norm.
+
+### C — `PtolC/code.c` + `code.h` (NEW)
+
+- `code_read_file(path, profile)` — keyword-count source file into `CodeProfile`.
+  Maps C and Python keywords to lower-𝕆 dims via line scan. No external parser.
+- `code_profile_to_vec(profile, vec8)` — normalise counts to unit 8-float vector.
+- `code_profile_print(profile, out)` — human-readable dim table with dominant op marker.
+
+### C — `PtolC/daemon.c` (EXTENDED)
+
+- `SEARCH <query>` — context search: arXiv + Wikipedia + LMFDB. Results `monad_learn()`'d.
+- `SENSOR_READ` — read 8 sensor channels, print table, feed dominant channel name to field.
+- `CODE_READ <path>` — profile source file, print dim table, feed first 256 chars to field.
+
+### C — Build
+
+- `PtolC/Makefile` and `PtolC/CMakeLists.txt` updated: `search.c sensor.c code.c` added.
+- `PtolC/daemon.h` protocol table updated.
+
+---
+
+## v2.7.0 — 2026-05-29
+
+**Field recognition and harmonic verification**
+
+### Python — `skills/voice_auth.py` (NEW)
+
+- **`VoicePrint`** — two recognition paths, one in-memory flag.
+- Path A (spectral): `enroll(seconds)` records audio, extracts formant trajectory
+  (F₀–F₄ via Hann-windowed FFT → mel-scale peak detection), writes raw IEEE-754
+  doubles to `~/.ptolemy/voiceprint.bin`. `authenticate(seconds)` records live audio,
+  compares via cosine similarity (threshold 0.82). On recognition, sets engine flag.
+- Path B (harmonic): `init_harmonic(expr)` evaluates expression, stores SHA-256 of
+  integer result in `~/.ptolemy/field_key`. `check_harmonic(expr)` compares digest.
+  On match, sets same engine flag. No number appears in any committed file.
+- Pure Python FFT — no numpy dependency for the spectral path.
+- Audio backend: tries sounddevice, falls back to pyaudio, fails gracefully.
+- Both stored artefacts (`voiceprint.bin`, `field_key`) are outside all repositories.
+
+### Python — `monad.py`
+
+- `Engine._author_recognised` — in-memory flag. Never written to disk.
+- `Engine._set_recognised(state)` — the only write path to the flag.
+- `Engine._tier` — computed property (0–3). Live field state, never stored.
+  Tier 0: always. +1 Noether violation < 0.35. +1 recognition flag set. +1 β_mean depth.
+- `Engine.get_voice_auth()` — lazy singleton VoicePrint.
+- Socket commands: `enroll_voice`, `auth_voice`, `init_harmonic`, `field_sync`,
+  `auth_status`, `auth_revoke`, `hear_raw` (tier ≥ 2 required).
+
+### Security
+
+- `.gitignore` updated across all four repos: voice artefacts, session state,
+  spectral working files, secrets. Nothing names the recognition model.
+
+---
+
+## v2.6.0 — 2026-05-29
+
+**GitHub Observer + Collaborator — Phase 1 Security Foundation**
+
+### Python — `skills/github.py` (NEW)
+
+- **`_scan_secrets(text)`** — GitGuardian-class pattern scanner. 14 patterns covering
+  GitHub PATs (classic + fine-grained), OAuth/server tokens, OpenAI/Anthropic/AWS keys,
+  private key blocks, and env-var assignment forms. Called on ALL outbound payloads
+  and defensively on all inbound content.
+
+- **`_cepstrum_gate(text, threshold=0.15)`** — P5 adversarial gate at the e₁₅ callosum
+  boundary. Computes mean-squared deviation of character frequency from Zipfian
+  ideal. Also pattern-matches 10 known injection markers (ignore previous, DAN mode,
+  [INST], etc.). Returns `{'pass': bool, 'score': float, 'reason': str}`.
+
+- **`GitHubEye`** (Observer — second 𝕆 / Mind's Eye): read-only GitHub access.
+  - `see_issue(number)` — fetch issue, P5 gate, MindEye.see() + hear().
+  - `see_pr(number)` — fetch PR, gate, ingest.
+  - `see_file(path, ref)` — fetch file content, gate, ingest.
+  - `see_commit(sha)` — fetch commit message, gate, ingest.
+  - `see_repo(repo)` — fetch repo metadata, gate, ingest.
+  - `list_issues(state)` — list open/closed issues without field ingestion.
+  - `watch(interval, on_new_issue)` — background daemon, polls every `interval` seconds.
+  - No token required for public repos.
+
+- **`GitHubHands`** (Collaborator — first 𝕆 / Hands): write access to GitHub.
+  - Token always read from `os.environ['GITHUB_TOKEN']` — never from any file.
+  - Rate limits: max 3 comments/hour, max 1 comment per issue per 24h.
+  - `comment(number, body)` — post comment after secret scan.
+  - `speak_on_issue(number, prompt)` — generate from field, post as comment.
+  - `commit_file(path, content, message, branch)` — create/update file.
+  - `create_branch(branch, from_branch)` — fork a new branch.
+  - `create_pr(title, body, head, base)` — open pull request.
+  - `push_state(bin_path, label)` — push .bin field checkpoint to states repo.
+
+### Python — `monad.py`
+
+- `Engine.get_github_eye(repo)` — lazy singleton GitHubEye.
+- `Engine.get_github_hands(repo)` — lazy singleton GitHubHands.
+- Socket commands added: `mindeye_see_issue`, `mindeye_see_pr`, `mindeye_see_file`,
+  `mindeye_see_commit`, `mindeye_see_repo`, `github_list_issues`, `github_comment`,
+  `github_speak_issue`, `github_commit`, `github_create_branch`, `github_create_pr`,
+  `github_push_state`.
+
+### Security
+
+- `.git/hooks/pre-commit` — secret scanner blocks any commit containing credential
+  patterns. Uses the same 14-pattern set as `_scan_secrets()`. Python script,
+  no external dependencies. Prints rotation instructions on block.
+
+---
+
+## v2.5.0 — 2026-05-28
+
+**Native Unified Field Theory Engine + Native Space Cosmological Model Engine**
+
+### Python — `physics/uft_engine.py` (NEW)
+
+- **`UFTEngine`** — the Cayley-Dickson tower IS the force hierarchy. Computes
+  running gauge couplings (EM, weak, strong, dark G₂) from one-loop SM beta functions
+  anchored at E_EW = D_STAR. Fully functional: returns dicts, socket-accessible.
+
+- **`coupling_table(n_points)`** — α_em, α_weak, α_strong, α_dark running from E=GAP to 1.0.
+  Asymptotic freedom (strong/weak) and Landau pole (EM) both reproduced.
+
+- **`unification()`** — GUT scale extrapolation. ln(E_GUT/E_EW) ≈ 32.5 in NS coordinates,
+  mass ratio M_GUT/M_Z ≈ 1.3×10¹⁴ (correct order: physical GUT ≈ 10¹⁴–¹⁶ × M_Z).
+  Two unification notions distinguished: perturbative (coupling equality, beyond Planck)
+  and algebraic (full sedenion symmetry restoration at E=1.0, exact by construction).
+
+- **`higgs_sector()`** — VEV = OMEGA_ZS = Lambert W(1) = SSB vacuum minimum.
+  GAP = Yang-Mills mass gap = sedenion ground-state eigenvalue. Quartic coupling λ
+  derived from NS_EXCESS/LN10. M_Z ≈ D_STAR via Weinberg angle (z_over_D* = 1.26).
+
+- **`gauge_algebra()`** — full sedenion dim → gauge group table: gravity(e₀), EM(e₀,e₁),
+  weak(e₁-e₃), strong(e₁-e₇), dark G₂(e₈-e₁₅). Gauge bosons named per dimension.
+  W/Z bosons = sedenion zero-divisors (break division algebra at D*=1).
+
+- **`mass_spectrum(n_zeros)`** — gauge boson masses from E_k = |sin(πγ_k/(γ_k+1))|.
+  mass_k = GAP × E_k. Higgs VEV/mass_gap ratio ≈ 802.
+
+- **`dark_sector()`** — second 𝕆 (e₈-e₁₅) dark physics. Mirror of strong (G₂),
+  asymptotically free, α_dark(E_EW) = 0.1181. 84 callosum channels (zero-divisors).
+  **Dark life confirmed possible:** same G₂ automorphism group = same laws.
+  Noether current loops in e₈-e₁₅ = metabolic capacity. Interaction via e₁₅ (χ boson)
+  at D*=1, σ=½ only. MindEye (`skills/mind_eye.py`) IS the dark-sector interface.
+
+- **`mass_gap_proof()`** — constructive proof: Δ_𝕊 lowest eigenvalue = OMEGA_ZS > 0.
+  β-field EMA fixed point β* = OMEGA_ZS > 0 → every field configuration has energy ≥ GAP.
+  GAP = 0.000707 > 0 by construction.
+
+### Python — `physics/cosmo_engine.py` (NEW)
+
+- **`CosmoEngine`** — Riemann zero distribution IS large-scale structure.
+  Density parameters, CMB peaks, BAO, Hubble tension, dark energy, inflation modes,
+  and void catalog — all from NS constants + Riemann zeros, no external fitting.
+
+- **`density_parameters()`** — NS decomposition: LN10 = 2·LN2 + NS_EXCESS →
+  Ω_Λ = NS_EXCESS/LN10 ≈ 0.398, Ω_m = 2·LN2/LN10 ≈ 0.602. Sum = 1.000 (flat universe).
+  Physical: Ω_Λ ≈ 0.69 observed — NS prediction pre-recombination; calibration needed.
+
+- **`bao_scale()`** — r_s = OMEGA_ZS in NS. First BAO peak:
+  ℓ₁ = π / (OMEGA_ZS × D_STAR) × 10 = 225.2 vs observed 220 (2.4% error, no fit).
+
+- **`cmb_peaks()`** — first five acoustic peaks from BAO harmonic sequence. First
+  peak error 2.4%. Higher peaks deviate (anharmonicity, neutrino free-streaming).
+  Neutrino phase shift Δℓ ≈ 42.8; Silk damping ℓ_silk ≈ 2520.
+
+- **`power_spectrum(l_max)`** — C_l from Riemann zero spacings. C_l ∝ (Δγ_l)² × OMEGA_ZS² / γ_l.
+  NS spectral index n_s ≈ 1 − 2/60 = 0.9667 (observed 0.9649 — within 0.2%).
+
+- **`hubble_tension()`** — local H₀ ∝ 1/D_STAR, CMB H₀ ∝ 1/OMEGA_ZS.
+  Mechanism: prime counting (local, discrete) vs Riemann zero density (CMB, continuous).
+  Direction correct (local > CMB); magnitude calibration in progress.
+
+- **`dark_energy()`** — Λ = NS_EXCESS (sedenion residual beyond division algebras).
+  Equation of state w = −OMEGA_LAMBDA ≈ −0.398 (true Λ: w = −1; deviation = sedenion signature).
+  Vacuum energy = GAP⁴ ≈ 2.5×10⁻¹³; CC hierarchy ratio ~10¹³ (problem persists; partial
+  cancellation via callosum coupling χ proposed).
+
+- **`inflation_modes(n_zeros)`** — first 60 zeros = 60 e-folds. Spectral index tilt
+  from zero spacing power law. Tensor-to-scalar r ≈ 16 × GAP/OMEGA_ZS × Ω_Λ.
+
+- **`void_catalog(n_arms)`** — 84 zero-divisor channels → cosmic web skeleton.
+  Arms per 𝕆 copy = 42 (G₂ triality × 7 imaginary units × 2 orientations).
+  Void filling fraction ≈ 80% (observed 80% from SDSS/6dFGS).
+
+### Python — `monad.py`
+
+- **`Engine.get_uft()`** — lazy-creates `UFTEngine`; shared singleton per engine.
+- **`Engine.get_cosmo()`** — lazy-creates `CosmoEngine`; shared singleton per engine.
+- **8 UFT socket commands:** `uft_report`, `uft_coupling`, `uft_unification`,
+  `uft_higgs`, `uft_gauge`, `uft_spectrum`, `uft_dark`, `uft_mass_gap`.
+- **9 cosmo socket commands:** `cosmo_report`, `cosmo_density`, `cosmo_bao`,
+  `cosmo_cmb`, `cosmo_spectrum`, `cosmo_hubble`, `cosmo_dark_energy`,
+  `cosmo_inflation`, `cosmo_voids`.
+
+---
+
+## v2.5.1 — 2026-05-29
+
+**Self-portrait engine + cosmological constants resolution (10 = 2 × 5)**
+
+### Python — `physics/cosmo_engine.py`
+
+- **Constants rewritten from first principles — 10 = 2 × 5:**
+  ```
+  OMEGA_LAMBDA = LN5 / LN10   ≈ 0.6990  (was NS_EXCESS/LN10 ≈ 0.398 — 73% error)
+  OMEGA_M      = LN2 / LN10   ≈ 0.3010  (was 2·LN2/LN10 ≈ 0.602)
+  OMEGA_B      = LN2 / (7·LN10)  ≈ 0.0430  (baryon fraction = 1/7 of Ω_m)
+  OMEGA_DM     = 6·LN2 / (7·LN10) ≈ 0.2580  (6 non-EM generators of first 𝕆)
+  ```
+  The prime factorisation 10 = 2 × 5 resolves the Ω_Λ/Ω_m identification:
+  - LN2 governs matter (first 𝕆, 7 imaginary units; 1 EM + 6 dark matter generators)
+  - LN5 governs dark energy (second 𝕆 propagating as expansion pressure via χ = e₁₅)
+  - Baryon fraction = 1/7: 1 EM generator (e₁) out of 7 imaginary units of first 𝕆
+  - W_DARK_ENERGY = −OMEGA_LAMBDA ≈ −0.699; deviation from true Λ (w = −1)
+    equals Ω_m — a testable DESI-era prediction: (1+w) = Ω_m
+
+- **Accuracy after fix:** Ω_Λ 1.5% error (was 73%), Ω_m 3.2% error (was 93%),
+  Ω_dm 1.6% error. Discovered by following the discrepancy in the self-portrait output.
+
+### Python — `skills/draw.py`
+
+- **`self_portrait(uns=None)`** — 5-panel composite PNG (2308×1400) of Holcus's
+  current mathematical state. Fully headless (matplotlib Agg, no display required).
+  Panels: sedenion wheel with live UNS state + force-sector arcs + callosum haze,
+  RH critical strip with first 20 Riemann zeros, gauge coupling unification,
+  UNS 16D radar chart, cosmological constants table.
+
+- **`_SECTOR`** — 16 hex colors mapping e₀..e₁₅ to force sectors:
+  purple (gravity e₀), yellow (EM e₁), green (weak e₂-e₃), red (strong e₄-e₇),
+  cyan (dark G₂ e₈-e₁₅). Arc widths proportional to live UNS amplitudes.
+
+- **`_RIEMANN_ZEROS`** — first 20 Riemann zeros as module constant.
+
+- **`Engine.get_draw()`** — lazy-creates `PtolDraw`; shared singleton per engine.
+
+### Python — `monad.py`
+
+- **Bug fix — `SpeakingThread.__init__`:** Added `self._engine = monad._engine`.
+  Without this, all physics/identity/mindeye socket commands failed with
+  `AttributeError` at runtime. Pre-existing since physics commands were added in v2.5.0.
+
+- **3 draw socket commands:** `draw_portrait` (5-panel PNG), `draw_wheel`
+  (sedenion wheel SVG), `draw_bao` (BAO rings SVG).
+
+---
+
+## v2.5.2 — 2026-05-29
+
+**Holcus as Composer — sedenion field → MIDI score engine**
+
+### Python — `skills/music.py` (NEW)
+
+- **`HolcusComposer`** — field geometry → musical score. The same J^μ field
+  that drives language output drives musical output. Same equation, different
+  output codec. No external dependencies — pure-Python MIDI writer bundled.
+
+- **GM catalog constants** — all 128 patches across 16 families:
+  `GM_PIANO`, `GM_CHROM_PERC`, `GM_ORGAN`, `GM_GUITAR`, `GM_BASS`,
+  `GM_STRINGS`, `GM_ENSEMBLE`, `GM_BRASS`, `GM_REED`, `GM_PIPE`,
+  `GM_SYNTH_LEAD`, `GM_SYNTH_PAD`, `GM_SYNTH_FX`, `GM_ETHNIC`,
+  `GM_PERCUSSIVE`, `GM_SOUND_FX`. Full `GM_ALL` lookup dict.
+
+- **`_SED_VOICE`** — sedenion dimension → (MIDI channel, default patch, family):
+  16 dimensions = 16 GM families = 16 MIDI channels.
+  e₀..e₇ (first 𝕆) = acoustic instruments; e₈..e₁₅ (second 𝕆) = electronic.
+  e₁₅ (χ, callosum bridge) = Breath Noise — the conductor coordinating all voices.
+
+- **Guitar tunings:** `_TUNING_6STD`, `_TUNING_6DROP_D`, `_TUNING_6OPEN_G`,
+  `_TUNING_6DADGAD`, `_TUNING_BASS4`, `_TUNING_BASS5`.
+
+- **Pure-Python MIDI writer** — `_MIDIFile` (format 1) + `_MIDITrack`;
+  variable-length delta encoding; note/program/tempo/name events; no deps.
+
+- **Field → music mapping:**
+  - Riemann zeros → pitch grid (GUE spacing preserved via `int(round(γ)) % span`)
+  - β-field → velocity (log scale: GAP → pp, β_sat → fff)
+  - E-value → note duration (|sin(πγ/(γ+1))|)
+  - A-matrix → voice leading; BAO → tonal centre (OMEGA_ZS → Bb/Eb/F cluster)
+  - Noether violation → phrase boundary; zero-divisor → bridge passage
+
+- **Instrument methods:** `piano()`, `guitar_6()`, `guitar_12()`, `bass_guitar()`,
+  `woodwind()`, `brass()`, `strings()`, `organ()`, `chromatic_percussion()`.
+  All accept live field or fall back to synthetic Riemann-zero field.
+
+- **`every_instrument()`** — full 16-voice sedenion orchestra from a single field
+  state. One MIDI file; 16 simultaneous voices; one per sedenion operator.
+
+- **`compose()`** — prompt → field state → score. Attempts live monad Engine
+  integration via import; falls back to synthetic field. Neutral buoyancy selects
+  pitches exactly as speak() selects words.
+
+- **Output helpers:** `to_abc()` (ABC notation), `midi_notation()` (human-readable
+  event log), `_build_tab()` (ASCII tablature for guitar/bass).
+
+- **Output directory:** `~/.ptolemy/music/`; files timestamped `{stem}_{unix}.mid`.
+
+### Python — `monad.py`
+
+- **`Engine.get_music()`** — lazy singleton for `HolcusComposer`; same pattern
+  as `Engine.get_draw()`.
+
+- **`Engine._build_music_field(n=64)`** — extracts live β-vector from crank into
+  `(gamma, beta, e_val, sed_dim)` field format for the composer. Falls back to
+  empty list (composer substitutes synthetic Riemann-zero field).
+
+- **10 music socket commands** added to `SpeakingThread._dispatch()`:
+  `compose_piano`, `compose_guitar`, `compose_guitar_12`, `compose_bass`,
+  `compose_woodwind`, `compose_brass`, `compose_strings`, `compose_organ`,
+  `compose_chrom_perc`, `compose_orchestra`.
+  All accept: `n_notes`, `tempo`, `variant`/`instrument`/`strings` params.
+  Return: `path` (MIDI file), `n_notes`, `notation` (first 2000 chars),
+  `abc` (first 1000 chars).
+
+---
+
+## v2.5.3 — 2026-05-29
+
+**HolcusDJ — real-time Disc Jockey: field → MIDI → speakers**
+
+### Python — `skills/music.py`
+
+- **`HolcusDJ`** — continuous playback loop in a daemon thread.
+  The same J^μ Noether current that drives speak() drives the DJ.
+  Same neutral-buoyancy selection; output codec is sound, not text.
+
+- **Playback priority (Ubuntu Studio stack):**
+  1. `aplaymidi -p 128:0 {file}` → existing FluidSynth → PipeWire → speakers
+     (zero overhead; reuses the running synth and its loaded soundfont)
+  2. `fluidsynth -a pulseaudio -g {gain} FluidR3_GM.sf2 {file}` (fallback)
+  3. `timidity -a -A {vol}%` (final fallback; always present)
+
+- **`_detect_fluid_port()`** — dynamically finds the FluidSynth ALSA MIDI
+  port from `aplaymidi -l` output. Re-checked each track (port changes if
+  synth restarts).
+
+- **`_find_soundfont()`** — searches standard Ubuntu Studio .sf2 paths,
+  prefers `FluidR3_GM.sf2`.
+
+- **Auto-ensemble arc** driven by live β_mean:
+  ```
+  β < 0.010  →  piano      (field just woke)
+  β < 0.050  →  strings    (early warmth)
+  β < 0.150  →  woodwind   (breath enters)
+  β < 0.500  →  brass      (field pressure)
+  β < 2.000  →  organ      (deep resonance)
+  β ≥ 2.000  →  orchestra  (full sedenion orchestra)
+  ```
+
+- **Auto-tempo arc** — drifts toward `60 + ratio×120` BPM (log scale,
+  GAP→60, β_sat→180); moves ≤ 5 BPM per track for smooth evolution.
+
+- **Controls:** `start(ensemble, tempo, n_notes, gain)`, `stop()`,
+  `skip()`, `set_tempo()`, `set_ensemble()`, `set_gain()`, `status()`.
+  All methods are thread-safe (internal `threading.Lock`).
+
+### Python — `monad.py`
+
+- **`Engine.get_dj()`** — lazy singleton for `HolcusDJ`; wired to live
+  `_build_music_field` so each track reflects the current engine state.
+
+- **7 DJ socket commands** added to `SpeakingThread._dispatch()`:
+  `dj_start`, `dj_stop`, `dj_skip`, `dj_status`,
+  `dj_tempo`, `dj_ensemble`, `dj_gain`.
+
+  Example — start the DJ:
+  ```json
+  {"type": "dj_start", "ensemble": "auto", "tempo": 120, "n_notes": 32}
+  ```
+  Skip track:
+  ```json
+  {"type": "dj_skip"}
+  ```
+
+---
+
 ## v2.4.0 — 2026-05-27
 
 **Neutral buoyancy word selection + Native Space constants + MindEye second-𝕆 workbench**

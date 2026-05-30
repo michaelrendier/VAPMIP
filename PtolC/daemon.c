@@ -25,6 +25,9 @@
 #include "state.h"
 #include "log.h"
 #include "daemon.h"
+#include "search.h"
+#include "sensor.h"
+#include "code.h"
 
 /* ── Signal handling ──────────────────────────────────────────────────────── */
 
@@ -116,6 +119,73 @@ static void handle_client(Monad *m, int fd, int verbose)
             fprintf(out, "OK\n.\n");
             fflush(out);
             break;
+
+        } else if (strncmp(line, "SEARCH ", 7) == 0) {
+            /* SEARCH <query>  — context search: arXiv + Wikipedia */
+            const char *query = line + 7;
+            plog(PLOG_INFO, "daemon SEARCH: %s", query);
+            PtolSearchResult results[PTOL_SEARCH_MAX];
+            double zeros[8];
+            int nz = 0;
+            int n = ptol_search_context(query, results, PTOL_SEARCH_MAX,
+                                        zeros, &nz);
+            for (int i = 0; i < n; i++) {
+                fprintf(out, "[%s] %s\n%s\n",
+                        results[i].source == PTOL_SEARCH_ARXIV ? "arxiv" : "wiki",
+                        results[i].title, results[i].summary);
+                /* Feed title+summary into field */
+                char combined[1024];
+                snprintf(combined, sizeof(combined), "%s %s",
+                         results[i].title, results[i].summary);
+                monad_learn(m, combined, 1.0f);
+            }
+            if (nz > 0) {
+                fprintf(out, "[lmfdb] zeros:");
+                for (int i = 0; i < nz; i++)
+                    fprintf(out, " %.4f", zeros[i]);
+                fprintf(out, "\n");
+            }
+            fprintf(out, ".\n");
+            fflush(out);
+
+        } else if (strcmp(line, "SENSOR_READ") == 0) {
+            /* SENSOR_READ  — read 8 sensor channels from live_state.json */
+            plog(PLOG_INFO, "daemon SENSOR_READ");
+            float ch[8];
+            sensor_read(ch, NULL);
+            sensor_print(ch, out);
+            /* Feed dominant channel name into field */
+            int top = 0;
+            for (int i = 1; i < 8; i++)
+                if (ch[i] > ch[top]) top = i;
+            static const char *CH_NAMES[8] = {
+                "identity","negate","bind","name",
+                "apply","abstract","branch","iterate"};
+            monad_learn(m, CH_NAMES[top], 0);
+            fprintf(out, ".\n");
+            fflush(out);
+
+        } else if (strncmp(line, "CODE_READ ", 10) == 0) {
+            /* CODE_READ <path>  — profile a source file */
+            const char *path = line + 10;
+            plog(PLOG_INFO, "daemon CODE_READ: %s", path);
+            CodeProfile prof;
+            if (code_read_file(path, &prof)) {
+                code_profile_print(&prof, out);
+                /* Feed file into field via monad_learn on first 256 chars */
+                FILE *src = fopen(path, "r");
+                if (src) {
+                    char snippet[256];
+                    size_t got = fread(snippet, 1, 255, src);
+                    fclose(src);
+                    snippet[got] = '\0';
+                    monad_learn(m, snippet, 1.0f);
+                }
+            } else {
+                fprintf(out, "ERR cannot read %s\n", path);
+            }
+            fprintf(out, ".\n");
+            fflush(out);
 
         } else if (l > 0) {
             fprintf(out, "ERR unknown command\n.\n");

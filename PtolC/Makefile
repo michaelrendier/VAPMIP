@@ -12,7 +12,8 @@ ifeq ($(HAVE_XML),yes)
 endif
 
 TARGET  = ptolemy
-SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c
+SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c \
+          search.c sensor.c code.c
 OBJS    = $(SRCS:.c=.o)
 
 PREFIX       ?= /usr/local
@@ -109,4 +110,7 @@ tokenizer.o:  tokenizer.c tokenizer.h
 filter.o:     filter.c filter.h
 ingest.o:     ingest.c monad.h filter.h state.h ingest.h log.h
 log.o:        log.c log.h
-daemon.o:     daemon.c ptolemy.h monad.h state.h daemon.h log.h
+daemon.o:     daemon.c ptolemy.h monad.h state.h daemon.h log.h search.h sensor.h code.h
+search.o:     search.c search.h log.h
+sensor.o:     sensor.c sensor.h log.h
+code.o:       code.c code.h log.h
