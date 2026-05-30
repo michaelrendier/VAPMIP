@@ -53,6 +53,16 @@
     "txt":  "mathematics_corpus.txt",
     "primary_tags": ["NUMBERTHEORY", "RIEMANN", "SPECTRAL", "MODULAR", "PRIMES", "CLAY", "HARMONIC"],
     "color": "orange",
-    "description": "Riemann zeta, spectral theory, prime distribution, modular forms, Leech lattice, Lambert W. The mathematical substrate of H_hat_RB and all six Clay projections."
+    "description": "Riemann zeta, spectral theory, prime distribution, modular forms, Leech lattice, Lambert W. The mathematical substrate of H_RB and all six Clay projections."
+  },
+  {
+    "name": "English Language — Complete",
+    "bin":  "monad_english.bin",
+    "txt":  "english_corpus.txt",
+    "primary_tags": ["ETYMOLOGY", "LITERARY", "ROOTS", "GRAMMAR"],
+    "primary_weight": 2.0,
+    "context_weight": 1.0,
+    "color": "silver",
+    "description": "Complete English language corpus — etymology, literary canon, morphology, grammar, rhetoric, philosophy of language, mathematics-English and physics-English interfaces. The lexical ground state beneath all other fields."
   }
 ]

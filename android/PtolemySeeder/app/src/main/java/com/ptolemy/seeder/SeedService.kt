@@ -136,13 +136,48 @@ class SeedService : LifecycleService() {
         "c_corpus.txt",
         "physics_corpus.txt",
         "mathematics_corpus.txt",
+        "english_corpus.txt",
     )
+
+    // Merge bundled corpus_list.json into the existing file.
+    // New entries in the bundled version are added; user-added entries (via ptorrent) are preserved.
+    private fun mergeCorpusJson(dir: String) {
+        val dest = File(dir, "corpus_list.json")
+        val bundledText = try {
+            assets.open("corpus_list.json").bufferedReader().readText()
+        } catch (_: Exception) { return }
+
+        if (!dest.exists()) {
+            dest.writeText(bundledText)
+            return
+        }
+
+        val existing = try { JSONArray(dest.readText()) } catch (_: Exception) { JSONArray() }
+        val bundled  = try { JSONArray(bundledText) } catch (_: Exception) { return }
+
+        val existingNames = (0 until existing.length())
+            .map { existing.getJSONObject(it).optString("name") }
+            .toSet()
+
+        var changed = false
+        for (i in 0 until bundled.length()) {
+            val entry = bundled.getJSONObject(i)
+            val name  = entry.optString("name")
+            if (name.isNotEmpty() && name !in existingNames) {
+                existing.put(entry)
+                changed = true
+            }
+        }
+        if (changed) dest.writeText(existing.toString(2))
+    }
 
     private fun extractAssets() {
         val dir = extDir()
+        mergeCorpusJson(dir)
         for (name in assetFiles) {
+            if (name == "corpus_list.json") continue
             val dest = File(dir, name)
-            if (!dest.exists() || name == "corpus_list.json") {
+            if (!dest.exists()) {
                 try {
                     assets.open(name).use { inp ->
                         dest.outputStream().use { out -> inp.copyTo(out) }

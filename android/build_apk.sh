@@ -13,6 +13,7 @@ PROJECT="$SCRIPT_DIR/PtolemySeeder"
 PYDIR="$PROJECT/app/src/main/python"
 ASSETS="$PROJECT/app/src/main/assets"
 CORPORA="$REPO_ROOT/code-corpora"
+PTORRENTS="$REPO_ROOT/ptorrents"
 
 echo "[seeder] Syncing Python sources…"
 cp "$REPO_ROOT/monad.py"                    "$PYDIR/monad.py"
@@ -26,7 +27,7 @@ cp "$REPO_ROOT/skills/corpus_mathematics.py" "$PYDIR/skills/corpus_mathematics.p
 cp "$REPO_ROOT/skills/foundations.py"        "$PYDIR/skills/foundations.py"
 cp "$REPO_ROOT/skills/meaning.py"            "$PYDIR/skills/meaning.py"
 cp "$REPO_ROOT/skills/fermat_lattice.py"     "$PYDIR/skills/fermat_lattice.py"
-cp "$SCRIPT_DIR/PtolemySeeder/app/src/main/python/seed_runner.py" "$PYDIR/seed_runner.py"
+# seed_runner.py lives in the assets python dir — no separate copy needed
 
 echo "[seeder] Syncing corpus assets…"
 cp "$REPO_ROOT/foundations.txt"              "$ASSETS/foundations.txt"
@@ -36,6 +37,7 @@ cp "$CORPORA/python_corpus.txt"              "$ASSETS/python_corpus.txt"
 cp "$CORPORA/c_corpus.txt"                   "$ASSETS/c_corpus.txt"
 cp "$CORPORA/physics_corpus.txt"             "$ASSETS/physics_corpus.txt"
 cp "$CORPORA/mathematics_corpus.txt"         "$ASSETS/mathematics_corpus.txt"
+cp "$PTORRENTS/english_corpus.txt"          "$ASSETS/english_corpus.txt"
 cp "$SCRIPT_DIR/corpus_list.json"           "$ASSETS/corpus_list.json"
 
 echo "[seeder] Building APK…"

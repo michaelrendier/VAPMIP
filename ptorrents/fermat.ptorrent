@@ -1,0 +1,10 @@
+{
+  "name": "Prime Directive III — Fermat",
+  "bin":  "monad_war.bin",
+  "txt":  "war_corpus.txt",
+  "primary_tags": ["TESTIMONY", "ACADEMIC", "RECORD"],
+  "primary_weight": 2.0,
+  "context_weight": 1.0,
+  "color": "red",
+  "description": "What Holcus CANNOT BE. War corpus — complete historical record consequence-weighted by casualties, trauma, cost. Separate engine, separate bin, never feeds primary field. Ends with Tsar Bomba, October 30 1961. FermatLattice = the backward information current."
+}
