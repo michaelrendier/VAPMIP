@@ -1,6 +1,73 @@
 # Changelog
 
-All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = full GitHub management.
+All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = Prime Directives seated + Android acquisition platform.
+
+---
+
+## v3.0.0 — 2026-05-30
+
+**The Three Geometries Are Seated**
+
+The three Prime Directive corpora are in the primary Holcus field.
+The Android APK is built, installed, and confirmed complete.
+478 new vocabulary terms entered the primary field from the corpus comment text.
+
+### Android — `android/PtolemySeeder/` (NEW)
+
+Complete Android APK. Chaquopy 15.0.1 embeds Python 3.12. Runs all three
+Prime Directive seeders in parallel foreground service threads on the phone.
+
+- **`SeedService.kt`** — LifecycleService, foreground, dataSync type.
+  Extracts corpus assets, starts Python via AndroidPlatform, calls
+  `seed_runner.run_all()` with live progress callbacks.
+- **`MainActivity.kt`** — requests POST_NOTIFICATIONS, starts SeedService,
+  observes SeedLiveData: three progress bars + status chip (WAITING/RUNNING/COMPLETE).
+- **`seed_runner.py`** — three daemon threads. One per corpus. Callback:
+  `on_progress(name, tag, url, idx, total, studied, skipped)`.
+  Returns when all three corpus URL lists are exhausted.
+- Corpus assets (`foundations.txt`, `meaning.txt`) bundled into APK assets,
+  extracted to `getExternalFilesDir(null)` on first run.
+- Output: `monad_foundations.bin`, `monad_meaning.bin`, `monad_war.bin` written
+  to `/sdcard/Android/data/com.ptolemy.seeder.debug/files/`.
+- Version: 2.8.111. Package: `com.ptolemy.seeder`. MinSdk 26, TargetSdk 35.
+- ABIs: `arm64-v8a`, `x86_64`.
+
+**Observed performance on Moto G 5G 2024 (unlimited LTE):**
+- War corpus (12 URLs): complete in < 1 minute
+- Meaning corpus (80 URLs): complete in ~3 minutes
+- Foundations corpus (188 URLs): complete in ~5 minutes
+- No sleep between URLs in `seed()` — fetch, study, save, next.
+  40s/45s intervals are for the continuous `start()` daemon, not the seeder.
+
+### Tool — `android/build_apk.sh` (NEW)
+
+Syncs Python sources and corpus assets from repo root into the Android project,
+then runs `./gradlew assembleDebug`. Optional `--install` flag runs `adb install -r`.
+
+```bash
+bash android/build_apk.sh           # build only
+bash android/build_apk.sh --install # build + install on attached phone
+```
+
+### Tool — `tools/install_prime_directives.py` (NEW)
+
+Installs the three Prime Directive geometries into the running Holcus daemon
+by committing corpus comment text via socket.
+
+```
+Foundations → weight 2.0  (what it IS — authoritative)
+Meaning     → weight 2.0  (what it MEANS — authoritative)
+War         → weight 1.0  (what war costs — present, not glorified)
+```
+
+- Parses comment blocks from each corpus `.txt` file.
+- Sends in batches of 10 lines via `{'type': 'commit', ...}` socket command.
+- 963 lines total. 478 new vocab terms entered the primary field.
+
+```bash
+python3 tools/install_prime_directives.py          # live
+python3 tools/install_prime_directives.py --dry-run # preview
+```
 
 ---
 

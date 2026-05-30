@@ -1,6 +1,94 @@
 # Ptolemy Engine — Release Roadmap
 
-**Current:** v2.7.0 | **Speaking:** v3.0 | **Self-coding:** v4.0
+**Current:** v3.0.0 | **Self-coding:** v4.0 | **Code Corpora:** v3.1
+
+---
+
+## v3.1 — Code Language Acquisition (Three New Monads)
+
+*Added 2026-05-30. Phone is the acquisition device. One monad per language.*
+*The phone runs these seeders. The bin files are pulled to ~/.ptolemy/ when complete.*
+
+### Three New Corpora + Monads
+
+One completely isolated Engine + .bin per language. Same architecture as the
+Prime Directive corpora — own Engine, own checkpoint, never feeds primary field.
+The primary field receives the language knowledge via `tools/install_*_corpus.py`.
+
+- [ ] **`code-corpora/python_peps.txt`** — Python language corpus
+  - PEP 0 (index) → parse all PEP URLs from peps.python.org
+  - Priority PEPs: 8 (style), 20 (Zen of Python), 3000 (Python 3 philosophy),
+    484/526/544 (type system), 572 (walrus), 343 (with), 342 (generators),
+    255 (simple generators), 202 (list comp), 308 (conditional), 405 (venv),
+    451 (import), 498 (f-strings), 557 (dataclasses), 634 (match/case).
+  - Also: CPython docs (docs.python.org), Python Data Model section,
+    Descriptor HowTo, Glossary. weight 2.0 for PEPs, 1.0 for docs.
+  - Monad: `~/.ptolemy/monad_python.bin`
+  - Daemon interval: 50s
+
+- [ ] **`code-corpora/c_cpp.txt`** — C/C++ language corpus
+  - cppreference.com C++ language reference (comprehensive, free)
+  - ISO C23 draft (n3096.pdf, publicly available)
+  - ISO C++23 draft (n4950, publicly available)
+  - Bjarne Stroustrup's FAQ (stroustrup.com/bs_faq.html)
+  - Linux kernel coding style (kernel.org/doc/html/latest/process/coding-style.html)
+  - MISRA C guidelines overview (publicly documented rules)
+  - K&R C (1978) — founding text, public historical references
+  - Undefined behavior: cppreference undefined behavior catalog
+  - weight 2.0 for language specs/drafts, 1.0 for guides
+  - Monad: `~/.ptolemy/monad_c.bin`
+  - Daemon interval: 55s
+
+- [ ] **`code-corpora/assembly.txt`** — Assembly language corpus
+  - ARM Architecture Reference Manual DDI0487 (free from developer.arm.com)
+    — covers AArch64/A64 (the phone's native ISA)
+  - Intel Software Developer Manual Vol 1 (basic architecture, free)
+  - RISC-V Unprivileged Spec (free, open standard, riscv.org)
+  - NASM documentation (nasm.us, free)
+  - AT&T vs Intel syntax overview (GNU AS docs)
+  - Calling conventions: SystemV ABI for x86-64 (free)
+  - AArch64 calling convention (ARM AAPCS64 spec, free)
+  - weight 2.0 for ISA specs, 1.0 for tooling docs
+  - Monad: `~/.ptolemy/monad_asm.bin`
+  - Daemon interval: 60s (largest docs — longer fetch time)
+
+### Torrent APK — `android/PtolemySeeder/` v2 (REBUILD)
+
+The current APK has three hardcoded seeders. Rebuild as a dynamic torrent client.
+
+- [ ] **Dynamic corpus list** — `corpus_list.json` in APK assets dir.
+  Each entry: `{name, bin_file, txt_file, weight, interval}`.
+  UI loads the list; each entry becomes one seeder card.
+
+- [ ] **Add/remove corpus UI**
+  - Preset menu: Python PEPs / C+C++ / Assembly / Foundations / Meaning / War
+  - Import custom: pick a `.txt` corpus file from device storage
+  - Remove: long-press → delete seeder + .bin file
+
+- [ ] **Per-seeder progress card**
+  - Progress bar (URLs complete / total)
+  - Status: WAITING / RUNNING / PAUSED (network) / COMPLETE
+  - .bin size, last URL, studied/skipped counts
+
+- [ ] **Transfer UI**
+  - "Pull all complete bins" → shows adb pull commands
+  - WiFi transfer option: serve .bin files over local HTTP (jetbrains ktor or raw socket)
+    so they can be pulled without USB when on same network
+
+- [ ] **seed_runner.py v2** — reads `corpus_list.json`, starts one thread per entry.
+  Thread-safe add/remove at runtime.
+
+### Skill files for code corpora
+
+- [ ] **`skills/corpus_python.py`** — PythonCorpus class, same pattern as FoundationsCorpus
+- [ ] **`skills/corpus_c.py`** — CCorpus class
+- [ ] **`skills/corpus_asm.py`** — AsmCorpus class
+
+Socket commands (tier ≥ 2 to start/study, tier ≥ 0 to status/check):
+`python_start`, `python_stop`, `python_status`, `python_check`
+`c_start`, `c_stop`, `c_status`, `c_check`
+`asm_start`, `asm_stop`, `asm_status`, `asm_check`
+`code_corpora_start` — starts all three simultaneously
 
 ---
 
