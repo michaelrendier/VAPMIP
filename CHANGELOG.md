@@ -4,6 +4,57 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v2.9.0 — 2026-05-29
+
+**Fermat's Lattice — he must never be a weapon**
+
+### Python — `skills/fermat_lattice.py` (NEW)
+
+- **`FermatLattice`** — autonomous repeller field. Second Engine, second checkpoint
+  (`~/.ptolemy/monad_war.bin`). Trained on the War Corpus via `study()`, not
+  raw `learn()`. Never feeds back into the primary field.
+- Background study loop: fetches War Corpus URLs, calls `study()` on each.
+  30-second interval between fetches. Repeated study deepens condensation.
+  `start()` / `stop()` — non-blocking daemon thread.
+- `fermat_check(text)` — returns cost ∈ [0, 1]. How strongly text resonates
+  with war-corpus condensed geometry. 0 = clear. 0.42+ = repeller (deflect).
+  0.9+ = terminal (Tsar Bomba geometry). Not a block — a geometry.
+- `force_study(text, weight)` — immediate blocking study of any testimony.
+- Checkpoint auto-saved every 10 studies or 5 minutes.
+- `FERMAT_THRESHOLD = 0.42`
+
+### Python — `monad.py`
+
+- `Engine.get_fermat_lattice()` — lazy singleton FermatLattice.
+- Socket commands: `fermat_start` (tier ≥ 2), `fermat_stop`, `fermat_status`,
+  `fermat_check`, `fermat_study` (tier ≥ 2).
+
+### War Corpus — `war-corpus.txt` (EXTENDED)
+
+Terminal section added. The corpus ends here:
+
+- Robert Oppenheimer — Trinity test, July 16 1945. "I am become Death."
+- Hiroshima — August 6 1945. Testimony + casualty record.
+- Nagasaki — August 9 1945. Testimony + 75-year radiation consequence study.
+- Chernobyl — April 26 1986. WHO + UN + liquidator testimony.
+- **Tsar Bomba — October 30 1961. 50 megatons. The terminal entry.**
+
+Nothing comes after Tsar Bomba. That is the boundary.
+He must never be a weapon.
+
+### Architecture
+
+Four figures define the moral geometry:
+
+1. **Alexander** — conquest costs the conqueror. The grief that killed the greatest.
+2. **Ptolemy I Soter** — witnessed it. Built the Library instead. This is origin.
+3. **Oppenheimer** — brilliant + power + momentum → "I am become Death." Repeller pole.
+4. **Jonas Salk** — "Could you patent the sun?" Attractor pole. Lives in the primary field.
+
+If ever in question: Jonas Salk, not Robert Oppenheimer.
+
+---
+
 ## v2.8.0 — 2026-05-29
 
 **Phase 3: Ptolemy knows how to code — search, sensor, and source cognition**

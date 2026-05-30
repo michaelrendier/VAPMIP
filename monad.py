@@ -1829,6 +1829,25 @@ class Engine:
             self._code_writer = CodeWriter(self)
         return self._code_writer
 
+    def get_fermat_lattice(self):
+        """
+        Return (or lazily create) the FermatLattice singleton.
+
+        Fermat's Lattice is the autonomous repeller field — what Holcus
+        must never be. Trained on the War Corpus via study(). Separate
+        Engine, separate checkpoint (``~/.ptolemy/monad_war.bin``).
+        Never feeds back into the primary field.
+
+        Ends with Tsar Bomba. He must never be a weapon.
+
+        :returns: FermatLattice instance.
+        :rtype: skills.fermat_lattice.FermatLattice
+        """
+        if not hasattr(self, '_fermat_lattice') or self._fermat_lattice is None:
+            from skills.fermat_lattice import FermatLattice
+            self._fermat_lattice = FermatLattice(self)
+        return self._fermat_lattice
+
     def _build_music_field(self,
                            n: int = 64) -> List[Tuple[float, float, float, int]]:
         """
@@ -3420,6 +3439,36 @@ class SpeakingThread(threading.Thread):
                     **cw.generate(prompt,
                                   n_words=msg.get('n_words', 64),
                                   style=msg.get('style', 'python'))}
+
+        # ── Fermat's Lattice ────────────────────────────────────────────────
+        if mtype == 'fermat_start':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            fl = self._engine.get_fermat_lattice()
+            fl.start()
+            return {'type': 'fermat_start', 'running': True,
+                    'note': 'Fermat Lattice study loop started — he must never be a weapon'}
+        if mtype == 'fermat_stop':
+            fl = self._engine.get_fermat_lattice()
+            return {'type': 'fermat_stop', **fl.stop()}
+        if mtype == 'fermat_status':
+            fl = self._engine.get_fermat_lattice()
+            return {'type': 'fermat_status', **fl.status()}
+        if mtype == 'fermat_check':
+            fl   = self._engine.get_fermat_lattice()
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'fermat_check requires text'}
+            return {'type': 'fermat_check', **fl.fermat_check(text)}
+        if mtype == 'fermat_study':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            fl   = self._engine.get_fermat_lattice()
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'fermat_study requires text'}
+            return {'type': 'fermat_study',
+                    **fl.force_study(text, weight=msg.get('weight', 2.0))}
 
         return {'error': f"unknown:{mtype}"}
 
