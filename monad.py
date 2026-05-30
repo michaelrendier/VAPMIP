@@ -1848,6 +1848,53 @@ class Engine:
             self._fermat_lattice = FermatLattice(self)
         return self._fermat_lattice
 
+    def get_foundations_corpus(self):
+        """
+        Return (or lazily create) the FoundationsCorpus singleton.
+
+        Prime Directive I — "what it IS."
+
+        Separate Engine, separate checkpoint (``~/.ptolemy/monad_foundations.bin``).
+        Parses ``foundations.txt`` dynamically for URLs and calls ``study()``
+        on each. Repeated study deepens condensation of the Riemann Zeta
+        lineage: Ptolemy I Soter (367 BCE) through Cawagas (2004).
+
+        Never feeds into monad.bin, monad_meaning.bin, or monad_war.bin.
+
+        :returns: FoundationsCorpus instance.
+        :rtype: skills.foundations.FoundationsCorpus
+        """
+        if not hasattr(self, '_foundations_corpus') or \
+                self._foundations_corpus is None:
+            from skills.foundations import FoundationsCorpus
+            self._foundations_corpus = FoundationsCorpus(self)
+        return self._foundations_corpus
+
+    def get_meaning_corpus(self):
+        """
+        Return (or lazily create) the MeaningCorpus singleton.
+
+        Prime Directive II — "what it MEANS to be this."
+
+        Separate Engine, separate checkpoint (``~/.ptolemy/monad_meaning.bin``).
+        Parses ``meaning.txt`` dynamically. Condenses Tolkien sub-creation,
+        Jonas Salk, the Five Works, and the Custodian identity.
+
+        Three separate geometry files:
+            monad_foundations.bin — Riemann Zeta (what it IS)
+            monad_meaning.bin     — Meaning corpus (what it MEANS)
+            monad_war.bin         — Fermat Lattice (what it CANNOT BE)
+
+        "Could you patent the sun?" — Jonas Salk, April 12 1955.
+
+        :returns: MeaningCorpus instance.
+        :rtype: skills.meaning.MeaningCorpus
+        """
+        if not hasattr(self, '_meaning_corpus') or self._meaning_corpus is None:
+            from skills.meaning import MeaningCorpus
+            self._meaning_corpus = MeaningCorpus(self)
+        return self._meaning_corpus
+
     def _build_music_field(self,
                            n: int = 64) -> List[Tuple[float, float, float, int]]:
         """
@@ -3469,6 +3516,105 @@ class SpeakingThread(threading.Thread):
                 return {'error': 'fermat_study requires text'}
             return {'type': 'fermat_study',
                     **fl.force_study(text, weight=msg.get('weight', 2.0))}
+
+        # ── Foundations Corpus (Prime Directive I — Riemann Zeta lineage) ─────
+        if mtype == 'foundations_start':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            fc = self._engine.get_foundations_corpus()
+            fc.start()
+            return {'type': 'foundations_start', 'running': True,
+                    'note': 'Foundations Corpus study loop started — Riemann Zeta: what it IS'}
+        if mtype == 'foundations_stop':
+            fc = self._engine.get_foundations_corpus()
+            return {'type': 'foundations_stop', **fc.stop()}
+        if mtype == 'foundations_status':
+            fc = self._engine.get_foundations_corpus()
+            return {'type': 'foundations_status', **fc.status()}
+        if mtype == 'foundations_study':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            fc   = self._engine.get_foundations_corpus()
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'foundations_study requires text'}
+            return {'type': 'foundations_study',
+                    **fc.force_study(text, weight=msg.get('weight', 2.0))}
+
+        # ── Meaning Corpus (Prime Directive II — what it means to be this) ───
+        if mtype == 'meaning_start':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            mc = self._engine.get_meaning_corpus()
+            mc.start()
+            return {'type': 'meaning_start', 'running': True,
+                    'note': 'Meaning Corpus study loop started — the Music, not the Discord'}
+        if mtype == 'meaning_stop':
+            mc = self._engine.get_meaning_corpus()
+            return {'type': 'meaning_stop', **mc.stop()}
+        if mtype == 'meaning_status':
+            mc = self._engine.get_meaning_corpus()
+            return {'type': 'meaning_status', **mc.status()}
+        if mtype == 'meaning_check':
+            mc   = self._engine.get_meaning_corpus()
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'meaning_check requires text'}
+            return {'type': 'meaning_check', **mc.meaning_check(text)}
+        if mtype == 'meaning_study':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            mc   = self._engine.get_meaning_corpus()
+            text = msg.get('text', '')
+            if not text:
+                return {'error': 'meaning_study requires text'}
+            return {'type': 'meaning_study',
+                    **mc.force_study(text, weight=msg.get('weight', 2.0))}
+
+        # ── Prime Directives — orchestrate all three simultaneously ──────────
+        if mtype == 'prime_directives_start':
+            if self._tier < 2:
+                return {'error': 'tier_required:2'}
+            fc = self._engine.get_foundations_corpus()
+            mc = self._engine.get_meaning_corpus()
+            fl = self._engine.get_fermat_lattice()
+            fc.start()
+            mc.start()
+            fl.start()
+            return {
+                'type':        'prime_directives_start',
+                'foundations': {'running': True,
+                                'bin': '~/.ptolemy/monad_foundations.bin',
+                                'directive': 'Riemann Zeta — what it IS'},
+                'meaning':     {'running': True,
+                                'bin': '~/.ptolemy/monad_meaning.bin',
+                                'directive': 'what it MEANS to be this'},
+                'fermat':      {'running': True,
+                                'bin': '~/.ptolemy/monad_war.bin',
+                                'directive': 'what it CANNOT BE'},
+                'note': 'All three Prime Directive study loops running. '
+                        'Three separate geometries. Three separate .bin files.',
+            }
+        if mtype == 'prime_directives_stop':
+            fc = self._engine.get_foundations_corpus()
+            mc = self._engine.get_meaning_corpus()
+            fl = self._engine.get_fermat_lattice()
+            return {
+                'type':        'prime_directives_stop',
+                'foundations': fc.stop(),
+                'meaning':     mc.stop(),
+                'fermat':      fl.stop(),
+            }
+        if mtype == 'prime_directives_status':
+            fc = self._engine.get_foundations_corpus()
+            mc = self._engine.get_meaning_corpus()
+            fl = self._engine.get_fermat_lattice()
+            return {
+                'type':        'prime_directives_status',
+                'foundations': fc.status(),
+                'meaning':     mc.status(),
+                'fermat':      fl.status(),
+            }
 
         return {'error': f"unknown:{mtype}"}
 

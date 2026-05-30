@@ -330,6 +330,73 @@ class FermatLattice:
             'terminal':   'Tsar Bomba — October 30 1961 — he must never be a weapon',
         }
 
+    def _wait_network(self, check_interval: int = 10):
+        """
+        Block until network connectivity is confirmed.
+
+        Saves immediately on first failure, polls until connection succeeds.
+
+        :param check_interval: Seconds between retry attempts.
+        """
+        import socket
+        first_fail = True
+        while True:
+            try:
+                s = socket.create_connection(('8.8.8.8', 53), timeout=3)
+                s.close()
+                return
+            except OSError:
+                if first_fail:
+                    self._save()
+                    first_fail = False
+                time.sleep(check_interval)
+
+    def seed(self, on_progress=None,
+             check_interval: int = 10) -> Dict[str, Any]:
+        """
+        Run one complete pass through the war corpus (blocking).
+
+        Fetches every URL in ``_WAR_CORPUS`` in order, calls study() on each.
+        Saves immediately on network failure, waits for connectivity, resumes.
+        Returns when Tsar Bomba — the terminal entry — has been studied.
+
+        :param on_progress: Optional callback with signature
+            ``(tag, url, idx, total, studied, skipped)``.
+        :param check_interval: Seconds between network retry attempts.
+        :returns: ``{'studied': int, 'skipped': int, 'total': int,
+            'complete': True, 'bin_path': str}``.
+        :rtype: dict
+        """
+        total   = len(_WAR_CORPUS)
+        skipped = 0
+
+        for idx, (tag, url, weight) in enumerate(_WAR_CORPUS):
+            self._wait_network(check_interval)
+            text = self._fetch_text(url)
+            if not text or len(text) < 40:
+                skipped += 1
+            else:
+                e  = self._get_engine()
+                st = e.get_study()
+                with self._lock:
+                    st.study(text, weight=weight,
+                             triggering_text=f'{tag} {url}')
+                    self._studied += 1
+                self._save()
+
+            if on_progress:
+                on_progress(tag, url, idx, total, self._studied, skipped)
+
+        self._save()
+        return {
+            'studied':  self._studied,
+            'skipped':  skipped,
+            'total':    total,
+            'complete': True,
+            'bin_path': self._bin_path,
+            'terminal': 'Tsar Bomba — October 30 1961 — he must never be a weapon',
+        }
+
     def force_study(self, text: str, weight: float = 2.0) -> Dict[str, Any]:
         """
         Immediately study a text passage in the war field (blocking).
