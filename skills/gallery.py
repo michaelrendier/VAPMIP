@@ -30,6 +30,9 @@ from typing import Optional
 # The mathematical sigil — sedenion product
 SIGIL = '⊗'  # ⊗
 
+# Repo root — gallery.py lives at <repo>/skills/gallery.py
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+
 # BAO-state fallback words when engine has no vocabulary yet
 _BAO_LABELS = [
     (0.006, 'convergence'),
@@ -39,6 +42,34 @@ _BAO_LABELS = [
 ]
 _BAO_NASCENT = 'nascent'    # BAO below 0.3 — field is new
 _OMEGA_ZS    = 0.56714
+
+_VERSION: Optional[str] = None   # cached on first call
+
+
+def _current_version() -> str:
+    """Read the current release version from CHANGELOG.md.
+
+    Parses the first ``## vX.Y.Z`` header and returns the version string
+    (e.g. ``v4.1.1``). Cached after first read. Falls back to ``v0`` if
+    CHANGELOG is missing or unparseable.
+
+    :returns: Version string starting with ``v``.
+    :rtype: str
+    """
+    global _VERSION
+    if _VERSION is not None:
+        return _VERSION
+    changelog = _REPO_ROOT / 'CHANGELOG.md'
+    try:
+        for line in changelog.read_text(encoding='utf-8').splitlines():
+            m = re.match(r'^##\s+(v[\d.]+)', line)
+            if m:
+                _VERSION = m.group(1)
+                return _VERSION
+    except OSError:
+        pass
+    _VERSION = 'v0'
+    return _VERSION
 
 
 def _field_word(engine=None) -> str:
@@ -88,11 +119,15 @@ def suggest_name(
     The filename encodes what Holcus was thinking (emit word) and when
     (calendar date), not just a Unix timestamp.
 
+    Default output directory is ``<repo>/gallery/<version>/`` — every image
+    lands in the gallery directory beside the source, organised by release.
+    Callers may override with an explicit ``directory``.
+
     :param image_type: Short type tag — ``portrait``, ``bao``, ``field``,
         ``uns``, etc.
     :param engine: Engine instance for live word derivation (optional).
-    :param directory: Output directory. Defaults to
-        ``~/.ptolemy/gallery/``.
+    :param directory: Output directory override. Defaults to
+        ``<repo>/gallery/<version>/``.
     :returns: Absolute path for the new image.
     :rtype: str
     """
@@ -101,7 +136,8 @@ def suggest_name(
     filename = f"{image_type}_{word}_{date}.png"
 
     if directory is None:
-        directory = os.path.expanduser('~/.ptolemy/gallery')
+        version   = _current_version()
+        directory = str(_REPO_ROOT / 'gallery' / version)
 
     Path(directory).mkdir(parents=True, exist_ok=True)
     return os.path.join(directory, filename)
