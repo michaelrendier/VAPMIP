@@ -29,6 +29,7 @@ import subprocess
 import threading
 from pathlib import Path
 from typing import Optional, List
+from skills import gallery as _gallery
 
 # ── Operator names (mirrors monad.py _OP) ─────────────────────────────────────
 _OP = {
@@ -103,7 +104,7 @@ class PtolDraw:
         :rtype: str or None
         """
         if not output_path:
-            output_path = self._plot_path(f"bao_{int(time.time())}.png")
+            output_path = _gallery.suggest_name('bao', engine=None)
 
         cx, cy = 200, 200
         target_r = 150
@@ -130,6 +131,7 @@ class PtolDraw:
                    '-fill', 'none', '-draw', mvg, output_path]
             subprocess.run(cmd, check=True,
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            _gallery.stamp(output_path, word='bao')
             return output_path
         except (subprocess.CalledProcessError, FileNotFoundError):
             return None
@@ -146,7 +148,7 @@ class PtolDraw:
         :rtype: str or None
         """
         if not output_path:
-            output_path = self._plot_path(f"uns_{int(time.time())}.png")
+            output_path = _gallery.suggest_name('uns', engine=None)
 
         cx, cy, R = 200, 200, 170
         cmds = []
@@ -176,6 +178,7 @@ class PtolDraw:
                    '-fill', 'none', '-draw', mvg, output_path]
             subprocess.run(cmd, check=True,
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            _gallery.stamp(output_path, word='uns')
             return output_path
         except (subprocess.CalledProcessError, FileNotFoundError):
             return None
@@ -262,7 +265,7 @@ class PtolDraw:
         if not history:
             return None
         if not output_path:
-            output_path = self._plot_path(f"field_{int(time.time())}.png")
+            output_path = _gallery.suggest_name('field', engine=None)
         try:
             import matplotlib
             matplotlib.use('Agg')
@@ -296,6 +299,7 @@ class PtolDraw:
             plt.savefig(output_path, dpi=100, bbox_inches='tight',
                         facecolor='black')
             plt.close(fig)
+            _gallery.stamp(output_path, word='field')
             return output_path
         except ImportError:
             return None
@@ -328,7 +332,7 @@ class PtolDraw:
         :rtype: str or None
         """
         if not output_path:
-            output_path = self._plot_path(f"portrait_{int(time.time())}.png")
+            output_path = _gallery.suggest_name('portrait', engine=engine)
 
         # Resolve UNS — live state if engine present, else uniform
         if uns is None and engine is not None:
@@ -648,6 +652,7 @@ class PtolDraw:
             plt.savefig(output_path, dpi=120, bbox_inches='tight',
                         facecolor=BG)
             plt.close(fig)
+            _gallery.stamp(output_path, engine=engine)
             return output_path
 
         except ImportError:
