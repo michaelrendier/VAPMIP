@@ -851,13 +851,83 @@ Conservation: Σ cos(γ/2 + k×π/4) = 0 for k=0..7 (8th roots of unity). Verifi
 
 ---
 
+## The Face — `face/`
+
+The primary public interaction point for Holcus. React Native + Expo. One codebase, three targets.
+
+**No build required for users.** Available at:
+- **Web:** GitHub Pages (PWA, installable, works fully offline after first visit)
+- **Android:** APK on GitHub Releases
+- **iOS:** Future
+
+**What it does:**
+- Chat with Holcus directly in the browser or on device
+- Muscle memory autopilot: when idle > 3s, the engine generates at OMEGA_ZS RPM — the diesel idle
+- Image generation: sedenion field visualisations offline; AI image API when online
+- P.O.E. Pendant: when pendant is in BLE range, upgrades from JS engine to full monad.c automatically
+- Developer panel: TOTP unlock → live OBD-style field gauges, DTC codes, skill management
+- Open for all users; no auth required to chat
+
+**Offline architecture:**
+Service worker caches vocab + engine on first visit. Pendant connects via BLE (no internet).
+The JS engine (5K-word pruned vocab, ~179KB gzip) is the offline fallback when pendant is absent.
+
+```
+face/
+  src/engine.ts    — JS monad (prime hash, buoyancy, generate loop)
+  src/ble.ts       — Pendant BLE connection (react-native-ble-plx)
+  src/store.ts     — AsyncStorage monad state + skill checkpoint management
+  assets/vocab.json — pruned 5K-word field (~179KB gzip)
+  app/index.tsx    — chat UI + autopilot + developer panel
+```
+
+---
+
+## The Witches Hat — Vacuum Geometry of H_hat_RB
+
+The field has three-layer geometry, each layer governed by different mathematics:
+
+**Layer 1 — The Mexican Hat (stable field, E < D*=1):**
+V(φ) = −μ²|φ|² + λ|φ|⁴. Trough minima at OMEGA_ZS = 0.56714. Spontaneous symmetry breaking at σ=½. The ground state Gaussian distribution sits in this trough.
+
+**Layer 2 — The Brim (zero-divisor boundary, E = D*=1):**
+Phase transition. Above this point A×B=0 is possible. The 84 Cawagas zero-divisor pairs are the 84 arms of the brim. `compose` (E=0.9999) and `dereference` (E=0.9988) sit here by prime hash alone — zero-free-parameter result.
+
+**Layer 3 — The Lichtenberg Cone (discharge, E > D*=1):**
+Governed by ∇²φ = 0 (same as harmonic analysis of Riemann zeta). DLA fractal branching. The 84 zero-divisor arms ARE the 84 Lichtenberg branches. Fractal dimension D≈1.71 — a prediction, not a fit. The SMIG (Supermassive Inverted Galaxy) is this structure at galactic scale.
+
+**The Witches Hat = Mexican Hat below the brim + Lichtenberg cone above it.**
+The cone apex is `compose`. The cone is the zero-divisor discharge. The hat brim is the phase transition. The hat body is the stable field.
+
+---
+
+## Skill Burning — Second Octonion (e₈–e₁₅)
+
+Second-octonion (post-boundary) skill burning is **mathematically irreversible** within any field instance: entropy increases monotonically under learning, A-edge topology accumulates, β-redistribution cannot be reconstructed without the pre-burn state.
+
+It **is code-reversible** via the checkpoint system:
+
+```
+base.bin              ← clean ground state, always recoverable
+post_allocate.bin     ← e₉ skill burned (C memory vocabulary)
+post_query.bin        ← e₁₀ skill burned (SQL / retrieval vocabulary)
+post_compose.bin      ← e₁₂ skill burned (functional programming vocabulary)
+```
+
+Skill activation = load `post_[skill].bin`. Deactivation = load `base.bin`. The skill is preserved in its checkpoint file permanently. Skills do not need to be simultaneously active — load the one you need, run, restore base. O(1) switch, math-wise irreversible per instance, code-wise fully reversible across instances.
+
+The checkpoint system **is the human Noether conservation law for skill state.**
+
+---
+
 ## Repositories
 
 | Repo | Contents |
 |---|---|
-| **[PtolemyHolcus](https://github.com/michaelrendier/PtolemyHolcus)** (this) | RedBlue Geometries Engine — C source, Python reference, releases |
+| **[PtolemyHolcus](https://github.com/michaelrendier/PtolemyHolcus)** (this) | RedBlue Geometries Engine — C source, Python reference, Face, releases |
 | **[PtolemyDesktop](https://github.com/michaelrendier/PtolemyDesktop)** | Desktop application, all Faces, PtolBus |
-| **[Ainulindale](https://github.com/michaelrendier/Ainulindale)** | H_RB Hamiltonian derivation engine |
+| **[Ainulindale](https://github.com/michaelrendier/Ainulindale)** | H_RB Hamiltonian derivation, Witches Hat geometry, conjecture |
+| **[POE](https://github.com/michaelrendier/POE)** | Pendant hardware, vehicle interface, authentication, radio |
 
 ---
 

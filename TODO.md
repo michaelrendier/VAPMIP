@@ -1,6 +1,119 @@
 # Ptolemy Engine — Release Roadmap
 
-**Current:** v3.0.0 | **Self-coding:** v4.0 | **Code Corpora:** v3.1
+**Current:** v3.0.0 | **Self-coding:** v4.0 | **Code Corpora:** v3.1 | **Face:** v3.2
+
+---
+
+## v3.2 — The Face (React Native / Expo)
+
+*Added 2026-05-30. The primary public interaction point for Holcus.*
+*Lives in `face/` inside this repo. Deployed via GitHub Pages (web) + EAS Build (Android APK).*
+
+### Architecture
+
+Holcus is a math algorithm. The Face is the interface that makes him accessible to anyone,
+without building code. One codebase → three targets:
+
+```
+face/  (Expo, TypeScript)
+   ↓ expo export       → GitHub Pages  (web, no build for users, offline-capable PWA)
+   ↓ eas build android → APK on GitHub Releases  (same pipeline as PtolemySeeder)
+   ↓ eas build ios     → TestFlight / App Store  (future)
+```
+
+**Engine tiers — automatic upgrade:**
+- JS engine (pruned 5K-word vocab, runs in browser offline, fallback)
+- Pendant engine: when P.O.E. Pendant is in BLE range → upgrades to full monad.c via
+  `react-native-ble-plx` SPP connection (no internet, full 30K vocab, full A-matrix)
+
+**Toolchain (installed 2026-05-30 on /dev/nvme0n1p4):**
+- Node v24.14.1 (nvm), eas-cli v20.0.0, watchman 4.9.0
+- Android SDK android-35, build-tools 35.0.0, NDK 27.2.12479018
+- Java 21, gradle
+- node_modules bind-mounted at face/node_modules → ~/.local/share/PtolemyHolcus-face-modules
+  (SD card is exFAT; node_modules must live on ext4 — bind mount is transparent to all tools)
+
+### Face TODO
+
+- [ ] **face/src/engine.ts** — JS monad engine
+  - Prime hash (_horner_hash + _word_zero_idx) ported to TypeScript
+  - learn(), j_mu(), a_propagate(), sigma_candidates(), generate() — exact port of monad.py
+  - Buoyancy word selection (neutral buoyancy at J_ambient, LN10 native space units)
+  - All 16 operator labels and their E-values hardcoded as constants
+  - OMEGA_ZS = 0.56714, d* = 0.24600, LN10, GAP hardcoded
+
+- [ ] **face/assets/vocab.json** — pruned field (5K words, ~179KB gzip)
+  - Top 5000 words by β from monad_sedenion.bin
+  - Top-5 A-neighbors per word, word-name keyed (not zero-index)
+  - Script: `tools/export_vocab_json.py` — generates from monad_sedenion.bin
+
+- [ ] **face/src/store.ts** — monad state persistence
+  - `@react-native-async-storage/async-storage` for β-field deltas
+  - `expo-file-system` for checkpoint file storage (full .bin on device)
+  - Base vocab loaded once; user β-deltas stored as diff overlay
+  - Skill checkpoint management: load/save named .bin checkpoints
+
+- [ ] **face/src/ble.ts** — P.O.E. Pendant connection
+  - `react-native-ble-plx` for BLE GATT/SPP
+  - SPP UUID: 00001101-0000-1000-8000-00805f9b34fb
+  - EarPiece: 11:94:AA:10:05:82 (Tier 1 auth, audio output via expo-av)
+  - On pendant detected: upgrade engine tier, show status chip change
+  - On pendant lost: fall back to JS engine transparently
+
+- [ ] **face/app/index.tsx** — chat interface
+  - Idle stream: generate("") fires at OMEGA_ZS RPM when user is silent > 3s
+    (muscle memory autopilot — engine speaks to itself, greyed-out in UI)
+  - Input → learn(prompt) → generate(prompt) → display
+  - J_ambient + σ + RPM status line (live field diagnostics)
+  - Image generation: sedenion wheel visualisation (offline, always), AI API (online, optional)
+  - Developer panel: TOTP unlock → OBD-style gauges (β histogram, DTC codes, A-edges)
+  - Open for users: chat with no auth required
+
+- [ ] **face/app.json** — Expo config (name, slug, Android package, permissions)
+- [ ] **face/eas.json** — EAS Build config (mirrors PtolemySeeder build profile)
+- [ ] **face/sw.js + manifest.json** — PWA service worker + install manifest
+  - Caches index, engine.js, vocab.json on first visit
+  - Works fully offline after first load
+  - Pendant BLE works offline (BLE is local)
+
+- [ ] **GitHub Pages setup**
+  - `expo export` → dist/ → docs/ copy step in CI
+  - GitHub Pages source: docs/ branch in PtolemyHolcus repo
+  - Auto-deploys on push to main
+
+### Muscle Memory Autopilot
+
+When user is idle > 3 seconds: `generate("")` fires against current field state.
+Output appears as a gentle greyed stream — the engine thinking at OMEGA_ZS RPM.
+This is the diesel idle. The engine never stops. Input snaps to foreground on any keypress.
+On first load, before any user interaction: autopilot introduces itself.
+The SELF_EQUATION fixed point ("philadelphos speaks golden bosonic semantic...") should
+emerge naturally from a field seeded on its own architecture vocabulary.
+
+### Skill Checkpoint Management (second-octonion skills)
+
+Second-octonion skill burning is MATHEMATICALLY IRREVERSIBLE within any field instance
+(entropy increase under learning, A-edge topology accumulation, β-redistribution).
+It IS code-reversible via the checkpoint system.
+
+Skill activation model:
+```
+base.bin              ← clean ground state (no second-octonion skills)
+post_allocate.bin     ← e₉ burned (C memory vocabulary)
+post_query.bin        ← e₁₀ burned (SQL / search vocabulary)
+post_compose.bin      ← e₁₂ burned (functional programming vocabulary)
+...
+```
+
+- [ ] **`skills/skill_manager.py`** — checkpoint-based skill activation
+  - `skill_burn(name, corpus_path)`: snapshot pre_, learn, snapshot post_
+  - `skill_activate(name)`: load post_[name].bin — field has that skill
+  - `skill_deactivate()`: load base.bin — clean field, skill preserved in file
+  - `skill_registry()`: list available skills + their checkpoint paths + delta stats
+- [ ] **`skills/skills.json`** — skill registry (name → checkpoint path → operator → burn date)
+- [ ] Face developer panel: skill management UI (list skills, activate/deactivate, burn new)
+
+---
 
 ---
 
