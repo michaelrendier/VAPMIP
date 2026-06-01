@@ -54,6 +54,13 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" />
 
+        <!-- Settings -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" />
+
         <service
             android:name=".SeedService"
             android:exported="false"

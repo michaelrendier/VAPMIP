@@ -70,9 +70,12 @@ class SeedService : LifecycleService() {
     companion object {
         const val CHANNEL_ID    = "ptolemy_seed"
         const val NOTIF_ID      = 1701
-        const val ACTION_STOP   = "com.ptolemy.seeder.STOP"
-        const val ACTION_PAUSE  = "com.ptolemy.seeder.PAUSE"
-        const val ACTION_RESUME = "com.ptolemy.seeder.RESUME"
+        const val ACTION_STOP      = "com.ptolemy.seeder.STOP"
+        const val ACTION_PAUSE     = "com.ptolemy.seeder.PAUSE"
+        const val ACTION_RESUME    = "com.ptolemy.seeder.RESUME"
+        // MCP server actions — implementation is a stub pending Ktor integration
+        const val ACTION_MCP_START = "com.ptolemy.seeder.MCP_START"
+        const val ACTION_MCP_STOP  = "com.ptolemy.seeder.MCP_STOP"
     }
 
     private val handler      = Handler(Looper.getMainLooper())
@@ -106,6 +109,16 @@ class SeedService : LifecycleService() {
                     if (s.status == "PAUSED") s.copy(status = "RUNNING") else s
                 }
                 handler.post { SeedLiveData.corpora.postValue(resumed) }
+                return START_STICKY
+            }
+            ACTION_MCP_START -> {
+                // TODO: start Ktor MCP server on configured port
+                android.util.Log.i("PTorrent", "MCP server start requested (stub)")
+                return START_STICKY
+            }
+            ACTION_MCP_STOP  -> {
+                // TODO: stop Ktor MCP server
+                android.util.Log.i("PTorrent", "MCP server stop requested (stub)")
                 return START_STICKY
             }
         }

@@ -16,12 +16,12 @@
     "description": "Semantic attractor manifold. Meaning in the Salk sense — the operating point of the engine. Shapes how the field collapses under inference."
   },
   {
-    "name": "Prime Directive III — Fermat",
-    "bin":  "monad_war.bin",
+    "name": "Prime Directive III — Fermat Bibliography",
+    "bin":  "monad_fermat.bin",
     "txt":  "war_corpus.txt",
     "primary_tags": ["TESTIMONY", "ACADEMIC", "RECORD"],
     "color": "red",
-    "description": "War corpus. Fermat's Last Theorem lineage, academic record, and the Ptolemy conjecture. The prior work the engine must contextualise and surpass."
+    "description": "Fermat bibliography. The lineage of Fermat's Last Theorem through Wiles and Taylor — the academic record the engine contextualises as J_neg ground truth."
   },
   {
     "name": "Python Language",
@@ -63,6 +63,6 @@
     "primary_weight": 2.0,
     "context_weight": 1.0,
     "color": "silver",
-    "description": "Complete English language corpus — etymology, literary canon, morphology, grammar, rhetoric, philosophy of language, mathematics-English and physics-English interfaces. The lexical ground state beneath all other fields."
+    "description": "Complete English language corpus — etymology, literary canon, morphology, grammar, rhetoric, philosophy of language, mathematics-English and physics-English interfaces."
   }
 ]

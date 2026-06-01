@@ -74,6 +74,8 @@ import argparse
 import pickle
 from typing import Dict, List, Tuple, Any, Optional
 
+_PTOLEMY_DIR = os.path.expanduser('~/.ptolemy')
+
 # ── Physical constants ──────────────────────────────────────────────────────────
 OMEGA_ZS   = 0.56714    # Lambert W(1); BAO spectral gap; Δ_𝕊 lowest eigenvalue
 GAP        = 0.000707   # Yang-Mills mass gap; semantic vacuum floor
@@ -901,6 +903,105 @@ class Crank:
         staged.sort()
         return [(-ns, idx, w) for (role, ns, idx, w) in staged]
 
+    # ── Fractal formulary methods (Tuning-the-Engine 2026-05-31) ──────────────
+
+    @staticmethod
+    def gnarl_validate(z0: complex, h: float = 0.01, alpha: float = 3.0,
+                       steps: int = 2000) -> complex:
+        """
+        Gnarl/Popcorn convergence test (Mark Townsend, mt.ucl).
+
+        The Gnarl formula IS the discrete-time RedBlue Hamiltonian:
+            x_new = x - h*sin(y + tan(alpha*y))   ← J_neg (restoring)
+            y_new = y + h*sin(x + tan(alpha*x))   ← J_pos (driving)
+
+        Fixed point at alpha=3: y ≈ 0.5671 = OMEGA_ZS.
+        Run any prime_hash output through this — it must converge near OMEGA_ZS.
+        Use as a corpus validation test: convergence distance from OMEGA_ZS
+        measures how far the word's sedenion address is from BAO equilibrium.
+
+        :param z0: Starting point (complex), typically prime_hash output.
+        :param h: Step size (default 0.01).
+        :param alpha: Gnarl parameter (default 3.0 → fixed point = OMEGA_ZS).
+        :param steps: Iteration count.
+        :returns: Converged complex address.
+        """
+        x, y = z0.real, z0.imag
+        for _ in range(steps):
+            try:
+                tx = math.tan(alpha * x)
+                ty = math.tan(alpha * y)
+            except (ValueError, ZeroDivisionError):
+                break
+            if abs(tx) > 1e6 or abs(ty) > 1e6:
+                break
+            x -= h * math.sin(y + ty)
+            y += h * math.sin(x + tx)
+        return complex(x, y)
+
+    @staticmethod
+    def tia_similarity(z: complex, c: complex, p: int = 2,
+                       n_iter: int = 48) -> float:
+        """
+        Triangle Inequality Average similarity (Kerry Mitchell, lkm.ufm).
+
+        Spectral similarity score computed over the full orbit trajectory.
+        At the critical line σ=½, TIA is inherently balanced.
+        Weights surface (early iterations) and deep (late) semantic
+        relationships differently — superior to cosine similarity.
+
+        TIA_n = (|z^p + c| - ||z^p| - |c||) / (2|c|)
+               = cos(angle between z^p and c)
+
+        :param z: Word address (complex prime_hash output).
+        :param c: Context address (complex prime_hash of context).
+        :param p: Power (default 2 = Mandelbrot).
+        :param n_iter: Orbit depth.
+        :returns: Similarity in [-1, 1]; 1 = synonymous, 0 = orthogonal.
+        """
+        if abs(c) < 1e-12:
+            return 0.0
+        acc = 0.0
+        for _ in range(n_iter):
+            try:
+                z = z ** p + c
+                zp = z ** p
+                denom = 2.0 * abs(c)
+                tia_n = (abs(zp + c) - abs(abs(zp) - abs(c))) / denom
+                acc += max(-1.0, min(1.0, tia_n))
+            except (OverflowError, ZeroDivisionError):
+                break
+        return acc / n_iter
+
+    @staticmethod
+    def hermite_E_targets() -> List[float]:
+        """
+        Hermite H₁₆ timing wheel — sedenion CAM calibration targets.
+
+        The 16th-degree Hermite polynomial has exactly 16 real zeros,
+        GUE-distributed (same statistics as Riemann zeros). Each zero
+        calibrates one sedenion dimension's resonance E-value target.
+
+        The operator self-organisation result (d*/σ½/D*=1) should produce
+        E-values that track these targets. Deviation = mis-calibration.
+
+        :returns: 16 target E-values, one per sedenion dimension e₀–e₁₅.
+        """
+        try:
+            import numpy as np
+            zeros = np.polynomial.hermite.hermroots([0] * 16 + [1])
+            real_zeros = sorted(z.real for z in zeros)
+            e_max = max(abs(z) for z in real_zeros) or 1.0
+            return [abs(z) / e_max * OMEGA_ZS for z in real_zeros]
+        except ImportError:
+            # numpy not available — return analytic approximation
+            # H₁₆ zeros approximately at ±x_k where x_k ≈ √(2k+1) * correction
+            targets = []
+            for k in range(16):
+                x = math.sqrt(2 * k + 1) * (1.0 - 1.0 / (8 * (2 * k + 1)))
+                targets.append(x / math.sqrt(31) * OMEGA_ZS)
+            return sorted(targets)
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  ENGINE — Dual Flow + 16-Word Sliding Window + One Wire
@@ -1534,6 +1635,88 @@ class Engine:
             pickle.dump(state, f)
         return {'saved': path, 'vocab': c.n}
 
+    def blend_geometric(self, other: 'Engine', weight: float = 0.5) -> None:
+        """
+        Geometric-mean corpus blend (Avariant/Agelink pattern).
+
+        Blends another engine's field into this one using geometric mean,
+        not arithmetic mean. √(β_A × β_B) at the BAO balance point.
+        Correct blend mode at σ=½: geometric mean preserves the Noether
+        current balance where arithmetic mean would bias toward the larger field.
+
+        Words in other but not in self are imported at geometric-mean weight.
+        Words in both: β ← β_self^(1-w) × β_other^w (weighted geometric mean).
+        A-matrix edges are union with weight-averaged values.
+
+        :param other: Source Engine to blend in.
+        :param weight: Blend weight for other (0=self only, 1=other only, 0.5=equal).
+        """
+        c_self  = self.crank
+        c_other = other.crank
+        w       = max(0.0, min(1.0, weight))
+
+        for word, oidx in c_other._vocab.items():
+            ob = c_other._beta[oidx]
+            oe = c_other._E[oidx]
+            if word in c_self._vocab:
+                sidx = c_self._vocab[word]
+                # Weighted geometric mean of β
+                c_self._beta[sidx] = (c_self._beta[sidx] ** (1.0 - w)) * (ob ** w)
+                # E-value: take whichever is farther from uniform (more informative)
+                if abs(oe - OMEGA_ZS) > abs(c_self._E[sidx] - OMEGA_ZS):
+                    c_self._E[sidx] = oe
+            else:
+                # Import word at blended weight
+                idx = c_self._register(word)
+                c_self._beta[idx] = max(GAP, ob * w)
+                c_self._E[idx]    = oe
+            # Merge A-matrix edges
+            if oidx < len(c_other._A):
+                sidx = c_self._vocab.get(word, -1)
+                if sidx >= 0:
+                    for ej, ev in c_other._A[oidx].items():
+                        eword = c_other._words[ej] if ej < len(c_other._words) else None
+                        if eword and eword in c_self._vocab:
+                            tidx = c_self._vocab[eword]
+                            existing = c_self._A[sidx].get(tidx, 0.0)
+                            c_self._A[sidx][tidx] = (existing ** (1-w)) * (ev ** w) if existing > 0 else ev * w
+
+    def gnarl_check(self, n_samples: int = 32) -> dict:
+        """
+        Gnarl/Popcorn corpus health check.
+
+        Samples n random words from the field, maps each to its prime_hash
+        address, runs Gnarl convergence, and reports mean distance from OMEGA_ZS.
+        A healthy field converges near OMEGA_ZS. Deviation > 0.1 indicates
+        mis-calibration.
+
+        :param n_samples: Words to sample.
+        :returns: Dict with mean_dist, max_dist, pct_converged, and sample list.
+        """
+        import random
+        c = self.crank
+        if c.n == 0:
+            return {'error': 'empty field'}
+        sample_words = random.sample(c._words, min(n_samples, c.n))
+        results = []
+        for w in sample_words:
+            zi  = _word_zero_idx(w)
+            g   = _gamma_at(zi)
+            z0  = complex(g / (g + 1.0), g / (2.0 * g + 1.0))
+            z_eq = Crank.gnarl_validate(z0)
+            dist = abs(abs(z_eq) - OMEGA_ZS)
+            results.append({'word': w, 'dist': round(dist, 5), 'converged': dist < 0.1})
+
+        dists       = [r['dist'] for r in results]
+        pct_conv    = sum(1 for r in results if r['converged']) / len(results)
+        return {
+            'mean_dist':    round(sum(dists) / len(dists), 5),
+            'max_dist':     round(max(dists), 5),
+            'pct_converged': round(pct_conv, 3),
+            'n_sampled':    len(results),
+            'samples':      results[:8],
+        }
+
     def _calibrate_J_ambient(self):
         """Set _J_ambient to the interquartile mean of β×E² across the field.
 
@@ -1975,6 +2158,39 @@ class Engine:
         except Exception:
             pass
         return {'error': f'Unrecognized format: {path}', 'path': path}
+
+    def load_checkpoint(self, path: str) -> Dict[str, Any]:
+        """Load corpus checkpoint state — writeable (NOT added to protected paths).
+
+        Use this for corpus bin files that the engine will also save back to.
+        Use load_bin() for read-only reference bins (monad_wordnet.bin etc).
+        """
+        try:
+            with open(path, 'rb') as f:
+                state = pickle.load(f)
+            if isinstance(state, dict):
+                c = self.crank
+                if 'vocab'           in state: c._vocab           = state['vocab']
+                if 'words'           in state: c._words           = state['words']
+                if 'beta'            in state: c._beta            = state['beta']
+                if 'E'               in state: c._E               = state['E']
+                if 'A'               in state: c._A               = state['A']
+                if 'age'             in state: c._age             = state['age']
+                if 'n'               in state: c.n                = state['n']
+                if 'correction_mask' in state: c._correction_mask = state['correction_mask']
+                if 'fire_count'      in state: c._fire_count      = state['fire_count']
+                if 'stratum'         in state: c._stratum         = state['stratum']
+                if 'psi_prev' in state:
+                    self._psi_prev = state['psi_prev']
+                if 'word_count' in state:
+                    self._word_count = state['word_count']
+                self._calibrate_J_ambient()
+                return {'loaded': path, 'vocab': c.n, 'format': 'checkpoint'}
+            return {'error': 'Unexpected pickle format', 'path': path}
+        except FileNotFoundError:
+            return {'error': f'Not found: {path}'}
+        except Exception as exc:
+            return {'error': str(exc), 'path': path}
 
     def _load_ptol_binary(self, path: str) -> Dict[str, Any]:
         """Read PtolC PTOL binary state file into the Crank field."""
@@ -2766,6 +2982,82 @@ class MonadInterface:
             return self._engine.save_session(path)
 
 
+# ── speak() contemplation depth ───────────────────────────────────────────────
+# Casual speech routes through Mind's Eye at depth=1 (one see_text pass).
+# Mathematical/technical prompts need the second 𝕆 to settle before the
+# callosum opens — the geometry must be complete before words are chosen.
+#
+# Depth scale:
+#   1  — greeting, simple question, one-word prompt
+#   2  — normal sentence, known topic
+#   3  — multi-clause, technical vocabulary present
+#   5  — mathematical reasoning, sedenion/Riemann operators active
+#   8  — explicit proof or derivation request
+
+_MATH_MARKERS = frozenset({
+    # sedenion operators
+    'identity', 'negate', 'bind', 'name', 'apply', 'abstract', 'branch',
+    'iterate', 'recurse', 'allocate', 'query', 'dereference', 'compose',
+    'parallelize', 'interrupt', 'emit',
+    # Riemann / spectral
+    'riemann', 'zeta', 'sigma', 'critical', 'eigenvalue', 'spectral',
+    'manifold', 'lagrangian', 'hamiltonian', 'noether', 'callosum',
+    'sedenion', 'octonion', 'quaternion', 'cardioid', 'bao', 'omega',
+    # physics
+    'potential', 'symmetry', 'gauge', 'tensor', 'geodesic', 'curvature',
+    'dark', 'matter', 'cosmological', 'quantum', 'wavefunction',
+    # proof language
+    'proof', 'theorem', 'lemma', 'conjecture', 'derive', 'prove',
+    'therefore', 'qed', 'implies', 'iff', 'forall', 'exists',
+})
+
+
+def _speak_depth(prompt: str, engine) -> int:
+    """Derive contemplation depth from prompt complexity.
+
+    Reads the prompt vocabulary against the live field — unknown words (not yet
+    trained) require deeper settling because the second 𝕆 has less geometric
+    prior to anchor on.  Mathematical markers push depth toward 5–8.
+
+    :param prompt: Raw prompt string.
+    :param engine: Live Engine instance.
+    :returns: Contemplation depth integer in [1, 8].
+    :rtype: int
+    """
+    words = prompt.lower().split()
+    if not words:
+        return 1
+
+    depth = 1
+
+    # Length contribution
+    n = len(words)
+    if n > 5:   depth += 1
+    if n > 20:  depth += 1
+    if n > 50:  depth += 1
+
+    # Mathematical/technical vocabulary
+    math_hits = sum(1 for w in words if w.rstrip('.,?!:;') in _MATH_MARKERS)
+    if math_hits >= 1: depth += 1
+    if math_hits >= 3: depth += 1
+    if math_hits >= 6: depth += 2
+
+    # Unknown words — field has no geometry for them, needs more settling
+    crank = engine.crank
+    unknown = sum(1 for w in words
+                  if crank._clean(w) not in crank._vocab)
+    if unknown > len(words) * 0.3: depth += 1
+
+    # BAO far from OMEGA_ZS — field is not in resonance, needs more settling
+    bao_buf = list(engine._bao_buf)
+    if bao_buf:
+        bao = sum(bao_buf) / len(bao_buf)
+        if abs(bao - OMEGA_ZS) > 0.15:
+            depth += 1
+
+    return min(depth, 8)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 #  SpeakingThread — Unix + TCP socket daemon
 # ══════════════════════════════════════════════════════════════════════════════
@@ -2872,9 +3164,21 @@ class SpeakingThread(threading.Thread):
         if mtype == 'emit':
             return {'type': 'word', 'word': self._monad.emit()}
         if mtype == 'generate':
-            r = self._monad.generate(
-                msg.get('prompt', ''), msg.get('n', 32))
-            return {'type': 'response', 'text': r.get('response', '')}
+            prompt = msg.get('prompt', '')
+            n      = msg.get('n', 32)
+            me     = self._engine.get_mind_eye()
+            depth  = _speak_depth(prompt, self._engine)
+            me.contemplate(prompt, depth=depth)
+            r      = me.describe(query=prompt, n_words=n)
+            # Feed the exchange back into psi2 — context accumulates geometrically
+            me.see_text(f'{prompt} {r.get("description", "")}')
+            return {
+                'type':            'response',
+                'text':            r.get('description', ''),
+                'callosum':        r.get('callosum_strength', 0.0),
+                'seed_words':      r.get('seed_words', []),
+                'contemplate_depth': depth,
+            }
         if mtype == 'status':
             return {'type': 'status', 'vocab': self._monad.vocab_size()}
         if mtype == 'ping':
@@ -3584,13 +3888,13 @@ class SpeakingThread(threading.Thread):
             return {
                 'type':        'prime_directives_start',
                 'foundations': {'running': True,
-                                'bin': '~/.ptolemy/monad_foundations.bin',
+                                'bin': os.path.join(_PTOLEMY_DIR, 'monad_foundations.bin'),
                                 'directive': 'Riemann Zeta — what it IS'},
                 'meaning':     {'running': True,
-                                'bin': '~/.ptolemy/monad_meaning.bin',
+                                'bin': os.path.join(_PTOLEMY_DIR, 'monad_meaning.bin'),
                                 'directive': 'what it MEANS to be this'},
                 'fermat':      {'running': True,
-                                'bin': '~/.ptolemy/monad_war.bin',
+                                'bin': os.path.join(_PTOLEMY_DIR, 'monad_war.bin'),
                                 'directive': 'what it CANNOT BE'},
                 'note': 'All three Prime Directive study loops running. '
                         'Three separate geometries. Three separate .bin files.',
@@ -3997,12 +4301,12 @@ def _build_teach_stack(engine: 'Engine'):
                   file=sys.stderr)
 
     cfg        = PtolConfig()
-    logger     = PtolLogger(cfg.get('log_dir', '~/.ptolemy/logs'))
-    staging    = PtolStaging(cfg.get('temp_dir',  '~/.ptolemy/.ptoltemp'),
-                             cfg.get('cache_dir', '~/.ptolemy/cache'))
+    logger     = PtolLogger(cfg.get('log_dir',   os.path.join(_PTOLEMY_DIR, 'logs')))
+    staging    = PtolStaging(cfg.get('temp_dir',  os.path.join(_PTOLEMY_DIR, '.ptoltemp')),
+                             cfg.get('cache_dir', os.path.join(_PTOLEMY_DIR, 'cache')))
     monitor    = PtolMonitor(logger, cfg)
     memory_log = MemoryLog(cfg.get('memory_log',
-                                   '~/.ptolemy/memory_corrections.json'))
+                                   os.path.join(_PTOLEMY_DIR, 'memory_corrections.json')))
     # Replay stored retractions onto the freshly loaded field.
     # Ensures corrections survive bin wipes and retrains.
     memory_log.replay(engine)

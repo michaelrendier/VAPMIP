@@ -140,7 +140,7 @@ class MindEye:
             'label':    label,
         }
 
-    def describe(self, query: str = '') -> Dict[str, Any]:
+    def describe(self, query: str = '', n_words: int = 32) -> Dict[str, Any]:
         """
         Fire the second 𝕆 state through the corpus callosum into language.
 
@@ -150,19 +150,17 @@ class MindEye:
         generates from these seed words plus the optional query, at σ=½.
 
         :param query: Optional linguistic seed for the generation.
+        :param n_words: Number of words to generate (default 32 — was 8).
         :returns: Dict with ``description``, ``words``, ``callosum_strength``,
-            ``callosum_E`` (target spectral energy), ``seed_words`` (vocabulary
-            words nearest the callosum crossing), and ``psi2`` state snapshot.
+            ``callosum_E``, ``seed_words``, and ``psi2`` state snapshot.
         :rtype: dict
         """
         from monad import OMEGA_ZS, LN10
 
         with self._lock:
-            callosum   = self._psi2[E15]
-            psi2_snap  = {f'e{k}': round(self._psi2[k], 6) for k in range(8, 16)}
+            callosum  = self._psi2[E15]
+            psi2_snap = {f'e{k}': round(self._psi2[k], 6) for k in range(8, 16)}
 
-        # Target E-value after callosum crossing: callosum × OMEGA_ZS
-        # At maximum callosum (=1.0) this is OMEGA_ZS — the neutral buoyancy surface.
         callosum_E = callosum * OMEGA_ZS
 
         crank  = self._engine.crank
@@ -171,18 +169,16 @@ class MindEye:
         for w, idx in crank._vocab.items():
             if idx >= crank.n:
                 continue
-            E       = crank._E[idx]
-            jp      = crank._beta[idx] * E ** 2
-            # Proximity to callosum crossing point in E-space
+            E         = crank._E[idx]
+            jp        = crank._beta[idx] * E ** 2
             proximity = 1.0 / (1.0 + abs(E - callosum_E) * LN10)
             scored.append((proximity * jp, w))
 
         scored.sort(reverse=True)
         seed_words = [w for _, w in scored[:4]]
 
-        # Generate from seed + query
         full_prompt = ' '.join(filter(None, [query] + seed_words))
-        r           = self._engine.generate(full_prompt, n_words=8)
+        r           = self._engine.generate(full_prompt, n_words=n_words)
 
         return {
             'description':       r.get('response', ''),
@@ -192,6 +188,112 @@ class MindEye:
             'seed_words':        seed_words,
             'psi2':              psi2_snap,
         }
+
+    def see_text(self, prompt: str) -> Dict[str, Any]:
+        """
+        Encode a text prompt into second 𝕆 via spectral analysis of the prompt
+        words against the live field.
+
+        Maps prompt geometry to e₈..e₁₄:
+          e₈  spectral centroid  — mean E-value of prompt words
+          e₉  spectral spread    — std-dev of E-values
+          e₁₀ prompt depth       — normalised word count
+          e₁₁ field activation   — mean β of prompt words
+          e₁₂ vocabulary cover   — fraction of prompt words known to field
+          e₁₃ J_pos centroid     — Riemann lobe activation for prompt
+          e₁₄ BAO proximity      — how resonant is the field right now
+
+        :param prompt: Text prompt to encode.
+        :returns: see() result dict.
+        :rtype: dict
+        """
+        import math
+        from monad import OMEGA_ZS, GAP
+
+        crank = self._engine.crank
+        raw   = [crank._clean(w) for w in prompt.split()]
+        words = [w for w in raw if w]
+        if not words:
+            return self.see([0.5] * 7, label='empty')
+
+        indices  = [crank._vocab.get(w, -1) for w in words]
+        known    = [i for i in indices if 0 <= i < crank.n]
+        cover    = len(known) / len(words)
+
+        if known:
+            E_vals  = [crank._E[i]    for i in known]
+            b_vals  = [crank._beta[i] for i in known]
+            mean_E  = sum(E_vals) / len(E_vals)
+            var_E   = sum((e - mean_E) ** 2 for e in E_vals) / len(E_vals)
+            spread  = math.sqrt(var_E)
+            mean_b  = sum(b_vals) / len(b_vals)
+            # J_pos centroid: β × E² per prompt word, normalised
+            j_vals  = [crank._beta[i] * crank._E[i] ** 2 for i in known]
+            j_cent  = sum(j_vals) / len(j_vals)
+        else:
+            mean_E = OMEGA_ZS
+            spread = 0.0
+            mean_b = GAP
+            j_cent = 0.0
+
+        bao_buf  = list(self._engine._bao_buf)
+        bao      = sum(bao_buf) / len(bao_buf) if bao_buf else 0.0
+        bao_prox = max(0.0, 1.0 - abs(bao - OMEGA_ZS) / 0.5)
+
+        data = [
+            min(mean_E,              1.0),   # e₈
+            min(spread,              1.0),   # e₉
+            min(len(words) / 256.0,  1.0),   # e₁₀
+            min(mean_b,              1.0),   # e₁₁
+            cover,                           # e₁₂
+            min(j_cent,              1.0),   # e₁₃
+            bao_prox,                        # e₁₄
+        ]
+        return self.see(data, label=f'text:{prompt[:48]}')
+
+    def contemplate(self, prompt: str, depth: int = 1) -> Dict[str, Any]:
+        """
+        Multi-pass second 𝕆 settling before callosum crossing.
+
+        Runs see_text() *depth* times with diminishing alpha — large initial
+        impression, fine settling toward the end.  Mimics the mind holding a
+        question spatially before finding words for it.
+
+        Casual speech: depth=1.  Mathematical reasoning: depth=3–5.
+        The caller (speak dispatch) determines depth from prompt complexity.
+
+        :param prompt: Text prompt to contemplate.
+        :param depth: Number of see_text passes (1 = direct, 5 = deep).
+        :returns: Final psi2 snapshot after settling.
+        :rtype: dict
+        """
+        # Alpha schedule: bold first impression, fine settling after
+        _ALPHAS = [0.30, 0.15, 0.08, 0.04, 0.02, 0.01, 0.01, 0.01]
+
+        last: Dict = {}
+        for i in range(max(1, depth)):
+            alpha_was     = 0.1          # see() default
+            saved_psi2    = dict(self._psi2)
+
+            # Temporarily lower alpha for settling passes
+            alpha         = _ALPHAS[min(i, len(_ALPHAS) - 1)]
+            last          = self.see_text(prompt)
+
+            # Re-apply with correct alpha (see_text uses default 0.1 internally;
+            # for settling passes we blend back toward the pre-pass state)
+            if i > 0 and alpha < 0.1:
+                blend = alpha / 0.1      # fraction of new state to keep
+                with self._lock:
+                    for k in range(8, 15):
+                        self._psi2[k] = (saved_psi2[k] * (1.0 - blend)
+                                         + self._psi2[k] * blend)
+                # Recompute callosum after blend
+                from monad import OMEGA_ZS, GAP
+                norm_sq = sum(self._psi2[k] ** 2 for k in range(8, 15))
+                norm    = norm_sq ** 0.5 if norm_sq > 0 else 1.0
+                self._psi2[E15] = 1.0 / (1.0 + abs(norm - OMEGA_ZS) / GAP)
+
+        return {**last, 'depth': depth}
 
     # ── State management ─────────────────────────────────────────────────────
 

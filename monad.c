@@ -1538,6 +1538,36 @@ static void print_report(FILE *f) {
     fprintf(f, "\nAdaptive thresholds:\n");
     fprintf(f, "  novelty_min=%.4f  redundancy=[%.4f,%.4f]\n",
             G.novelty_min, G.redundancy_min, G.redundancy_max);
+
+    /* Gnarl/Popcorn corpus health (fractal tuning 2026-05-31) */
+    if (G_n > 0) {
+        int   n_samp = G_n > 32 ? 32 : (int)G_n;
+        int   step   = (int)G_n / n_samp;
+        if (step < 1) step = 1;
+        double acc = 0.0; int cnt = 0;
+        for (i = 0; i < G_n && cnt < n_samp; i += step, cnt++) {
+            double wh = word_hash(G_words[i].word);
+            double x0 = wh, y0 = 0.5 - wh * 0.3;
+            /* Gnarl iteration */
+            double x = x0, y = y0;
+            int st;
+            for (st = 0; st < 500; st++) {
+                double tx = tan(3.0 * x), ty = tan(3.0 * y);
+                if (fabs(tx) > 1e6 || fabs(ty) > 1e6) break;
+                x -= 0.01 * sin(y + ty);
+                y += 0.01 * sin(x + tx);
+            }
+            acc += fabs(sqrt(x*x + y*y) - OMEGA_ZS);
+        }
+        double gnarl_dist = cnt > 0 ? acc / cnt : -1.0;
+        fprintf(f, "\nGnarl/BAO health (fractal cross-validation):\n");
+        fprintf(f, "  mean |z_eq| − ΩZS = %.5f  (target < 0.05 = converged)\n",
+                gnarl_dist);
+        fprintf(f, "  %s\n",
+                gnarl_dist < 0.05 ? "CONVERGED — field at BAO equilibrium" :
+                gnarl_dist < 0.15 ? "NEAR — field approaching equilibrium" :
+                                    "DIVERGED — corpus needs deeper training");
+    }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

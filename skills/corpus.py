@@ -17,6 +17,11 @@ import re
 import socket
 import threading
 import time
+import urllib.parse
+import urllib.request
+import urllib.robotparser
+import html.parser
+import json as _json
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 # Import Engine from the parent package.  When running inside the APK
@@ -105,15 +110,17 @@ class GenericCorpus:
         self._primary_weight = primary_weight
         self._context_weight = context_weight
 
-        self._lock    = threading.Lock()
-        self._running = False
-        self._halt    = threading.Event()
+        self._lock         = threading.Lock()
+        self._running      = False
+        self._halt         = threading.Event()
         self._thread: Optional[threading.Thread] = None
-        self._studied = 0
+        self._studied      = 0
+        self._robots_cache: Dict[str, urllib.robotparser.RobotFileParser] = {}
+        self._robots_lock  = threading.Lock()
 
         if os.path.exists(bin_path):
             try:
-                self._engine.load_bin(bin_path)
+                self._engine.load_checkpoint(bin_path)
             except Exception:
                 pass
 
@@ -128,51 +135,179 @@ class GenericCorpus:
             context_weight=self._context_weight,
         )
 
-    def _fetch_text(self, url: str, timeout: int = 12) -> str:
-        """Fetch plain text from *url*.  Returns empty string on failure."""
+    _UA = ('Mozilla/5.0 (compatible; PtolemyHolcus/3.0; '
+           '+https://github.com/ptolemy-holcus; corpus-seeder)')
+
+    # ── API hosts: use structured APIs instead of HTML scraping ──────────────
+    _MEDIAWIKI_HOSTS = frozenset({
+        'en.wikipedia.org', 'en.wiktionary.org', 'simple.wikipedia.org',
+        'en.wikisource.org', 'en.wikiquote.org',
+    })
+    _ARXIV_HOST = 'arxiv.org'
+
+    def _robots_allowed(self, url: str, timeout: int = 6) -> bool:
+        """Return True if robots.txt permits fetching *url* for our UA."""
         try:
-            import urllib.request
-            import html.parser
-
-            class _Stripper(html.parser.HTMLParser):
-                def __init__(self):
-                    super().__init__()
-                    self._parts: List[str] = []
-                    self._skip = False
-
-                def handle_starttag(self, tag, attrs):
-                    if tag in ('script', 'style', 'nav', 'footer'):
-                        self._skip = True
-
-                def handle_endtag(self, tag):
-                    if tag in ('script', 'style', 'nav', 'footer'):
-                        self._skip = False
-
-                def handle_data(self, data):
-                    if not self._skip:
-                        self._parts.append(data)
-
-                def text(self) -> str:
-                    return ' '.join(self._parts)
-
-            req = urllib.request.Request(
-                url,
-                headers={'User-Agent': 'Ptolemy/3.0 corpus-seeder'},
-            )
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                raw = resp.read(1_000_000).decode('utf-8', errors='replace')
-            s = _Stripper()
-            s.feed(raw)
-            return s.text()
+            parsed = urllib.parse.urlparse(url)
+            host_key = f'{parsed.scheme}://{parsed.netloc}'
+            with self._robots_lock:
+                rp = self._robots_cache.get(host_key)
+                if rp is None:
+                    rp = urllib.robotparser.RobotFileParser()
+                    rp.set_url(f'{host_key}/robots.txt')
+                    try:
+                        rp.read()
+                    except Exception:
+                        rp = None
+                    self._robots_cache[host_key] = rp
+            if rp is None:
+                return True
+            return rp.can_fetch(self._UA, url)
         except Exception:
+            return True
+
+    def _strip_html(self, raw: str) -> str:
+        """Strip HTML to prose. Skips script/style/nav/header/footer/aside."""
+        _SKIP_TAGS = frozenset({
+            'script', 'style', 'nav', 'header', 'footer',
+            'aside', 'noscript', 'form', 'button',
+        })
+
+        class _S(html.parser.HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self._buf: List[str] = []
+                self._depth = 0
+
+            def handle_starttag(self, tag, attrs):
+                if tag in _SKIP_TAGS:
+                    self._depth += 1
+
+            def handle_endtag(self, tag):
+                if tag in _SKIP_TAGS and self._depth:
+                    self._depth -= 1
+
+            def handle_data(self, data):
+                if not self._depth:
+                    t = data.strip()
+                    if t:
+                        self._buf.append(t)
+
+            def text(self):
+                return '\n'.join(self._buf)
+
+        s = _S()
+        try:
+            s.feed(raw)
+        except Exception:
+            pass
+        return s.text()
+
+    def _fetch_text(self, url: str, timeout: int = 15) -> str:
+        """Fetch plain text from *url*.
+
+        Routing:
+          Wikipedia / Wiktionary / Wikisource  → MediaWiki extracts API
+          arXiv abstract pages                  → arXiv abs HTML (structured)
+          Everything else                       → robots.txt check, then fetch
+                                                  + HTML strip
+
+        Returns empty string on failure or if robots.txt disallows.
+        No intermediate files are written — text flows directly to learn().
+        """
+        parsed = urllib.parse.urlparse(url)
+        host   = parsed.netloc.lower().lstrip('www.')
+
+        # ── MediaWiki API (Wikipedia, Wiktionary, Wikisource…) ───────────────
+        if host in self._MEDIAWIKI_HOSTS or host.endswith('.wikipedia.org'):
+            title = urllib.parse.unquote(
+                parsed.path.rstrip('/').rsplit('/', 1)[-1])
+            if title and not title.startswith('Special:'):
+                api_url = (
+                    f'https://{parsed.netloc}/w/api.php'
+                    f'?action=query'
+                    f'&titles={urllib.parse.quote(title, safe="")}'
+                    f'&prop=extracts&explaintext=1&exsectionformat=plain'
+                    f'&redirects=1&format=json'
+                )
+                try:
+                    req = urllib.request.Request(
+                        api_url, headers={'User-Agent': self._UA})
+                    with urllib.request.urlopen(req, timeout=timeout) as r:
+                        data = _json.loads(r.read(4_000_000))
+                    for page in data.get('query', {}).get('pages', {}).values():
+                        text = page.get('extract', '').strip()
+                        if text and len(text) > 100:
+                            return text
+                except Exception:
+                    pass
             return ''
+
+        # ── arXiv: abs page has clean structured text ─────────────────────────
+        if self._ARXIV_HOST in host:
+            try:
+                req = urllib.request.Request(
+                    url, headers={'User-Agent': self._UA})
+                with urllib.request.urlopen(req, timeout=timeout) as r:
+                    raw = r.read(500_000).decode('utf-8', errors='replace')
+                # Extract abstract block only — avoid boilerplate
+                m = re.search(
+                    r'<blockquote[^>]*class="abstract[^"]*"[^>]*>(.*?)</blockquote>',
+                    raw, re.DOTALL | re.IGNORECASE)
+                if m:
+                    abstract = re.sub(r'<[^>]+>', ' ', m.group(1)).strip()
+                    # Also grab title
+                    t = re.search(r'<h1[^>]*class="title[^"]*"[^>]*>(.*?)</h1>',
+                                  raw, re.DOTALL | re.IGNORECASE)
+                    title = re.sub(r'<[^>]+>', '', t.group(1)).strip() if t else ''
+                    return f'{title}\n{abstract}' if title else abstract
+            except Exception:
+                pass
+            return ''
+
+        # ── Generic: robots.txt → fetch → strip ──────────────────────────────
+        if not self._robots_allowed(url, timeout=6):
+            return ''
+        req = urllib.request.Request(url, headers={'User-Agent': self._UA})
+        raw = ''
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                ct  = r.headers.get('Content-Type', '')
+                raw = r.read(2_000_000).decode('utf-8', errors='replace')
+        except Exception as exc:
+            # SSL cert mismatch (misconfigured university/institution servers):
+            # fall back to unverified — content is not sensitive, just educational.
+            if 'CERTIFICATE' in str(exc).upper() or 'SSL' in str(exc).upper():
+                try:
+                    import ssl
+                    ctx = ssl.create_default_context()
+                    ctx.check_hostname = False
+                    ctx.verify_mode    = ssl.CERT_NONE
+                    with urllib.request.urlopen(req, timeout=timeout,
+                                               context=ctx) as r:
+                        ct  = r.headers.get('Content-Type', '')
+                        raw = r.read(2_000_000).decode('utf-8', errors='replace')
+                except Exception:
+                    return ''
+            else:
+                return ''
+        if not raw:
+            return ''
+        if 'text/plain' in ct or url.endswith('.txt'):
+            return raw
+        return self._strip_html(raw)
 
     def _save(self) -> None:
         """Save Engine state to the checkpoint file."""
         try:
-            self._engine.save_session(self._bin_path)
-        except Exception:
-            pass
+            result = self._engine.save_session(self._bin_path)
+            if isinstance(result, dict) and 'error' in result:
+                import sys
+                print(f'[corpus:{self._name}] save error: {result["error"]}',
+                      file=sys.stderr)
+        except Exception as exc:
+            import sys
+            print(f'[corpus:{self._name}] save exception: {exc}', file=sys.stderr)
 
     def _wait_network(self, check_interval: int = 10) -> None:
         """Block until 8.8.8.8:53 is reachable, saving state on first failure.
