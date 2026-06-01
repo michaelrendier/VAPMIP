@@ -1,0 +1,24 @@
+11:94:AA:10:05:82
+public
+F-SL001A
+F-SL001A
+0x240404
+0x0000
+audio-headset
+yes
+no
+no
+no
+-65 dBm (0x-41)
+yes
+00001101-0000-1000-8000-00805f9b34fb Serial Port
+00001108-0000-1000-8000-00805f9b34fb Headset
+0000110b-0000-1000-8000-00805f9b34fb Audio Sink
+0000110c-0000-1000-8000-00805f9b34fb Remote Control Target
+0000110d-0000-1000-8000-00805f9b34fb Advanced Audio
+0000110e-0000-1000-8000-00805f9b34fb Remote Control
+0000111e-0000-1000-8000-00805f9b34fb Handsfree
+00001124-0000-1000-8000-00805f9b34fb Human Interface Device Service (HID)
+00001200-0000-1000-8000-00805f9b34fb PnP Information
+bluetooth:v0094p1234d0101
+/org/bluez/hci0

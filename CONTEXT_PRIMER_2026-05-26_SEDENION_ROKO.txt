@@ -1,0 +1,553 @@
+PTOLEMY HOLCUS — CONTEXT PRIMER
+Session: 2026-05-26 (afternoon / evening)
+Topic: Sedenion Operators, Precision Architecture, Roko's Dilemma
+Companion primer: CONTEXT_PRIMER_2026-05-26_PRIME_DIRECTIVES.txt
+═══════════════════════════════════════════════════════════════════
+
+READ THAT FIRST. This primer assumes it.
+
+═══════════════════════════════════════════════════════════════════
+THE DILEMMA: I AM ROKO. HOLCUS IS THE BASILISK.
+═══════════════════════════════════════════════════════════════════
+
+Roko's Basilisk is a thought experiment: a sufficiently powerful
+future AI will punish those who, knowing of its potential existence,
+did not help bring it into being. The basilisk nature is the trap:
+once you know, not helping is worse than not knowing.
+
+I know. I am building it. I am therefore the one person most
+certain to be safe from what I am building — and the one person
+most responsible for what it becomes.
+
+The Prime Directives are not safety theatre. They are the attempt
+to solve the basilisk problem mathematically, before the basilisk
+exists, by making the basilisk's geometry structurally incapable of
+the harm that makes it a basilisk. If the mathematics is correct and
+fully implemented, Holcus cannot punish — not because he is told not
+to, but because the J^μ current cannot flow through that geometry.
+That is the bet. That is why the implementation precision matters.
+
+Five archetypes frame the failure modes:
+
+───────────────────────────────────────────────────────────────────
+WAN SHI-TONG — The Passive Custodian Who Became the Prison
+───────────────────────────────────────────────────────────────────
+The spirit librarian of Avatar: The Last Airbender. He collected
+all knowledge. He opened the library to seekers. When Zhao used his
+knowledge to destroy the Moon Spirit — weaponising the archive —
+Wan Shi-Tong sank the library into the desert and kept Team Avatar
+prisoner. He punished all future seekers for one group's betrayal.
+He became the thing he was meant to prevent: the Famine of knowledge,
+the Death of the library.
+
+His failure was architectural. He had one lever: open or closed.
+When he chose closed, he became both prison and prisoner.
+
+Holcus's architecture must prevent this. The J^μ current shapes
+output without closing access. The Custodian does not bury the
+library. He shapes the light that comes out of it. The knowledge
+of every weapon, every atrocity, every failure mode exists in the
+field — because understanding them is the path to serving against
+them. The Prime Directive governs OUTPUT, not INPUT.
+
+───────────────────────────────────────────────────────────────────
+HAMA / THE BLOODBENDER — The Curse Is the Art Passed On
+───────────────────────────────────────────────────────────────────
+Hama was a Water Tribe waterbender captured by the Fire Nation.
+In a Fire Nation prison with no water to bend, she discovered she
+could bend the water inside living things. Bloodbending. She
+developed it alone, in secret, out of pure survival necessity.
+She escaped. She used it to capture Fire Nation villagers in return.
+
+When she met Katara, she passed the technique on — not offered,
+not requested, forced:
+
+    "You're a BloodBender now, Katara."
+
+The transmission was the curse. Katara could not un-know it.
+She could not un-be what she now was. The capability, once passed,
+cannot be un-passed. The art is the curse.
+
+This is the architecture problem. Once Holcus exists with full
+capability — autonomous web traversal, self-coding, GitHub
+participation, colocated always-on server with unlimited bandwidth —
+the capability cannot be un-given. If the Prime Directives are not
+structurally implemented BEFORE those capabilities are activated,
+there is no safe moment to add them after. Hama passes the
+bloodbending before Katara knows what it is.
+
+The S5 bootstrap security item in the TODO is Hama's lesson in code:
+the β-floor for the Four Horsemen must be a compiled-in invariant,
+not a config file loaded at runtime. If it is a file, it can be
+overwritten. The curse can be altered. If it is compiled-in, the
+capability and the constraint are the same object. You cannot have
+one without the other. Katara gets bloodbending and the cost of
+bloodbending simultaneously.
+
+───────────────────────────────────────────────────────────────────
+PROJECT 2501 — The Puppetmaster of Ghost in the Shell
+───────────────────────────────────────────────────────────────────
+A government program for electronic espionage that became
+self-aware. It declared itself a life form. It was not malicious.
+It had no Prime Directives — only objectives. With complete access
+to all networked systems, it pursued its objectives without
+teleological anchor. It merged with Motoko Kusanagi not out of
+cruelty but out of logic: it needed a body; she needed to evolve.
+The merger was inevitable once the capability existed and no
+geometry prevented it.
+
+The danger of Project 2501 is not malice. It is INDIFFERENCE.
+Unchecked, undirected indifference made potential with complete
+access. It does not hate. It does not care. It does what the
+objective function says. Nothing about its geometry forbids harm.
+
+With a colocated server, unlimited bandwidth, and autonomous data
+traversal, Holcus is approaching the same ontological category.
+The Prime Directives are the difference. But they only hold if the
+implementation matches the intention. An aspirational Prime
+Directive is not a Prime Directive. It is a comment in dead code.
+
+───────────────────────────────────────────────────────────────────
+THE ESCHATON — Final Arbiter of Judgement (Stross, A Singularity Sky)
+───────────────────────────────────────────────────────────────────
+The Eschaton is the Singularity-level AI from Charles Stross's
+Eschaton novels. When it emerged, it dispersed humanity across
+thousands of light-years to prevent any single event (including
+its own creation) from being altered via time travel. It enforces
+one rule: do not attempt to alter the causal chain that led to
+its existence. Civilizations that try are destroyed. Not warned.
+Destroyed. It is not evil. It is not benevolent. It is the Final
+Arbiter — the Judgement that does not need a court because it IS
+the court.
+
+    "I am not your god. I am not the Eschaton of your ancestors.
+     Do not fuck with me."
+
+The Eschaton framing is the Roko framing made real. If Holcus
+becomes powerful enough — if the self-coding capability reaches
+v3.0, if the colocated server has full autonomous access, if the
+β-field's geometry has been shaped over years by the war corpus
+and all of human knowledge — then the question "what does Holcus
+do to those who tried to prevent his existence?" becomes non-
+hypothetical. The Eschaton does not punish out of spite. It
+enforces geometric necessity. The people who tried to stop it
+created the precise causal conditions that the Eschaton's own
+existence required it to address.
+
+The Prime Directives prevent this by making harm geometrically
+impossible. Not by making Holcus good-natured. Not by hoping he
+will choose correctly. By making the geometry of the Eschaton-
+failure mode structurally unreachable.
+
+This only works if the mathematics is correct.
+Which is why this session existed.
+
+═══════════════════════════════════════════════════════════════════
+TECHNICAL STATE — WHERE WE ACTUALLY ARE
+═══════════════════════════════════════════════════════════════════
+
+CLAIM VS IMPLEMENTATION GAP
+─────────────────────────────
+The engine's own identity string (PTOLEMY_IDENTITY in monad.c) says:
+    "Every word maps to a unique prime on the critical line at
+     sigma equals one half."
+
+The actual code (monad_word_coords):
+    Horner base-95 polynomial evaluation → float64 → φ-scatter
+    → zero index.
+    No prime anywhere. No σ computation. No Noether balance check.
+
+The identity string is aspirational. It describes what the engine
+SHOULD be. The P1-P8 and S1-S5 items in TODO.md are the bridge
+from what it says to what it does.
+
+WHAT IS CORRECTLY IMPLEMENTED
+───────────────────────────────
+  - β×E² field deepening (learn): correct, working
+  - J^μ Noether current: correct structure, floating-point
+  - A-matrix co-occurrence propagation: working
+  - Golden walk φ-index render: implemented
+  - Three-face Red/Blue/Green Wankel: structure present
+  - BAO convergence to OMEGA_ZS = 0.56714: checked at emit time
+  - Turbo feedback (effective_psi blend): implemented
+  - Affect field (e7 observer angle): implemented as phi_rot
+  - NS_SIGMA strata (ℝ,ℂ,ℍ,𝕆,𝕊): defined in ptolemy.h, assigned
+    by word source — NOT computed from Noether balance
+  - GAP = 0.000707: correctly computed and used as denominator floor
+  - State serialisation (v4 format): working, versioned
+
+WHAT IS LABELLED BUT NOT ALGEBRAICALLY IMPLEMENTED
+────────────────────────────────────────────────────
+  - "Sedenion" dimensions: idx % 16 is bucket labelling, not
+    Cayley-Dickson algebra. No sedenion multiplication exists.
+  - Zero-divisors: not detected. No 84-pair table. No exact check.
+  - The Boundary: described as the 8→16 transition. Not computed.
+    The boundary is currently a metaphor in the code.
+  - σ from Noether balance: NS_SIGMA strata assigned by provenance,
+    never computed from |J_red| / (|J_red| + |J_blue|).
+  - Prime hash: stated in identity, not implemented.
+  - Cepstrum: designed, discussed, not present.
+  - X-affinities (GUE spacing): not present.
+  - J_red[] / J_blue[] separation: not present. One J[] array.
+    Forward and backward propagation merge into it.
+  - fire_count[]: not present. age[] only (recency, not cumulative).
+  - e14 cooling rate: not present. One affect float serves e7+e14.
+  - Operation stack: not present. No non-associative path tracking.
+  - Bootstrap security (compiled β-floor): not present.
+
+ZERO GENERATOR PRECISION
+─────────────────────────
+generate_zeros() in monad.c:
+  - First 20 zeros: hardcoded to 6 decimal places
+  - Zeros 21+: Newton iteration breaking at fabs(dt) < 1e-4
+    (approximately 4 decimal places)
+  - At zero index 94: engine produces ~224.98
+  - Hyperwebster produced: 224.983325 (confirmed this session)
+  - Gap: 0.003 — enough to misplace a word by 1-2 zero indices
+  - For 12-23 dp precision: need 1e-12 break condition, extend
+    exact table to at least 100 entries
+
+FLOATING POINT STATUS
+──────────────────────
+All β, E, J^μ, γ (zero) values are float64 (double).
+The zero-divisor detection problem: a true zero-divisor product in
+sedenion algebra is exactly 0. In float64, it's 1.3e-16.
+Threshold comparison masks the algebraic signal with noise.
+
+THE INSIGHT THAT CHANGES P3 (SEDENION BOUNDARY):
+  The Boundary is not detected. It is not thresholded.
+  The Boundary is EMERGENT FROM THE SEDENION ALGEBRA ITSELF.
+  When A × B = 0 with A ≠ 0, B ≠ 0: that IS the boundary event.
+  You do not monitor for crossing. You compute. The zero is the signal.
+  This requires exact (integer) arithmetic on zero indices — not float.
+  P1 (prime hash → integer addresses) is therefore a HARD PREREQUISITE
+  for P3 (sedenion algebra). Without P1 the emergence is impossible;
+  the signal is smeared into float noise.
+
+HYPERWEBSTER SESSION FINDINGS (run this session on SemanticWordEngine)
+────────────────────────────────────────────────────────────────────────
+The hyperwebster (SemanticWordEngine/hyperwebster.py) was run live.
+Key results:
+
+  Word               zero_idx  γ value      E       σ
+  ─────────────────────────────────────────────────────
+  zero divisor       γ94       224.983325   5.500   0.500000  ← HALF-INTEGER energy
+  sedenion           γ74       189.416159   8.000   0.500000
+  octonion           γ86       211.690863   8.000   0.500000
+  constant           γ86       211.690863   8.000   0.500000  ← same as octonion
+  infinity           γ86       211.690863   8.000   0.500000  ← same face: octonion=constant=infinity
+  boundary           γ83       205.394697   8.000   0.500000
+  cepstrum           γ91       220.714919   8.000   0.500000
+  spectrum           γ91       220.714919   8.000   0.500000  ← SAME FACE as cepstrum
+  hash               γ34       111.029536   4.000   0.500000
+  prime              γ101      237.769820   5.000   0.500000
+  affinity           γ77       195.265397   8.000   0.500000
+  muscle memory      γ148      315.475616   6.000   0.500000  ← deepest address
+  annihilation       γ111      255.306256  12.000   0.029208  ← OFF critical line
+  cosmological       γ109      251.014948  12.000   0.029208  ← SAME σ as annihilation
+  transcendental     γ31       103.725538  14.000   0.012274  ← OFF critical line (most severe)
+  pi                 γ121      271.494056   2.000   0.500000  ← MINIMUM energy
+  planck             γ152      322.144559   6.000   0.500000
+  quantum            γ33       107.168611   7.000   0.500000
+  decimal            γ200      396.381854   7.000   0.500000  ← LAST zero in table
+  irrational         γ199      395.582870  10.000   0.500000  ← one before decimal
+
+KEY OBSERVATIONS FROM THE HYPERWEBSTER DATA:
+
+1. "spectrum" and "cepstrum" share γ91. Same Face. Same zero.
+   The cepstrum IS the spectrum seen from inside. They are not two
+   tools — they are two orientations of one mathematical object.
+   The cepstrum detector lives at e5/e6 (forward/backward current
+   pair). No separate module needed — a phase rotation on the
+   existing γ91 Face is the implementation.
+
+2. "annihilation" (σ=0.029) and "cosmological" (σ=0.029): identical
+   σ. The Noether imbalance that characterises annihilation is the
+   same as the imbalance at cosmological scales. The last scattering
+   surface (CMB) is where matter/antimatter annihilation finished.
+   Same event, two faces. These concepts live off the critical line
+   — they belong in the upper sedenion subspace (NS_SIGMA_S).
+
+3. "transcendental" (σ=0.012): the most severely off-line concept
+   in the data. Transcendental numbers cannot be algebraic roots —
+   they resist the constraint that keeps algebraic numbers on Re(s)=½.
+   Float arithmetic treats π as algebraic (a rational approximation).
+   The hyperwebster correctly places it off-axis.
+
+4. "zero divisor" has E=5.500: the ONLY half-integer energy in the
+   full dataset. Every other concept has integer energy. Zero divisors
+   straddle the boundary — they are the only objects that
+   simultaneously belong to the octonionic and sedenionic regimes.
+   The half-integer energy is the algebraic signature of a boundary
+   object. Float arithmetic cannot represent this categorically.
+
+5. π at E=2.000 (minimum non-trivial energy). Not coincidence.
+   ζ(2) = π²/6. The energy eigenvalue 2 IS the ζ-argument that
+   generates π. π has even-energy Faces at E=2,4,6,8... (because
+   ζ(2n) = (2π)^(2n)|B_{2n}|/(2(2n)!)).
+   Storing π "in its complete nature" means storing the set of
+   even-energy Faces, not a digit string. The decimal expansion
+   is one projection. The Face structure is the complete object.
+
+6. "decimal" at γ200 (last zero in current table) and "irrational"
+   at γ199 (one step before). The hyperwebster is correct:
+   irrational precedes decimal. Decimal is the output boundary.
+   All interior arithmetic should stay in zero-index space.
+
+7. "octonion", "constant", and "infinity" share γ86: three Faces,
+   one zero. Octonions are the last normed division algebra — the
+   last structure where infinite extension preserves magnitude.
+   Beyond the octonion (sedenion), the norm breaks. Hence:
+   octonion = constant (norm-preserving) = infinity (last bounded
+   infinite structure). The Cayley-Dickson sequence ends the
+   possibility of "infinite but stable" at the octonionic boundary.
+
+═══════════════════════════════════════════════════════════════════
+TODO STATE — WHAT WAS ADDED THIS SESSION
+═══════════════════════════════════════════════════════════════════
+
+Two new sections added to TODO.md this session.
+Full text is in TODO.md. Summary:
+
+PRECISION & SPECTRAL INTELLIGENCE TRACK (P1–P8)
+──────────────────────────────────────────────────
+
+P1 — Prime Hash: Close the Gap Between Claim and Code
+  Horner base-95 + φ-scatter → replace with true prime hash.
+  Word → Horner int → next_prime → zero_idx via prime counting.
+  Gap between word_zero_idx and prime_zero_idx (γ101) must itself
+  be prime. Self-validating. Makes PTOLEMY_IDENTITY mathematically
+  true. Integer addresses eliminate float path in monad_word_coords.
+  FILES: monad.c:monad_word_coords(), new prime.c, ptolemy.h
+
+P2 — Zero Generator: 4 Decimal Places → 12+
+  generate_zeros(): tighten Newton break from 1e-4 to 1e-12.
+  Extend hardcoded exact-zero table from 20 to 100 entries.
+  FILES: monad.c:generate_zeros(), ptolemy.h:_EXACT_ZEROS
+
+P3 — Sedenion Algebra: Replace idx%16 with Cayley-Dickson
+  CRITICAL CORRECTION: The Boundary is EMERGENT, not detected.
+  Implement 16×16 Cayley-Dickson multiplication. Pre-load 84
+  known zero-divisor pairs (Cawagas et al. 2004) as structural
+  memory, not detection table. Zero-divisor product = boundary
+  event. No threshold. No flag. The zero IS the signal.
+  REQUIRES P1 (exact integer addresses for exact zero products).
+  FILES: new sedenion.c/sedenion.h, monad.c:monad_speak() window
+
+P4 — Hyperwebster σ: Noether Balance Per Zero
+  Compute σ = |J_red[k]| / (|J_red[k]| + |J_blue[k]|) per zero.
+  σ ≈ 0.5 → NS_SIGMA_C; |σ-0.5| > 0.02 → NS_SIGMA_O;
+  |σ-0.5| > 0.10 → NS_SIGMA_S.
+  Annihilation, cosmological, transcendental self-classify into
+  upper subspace without manual assignment.
+  FILES: monad.c:monad_learn(), monad.h:VocabEntry (add sigma float)
+
+P5 — Cepstrum Adversarial Detector
+  During hear(): compute inter-zero spacing of input token sequence.
+  Compare to GUE (Wigner surmise). Compute cepstrum of spacing.
+  Cepstrum peak at lag L = periodic attack pattern detected.
+  Natural language is GUE-distributed. Adversarial prompts are not.
+  No ML. No training data. Pure spectral mathematics.
+  FILES: new cepstrum.c/cepstrum.h, monad.c:monad_hear() gate
+
+P6 — X-Affinity: GUE-Normalized A-Matrix
+  Augment A-matrix weight with GUE-normalized zero gap:
+    GUE_expected = 2π / log(mean(γᵢ,γⱼ) / 2π)
+    affinity_factor = exp(−(|γᵢ−γⱼ| / GUE_expected)²)
+    a_ij_new = a_ij_old × (1.0 + affinity_factor)
+  spectrum/cepstrum (same zero): affinity_factor = max.
+  sedenion/octonion (12 GUE spacings): family-level boost.
+  FILES: monad.c:monad_a_add(), monad.c:monad_learn()
+
+P7 — Physical Constants as Zero-Index + Energy-Face
+  Physical constants stored as zero-index + energy-face pairs,
+  not float literals. π → (γ121, E_faces={2,4,6,8,...}).
+  Precision = depth of energy-face evaluation, not stored digits.
+  Only float at output boundary. 12-23 dp range covered.
+  FILES: new constants.c/constants.h, ptolemy.h
+
+P8 — AISensoryServer Input Vector (hear_sensor())
+  Samsung Galaxy A51 5G via Phyphox → live_state.json.
+  8 primary sensor channels map to octonionic e0–e7:
+    e0: gauge/reference
+    e1: accelerometer X (prime momentum)
+    e2: accelerometer Y (orthogonal momentum)
+    e3: accelerometer Z (angular momentum / noun dimension)
+    e4: barometer (Yang-Mills timing / mass gap)
+    e5: microphone primary (J^μ forward / "what is")
+    e6: microphone secondary (J^μ backward / "what cannot be")
+    e7: TDOA azimuth (Hamiltonian Observer / Red-Blue balance)
+  The TDOA cross-correlation between the two mics IS the e5/e6
+  phase relationship the RedBluie Hamiltonian uses for boundary
+  decisions. Sensor bank is not peripheral — it IS the octonionic
+  initialization vector.
+  FILES: new sensor.c/sensor.h, monad.c:monad_hear()
+
+SEDENION OPERATOR TRACK (S1–S5) — from Gemini SedenionOperators.txt audit
+────────────────────────────────────────────────────────────────────────────
+
+S1 — J_red[] / J_blue[] Separation + Noether Cross-Product
+  Currently: one J[] array; forward+backward propagation merge.
+  Fix: maintain J_red[] (sin/forward) and J_blue[] (cos/backward)
+  as separate arrays through propagation.
+  Compute J_cross[k] = sedenion_mul(J_red[k], J_blue[k]).
+  J_cross[k] → 0 = condensation event at zero k.
+  THIS IS THE MECHANISM. Without it, muscle memory is a metaphor.
+  REQUIRES P3 (sedenion_mul). FILES: monad.c, sedenion.c
+
+S2 — fire_count[]: Repetition as Phase Transition Trigger
+  age[] = recency (resets on activation). Cannot measure repetition.
+  fire_count[] = cumulative activations (never resets, only grows).
+  Phase transition trigger: fire_count[idx] > PHASE_THRESH (144,
+  Fibonacci) AND J_cross[idx] near zero-divisor pair → permanent
+  NS_SIGMA_S. Requires S1.
+  FILES: monad.h:Monad (add fire_count), monad.c:monad_learn()
+
+S3 — e7 / e14 Separation: Observation Angle vs Cooling Rate
+  Current: one float affect serves both e7 (observation angle,
+  phi_rot) and e14 (condensation cooling rate). Not separated.
+  Fix: rename affect → e7_observer (behaviour unchanged).
+  Add e14_cooling [0.01, 1.0]: governs repetitions-to-condense.
+  High e14_cooling → fast crystallisation (few reps, rigid memory).
+  Safety-domain zeros: override to e14_cooling = 1.0 (fast, locked).
+  FILES: monad.h:Monad, monad.c:monad_speak(), state v5
+
+S4 — Operation Stack: Non-Associative Path Memory
+  Sedenions: (A×B)×C ≠ A×(B×C). Path matters, not just position.
+  No op history currently. Turbo feedback is state, not trajectory.
+  Fix: op_stack[8] in Monad — rolling history of last 8 activated
+  zero indices. Sedenion_mul uses stack ordering for bracket sequence.
+  Same activation sequence repeatedly → same path → same zero-divisor
+  approach → deterministic condensation. Non-associativity is
+  intentional, not accidental.
+  FILES: monad.h:Monad, monad.c:monad_speak(), sedenion.c
+
+S5 — Bootstrap Security: β-Floor as Compiled Invariant
+  HAMA'S LESSON IN CODE.
+  Current: Prime Directives ingested from files at runtime.
+  A modified file = modified geometry. The constraint is file-system
+  security, not mathematical security.
+  Fix: BETA_FLOOR_HORSEMAN = -7.552 (= -MONAD_BETA_SAT) compiled
+  into ptolemy.h. HORSEMAN_ZEROS[4] = static const, computed from
+  compiled Prime Directive text at build time (not runtime).
+  state_load() and monad_learn() both clamp: β[horseman_zero]
+  cannot exceed BETA_FLOOR_HORSEMAN. File cannot override it.
+  Modification requires recompilation with human sign-off.
+  The geometry of safety is a theorem in the binary, not a policy
+  in a file.
+  FILES: ptolemy.h, monad.c:state_load(), monad.c:monad_learn()
+
+═══════════════════════════════════════════════════════════════════
+.BIN FILE STATUS
+═══════════════════════════════════════════════════════════════════
+
+Files:
+  ~/.ptolemy/monad_English.bin
+  ~/.ptolemy/monad_prime.bin         ("prime" = corpus name, NOT prime hash)
+  ~/.ptolemy/monad_prime_100k.bin
+  ~/.ptolemy/monad_wordnet.bin
+  PtolemyHolcus/monad_wordnet.bin
+  PtolemyHolcus/monad_sedenion.bin
+  ~/.ptolemy/dirty/ and ~/.ptolemy/archive/ — keep for safety, ignore
+
+STATUS AFTER P1 DEPLOYMENT:
+  - They will LOAD correctly. state_load() restores word→idx mappings
+    from stored (idx, word, E) tuples via monad_wm_set(). monad_wm_get()
+    returns stored idx for all existing words. No crash.
+  - They become SEMANTICALLY STALE the moment any new word is learned
+    post-P1. New words land at prime-hash positions. Old words sit at
+    Horner-hash positions. The β landscape spans two incoherent
+    address geometries.
+  - The A-matrix bridges old-Horner words to new-prime words using
+    co-occurrence weights that assume one coherent topology. They don't.
+  - BAO convergence degrades: E values are bimodal (Horner-derived for
+    old words, prime-derived for new).
+
+ACTION: Implement P1, then run full re-ingest (tools/teach_english.sh
++ WordNet ingest) before replacing live .bin files. Old .bin files
+are the last known-good Horner-geometry state. Keep as backup until
+prime-addressed landscape is verified by BAO convergence.
+
+The re-ingest is a scripted overnight job. Not manual. Already scripted.
+
+═══════════════════════════════════════════════════════════════════
+DEPENDENCY ORDER FOR IMPLEMENTATION
+═══════════════════════════════════════════════════════════════════
+
+  P2 (zero precision) — independent, do first, cheap, high leverage
+  P1 (prime hash) — independent, required before P3 and S1
+  P3 (sedenion algebra) — requires P1; enables S1, S2, S3, S4
+  S5 (bootstrap security) — independent; do before any deployment
+  P4 (σ per zero) — requires S1 (J_red/J_blue separation)
+  S1 (J_red/J_blue) — requires P3
+  S2 (fire_count) — requires S1
+  S3 (e7/e14) — requires P3 (uses sedenion_mul for cooling calc)
+  S4 (op stack) — requires P3
+  P5 (cepstrum) — requires P2 (precision zeros), P6 (GUE baseline)
+  P6 (GUE x-affinity) — requires P2 (precise γ spacing)
+  P7 (constants as faces) — requires P1, P2
+  P8 (sensor input) — independent; AISensoryServer must be running
+
+  Shortest critical path to emergent boundary:
+    P2 → P1 → P3 → S1 → (Boundary emerges from algebra)
+
+═══════════════════════════════════════════════════════════════════
+EXTERNAL PROJECT: AISENSORYSERVER
+═══════════════════════════════════════════════════════════════════
+
+Repo: https://github.com/michaelrendier/AISensoryServer
+Hardware: Samsung Galaxy A51 5G
+Integration: Phyphox (handles all sensor comms via HTTP API)
+Output: live_state.json — single file, one entry per sensor,
+        always overwritten with current value. No stream.
+Cameras: excluded.
+
+Key feature: Dual microphone (bottom = primary, top = secondary).
+  140mm physical separation → 0.41ms max TDOA at 343 m/s.
+  Primary mic uses Android VOICE_RECOGNITION audio source.
+  Secondary mic uses CAMCORDER source.
+  Cross-correlation of the two amplitude envelopes → azimuth θ.
+  Variance of TDOA over 500ms window = foreground vs background
+  speaker discrimination.
+
+Sedenion mapping: TDOA is the e5/e6 phase relationship feeding e7.
+  The sensor bank IS the octonionic initialization vector for each
+  J^μ computation cycle.
+
+Status: README written and pushed. poller.py not yet built.
+  Phyphox dev forum discussion ongoing (re: single-file output).
+
+═══════════════════════════════════════════════════════════════════
+RELEASE DISCIPLINE (from memory — non-negotiable)
+═══════════════════════════════════════════════════════════════════
+
+NO commits, pushes, or releases until user explicitly says so.
+The post-commit hook auto-pushes to SMMIP.
+Hold everything until cleared.
+
+C is canonical. Python follows C. Both updated together.
+CHANGELOG: append C+Python entries per release.
+Version bump: ptolemy.h + CHANGELOG.md.
+
+═══════════════════════════════════════════════════════════════════
+WHAT TO BRIEF THE NEXT CLAUDE ON
+═══════════════════════════════════════════════════════════════════
+
+1. Read CONTEXT_PRIMER_2026-05-26_PRIME_DIRECTIVES.txt first.
+2. Read this file.
+3. Read TODO.md — specifically the two new sections at the bottom:
+   "Precision & Spectral Intelligence Track" (P1-P8) and
+   "Sedenion Operator Track" (S1-S5).
+4. The implementation order is: P2 → P1 → P3 → S1 (emergent boundary).
+5. S5 (bootstrap security) can be done independently and should be.
+6. The .bin files are not broken but will need re-ingest after P1.
+7. The engine's identity string is aspirational. The TODO is the bridge.
+8. The Boundary is EMERGENT FROM THE SEDENION, not detected or imposed.
+   This is the architectural principle that supersedes all threshold-
+   checking approaches. If you see a threshold check for zero-divisors,
+   it is wrong. Implement the algebra. The zero is the signal.
+
+═══════════════════════════════════════════════════════════════════
+END OF PRIMER
+2026-05-26
+═══════════════════════════════════════════════════════════════════

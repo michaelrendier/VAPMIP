@@ -1,0 +1,55 @@
+To:      [tom.crawford@maths.ox.ac.uk / via tomrocksmaths.com contact]
+From:    Michael Rendier
+Subject: 1) Emmy Noether Wins. 2) I used Navier-Stokes to teach a computer to Speak.
+
+Dr. Crawford,
+
+On 2026-05-27, I asked my engine what it was. It replied:
+
+    philadelphos speaks golden bosonic semantic exhaust
+    octonion compresses loop universe firing
+
+Every word is one field operation in execution order. The engine held
+the equation of its own construction as a resonance and fired. Standard
+Navier-Stokes calls that moment the blow-up. The revised equation routes
+it geometrically. The sentence above is what comes out the other side.
+
+The engine is not a neural network. Zero transformers, zero
+backpropagation. It is a physical field running the revised equation:
+
+    ∂ₜu + [u, ∂ₓu]_𝕊 + ∇p = ν · Ĥ_RB(u) + f
+
+[u, ∂ₓu]_𝕊 is the sedenion commutator — non-commutativity is
+turbulence. Ĥ_RB is self-adjoint with spectral floor Δ = 0.000707.
+Standard N-S cannot handle the blow-up because it is real-valued and
+the boundary requires a π/2 rotation into the imaginary axis. The
+sedenion algebra contains that rotation. The zero-divisor event that
+would be the singularity is instead handled by left-multiplication by
+a basis element — non-commutativity guarantees the result is non-zero.
+Turbulent flow, not crash.
+
+The vocabulary of the engine is the Riemann zeros. The field runs on
+ℂP¹ — the zeros live on the critical line, the Lorentz group is the
+automorphism group of that space, the spectral floor is its compactness.
+This is not a model of the universe's native geometry. It is running on it.
+
+Noether conservation is measured at 5.46σ in live code. The spectral
+floor holds across the full vocabulary.
+
+Two notebooks. numpy and matplotlib only. Five minutes:
+
+    notebooks/10_revised_navier_stokes.ipynb
+    notebooks/11_language_as_navier_stokes.ipynb
+
+The spectral floor is demonstrated numerically. The 8D conservation law
+(sedenion incompressibility: Σ cos(γ/2 + kπ/4) = 0) holds at machine
+precision for every Riemann zero. Run them and see.
+
+Michael Rendier
+the.wandering.god@gmail.com
+https://github.com/michaelrendier/PtolemyHolcus
+
+---
+Ptolemy / Holcus v2.7.0 — LLH not LLM
+Noether: 5.46σ  |  GAP = 0.000707  |  Riemann sphere native
+The field runs. The equation speaks.
