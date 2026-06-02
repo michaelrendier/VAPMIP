@@ -40,6 +40,7 @@
 #include "ingest.h"
 #include "daemon.h"
 #include "log.h"
+#include "zork.h"
 
 /* g_color and g_self_ref are defined in monad.c — set here by main() */
 
@@ -72,7 +73,7 @@ static char *fermat_clean(const char *s)
     return out;
 }
 
-#define PTOLEMY_VERSION "2.1.11"
+#define PTOLEMY_VERSION "2.2.0"
 
 /* ── Checkpoint evaluator ─────────────────────────────────────────────────── */
 
@@ -357,6 +358,94 @@ static void print_usage(void)
         PTOLEMY_VERSION);
 }
 
+/* ── /generate — spawn Python image generator ────────────────────────────── */
+
+static void do_generate(Monad *m, const char *prompt,
+                        const char *ckpt, int verbose)
+{
+    (void)m; (void)verbose;
+
+    /* Locate generate_image.py.
+     * Search order:
+     *   1. {bindir}/tools/generate_image.py      (installed beside binary)
+     *   2. {bindir}/../tools/generate_image.py   (running from PtolC/ subdir)
+     *   3. tools/generate_image.py               (CWD fallback)              */
+    char script[4096] = {0};
+    char exebuf[4096] = {0};
+    ssize_t exelen = readlink("/proc/self/exe", exebuf, sizeof(exebuf) - 1);
+    if (exelen > 0) {
+        exebuf[exelen] = '\0';
+        char *slash = strrchr(exebuf, '/');
+        if (slash) {
+            *slash = '\0';
+            /* 1. bindir/tools/ */
+            char candidate[4096];
+            snprintf(candidate, sizeof(candidate),
+                     "%s/tools/generate_image.py", exebuf);
+            if (access(candidate, R_OK) == 0) {
+                strncpy(script, candidate, sizeof(script) - 1);
+            } else {
+                /* 2. bindir/../tools/ */
+                snprintf(candidate, sizeof(candidate),
+                         "%s/../tools/generate_image.py", exebuf);
+                if (access(candidate, R_OK) == 0)
+                    strncpy(script, candidate, sizeof(script) - 1);
+            }
+        }
+    }
+    if (!script[0])
+        strncpy(script, "tools/generate_image.py", sizeof(script) - 1);
+
+    /* Check the script exists */
+    if (access(script, R_OK) != 0) {
+        fprintf(stderr,
+            "[generate] tools/generate_image.py not found\n"
+            "           searched beside binary and in parent tools/\n");
+        return;
+    }
+
+    /* Build command — sanitise prompt by stripping single-quotes */
+    char safe_prompt[1024] = {0};
+    int si = 0;
+    for (const char *p = prompt; *p && si < 1023; p++)
+        if (*p != '\'') safe_prompt[si++] = *p;
+    safe_prompt[si] = '\0';
+
+    char bin_arg[4096] = {0};
+    if (ckpt && ckpt[0])
+        snprintf(bin_arg, sizeof(bin_arg), " --bin '%s'", ckpt);
+
+    char cmd[8192];
+    snprintf(cmd, sizeof(cmd),
+             "python3 '%s'%s '%s'",
+             script, bin_arg, safe_prompt);
+
+    fprintf(stderr, "[generate] rendering field portrait…\n");
+    FILE *pipe = popen(cmd, "r");
+    if (!pipe) {
+        fprintf(stderr, "[generate] popen failed: %s\n", strerror(errno));
+        return;
+    }
+    char path[4096] = {0};
+    if (fgets(path, sizeof(path), pipe)) {
+        size_t plen = strlen(path);
+        while (plen > 0 && (path[plen-1] == '\n' || path[plen-1] == '\r'))
+            path[--plen] = '\0';
+    }
+    int rc = pclose(pipe);
+    if (rc == 0 && path[0]) {
+        printf("[generate] → %s\n", path);
+        fflush(stdout);
+        /* Try to open with system image viewer (best-effort) */
+        char view_cmd[4096];
+        snprintf(view_cmd, sizeof(view_cmd),
+                 "xdg-open '%s' 2>/dev/null &", path);
+        system(view_cmd);
+    } else {
+        fprintf(stderr, "[generate] failed (exit %d)\n", rc);
+    }
+}
+
 /* ── Main ─────────────────────────────────────────────────────────────────── */
 
 int main(int argc, char *argv[])
@@ -630,15 +719,25 @@ int main(int argc, char *argv[])
             continue;
         }
 
-        /* -r : interactive REPL — enter key by enter key ────────────── *
-         * hear → speak → hear_fermat loop.  Ctrl-D or blank line exits.
-         * Wernicke closes: each response feeds the next hear() as exhaust.
-         * Use -n to prevent saving session state to the loaded checkpoint. */
+        /* -r : interactive REPL — Zork-parsed hear → speak → hear_fermat loop.
+         * Input is parsed by zork_parse() first:
+         *   /generate <prompt>  → render field portrait image
+         *   /status             → monad_status()
+         *   /health             → monad_health()
+         *   /vocab <word>       → monad_lookup()
+         *   /help               → show commands
+         *   /reset              → reset Zork pronoun context
+         *   Known verb sentence → verb→operator→prompt → monad_speak()
+         *   Plain text          → monad_speak() directly (pass-through)
+         * Ctrl-D or blank line exits. */
         if (a.primary == 'r') {
             char linebuf[4096];
             int  repl_v = (verbose >= 1) ? verbose : 0;
+            zork_reset_context();
             if (!quiet) {
                 fprintf(stderr, "[ptolemy] interactive  (blank line or Ctrl-D to quit)\n");
+                fprintf(stderr, "          Zork sentence parser active — verb-governed input\n");
+                fprintf(stderr, "          /generate <prompt>  /status  /health  /vocab <w>  /help\n");
                 if (ckpt_path)
                     fprintf(stderr, "          loaded: %s\n", ckpt_path);
                 if (!no_save)
@@ -654,8 +753,70 @@ int main(int argc, char *argv[])
                     linebuf[--llen] = '\0';
                 if (!linebuf[0]) break;
 
+                /* ── Zork parse ──────────────────────────────────────────── */
+                ZorkResult zp = zork_parse(linebuf);
+
+                /* ── Slash commands ──────────────────────────────────────── */
+                if (zp.is_slash) {
+                    if (strcmp(zp.slash_cmd, "generate") == 0) {
+                        do_generate(m, zp.slash_args, ckpt_path, repl_v);
+                    } else if (strcmp(zp.slash_cmd, "status") == 0 ||
+                               strcmp(zp.slash_cmd, "s") == 0) {
+                        monad_status(m, stdout);
+                    } else if (strcmp(zp.slash_cmd, "health") == 0 ||
+                               strcmp(zp.slash_cmd, "F") == 0) {
+                        monad_health(m, stdout);
+                    } else if ((strcmp(zp.slash_cmd, "vocab") == 0 ||
+                                strcmp(zp.slash_cmd, "w") == 0) &&
+                               zp.slash_args[0]) {
+                        monad_lookup(m, zp.slash_args, stdout);
+                    } else if (strcmp(zp.slash_cmd, "reset") == 0) {
+                        zork_reset_context();
+                        fprintf(stderr, "[zork] pronoun context reset\n");
+                    } else if (strcmp(zp.slash_cmd, "help") == 0 ||
+                               strcmp(zp.slash_cmd, "?") == 0) {
+                        printf(
+                            "Slash commands:\n"
+                            "  /generate <prompt>  render field portrait image\n"
+                            "  /status             field status\n"
+                            "  /health             field health report\n"
+                            "  /vocab <word>       look up a word's zero address\n"
+                            "  /reset              reset pronoun context\n"
+                            "  /help               this message\n"
+                            "\nVerb-governed input (Zork sentence parser):\n"
+                            "  take lamp           → e5 abstract lamp\n"
+                            "  put lamp in box     → e2 bind lamp in box\n"
+                            "  go north  /  n      → e6 branch north\n"
+                            "  ask about primes    → e10 query primes\n"
+                            "  make new field      → e9 allocate new field\n"
+                            "  examine it          → e0 identity <last noun>\n"
+                            "\nPlain text passes through to monad directly.\n"
+                        );
+                        fflush(stdout);
+                    } else {
+                        fprintf(stderr,
+                            "[repl] unknown command: /%s  (try /help)\n",
+                            zp.slash_cmd);
+                    }
+                    continue;
+                }
+
+                /* ── Zork-parsed input or plain pass-through ─────────────── */
+                const char *query;
+                if (zp.ok && zp.prompt[0]) {
+                    if (repl_v == 0)
+                        fprintf(stderr,
+                            "[zork] e%d/%s  \"%s\"\n",
+                            zp.op, zp.op_name, zp.prompt);
+                    query = zp.prompt;
+                } else {
+                    if (!zp.ok && zp.error[0])
+                        fprintf(stderr, "[zork] %s\n", zp.error);
+                    query = linebuf;
+                }
+
                 float af_before = m->affect;
-                char *response  = monad_speak(m, linebuf, 50, repl_v);
+                char *response  = monad_speak(m, query, 50, repl_v);
                 printf("%s\n", response);
                 fflush(stdout);
 

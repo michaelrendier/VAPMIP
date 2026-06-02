@@ -4,6 +4,57 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v3.2.11 — 2026-06-01
+
+**Zork sentence parser + /generate + face/ JS engine + voice + framenet ptorrents**
+
+### PtolC — Zork sentence parser wired to REPL (`ptolemy -r`)
+
+- **`zork.c` / `zork.h`** — Infocom-style sentence parser: 16-operator verb table,
+  direction shortcuts (N/S/E/W → `branch`), article stripping, pronoun resolution
+  (IT/THEM → last noun via `g_last_noun`), 6-letter prefix expansion.
+  Mirrors `zork_parser.py` exactly — same verb table, same grammar.
+- **REPL wired** — `-r` interactive mode now runs every line through `zork_parse()`
+  before `monad_speak()`.  Known verbs print `[zork] e5/abstract "abstract lantern"`
+  and feed the parsed prompt; unknown verbs fall through to plain monad with an
+  Infocom-style error.
+- **Slash commands** — `/generate <prompt>`, `/status`, `/health`, `/vocab <word>`,
+  `/reset` (pronoun context), `/help`.
+- **`tools/generate_image.py`** — drives the monad field with the prompt, renders
+  `PtolDraw.self_portrait()`, saves to `gallery/<version>/`, prints path.
+  `xdg-open` launches the viewer.  Binary path search: `{bindir}/../tools/`.
+- **`PTOLEMY_VERSION`** bumped to `2.2.0`.
+
+### face/ — React Native/Expo chat UI (JS engine complete)
+
+- **`src/engine.ts`** — full JS port of monad.py Crank + Engine: prime sieve,
+  prime-π table, word→zero addressing, β-field, A-matrix co-occurrence edges,
+  golden-walk generation, Lagrangian word-count compression, Fermat-space separators.
+- **`src/constants.ts`** — `OMEGA_ZS`, `D_STAR`, `PHI`, `OPERATORS`, `PRONOUNS`.
+- **`src/store.ts`** — AsyncStorage persistence: vocab JSON, β-deltas, field state
+  (jAmbient, wordCount).
+- **`App.tsx`** — BLE pendant integration, autopilot idle emission, dev panel (VCDS),
+  status strip (J / σ / RPM / vocab / BLE).
+
+### Python engine
+
+- **`monad.py`** v1.218 — Three-Face Wankel (e₁₃ parallelize), anaphor resolution
+  (e₁₁ dereference), Fermat-space wastegate, Wick-rotated speak, octonion speak,
+  J-direct speak, monad_hear_fermat, field health, full daemon protocol.
+- **`speak.py`** — prompt → `monad.generate()` → `PtolemyTongue.filter()` → espeak.
+- **`skills/voice.py`** — `HolcusVoice`: espeak-ng wrapper, pitch/rate/volume tuned
+  to Ptolemy's measured parameters.
+- **`skills/corpus.py`** — BAO-adaptive ingest thresholds, redundancy/novelty gates.
+- **`skills/mind_eye.py`** — visual field state introspection.
+
+### ptorrents
+
+- **`framenet.ptorrent`** — FrameNet 1.7 corpus (semantic frame database).
+- **`riemann_zeros.ptorrent`** — first 100,000 Riemann zeros corpus.
+- Updated: english_complete, mathematics, physics, foundations, meaning, python, fermat.
+
+---
+
 ## v4.0.0 — 2026-05-30
 
 **Android APK v2.0 — PTorrent Protocol + Corpus Detail Pages**

@@ -13,7 +13,7 @@ endif
 
 TARGET  = ptolemy
 SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c \
-          search.c sensor.c code.c
+          search.c sensor.c code.c zork.c
 OBJS    = $(SRCS:.c=.o)
 
 PREFIX       ?= /usr/local
@@ -103,7 +103,8 @@ clean:
 	rm -f ~/.ptolemy/logs/ptolemy_test_*.log 2>/dev/null || true
 
 # ── Dependencies ────────────────────────────────────────────────────────────
-main.o:       main.c ptolemy.h monad.h state.h tokenizer.h ingest.h daemon.h log.h
+main.o:       main.c ptolemy.h monad.h state.h tokenizer.h ingest.h daemon.h log.h zork.h
+zork.o:       zork.c zork.h
 monad.o:      monad.c ptolemy.h monad.h filter.h tokenizer.h
 state.o:      state.c ptolemy.h state.h monad.h
 tokenizer.o:  tokenizer.c tokenizer.h
