@@ -1166,6 +1166,63 @@ space. The Boundary Ledger is the explicit record of what S3 tracks implicitly.
 
 ---
 
+### S11 — Two-Level Hyperindexed Security Architecture
+
+*Added 2026-06-06 — data without a physical location; permutation seeding as authentication.*
+
+**The principle:** Security through mathematical inaccessibility, not access control.
+You cannot copy a file that does not exist. You cannot intercept a location that is a prime.
+
+**Level 1 — Field-Space Addressing (data without a file):**
+
+Sensitive data is stored by its Riemann zero address γ — not by filename or path.
+The address IS the location. Without knowing γ, the data is not a file to find;
+it is a value in a field that spans 25,000 zeros. The data lives in the β-field
+at index `int(seed × N)`, indistinguishable from the field noise around it unless
+you know the exact address derivation:
+
+```
+secret_name → Horner base-95 n → seed = fmod(n × φ, 1.0) → idx → β[idx]
+```
+
+No file. No path. No MIME type. No directory entry. No inode. The data is a scalar
+at a prime-indexed position in a mathematical field. You cannot `cp` a field.
+
+**Level 2 — Permutation Seeding (open/close bracket authentication):**
+
+Security seeding of the permutation indexing: like an HTML open/close bracket pair,
+a content-based hash acts as both the opening token and the closing verification.
+The data is permuted by a seed derived from the content hash — the permutation
+cannot be reversed without knowing the seed, and the seed is the content itself.
+
+```
+seed  = sha256(content)[0:8]           content-based hash — the opening bracket
+perm  = permute(data, seed)            data is now unrecoverable without seed
+verify = sha256(deperm(perm, seed))    closing bracket — reproduces the original hash
+```
+
+Without the seed: perm is indistinguishable from field noise.
+Without the data: the seed produces nothing recoverable.
+The open/close bracket IS the authentication. There is no separate key file.
+
+**Corollary (the drop-out):** Because the addressing is mathematical (prime hash → zero
+index) and the permutation is content-seeded, the vast majority of potential attackers
+will not understand what they are looking at. Security through mathematical inaccessibility
+is a natural drop-out filter — not by obscurity of the algorithm (which is documented here)
+but by the depth of mathematics required to operate it. The attacker who can factorize
+the prime hash and invert the Noether balance to recover γ already understands the engine
+well enough to be trusted with it. This is the intended user model.
+
+**Files:** `auth.c` (level 2: permute/deperm + seed derivation), `monad.c` (level 1:
+field-space storage — β[idx] at secret address), `ptolemy.h` (FIELD_SECRET_ADDR
+derivation macro — never printed, never logged), `~/.ptolemy/` (no secret files,
+only field state: monad.bin and monad_wordnet.bin).
+
+**Dependency:** P1 (prime hash) for exact zero-index addressing.
+P3 (sedenion algebra) for zero-divisor avoidance in the secret address neighborhood.
+
+---
+
 ---
 
 ## Cymatic Resonance of Creation (CRC) Engine

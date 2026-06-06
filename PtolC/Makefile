@@ -80,22 +80,36 @@ ingest: $(TARGET)
 	python3 tools/ingest_system.py --root / --first $(FIRST)
 
 # ── Install ──────────────────────────────────────────────────────────────────
-install: $(TARGET) install-man
-	install -Dm755 $(TARGET) $(DESTDIR)$(PREFIX)/bin/ptolemy
-	install -Dm755 tools/checkpoint_expand $(DESTDIR)$(PREFIX)/bin/checkpoint_expand
+INSTALL_CMD = install -Dm755 $(TARGET) $(DESTDIR)$(PREFIX)/bin/ptolemy \
+    && install -Dm755 tools/checkpoint_expand $(DESTDIR)$(PREFIX)/bin/checkpoint_expand \
+    && install -Dm644 man/ptolemy.1 $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+    && install -Dm644 man/ptolemyignore.5 $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5 \
+    && gzip -f $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+    && gzip -f $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5
+
+install: $(TARGET)
+	pkexec sh -c '$(INSTALL_CMD)' 2>/dev/null || sudo sh -c '$(INSTALL_CMD)'
 
 install-systemd:
-	install -Dm644 systemd/ptolemy.socket \
-	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.socket
-	install -Dm644 systemd/ptolemy.service \
-	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.service
+	pkexec sh -c 'install -Dm644 systemd/ptolemy.socket \
+	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.socket \
+	    && install -Dm644 systemd/ptolemy.service \
+	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.service' 2>/dev/null || \
+	sudo sh -c 'install -Dm644 systemd/ptolemy.socket \
+	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.socket \
+	    && install -Dm644 systemd/ptolemy.service \
+	    $(DESTDIR)$(PREFIX)/lib/systemd/user/ptolemy.service'
 	@echo "Enable with: systemctl --user enable --now ptolemy.socket"
 
 install-man:
-	install -Dm644 man/ptolemy.1 $(DESTDIR)$(MANDIR)/man1/ptolemy.1
-	install -Dm644 man/ptolemyignore.5 $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5
-	gzip -f $(DESTDIR)$(MANDIR)/man1/ptolemy.1
-	gzip -f $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5
+	pkexec sh -c 'install -Dm644 man/ptolemy.1 $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+	    && install -Dm644 man/ptolemyignore.5 $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5 \
+	    && gzip -f $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+	    && gzip -f $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5' 2>/dev/null || \
+	sudo sh -c 'install -Dm644 man/ptolemy.1 $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+	    && install -Dm644 man/ptolemyignore.5 $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5 \
+	    && gzip -f $(DESTDIR)$(MANDIR)/man1/ptolemy.1 \
+	    && gzip -f $(DESTDIR)$(MANDIR)/man5/ptolemyignore.5'
 
 # ── Remove build artifacts ────────────────────────────────────────────────────
 clean:

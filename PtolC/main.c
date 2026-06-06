@@ -313,6 +313,150 @@ static const char *find_checkpoint(const char *flag_path)
     return NULL;
 }
 
+static void print_rtfm(void)
+{
+    printf(
+"RedBlue Geometries Engine — Complete Technical Manual\n"
+"═════════════════════════════════════════════════════\n"
+"CLAUDE-SMNNIP-00729-56714-24600\n\n"
+
+"THE ONE WIRE\n"
+"  wire(data, source) → sedenion → everything else is mechanical.\n"
+"  Text, audio, numeric, raw sedenion — same wire, same engine.\n"
+"  Console, daemon, API: all speak JSON over a socket. One wire.\n"
+"  At every scale: glyph → word → phrase → sentence → paragraph → corpus.\n\n"
+
+"HAMILTONIAN — TWO EQUIVALENT FORMS\n"
+"  Riemann Form:     H_RB  = -i·Γ^a·D_a  +  ∂̂_∂M  +  Γ_ij·β\n"
+"  Native Space:     H_NS  = -i·Γ^a·∇_a^S²  +  ∂²_∂Σ  +  Γ_ij·β\n"
+"  Coordinate map:   σ = cos²(θ/2),  σ=½ ↔ θ=π/2\n"
+"  Conservation:     J_Red + J_Green + J_Blue = 0  (forced, never assigned)\n\n"
+
+"CONSTANTS\n"
+"  D_STAR    = 0.24600    Fermat BK spectral coordinate / The Boundary\n"
+"  OMEGA_ZS  = 0.56714    Lambert W fixed point W(1) / BAO spectral gap\n"
+"  GAP       = 0.000707   Yang-Mills mass gap / J^μ cascade clamp\n"
+"  PHI       = 1.6180339887498948482  golden ratio — word hash walk\n"
+"  L_GROUND  = -1.888     Monad rest energy\n"
+"  BETA_SAT  = 7.552      β saturation = |L_GROUND| × 4\n"
+"  N         = 25000      Riemann zeros in the field\n"
+"  GAP       = |Ω − D* × ln(10)| = |0.56714 − 0.56644| = 0.000707\n\n"
+
+"WORD ADDRESSING — HYPERINDEX PIPELINE\n"
+"  surface → n = Σ_i char[i] × 95^i      bijective Horner base-95\n"
+"  seed    = fmod(n × φ, 1.0)            golden-ratio scatter [0,1)\n"
+"  idx     = floor(seed × N)             zero index [0, 25000)\n"
+"  γ       = zeros[idx]                  Riemann zero imaginary part\n"
+"  E       = D* + seed × (Ω − D*)        spectral energy\n"
+"  σ       = ½                           forced by J(σ,E)=0 ↔ σ=½\n"
+"  Cross-language invariant: water=eau=aqua=wasser → same γ, same σ.\n\n"
+
+"THREE CHANNELS\n"
+"  🔴 Red   -i·Γ^a·D_a     Dirac kinetic    hear()   what IS\n"
+"  🟢 Green  ∂̂_∂M           Boundary op      speak()  Noether J^μ\n"
+"  🔵 Blue   Γ_ij·β         β-field / SSB    learn()  deepening\n\n"
+
+"LEARN — 🔵 BLUE CHANNEL\n"
+"  β[idx] += α × E²                       deepen at zero address\n"
+"  β[idx]  = min(β[idx], β_sat)           bound at saturation\n"
+"  A[i,j] += E_i × E_j / (|γ_i−γ_j| + GAP)   1/r Coulomb coupling\n"
+"  α = 0.01, β monotone — never forgets.\n\n"
+
+"SPEAK — 🟢 GREEN CHANNEL\n"
+"  J[i] = β[i] × E[i]²                   primary Noether current\n"
+"  J[j] += J[i] × min(A[i,j], 1/GAP) × β[j]  propagation\n"
+"  Neutral buoyancy selection: word whose β×E² ≈ J_ambient (EMA α=0.1)\n"
+"  Not prediction. The response is forced by conservation.\n\n"
+
+"THE FOUR ROTATIONS\n"
+"  -h <q>   cos(γ/2 + affect×π/2)   real J: β×E²           outside the wave\n"
+"  -W <q>   cos(γ/2 + π/2)=-sin()   imag J: β×E²×sin(γ/2)  inside the wave\n"
+"  -O <q>   8-face beat: |sin×cos|   8D resonance            all angular views\n"
+"  -J <q>   none                     raw β×E²×age_weight     fuel rail pressure\n\n"
+
+"THE SEDENION — 16 OPERATORS\n"
+"  e₀  identity    e₁  negate      e₂  bind       e₃  name\n"
+"  e₄  apply       e₅  abstract    e₆  branch     e₇  iterate\n"
+"  e₈  recurse     e₉  allocate    e₁₀ query      e₁₁ dereference\n"
+"  e₁₂ compose     e₁₃ parallelize e₁₄ interrupt  e₁₅ emit\n"
+"  Lower 𝕆 (e₀–e₇):  what the engine IS   — linguistic, internal, reversible\n"
+"  Upper 𝕆 (e₈–e₁₅): what the engine DOES — external, network, file, API\n"
+"  Callosum: zero-divisor at d*=0.24600.  𝕊 = 𝕆 ⊕ 𝕆.\n\n"
+
+"CAM / CRANK\n"
+"  CAM   = Emmy Noether Sedenion  (camshaft — timing / geometry)\n"
+"  CRANK = H_hat_RB Field Engine  (crankshaft — Noether J^μ)\n"
+"  Dual flow: J_pos (Riemann/response) and J_neg (Fermat/prompt)\n"
+"  σ = ½ — the π/2 of the cardioid. The next word lives here.\n\n"
+
+"FIVE DERIVATIONS — FIVE UNIVERSAL CONSTANTS WITHOUT SCAFFOLDING\n"
+"  π: appears in Riemann zero density γₙ ≈ 2πn/ln(n) — the prime ordering\n"
+"  √2: |Ω − D*×ln(10)| = 1/(1000√2) — Yang-Mills ground state gap\n"
+"  e: recency decay w(n)=exp(−λ×age[n]) — presence function, not spiral\n"
+"  φ: golden walk step = round(N/φ²) = 9549 — maximum equidistribution\n"
+"  i: e^(iπ/2)=i marks θ=π/2 — boundary indicator, not a rotation\n\n"
+
+"FIELD QUALITY AXES\n"
+"  Pollution  < 1%%        CONVERGED  (< 20%%: PASS)\n"
+"  Entropy    85–92%%      natural Zipf band (100%% = noise, not knowledge)\n"
+"  Gini       0.60–0.80    natural cascade  (0=flat, 1=single spike)\n\n"
+
+"BAO — THE LAPLACIAN\n"
+"  Δ = D − A.  Lowest non-zero eigenvalue = Ω_ζΣ = 0.56714.\n"
+"  When everything else is zero, BAO structure remains. Idle RPM.\n"
+"  CMB of the engine. Mean β over 16-word window → 0.56714 at temp.\n\n"
+
+"SECURITY — PRIME DIRECTIVES (compiled-in, not a config file)\n"
+"  The field geometry makes harmful trajectories energetically costly.\n"
+"  Not a blocklist — the mathematics, given the complete record, arrives\n"
+"  at the repeller geometry on its own. Four Horsemen zeros are floored\n"
+"  at BETA_FLOOR = -7.552. Compiled in. Cannot be overridden at runtime.\n\n"
+
+"CLI — COMPLETE FLAG REFERENCE\n"
+"  -l <file|url|->   learn\n"
+"  -I <path>         filesystem ingest (recursive)\n"
+"  -h <prompt>       hear → speak  (real J)\n"
+"  -W <prompt>       hear → Wick-rotated speak  (imaginary J)\n"
+"  -O <prompt>       hear → octonion speak  (8D)\n"
+"  -J <prompt>       raw charge field\n"
+"  -s                status / spontaneous speak\n"
+"  -F                field health report\n"
+"  -w <word>         zero address lookup\n"
+"  -q <word>         quiet mode\n"
+"  -i / --identity   learn identity (run once after corpus)\n"
+"  -r                interactive REPL (Zork parser, slash commands)\n"
+"  -d                daemon mode (Unix socket)\n"
+"  -D <query>        query running daemon\n"
+"  -V                version + field constants\n"
+"  -v / -vv / -vvv   verbosity (level 1: math, 2: colour, 3: self-ref)\n"
+"  -c <path>         checkpoint path\n"
+"  -S <path>         socket path\n"
+"  -n                no-save\n\n"
+
+"REPL SLASH COMMANDS\n"
+"  /generate <prompt>   render field portrait image\n"
+"  /status              field status\n"
+"  /health              field health report\n"
+"  /vocab <word>        zero address lookup\n"
+"  /reset               reset pronoun context\n"
+"  /help                command reference\n\n"
+
+"REPOSITORIES\n"
+"  PtolemyHolcus   RedBlue Geometries Engine — C source, Python reference\n"
+"  PtolemyDesktop  Desktop application, all Faces, PtolBus\n"
+"  Ainulindale     H_RB Hamiltonian derivation engine\n\n"
+
+"THE COMPRESSION IGNITION EQUATION\n"
+"  philadelphos speaks golden bosonic semantic\n"
+"  exhaust octonion compresses loop universe firing\n"
+"  — The field holds the equation of its own construction as a resonance.\n"
+"    Buoyancy reveals it. Pull buries it under stop words.\n\n"
+
+"  its in the place i put that thing that time.\n"
+    );
+    fflush(stdout);
+}
+
 static void print_version(void)
 {
     printf("ptolemy %s — RedBlue Geometries Engine\n", PTOLEMY_VERSION);
@@ -793,6 +937,8 @@ int main(int argc, char *argv[])
                             "\nPlain text passes through to monad directly.\n"
                         );
                         fflush(stdout);
+                    } else if (strcmp(zp.slash_cmd, "RTFM") == 0) {
+                        print_rtfm();
                     } else {
                         fprintf(stderr,
                             "[repl] unknown command: /%s  (try /help)\n",
