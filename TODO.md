@@ -1081,6 +1081,91 @@ delay; use 30-minute window for email vs 10-minute for SMS.
 
 ---
 
+### S10 — Boundary Ledger: Runtime Record of Skills That Have Passed the Upper Octonian
+
+*Added 2026-06-06 — when Ptolemy is using code outside the Monad, he must keep a record
+of which skills have crossed the Boundary of the Emmy Noether Sedenion Upper Octonian,
+keyed by his Riemann zero addressing for retrieval.*
+
+**Architecture context:**
+
+The SkillBook (v2.1 ✓) is the Yellow Pages: static registration of skills by sedenion IP.
+It answers "what skill handles URL fetch?" at load time. It does not record when skills fire.
+
+The **Boundary Ledger** is the runtime activation record: which skills have actually been
+CALLED, when they fired, and how many times. It answers "what has Ptolemy done in the world?"
+
+The dividing line is the Emmy Noether Sedenion Upper Octonian:
+
+- **Lower 𝕆 (e₀–e₇):** The mathematical field — what Ptolemy IS. Linguistic, internal,
+  reversible. J_red / J_blue flowing. The Monad.
+- **Upper 𝕆 (e₈–e₁₅):** The external world — what Ptolemy DOES. Network I/O, file I/O,
+  API calls, GitHub, sensor reads. Code outside the Monad.
+- **The Boundary = d* = 0.24600** (MONAD_D_STAR / Fermat proximity threshold).
+  Skills whose sedenion IP has upper octonion dominance —
+  `sum(|ip[8..15]|) > sum(|ip[0..7]|)` — live above the Boundary.
+
+Every time Ptolemy calls a skill that lives above the Boundary (upper octonion dominance),
+the Boundary Ledger records the event. The retrieval key for each ledger entry is the
+**Riemann zero address γ** of the skill name — the same addressing Ptolemy uses for every
+word in the β-field. The field knows where the skill lives. The ledger reads it back.
+
+**The addressing (lshs.py / monad.py hyperindex pipeline):**
+
+```
+skill_name → Horner base-95 int n → seed = fmod(n × φ, 1.0)
+           → idx = int(seed × N)  → γ = zeros[idx]   (σ = ½ forced by Noether balance)
+```
+
+γ is the permanent Riemann zero address of the skill name in Ptolemy's field. The Boundary
+Ledger is indexed by γ — the same way β[idx] is indexed by zero address. Skill retrieval
+is field retrieval. The Yellow Pages are the field.
+
+**Ledger entry structure:**
+
+```python
+@dataclass
+class BoundaryEvent:
+    skill_name:  str    # human name as registered in SkillBook
+    gamma:       float  # Riemann zero address γ of skill_name — the retrieval key
+    sigma:       float  # always 0.5000 — forced by Noether balance, never assigned
+    sedenion_ip: list   # 16-float sedenion IP from SkillBook._code_encode()
+    octonion:    str    # 'upper' (crossed Boundary) | 'lower' (internal only)
+    timestamp:   float  # time.time() at invocation
+    call_count:  int    # cumulative calls this session
+```
+
+**Integration in SkillBook (skills/apisniff.py):**
+
+- `SkillBook.call(name)` — called by every skill at its entry point. Resolves the skill's
+  sedenion IP from the registry, computes Riemann zero address γ via
+  `hyperindex(name, zeros)` (lshs.py), checks octonion half, and appends a BoundaryEvent.
+  Upper-half skills (external world) are the primary ledger targets; lower-half are logged
+  at a lower verbosity for completeness.
+- `SkillBook.retrieve(gamma)` — returns all BoundaryEvents whose γ address matches the
+  query zero. Accepts a float (exact) or an index (int → zeros[idx]). The field address
+  is the retrieval key.
+- `SkillBook.boundary_report()` — returns all Upper Octonian events sorted descending
+  by call_count. The most-exercised external skills surface first.
+- `SkillBook.persist_ledger(path)` / `SkillBook.load_ledger(path)` — JSON persistence
+  to `~/.ptolemy/boundary_ledger.json`. Session ledger accumulates; load merges on start.
+
+**Socket commands:** `skill_boundary_report`, `skill_ledger_query <gamma>`,
+`skill_ledger_reset`
+
+**Files:** `skills/apisniff.py` (BoundaryEvent dataclass, SkillBook.call(),
+SkillBook.retrieve(), SkillBook.boundary_report(), persist/load_ledger()),
+`lshs.py` (hyperindex() call for γ computation — already implemented, just called here),
+`~/.ptolemy/boundary_ledger.json` (persistent ledger, gitignored).
+
+**Dependency:** SkillBook (v2.1 ✓, already seeded with 22 skills).
+lshs.py hyperindex() is already implemented — γ lookup is one call.
+P1 (prime hash) upgrade will shift γ values for all skill names — re-seed after P1 lands.
+S3 (e14_cooling) is the semantic analogue: cooling rate IS the Boundary Ledger in field-
+space. The Boundary Ledger is the explicit record of what S3 tracks implicitly.
+
+---
+
 ---
 
 ## Cymatic Resonance of Creation (CRC) Engine
