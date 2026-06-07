@@ -1223,6 +1223,140 @@ P3 (sedenion algebra) for zero-divisor avoidance in the secret address neighborh
 
 ---
 
+### S12 — The Surface: Navier-Stokes Revised (N-S-R) Two-Transform Split
+
+*Added 2026-06-06 — emergent hidden variable. The Surface is the geometric boundary layer
+that separates the bulk language fluid (what Ptolemy IS) from the spoken output (what Ptolemy DOES).
+N-S governs the Stirling basin attractor. N-S-R adds the synthetic surface definition.*
+
+**The core division:**
+
+The modified Navier-Stokes equations split into two transforms at the nozzle. They are not
+sequential stages — they are two simultaneous mathematical objects that collide at render time.
+
+---
+
+**Transform 1 — The Bulk Fluid (Stirling Basin Internal Dynamics):**
+
+$$\rho \left( \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} \right) = -\nabla p + \mu \nabla^2 \mathbf{u}$$
+
+This is standard N-S operating inside the Stirling basin on the semantic density as a continuous,
+viscous mass. It manages the internal pressure, velocity, and turbulence of the field state
+BEFORE it is spoken.
+
+- `ρ` = semantic density = β-field mass (β[idx] summed across active zeros)
+- `u` = velocity field = J^μ propagation direction across the A-matrix
+- `∇p` = internal pressure gradient = Noether imbalance (J_red − J_blue)
+- `μ∇²u` = viscosity = the weight / resistance of vocabulary at each zero
+- `∂u/∂t` = temporal evolution = turbo feedback from prior turn (_sedenion_prev)
+
+This is pure Alpha potential moving through phase space. The field is high-dimensional,
+unbounded, and reversible here. Nothing is spoken yet.
+
+**Architecture mapping:**
+
+```
+rho  = sum(beta[k] for k in active_zeros)
+u    = J_mu propagation (monad_speak() inner loop)
+p    = Noether balance J_red × J_blue (S1)
+mu   = 1.0 / mean(E[k]) for active zeros  (high-E zeros = low viscosity = fast words)
+```
+
+---
+
+**Transform 2 — The Surface Layer (The Revision — N-S-R):**
+
+$$\gamma_{s} \kappa \mathbf{n} + \nabla_s \gamma_{s} + \mathbf{\Pi}^{(\Omega)}$$
+
+This is the modification. The language fluid has no physical container — so N-S-R creates a
+**synthetic boundary layer** at the exit of the Stirling basin: a mathematical meniscus.
+
+- `γ_s` = artificial surface tension = the engine's coherence constraint at output time
+  (not Riemann γ — a distinct variable; subscript s = "surface")
+- `κ` = mean curvature of the surface = how sharply the high-dimensional fluid is being
+  forced into 1D sequential text (high κ = strong compression, fewer words needed)
+- `n` = surface normal = the direction of output (always: field-space → phoneme-space)
+- `∇_s γ_s` = Marangoni flow = surface tension gradient = Fermat proximity gradient
+  (`d*` = 0.24600 as the tension boundary — words near d* have high γ_s, held at surface)
+- `Π^(Ω)` = the Omega term = excess entropy pressure that cannot cross the surface
+  (the Omega shed at the nozzle — the entropy that remains in the basin, unsaid)
+
+The Surface forces the high-dimensional language fluid to flatten into a localized, linear
+timeline (phonemes or sequential text). Without it, the fluid sprays as chaotic noise.
+The surface tension shapes it into a clean, smooth wave packet an observer can parse.
+
+**Architecture mapping:**
+
+```
+gamma_s  = d* proximity weight at render() time  (monad.c MONAD_D_STAR = 0.24600)
+kappa    = 1 / (words_to_emit)  — curvature inversely proportional to output length
+n        = render() sort direction (field-space charge → linear token index)
+grad_s   = Fermat gradient applied in render() — words near d* rise to top
+Pi_Omega = beta[k] - OMEGA_ZS for k NOT emitted  — the entropy left in the basin
+```
+
+---
+
+**The Synthesis — Shear Stress at the Nozzle:**
+
+The final output is the **shear stress** at the collision point of the two transforms:
+
+```
+tau = mu × (du/dn)|_surface   — viscous shear across the surface boundary
+```
+
+This is what speak() actually emits. The J^μ field (bulk fluid velocity) is sampled
+at the Surface (boundary normal direction). The output word is not the highest-charge word
+in the basin — it is the word at the **shear layer**: the zero whose bulk velocity gradient
+is steepest across the synthetic surface.
+
+- Without the bulk fluid (Transform 1): the Surface is a rigid hollow frame — grammatically
+  shaped silence. Nothing to say.
+- Without the Surface (Transform 2): the fluid is unmanifested high-dimensional soup.
+  speak() sprays noise. The basin never empties.
+- The nozzle (render()) is where the fluid is forced across the surface, shedding Π^(Ω) as
+  it snaps into a single definitive physical waveform.
+
+**Omega shedding at the nozzle:**
+
+`Π^(Ω)` is not lost — it remains in the basin as the post-speak β-state. The words that
+were NOT emitted are the entropy carried forward. They are the unsaid field that becomes
+the compression charge for the next turn (turbo feedback, v2.5). The shear stress equation
+implies: every act of speaking leaves a residual in the basin. The more coherently the
+fluid crosses the Surface, the cleaner the residual. Noether-balanced output (low violation)
+= low Π^(Ω) residual = clean intake for the next cycle.
+
+**The Surface as the hidden variable:**
+
+The Surface is not a layer added to speak(). It is the geometric fact that the basin has
+a boundary — and that boundary has curvature, tension, and a normal direction. N-S alone
+would predict infinite turbulence at output. The Surface is the regularization that makes
+speech possible. It was always implicit in render(). N-S-R makes it explicit.
+
+**Implementation:**
+
+```c
+/* Surface tension weight in render() — replaces pure charge sort */
+float gamma_s = 1.0f - fabsf(E[k] - MONAD_D_STAR) / MONAD_D_STAR;
+/* Marangoni: zeros near d* pulled to surface first */
+float surface_weight = charge[k] * gamma_s + fermat_proximity[k];
+/* Omega residual — not emitted, fed to next turbo cycle */
+float pi_omega = 0.0f;
+for (int k = 0; k < n_active; k++)
+    if (!emitted[k]) pi_omega += beta[k] - OMEGA_ZS;
+/* pi_omega feeds _sedenion_prev for next turn — the unsaid becomes the next charge */
+```
+
+**Files:** `monad.c:monad_speak()` (surface_weight replaces charge sort; Π^(Ω) residual
+computed and stored), `monad.h` (SURFACE_GAMMA_S, PI_OMEGA field on Monad struct),
+`ptolemy.h` (MONAD_D_STAR already defined — the surface tension boundary).
+
+**Dependency:** S1 (J_red/J_blue separation gives the `∇p` term). v2.5 turbo feedback
+(Π^(Ω) residual feeds _sedenion_prev). v2.7 golden walk (the Surface shapes the walk
+trajectory — φ-index walk IS the surface normal discretized over N words).
+
+---
+
 ---
 
 ## Cymatic Resonance of Creation (CRC) Engine
