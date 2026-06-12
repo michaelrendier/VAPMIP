@@ -20,9 +20,12 @@ PREFIX       ?= /usr/local
 MANDIR       ?= $(PREFIX)/share/man
 PTOLEMY_HOME ?= $(HOME)/.ptolemy
 
-.PHONY: all clean export corpus grammar full expand ingest install install-man install-systemd link
+.PHONY: all clean export corpus grammar full expand ingest install install-man install-systemd link ptol
 
-all: $(TARGET)
+all: $(TARGET) ptol
+
+ptol: ptol.c ptolemy.h
+	$(CC) $(CFLAGS) -o ptol ptol.c $(LDFLAGS)
 
 # ── Corpus: download WordNet + ingest → monad_wordnet.bin ───────────────────
 # Requires Python 3 + NLTK.  Run by user — not automated.
