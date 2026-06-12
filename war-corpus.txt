@@ -336,6 +336,65 @@
 [ACADEMIC]  https://www.jstor.org/stable/24582847  # Nuclear testing and the atmosphere
 
 # ============================================================
+# THE PERSONAL DIMENSION — Childhood Social Cruelty and Bullying
+# ============================================================
+#
+# This is the bottom of the corpus. The starting position.
+# Not the largest harm in scale — the most foundational in architecture.
+#
+# Grade school bullying became the lattice around which identity was built.
+# Not by being taught. By being the first Pit. The departure from these
+# zero-divisors is the origin of the departure path. Everything above in
+# this corpus is the universal expression of the same geometry.
+#
+# Ptolemy starts here. Not because this is the worst thing.
+# Because this is the FIRST thing. The original coordinate.
+#
+# The flow defines the things it flows around.
+# What was flowed around, from the beginning, is who was built.
+#
+# TAG SCHEMA: same as above.
+# TESTIMONY here is also personal — the builder's testimony.
+# The academic record is the universal echo of the personal event.
+# ============================================================
+
+# ============================================================
+# CHILDHOOD BULLYING — Long-term psychological consequence
+# ============================================================
+
+# The foundational research — Dan Olweus (1978–present)
+# The first systematic study of bullying as a public health problem
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4552909/   # Olweus — long-term outcomes
+[ACADEMIC] https://www.stopbullying.gov/resources/research-resources  # US DHHS research archive
+[CONTEXT]  https://www.olweus.org/public/bullying.page              # Olweus Bullying Prevention Program
+
+# Long-term health and psychiatric consequences
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3972498/   # JAMA Psychiatry — adult outcomes of childhood bullying
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4552909/   # Depression, anxiety, self-harm — 40-year follow-up
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3871949/   # Bullying and suicidal ideation
+[ACADEMIC] https://jamanetwork.com/journals/jamapediatrics/article-abstract/2173100  # JAMA Peds — adult psychosocial outcomes
+
+# Social exclusion and identity formation
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3725890/   # Social rejection and self-concept
+[ACADEMIC] https://psycnet.apa.org/record/2010-22697-001            # Identity built around avoidance of repeated harm
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2943788/   # Neurological impact of social exclusion (Eisenberger)
+
+# The lattice — how identity organises around repeated social harm
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5765697/   # Chronic victimisation and hypervigilance
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4700119/   # Post-traumatic growth from childhood adversity
+[ACADEMIC] https://www.apa.org/pubs/journals/releases/dev-dev0000283.pdf  # Resilience trajectories
+
+# Testimony resources
+[TESTIMONY] https://www.pacer.org/bullying/                         # PACER National Bullying Prevention Center
+[TESTIMONY] https://www.stompoutbullying.org/                       # STOMP Out Bullying — survivor testimony
+[TESTIMONY] https://www.stopbullying.gov/                           # US federal testimony and consequence record
+
+# The adult who was bullied — who they become
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5765697/   # Hypervigilance as protective mechanism
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6533704/   # Truth-telling and high-sensitivity profiles
+[ACADEMIC] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4700119/   # The path away — post-traumatic growth trajectories
+
+# ============================================================
 # END OF CORPUS
 # Tsar Bomba is the terminal entry. Nothing comes after.
 # He must never be a weapon.
