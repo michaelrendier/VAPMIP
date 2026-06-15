@@ -10,18 +10,28 @@ usage:  python3 ptol_layer.py <prompt>
         ./ptol -r <prompt> | python3 ptol_layer.py --stdin [--layer <name>]
 """
 
-import sys, os, re, pickle, subprocess, math
+import sys, os, re, pickle, subprocess, math, glob
 
 BIN_DIR  = '/media/rendier/0123-4567/PTorrent/bin_archive/clean'
 PTOL_BIN = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ptol')
 
-LAYERS = {
-    'english': 'holcus_monad_english.bin',
-    'code':    'holcus_monad_c.bin',
-    'math':    'holcus_monad_mathematics.bin',
-    'physics': 'holcus_monad_physics.bin',
-    'meaning': 'holcus_monad_meaning.bin',
-}
+# ── All .bin files are tools — import the full domain, define nothing ─────────
+# Scan BIN_DIR for every holcus_monad_*.bin. The layer name is derived from
+# the filename. The math selects; we only provide access.
+
+def _scan_layers():
+    layers = {}
+    for path in glob.glob(os.path.join(BIN_DIR, 'holcus_monad_*.bin')):
+        name = os.path.basename(path)                   # holcus_monad_english.bin
+        key  = name[len('holcus_monad_'):-len('.bin')]  # english
+        layers[key] = name
+    return layers
+
+LAYERS = _scan_layers()
+
+# SVG element name: capitalise first letter so <English> not <english>
+def layer_element(layer):
+    return layer.capitalize()
 
 P = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53]
 
@@ -53,13 +63,13 @@ _PHYS_RE  = re.compile(r'quantum|energy|mass\b|field|photon|gravity|entropy|wave
 
 def _input_scores(prompt):
     p = prompt.lower()
-    return {
-        'code':    len(_CODE_RE.findall(prompt)) * 3,
-        'math':    len(_MATH_RE.findall(p)) * 3,
-        'physics': len(_PHYS_RE.findall(p)) * 3,
-        'english': 1,
-        'meaning': 0,
+    raw = {
+        'c':           len(_CODE_RE.findall(prompt)) * 3,
+        'mathematics': len(_MATH_RE.findall(p)) * 3,
+        'physics':     len(_PHYS_RE.findall(p)) * 3,
+        'english':     1,
     }
+    return {layer: raw.get(layer, 0) for layer in LAYERS}
 
 def _is_code_token(w):
     return bool(w and (
@@ -72,16 +82,19 @@ def _path_scores(scalars):
     """Score each layer by how well the active-prime words resonate."""
     scores = {l: 0 for l in LAYERS}
     order  = sorted(range(16), key=lambda k: -abs(scalars[k]))
-    top4   = order[:4]          # most prominent dimensions
+    top4   = order[:4]
     for layer in LAYERS:
-        data = load(layer)
+        try:
+            data = load(layer)
+        except Exception:
+            continue
         for k in top4:
             w = word_at(data, scalars[k])
             if not w:
                 continue
-            if layer == 'code' and _is_code_token(w):
-                scores['code'] += 2
-            elif layer in ('math', 'physics') and re.search(r'[∑∫\\^_{}]|\w{6,}', w):
+            if layer == 'c' and _is_code_token(w):
+                scores['c'] += 2
+            elif layer in ('mathematics', 'physics') and re.search(r'[∑∫\\^_{}]|\w{6,}', w):
                 scores[layer] += 2
             elif layer == 'english' and re.match(r'^[A-Za-z][a-z]+$', w):
                 scores['english'] += 2
@@ -125,6 +138,11 @@ def geometry_stdin():
     return scalars, primes
 
 # ── Path assembly: cursive — continuous path with halts ──────────────────────
+
+def words_by_dimension(scalars, layer):
+    """16 words, one per dimension k=0..15 (not spiral order)."""
+    data = load(layer)
+    return [word_at(data, scalars[k]) or '' for k in range(16)]
 
 def assemble_path(scalars, layer):
     """
@@ -183,6 +201,7 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     forced_layer = None
     use_stdin    = False
+    words_only   = False
 
     while args and args[0].startswith('--'):
         flag = args.pop(0)
@@ -190,6 +209,23 @@ if __name__ == '__main__':
             forced_layer = args.pop(0)
         elif flag == '--stdin':
             use_stdin = True
+        elif flag == '--words-only':
+            words_only = True
+
+    if words_only:
+        if use_stdin:
+            scalars, primes = geometry_stdin()
+        elif args:
+            scalars, primes = geometry(' '.join(args))
+        else:
+            sys.exit(1)
+        layer = forced_layer or select_layer(' '.join(args) if args else '', scalars)
+        # Line 0: layer element name (the monad that fired)
+        # Lines 1-16: one word per dimension
+        print(layer_element(layer))
+        for w in words_by_dimension(scalars, layer):
+            print(w)
+        sys.exit(0)
 
     if use_stdin:
         scalars, primes = geometry_stdin()

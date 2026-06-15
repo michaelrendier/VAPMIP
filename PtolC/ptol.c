@@ -46,7 +46,11 @@
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include "ptolemy.h"
+
+/* Directory containing the ptol binary (and ptol_layer.py). Set in main(). */
+static char g_ptol_dir[512] = ".";
 
 static const int P[16] = {
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53
@@ -114,16 +118,78 @@ static void make_outpath(const char *dir, const char *slug, long ts,
         snprintf(out, sz, "ptol_%s_%ld.%s", slug, ts, ext);
 }
 
+/* ── Monad layer — call ptol_layer.py, get element name + one word per dim ── */
+/*
+ * Writes normalised scalars + active primes to a tempfile, calls:
+ *   python3 ptol_layer.py --stdin --words-only < tmpfile
+ * Reads back: line 0 = element name (the monad that fired, e.g. "English"),
+ *             lines 1..16 = one word per dimension k=0..15.
+ * layer_elem receives the element name for the SVG <ElementName> tag.
+ * On any failure words are zero-initialised and layer_elem is "English".
+ */
+
+static void get_monad_words(const double *v, const double *raw_x,
+                             double thresh_raw,
+                             char words[16][256], char layer_elem[64])
+{
+    strncpy(layer_elem, "English", 63); layer_elem[63] = '\0';
+
+    char tmp[] = "/tmp/ptol_words_XXXXXX";
+    int  fd    = mkstemp(tmp);
+    if (fd < 0) return;
+
+    FILE *tf = fdopen(fd, "w");
+    if (!tf) { close(fd); return; }
+    for (int k = 0; k < 16; k++)
+        fprintf(tf, "%+.10f\n", v[k]);
+    fprintf(tf, "---\n");
+    for (int k = 0; k < 16; k++)
+        if (fabs(raw_x[k]) >= thresh_raw)
+            fprintf(tf, "%d\n", P[k]);
+    fclose(tf);
+
+    char cmd[1024];
+    snprintf(cmd, sizeof(cmd),
+        "python3 '%s/ptol_layer.py' --stdin --words-only < '%s' 2>/dev/null",
+        g_ptol_dir, tmp);
+
+    FILE *pipe = popen(cmd, "r");
+    if (pipe) {
+        /* Line 0: element name */
+        char elem_line[64];
+        if (fgets(elem_line, sizeof(elem_line), pipe)) {
+            int l = (int)strlen(elem_line);
+            if (l > 0 && elem_line[l-1] == '\n') elem_line[l-1] = '\0';
+            if (elem_line[0] >= 'A' && elem_line[0] <= 'Z')
+                strncpy(layer_elem, elem_line, 63);
+        }
+        /* Lines 1-16: words */
+        for (int k = 0; k < 16; k++) {
+            if (!fgets(words[k], 256, pipe)) break;
+            int l = (int)strlen(words[k]);
+            if (l > 0 && words[k][l-1] == '\n') words[k][l-1] = '\0';
+        }
+        pclose(pipe);
+    }
+    remove(tmp);
+}
+
 /* ── SVG paper — the pathway ─────────────────────────────────────────────── */
 /*
  * 16-spoke polar web. Each spoke k points at spoke_angle(k).
  * Radius of tip = |v[k]| × R_max.   Sign: red (+), blue (−).
  * Spiral path: connect tips in ascending |x| order (ZD → great circle).
  * Active prime spokes (|x_k| >= thresh) drawn bold.
+ *
+ * <English> operator: for active spokes, emit a bare <English> XML element
+ * at the amplitude dot position — no fill, no definition. monad_English.bin
+ * is the source; the geometry decides whether it fires. The SVG source IS
+ * the architecture. The render is the shadow.
  */
 
 static int write_svg(const char *path, const double *v, const int *idx,
-                     double thresh_norm, const char *prompt)
+                     double thresh_norm, const char *prompt,
+                     const char words[16][256], const char *layer_elem)
 {
     FILE *f = fopen(path, "w");
     if (!f) { perror(path); return 0; }
@@ -167,34 +233,81 @@ static int write_svg(const char *path, const double *v, const int *idx,
                "font-size=\"8\" fill=\"#2a4a2a\" text-anchor=\"start\">"
                "σ=½</text>\n", CX + R*0.5 + 2, CY);
 
-    /* Spokes */
+    /* Spokes, amplitude dots, and English word labels */
     for (int k = 0; k < 16; k++) {
-        double a = spoke_angle(k);
+        double a    = spoke_angle(k);
         double tip_r = fabs(v[k]) * R;
-        double tx = CX + cos(a) * R;
-        double ty = CY + sin(a) * R;
-        int active = (fabs(v[k]) >= thresh_norm);
-        const char *sc = active ? "#333" : "#1a1a1a";
+        double tx   = CX + cos(a) * R;
+        double ty   = CY + sin(a) * R;
+        int active  = (fabs(v[k]) >= thresh_norm);
+
+        /* Spoke line */
         fprintf(f, "  <line x1=\"%.2f\" y1=\"%.2f\" x2=\"%.2f\" y2=\"%.2f\" "
                    "stroke=\"%s\" stroke-width=\"%.1f\"/>\n",
-                   CX, CY, tx, ty, sc, active ? 0.8 : 0.4);
+                   CX, CY, tx, ty,
+                   active ? "#333" : "#1a1a1a",
+                   active ? 0.8 : 0.4);
 
-        /* Prime label at spoke tip */
-        double lx = CX + cos(a) * (R + 14);
-        double ly = CY + sin(a) * (R + 14);
-        fprintf(f, "  <text x=\"%.1f\" y=\"%.1f\" font-family=\"monospace\" "
-                   "font-size=\"9\" fill=\"%s\" text-anchor=\"middle\" "
-                   "dominant-baseline=\"central\">p%d</text>\n",
-                   lx, ly, active ? "#666" : "#2a2a2a", P[k]);
-
-        /* Amplitude dot at tip */
+        /* Amplitude dot */
         if (tip_r > 1.0) {
             double dx = CX + cos(a) * tip_r;
             double dy = CY + sin(a) * tip_r;
             const char *col = (v[k] >= 0) ? "#c04040" : "#4060c0";
-            double dotR = active ? 4.0 : 2.5;
             fprintf(f, "  <circle cx=\"%.2f\" cy=\"%.2f\" r=\"%.1f\" "
-                       "fill=\"%s\" opacity=\"0.9\"/>\n", dx, dy, dotR, col);
+                       "fill=\"%s\" opacity=\"0.9\"/>\n",
+                       dx, dy, active ? 4.0 : 2.5, col);
+        }
+
+        /* English word at spoke tip — the shadow on the wall of primes */
+        const char *word = words ? words[k] : NULL;
+        char wsvg[64]; wsvg[0] = '\0';
+        if (word && word[0]) {
+            /* Truncate + XML-escape for SVG */
+            int wi = 0;
+            const char *wp = word;
+            int chars = 0;
+            while (*wp && chars < 13 && wi < 58) {
+                if      (*wp == '<') { memcpy(wsvg+wi,"&lt;",4); wi+=4; }
+                else if (*wp == '>') { memcpy(wsvg+wi,"&gt;",4); wi+=4; }
+                else if (*wp == '&') { memcpy(wsvg+wi,"&amp;",5); wi+=5; }
+                else                 wsvg[wi++] = *wp;
+                chars++; wp++;
+            }
+            if (*wp) { memcpy(wsvg+wi,"…",3); wi+=3; } /* UTF-8 ellipsis */
+            wsvg[wi] = '\0';
+
+            double lx = CX + cos(a) * (R + 16);
+            double ly = CY + sin(a) * (R + 16);
+            if (active) {
+                /* Active: green word — the path lands here */
+                fprintf(f, "  <text x=\"%.1f\" y=\"%.1f\" font-family=\"monospace\" "
+                           "font-size=\"10\" fill=\"#40a060\" font-weight=\"bold\" "
+                           "text-anchor=\"middle\" dominant-baseline=\"central\">"
+                           "%s</text>\n", lx, ly, wsvg);
+            } else {
+                /* Inactive: dim word — present but below threshold */
+                fprintf(f, "  <text x=\"%.1f\" y=\"%.1f\" font-family=\"monospace\" "
+                           "font-size=\"8\" fill=\"#2a2a2a\" "
+                           "text-anchor=\"middle\" dominant-baseline=\"central\">"
+                           "%s</text>\n", lx, ly, wsvg);
+            }
+        } else {
+            /* No word: fall back to prime label */
+            double lx = CX + cos(a) * (R + 14);
+            double ly = CY + sin(a) * (R + 14);
+            fprintf(f, "  <text x=\"%.1f\" y=\"%.1f\" font-family=\"monospace\" "
+                       "font-size=\"9\" fill=\"%s\" text-anchor=\"middle\" "
+                       "dominant-baseline=\"central\">p%d</text>\n",
+                       lx, ly, active ? "#666" : "#2a2a2a", P[k]);
+        }
+
+        /* <Monad> element — bare XML at amplitude dot. No fill. No definition.
+         * Element name = the monad that fired. The geometry chose it. */
+        if (active && word && word[0] && tip_r > 1.0) {
+            double ex = CX + cos(a) * tip_r;
+            double ey = CY + sin(a) * tip_r;
+            fprintf(f, "  <%s x=\"%.2f\" y=\"%.2f\">%s</%s>\n",
+                       layer_elem, ex, ey, wsvg, layer_elem);
         }
     }
 
@@ -298,7 +411,8 @@ static int write_ppm(const char *path, const double *v, double thresh_norm)
 
 static int write_html(const char *html_path, const char *svg_path,
                       const char *ppm_path, const double *v, const int *idx,
-                      const int *P16, double thresh_norm, const char *prompt)
+                      const int *P16, double thresh_norm, const char *prompt,
+                      const char words[16][256])
 {
     /* Convert PPM to PNG via ImageMagick if available, embed SVG inline. */
     char png_path[512];
@@ -355,29 +469,53 @@ static int write_html(const char *html_path, const char *svg_path,
     fprintf(f, "  </div>\n");
     fprintf(f, "</div>\n");
 
-    /* Sedenion table */
+    /* Sedenion table with English words */
     fprintf(f, "<div class=\"shadow\">\n");
     fprintf(f, "<table><tr><th>k</th><th>p_k</th><th>e_k</th>"
-               "<th>scalar</th><th>active</th></tr>\n");
+               "<th>scalar</th><th>active</th><th>word</th></tr>\n");
     for (int k = 0; k < 16; k++) {
         int active = (fabs(v[k]) >= thresh_norm);
         const char *cls = (v[k] >= 0) ? "pos" : "neg";
         if (active) cls = "act";
+        const char *word = (words && words[k][0]) ? words[k] : "";
         fprintf(f, "<tr><td>%d</td><td>%d</td>"
                    "<td class=\"%s\">e%d</td>"
                    "<td class=\"%s\">%+.6f</td>"
-                   "<td>%s</td></tr>\n",
-                   k, P16[k], cls, k, cls, v[k], active ? "●" : "");
+                   "<td>%s</td>"
+                   "<td class=\"%s\">%s</td></tr>\n",
+                   k, P16[k], cls, k, cls, v[k],
+                   active ? "●" : "",
+                   active ? "act" : "", word);
     }
     fprintf(f, "</table>\n");
 
-    /* Spiral path */
-    fprintf(f, "<p class=\"spiral\">spiral (ZD → great circle):<br>");
+    /* Spiral path with English words */
+    fprintf(f, "<p class=\"spiral\">path (ZD → great circle):<br>");
+    const char *last_word = NULL;
     for (int i = 0; i < 16; i++) {
         int k = idx[i];
-        fprintf(f, "e%d(%+.3f)%s", k, v[k], i < 15 ? " → " : "");
+        int active = (fabs(v[k]) >= thresh_norm);
+        const char *word = (words && words[k][0]) ? words[k] : NULL;
+        if (word) {
+            if (active)
+                fprintf(f, "<strong style=\"color:#40a060\">%s</strong>", word);
+            else
+                fprintf(f, "<span style=\"color:#444\">%s</span>", word);
+            if (i < 15) fprintf(f, " → ");
+            last_word = words[k];
+        } else {
+            fprintf(f, "e%d(%+.3f)%s", k, v[k], i < 15 ? " → " : "");
+        }
     }
     fprintf(f, "</p>\n");
+
+    /* Response: the word the path lands at */
+    if (last_word && last_word[0]) {
+        fprintf(f, "<p style=\"font-size:1.4em;color:#40a060;"
+                   "border-left:2px solid #40a060;padding-left:0.8em;"
+                   "margin-top:1em\">%s</p>\n", last_word);
+    }
+
     fprintf(f, "</div>\n</body></html>\n");
 
     fclose(f);
@@ -453,6 +591,17 @@ static int read_image_scalars(const char *img_path, double *v_out)
 
 int main(int argc, char *argv[])
 {
+    /* Locate our own directory so get_english_words() can find ptol_layer.py */
+    {
+        char self[512];
+        ssize_t len = readlink("/proc/self/exe", self, sizeof(self)-1);
+        if (len > 0) {
+            self[len] = '\0';
+            char *slash = strrchr(self, '/');
+            if (slash) { *slash = '\0'; g_ptol_dir[0]='\0'; strncat(g_ptol_dir, self, sizeof(g_ptol_dir)-1); }
+        }
+    }
+
     int raw       = 0;
     int do_svg    = 0;
     int do_bmp    = 0;
@@ -466,13 +615,13 @@ int main(int argc, char *argv[])
             raw = 1; arg0++;
         } else if (strcmp(argv[arg0], "-s") == 0) {
             do_svg = 1; arg0++;
-            if (arg0 < argc && argv[arg0][0] != '-') out_dir = argv[arg0++];
+            if (arg0 < argc && (argv[arg0][0]=='.' || argv[arg0][0]=='/' || argv[arg0][0]=='~')) out_dir = argv[arg0++];
         } else if (strcmp(argv[arg0], "-b") == 0) {
             do_bmp = 1; arg0++;
-            if (arg0 < argc && argv[arg0][0] != '-') out_dir = argv[arg0++];
+            if (arg0 < argc && (argv[arg0][0]=='.' || argv[arg0][0]=='/' || argv[arg0][0]=='~')) out_dir = argv[arg0++];
         } else if (strcmp(argv[arg0], "-H") == 0) {
             do_svg = do_bmp = do_html = 1; arg0++;
-            if (arg0 < argc && argv[arg0][0] != '-') out_dir = argv[arg0++];
+            if (arg0 < argc && (argv[arg0][0]=='.' || argv[arg0][0]=='/' || argv[arg0][0]=='~')) out_dir = argv[arg0++];
         } else if (strcmp(argv[arg0], "-i") == 0) {
             arg0++;
             if (arg0 >= argc) { fprintf(stderr, "ptol: -i needs <image>\n"); return 1; }
@@ -515,17 +664,34 @@ int main(int argc, char *argv[])
     }
 
     /* ── Text prompt mode ── */
-    if (argc <= arg0) {
-        fprintf(stderr,
-            "usage: ptol [-r] [-s [dir]] [-b [dir]] [-H [dir]] [-i <img>] <prompt>\n");
-        return 1;
-    }
-
     char sigma[65536];
     sigma[0] = '\0';
-    for (int i = arg0; i < argc; i++) {
-        if (i > arg0) strncat(sigma, " ", sizeof(sigma) - strlen(sigma) - 1);
-        strncat(sigma, argv[i], sizeof(sigma) - strlen(sigma) - 1);
+
+    if (argc <= arg0) {
+        /* No argument: try stdin if it's a pipe */
+        if (isatty(STDIN_FILENO)) {
+            fprintf(stderr,
+                "usage: ptol [-r] [-s [dir]] [-b [dir]] [-H [dir]] [-i <img>] <prompt>\n");
+            return 1;
+        }
+        size_t cap = sizeof(sigma) - 1;
+        size_t len = 0;
+        int c;
+        while (len < cap && (c = getchar()) != EOF && c != '\n')
+            sigma[len++] = (char)c;
+        sigma[len] = '\0';
+        /* strip trailing whitespace */
+        while (len > 0 && (sigma[len-1] == ' ' || sigma[len-1] == '\r'))
+            sigma[--len] = '\0';
+        if (len == 0) {
+            fprintf(stderr, "ptol: empty prompt\n");
+            return 1;
+        }
+    } else {
+        for (int i = arg0; i < argc; i++) {
+            if (i > arg0) strncat(sigma, " ", sizeof(sigma) - strlen(sigma) - 1);
+            strncat(sigma, argv[i], sizeof(sigma) - strlen(sigma) - 1);
+        }
     }
     int n = (int)strlen(sigma);
 
@@ -547,7 +713,53 @@ int main(int argc, char *argv[])
     for (int k = 0; k < 16; k++) idx[k] = k;
     qsort(idx, 16, sizeof(int), cmp_mag_asc);
 
-    /* ── Console output ── */
+    /* ── Monad layer (all non-raw modes) — math selects from full domain ── */
+    char words[16][256];
+    char layer_elem[64];
+    memset(words, 0, sizeof(words));
+    strncpy(layer_elem, "English", 63); layer_elem[63] = '\0';
+    if (!raw)
+        get_monad_words(v, _x, thresh, words, layer_elem);
+
+    /* ── Papers dir (shared by default SVG and explicit flags) ── */
+    static char ptolemy_papers[512];
+    ptolemy_papers[0] = '\0';
+    if (!out_dir || !*out_dir) {
+        const char *home = getenv("HOME");
+        if (home) {
+            char ph[512];
+            snprintf(ph, sizeof(ph), "%s/.ptolemy", home);
+            mkdir(ph, 0755);
+            snprintf(ptolemy_papers, sizeof(ptolemy_papers), "%s/.ptolemy/papers", home);
+            mkdir(ptolemy_papers, 0755);
+            out_dir = ptolemy_papers;
+        }
+    }
+
+    char slug[64];
+    make_slug(sigma, slug, sizeof(slug));
+    long ts = (long)time(NULL);
+
+    /* ── Default mode: SVG + English stdout ── */
+    if (!raw && !do_svg && !do_bmp && !do_html) {
+        char svg_path[1024];
+        make_outpath(out_dir, slug, ts, "svg", svg_path, sizeof(svg_path));
+        if (write_svg(svg_path, v, idx, thresh_norm, sigma, words, layer_elem))
+            fprintf(stderr, "paper: %s\n", svg_path);
+
+        /* English firing order (Riemann spiral) to stdout */
+        for (int i = 0; i < 16; i++) {
+            int k = idx[i];
+            int active = (fabs(v[k]) >= thresh_norm);
+            const char *w = words[k][0] ? words[k] : NULL;
+            if (i > 0) printf(" ");
+            if (active) printf("*");
+            printf("%s", w ? w : "·");
+        }
+        printf("\n");
+    }
+
+    /* ── Raw mode ── */
     if (raw) {
         for (int k = 0; k < 16; k++)
             printf("%+.10f\n", v[k]);
@@ -555,34 +767,17 @@ int main(int argc, char *argv[])
         for (int k = 0; k < 16; k++)
             if (fabs(_x[k]) >= thresh)
                 printf("%d\n", P[k]);
-    } else {
-        printf("sedenion:\n");
-        for (int k = 0; k < 16; k++)
-            printf("  e%-2d  %+.8f\n", k, v[k]);
-
-        printf("\nprimes:\n");
-        for (int k = 0; k < 16; k++)
-            if (fabs(_x[k]) >= thresh)
-                printf("  p%-2d = %d\n", k, P[k]);
-
-        printf("\nspiral (zero divisor → great circle):\n  ");
-        for (int i = 0; i < 16; i++)
-            printf("e%d(%+.3f)%s", idx[i], v[idx[i]], i < 15 ? " → " : "\n");
     }
 
-    /* ── Paper output ── */
+    /* ── Explicit paper output (-s / -b / -H) ── */
     if (do_svg || do_bmp || do_html) {
-        char slug[64];
-        make_slug(sigma, slug, sizeof(slug));
-        long ts = (long)time(NULL);
-
         char svg_path[1024], ppm_path[1024], html_path[1024];
         make_outpath(out_dir, slug, ts, "svg",  svg_path,  sizeof(svg_path));
         make_outpath(out_dir, slug, ts, "ppm",  ppm_path,  sizeof(ppm_path));
         make_outpath(out_dir, slug, ts, "html", html_path, sizeof(html_path));
 
         if (do_svg) {
-            if (write_svg(svg_path, v, idx, thresh_norm, sigma))
+            if (write_svg(svg_path, v, idx, thresh_norm, sigma, words, layer_elem))
                 fprintf(stderr, "paper (pathway): %s\n", svg_path);
         }
         if (do_bmp) {
@@ -591,7 +786,7 @@ int main(int argc, char *argv[])
         }
         if (do_html) {
             if (write_html(html_path, svg_path, ppm_path,
-                           v, idx, P, thresh_norm, sigma))
+                           v, idx, P, thresh_norm, sigma, words))
                 fprintf(stderr, "paper (html):    %s\n", html_path);
         }
     }

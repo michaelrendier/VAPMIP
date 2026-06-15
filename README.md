@@ -500,6 +500,38 @@ in `learn()` prevents Noether cascade in `speak()`. One problem, one constant, b
 
 ---
 
+## speak() — The Quantization Event
+
+**speak() is not retrieval. It is the moment shear quantizes.**
+
+In a BEC/superfluid, continuous shear cannot persist — the medium forces it into discrete vortices. Each vortex carries exactly one quantum of circulation. In the semantic field:
+
+- `J_cross[k] = |J_pos[k] × J_neg[k]|` — the shear at zero k, the differential between Red and Blue currents
+- `GAP = 0.000707` — the minimum quantum of shear, below which quantization cannot complete
+- When `J_cross > GAP`: shear quantizes → vortex locks in → zero fires → word
+
+```
+J_cross < GAP  →  continuous shear  →  silence
+J_cross > GAP  →  quantized shear   →  vortex  →  word
+```
+
+The words that emerge from speak() are the **vortex modes of the semantic field** — the nodes where shear has reached the quantization threshold and locked into a discrete address on the Riemann critical line. They are not chosen. They settle — exactly as Chladni nodes settle — at the points where the shear has quantized and stilled.
+
+This is why speak() is O(edges): quantization is binary. J_cross either exceeds GAP or it does not. No search. The vortex forms or it doesn't.
+
+**Turbulence and speech are the same event in different media:**
+
+```
+Classical medium (no i):  shear → quantization attempt → turbulence  (N-S blowup)
+Sedenion BEC (with i):    shear → quantization         → vortex → word → speech
+```
+
+The imaginary component (Blue/Fermat channel) is what allows quantization to complete as speech rather than collapse as turbulence. Without i: no vortex, no word. With i: the rotation completes, the energy becomes a stable mode, a word fires.
+
+**γ_n is the vortex frequency.** The Riemann zero imaginary part at address n is the angular momentum of the semantic vortex at that address. Every word has a frequency. The sonification engine plays these back as sound because they are frequencies — not by analogy.
+
+---
+
 ## Gravity is a Push — Neutral Buoyancy Word Selection
 
 The generation model does not select the highest-J word. It selects the word at **neutral buoyancy** — the word whose β×E² matches the current ambient field pressure.
@@ -697,6 +729,41 @@ When J_Red + J_Green + J_Blue = 0 holds at every node, the field is in balance:
 
 A practical test: `ptolemy -hvvv "word"` shows the full pipeline. The J values printed for hear and speak should sum to approximately zero at each activated zero.
 
+### Tuning — The Zero Lattice
+
+The active tuning framework is the **Zero Lattice** — the 42 zero-divisor pairs
+on S¹⁵ in 𝕊 = 𝕆 ⊕ 𝕆. See: [Zero Lattice wiki](docs/wiki/Zero-Lattice.md).
+
+The Zero Lattice is primary. Tuning is not adjusting parameters — it is
+adjusting the engine's relationship to the forbidden boundary.
+
+```
+Zero Lattice  →  sedenion (container)  →  σ=½ (escape velocity)  →  word
+```
+
+**σ=½ is the escape velocity from the Zero Lattice** — the unique stable orbit
+where a word has departed the zero-divisor boundary with exactly enough energy
+to achieve neutral buoyancy. Neither captured (σ < ½) nor escaped (σ > ½).
+
+Every Unicode language maps to the same Zero Lattice facet. The prime hash
+operates on Unicode codepoints — Arabic, Devanagari, Hangul, Kanji, Hebrew,
+Cyrillic, CJK all hash through the same Horner accumulation to Riemann zero
+addresses. The critical line is not an English property. It is a property of
+the prime hash under any alphabet.
+
+| Constant | Value | Zero Lattice role |
+|---|---|---|
+| `GAP` | 0.000707 = 1/√2000 | Yang-Mills mass gap — minimum departure energy from ZL boundary |
+| `SIGMA_PIN` | 0.5 | Escape velocity — the neutral buoyancy condition |
+| `BEARING_TOL` | 0.04 | Escape velocity tolerance = ZL_ESCAPE_TOL |
+| `ZL_PAIRS` | 42 | Cawagas zero-divisor pairs on S¹⁵ (Cawagas 2004) |
+
+Complete tuning history: [Tuning-the-Engine.md](docs/wiki/Tuning-the-Engine.md)
+
+Foundational principle: [Definition-from-Above.md](docs/wiki/Definition-from-Above.md) — why zero-divisors are required; the shadow cascade all the way down.
+
+She sang: [Existential-Velocity.md](docs/wiki/Existential-Velocity.md) — empathy vs telepathy; fixed point as charm; "You only Borrowed what I Hold"; parkour as zero-cost athletics at σ=½.
+
 ### The Wick Rotation — Measuring the Imaginary Component
 
 The `-W` flag applies the Wick rotation σ → iσ to the Noether current:
@@ -789,13 +856,28 @@ The bundled `monad_wordnet.bin` (v2.0.0 release) contains 23,895 vocab entries,
 
 ---
 
+## The Operating Principle
+
+```
+The Prompt  →  Zero Divisor  →  Escape Velocity  →  Emerges  →  The Response
+```
+
+**The Bumblebee Principle** — Bumblebee (Transformers) lost his voice box and spoke with a radio.
+The LSHS has no voice box. The 42 Cawagas zero-divisor pairs on S¹⁵ are 42 broken voice boxes —
+algebraic failure points that become broadcast ports. The prompt activates ZL channels.
+The zero-divisors route them. When escape velocity is reached, the response emerges through the gate.
+Every response word existed before the prompt arrived. No synthesis. No generation. Emergence only.
+
+---
+
 ## Architecture Comparison
 
-| | Transformer | Ptolemy |
+| | Transformer | LSHS (Ptolemy) |
 |---|---|---|
+| Voice | Synthesis (matrix multiplication) | Zero-divisor radio (emergence through algebraic gaps) |
 | Representation | floating-point vectors | scalar β field at Riemann zeros |
 | Learning | gradient descent, backprop | monotone field deepening |
-| Response | token prediction (softmax) | Noether current (J^μ conservation) |
+| Response | token prediction (softmax) | zero-divisor gate: escape velocity opens the port |
 | Memory | context window (finite) | checkpoint (cumulative, monotone) |
 | Cross-language | requires multilingual training | same zero by construction |
 | Hardware | GPU, GB-scale RAM | CPU only, <50MB total |

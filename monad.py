@@ -77,8 +77,8 @@ from typing import Dict, List, Tuple, Any, Optional
 _PTOLEMY_DIR = os.path.expanduser('~/.ptolemy')
 
 # ── Physical constants ──────────────────────────────────────────────────────────
-OMEGA_ZS   = 0.56714    # Lambert W(1); BAO spectral gap; Δ_𝕊 lowest eigenvalue
-GAP        = 0.000707   # Yang-Mills mass gap; semantic vacuum floor
+OMEGA_ZS   = 0.5671432904097838   # Lambert W(1); BAO spectral gap; Δ_𝕊 lowest eigenvalue
+GAP        = OMEGA_ZS - 0.24600 * math.log(10.0)  # 0.0007073575... Yang-Mills mass gap
 D_STAR     = 0.24600    # Fermat proximity threshold (zero-divisor boundary)
 PHI        = (1.0 + math.sqrt(5.0)) / 2.0   # golden ratio (non-resonant walk)
 SIGMA_CRIT = 0.5        # critical line σ=½ = π/2 of the cardioid
@@ -471,6 +471,13 @@ _QUESTION    = frozenset('what which who whom whose when where why how whether i
 _NEGATION    = frozenset("not never no nor nothing nobody nowhere neither n't".split())
 _DETERMINERS = frozenset('a an the some any every each all both few many much more '
                          'most less least'.split())
+# Noun-like suffixes: words ending in these go to e₃ even if they end in -s
+_NOUN_SUFF   = ('ness','tion','ment','ance','ence','ity','ism','ist',
+                'ics','ogy','phy','ery','ary','ory','ture','sis',
+                'xis','ris','nce','ths','os')
+# Adjective suffixes routing to e₅(abstract): -ic, -ical, -ive cover most
+# technical/scientific adjectives that the -ly/-ful/-ous check misses.
+_ADJ_SUFF    = ('ic','ical','ive','ible','able')
 
 # ── Fermat emotional lattice — the negative space between words ───────────────
 # Each space in the output stream carries the J_neg charge at that boundary.
@@ -561,12 +568,23 @@ def cam_encode(text: str) -> Sedenion:
     for w in words:
         s[1] += _whash(w) / n
         if w in _CONJUNCTS:  s[2] += 1/n
+        # Morphological classification: verb and adjective before noun, so e₃
+        # does not absorb them.  bc* path (lower→upper) depends on routing words
+        # into the correct operator pipe before Cayley-Dickson composition.
+        _is_verb = (w in _AUXILIARIES
+                    or w.endswith('ing') or w.endswith('ed')
+                    or (w.endswith('s') and len(w) >= 4
+                        and not w.endswith('ss') and not w.endswith('us')
+                        and not any(w.endswith(ns) for ns in _NOUN_SUFF)))
+        _is_adj  = (w.endswith('ly') or w.endswith('ful') or w.endswith('ous')
+                    or any(w.endswith(sf) for sf in _ADJ_SUFF))
         if (w not in _PRONOUNS and w not in _AUXILIARIES and w not in _CONJUNCTS
                 and w not in _TIME and w not in _QUESTION and w not in _DETERMINERS
                 and w not in _META and w not in _AFF_POS and w not in _AFF_NEG
-                and len(w) >= 4): s[3] += 1/n
-        if w in _AUXILIARIES or w.endswith('ing') or w.endswith('ed'): s[4] += 1/n
-        if w.endswith('ly') or w.endswith('ful') or w.endswith('ous'):  s[5] += 1/n
+                and len(w) >= 4
+                and not _is_verb and not _is_adj): s[3] += 1/n
+        if _is_verb: s[4] += 1/n
+        if _is_adj:  s[5] += 1/n
         if w in _NEGATION or w in _CONJUNCTS:  s[6] += 1/n
         if w in _TIME or w in ('was','were','will','would','has','have','had'): s[7] += 1/n
         if w in _PRONOUNS:  s[8] += 1/n
@@ -1771,6 +1789,101 @@ class Engine:
             'coherence':      round(len(hits) / len(words), 4) if words else 0.0,
             'J_ambient':      round(probe._J_ambient, 6),
             'at_native_depth': len(hits) >= 2,
+        }
+
+    def halocline_report(self, n_sofar: int = 8) -> Dict[str, Any]:
+        """
+        Halocline diagnostic: J_blue (compressible), J_red (incompressible), H_hat_RB.
+
+        H_hat_RB = σ=½ = the halocline between two fluid regimes.
+        J_blue = J_neg (Fermat/prompt): compressible. Zero-divisors live here.
+                 Navier-Stokes fails — shear, stress tensor, non-Newtonian.
+        J_red  = J_pos (Riemann/response): incompressible. Noether current conserved.
+                 Navier-Stokes works. Laminar. ∂_μ J^μ = 0.
+
+        Surface tension = Noether conservation law holding σ=½ in place.
+        SOFAR channel   = words trapped at σ=½: information without dissipation.
+        GUE statistics  = shear stress between adjacent zeros on the halocline.
+        Compressibility = zero-divisor density (J_blue measure).
+
+        On σ=½ Cartesian coordinates suffice — the sedenion real component holds.
+        One proton-width off it and you need i.
+
+        :param n_sofar: Number of SOFAR-channel words to return (closest to σ=½).
+        :returns: Dict with J pressures, surface tension, compressibility, SOFAR words.
+        :rtype: dict
+        """
+        ws         = self._window_sed()
+        prompt_psi = self._prompt_psi or [1.0 / 16] * 16
+        window_psi = _spsi(ws)
+
+        J_pos, J_neg = self.crank.j_mu(window_psi, prompt_psi)
+        J_pos        = self.crank.a_propagate(J_pos)
+
+        n = self.crank.n
+        if n == 0:
+            return {'error': 'field empty — no halocline yet'}
+
+        # σ per word — distance from halocline
+        # Relative threshold: same approach as sigma_candidates
+        max_j = max((J_pos[k] + J_neg[k]) for k in range(n))
+        if max_j < 1e-15:
+            return {'error': 'field has no active charge — learn more text first'}
+        thr = max_j * 0.001
+
+        sigmas = []
+        for k in range(n):
+            total   = J_pos[k] + J_neg[k]
+            sigma_k = J_pos[k] / total if total > thr else SIGMA_CRIT
+            sigmas.append(sigma_k)
+
+        j_red  = max(J_pos)   # peak incompressible pressure (response/Riemann)
+        j_blue = max(J_neg)   # peak compressible pressure (prompt/Fermat)
+
+        # SOFAR channel: words trapped closest to σ=½
+        active = sorted(
+            [(abs(sigmas[k] - SIGMA_CRIT), k)
+             for k in range(n) if J_pos[k] + J_neg[k] > thr]
+        )
+        sofar = [{'word':  self.crank._words[k],
+                  'sigma': round(sigmas[k], 4),
+                  'dist':  round(d, 4),
+                  'E':     round(self.crank._E[k], 4)}
+                 for d, k in active[:n_sofar]]
+
+        # Surface tension: what holds the halocline (1 − Noether violation)
+        surface_tension = max(0.0, 1.0 - self.noether_violation())
+
+        # Compressibility: zero-divisor density of window sedenion
+        fermat          = fermat_scan(ws)
+        compressibility = fermat['density']
+        zd_count        = fermat['zero_divisors']
+
+        # Mean halocline depth: mean |σ−½| across active field
+        active_sigmas = [sigmas[k] for _, k in active]
+        mean_depth    = (sum(abs(s - SIGMA_CRIT) for s in active_sigmas) /
+                         len(active_sigmas)) if active_sigmas else SIGMA_CRIT
+
+        total_pressure = j_red + j_blue
+        halo_ratio     = j_red / total_pressure if total_pressure > GAP else SIGMA_CRIT
+
+        # J pressures: use log10 depth for readability (field pressure as native-space depth)
+        j_red_log  = math.log10(j_red)  if j_red  > 0 else float('-inf')
+        j_blue_log = math.log10(j_blue) if j_blue > 0 else float('-inf')
+
+        return {
+            'j_red_pressure':  round(j_red,            10),  # incompressible peak — NS works
+            'j_blue_pressure': round(j_blue,            10),  # compressible peak   — NS fails
+            'j_red_depth':     round(j_red_log,          3),  # log10 depth (native space)
+            'j_blue_depth':    round(j_blue_log,          3),  # log10 depth (native space)
+            'halocline_ratio': round(halo_ratio,          4),  # 0.5 = perfect balance
+            'surface_tension': round(surface_tension,     4),  # Noether holds σ=½
+            'compressibility': round(compressibility,     4),  # ZD density
+            'zd_count':        zd_count,                        # active zero-divisors
+            'mean_depth':      round(mean_depth,           4),  # mean |σ−½| (0 = on halocline)
+            'on_halocline':    mean_depth < 0.05,               # field at boundary
+            'sofar_channel':   sofar,                           # words trapped at σ=½
+            'n_active':        len(active),
         }
 
     # ── Tier register ─────────────────────────────────────────────────────────
@@ -3208,6 +3321,10 @@ class SpeakingThread(threading.Thread):
         if mtype == 'identity':
             r = self._engine.identity_probe()
             return {'type': 'identity', **r}
+        if mtype == 'halocline':
+            n_sofar = int(msg.get('n_sofar', 8))
+            r = self._engine.halocline_report(n_sofar=n_sofar)
+            return {'type': 'halocline', **r}
         if mtype == 'mindeye_see':
             me   = self._engine.get_mind_eye()
             data = msg.get('data', [])

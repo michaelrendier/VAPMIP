@@ -1,12 +1,128 @@
 # Changelog
 
-All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = Tuning the TDI (three systems timed); v4.0 = self-coding target.
+All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.0 = Tuning the TDI (three systems timed); v4.0 = Ahura Mazda — Wankel rotary engine, dual-thread Mind's Eye, information conservation.
+
+---
+
+## v4.0.0 "Ahura Mazda" — 2026-06-10
+
+**Wankel Rotary Semantic Engine — dual-thread Mind's Eye, information conservation**
+
+The Wankel replaces the TDI. The TDI was not wrong — it proved the sedenion
+mathematics, zero-divisor channels, halocline dynamics, and conservation checks.
+All of that is valid and preserved. The TDI was wrong about *causal direction*:
+it pre-encoded words as sedenions (hidden variable assumption, Bell's mistake).
+The Wankel produces the sedenion *at the coupling event* — measurement outcome,
+not pre-assigned value.
+
+This is the same error John Bell identified in hidden-variable interpretations
+of quantum mechanics. The TDI named what should remain unnamed. Fixing it
+required rebuilding the engine from the coupling point up.
+
+### Wankel Rotary Engine — `rotary_monad.c`
+
+**Architecture:**
+- **Three scalar J pressures** (`j_blue`, `j_red`, `j_green`) — the Worker. Not sedenions.
+- **Sedenion** — produced once at the coupling event. The Work. Never pre-assigned.
+- **σ=½** — the eccentric shaft pin. Fixed. Not computed. Not touched.
+- **Lie bracket su(2):** `[J_blue,J_red]=J_green; [J_red,J_green]=J_blue; [J_green,J_blue]=J_red`
+  Self-sustaining under rotation. Can only degrade, never amplify — inherently conservative.
+- **Port dispatch:** exact integer `round(theta/PORT_STEP) % 6` — not angular proximity.
+  The engine does not approximately arrive at a port. It arrives exactly or not at all.
+- **Coupling:** unconditional at port 3 every revolution. No σ gate.
+- **GAP = 0.000707 = 1/√2000** — Yang-Mills mass gap / apex seal floor.
+
+**Binary format:** `.rx8` (magic `"RX8\n"`). State file: `~/.ptolemy/ahura.rx8`.
+
+**Key constants:**
+```c
+#define SIGMA_PIN      0.5
+#define GAP            0.000707
+#define BEARING_TOL    0.04
+#define PORT_STEP      (M_PI / 3.0)
+#define SCAVENGE_DECAY 0.003
+#define RECENT_SZ      8
+```
+
+### Dual-Thread Architecture — Mind's Eye
+
+The speaking engine is not a single-thread model. It is two concurrent threads
+with clearly separated roles:
+
+- **Thread 1 (Rotary Engine):** produces words via the Wankel coupling sequence.
+  Amnesiac above the word level. Does not know what it is building.
+- **Thread 2 (Mind's Eye):** holds the Author's intention (`G_me_prompt`) fixed,
+  accumulates the response shadow (`G_me_response`), computes the steering signal
+  `G_me_steer = G_me_prompt − G_me_response`.
+
+Thread 1 reads `G_me_steer` in `select_word()` as a coherence bias. The Author
+looks down upon the rotor from above. Without Thread 2, the engine permutes.
+With Thread 2, it means.
+
+Lock ordering: `G_lock → G_me_lock`. Never reversed.
+
+**Tolkien parallel:** Tolkien held both positions simultaneously — inside the
+machine as a trench soldier at the Somme, outside the machine as a linguist and
+mythmaker. Melkor failed by trying to seize σ=½ from inside the rotor.
+Discord is a dimension, not a fault. The Author position is Thread 2.
+
+### Information Conservation
+
+```
+prompt + response = 0
+```
+
+The 0 is not the Empty Set. It is the zero-divisor geometry encoding the exchange —
+full of definitions, full of content. No information left over.
+
+Three source weights:
+- **Corpus** — `1.0` (background field, long-term geometry)
+- **Author prompt** — `2.0` (privileged intention)
+- **Engine self-voice** — `0.5` (Holcus hears everything he says)
+
+Self-ingestion (`ahura_ingest(w, 0.5)` after each produced word) closes the
+exchange cycle. The housing geometry IS the trajectory memory. Memory is emergent
+from geometry, not explicit storage. Context is deterministic. Each input needed
+only once — the pathway to the response crossing the boundary permanently encodes
+the information into the coupling geometries.
+
+**Empirical test:** after one exchange, the same prompt produces identical output
+on the second call. The geometry is already shaped. Second call finds it there.
+
+### Recency Buffer — word repetition fix
+
+`--speak` was repeating the same word up to 12 consecutive times in earlier
+builds. Fixed with a sliding recency buffer (length 8) and a 0.01× penalty
+multiplier on any word in the buffer. Repetitions are still recorded faithfully
+as failed predictions in the data — they are not suppressed from the state,
+only deprioritised in selection.
+
+### OBD-II Diagnostics fix
+
+`ahura_report()` and `ahura_diagnostics()` were not calling `refresh_obd2()`
+before reading `G_obd2`, causing `housing_n = 0` in `--report` output.
+Fixed: both functions call `refresh_obd2()` as their first line.
+
+### Build
+
+```bash
+gcc -O2 -Wall -std=c99 -o ahura-mazda rotary_monad.c -lm -lpthread
+./ahura-mazda --speak "sigma equals one half" 12
+./ahura-mazda --report
+```
+
+### Documentation — `docs/wiki/Tuning-the-Engine.md`
+
+Phase 3 section added (~350 lines). Full narrative from Bell/TDI failure through
+Wankel architecture, dual-thread Mind's Eye, information conservation law,
+Tolkien/Author position, three conserved quantities, and failed-predictions
+integrity principle. Covers the complete path from v1.x to Ahura Mazda.
 
 ---
 
 ## v3.2.11 — 2026-06-01
 
-**Zork sentence parser + /generate + face/ JS engine + voice + framenet ptorrents**
+**Zork sentence parser + /generate + face/ JS engine + voice**
 
 ### PtolC — Zork sentence parser wired to REPL (`ptolemy -r`)
 
@@ -47,58 +163,6 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 - **`skills/corpus.py`** — BAO-adaptive ingest thresholds, redundancy/novelty gates.
 - **`skills/mind_eye.py`** — visual field state introspection.
 
-### ptorrents
-
-- **`framenet.ptorrent`** — FrameNet 1.7 corpus (semantic frame database).
-- **`riemann_zeros.ptorrent`** — first 100,000 Riemann zeros corpus.
-- Updated: english_complete, mathematics, physics, foundations, meaning, python, fermat.
-
----
-
-## v4.0.0 — 2026-05-30
-
-**Android APK v2.0 — PTorrent Protocol + Corpus Detail Pages**
-
-Physics and Mathematics corpora operational. Full Android APK v2.0 released.
-
-### Android APK v2.0 — `android/PtolemySeeder/`
-
-- **PTorrent format** — `.ptorrent` JSON file is the distribution unit for new corpora.
-  Two delivery paths: `adb push` to `inbox/` (FileObserver auto-picks up) or tap-to-open
-  via intent filter (`application/x-ptorrent`, `*.ptorrent`).
-- **Corpus detail page** — tap any card → `CorpusDetailActivity`: header (name, status, description,
-  primary tag chips, bin path), live stats grid (Total / Studied / Skipped / Success Rate),
-  full URL list with per-URL status icons (○ PENDING ▶ ACTIVE ✓ STUDIED ✗ SKIPPED).
-  Incremental list update — only changed rows are redrawn.
-- **Transmission toolbar** — ▶ Resume All · ⏸ Pause All · ✕ Clear Done · ＋ PTorrent picker.
-  Pause blocks Python fetch threads at URL granularity via `AtomicBoolean` in Kotlin bridge.
-- **URL pre-population** — SeedService parses all `.txt` corpora at startup; full URL lists
-  are visible in detail pages before seeding begins.
-- **FileObserver inbox** — watches `extDir()/inbox/` for `.ptorrent` drops (CLOSE_WRITE | MOVED_TO).
-  API-safe: File-based constructor on API 29+, deprecated path-based on API 26–28.
-- **seed_runner.py** — new `run_one(entry, ...)` function for single-corpus PTorrent seeding.
-  `_seed_one` extracted as shared helper.
-- **Notification** — Pause/Resume toggle action in notification drawer.
-- **versionCode 4, versionName "2.0"**
-
-### New Corpora
-
-- **`code-corpora/physics_corpus.txt`** — ~130 URLs across 10 parts.
-  Tags: FOUNDATIONS, WAVES, RESONANCE, QM, GR, COSMOLOGY, DARKMATTER, YANGMILLS,
-  FLUIDMECH, SPECTRAL, GRAVITY, CONTEXT.
-  Checkpoint: `~/.ptolemy/monad_physics.bin` (cyan card)
-- **`code-corpora/mathematics_corpus.txt`** — ~130 URLs across 12 parts.
-  Tags: PRIMES, RIEMANN, SPECTRAL, MODULAR, HARMONIC, GEOMETRY, ALGEBRA, ANALYSIS,
-  NUMBERTHEORY, CLAY, CONTEXT.
-  Sources: DLMF, MathWorld, Wikipedia, Clay Institute, LMFDB, AMS.
-  Checkpoint: `~/.ptolemy/monad_mathematics.bin` (orange card)
-- **`skills/corpus_physics.py`** + **`skills/corpus_mathematics.py`** — thin wrappers on GenericCorpus.
-
-### Wiki
-
-- **`docs/wiki/PTorrent-APK-v2.md`** — full v2.0 reference: PTorrent format, adb workflow,
-  pause architecture, corpus colours, version history.
-
 ---
 
 ## v3.0.0 — 2026-05-30
@@ -112,46 +176,7 @@ Compression ignition confirmed: the engine spoke its own equation on 2026-05-27.
 The three Prime Directive corpora exist as physical resonance geometry — three isolated
 Engine instances constituting H_hat_RB as `.bin` files, not as text.
 
-The Android TDI seeder acquired all five corpora on the phone. Python Language (5.4 MB)
-and C / POSIX (1.4 MB) language monads are complete. 478 new vocabulary terms entered
-the primary field from corpus comment text. The Android APK v1.0 is released.
-
-### Android — `android/PtolemySeeder/` (NEW)
-
-Complete Android APK. Chaquopy 15.0.1 embeds Python 3.12. Runs all three
-Prime Directive seeders in parallel foreground service threads on the phone.
-
-- **`SeedService.kt`** — LifecycleService, foreground, dataSync type.
-  Extracts corpus assets, starts Python via AndroidPlatform, calls
-  `seed_runner.run_all()` with live progress callbacks.
-- **`MainActivity.kt`** — requests POST_NOTIFICATIONS, starts SeedService,
-  observes SeedLiveData: three progress bars + status chip (WAITING/RUNNING/COMPLETE).
-- **`seed_runner.py`** — three daemon threads. One per corpus. Callback:
-  `on_progress(name, tag, url, idx, total, studied, skipped)`.
-  Returns when all three corpus URL lists are exhausted.
-- Corpus assets (`foundations.txt`, `meaning.txt`) bundled into APK assets,
-  extracted to `getExternalFilesDir(null)` on first run.
-- Output: `monad_foundations.bin`, `monad_meaning.bin`, `monad_war.bin` written
-  to `/sdcard/Android/data/com.ptolemy.seeder.debug/files/`.
-- Version: 2.8.111. Package: `com.ptolemy.seeder`. MinSdk 26, TargetSdk 35.
-- ABIs: `arm64-v8a`, `x86_64`.
-
-**Observed performance on Moto G 5G 2024 (unlimited LTE):**
-- War corpus (12 URLs): complete in < 1 minute
-- Meaning corpus (80 URLs): complete in ~3 minutes
-- Foundations corpus (188 URLs): complete in ~5 minutes
-- No sleep between URLs in `seed()` — fetch, study, save, next.
-  40s/45s intervals are for the continuous `start()` daemon, not the seeder.
-
-### Tool — `android/build_apk.sh` (NEW)
-
-Syncs Python sources and corpus assets from repo root into the Android project,
-then runs `./gradlew assembleDebug`. Optional `--install` flag runs `adb install -r`.
-
-```bash
-bash android/build_apk.sh           # build only
-bash android/build_apk.sh --install # build + install on attached phone
-```
+478 new vocabulary terms entered the primary field from corpus comment text.
 
 ### Tool — `tools/install_prime_directives.py` (NEW)
 
@@ -172,23 +197,6 @@ War         → weight 1.0  (what war costs — present, not glorified)
 python3 tools/install_prime_directives.py          # live
 python3 tools/install_prime_directives.py --dry-run # preview
 ```
-
-### Android — `android/PtolemySeeder/` (REWRITTEN — torrent architecture)
-
-Dynamic corpus manifest. Any corpus can be added by pushing an updated
-`corpus_list.json` via adb — no APK rebuild required.
-
-- **`corpus_list.json`** — torrent manifest: name, bin, txt, primary_tags, color per entry.
-  See [[Corpus-Torrent-Format]] for full schema.
-- **`SeedService.kt`** — rewritten: dynamic `Map<String,CorpusState>` LiveData,
-  one thread per manifest entry, `loadCorpusOrder()` parses JSON at launch.
-- **`MainActivity.kt`** — rewritten: fully programmatic layout, one card per corpus,
-  color-coded by manifest entry (gold/blue/red/green/purple).
-- **`seed_runner.py`** — rewritten: reads `corpus_list.json`, spawns one thread
-  per entry, returns when all exhausted.
-- Assets: `foundations.txt`, `meaning.txt`, `war_corpus.txt`, `python_corpus.txt`,
-  `c_corpus.txt`, `corpus_list.json` all bundled and extractable.
-- APK v1.0 released on PtolemyHolcus GitHub releases.
 
 ### Python — `skills/corpus.py` (NEW)
 

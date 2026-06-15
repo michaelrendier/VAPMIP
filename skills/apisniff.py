@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Optional
 
 # ── Sedenion constants (mirrors monad.py) ─────────────────────────────────────
-OMEGA_ZS   = 0.56714
+OMEGA_ZS   = 0.5671432904097838
 GAP        = 0.000707
 SIGMA_CRIT = 0.5
 PHI        = (1.0 + math.sqrt(5.0)) / 2.0

@@ -42,7 +42,7 @@ from typing import Dict, List, Optional, Tuple, Any
 # ── Constants (never change) ──────────────────────────────────────────────────
 
 D_STAR   = 0.24600    # spectral coordinate — NEVER compute as OMEGA/ln(10)
-OMEGA_ZS = 0.56714    # Lambert W fixed point — BAO convergence target
+OMEGA_ZS = 0.5671432904097838    # Lambert W fixed point — BAO convergence target
 L_GROUND = -1.888     # Monad rest energy (ESTABLISHED, engine-verified)
 GAP      = 0.000707   # Yang-Mills mass gap / J^μ cascade regulator (OPEN 2)
 PHI      = 1.618034   # golden ratio — self-reference fixed point
@@ -446,7 +446,7 @@ class LSHS:
 
     def bao_check(self) -> Dict[str, Any]:
         """
-        BAO health check: dc_sum converging to OMEGA_ZS = 0.56714
+        BAO health check: dc_sum converging to OMEGA_ZS = 0.5671432904097838
         is the computational signature of coherence.
         CONFIDENCE: THEORETICAL
         """

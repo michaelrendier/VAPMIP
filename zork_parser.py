@@ -461,10 +461,10 @@ class MonadInterface:
         J_ambient can be set per-session, per-turn, per-domain.
         High J_ambient: deep surface, few words emerge, compressed output.
         Low J_ambient: shallow surface, more words emerge, creative output.
-        Default: OMEGA_ZS = 0.56714 (the BAO attractor — neutral buoyancy).
+        Default: OMEGA_ZS = 0.5671432904097838 (the BAO attractor — neutral buoyancy).
     """
 
-    def __init__(self, engine=None, J_ambient: float = 0.56714):
+    def __init__(self, engine=None, J_ambient: float = 0.5671432904097838):
         """
         :param engine: monad Engine instance (or None for parser-only mode).
         :param J_ambient: Depth of artificial output surface.

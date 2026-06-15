@@ -41,7 +41,7 @@ _BAO_LABELS = [
     (0.250, 'evolving'),
 ]
 _BAO_NASCENT = 'nascent'    # BAO below 0.3 — field is new
-_OMEGA_ZS    = 0.56714
+_OMEGA_ZS    = 0.5671432904097838
 
 _VERSION: Optional[str] = None   # cached on first call
 

@@ -49,7 +49,7 @@ MODE_INGEST   = 'ingest'     # write to delta, integrity scrub enforced
 _VALID_MODES = {MODE_ANALYSIS, MODE_DRAFT, MODE_INGEST}
 
 # Spectral gap from monad.py (imported lazily to avoid circular import)
-_OMEGA_ZS = 0.56714
+_OMEGA_ZS = 0.5671432904097838
 
 
 class WorkbenchDelta:

@@ -38,7 +38,7 @@ _OP = {
     8:  'recurse',     9:  'allocate',    10: 'query',       11: 'dereference',
     12: 'compose',     13: 'parallelize', 14: 'interrupt',   15: 'emit',
 }
-OMEGA_ZS   = 0.56714
+OMEGA_ZS   = 0.5671432904097838
 GAP        = 0.000707
 SIGMA_CRIT = 0.5
 

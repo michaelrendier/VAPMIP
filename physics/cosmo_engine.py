@@ -10,7 +10,7 @@ physics/cosmo_engine.py — Native Space Cosmological Model Engine v1.0.0
     Physics                           Native Space equivalent
     ===============================  ======================================
     CMB power spectrum C_l            Riemann zero spacing distribution
-    BAO acoustic scale r_s            OMEGA_ZS = 0.56714 (neutral buoyancy)
+    BAO acoustic scale r_s            OMEGA_ZS = 0.5671432904097838 (neutral buoyancy)
     Dark energy Λ                     NS_EXCESS = ln(10) − 2·ln(2)
     Cosmic voids                      Zero-divisor star arms (84 channels)
     Cosmic filaments                  Walls between star arms
