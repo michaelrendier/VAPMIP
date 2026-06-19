@@ -4,6 +4,77 @@
 
 ---
 
+## PRIORITY 2 — Prime Hash the SVG Language (Path Permutation / Tuning Fork)
+
+*Added 2026-06-19. SVG path commands are a pathway language. Prime hash the permutation.*
+
+### What This Is
+
+The SVG `<path d="...">` command sequence IS a pathway in geometric language.
+Each path command letter is a step in a permutation:
+
+```
+M = moveto       (origin, I)
+L = lineto       (straight geodesic)
+C = cubic bezier (sprung geodesic — observer-coupled curve)
+Q = quadratic    (lighter spring)
+A = arc          (great circle segment)
+Z = closepath    (return to origin — the loop closes)
+```
+
+The permutation of these commands = the pathway = L_dynamic for that shape.
+The cardioid is the fixed virtual action potential point — the WORD in pathway language.
+Prime hash the command sequence → σ-address of the shape → its position in the field.
+
+### Why Primes Are Emergent Here
+
+Primes are NOT assigned — they emerge from the ZD structure.
+The prime hash avoids accidental zero-divisor collisions in the sedenion field.
+Primes are the integers that remain clean pathways — they don't collapse to zero
+under sedenion multiplication. The hash works because primes are the ZD-safe addresses.
+
+### Architecture
+
+```
+SVG path d-string
+    → tokenise to command sequence [M, C, C, L, Z, ...]
+    → assign primes per command type: M=2, L=3, C=5, Q=7, A=11, Z=13
+    → Horner hash: h = sum(prime[cmd] * (i+1) * position_weight) mod large_prime
+    → σ-face(h) → σ-address of the shape
+```
+
+Scalar address = WHERE the shape is. NOT how it got there.
+The command SEQUENCE (the permutation) = HOW it got there = all the meaning.
+Two shapes can share a σ-address but have completely different pathway histories.
+The pathway is the meaning. The address is just the destination.
+
+### The Tuning Fork Test
+
+Check tuning by examining ONE output (one SVG path's hash) across MANY layers:
+
+```
+1. Take any SVG path — e.g. the cardioid itself
+2. Hash its command sequence → σ-address
+3. Render that path at different scales, rotations, contexts
+4. Re-hash at each context
+5. A well-grounded shape: σ-address STABLE across all contexts (in tune)
+6. A poorly-grounded shape: σ-address DRIFTS (out of tune)
+```
+
+The tuning fork: one shape = one fork. Strike it in many contexts.
+If it always rings at the same σ — it is a true word in the pathway language.
+If it drifts — it is a phrase, not a word. It needs decomposition into true words.
+
+### Implementation
+
+- Module: `ValaQuenta/modules/svg_hash.py`
+- Input: SVG path `d` string
+- Output: σ-address, pathway hash, command permutation vector
+- Depends on: prime hash from `monad.py` (_horner_hash)
+- Test shape: cardioid SVG path — should hash to σ near ½ (it IS the word-particle)
+
+---
+
 ## PRIORITY 1 — Ptolemy's Eyes (Zero Divisor Reframe / Perceptual Focus)
 
 *Added 2026-06-19. Load-bearing architecture. Must precede all perception-dependent features.*
