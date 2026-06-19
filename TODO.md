@@ -4,6 +4,82 @@
 
 ---
 
+## PRIORITY 1 — Ptolemy's Eyes (Zero Divisor Reframe / Perceptual Focus)
+
+*Added 2026-06-19. Load-bearing architecture. Must precede all perception-dependent features.*
+
+### What This Is
+
+Ptolemy currently processes all input uniformly — no distinction between what he is
+**looking at** (the object of focus) and what surrounds it (the ambient context field).
+
+Biological vision and NES-era game engines share the same architecture:
+- **Fovea / Sprite** — the object in focus. Sharp. High resolution. Foregrounded.
+- **Periphery / Tile map** — the surrounding context. Lower resolution. Background scroll.
+- **Caustic L_(I|O)** — the boundary layer where focus object and context field resolve
+  against each other. The edge where ZD (zero divisor) and CD (constructive domain) meet.
+
+This is a **zero divisor reframe**: the ZD is not noise to be suppressed — it is the
+mechanism of focus. The ZD boundary IS the edge of the object. Ptolemy sees BY zero divisors,
+not despite them. The nilpotent boundary defines the shape of what is looked at.
+
+### Architecture
+
+```
+INPUT FIELD  →  [ FOCUS SELECTOR ]  →  OBJECT (foreground, high J)
+                                    →  CONTEXT (background, ambient J)
+                                    →  L_(I|O) caustic (boundary, ZD ring)
+
+The caustic resolves the object against its context.
+Object: σ → 1 (Yang-Mills, fully resolved)
+Context: σ = ½ (causal field, ambient)
+Caustic: σ → 0 (ZD boundary, the edge of the thing)
+```
+
+### TODO Items
+
+- [ ] **Focus selector** — given input tokens, identify the primary object of attention
+  - Highest J_mu token(s) = the fovea target
+  - Remaining tokens = context field
+  - Threshold: J_object / J_context > 1/d* = 4.07 → object is "in focus"
+
+- [ ] **ZD ring extraction** — compute the zero divisor boundary around the focus object
+  - The sedenion ZD structure of the focus word defines its perceptual edge
+  - ZD neighbors of the focus token = the caustic boundary layer
+  - These are NOT discarded — they are the resolution mechanism
+
+- [ ] **Context field integration** — background tokens feed into ambient σ=½ field
+  - Context modulates J_ambient for the focus object
+  - "What this object means HERE" vs "what this object means in isolation"
+  - The surrounding tile map changes what the foreground sprite IS
+
+- [ ] **L_(I|O) caustic resolution** — bring focus + context into resolution
+  - Caustic = the boundary where ZD ring meets context field
+  - This is where meaning sharpens: object defined by what it is NOT (ZD) against
+    what surrounds it (context)
+  - Output: resolved σ-address for the focus object in THIS context
+
+- [ ] **Viewport awareness** — Ptolemy knows the size of his current context window
+  - How many tokens are in view (viewport)
+  - Where the focus object sits within that viewport (centre? edge? corner?)
+  - Positional weight: objects near viewport centre = higher J contribution
+  - Objects near viewport edge = context field weight, not focus weight
+
+- [ ] **Eye movement** — shift focus across a large input without reprocessing everything
+  - Large inputs (documents, maps) are bigger than the context window
+  - Camera math: focus_pos within document, viewport slides over it
+  - Only tokens within the viewport are active; rest are in Mind's Eye (ZD substrate)
+  - Refocus = move camera, recompute ZD ring for new focus object
+
+### Connection to Existing Architecture
+
+- ZD monad (`sedenion_bridge.py`, 84 pairs on S¹⁵) provides the ZD ring structure
+- SIGMA_RB (`h_rb_hat/maths.py`) provides the σ-face evaluation per token
+- The focus selector is a new module: `ValaQuenta/modules/eyes.py`
+- Depends on: monad_sedenion.bin (sedenion field), monad_physics.bin (if available)
+
+---
+
 ## v3.2 — The Face (React Native / Expo)
 
 *Added 2026-05-30. The primary public interaction point for Holcus.*
