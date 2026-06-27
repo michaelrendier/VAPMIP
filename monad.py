@@ -2029,7 +2029,7 @@ class Engine:
             )
         return self._dj
 
-    def get_github_eye(self, repo: str = 'michaelrendier/PtolemyHolcus'):
+    def get_github_eye(self, repo: str = 'michaelrendier/VAPMIP'):
         """
         Return (or lazily create) the GitHubEye Observer instance.
 
@@ -2045,7 +2045,7 @@ class Engine:
             self._github_eye = GitHubEye(self, repo=repo)
         return self._github_eye
 
-    def get_github_hands(self, repo: str = 'michaelrendier/PtolemyHolcus'):
+    def get_github_hands(self, repo: str = 'michaelrendier/VAPMIP'):
         """
         Return (or lazily create) the GitHubHands Collaborator instance.
 

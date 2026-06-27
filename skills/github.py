@@ -104,7 +104,7 @@ def _gh_request(path: str, method: str = 'GET',
     headers = {
         'Accept': accept,
         'X-GitHub-Api-Version': '2022-11-28',
-        'User-Agent': 'PtolemyHolcus/2.5 (github.com/michaelrendier/PtolemyHolcus)',
+        'User-Agent': 'VAPMIP/2.5 (github.com/michaelrendier/VAPMIP)',
     }
     if token:
         headers['Authorization'] = f'Bearer {token}'
@@ -209,7 +209,7 @@ class GitHubEye:
         print(result['title'], result['gate'])
     """
 
-    def __init__(self, engine, repo: str = 'michaelrendier/PtolemyHolcus'):
+    def __init__(self, engine, repo: str = 'michaelrendier/VAPMIP'):
         """
         :param engine: Live ``Engine`` instance.
         :param repo: Default ``owner/repo``.
@@ -508,7 +508,7 @@ class GitHubHands:
         hands.comment(42, 'The field has processed this issue.')
     """
 
-    def __init__(self, engine, repo: str = 'michaelrendier/PtolemyHolcus'):
+    def __init__(self, engine, repo: str = 'michaelrendier/VAPMIP'):
         """
         :param engine: Live ``Engine`` instance.
         :param repo: Default ``owner/repo``.

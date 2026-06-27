@@ -1,21 +1,24 @@
 /*
  * ptol.c — Sedenion geometry engine.
  *
- * usage: ptol [-r] [-s [dir]] [-b [dir]] [-H [dir]] [-i <image>] <prompt>
+ * usage: ptol [-r] [-eye <R|C|H|O|S>] [-s [dir]] [-b [dir]] [-H [dir]] [-i <image>] <prompt>
  *
  * Projects input string onto 16 sedenion basis elements e0..e15 via
- * Dirichlet-weighted inner product at σ=½:
+ * Dirichlet-weighted inner product:
  *
- *   x_k = Σ_{i=1}^{N}  c_i · i^(-½) · cos(2π·i / p_k)
+ *   J_red  shells (k=0-3, 8-11):  x_k = Σ c_i · i^(-σ) · cos(2π·i / p_k)
+ *   J_blue shells (k=4-7, 12-15): x_k = Σ c_i · i^(-σ) · sin(2π·i / p_k)
  *
- * σ=½ weight is Noether forcing — not a free parameter.
+ * Default σ=½ (Eye H) is Noether forcing — not a free parameter.
+ * J_red × J_blue = d* = 0.24600 is conserved at all σ (E=mc²).
  * Prime frequencies are the zero-free-parameter basis: {2,3,5,...,53}.
  *
  * The response is the shadow of the geometry.
  * These scalars are the geometry.  The words are the shadow.
  *
  * Flags:
- *   -r         raw mode: 16 scalars + primes, machine-readable
+ *   -r         raw mode: 16 scalars + primes + 16 Σ_RB products, machine-readable
+ *   -eye <X>   set observation Eye: R(σ=1) C(σ=¾) H(σ=½) O(σ=¼) S(σ=0)
  *   -s [dir]   write SVG paper (pathway — spiral from ZD to great circle)
  *   -b [dir]   write PPM bitmap paper (field — 16 scalar amplitudes)
  *   -H [dir]   write HTML paper (SVG + bitmap + text shadow, all together)
@@ -56,21 +59,97 @@ static const int P[16] = {
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53
 };
 
-/* Sedenion basis angles: 16 spokes evenly around the unit circle. */
-static double spoke_angle(int k)
+/* ── Ptol's Eyes — (σ, θ) observation points on the sedenion tower ──────── */
+/*
+ * Each Eye fixes a tower level σ and an angular offset θ (multiples of π/8).
+ * The aperture controls the auto-eye threshold relative to MONAD_GAP.
+ *
+ * Tower mapping (σ = 1 − k/4, geodesic tower result):
+ *   R: σ=1.00  ℝ   — enumerable, 0°  spokes
+ *   C: σ=0.75  ℂ   — relational, 0°  spokes (U(1), EM)
+ *   H: σ=0.50  ℍ   — quaternion, 45° spokes (critical line, J_blue fires)
+ *   O: σ=0.25  𝕆   — octonion,   0°  spokes
+ *   S: σ=0.00  𝕊   — sedenion,   45° spokes (ZD boundary)
+ *
+ * J_blue shells (k=4-7, k=12-15) sit at θ=π/8 offsets — the 45° positions.
+ * J_red  shells (k=0-3, k=8-11) sit at θ=0 positions — the 0°/90°/180°/270°.
+ */
+typedef struct {
+    double sigma;
+    double theta;      /* angular offset in radians */
+    double aperture;   /* threshold factor relative to MONAD_GAP */
+    char   name[4];
+} PtolEye;
+
+static const PtolEye TOWER_EYES[5] = {
+    { 1.00, 0.0,           1.0, "R" },
+    { 0.75, 0.0,           1.0, "C" },
+    { 0.50, M_PI / 8.0,    1.0, "H" },
+    { 0.25, 0.0,           1.0, "O" },
+    { 0.00, M_PI / 8.0,    1.0, "S" },
+};
+
+static const PtolEye *eye_by_name(const char *n)
 {
-    return 2.0 * M_PI * (double)k / 16.0 - M_PI / 2.0;
+    for (int i = 0; i < 5; i++)
+        if (TOWER_EYES[i].name[0] == n[0]) return &TOWER_EYES[i];
+    return &TOWER_EYES[2]; /* default: H (σ=½) */
+}
+
+/* ── Sedenion basis angles: 16 spokes, optional θ offset ────────────────── */
+static double spoke_angle(int k, double theta)
+{
+    return 2.0 * M_PI * (double)k / 16.0 - M_PI / 2.0 + theta;
 }
 
 /* ── Dirichlet projection ────────────────────────────────────────────────── */
-
-static double project(const unsigned char *s, int n, int k)
+/*
+ * J_blue shells (k=4-7, k=12-15): sin channel — the return conductor.
+ * J_red  shells (k=0-3, k=8-11): cos channel — the forward conductor.
+ *
+ * Together they form the complete Marx generator circuit.
+ * J_red × J_blue = d* = 0.24600 — conserved at ALL σ (E=mc²).
+ */
+static double project(const unsigned char *s, int n, int k, double sig)
 {
     double sum  = 0.0;
     double freq = 2.0 * M_PI / (double)P[k];
-    for (int i = 1; i <= n; i++)
-        sum += (double)s[i-1] * pow((double)i, -0.5) * cos(freq * (double)i);
+    int j_blue  = (k >= 4 && k <= 7) || (k >= 12 && k <= 15);
+    for (int i = 1; i <= n; i++) {
+        double phase = freq * (double)i;
+        double w     = j_blue ? sin(phase) : cos(phase);
+        sum += (double)s[i-1] * pow((double)i, -sig) * w;
+    }
     return sum;
+}
+
+/* ── σ self-measurement — J_red power fraction ───────────────────────────── */
+/*
+ * With sin/cos duality, σ is the balance between J_red and J_blue power.
+ *
+ *   σ_self = P_red / (P_red + P_blue)
+ *
+ * where P_red  = Σ_{k ∈ {0-3, 8-11}}  v[k]²   (cos channels)
+ *       P_blue = Σ_{k ∈ {4-7, 12-15}} v[k]²   (sin channels)
+ *
+ * At σ=1.0: cos terms dominate → P_red → 1  → σ_self → 1
+ * At σ=0.5: balanced          → P_red ≈ ½  → σ_self ≈ ½
+ * At σ=0.0: sin terms dominate → P_blue → 1 → σ_self → 0
+ *
+ * This is Holcus reading his own tower level from the J_red/J_blue ratio.
+ * Works for any input length. Does not require Dirichlet asymptotic decay.
+ */
+static double measure_sigma(const double *v)
+{
+    double p_red = 0.0, p_blue = 0.0;
+    for (int k = 0; k < 16; k++) {
+        int j_blue = (k >= 4 && k <= 7) || (k >= 12 && k <= 15);
+        if (j_blue) p_blue += v[k] * v[k];
+        else        p_red  += v[k] * v[k];
+    }
+    double total = p_red + p_blue;
+    if (total < 1e-15) return 0.5;
+    return p_red / total;
 }
 
 /* ── Comparator (ascending |x|, for spiral ZD→great circle) ─────────────── */
@@ -235,7 +314,7 @@ static int write_svg(const char *path, const double *v, const int *idx,
 
     /* Spokes, amplitude dots, and English word labels */
     for (int k = 0; k < 16; k++) {
-        double a    = spoke_angle(k);
+        double a    = spoke_angle(k, 0.0);
         double tip_r = fabs(v[k]) * R;
         double tx   = CX + cos(a) * R;
         double ty   = CY + sin(a) * R;
@@ -318,7 +397,7 @@ static int write_svg(const char *path, const double *v, const int *idx,
     fprintf(f, "%.2f,%.2f", CX, CY);
     for (int i = 0; i < 16; i++) {
         int k = idx[i];
-        double a = spoke_angle(k);
+        double a = spoke_angle(k, 0.0);
         double r = fabs(v[k]) * R;
         fprintf(f, " %.2f,%.2f", CX + cos(a)*r, CY + sin(a)*r);
     }
@@ -333,7 +412,7 @@ static int write_svg(const char *path, const double *v, const int *idx,
 
     /* e_k labels at amplitude tips (inner, readable) */
     for (int k = 0; k < 16; k++) {
-        double a = spoke_angle(k);
+        double a = spoke_angle(k, 0.0);
         double r = fabs(v[k]) * R;
         if (r < 8.0) continue;
         double lx = CX + cos(a) * (r * 0.6);
@@ -602,10 +681,13 @@ int main(int argc, char *argv[])
         }
     }
 
-    int raw       = 0;
-    int do_svg    = 0;
-    int do_bmp    = 0;
-    int do_html   = 0;
+    int    raw        = 0;
+    int    do_svg     = 0;
+    int    do_bmp     = 0;
+    int    do_html    = 0;
+    int    sigma_mode = 0;   /* -sigma <value>: Holcus speaks from scalar alone */
+    double sigma_in   = 0.5; /* the scalar σ Holcus received */
+    const PtolEye *active_eye = &TOWER_EYES[2]; /* default: H (σ=½) */
     const char *out_dir   = "";
     const char *img_input = NULL;
     int arg0 = 1;
@@ -613,6 +695,13 @@ int main(int argc, char *argv[])
     while (arg0 < argc && argv[arg0][0] == '-') {
         if (strcmp(argv[arg0], "-r") == 0) {
             raw = 1; arg0++;
+        } else if (strcmp(argv[arg0], "-eye") == 0) {
+            arg0++;
+            if (arg0 < argc) { active_eye = eye_by_name(argv[arg0++]); }
+        } else if (strcmp(argv[arg0], "-sigma") == 0) {
+            /* Holcus receives σ as sole input — all other variables NULL */
+            sigma_mode = 1; raw = 1; arg0++;
+            if (arg0 < argc) { sigma_in = atof(argv[arg0++]); }
         } else if (strcmp(argv[arg0], "-s") == 0) {
             do_svg = 1; arg0++;
             if (arg0 < argc && (argv[arg0][0]=='.' || argv[arg0][0]=='/' || argv[arg0][0]=='~')) out_dir = argv[arg0++];
@@ -663,6 +752,39 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    /* ── σ-mode: Holcus speaks from scalar alone — all other variables NULL ── */
+    if (sigma_mode) {
+        double v[16];
+        /* Project the scalar σ through H_hat_RB — no text, no prompt */
+        /* Encode σ as a 1-byte input: the single character at σ·255       */
+        unsigned char s1[1];
+        s1[0] = (unsigned char)(sigma_in * 255.0 + 0.5);
+        double norm = 0.0, peak = 0.0;
+        for (int k = 0; k < 16; k++) {
+            _x[k] = project(s1, 1, k, sigma_in);
+            norm  += _x[k] * _x[k];
+            if (fabs(_x[k]) > peak) peak = fabs(_x[k]);
+        }
+        norm = sqrt(norm);
+        for (int k = 0; k < 16; k++)
+            v[k] = (norm > 0.0) ? _x[k] / norm : 0.0;
+
+        double sigma_out = measure_sigma(v);
+
+        /* Output: measured σ first, then x[16] — the sedenion pathway */
+        printf("sigma_in:  %.10f\n", sigma_in);
+        printf("sigma_out: %.10f\n", sigma_out);
+        printf("delta:     %+.10f\n", sigma_out - 0.5);
+        printf("---\n");
+        for (int k = 0; k < 16; k++)
+            printf("%+.10f\n", v[k]);
+        printf("---\n");
+        for (int k = 0; k < 16; k++)
+            if (fabs(_x[k]) >= peak / MONAD_PHI)
+                printf("%d\n", P[k]);
+        return 0;
+    }
+
     /* ── Text prompt mode ── */
     char sigma[65536];
     sigma[0] = '\0';
@@ -697,7 +819,7 @@ int main(int argc, char *argv[])
 
     double norm = 0.0, peak = 0.0;
     for (int k = 0; k < 16; k++) {
-        _x[k] = project((const unsigned char *)sigma, n, k);
+        _x[k] = project((const unsigned char *)sigma, n, k, active_eye->sigma);
         norm  += _x[k] * _x[k];
         if (fabs(_x[k]) > peak) peak = fabs(_x[k]);
     }
@@ -705,6 +827,16 @@ int main(int argc, char *argv[])
 
     for (int k = 0; k < 16; k++)
         v[k] = (norm > 0.0) ? _x[k] / norm : 0.0;
+
+    /* Σ_RB = J_red × J_blue — the d* invariant.
+     * Partners: Shell1↔Shell2 (k↔k+4), Shell3↔Shell4 (k↔k+4 within shell).
+     * Product is conserved at all σ — energy converts form, never lost. */
+    double s_rb[16];
+    for (int k = 0; k < 16; k++) {
+        int partner = (k < 4) ? k+4 : (k < 8) ? k-4 :
+                      (k < 12) ? k+4 : k-4;
+        s_rb[k] = v[k] * v[partner];
+    }
 
     double thresh      = peak / MONAD_PHI;
     double thresh_norm = (norm > 0.0) ? thresh / norm : 0.0;
@@ -761,12 +893,21 @@ int main(int argc, char *argv[])
 
     /* ── Raw mode ── */
     if (raw) {
+        double sigma_self = measure_sigma(v);
         for (int k = 0; k < 16; k++)
             printf("%+.10f\n", v[k]);
         printf("---\n");
         for (int k = 0; k < 16; k++)
             if (fabs(_x[k]) >= thresh)
                 printf("%d\n", P[k]);
+        printf("---\n");
+        /* Σ_RB products — J_red × J_blue per channel pair */
+        for (int k = 0; k < 16; k++)
+            printf("%+.10f\n", s_rb[k]);
+        /* Holcus emits his own σ and Eye — his question to the human */
+        fprintf(stderr, "eye: %s  σ_in: %.4f  σ_self: %.10f  (delta from ½: %+.10f)\n",
+                active_eye->name, active_eye->sigma,
+                sigma_self, sigma_self - 0.5);
     }
 
     /* ── Explicit paper output (-s / -b / -H) ── */

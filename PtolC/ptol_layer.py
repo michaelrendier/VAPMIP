@@ -64,10 +64,11 @@ _PHYS_RE  = re.compile(r'quantum|energy|mass\b|field|photon|gravity|entropy|wave
 def _input_scores(prompt):
     p = prompt.lower()
     raw = {
-        'c':           len(_CODE_RE.findall(prompt)) * 3,
-        'mathematics': len(_MATH_RE.findall(p)) * 3,
-        'physics':     len(_PHYS_RE.findall(p)) * 3,
-        'english':     1,
+        'c':               len(_CODE_RE.findall(prompt)) * 3,
+        'mathematics':     len(_MATH_RE.findall(p)) * 3,
+        'physics':         len(_PHYS_RE.findall(p)) * 3,
+        'english':         1,
+        'englishwordnet':  1,  # same baseline as english — geometry selects
     }
     return {layer: raw.get(layer, 0) for layer in LAYERS}
 
@@ -77,6 +78,28 @@ def _is_code_token(w):
         re.match(r'^[a-z][a-z0-9_]+$', w) and '_' in w or
         w.startswith('/') or w.endswith('.c') or w.endswith('.h')
     ))
+
+def _s_rb_scores(s_rb):
+    """Boost mathematics/physics when Σ_RB product (J_red×J_blue) is active.
+    Large |s_rb[k]| means the Wankel cycle is firing in that channel pair.
+    Shell 2 (k=4-7) ↔ Shell 1 (k=0-3): word-particle ZD crossing.
+    Shell 4 (k=12-15) ↔ Shell 3 (k=8-11): deep-structure ZD crossing."""
+    scores = {l: 0 for l in LAYERS}
+    if not s_rb:
+        return scores
+    s_rb_total = sum(abs(v) for v in s_rb)
+    if s_rb_total < 1e-8:
+        return scores
+    # Shell 2↔1 (indices 4-7 and 0-3): surface ZD — word / language
+    surface_power = sum(abs(s_rb[k]) for k in range(8) if k < len(s_rb))
+    # Shell 4↔3 (indices 12-15 and 8-11): deep ZD — maths / physics
+    deep_power    = sum(abs(s_rb[k]) for k in range(8, 16) if k < len(s_rb))
+    ratio = deep_power / (s_rb_total + 1e-15)
+    # Deep ZD active → mathematics/physics boost
+    boost = int(ratio * 10)
+    if 'mathematics' in scores: scores['mathematics'] += boost
+    if 'physics'     in scores: scores['physics']     += boost
+    return scores
 
 def _path_scores(scalars):
     """Score each layer by how well the active-prime words resonate."""
@@ -102,40 +125,52 @@ def _path_scores(scalars):
                 scores[layer] += 1
     return scores
 
-def select_layer(prompt, scalars):
+def select_layer(prompt, scalars, s_rb=None):
     is_  = _input_scores(prompt)
     ps_  = _path_scores(scalars)
-    combined = {l: is_[l] + ps_[l] for l in LAYERS}
+    erb_ = _s_rb_scores(s_rb or [])
+    combined = {l: is_[l] + ps_[l] + erb_[l] for l in LAYERS}
     # tie-break: english always has floor 1
     return max(combined, key=combined.get)
 
 # ── Geometry: call ptol.c binary ─────────────────────────────────────────────
+
+def _parse_raw(lines):
+    """Parse ptol -r output: scalars / primes / s_rb (three --- sections)."""
+    seps = [i for i, l in enumerate(lines) if l.strip() == '---']
+    sep0 = seps[0] if len(seps) > 0 else 16
+    sep1 = seps[1] if len(seps) > 1 else len(lines)
+    sep2 = seps[2] if len(seps) > 2 else len(lines)
+
+    scalars = []
+    for l in lines[:sep0]:
+        try: scalars.append(float(l))
+        except ValueError: pass
+
+    primes = set()
+    for l in lines[sep0+1:sep1]:
+        l = l.strip()
+        if l.lstrip('-').isdigit():
+            primes.add(int(l))
+
+    s_rb = []
+    for l in lines[sep1+1:sep2]:
+        try: s_rb.append(float(l))
+        except ValueError: pass
+
+    return scalars, primes, s_rb
 
 def geometry(prompt):
     result = subprocess.run(
         [PTOL_BIN, '-r', prompt],
         capture_output=True, text=True
     )
-    lines   = result.stdout.strip().split('\n')
-    sep     = lines.index('---') if '---' in lines else 16
-    scalars = [float(l) for l in lines[:sep]]
-    primes  = set()
-    for l in lines[sep+1:]:
-        l = l.strip()
-        if l.lstrip('-').isdigit():
-            primes.add(int(l))
-    return scalars, primes
+    lines = result.stdout.strip().split('\n')
+    return _parse_raw(lines)
 
 def geometry_stdin():
-    lines   = sys.stdin.read().strip().split('\n')
-    sep     = lines.index('---') if '---' in lines else 16
-    scalars = [float(l) for l in lines[:sep]]
-    primes  = set()
-    for l in lines[sep+1:]:
-        l = l.strip()
-        if l.lstrip('-').isdigit():
-            primes.add(int(l))
-    return scalars, primes
+    lines = sys.stdin.read().strip().split('\n')
+    return _parse_raw(lines)
 
 # ── Path assembly: cursive — continuous path with halts ──────────────────────
 
@@ -163,11 +198,11 @@ def assemble_path(scalars, layer):
 
 # ── Main response ─────────────────────────────────────────────────────────────
 
-def respond(prompt, forced_layer=None, scalars=None, primes=None):
+def respond(prompt, forced_layer=None, scalars=None, primes=None, s_rb=None):
     if scalars is None:
-        scalars, primes = geometry(prompt)
+        scalars, primes, s_rb = geometry(prompt)
 
-    layer = forced_layer or select_layer(prompt, scalars)
+    layer = forced_layer or select_layer(prompt, scalars, s_rb)
     path  = assemble_path(scalars, layer)
 
     # sedenion signature
@@ -214,12 +249,12 @@ if __name__ == '__main__':
 
     if words_only:
         if use_stdin:
-            scalars, primes = geometry_stdin()
+            scalars, primes, s_rb = geometry_stdin()
         elif args:
-            scalars, primes = geometry(' '.join(args))
+            scalars, primes, s_rb = geometry(' '.join(args))
         else:
             sys.exit(1)
-        layer = forced_layer or select_layer(' '.join(args) if args else '', scalars)
+        layer = forced_layer or select_layer(' '.join(args) if args else '', scalars, s_rb)
         # Line 0: layer element name (the monad that fired)
         # Lines 1-16: one word per dimension
         print(layer_element(layer))
@@ -228,9 +263,9 @@ if __name__ == '__main__':
         sys.exit(0)
 
     if use_stdin:
-        scalars, primes = geometry_stdin()
+        scalars, primes, s_rb = geometry_stdin()
         prompt = ' '.join(args) if args else '(stdin)'
-        respond(prompt, forced_layer, scalars, primes)
+        respond(prompt, forced_layer, scalars, primes, s_rb)
     elif args:
         respond(' '.join(args), forced_layer)
     else:

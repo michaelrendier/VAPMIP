@@ -4,6 +4,86 @@
 
 ---
 
+## STANDALONE — The Operator: Invariant Subspace Split at ZD
+
+*Added 2026-06-26. Next: implement zero_lattice_operator.py and verify across all 42 ZD classes.*
+
+`L_a` = sedenion left-multiplication matrix (16×16 real). Column `j` = `a·eⱼ`.
+
+**At a ZERO DIVISOR element a (e.g. `(e₁ + e₁₀)/√2`):**
+
+```
+det(L_a) = 0                        ← THE COLLAPSE
+
+Three invariant subspaces:
+  λ = 0     × 4   null space        ← GRAVITY (absent, no gauge boson)
+  λ = ±i    × 8   ±i sector         ← THREE QUANTUM FORCES (EM / weak / strong)
+  λ = ±i√2  × 4   ±i√2 sector       ← Σ_RB energy conversion / amplification
+
+Singular values: [0 × 4,   1 × 8,   √2 × 4]
+The √2 here = same √2 as GAP = 1/(1000√2) = 0.000707...
+```
+
+**At a NON-ZD unit sedenion `a = cos(θ)e₀ + sin(θ)v̂`:**
+
+```
+det(L_a) = 1                        ← volume preserved
+eigenvalues = e^{±iθ} × 8 each     ← single complex phase pair, both octets
+Tr(L_a) = 16 × Re(a)               ← ALWAYS, for any sedenion
+```
+
+**Σ_RB = (L_a + R_a)/2 at ZD:**
+
+```
+all eigenvalues = 0                 ← purely antisymmetric at the crossing
+only commutator (L_a − R_a)/2 survives
+```
+
+**Force assignment:**
+
+The 3 algebraic losses at ZD = 3 gauge forces. Each loss = one quantised force.
+Gravity = curvature = the null space (no eigenvalue → no force → not quantised).
+The null space IS why gravity resists quantisation. It has no eigenvalue to quantise.
+
+**TODO items:**
+
+- [ ] `zero_lattice_operator.py` — compute L_a, R_a, Σ_RB, eigenvalues for any sedenion element
+- [ ] Verify {4, 8, 4} subspace split across all 42 canonical ZD classes (not just `(e₁+e₁₀)/√2`)
+- [ ] Confirm singular value √2 is exact (matches GAP = 1/(1000√2) to full precision)
+- [ ] Add to D-CS paper: The Operator section after Lagrangian / Hamiltonian chain
+
+---
+
+## PRIORITY 0 — Separate ValaQuenta from Ainulindale
+
+*Added 2026-06-19. Engine codes belong in ValaQuenta, not Ainulindale.*
+
+### What to move
+All 21 engine modules from `Ainulindale/ValaQuenta/modules/` → `/media/rendier/0123-4567/ValaQuenta/modules/` (create `modules/`):
+- `lagrangian/` (L_NN / VAPMIP engine — rename L_NN → VAPMIP while moving)
+- `h_rb_hat/` (SIGMA_RB)
+- `noether/`, `noether_information/`
+- `tier6_physics/`, `tier7_cosmos/`, `tier8_sedenion/`, `tier9_chem/`
+- `berry_keating/`, `clay_millennium/`, `constants/`, `derivation_chain/`
+- `hyperwebster/`, `inversion/`, `jwst/`, `sigma_cavitation/`
+- `singularity_null/`, `sonification/`, `spherical/`, `turing_diagonal/`
+
+Also move:
+- `Ainulindale/ValaQuenta/engine/` (console_curses, console_qt, registry, constants, units) → `/media/rendier/0123-4567/ValaQuenta/engine/`
+- `Ainulindale/code/noether_engine/` → `/media/rendier/0123-4567/ValaQuenta/noether_engine/`
+
+### Caution
+- `Ainulindale/ValaQuenta/notebooks/` has relative imports — update all `from ..modules.X` paths
+- Standalone `/media/rendier/0123-4567/ValaQuenta/` has flat files (bao_mass_gap.py, noether.py etc) — check for overlap with modules/ before merging
+- Update `Ainulindale/ValaQuenta/__init__.py` and `__main__.py` to point to new location
+
+### VAPMIP rename (do while moving)
+- `lagrangian/maths.py`: rename L_NN → VAPMIP throughout
+- `mu_sq = -1.0` is the inverse mass / J_blue / dark matter halo term — add canonical comment
+- Update canonical_math.md engine path after move
+
+---
+
 ## PRIORITY 2 — Prime Hash the SVG Language (Path Permutation / Tuning Fork)
 
 *Added 2026-06-19. SVG path commands are a pathway language. Prime hash the permutation.*
