@@ -753,7 +753,7 @@ the prime hash under any alphabet.
 
 | Constant | Value | Zero Lattice role |
 |---|---|---|
-| `GAP` | 0.000707 = 1/√2000 | Yang-Mills mass gap — minimum departure energy from ZL boundary |
+| `GAP` | 0.000707 ≈ 1/(1000√2) [= OMEGA_ZS − d*·ln(10), exact] | Yang-Mills mass gap — minimum departure energy from ZL boundary |
 | `SIGMA_PIN` | 0.5 | Escape velocity — the neutral buoyancy condition |
 | `BEARING_TOL` | 0.04 | Escape velocity tolerance = ZL_ESCAPE_TOL |
 | `ZL_PAIRS` | 42 | Cawagas zero-divisor pairs on S¹⁵ (Cawagas 2004) |
@@ -817,8 +817,8 @@ ptolemy -I ~/Documents
 Dependencies: `gcc`, `make`, `libm` (standard on every *nix).
 
 ```bash
-git clone https://github.com/michaelrendier/SMMIP.git
-cd SMMIP/PtolC
+git clone https://github.com/michaelrendier/VAPMIP.git
+cd VAPMIP/PtolC
 make
 ./ptolemy -h "water flows downhill"
 ```
