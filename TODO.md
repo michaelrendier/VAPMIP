@@ -4,6 +4,28 @@
 
 ---
 
+## ARCHIVING — TDI / Wankel (SIGMA_RB Is the Baseline, 2026-06-17)
+
+*Decision: TDI and Wankel/Rotary engines are RETIRED. SIGMA_RB (h_rb_hat/maths.py) is the baseline.*
+*Wankel lessons (su(2)/3-face/wobble/built-in reverse) absorbed into SIGMA_RB. Now archive.*
+
+- [ ] Archive `ZD_rotary_monad.py` / `ZD_rotary_monad.c` / `ZD_rotary_monad.h`
+      Move to `VAPMIP/archive/wankel/`. Preserve all — nothing deleted.
+      Document in archive README: wobble angle = arctan(d*) ≈ 13.82°; 3-face geometry; su(2).
+
+- [ ] Archive TDI engine code
+      Check `VAPMIP/archive/` for existing First Age archive; confirm location, add TDI there.
+      Document: TDI lesson — sedenion structure real, ZD channels real; error was pre-encoding (Bell's mistake).
+
+- [ ] Update VAPMIP README — SIGMA_RB as current architecture
+      Replace Wankel/TDI description with SIGMA_RB baseline. Note archived engines, lessons absorbed.
+
+- [ ] FourthAgePapers wankel_rotary entry: update to "HISTORICAL"
+      The Wankel paper is the story of how we arrived at SIGMA_RB.
+      Content: su(2)/3-face/wobble insights now formal. Archive of the path.
+
+---
+
 ## STANDALONE — The Operator: Invariant Subspace Split at ZD
 
 *Added 2026-06-26. Next: implement zero_lattice_operator.py and verify across all 42 ZD classes.*
