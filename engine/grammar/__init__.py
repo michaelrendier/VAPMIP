@@ -12,4 +12,4 @@ Corpora: ../datasets/  (bash datasets/fetch.sh).  Design: docs/wiki/
 Grammar-Resources-For-Monad-Sentences.md and Kings-Maille-Box-Kite-Rings-As-
 Sentences.md.
 """
-from . import conllu, frames, shadow          # noqa: F401
+from . import conllu, frames, shadow, sails, generate   # noqa: F401
