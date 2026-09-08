@@ -131,6 +131,8 @@ def frame_of(lemma: str) -> dict:
             licensed.add("SVO")
         if a >= 3:
             licensed.add("SVOO")
+    if lem in COPULAR:
+        licensed |= set(COPULAR[lem])
     return {
         "lemma": lem,
         "vn_classes": sorted(vn.get("classes", [])),
@@ -141,6 +143,92 @@ def frame_of(lemma: str) -> dict:
         "licensed_patterns": sorted(licensed) or ["SVO"],
         "known": bool(vn or pb),
     }
+
+
+# ── copular / linking verbs — VerbNet & PropBank don't tag these as SVC ────
+COPULAR = {
+    "be": ["SVC", "SVA"], "seem": ["SVC"], "become": ["SVC"], "appear": ["SVC"],
+    "remain": ["SVC"], "stay": ["SVC"], "prove": ["SVC"], "keep": ["SVC"],
+    "feel": ["SVC"], "look": ["SVC"], "sound": ["SVC"], "taste": ["SVC"],
+    "smell": ["SVC"], "grow": ["SVC"], "turn": ["SVC"], "get": ["SVC"],
+}
+
+
+def _syntax_to_map(frame):
+    """One VerbNet <FRAME> -> (sail, {themrole: slot_role})."""
+    d = frame.find("DESCRIPTION")
+    sail = primary_to_pattern(d.get("primary", "")) if d is not None else "SVO"
+    syn = frame.find("SYNTAX")
+    if syn is None:
+        return sail, {}
+    seen_verb = False
+    last_prep = None
+    post_nps = []
+    mp = {}
+    for ch in syn:
+        if ch.tag == "VERB":
+            seen_verb = True; last_prep = None; continue
+        if ch.tag == "PREP":
+            last_prep = (ch.get("value") or "").lower(); continue
+        val = ch.get("value")
+        if ch.tag == "NP" and not seen_verb:
+            if val:
+                mp[val] = "S"
+        elif ch.tag == "NP" and seen_verb:
+            post_nps.append((val, last_prep)); last_prep = None
+        elif ch.tag in ("ADJ", "ADJP") and seen_verb and val:
+            mp[val] = "C"
+    bare = [tr for tr, pr in post_nps if not pr]
+    prepped = [(tr, pr) for tr, pr in post_nps if pr]
+    if len(bare) == 2:
+        mp[bare[0]] = "O_i"; mp[bare[1]] = "O_d"
+    elif len(bare) == 1:
+        mp[bare[0]] = "O_d"
+    for tr, pr in prepped:
+        if tr:
+            mp[tr] = "O_i" if pr in ("to", "for") else "A"
+    return sail, mp
+
+
+# hand map for the copular sails (VerbNet gives no SVC frame for "be")
+_COP_MAP = {"SVC": {"Theme": "S", "Attribute": "C"},
+            "SVA": {"Theme": "S", "Location": "A"}}
+
+
+@lru_cache(maxsize=1)
+def _all_slot_maps() -> dict:
+    """ONE pass over VerbNet -> {lemma: {sail: {themrole: slot_role}}}."""
+    idx: dict = {}
+    for path in glob.glob(os.path.join(VN_DIR, "*.xml")):
+        try:
+            root = ET.parse(path).getroot()
+        except ET.ParseError:
+            continue
+        for vnclass in [root] + root.findall(".//VNSUBCLASS"):
+            members = [m.get("name", "").replace("_", " ").lower()
+                       for m in vnclass.findall("./MEMBERS/MEMBER")]
+            if not members and vnclass is root:
+                members = [m.get("name", "").replace("_", " ").lower()
+                           for m in root.findall("./MEMBERS/MEMBER")]
+            frames_src = vnclass.findall("./FRAMES/FRAME") or root.findall("./FRAMES/FRAME")
+            pairs = [_syntax_to_map(fr) for fr in frames_src]
+            for lem in members:
+                if not lem:
+                    continue
+                e = idx.setdefault(lem, {})
+                for sail, mp in pairs:
+                    if mp:
+                        e.setdefault(sail, {}).update(mp)
+    return idx
+
+
+def slot_maps(lemma: str) -> dict:
+    lem = lemma.lower()
+    out = dict(_all_slot_maps().get(lem, {}))
+    if lem in COPULAR:
+        for sail in COPULAR[lem]:
+            out.setdefault(sail, {}).update(_COP_MAP.get(sail, {}))
+    return {k: v for k, v in out.items() if v}
 
 
 if __name__ == "__main__":

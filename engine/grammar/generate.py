@@ -20,10 +20,42 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+import json as _json
+import os as _os
 from .sails import (SAILS, SPEECH_ACTS, RHYTHM_AFFINITY, band_of, needs_gloss,
                     SlotSpec)
-from .frames import frame_of
+from .frames import frame_of, slot_maps
 from .shadow import Shadow, check as shadow_check
+
+_SCHEMA_PATH = _os.path.join(_os.path.dirname(__file__), "..", "..", "monad_sentences.json")
+try:
+    SCHEMA = _json.load(open(_SCHEMA_PATH))
+except Exception:                                     # noqa: BLE001
+    SCHEMA = {"verbs": {}, "sails": {}, "speech_acts": SPEECH_ACTS}
+
+
+def _verb(lem):
+    return SCHEMA.get("verbs", {}).get(lem.lower()) or {
+        "sails": frame_of(lem)["licensed_patterns"], "maps": slot_maps(lem),
+        "context_hash": None}
+
+
+_FOCUS_FALLBACK = {"P": ["SV", "SVA", "SVO"], "S": ["SVO", "SV", "SVC"],
+                   "A": ["SVA", "SVOA", "SV"], "C": ["SVC", "SVA"],
+                   "O_d": ["SVO", "SVOO", "SVOA"], "reason": ["SVO", "SV"],
+                   "polarity": ["SVC", "SVO"]}
+
+
+def choose_sail(spec_verb, want_sail, focus):
+    """intersect the speech-act sail with the verb's licensed sails."""
+    licensed = set(_verb(spec_verb)["sails"])
+    if want_sail in licensed and not (focus == "P" and "SV" in licensed
+                                      and want_sail in ("SVO", "SVOO")):
+        return want_sail
+    for cand in _FOCUS_FALLBACK.get(focus, []) + sorted(licensed):
+        if cand in licensed:
+            return cand
+    return next(iter(licensed), "SV")
 
 
 # ── the tree ───────────────────────────────────────────────────────────────
@@ -91,10 +123,15 @@ _GLOSS = {"integrate": "add up the pieces", "diagonalize": "line up the axes",
 
 
 def structure_phase(spec: ParseSpec, depth: str = "surface") -> Sentence:
-    act = SPEECH_ACTS[spec.speech_act]
-    sail = act["sail"]
-    ring = Ring(anchor=spec.verb, sail=sail,
-                slots=[Slot(spec=ss) for ss in SAILS[sail]])
+    act = SCHEMA.get("speech_acts", SPEECH_ACTS)[spec.speech_act]
+    sail = choose_sail(spec.verb, act["sail"], act.get("focus", "P"))
+    themmap = _verb(spec.verb).get("maps", {}).get(sail, {})
+    role_theme = {v: k for k, v in themmap.items()}       # slot_role -> themrole
+    slots = []
+    for ss in SAILS[sail]:
+        tr = role_theme.get(ss.role, ss.themrole)
+        slots.append(Slot(spec=SlotSpec(ss.role, ss.deprel, tr, ss.head)))
+    ring = Ring(anchor=spec.verb, sail=sail, slots=slots)
     # weave from depth
     weave = {"narrative": "simple", "surface": "simple",
              "technical": "complex", "thesis": "complex"}[depth]
@@ -103,9 +140,11 @@ def structure_phase(spec: ParseSpec, depth: str = "surface") -> Sentence:
     if depth in ("technical", "thesis") and "cumulative" in RHYTHM_AFFINITY[sail]:
         rhythm = "cumulative"
     # definition-point: verb above the listener's halocline -> schedule a gloss
-    if spec.verb in _TECHNICAL and needs_gloss("technical", depth):
+    vh = (_verb(spec.verb).get("context_hash") or {})
+    verb_band = vh.get("band", "technical" if spec.verb in _TECHNICAL else "surface")
+    if needs_gloss(verb_band, depth) and spec.verb in _GLOSS:
         p = ring.slot("P")
-        if p and spec.verb in _GLOSS:
+        if p:
             p.gloss = Gloss(of=spec.verb, text=f"that is, {_GLOSS[spec.verb]}")
     return Sentence(main=ring, weave=weave, rhythm=rhythm)
 
@@ -114,7 +153,11 @@ def structure_phase(spec: ParseSpec, depth: str = "surface") -> Sentence:
 _ROLE_NP = {
     "Agent": Leaf("the method", gamma=0.45), "Theme": Leaf("the result", gamma=0.4),
     "Recipient": Leaf("the reader", gamma=0.3), "Attribute": Leaf("clear", gamma=0.35),
-    "Location": Leaf("in the model", gamma=0.5), "-": None,
+    "Location": Leaf("in the model", gamma=0.5),
+    "Destination": Leaf("into the model", gamma=0.5), "Goal": Leaf("to the limit", gamma=0.5),
+    "Source": Leaf("from the data", gamma=0.5), "Pivot": Leaf("the case", gamma=0.3),
+    "Patient": Leaf("the object", gamma=0.4), "Asset": Leaf("the value", gamma=0.4),
+    "Beneficiary": Leaf("the reader", gamma=0.3), "-": None,
 }
 
 
@@ -161,7 +204,7 @@ def linearize(sent: Sentence) -> str:
         else:
             out += _np_words(slot.filler)
     s = " ".join(w for w in out if w).strip()
-    s = s.replace(" ,", ",")
+    s = s.replace(" ,", ",").replace(",,", ",").rstrip(", ")
     return s[0].upper() + s[1:] + "."
 
 
