@@ -26,6 +26,7 @@ from .frames import (frame_of, verbnet_index, propbank_index, slot_maps,
                      COPULAR, PATTERNS)
 from .shadow import reduce, check
 from .sails import SAILS, RHYTHM_AFFINITY, SPEECH_ACTS, REGISTER_BANDS, band_of
+from . import sem_hash
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "..", "monad_sentences.json")
 
@@ -75,6 +76,7 @@ def _context_hashes(lemmas):
 def run(with_hashes: bool = True):
     sail_freq = Counter(); sail_ex = {}
     verbs_seen = Counter(); verd = Counter(); n = 0
+    filler_freq = Counter()          # lemma -> count, for NOUN/PROPN/ADJ
     for split in ("train", "dev", "test"):
         for corp in (conllu.EWT, conllu.GUM):
             p = corp[split]
@@ -88,12 +90,35 @@ def run(with_hashes: bool = True):
                 sail_freq[sh.pattern] += 1
                 sail_ex.setdefault(sh.pattern, s.text[:120])
                 verbs_seen[sh.verb_lemma] += 1
+                for t in s.toks:
+                    if t.upos in ("NOUN", "PROPN", "ADJ") and t.lemma.isalpha():
+                        filler_freq[(t.lemma.lower(), "n" if t.upos != "ADJ" else "a")] += 1
                 c = check(sh)
                 verd[c["verdict"] if c["verb_known"] else "verb-unknown"] += 1
 
     vi, pi = verbnet_index(), propbank_index()
     lemmas = sorted(set(vi) | set(pi))
     hashes = _context_hashes(lemmas) if with_hashes else {}
+
+    fillers = {}
+    if with_hashes:
+        try:
+            wn = _wordnet(); import context_hash_v2 as _ch
+            top = [lp for lp, _ in filler_freq.most_common(2500)]
+            for (lem, pos) in top:
+                ss = wn.synsets(lem, pos=pos)
+                if not ss:
+                    continue
+                sc = sem_hash.sem_code(ss[0])
+                try:
+                    gr = _ch.gamma_radial(ss[0]); bd = band_of(abs(gr))
+                except Exception:                        # noqa: BLE001
+                    gr, bd = 0.0, "surface"
+                fillers[lem] = {"pos": pos, "sense": ss[0].name(),
+                                "sem_code": sc, "gamma_radial": round(gr, 4),
+                                "band": bd, "count": filler_freq[(lem, pos)]}
+        except Exception as e:                            # noqa: BLE001
+            print(f"  fillers pass skipped ({e!r})")
 
     verbs = {}
     for lem in lemmas:
@@ -104,6 +129,14 @@ def run(with_hashes: bool = True):
             "context_hash": hashes.get(lem),
             "corpus_count": verbs_seen.get(lem, 0),
         }
+
+    role_codes = {}
+    if with_hashes:
+        try:
+            for tr in sem_hash.ROLE_ANCHORS:
+                role_codes[tr] = sem_hash.role_code(tr)
+        except Exception:                                # noqa: BLE001
+            pass
 
     sails = {}
     for p in PATTERNS:
@@ -119,11 +152,13 @@ def run(with_hashes: bool = True):
     index = {
         "meta": {
             "schema": 2, "sentences": n, "verbs": len(verbs),
-            "verbs_with_hash": len(hashes),
+            "verbs_with_hash": len(hashes), "fillers": len(fillers),
             "vn_lemmas": len(vi), "pb_lemmas": len(pi),
             "verdicts": dict(verd),
         },
         "sails": sails,
+        "fillers": fillers,
+        "role_codes": role_codes,
         "speech_acts": SPEECH_ACTS,
         "register_bands": [list(b) for b in REGISTER_BANDS],
         "np_grammar": NP_GRAMMAR,
@@ -133,7 +168,7 @@ def run(with_hashes: bool = True):
     with open(OUT, "w") as f:
         json.dump(index, f, indent=1, default=list)
     print(f"wrote {os.path.relpath(OUT)}  schema 2")
-    print(f"  {n} sentences · {len(verbs)} verbs · {len(hashes)} with a context hash")
+    print(f"  {n} sentences · {len(verbs)} verbs · {len(hashes)} verb hashes · {len(fillers)} fillers")
     print(f"  sail freq: {dict(sail_freq.most_common())}")
     print(f"  verdicts:  {dict(verd)}")
     for lem in ("give", "put", "be", "run", "converge"):

@@ -107,11 +107,12 @@ class Sentence:
 # ── phase 1: a light parse spec (the real ParseResult plugs in here) ───────
 @dataclass
 class ParseSpec:
-    speech_act: str                       # key of SPEECH_ACTS
-    verb: str                             # the answer's finite verb
-    subject_hint: Optional[str] = None    # the X in "what does X do"
+    speech_act: str
+    verb: str
+    subject_hint: Optional[str] = None
     focus_hint: Optional[str] = None
-    topic_gamma: float = 0.4              # |gamma| of the prompt's own vocab
+    topic_gamma: float = 0.4
+    topic_lemmas: List[str] = field(default_factory=list)   # prompt content words
 
 
 # ── phase 2: structure (word-free) ───────────────────────────────────────
@@ -161,17 +162,66 @@ _ROLE_NP = {
 }
 
 
-def fill_phase(sent: Sentence, spec: ParseSpec) -> Sentence:
+def _pf_distinct(g: int) -> int:
+    n, k, d = g, 0, 2
+    while d * d <= n:
+        if n % d == 0:
+            k += 1
+            while n % d == 0:
+                n //= d
+        d += 1
+    return k + (1 if n > 1 else 0)
+
+
+def _resonance(a: int, b: int) -> int:
+    from math import gcd
+    g = gcd(a, b)
+    return 0 if g <= 1 else _pf_distinct(g)
+
+
+_FILLERS = SCHEMA.get("fillers", {})
+_ROLE_CODES = {k: int(v) for k, v in SCHEMA.get("role_codes", {}).items()}
+
+
+def _band_ok(cand_band: str, want: str) -> bool:
+    order = ["narrative", "surface", "technical", "thesis"]
+    return abs(order.index(cand_band) - order.index(want)) <= 1
+
+
+def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int):
+    role_c = _ROLE_CODES.get(themrole, 1)
+    target = role_c * topic_code if topic_code > 1 else role_c
+    best, best_score, best_cnt = None, 0, -1
+    for lem, e in _FILLERS.items():
+        if e["pos"] != pos or not _band_ok(e["band"], depth):
+            continue
+        sc = _resonance(int(e["sem_code"]), target)
+        if sc > best_score or (sc == best_score and sc > 0 and e["count"] > best_cnt):
+            best, best_score, best_cnt = lem, sc, e["count"]
+    if best is None or best_score == 0:          # no real resonance -> let the stub answer
+        return None
+    return Leaf(best, synset=_FILLERS[best]["sense"],
+                gamma=abs(_FILLERS[best]["gamma_radial"]))
+
+
+def fill_phase(sent: Sentence, spec: ParseSpec, depth: str = "surface") -> Sentence:
+    topic_code = 1
+    for lem in spec.topic_lemmas:
+        e = _FILLERS.get(lem.lower())
+        if e:
+            topic_code *= int(e["sem_code"])
     for slot in sent.main.slots:
         if slot.spec.head:
             continue
         if slot.spec.role == "S" and spec.subject_hint:
             slot.filler = Leaf(spec.subject_hint, gamma=spec.topic_gamma)
-        elif slot.spec.role == "C" and sent.main.sail == "SVC":
-            slot.filler = _ROLE_NP.get(slot.spec.themrole) or Leaf("defined")
-        else:
+            continue
+        pos = "a" if slot.spec.role == "C" else "n"
+        pick = _resonant_pick(slot.spec.themrole, pos, depth, topic_code)
+        if pick is None:
             proto = _ROLE_NP.get(slot.spec.themrole)
-            slot.filler = Leaf(proto.lemma, gamma=proto.gamma) if proto else Leaf("it")
+            pick = Leaf(proto.lemma, gamma=proto.gamma) if proto else Leaf("it")
+        slot.filler = pick
     return sent
 
 
@@ -232,7 +282,7 @@ def check(sent: Sentence) -> dict:
 # ── the pipeline ──────────────────────────────────────────────────────
 def build_response(spec: ParseSpec, depth: str = "surface") -> dict:
     sent = structure_phase(spec, depth)          # 2
-    sent = fill_phase(sent, spec)                # 3 (stub)
+    sent = fill_phase(sent, spec, depth)         # 3
     surface = linearize(sent)                    # 4
     verdict = check(sent)                        # 5
     return {"depth": depth, "sail": sent.main.sail, "weave": sent.weave,
@@ -244,12 +294,15 @@ def build_response(spec: ParseSpec, depth: str = "surface") -> dict:
 if __name__ == "__main__":
     import json
     cases = [
-        (ParseSpec("what_does_X_do", "converge", subject_hint="the series"), ("narrative", "thesis")),
-        (ParseSpec("what_does_X_do", "integrate", subject_hint="the engine"), ("surface", "thesis")),
-        (ParseSpec("define_X", "be", subject_hint="an integral"), ("surface",)),
-        (ParseSpec("how", "run"), ("surface",)),
-        (ParseSpec("who_Xs", "give"), ("surface",)),
-        (ParseSpec("what_does_X_do", "elect", subject_hint="the board"), ("surface",)),
+        (ParseSpec("what_does_X_do", "converge", subject_hint="the series",
+                   topic_lemmas=["series", "limit", "sum", "value"]), ("narrative", "thesis")),
+        (ParseSpec("define_X", "be", subject_hint="an integral",
+                   topic_lemmas=["integral", "area", "sum"]), ("surface", "thesis")),
+        (ParseSpec("who_Xs", "give", topic_lemmas=["book", "reader", "gift"]), ("surface",)),
+        (ParseSpec("how", "run", subject_hint="the engine",
+                   topic_lemmas=["engine", "machine", "system"]), ("surface",)),
+        (ParseSpec("what_does_X_do", "elect", subject_hint="the board",
+                   topic_lemmas=["board", "chair", "member"]), ("surface",)),
     ]
     for spec, depths in cases:
         print(f"\n{spec.speech_act}  verb={spec.verb}")
