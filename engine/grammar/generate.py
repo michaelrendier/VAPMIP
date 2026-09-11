@@ -194,14 +194,33 @@ def _band_ok(cand_band: str, want: str) -> bool:
     return abs(order.index(cand_band) - order.index(want)) <= 1
 
 
+def _rank(candidates, pos: str, depth: str, target: int):
+    """RANK only — resonance against target, count as the tie-break. Shared
+    by both passes of _resonant_pick below."""
+    best, best_score, best_cnt = None, 0, -1
+    for lem, e in candidates:
+        if e["pos"] != pos or not _band_ok(e["band"], depth):
+            continue
+        sc = _resonance(int(e["sem_code"]), target)
+        if sc > best_score or (sc == best_score and sc > 0 and e["count"] > best_cnt):
+            best, best_score, best_cnt = lem, sc, e["count"]
+    return best, best_score
+
+
 def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int,
                    restrs=(), topic_is_maths: bool = False):
     """two stages: GATE (invariant match, free — short-circuits) then
-    RANK (resonance, work — only on survivors). topic_is_maths adds a RANK
-    bonus only — see sem_hash's "happy medium" note: the granular maths
-    corpus (monad_mathematics.bin) never gates, it only nudges the ranking
-    among candidates the real (SELRESTR) gate already let through."""
-    pool = _FILLERS.items()
+    RANK (resonance, work — only on survivors).
+
+    topic_is_maths (sem_hash.is_maths_eligible on the spec's topic — a
+    sparse, structural, WordNet-anchored test, never the maths corpus
+    itself) makes the source="maths" fillers the PRIMARY lexicon: ranked
+    FIRST, and used outright if any of them resonates at all. The full
+    pool (source="maths" and "corpus" together) is the fallback — tried
+    only when the primary lexicon has nothing that fits this slot, so a
+    gated-in topic never comes up empty just because its own vocabulary
+    happened to have no match for THIS particular themrole."""
+    pool = list(_FILLERS.items())
     if restrs:
         pool = [(lem, e) for lem, e in pool
                if sem_hash.gate_pass(int(e["sem_code"]), restrs)]
@@ -209,14 +228,16 @@ def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int,
             return None                           # -> no ranking work needed
     role_c = _ROLE_CODES.get(themrole, 1)
     target = role_c * topic_code if topic_code > 1 else role_c
-    best, best_score, best_cnt = None, 0, -1
-    for lem, e in pool:
-        if e["pos"] != pos or not _band_ok(e["band"], depth):
-            continue
-        sc = _resonance(int(e["sem_code"]), target)
-        sc += sem_hash.maths_rank_bonus(lem, topic_is_maths)
-        if sc > best_score or (sc == best_score and sc > 0 and e["count"] > best_cnt):
-            best, best_score, best_cnt = lem, sc, e["count"]
+
+    if topic_is_maths:
+        primary = [(lem, e) for lem, e in pool if e.get("source") == "maths"]
+        best, best_score = _rank(primary, pos, depth, target)
+        if best is not None and best_score > 0:
+            return Leaf(best, synset=_FILLERS[best]["sense"],
+                       gamma=abs(_FILLERS[best]["gamma_radial"]))
+        # the primary lexicon has nothing for this slot -> fall through
+
+    best, best_score = _rank(pool, pos, depth, target)
     if best is None or best_score == 0:          # no real resonance -> let the stub answer
         return None
     return Leaf(best, synset=_FILLERS[best]["sense"],

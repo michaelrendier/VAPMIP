@@ -116,7 +116,35 @@ def run(with_hashes: bool = True):
                     gr, bd = 0.0, "surface"
                 fillers[lem] = {"pos": pos, "sense": ss[0].name(),
                                 "sem_code": sc, "gamma_radial": round(gr, 4),
-                                "band": bd, "count": filler_freq[(lem, pos)]}
+                                "band": bd, "count": filler_freq[(lem, pos)],
+                                "source": "corpus"}
+
+            # the sanitized monad_mathematics.bin pass (Cody, 2026-09-11):
+            # "the complete vocabulary needs to be in monad3_c.bin, and upon
+            # granularity, the mathematics.bin adds weight to the already
+            # present vocabulary... it should become the primary 'lexicon'
+            # in the case of granularity." These get the SAME sem_code/
+            # gamma_radial/band treatment as the corpus fillers above, so
+            # they are real, selectable candidates — not a side presence
+            # check — tagged source="maths" so generate.py's _resonant_pick
+            # can prefer them as the PRIMARY pool once a topic gates in
+            # (sem_hash.is_maths_eligible), falling back to the full pool
+            # only when the primary lexicon has nothing that fits.
+            from . import maths_sanitize
+            for lem, pos in maths_sanitize.sanitize().items():
+                if lem in fillers:                        # corpus already won
+                    continue
+                ss = wn.synsets(lem, pos=pos)
+                if not ss:
+                    continue
+                sc = sem_hash.sem_code(ss[0])
+                try:
+                    gr = _ch.gamma_radial(ss[0]); bd = band_of(abs(gr))
+                except Exception:                          # noqa: BLE001
+                    gr, bd = 0.0, "surface"
+                fillers[lem] = {"pos": pos, "sense": ss[0].name(),
+                                "sem_code": sc, "gamma_radial": round(gr, 4),
+                                "band": bd, "count": 1, "source": "maths"}
         except Exception as e:                            # noqa: BLE001
             print(f"  fillers pass skipped ({e!r})")
 

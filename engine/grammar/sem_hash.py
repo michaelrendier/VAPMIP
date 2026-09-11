@@ -201,19 +201,26 @@ def gate_pass(candidate_code: int, restrs) -> bool:
     return True
 
 
-# ── the granular maths corpus (monad_mathematics.bin) — RANK bonus only ───
-# Cody, 2026-09-11: "there has to be a happy medium between 'using the
-# mathematics corpus' vs 'using the mathematics corpus as extra weight'."
+# ── the granular maths corpus (monad_mathematics.bin) — the GATE only ─────
+# Cody, 2026-09-11 (two turns): "there has to be a happy medium between
+# 'using the mathematics corpus' vs 'using the mathematics corpus as extra
+# weight'"; then, once that corpus was sanitized and folded into the real
+# vocabulary (maths_sanitize.py, build.py's fillers pass, tagged
+# source="maths"): "the complete vocabulary needs to be in monad3_c.bin,
+# and upon granularity, the mathematics.bin adds weight to the already
+# present vocabulary... it should become the primary 'lexicon' in the case
+# of granularity."
 #
-# monad_mathematics.bin (PtolemyDesktop/Archimedes/monadbin.py's MathsVocab)
-# is a flat scrape — no hypernym closure, no taxonomy, nothing commensurable
-# with sem_code — so it can never be the GATE. That was exactly the removed
-# Archimedes bug: a last-word membership test over that same flat scrape
-# false-positived on "internet" and "color". It is only ever a RANK bonus
-# below, and only for candidates whose TOPIC already passed a real, sparse,
-# structural gate built from WordNet — never from this corpus.
-#
-# The gate itself is 3 independent, individually narrow, best-effort
+# So the corpus itself is no longer consulted raw at generation time — it
+# was a flat scrape (no hypernym closure, no taxonomy, nothing commensurable
+# with sem_code; a last-word membership test over it is exactly what
+# false-positived Archimedes on "internet"/"color") and is now sanitized,
+# WordNet-verified, and merged into the SAME filler schema every other word
+# lives in. What remains HERE is only the GATE — is_maths_eligible below,
+# which decides whether a topic makes the source="maths" fillers the
+# PRIMARY lexicon for this sentence (see generate.py's _resonant_pick).
+# Still sparse and structural, still never corpus membership: 3 independent,
+# individually narrow, best-effort
 # signals OR'd together — WordNet's own maths coverage is genuinely
 # inconsistent (measured, 2026-09-11: of 12 common maths nouns — integral,
 # derivative, eigenvalue, theorem, matrix, series, equation, limit,
@@ -277,44 +284,6 @@ def is_maths_eligible(word: str) -> bool:
         if any(code % a == 0 for a in anchors):
             return True
     return False
-
-
-@lru_cache(maxsize=1)
-def _maths_vocab_words() -> frozenset:
-    """The RANK source. Presence-only — the pickle's beta/E fields are
-    undocumented (Archimedes/monadbin.py's own comment: "already weighted,
-    read as-is, no hashing, no learning"); fabricating a numeric weight
-    from fields we don't understand is exactly the confident-wrong-number
-    failure mode this framework rejects. A flat membership check is the
-    honest amount of information this asset can responsibly contribute
-    today."""
-    import glob
-    import os
-    import pickle
-    # __file__ = .../ThePlace/VAPMIP/engine/grammar/sem_hash.py -> 4 dirnames
-    # to ThePlace (VAPMIP/engine/grammar, VAPMIP/engine, VAPMIP, ThePlace).
-    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))                       # .../ThePlace
-    for path in glob.glob(os.path.join(
-            root, "PTorrent", "bin_archive", "clean", "monad_mathematics.bin")):
-        try:
-            with open(path, "rb") as f:
-                d = pickle.load(f)
-            words = d.get("words") or []
-            return frozenset(w.lower() for w in words if isinstance(w, str))
-        except Exception:                                  # noqa: BLE001
-            continue
-    return frozenset()
-
-
-def maths_rank_bonus(word: str, topic_is_maths: bool) -> int:
-    """+1 iff the topic already gated in AND this candidate is itself in
-    the granular maths vocabulary — never computed, never scored, while
-    the gate is closed. An additive nudge among survivors of the real
-    (SELRESTR) gate, never a pool swap or a route switch."""
-    if not topic_is_maths:
-        return 0
-    return 1 if word.lower() in _maths_vocab_words() else 0
 
 
 if __name__ == "__main__":
