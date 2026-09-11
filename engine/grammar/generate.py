@@ -25,6 +25,7 @@ import os as _os
 from .sails import (SAILS, SPEECH_ACTS, RHYTHM_AFFINITY, band_of, needs_gloss,
                     SlotSpec)
 from .frames import frame_of, slot_maps
+from . import sem_hash
 from .shadow import Shadow, check as shadow_check
 
 _SCHEMA_PATH = _os.path.join(_os.path.dirname(__file__), "..", "..", "monad_sentences.json")
@@ -32,6 +33,8 @@ try:
     SCHEMA = _json.load(open(_SCHEMA_PATH))
 except Exception:                                     # noqa: BLE001
     SCHEMA = {"verbs": {}, "sails": {}, "speech_acts": SPEECH_ACTS}
+if SCHEMA.get("ancestor_primes"):
+    sem_hash.load_prime_table(SCHEMA["ancestor_primes"])
 
 
 def _verb(lem):
@@ -191,11 +194,20 @@ def _band_ok(cand_band: str, want: str) -> bool:
     return abs(order.index(cand_band) - order.index(want)) <= 1
 
 
-def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int):
+def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int,
+                   restrs=()):
+    """two stages: GATE (invariant match, free — short-circuits) then
+    RANK (resonance, work — only on survivors)."""
+    pool = _FILLERS.items()
+    if restrs:
+        pool = [(lem, e) for lem, e in pool
+               if sem_hash.gate_pass(int(e["sem_code"]), restrs)]
+        if not pool:                              # the gate itself says "no"
+            return None                           # -> no ranking work needed
     role_c = _ROLE_CODES.get(themrole, 1)
     target = role_c * topic_code if topic_code > 1 else role_c
     best, best_score, best_cnt = None, 0, -1
-    for lem, e in _FILLERS.items():
+    for lem, e in pool:
         if e["pos"] != pos or not _band_ok(e["band"], depth):
             continue
         sc = _resonance(int(e["sem_code"]), target)
@@ -220,7 +232,8 @@ def fill_phase(sent: Sentence, spec: ParseSpec, depth: str = "surface") -> Sente
             slot.filler = Leaf(spec.subject_hint, gamma=spec.topic_gamma)
             continue
         pos = "a" if slot.spec.role == "C" else "n"
-        pick = _resonant_pick(slot.spec.themrole, pos, depth, topic_code)
+        restrs = _verb(spec.verb).get("selrestrs", {}).get(slot.spec.themrole, [])
+        pick = _resonant_pick(slot.spec.themrole, pos, depth, topic_code, restrs)
         if pick is None:
             proto = _ROLE_NP.get(slot.spec.themrole)
             pick = Leaf(proto.lemma, gamma=proto.gamma) if proto else Leaf("it")

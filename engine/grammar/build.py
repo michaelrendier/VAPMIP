@@ -23,7 +23,7 @@ import sys
 from collections import Counter
 from . import conllu
 from .frames import (frame_of, verbnet_index, propbank_index, slot_maps,
-                     COPULAR, PATTERNS)
+                     selrestrs, COPULAR, PATTERNS)
 from .shadow import reduce, check
 from .sails import SAILS, RHYTHM_AFFINITY, SPEECH_ACTS, REGISTER_BANDS, band_of
 from . import sem_hash
@@ -126,15 +126,20 @@ def run(with_hashes: bool = True):
         verbs[lem] = {
             "sails": fr["licensed_patterns"],
             "maps": slot_maps(lem),
+            "selrestrs": selrestrs(lem),
             "context_hash": hashes.get(lem),
             "corpus_count": verbs_seen.get(lem, 0),
         }
 
-    role_codes = {}
+    role_codes, selrestr_anchors = {}, {}
     if with_hashes:
         try:
             for tr in sem_hash.ROLE_ANCHORS:
                 role_codes[tr] = sem_hash.role_code(tr)
+            for typ in sem_hash.SELRESTR_ANCHORS:
+                ac = sem_hash.anchor_code(typ)
+                if ac:
+                    selrestr_anchors[typ] = ac
         except Exception:                                # noqa: BLE001
             pass
 
@@ -159,6 +164,8 @@ def run(with_hashes: bool = True):
         "sails": sails,
         "fillers": fillers,
         "role_codes": role_codes,
+        "selrestr_anchors": selrestr_anchors,
+        "ancestor_primes": sem_hash.dump_prime_table() if with_hashes else {},
         "speech_acts": SPEECH_ACTS,
         "register_bands": [list(b) for b in REGISTER_BANDS],
         "np_grammar": NP_GRAMMAR,

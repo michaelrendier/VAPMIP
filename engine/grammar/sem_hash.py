@@ -47,6 +47,36 @@ def _prime_for(offset: int) -> int:
     return p
 
 
+def load_prime_table(mapping) -> int:
+    """Install a PERSISTED offset->prime table (from the schema) before any
+    sem_code/anchor_code calls, so a synset gets the SAME prime whether it
+    was hashed at build time or freshly at generation time — two processes
+    must agree on the code, or gcd finds nothing even for a real match.
+    Returns the number of entries installed; existing lazy entries are kept,
+    the persisted ones fill in anything not yet seen this process. Also fast
+    -forwards the generator past every prime already claimed, so a NEW
+    offset (unseen in the persisted table) never collides with one that is."""
+    n = 0
+    claimed = set(_PRIME_OF.values())
+    for k, v in mapping.items():
+        off, p = int(k), int(v)
+        if off not in _PRIME_OF:
+            _PRIME_OF[off] = p
+            n += 1
+        claimed.add(p)
+    global _PGEN
+    def _resume():
+        for p in _PGEN:
+            if p not in claimed:
+                yield p
+    _PGEN = _resume()
+    return n
+
+
+def dump_prime_table() -> dict:
+    return {str(k): v for k, v in _PRIME_OF.items()}
+
+
 def _wn():
     for m in ("sklearn", "sklearn.feature_extraction", "sklearn.feature_extraction.text"):
         sys.modules.setdefault(m, None)
@@ -114,6 +144,59 @@ def role_code(themrole: str) -> int:
         except Exception:                                 # noqa: BLE001
             pass
     return code
+
+
+# ── SELRESTR anchors — the INVARIANT (Noether-conserved) gate ─────────────
+# VerbNet THEMROLE SELRESTRS, keyed to a WordNet anchor whose hypernym-closure
+# MEMBERSHIP is the invariant test: candidate.sem_code % anchor_code == 0
+# means the anchor is literally an ancestor of the candidate — a fact that
+# cannot vary by picking a different candidate in the same class, i.e. exactly
+# the zero-tension / conserved read the gate needs.  Grammatical restrictions
+# (int_control, refl, plural, nonrigid, pointy, elongated) name properties no
+# hypernym closure carries — skipped, not guessed at.
+SELRESTR_ANCHORS = {
+    "animate": "animate_thing.n.01", "organization": "organization.n.01",
+    "concrete": "physical_entity.n.01", "abstract": "abstraction.n.06",
+    "animal": "animal.n.01", "biotic": "organism.n.01",
+    "body_part": "body_part.n.01", "comestible": "food.n.01",
+    "communication": "communication.n.02", "currency": "currency.n.01",
+    "eventive": "event.n.01", "force": "force.n.02",
+    "garment": "garment.n.01", "human": "person.n.01",
+    "location": "location.n.01", "machine": "machine.n.01",
+    "region": "region.n.03", "solid": "solid.n.01",
+    "sound": "sound.n.04", "substance": "substance.n.01",
+    "vehicle": "vehicle.n.01", "vehicle_part": "vehicle.n.01",
+}
+
+
+@lru_cache(maxsize=64)
+def anchor_code(restr_type: str) -> int:
+    wn = _wn()
+    name = SELRESTR_ANCHORS.get(restr_type)
+    if not name:
+        return 0
+    try:
+        return sem_code(wn.synset(name))
+    except Exception:                                     # noqa: BLE001
+        return 0
+
+
+def gate_pass(candidate_code: int, restrs) -> bool:
+    """restrs = [(sign, type), ...].  '+' types OR (pass if any match); '-'
+    types must ALL be absent.  Non-taxonomy types carry no anchor (code 0)
+    and are silently skipped — nothing to gate on."""
+    pos, neg = [], []
+    for sign, typ in restrs:
+        ac = anchor_code(typ)
+        if ac == 0:
+            continue
+        (neg if sign == "-" else pos).append(ac)
+    for ac in neg:
+        if candidate_code % ac == 0:
+            return False
+    if pos:
+        return any(candidate_code % ac == 0 for ac in pos)
+    return True
 
 
 if __name__ == "__main__":

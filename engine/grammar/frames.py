@@ -195,22 +195,60 @@ _COP_MAP = {"SVC": {"Theme": "S", "Attribute": "C"},
             "SVA": {"Theme": "S", "Location": "A"}}
 
 
+def _themrole_selrestrs(vnclass) -> dict:
+    """{themrole: [(sign, type), ...]} from <THEMROLES><THEMROLE><SELRESTRS>
+    (any depth — AND/OR sub-groups are flattened; the gate treats every '+'
+    as an OR-alternative and every '-' as a must-not, which is the safe
+    reading for both cases actually seen in VerbNet 3.4)."""
+    out = {}
+    for tr in vnclass.findall("./THEMROLES/THEMROLE"):
+        role = tr.get("type")
+        restrs = [(sr.get("Value"), sr.get("type"))
+                 for sr in tr.findall(".//SELRESTR") if sr.get("type")]
+        if restrs:
+            out[role] = restrs
+    return out
+
+
 @lru_cache(maxsize=1)
 def _all_slot_maps() -> dict:
     """ONE pass over VerbNet -> {lemma: {sail: {themrole: slot_role}}}."""
+    idx, _ = _all_slot_maps_and_restrs()
+    return idx
+
+
+@lru_cache(maxsize=1)
+def _all_selrestrs() -> dict:
+    """ONE pass -> {lemma: {themrole: [(sign, type), ...]}}."""
+    _, restrs = _all_slot_maps_and_restrs()
+    return restrs
+
+
+@lru_cache(maxsize=1)
+def _all_slot_maps_and_restrs():
     idx: dict = {}
+    restr_idx: dict = {}
     for path in glob.glob(os.path.join(VN_DIR, "*.xml")):
         try:
             root = ET.parse(path).getroot()
         except ET.ParseError:
             continue
+        root_restrs = _themrole_selrestrs(root)
+        root_frames = root.findall("./FRAMES/FRAME")
         for vnclass in [root] + root.findall(".//VNSUBCLASS"):
             members = [m.get("name", "").replace("_", " ").lower()
                        for m in vnclass.findall("./MEMBERS/MEMBER")]
-            if not members and vnclass is root:
-                members = [m.get("name", "").replace("_", " ").lower()
-                           for m in root.findall("./MEMBERS/MEMBER")]
-            frames_src = vnclass.findall("./FRAMES/FRAME") or root.findall("./FRAMES/FRAME")
+            # VerbNet subclasses INHERIT the parent's THEMROLES/FRAMES unless
+            # they redefine a role/frame of their own (give-13.1-1 only adds
+            # "Asset"; Agent/Theme/Recipient + their SELRESTRS come from the
+            # parent give-13.1) — merge, subclass wins on the same role name.
+            if vnclass is root:
+                restrs = root_restrs
+                frames_src = root_frames
+            else:
+                own = _themrole_selrestrs(vnclass)
+                restrs = {**root_restrs, **own}
+                frames_src = vnclass.findall("./FRAMES/FRAME") or root_frames
             pairs = [_syntax_to_map(fr) for fr in frames_src]
             for lem in members:
                 if not lem:
@@ -219,7 +257,18 @@ def _all_slot_maps() -> dict:
                 for sail, mp in pairs:
                     if mp:
                         e.setdefault(sail, {}).update(mp)
-    return idx
+                if restrs:
+                    re_ = restr_idx.setdefault(lem, {})
+                    for role, rs in restrs.items():
+                        re_.setdefault(role, [])
+                        for pair in rs:
+                            if pair not in re_[role]:
+                                re_[role].append(pair)
+    return idx, restr_idx
+
+
+def selrestrs(lemma: str) -> dict:
+    return _all_selrestrs().get(lemma.lower(), {})
 
 
 def slot_maps(lemma: str) -> dict:
