@@ -195,9 +195,12 @@ def _band_ok(cand_band: str, want: str) -> bool:
 
 
 def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int,
-                   restrs=()):
+                   restrs=(), topic_is_maths: bool = False):
     """two stages: GATE (invariant match, free — short-circuits) then
-    RANK (resonance, work — only on survivors)."""
+    RANK (resonance, work — only on survivors). topic_is_maths adds a RANK
+    bonus only — see sem_hash's "happy medium" note: the granular maths
+    corpus (monad_mathematics.bin) never gates, it only nudges the ranking
+    among candidates the real (SELRESTR) gate already let through."""
     pool = _FILLERS.items()
     if restrs:
         pool = [(lem, e) for lem, e in pool
@@ -211,6 +214,7 @@ def _resonant_pick(themrole: str, pos: str, depth: str, topic_code: int,
         if e["pos"] != pos or not _band_ok(e["band"], depth):
             continue
         sc = _resonance(int(e["sem_code"]), target)
+        sc += sem_hash.maths_rank_bonus(lem, topic_is_maths)
         if sc > best_score or (sc == best_score and sc > 0 and e["count"] > best_cnt):
             best, best_score, best_cnt = lem, sc, e["count"]
     if best is None or best_score == 0:          # no real resonance -> let the stub answer
@@ -225,6 +229,11 @@ def fill_phase(sent: Sentence, spec: ParseSpec, depth: str = "surface") -> Sente
         e = _FILLERS.get(lem.lower())
         if e:
             topic_code *= int(e["sem_code"])
+    # eligibility, computed once per sentence off the actual topic — never
+    # off a candidate word, never off the granular corpus itself (see
+    # sem_hash.is_maths_eligible's module note: that corpus is a flat
+    # scrape, not a gate source).
+    topic_is_maths = any(sem_hash.is_maths_eligible(w) for w in spec.topic_lemmas)
     for slot in sent.main.slots:
         if slot.spec.head:
             continue
@@ -233,7 +242,8 @@ def fill_phase(sent: Sentence, spec: ParseSpec, depth: str = "surface") -> Sente
             continue
         pos = "a" if slot.spec.role == "C" else "n"
         restrs = _verb(spec.verb).get("selrestrs", {}).get(slot.spec.themrole, [])
-        pick = _resonant_pick(slot.spec.themrole, pos, depth, topic_code, restrs)
+        pick = _resonant_pick(slot.spec.themrole, pos, depth, topic_code, restrs,
+                              topic_is_maths)
         if pick is None:
             proto = _ROLE_NP.get(slot.spec.themrole)
             pick = Leaf(proto.lemma, gamma=proto.gamma) if proto else Leaf("it")

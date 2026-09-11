@@ -19,6 +19,7 @@ the relational code is flat.
 """
 from __future__ import annotations
 import math
+import re
 import sys
 from functools import lru_cache
 
@@ -65,12 +66,13 @@ def load_prime_table(mapping) -> int:
             n += 1
         claimed.add(p)
     global _PGEN
-    def _resume():
-        for p in _PGEN:
-            if p not in claimed:
-                yield p
-    _PGEN = _resume()
-    return n
+    old_gen = _PGEN                        # capture BEFORE reassigning below —
+    def _resume():                         # `_PGEN` inside this closure would
+        for p in old_gen:                  # otherwise resolve to ITSELF at call
+            if p not in claimed:           # time (found live, 2026-09-11: any
+                yield p                    # offset new since the table was
+    _PGEN = _resume()                      # loaded raised "generator already
+    return n                               # executing" / StopIteration)
 
 
 def dump_prime_table() -> dict:
@@ -197,6 +199,122 @@ def gate_pass(candidate_code: int, restrs) -> bool:
     if pos:
         return any(candidate_code % ac == 0 for ac in pos)
     return True
+
+
+# ── the granular maths corpus (monad_mathematics.bin) — RANK bonus only ───
+# Cody, 2026-09-11: "there has to be a happy medium between 'using the
+# mathematics corpus' vs 'using the mathematics corpus as extra weight'."
+#
+# monad_mathematics.bin (PtolemyDesktop/Archimedes/monadbin.py's MathsVocab)
+# is a flat scrape — no hypernym closure, no taxonomy, nothing commensurable
+# with sem_code — so it can never be the GATE. That was exactly the removed
+# Archimedes bug: a last-word membership test over that same flat scrape
+# false-positived on "internet" and "color". It is only ever a RANK bonus
+# below, and only for candidates whose TOPIC already passed a real, sparse,
+# structural gate built from WordNet — never from this corpus.
+#
+# The gate itself is 3 independent, individually narrow, best-effort
+# signals OR'd together — WordNet's own maths coverage is genuinely
+# inconsistent (measured, 2026-09-11: of 12 common maths nouns — integral,
+# derivative, eigenvalue, theorem, matrix, series, equation, limit,
+# variable, polynomial, vector, sum — only 2 reach mathematics.n.01 by
+# hypernym closure on their FIRST sense (WordNet's "most frequent" sense is
+# often not the maths one: series.n.07 of 7, limit.n.05 of 6, sum.n.02 of
+# 6); only 4 carry an explicit topic_domain of mathematics.n.01; checking
+# ALL senses against a curated multi-node anchor set closes most of the
+# rest). A miss just means the corpus contributes no bonus — degrades to
+# the pre-existing baseline (no signal at all), never to a false positive
+# the way the removed corpus-membership gate did.
+_MATH_TOKEN_RE = re.compile(     # mirrors PtolC/ptol_layer.py's _MATH_RE
+    r'[∑∫∂σζΓΩπφ]|theorem|proof|integral|eigenvalue|riemann|prime|modular|'
+    r'matrix|vector|polynomial|derivative|logarithm|coefficient|equation|'
+    r'inequality|calculus|algebra|geometry|trigonometry|topology',
+    re.IGNORECASE)
+
+# WordNet's purpose-built maths-domain nodes — not just mathematics.n.01
+# itself (too shallow a subtree to catch much), but the "mathematical_*"
+# family that terms like "equation" (-> mathematical_statement.n.01) and
+# "function" (-> mathematical_relation.n.01) actually route through.
+_MATHS_ANCHOR_SYNSETS = (
+    "mathematics.n.01", "mathematical_relation.n.01",
+    "mathematical_statement.n.01", "mathematical_process.n.01",
+    "mathematical_space.n.01", "mathematical_notation.n.01",
+    "mathematical_symbol.n.01",
+)
+
+
+@lru_cache(maxsize=1)
+def _maths_anchor_codes() -> tuple:
+    wn = _wn()
+    codes = []
+    for name in _MATHS_ANCHOR_SYNSETS:
+        try:
+            codes.append(sem_code(wn.synset(name)))
+        except Exception:                                 # noqa: BLE001
+            pass
+    return tuple(codes)
+
+
+@lru_cache(maxsize=4096)
+def is_maths_eligible(word: str) -> bool:
+    """The GATE. Sparse and structural — see the module note above. Checks
+    ALL noun senses (not just the first — WordNet's most-frequent sense is
+    often not the maths one), OR'd with the token regex. Never corpus
+    membership; false by default, on purpose."""
+    w = word.lower().strip()
+    if not w:
+        return False
+    if _MATH_TOKEN_RE.search(w):
+        return True
+    anchors = _maths_anchor_codes()
+    if not anchors:
+        return False
+    wn = _wn()
+    for syn in wn.synsets(w, pos="n"):
+        if any(d.name() == "mathematics.n.01" for d in syn.topic_domains()):
+            return True
+        code = sem_code(syn)
+        if any(code % a == 0 for a in anchors):
+            return True
+    return False
+
+
+@lru_cache(maxsize=1)
+def _maths_vocab_words() -> frozenset:
+    """The RANK source. Presence-only — the pickle's beta/E fields are
+    undocumented (Archimedes/monadbin.py's own comment: "already weighted,
+    read as-is, no hashing, no learning"); fabricating a numeric weight
+    from fields we don't understand is exactly the confident-wrong-number
+    failure mode this framework rejects. A flat membership check is the
+    honest amount of information this asset can responsibly contribute
+    today."""
+    import glob
+    import os
+    import pickle
+    # __file__ = .../ThePlace/VAPMIP/engine/grammar/sem_hash.py -> 4 dirnames
+    # to ThePlace (VAPMIP/engine/grammar, VAPMIP/engine, VAPMIP, ThePlace).
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))                       # .../ThePlace
+    for path in glob.glob(os.path.join(
+            root, "PTorrent", "bin_archive", "clean", "monad_mathematics.bin")):
+        try:
+            with open(path, "rb") as f:
+                d = pickle.load(f)
+            words = d.get("words") or []
+            return frozenset(w.lower() for w in words if isinstance(w, str))
+        except Exception:                                  # noqa: BLE001
+            continue
+    return frozenset()
+
+
+def maths_rank_bonus(word: str, topic_is_maths: bool) -> int:
+    """+1 iff the topic already gated in AND this candidate is itself in
+    the granular maths vocabulary — never computed, never scored, while
+    the gate is closed. An additive nudge among survivors of the real
+    (SELRESTR) gate, never a pool swap or a route switch."""
+    if not topic_is_maths:
+        return 0
+    return 1 if word.lower() in _maths_vocab_words() else 0
 
 
 if __name__ == "__main__":
