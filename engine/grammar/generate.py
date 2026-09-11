@@ -47,10 +47,13 @@ _FOCUS_FALLBACK = {"P": ["SV", "SVA", "SVO"], "S": ["SVO", "SV", "SVC"],
 
 
 def choose_sail(spec_verb, want_sail, focus):
-    """intersect the speech-act sail with the verb's licensed sails."""
+    """intersect the speech-act sail with the verb's licensed sails.
+    Known limitation: VerbNet frames are aggregated across ALL senses of a
+    lemma, so an intransitive verb can inherit a rare transitive sense's sail
+    (e.g. "converge" ~ optics "converge the beams" licensing SVO) — this
+    needs per-sense disambiguation to close, not a blanket rule."""
     licensed = set(_verb(spec_verb)["sails"])
-    if want_sail in licensed and not (focus == "P" and "SV" in licensed
-                                      and want_sail in ("SVO", "SVOO")):
+    if want_sail in licensed:
         return want_sail
     for cand in _FOCUS_FALLBACK.get(focus, []) + sorted(licensed):
         if cand in licensed:
@@ -240,6 +243,12 @@ def _np_words(f) -> List[str]:
     return f.words()
 
 
+_A_PREP = {"Destination": "into", "Source": "from", "Goal": "to",
+          "Recipient": "to", "Beneficiary": "for", "Location": "in"}
+_VERB_PREP = {"belong": "to", "consist": "of", "result": "from",
+             "occur": "in", "apply": "in", "relate": "to"}
+
+
 def linearize(sent: Sentence) -> str:
     r = sent.main
     out: List[str] = []
@@ -252,6 +261,9 @@ def linearize(sent: Sentence) -> str:
             if slot.gloss:
                 out += slot.gloss.words()
         else:
+            if slot.spec.role == "A" and slot.filler is not None:
+                prep = _VERB_PREP.get(r.anchor) or _A_PREP.get(slot.spec.themrole, "in")
+                out.append(prep)
             out += _np_words(slot.filler)
     s = " ".join(w for w in out if w).strip()
     s = s.replace(" ,", ",").replace(",,", ",").rstrip(", ")
