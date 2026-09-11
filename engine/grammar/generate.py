@@ -262,6 +262,24 @@ _VERB_PREP = {"belong": "to", "consist": "of", "result": "from",
              "occur": "in", "apply": "in", "relate": "to"}
 
 
+_THIRD_PERSON_IRREGULAR = {"be": "is", "have": "has", "do": "does", "go": "goes"}
+_SIBILANT_END = ("s", "ss", "sh", "ch", "x", "z", "o")
+
+
+def _third_person(verb: str) -> str:
+    """Third-person-singular present, English orthography rules — not just
+    a bare '+s': applY -> applies (consonant+y), pasS/watcH/fiX/buzZ/echO ->
+    +es (sibilant/o), the four irregulars, else +s."""
+    irr = _THIRD_PERSON_IRREGULAR.get(verb)
+    if irr:
+        return irr
+    if verb.endswith("y") and len(verb) > 1 and verb[-2] not in "aeiou":
+        return verb[:-1] + "ies"
+    if verb.endswith(_SIBILANT_END):
+        return verb + "es"
+    return verb + "s"
+
+
 def linearize(sent: Sentence) -> str:
     r = sent.main
     out: List[str] = []
@@ -270,7 +288,7 @@ def linearize(sent: Sentence) -> str:
             if r.sail == "SVC":
                 out.append(_COP["SVC"])
             else:
-                out.append(r.anchor + ("s" if not r.anchor.endswith("s") else ""))
+                out.append(_third_person(r.anchor))
             if slot.gloss:
                 out += slot.gloss.words()
         else:

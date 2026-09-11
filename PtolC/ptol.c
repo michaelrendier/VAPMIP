@@ -43,6 +43,8 @@
  *   -b [dir]   write PPM bitmap paper (field — 16 scalar amplitudes)
  *   -H [dir]   write HTML paper (SVG + bitmap + text shadow, all together)
  *   -i <file>  read image as prompt (via ImageMagick — geometry-first OCR)
+ *   -say <p>   one-shot console_speak() — no curses console, no socketpair;
+ *              the sentence creator's voice from a shell, fully offline
  *   -w         fork the PtolemyDesktop tabbed curses console (Chat /
  *   --boxkite  ValaQuenta / Generational Lineage / Archimedes — unfinished
  *   --console  tabs greyed) onto the tty and stay resident as the speaking
@@ -379,6 +381,113 @@ static void get_monad_words(const double *v, const double *raw_x,
         pclose(pipe);
     }
     remove(tmp);
+}
+
+/* ── The sentence creator bridge — engine/grammar/ptolc_bridge.py ─────────
+ *
+ * get_monad_words() above is the GUARANTEED fallback: no dependency past
+ * python3+nltk's already-downloaded corpora, always returns something. This
+ * calls the real box-kite sentence creator (VerbNet sails + WordNet
+ * hypernym-closure fill + the invariant SELRESTR gate, engine/grammar/) on
+ * the SAME firing words + Γ that built the word bag; on any failure
+ * (offline WordNet cache missing, an unknown verb, a bad schema) it prints
+ * nothing and exits nonzero, and console_speak() keeps the word bag. As of
+ * 2026-09-11 sentence mode is the DEFAULT voice, not an opt-in switch —
+ * `out` is overwritten only on a clean, non-empty return, never left half
+ * -built. */
+
+/* Case-insensitive whole-word search: "how" must not fire inside "show". */
+static int has_word(const char *hay, const char *word)
+{
+    size_t wl = strlen(word);
+    const char *p = hay;
+    while ((p = strstr(p, word)) != NULL) {
+        int before_ok = (p == hay) || !isalpha((unsigned char)p[-1]);
+        int after_ok  = !isalpha((unsigned char)p[wl]);
+        if (before_ok && after_ok) return 1;
+        p += wl;
+    }
+    return 0;
+}
+
+/* The "small wh-word scan" from the design pass: everything console_speak()
+ * needs for a ParseSpec except this comes straight off the geometry
+ * already (topic words from the firing shells, depth from Γ) — only the
+ * speech act still lives in the surface text of the prompt. Heuristic, not
+ * a parser: on a miss it lands on "what_does_X_do", the most general act,
+ * never on a value the schema would reject (ptolc_bridge.py re-validates
+ * against SCHEMA["speech_acts"] regardless). */
+static void infer_speech_act(const char *prompt, char act[24])
+{
+    char p[512];
+    size_t j = 0;
+    for (const char *s = prompt; *s && j < sizeof(p) - 1; s++)
+        p[j++] = (char)tolower((unsigned char)*s);
+    p[j] = '\0';
+
+    if (has_word(p, "why"))    { strcpy(act, "why");    return; }
+    if (has_word(p, "how"))    { strcpy(act, "how");    return; }
+    if (has_word(p, "where"))  { strcpy(act, "where");  return; }
+    if (has_word(p, "who"))    { strcpy(act, "who_Xs"); return; }
+    if (has_word(p, "what")) {
+        strcpy(act, (has_word(p, "do") || has_word(p, "does") || has_word(p, "did"))
+                    ? "what_does_X_do" : "define_X");
+        return;
+    }
+    if (has_word(p, "define")) { strcpy(act, "define_X"); return; }
+    if (p[0]) {
+        char first[16] = {0};
+        sscanf(p, "%15s", first);
+        static const char *YESNO[] = {"is","are","was","were","do","does",
+                                       "did","can","will","would","has","have"};
+        for (size_t i = 0; i < sizeof(YESNO) / sizeof(YESNO[0]); i++)
+            if (strcmp(first, YESNO[i]) == 0) { strcpy(act, "yesno"); return; }
+    }
+    strcpy(act, "what_does_X_do");
+}
+
+/* seen[0..nseen) is console_speak()'s already-deduped firing word list
+ * (topic words + a candidate verb, spiral order); gamma is Γ from
+ * measure_gamma(). Writes them to a tempfile in the bridge's line format,
+ * pipes through ptolc_bridge.py (run from the VAPMIP root, one level above
+ * g_ptol_dir, so its package-relative imports resolve), and reads back one
+ * line. Returns 1 and fills out[1024] on a clean, non-empty, exit-0 result;
+ * 0 otherwise (out left untouched). */
+static int get_monad_sentence(double gamma, const char *act,
+                               char seen[16][64], int nseen,
+                               char out[1024])
+{
+    char tmp[] = "/tmp/ptol_sentence_XXXXXX";
+    int fd = mkstemp(tmp);
+    if (fd < 0) return 0;
+    FILE *tf = fdopen(fd, "w");
+    if (!tf) { close(fd); remove(tmp); return 0; }
+    fprintf(tf, "GAMMA %+.10f\n", gamma);
+    fprintf(tf, "ACT %s\n", act);
+    fprintf(tf, "WORDS");
+    for (int i = 0; i < nseen; i++) fprintf(tf, " %s", seen[i]);
+    fprintf(tf, "\n");
+    fclose(tf);
+
+    char cmd[1024];
+    snprintf(cmd, sizeof(cmd),
+        "cd '%s/..' && python3 -m engine.grammar.ptolc_bridge < '%s' 2>/dev/null",
+        g_ptol_dir, tmp);
+
+    int ok = 0;
+    FILE *pipe = popen(cmd, "r");
+    if (pipe) {
+        if (fgets(out, 1024, pipe)) {
+            size_t l = strlen(out);
+            if (l > 0 && out[l - 1] == '\n') out[--l] = '\0';
+            if (l > 0) ok = 1;
+        }
+        int status = pclose(pipe);
+        if (!(status >= 0 && WIFEXITED(status) && WEXITSTATUS(status) == 0))
+            ok = 0;
+    }
+    remove(tmp);
+    return ok;
 }
 
 /* ── SVG paper — the pathway ─────────────────────────────────────────────── */
@@ -874,6 +983,18 @@ static void console_speak(const char *prompt, char out[1024],
     if (sig_out) *sig_out = measure_sigma(v);
     if (gam_out) *gam_out = gam;
 
+    /* Sentence mode is the default voice: hand the same firing words + Γ
+     * to the real creator; overwrite `out` only on a clean return, else
+     * the word bag built above stands as the guaranteed fallback. */
+    if (nseen > 0) {
+        char act[24], sentence[1024];
+        infer_speech_act(prompt, act);
+        if (get_monad_sentence(gam, act, seen, nseen, sentence)) {
+            strncpy(out, sentence, 1024 - 1);
+            out[1024 - 1] = '\0';
+        }
+    }
+
     size_t po = 0;
     for (int k = 0; k < 16; k++)
         if (fabs(_x[k]) >= thresh) {
@@ -1057,6 +1178,26 @@ int main(int argc, char *argv[])
                 for (int q = 0; q < 19; q++) printf("%d%s", vec[q], q < 18 ? "," : "");
                 printf("]\n");
             }
+            return 0;
+        } else if (strcmp(argv[arg0], "-say") == 0) {
+            /* diagnostic: one-shot console_speak() with no curses console,
+             * no socketpair — the same word-bag-or-sentence voice `ptol -w`
+             * uses, callable straight from a shell. Exists so the sentence
+             * creator can be smoke-tested (or just talked to) fully
+             * offline: everything past python3 + the already-downloaded
+             * nltk_data/VerbNet corpora and monad_sentences.json is local. */
+            arg0++;
+            if (arg0 >= argc) { fprintf(stderr, "ptol: -say needs a prompt\n"); return 1; }
+            char prompt[65536] = "";
+            for (int i = arg0; i < argc; i++) {
+                if (i > arg0) strncat(prompt, " ", sizeof(prompt) - strlen(prompt) - 1);
+                strncat(prompt, argv[i], sizeof(prompt) - strlen(prompt) - 1);
+            }
+            char reply[1024], primes[128];
+            double sig, gam;
+            console_speak(prompt, reply, &sig, &gam, primes);
+            printf("%s\n", reply);
+            fprintf(stderr, "  [σ=%.4f Γ=%+.4f primes: %s]\n", sig, gam, primes);
             return 0;
         } else if (strcmp(argv[arg0], "-g") == 0 || strcmp(argv[arg0], "--gui") == 0) {
             /* Launch holcus_window.py — the brain exec's the face */
