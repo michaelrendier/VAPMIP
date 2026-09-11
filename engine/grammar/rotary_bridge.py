@@ -68,6 +68,28 @@ def assemble_sentence_v2(direction: str, words_out: List[str],
     return r["surface"] + f"  [{act}/{r['sail']}/{depth}]"
 
 
+def install() -> bool:
+    """Permanently swap in the real creator for a LONG-LIVED process — the
+    Chat tab's BoxKiteMonad._load() in ptolemy_console.py, which builds one
+    RotaryBoxKiteMonad and keeps it resident for the whole session. Unlike
+    run_encounter()'s try/finally (built for A/B comparison, restores the
+    template afterward), this does not restore: the creator becomes the
+    module's assemble_sentence for the rest of the process. Idempotent —
+    safe to call every time the Chat tab boots. Returns True once the
+    creator is confirmed installed, so the caller can report it truthfully
+    instead of assuming."""
+    import sys
+    for m in ("sklearn", "sklearn.feature_extraction", "sklearn.feature_extraction.text"):
+        sys.modules.setdefault(m, None)
+    import rotary_rerun_boxkite_monad as rb
+
+    if getattr(rb.assemble_sentence, "_is_creator", False):
+        return True                                     # already installed
+    assemble_sentence_v2._is_creator = True               # type: ignore[attr-defined]
+    rb.assemble_sentence = assemble_sentence_v2
+    return rb.assemble_sentence is assemble_sentence_v2
+
+
 def run_encounter(text: str, use_creator: bool = True):
     """Run RotaryBoxKiteMonad.process_input(text), optionally through the
     real sentence creator instead of the template assembler.  Returns
