@@ -78,3 +78,9 @@ datasets/*/
 # grammar index — regenerable via: python3 -m engine.grammar.build
 monad_sentences.json
 monad_sentences.bin
+
+# ptol-native relation facts — grows from experience, not regenerable from
+# a rebuild the way monad_sentences.json is; still not committed (per-
+# machine live state, like monad3_c.bin itself)
+engine/grammar/ptol_relations.json
+engine/grammar/_ptol_relations_demo.json

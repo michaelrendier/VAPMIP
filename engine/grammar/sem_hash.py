@@ -286,6 +286,59 @@ def is_maths_eligible(word: str) -> bool:
     return False
 
 
+# ── ptol-native closure — the boxkite context, grown from experience ──────
+# Cody, 2026-09-12/13: monad3_c.bin's WordNet sub-store is a static, one-
+# time dump (last turn, verified against the real store: "abelian" —
+# eng_idx real, 59 live co-occurrence edges, wn_idx=-1, blank forever
+# under that path). "we don't have to rebuild anything someone else does,
+# we just need to add the 'experience' of ptol... the boxkite context is
+# the only thing... needing to be updated... the sedenion window can be
+# that tool."
+#
+# ptol_relations.py is that experience — facts extracted from ordinary
+# sentences (slot_shells.find_anchor() for the verb, plain word position
+# for the two arguments — no UD parse, so it runs on live conversation),
+# stored keyed exactly like WordNet's own 19 RELATION_METHODS. This walks
+# THAT graph the same way sem_code() walks a WordNet hypernym closure —
+# same idea (a squarefree Gödel code over reachable "ancestors"), same
+# resonance() comparison downstream, completely SEPARATE prime table (a
+# ptol-native relation is not a WordNet relation; conflating their prime
+# assignments would let an accidental integer collision between two
+# unrelated graphs register as a shared ancestor).
+_WORD_PRIME_OF: dict = {}
+_WORD_PGEN = _prime_gen()
+
+
+def _prime_for_word(word: str) -> int:
+    p = _WORD_PRIME_OF.get(word)
+    if p is None:
+        p = next(_WORD_PGEN)
+        _WORD_PRIME_OF[word] = p
+    return p
+
+
+def ptol_code(word: str, store=None, _seen=None, _depth: int = 0) -> int:
+    """squarefree product over the closure of ptol_relations facts
+    reachable from `word` — the live-growing analogue of sem_code()'s
+    static WordNet-hypernym closure. Depth-capped at 3: unlike WordNet's
+    hypernym DAG, this graph carries no acyclicity guarantee (similar_tos
+    is symmetric by construction, and ordinary usage could produce a real
+    cycle) — a bounded walk, not a proof of termination, is the honest
+    guarantee here."""
+    if store is None:
+        from .ptol_relations import PtolRelationStore
+        store = PtolRelationStore()
+    if _seen is None:
+        _seen = set()
+    if word in _seen or _depth > 3:
+        return 1
+    _seen.add(word)
+    code = _prime_for_word(word)
+    for t in store.all_targets(word):
+        code *= ptol_code(t, store, _seen, _depth + 1)
+    return code
+
+
 if __name__ == "__main__":
     import time
     t0 = time.time()

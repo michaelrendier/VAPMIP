@@ -31,6 +31,23 @@ from typing import Dict, List, Optional
 P16 = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
 PHI = (1.0 + 5.0 ** 0.5) / 2.0
 
+# Closed-class function words have no business occupying a content role —
+# they carry no independent semantic filler of their own (an article never
+# IS the Theme, it marks one), and their projections are noise input to
+# assign_role() the same way any other word's is. Confirmed live, 2026-09-
+# 13: without this filter "The engine comprises pistons." classified 'the'
+# into a content role right alongside 'engine'/'pistons', and "An abelian
+# group is a group." put 'an'/'a' into S alongside the real subject —
+# corrupting every downstream consumer that expects a role's word list to
+# be actual content (ptol_relations.py's fact extractor, most directly).
+_FUNCTION_WORDS = frozenset((
+    "a", "an", "the", "this", "that", "these", "those",
+    "to", "of", "in", "on", "at", "by", "for", "with", "as", "into",
+    "and", "or", "but", "nor", "so", "yet",
+    "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them",
+    "my", "your", "his", "its", "our", "their",
+))
+
 ROLE_SHELLS: Dict[str, tuple] = {
     "S":   (1, 2, 3),
     "O_i": (4, 5, 6),
@@ -149,42 +166,59 @@ def _verb_lemma(word: str) -> Optional[str]:
     return wn.morphy(word, "v") or word
 
 
-def assign_slots(text: str, verbs: Optional[dict] = None,
-                 sigma: float = 0.5) -> Dict[str, List[str]]:
-    """Tokenize `text`, find the anchor (P), then assign every OTHER word
-    a role via assign_role(). Returns {role: [words]}, 'P' included in
-    canonical SPOCA order, reading order preserved within each role.
-    Usable straight into a ParseSpec — no UD parse anywhere in this path,
-    so it works on live input or crawled text a treebank never saw.
+def tokenize(text: str) -> List[str]:
+    words = [w.strip(".,;:!?\"'()").lower() for w in text.split()]
+    return [w for w in words if w]
 
-    The anchor: the first word whose verb-lemma (_verb_lemma) is IN the
-    schema, in reading order — the same convention ptolc_bridge.py already
-    uses. Disclosed limitation, tried and measured rather than assumed:
-    many common words are verb/noun homographs ("board", "water", "point",
-    "new" all carry a registered verb sense too), so this picks the wrong
-    anchor on some ordinary sentences ("The board elected a new chair..."
-    picks 'board' over 'elected'). e0's own magnitude was tried as a
-    tie-break — project() at k=0, the shell console_speak() reads
-    σ_self/Γ off — and measured WORSE: it picked 'new' (a bare adjective)
-    over every real verb candidate in that same sentence, confirming e0
-    encodes word identity/shape, not syntactic function, and cannot
-    principled-ly settle a homograph question. Reading-order-first, while
-    still wrong on some sentences, was strictly better or equal across
-    every test case measured here. A real fix needs POS information this
-    module was built specifically to avoid requiring."""
+
+def find_anchor(words: List[str], verbs: Optional[dict] = None) -> int:
+    """The index of P (the anchor/verb) in `words`, or -1. The first word
+    whose verb-lemma (_verb_lemma) is IN the schema, in reading order — the
+    same convention ptolc_bridge.py already uses. Disclosed limitation,
+    tried and measured rather than assumed: many common words are
+    verb/noun homographs ("board", "water", "point", "new" all carry a
+    registered verb sense too), so this picks the wrong anchor on some
+    ordinary sentences ("The board elected a new chair..." picks 'board'
+    over 'elected'). e0's own magnitude was tried as a tie-break —
+    project() at k=0, the shell console_speak() reads σ_self/Γ off — and
+    measured WORSE: it picked 'new' (a bare adjective) over every real
+    verb candidate in that same sentence, confirming e0 encodes word
+    identity/shape, not syntactic function, and cannot principled-ly
+    settle a homograph question. Reading-order-first, while still wrong
+    on some sentences, was strictly better or equal across every test
+    case measured here. A real fix needs POS information this module was
+    built specifically to avoid requiring."""
     if verbs is None:
         from .generate import SCHEMA
         verbs = SCHEMA.get("verbs", {})
-    words = [w.strip(".,;:!?\"'()").lower() for w in text.split()]
-    words = [w for w in words if w]
+    return next((i for i, w in enumerate(words)
+                if _verb_lemma(w) in verbs), -1)
 
-    anchor_idx = next((i for i, w in enumerate(words)
-                       if _verb_lemma(w) in verbs), -1)
+
+def content_words(words: List[str]) -> List[str]:
+    """`words` with closed-class function words dropped — see the
+    _FUNCTION_WORDS note; a content role should never be occupied by one."""
+    return [w for w in words if w not in _FUNCTION_WORDS]
+
+
+def assign_slots(text: str, verbs: Optional[dict] = None,
+                 sigma: float = 0.5) -> Dict[str, List[str]]:
+    """Tokenize `text`, find the anchor (P) via find_anchor(), then assign
+    every OTHER (non-function-word) word a role via assign_role(). Returns
+    {role: [words]}, 'P' included in canonical SPOCA order, reading order
+    preserved within each role. Usable straight into a ParseSpec — no UD
+    parse anywhere in this path, so it works on live input or crawled text
+    a treebank never saw. See find_anchor()'s docstring for the anchor
+    heuristic's disclosed homograph limitation."""
+    words = tokenize(text)
+    anchor_idx = find_anchor(words, verbs)
 
     out: Dict[str, List[str]] = {}
     for i, w in enumerate(words):
         if i == anchor_idx:
             out.setdefault("P", []).append(w)
+            continue
+        if w in _FUNCTION_WORDS:
             continue
         role = assign_role(w, sigma)
         if role:
