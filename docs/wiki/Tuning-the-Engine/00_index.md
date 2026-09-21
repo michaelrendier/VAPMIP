@@ -13,8 +13,8 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*37 entries — Phases 1–36 (+ addenda 02b, 21b) + one chain-of-custody audit.
-Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–36 by a
+*38 entries — Phases 1–37 (+ addenda 02b, 21b) + one chain-of-custody audit.
+Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–37 by a
 mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 
 ---
@@ -62,6 +62,7 @@ mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 | [_chain_of_custody_2026-08-27.md](_chain_of_custody_2026-08-27.md) | — | 2026-08-27 | Chain of Custody — audit of Phases 1–34 before the `ptol.c` migration |
 | [35_the_spider_web_composition_cycle.md](35_the_spider_web_composition_cycle.md) | 35 | 2026-09-03 → 2026-09-04 | The Spider-Web Composition Cycle |
 | [36_ptol_w_the_tabbed_console_and_the_resident_monad.md](36_ptol_w_the_tabbed_console_and_the_resident_monad.md) | 36 | 2026-09-04 | `ptol -w`, the Tabbed Console, and the Resident Monad |
+| [37_the_composter_monad_eye_hands_reused_not_reinvented.md](37_the_composter_monad_eye_hands_reused_not_reinvented.md) | 37 | 2026-09-21 | The Composter Monad: Eye/Hands Reused, Not Reinvented |
 
 ---
 
