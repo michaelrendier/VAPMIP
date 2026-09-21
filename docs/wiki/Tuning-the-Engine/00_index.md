@@ -2,15 +2,20 @@
 
 The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 
-> **⚠ PROTOCOL (2026-08-13).** These pages are now the **only** live copy. The
-> monolith is archived at
+> **⚠ PROTOCOL (2026-08-13, amended 2026-09-20).** These pages are now the
+> **only** live copy. The monolith is archived at
 > [Tuning-the-Engine.ARCHIVED-2026-08-13.md](../Tuning-the-Engine.ARCHIVED-2026-08-13.md)
 > and must not be edited. **New phases are new pages in this directory** — add the
 > page, then add its row below. The split exists to keep a phase readable without
-> loading 244 KB.
+> loading 244 KB. **Amendment (Cody, 2026-09-20): a repass on this index is part
+> of "update Tuning the Engine" every time** — don't just add the new page and its
+> own row; re-check the whole table is current (no missing phases, no stale
+> author/date ranges) before calling the update done. This index had drifted to
+> stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*29 entries — Phases 1–28. Phases 1–23 authored by Claude Sonnet 4.6;
-24–28 by Claude Opus 5.*
+*37 entries — Phases 1–36 (+ addenda 02b, 21b) + one chain-of-custody audit.
+Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–36 by a
+mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 
 ---
 
@@ -48,6 +53,15 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 | [26_the_degeneracy_audit_five_dead_statistics.md](26_the_degeneracy_audit_five_dead_statistics.md) | 26 | 2026-08-08 | The Degeneracy Audit: Five Dead Statistics |
 | [27_the_apex_path_and_the_half_radius_circle.md](27_the_apex_path_and_the_half_radius_circle.md) | 27 | 2026-08-13 | The Apex Path, the Half-Radius Circle, and Where Text Actually Lives |
 | [28_the_three_faces_the_fermat_ladder_and_executable_structure.md](28_the_three_faces_the_fermat_ladder_and_executable_structure.md) | 28 | 2026-08-18 | The Three Faces, the Fermat Ladder, and Structure as a Fast Path |
+| [29_generational_lineage_and_the_anatomy_of_sigma.md](29_generational_lineage_and_the_anatomy_of_sigma.md) | 29 | 2026-08-20 | Generational Lineage, and the Anatomy of σ in ∅_RB |
+| [30_wind_lift_and_the_monads_original_gate.md](30_wind_lift_and_the_monads_original_gate.md) | 30 | 2026-08-23 | Wind, Lift, and the Monad's Original Gate |
+| [31_wordnet_box_kites_and_the_pile_concept_emergence.md](31_wordnet_box_kites_and_the_pile_concept_emergence.md) | 31 | 2026-08-24 → 2026-08-25 | WordNet Box-Kites and the Pile-Concept Emergence |
+| [32_the_monad_that_uses_the_harness.md](32_the_monad_that_uses_the_harness.md) | 32 | 2026-08-25 | The Monad That Uses the Harness |
+| [33_folded_in_context_and_the_geometry_that_does_no_work.md](33_folded_in_context_and_the_geometry_that_does_no_work.md) | 33 | 2026-08-25 | Folded-In Context, and the Geometry That Does No Work |
+| [34_the_anomaly_the_caustic_and_the_one_file.md](34_the_anomaly_the_caustic_and_the_one_file.md) | 34 | 2026-08-27 | The Anomaly, the Caustic, and the One File |
+| [_chain_of_custody_2026-08-27.md](_chain_of_custody_2026-08-27.md) | — | 2026-08-27 | Chain of Custody — audit of Phases 1–34 before the `ptol.c` migration |
+| [35_the_spider_web_composition_cycle.md](35_the_spider_web_composition_cycle.md) | 35 | 2026-09-03 → 2026-09-04 | The Spider-Web Composition Cycle |
+| [36_ptol_w_the_tabbed_console_and_the_resident_monad.md](36_ptol_w_the_tabbed_console_and_the_resident_monad.md) | 36 | 2026-09-04 | `ptol -w`, the Tabbed Console, and the Resident Monad |
 
 ---
 

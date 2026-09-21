@@ -26,7 +26,7 @@ always emits the pickle.
 | `n` | `int` | vocabulary size = `len(words)` |
 | `vocab` | `dict[str, int]` | word → row index |
 | `words` | `list[str]` | row index → word (cleaned: lowercased, edge punctuation stripped) |
-| `beta` | `list[float]` | β-field, one per word. Knowledge depth at that address. Range `(0, 1]`; seeded at `GAP ≈ 7.07e-4`. |
+| `beta` | `list[float]` | β-field, one per word. Knowledge depth at that address. Range `(0, MONAD_BETA_SAT]` — `MONAD_BETA_SAT = 7.552` (`PtolC/ptolemy.h`), not `(0, 1]` as this spec previously stated: checked directly against the live cap in `monad_learn_ex` (`PtolC/monad.c`), the formula the daemon actually runs. Seeded at `GAP ≈ 7.07e-4`. The `monad.bin`/`Crank.learn` build path (§4, §9) separately caps at `1.0` on its own accumulation rule; `monad3_c.bin`'s own β field is kept in sync with the live in-memory value via `daemon.c::monad3c_fold_inplace` (periodic in-place mmap write, not a rebuild), so once the daemon has grown a word past `1.0` live, that is `monad3_c.bin`'s real value — the bootstrap-time `≤1.0` figure is only the file's starting point, not its ceiling. |
 | `E` | `list[float]` | E-field, one per word. `E = |sin(π·γ / (γ+1))|` where `γ` is the word's Riemann-zero value. Fixed by the address — not learned. |
 | `A` | `list[dict[int, float]]` | sparse A-matrix. `A[i][j]` = directed co-occurrence weight i→j, range `(0, 1]`. Row `i` is the out-edges of word `i`. |
 | `age` | `list[float]` | temporal decay counter per word; `0.0` = just touched |

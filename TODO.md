@@ -1913,3 +1913,79 @@ an optional vowel-marking layer present in some registers and absent in
 others. None of this is implied or half-solved by the English-only work
 already done — it needs its own data sources and design pass when picked
 back up, not an extension of the current tables.
+
+---
+
+## TODO — `prose_seen` must be monotonic (2026-09-20, found via ScalarContextPropagation §6.5)
+
+`PtolC/monad.c::monad_learn_ex` (~lines 505–512): the `NS_FT_WORDNET`
+branch unconditionally overwrites `m->vocab[idx].prose_seen = 2`,
+regardless of prior value — including when the word was already `3`
+("verified common", both WordNet and real prose). Verified directly by
+running the extracted logic over every 1–3-touch sequence of
+`{WORDNET, PROSE}`: the sequence `WN, P, WN` reaches `3` after the first
+two touches and is then **demoted back to `2`** by the third. Since
+WordNet is re-ingested as an ordinary corpus source on every bootstrap
+rebuild, this means a word that has genuinely earned "verified" status
+through real usage can have that status silently stripped by the next
+WordNet re-ingestion, dropping it into the tier `near_canonical()`'s own
+comment calls "last-resort... may be obscure" — for output-surface-form
+selection, this is a real behavioural regression, not cosmetic.
+
+**Fix direction:** make `prose_seen` monotonic — track the union of
+ever-seen sources (e.g. two bits, `ever_wordnet` / `ever_prose`) and
+derive the display tier as a pure function of that union, the same
+"never regress" philosophy β already follows (`min(β + Δ, BETA_SAT)`,
+capped, never reset by a later touch). Cody, 2026-09-20: *"that is a
+finding worth fixing. this directly affects the cumulative 'knowledge'
+through usage pathway."* Also: audience/listener-scaled word demotion
+(picking simpler or more technical words depending on who's being
+addressed) is explicitly **not** what this field is for — that belongs
+downstream, in the Mind's Eye `rehearse` handoff (decays, doesn't
+mutate the permanent record), keyed off box-kite/Flashlight granularity,
+never in this base ledger. See `monad_bin/SPEC.md` (already corrected
+2026-09-20 for the separate `MONAD_BETA_SAT` discrepancy this same
+pass found) and `[[project-minds-eye-papers-hands]]` /
+`[[project-scalar-context-paper]]` in Claude's memory for the fuller
+writeup. Not yet applied — noted here per this project's discipline,
+pending Cody picking it up.
+
+---
+
+## TODO — Boxkite Catalog: engineer in the sentence constructor; sentences are rings INSIDE one box kite (2026-09-20, Cody)
+
+Cody, explicit: *"the boxkite catalog is going to be engineered to
+include the sentence constructor... and sentences are not going to be
+rings of boxkites, but rings inside the singular boxkite."* A real
+architectural correction to record precisely, not to blur: the earlier
+open framing (a sentence as a chain/ring **of multiple box kites**,
+one per word or clause) is superseded — a sentence is instead one or
+more **rings that live inside a single box kite's own structure**
+(struts, pencil paths, the 42 Assessors) rather than a structure built
+by connecting many separate box kites together. `VAPMIP/Boxkite-Catalog.txt`
+(the session-long inventory of every box-kite finding — pencils, the
+21-member "Blackjack subgroup" of `PSL(2,7)`, zero-divisor portals,
+torsion/circulation, the anchor to the Real axis) is the material this
+gets engineered from. Not built — noted here so the direction isn't
+lost before the engineering pass starts. See
+`FourthAgePapers/ScalarContextPropagation/NOTEBOOK_PAPER_PLAN.md` §11
+("Future Paths for Research") for where this connects to the paper
+currently in progress (that paper stays scoped to 19D WordNet
+propagation only; this sentence-constructor work is later, separate).
+
+---
+
+## TODO — Turn the Mind's Eye into a box kite (2026-09-20, Cody)
+
+Cody, explicit: *"I want to make the Mind's Eye INTO a boxkite."* Not a
+metaphor to soften — a literal re-architecture of the Mind's Eye
+(`R̂`, updateable, the `stage/rehearse/archive/recall` STM side of the
+Operator Stitch Board, see `[[project-minds-eye-papers-hands]]`) onto
+the box-kite structure itself, rather than the box kite being merely a
+tool the Mind's Eye calls. Connects directly to the entry above (rings
+inside one box kite = the sentence-construction geometry) and to the
+`prose_seen` fix entry (audience-scaled word demotion belongs in
+`rehearse`, and if Mind's Eye *is* a box kite, that demotion is exactly
+a windspeed/pencil-collapse event on it, not a separate bolted-on
+mechanism). Not designed in detail yet — noted here so the direction is
+on record before the engineering pass starts.
