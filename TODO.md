@@ -1989,3 +1989,32 @@ inside one box kite = the sentence-construction geometry) and to the
 a windspeed/pencil-collapse event on it, not a separate bolted-on
 mechanism). Not designed in detail yet — noted here so the direction is
 on record before the engineering pass starts.
+
+---
+
+## TODO — static grammar rules map onto the box kite's non-deformable structures, in the A-Matrix Basin Windspeed sentence constructor (2026-09-21, Cody)
+
+`monad3_c.bin`'s deepening (`FourthAgePapers/ScalarContextPropagation`
+§6.4) folds a word's entry into three separate, independently-weighted
+layers: **context** (which other words it keeps company with),
+**semantics** (how it's actually used), and **static grammar rules**
+(the part of its behaviour that doesn't move). The first two are exactly
+what the **A-Matrix Basin Windspeed** (the sentence-construction
+windspeed, `basin()` in `monad_english_io.py` — see
+`FourthAgePapers/ScalarContextPropagation` §9.1/§11, deliberately not
+the corpus-free Gamma-Radial Windspeed the paper itself uses) is built
+to drive: it's corpus-dependent and usage-sensitive on purpose, so it's
+the right scalar for deforming a box kite's pencil/strut geometry
+per-word, per-context.
+
+Static grammar rules are the odd one out — by definition they're what
+does *not* deform. Direction to engineer: when the sentence-constructor
+box kite (rings inside one box kite, entry above) is built out under the
+A-Matrix Basin Windspeed, static grammar rules should map onto the
+kite's **non-deformable** structures — the fixed combinatorial skeleton
+a windspeed doesn't touch (struts, the 42 Assessors, the PG(3,2) pencil
+skeleton itself) — not onto the pencil/strut-angle geometry `Φ_w`
+deforms. Context and semantics ride the deformation; grammar is the
+frame the deformation happens inside of. Not designed in detail yet —
+noted here so the split is on record before the engineering pass
+starts.

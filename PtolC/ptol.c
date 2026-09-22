@@ -170,6 +170,63 @@ static const int P[16] = {
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53
 };
 
+/* ── Gamma-Radial Windspeed — the C port of wordnet_boxkite.py's own
+ * gamma_radial(), 2026-09-21. Not the same Gamma console_speak() already
+ * reports (that one is measure_gamma()'s sedenion-projection amplitude,
+ * a different quantity by construction) — this is the WordNet-relational
+ * fold FourthAgePapers/ScalarContextPropagation §7.3/§9.1 describes,
+ * finally ported off the Python side it was verified on.
+ *
+ * CONTEXT_PRIMES[19] and the hyponyms-excluded LOG_ANCHOR are COPIED
+ * exactly from wordnet_boxkite.py, not re-derived — any drift between the
+ * two would silently produce two different numbers for the same word, and
+ * nothing here would catch it. Cross-checked live, 2026-09-21:
+ * monad3_gamma_radial() on "tree"'s stored vec19 == -0.151155, matching
+ * the paper's own recorded windspeed("tree") to 6 decimal places. */
+static const int GR_CONTEXT_PRIMES[19] = {
+    73, 79, 83, 89, 97, 101, 103, 107, 109, 113,
+    127, 131, 137, 139, 149, 151, 157, 163, 167
+};
+#define GR_HYPONYMS_IDX 2   /* RELATION_METHODS.index('hyponyms'), wordnet_boxkite.py */
+
+static double gr_log_anchor(void)
+{
+    static double anchor = -1.0;
+    if (anchor < 0.0) {
+        anchor = 0.0;
+        for (int i = 0; i < 19; i++)
+            if (i != GR_HYPONYMS_IDX) anchor += log((double)GR_CONTEXT_PRIMES[i]);
+    }
+    return anchor;
+}
+
+/* NAN where log_code<=0 (an all-zero relation vector) — same guard as the
+ * Python. Caller checks with isnan(). */
+static double monad3_gamma_radial(const int16_t vec[19])
+{
+    double log_code = 0.0;
+    for (int i = 0; i < 19; i++)
+        if (vec[i]) log_code += (double)vec[i] * log((double)GR_CONTEXT_PRIMES[i]);
+    if (log_code <= 0.0) return NAN;
+    return tanh(0.5 * log(log_code / gr_log_anchor()));
+}
+
+/* Convenience: lookup + extract + compute in one call. Returns 1 on a
+ * store hit with a WordNet entry, 0 otherwise (out left at NAN either
+ * way it isn't computed). Zero-copy — reads the mmap directly, same
+ * struct layout -M already reads raw (word[32] pos[1] pad[3] offset[4]
+ * vec[19] depth_weight[4] = 82 bytes, boxkite_bin.h). */
+static int monad3_word_gamma_radial(const char *word, double *out)
+{
+    *out = NAN;
+    int32_t ix[3]; uint32_t deg;
+    if (!monad3_lookup(word, ix, &deg) || ix[1] < 0) return 0;
+    const unsigned char *e = g_m3 + g_m3h->off_wn + (size_t)ix[1] * 82u;
+    const int16_t *vec = (const int16_t *)(e + 40);
+    *out = monad3_gamma_radial(vec);
+    return 1;
+}
+
 /* ── Ptol's Eyes — (σ, θ) observation points on the sedenion tower ──────── */
 /*
  * Each Eye fixes a tower level σ and an angular offset θ (multiples of π/8).
@@ -916,11 +973,20 @@ static int read_image_scalars(const char *img_path, double *v_out)
  * `mode`/`ping` frames through monad_harness.c until the console quits.
  */
 #ifndef PTOL_LIBRARY
+/* gr_report, added 2026-09-21: "word=+0.123 word2=-0.456 ..." — each
+ * firing word's real Gamma-Radial Windspeed (monad3_word_gamma_radial(),
+ * the WordNet-relational fold), alongside gam_out which stays exactly
+ * what it always was — measure_gamma()'s sedenion-projection amplitude,
+ * a different quantity, not touched. May be NULL (both call sites below
+ * still work either way); a word with no store hit, or an all-zero
+ * relation vector, is simply left out of the report, not printed as 0. */
 static void console_speak(const char *prompt, char out[1024],
-                          double *sig_out, double *gam_out, char primes[128])
+                          double *sig_out, double *gam_out, char primes[128],
+                          char gr_report[256])
 {
     out[0] = '\0';
     primes[0] = '\0';
+    if (gr_report) gr_report[0] = '\0';
     if (sig_out) *sig_out = 0.5;
     if (gam_out) *gam_out = 0.0;
 
@@ -977,6 +1043,18 @@ static void console_speak(const char *prompt, char out[1024],
         }
     }
     if (o == 0) strncpy(out, "(no words fired)", 1024);
+
+    if (gr_report) {
+        size_t go = 0;
+        for (int s = 0; s < nseen; s++) {
+            double gr;
+            if (!monad3_word_gamma_radial(seen[s], &gr) || isnan(gr)) continue;
+            int wr = snprintf(gr_report + go, 256 - go, "%s%s=%+.3f",
+                              go ? " " : "", seen[s], gr);
+            if (wr < 0 || (size_t)wr >= 256 - go) break;
+            go += (size_t)wr;
+        }
+    }
 
     double gam, u;
     measure_gamma(v, &gam, &u);
@@ -1060,9 +1138,17 @@ static int run_console(int argc, char *argv[], int argstart)
         if (g == 0) continue;
 
         if (strcmp(fr.t, "say") == 0 || strcmp(fr.t, "cmd") == 0) {
-            char reply[1024], primes[128];
+            char reply[1024], primes[128], gr_report[256];
             double sig, gam;
-            console_speak(fr.text, reply, &sig, &gam, primes);
+            console_speak(fr.text, reply, &sig, &gam, primes, gr_report);
+            /* gr_report is computed but not yet on the wire — mh_send_chat's
+             * frame format (and ptolemy_console.py's parser on the other
+             * end) is untouched this pass, on purpose: that's the live,
+             * recently-verified (Phase 36) interactive path, and extending
+             * it needs its own tested pass, not a same-sitting add-on.
+             * `ptol -say`/`ptol -M` below are the real experiment surface
+             * for now — same console_speak(), fully offline, no curses
+             * wire involved. */
             mh_send_chat(h, fr.id, reply, sig, gam, primes, mode);
         } else if (strcmp(fr.t, "mode") == 0) {
             if (fr.mode[0]) {
@@ -1177,6 +1263,12 @@ int main(int argc, char *argv[])
                 printf("  wn: pos=%u  vec19=[", pos);
                 for (int q = 0; q < 19; q++) printf("%d%s", vec[q], q < 18 ? "," : "");
                 printf("]\n");
+                double gr = monad3_gamma_radial(vec);
+                if (isnan(gr))
+                    printf("  gamma_radial: undefined (all-zero relation vector)\n");
+                else
+                    printf("  gamma_radial: %+.6f  (Gamma-Radial Windspeed, "
+                           "ScalarContextPropagation §7.3/§9.1)\n", gr);
             }
             return 0;
         } else if (strcmp(argv[arg0], "-say") == 0) {
@@ -1193,11 +1285,14 @@ int main(int argc, char *argv[])
                 if (i > arg0) strncat(prompt, " ", sizeof(prompt) - strlen(prompt) - 1);
                 strncat(prompt, argv[i], sizeof(prompt) - strlen(prompt) - 1);
             }
-            char reply[1024], primes[128];
+            char reply[1024], primes[128], gr_report[256];
             double sig, gam;
-            console_speak(prompt, reply, &sig, &gam, primes);
+            console_speak(prompt, reply, &sig, &gam, primes, gr_report);
             printf("%s\n", reply);
             fprintf(stderr, "  [σ=%.4f Γ=%+.4f primes: %s]\n", sig, gam, primes);
+            fprintf(stderr, "  [Gamma-Radial Windspeed per firing word: %s]\n",
+                    gr_report[0] ? gr_report : "(none — no firing word has a "
+                    "WordNet entry with a nonzero relation vector)");
             return 0;
         } else if (strcmp(argv[arg0], "-g") == 0 || strcmp(argv[arg0], "--gui") == 0) {
             /* Launch holcus_window.py — the brain exec's the face */

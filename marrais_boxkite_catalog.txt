@@ -1,0 +1,146 @@
+THE MARRAIS BOX-KITE CATALOG — the mathematical object itself, established only
+
+Sits next to Boxkite-Catalog.txt on purpose, not as a duplicate of it.
+Boxkite-Catalog.txt is this project's own measured/derived extensions
+(windspeed, sigma_RB, torsion, lift, portals — OURS/MEASURED/OPEN, tagged
+throughout). This catalog is the other half: the actual object de Marrais
+(2000) defined and proved, as this project's own code computes it —
+ESTABLISHED tier only, no project extensions, every number below reproduced
+live from `ValaQuenta/modules/box_kite/maths.py` before being written down
+here, not copied from memory or from the paper.
+
+Source: de Marrais, R. P. C. (2000). "The 42 Assessors and the Box-Kites
+They Fly: Diagonal Axis-Pair Systems of Zero-Divisors in the Sedenions' 16
+Dimensions." arXiv:math/0011260. Responding directly to Moreno (1997/98),
+who proved the norm-one zero-divisors are homeomorphic to G2 — true, and,
+per de Marrais, the wrong place to build: G2 is the *continuous shadow* of
+the exact, finite object below. All of it is ESTABLISHED — none of the
+entries here are this project's own measurement or extension; verify_
+counts() and friends check computed structure against de Marrais's own
+published figures, they do not assert them.
+
+## 1. The underlying geometry — PG(3,2)
+
+- 15 points = the 15 pure-imaginary sedenion basis units, e1..e15.
+- 35 lines of 3 points each.
+- 15 Fano planes (7 points each) inside that.
+- `Aut(PG(3,2)) = PSL(2,7) = GL(3,2)`, order **168** — verified live:
+  `psl27_order() = 168`, `skeleton_counts()` confirms 15 points / 35 lines /
+  15 planes / plane_size 7, all exact.
+
+## 2. e0 — outside the geometry, not a generator inside it
+
+`e0_is_outside()`, verified live: `e0_is_a_pg32_point = False`,
+`e0_in_any_assessor = False`, `e0_associator_always_vanishes = True`,
+`e0_is_outside_the_geometry = True`. e0 is not one of the 15 pure
+imaginaries, spans no Assessor, sits in no box-kite — it is the axis the
+geometry is measured *from*, not a member *of* it. This is a derived fact,
+not asserted: it falls straight out of the definitions above.
+
+## 3. The 42 Assessors
+
+An Assessor is a plane `span(e_a, e_{b+8})`, `a,b in 1..7`, `a != b`, whose
+two diagonals `e_a +/- e_{b+8}` are genuine zero divisors. `a == b` never
+qualifies (that plane is a normed sub-algebra, no zero divisors) — hence
+`49 - 7 = 42`. Verified live: `assessors()` returns exactly 42 ordered
+pairs, `verify_counts()['all_verified_assessors'] = True`.
+
+## 4. The 84 diagonals, 168 unit zero divisors, 336 ordered ZD pairs
+
+- 84 diagonals = 42 Assessors x 2 signs.
+- 168 primitive unit zero divisors = 42 x 4 (each Assessor's point-set
+  quartet, both signs both diagonals) — exactly `|PSL(2,7)|`, not a
+  coincidence de Marrais leaves unremarked.
+- 336 ordered zero-divisor pairs: each of the 84 diagonals annihilates
+  exactly 4 others. `verify_counts()`: `diagonals=84`, `unit_points=168`,
+  `ordered_zd_pairs=336`, `kills_per_diagonal=4` — all exact, live.
+
+## 5. STRUT — the box-kite index
+
+`strut(a,b) = a XOR b`, valued in 1..7. Every Assessor belongs to exactly
+one strut.
+
+## 6. The 7 box-kites — one octahedron each
+
+7 struts x 6 Assessors = 42. Verified live, `box_kites()`:
+
+    strut 1: (2,3) (3,2) (4,5) (5,4) (6,7) (7,6)
+    strut 2: (1,3) (3,1) (4,6) (5,7) (6,4) (7,5)
+    strut 3: (1,2) (2,1) (4,7) (5,6) (6,5) (7,4)
+    strut 4: (1,5) (2,6) (3,7) (5,1) (6,2) (7,3)
+    strut 5: (1,4) (2,7) (3,6) (4,1) (6,3) (7,2)
+    strut 6: (1,7) (2,4) (3,5) (4,2) (5,3) (7,1)
+    strut 7: (1,6) (2,5) (3,4) (4,3) (5,2) (6,1)
+
+Each box-kite's 6 Assessors form a 4-regular graph on 6 vertices with
+exactly 3 non-edges — the 3 reversal pairs `(a,b)<->(b,a)`. That is
+`K_{2,2,2}`, the octahedron, confirmed by `box_kite_graph()` from the
+actual vanishing products, not assumed from the shape's name:
+`is_4_regular = True`, `non_edges_are_reversals = True`,
+`is_octahedron = True`, for all 7.
+
+## 7. The chart (one box-kite's) Laplacian spectrum — closed form, exact
+
+    adjacency:   4, 0, 0, 0, -2, -2
+    Laplacian:   0, 4, 4, 4, 6, 6
+
+Verified live, `chart_spectrum(s)` for every s in 1..7: identical every
+time, `{0, 4(x3), 6(x2)}` to float precision. One zero mode (e0's own
+signature — the mode that exists everywhere, propagates nowhere), a
+3-fold degenerate mode at 4, a 2-fold degenerate mode at 6.
+
+## 8. The glued spectrum — all 7 box-kites at once
+
+`glued_spectrum()`, verified live: the full 42-eigenvalue set collapses to
+exactly `{0, 4, 6}` (with multiplicity 7, 21, 14 respectively) — the
+per-chart spectrum survives gluing unchanged in VALUE, only in
+multiplicity. The curvature de Marrais's construction carries lives in the
+*transitions* between charts, not in any single chart's own spectrum —
+stated open in the module's own docstring, not resolved here.
+
+## 9. The associator — the curvature, exact and pointwise
+
+`[a,b,c] = (ab)c - a(bc)`. Census over all `16^3 = 4096` basis triples,
+verified live: **1848 nonzero, 2248 zero** (`associator_census()`). The
+direct sedenion analogue of a curvature tensor; the commutator
+`[a,b]=ab-ba` is its torsion analogue.
+
+## 10. Pencils — one anchor, 7 factorizations
+
+`pencil(r)` for anchor `r`: the 7 lines of PG(3,2) through the point
+corresponding to `r`, each giving one `(a,b)` factor pair with `a XOR b =
+r`. Verified live, `verify_pencil_counts()`: 35 lines total, 105
+point-line incidences, uniform 7 lines per point, sizes all 7, consistent
+with the line set independently enumerated. `pencil(1)`:
+
+    (2,3) (4,5) (6,7) (8,9) (10,11) (12,13) (14,15)
+
+exact match against the independently-built line list.
+
+## Summary table — every count in this catalog, in one place
+
+| object                          | count | verified live via |
+|----------------------------------|-------|---------------------|
+| PG(3,2) points                  | 15    | `pg32_points()` |
+| PG(3,2) lines                   | 35    | `pg32_lines()` / `skeleton_counts()` |
+| Fano planes                     | 15    | `fano_planes()` / `skeleton_counts()` |
+| `\|PSL(2,7)\|`                    | 168   | `psl27_order()` |
+| Assessors                       | 42    | `assessors()` / `verify_counts()` |
+| diagonals                       | 84    | `verify_counts()` |
+| unit zero divisors              | 168   | `verify_counts()` |
+| ordered ZD pairs                | 336   | `verify_counts()` |
+| kills per diagonal              | 4     | `verify_counts()` |
+| box-kites (octahedra)           | 7     | `box_kites()` / `verify_counts()` |
+| Assessors per box-kite           | 6     | `box_kites()` |
+| non-edges per box-kite (lobes)  | 3     | `box_kite_graph()` |
+| chart Laplacian spectrum        | {0,4,4,4,6,6} | `chart_spectrum(s)`, every s |
+| glued spectrum (distinct values)| {0,4,6} | `glued_spectrum()` |
+| nonzero associators / 4096      | 1848  | `associator_census()` |
+| pencil size (lines per anchor)  | 7     | `verify_pencil_counts()` |
+| point-line incidences           | 105   | `verify_pencil_counts()` |
+
+Nothing above is this project's own claim. Where this project's own
+extensions pick up from here — windspeed, torsion sign, lift, the portal
+dynamics, the 21-element zero-divisor-preserving subgroup — that is
+Boxkite-Catalog.txt, kept deliberately separate so a reader always knows
+which side of the ESTABLISHED/OURS line any given fact sits on.

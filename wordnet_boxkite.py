@@ -168,6 +168,66 @@ def context_addr(synset: Any) -> Dict[str, int]:
     return {'code': code, 'addr': addr, 'delta': addr - code}
 
 
+# ── gamma_radial — the one-real-number fold, promoted out of notebook 05 ────
+# cell 5 into shipped code (2026-09-21). FourthAgePapers/ScalarContextPropagation
+# §7.3/§9.1/§13 describe this as shipped; before this pass it only existed
+# inline in the notebook, never as a function another module could import —
+# closing that gap here rather than reimplementing the formula ad hoc
+# wherever it's next needed. Formula, LOG_ANCHOR, and the exact
+# tanh/atanh round-trip are UNCHANGED from the verified notebook cell.
+
+_HYPONYMS_IDX = RELATION_METHODS.index('hyponyms')
+_LOG_CONTEXT_PRIMES = [math.log(p) for p in CONTEXT_PRIMES[:len(RELATION_METHODS)]]
+LOG_ANCHOR = sum(_LOG_CONTEXT_PRIMES[i] for i in range(len(RELATION_METHODS))
+                  if i != _HYPONYMS_IDX)
+
+
+def log_code_of(vector: Sequence[int]) -> float:
+    """Sigma v[i].ln(CONTEXT_PRIMES[i]) — the real-valued log of
+    context_code(), one level before the tanh bound. Injective on real
+    vocabulary by the same unique-factorisation argument as context_code
+    itself (§7.2/§7.3)."""
+    return sum(v * lp for v, lp in zip(vector, _LOG_CONTEXT_PRIMES))
+
+
+def gamma_radial(vector_or_synset: Any) -> Optional[float]:
+    """The single continuous scalar: tanh(0.5.ln(log_code/LOG_ANCHOR)).
+    Accepts either a raw 19-vector (from context_vector(), or recovered
+    from an address via recover_gamma_radial() below) or a synset
+    directly. Returns None where log_code<=0 (an all-zero vector — no
+    relations at all — has no defined radial position), same guard the
+    notebook cell uses."""
+    vector = (vector_or_synset if isinstance(vector_or_synset, (list, tuple))
+              else context_vector(vector_or_synset))
+    lc = log_code_of(vector)
+    if lc <= 0:
+        return None
+    return math.tanh(0.5 * math.log(lc / LOG_ANCHOR))
+
+
+def recover_gamma_radial(full_addr: int, delta: int, word: str) -> Optional[float]:
+    """The full §9.1 recovery, end to end, from what a word's own stored
+    address already carries plus its own spelling — no separate WordNet
+    read. full_addr-delta -> full_code; divide out spelling_code(word)
+    (exact, disjoint prime tiers, §7.4); recovered_context_code's own
+    log (via its prime factorisation over CONTEXT_PRIMES, not a vector
+    rebuild) folds through gamma_radial's tanh bound directly."""
+    full_code = full_addr - delta
+    spelling = spelling_code(word)
+    if full_code % spelling != 0:
+        return None                     # not this word's address
+    context_code_recovered = full_code // spelling
+    lc = 0.0
+    remaining = context_code_recovered
+    for p, lp in zip(CONTEXT_PRIMES[:len(RELATION_METHODS)], _LOG_CONTEXT_PRIMES):
+        while remaining % p == 0:
+            remaining //= p
+            lc += lp
+    if remaining != 1 or lc <= 0:
+        return None
+    return math.tanh(0.5 * math.log(lc / LOG_ANCHOR))
+
+
 # ── vector distance — "nearly the same", the piece the address gap ────────
 # couldn't answer (see compress_count()'s docstring: a 1-step count change
 # multiplies the WHOLE address by a prime, so the gap can't carry
