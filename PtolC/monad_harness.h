@@ -9,16 +9,21 @@
  *      regularly-structured lines in the Chat buffer; mh_parse_support_line()
  *      reads them back, Ptolemy's judgement lines included.
  *
- * Frame dispatch (mh_recv / mh_send_chat / mh_send_raw) is now real. The
- * monad.h ingest hooks (mh_ingest_support) are still TODO against the core.
+ * Frame dispatch (mh_recv / mh_send_chat / mh_send_raw) is real, and so is
+ * mh_pump()'s ingest: a "radio" frame's text is parsed as a support line and
+ * folded into the Monad via mh_ingest_support(). This is the beginning of
+ * the PtolemyDesktop Event Handler for the monad -- the bus function (a
+ * general pub/sub beyond this one frame type) is deliberately deferred, not
+ * built here.
+ *
+ * `Monad *` is passed through as `void *` so this header stays standalone
+ * (no monad.h dependency) -- monad_harness.c includes monad.h itself and
+ * casts back at the point of use.
  */
 #ifndef MONAD_HARNESS_H
 #define MONAD_HARNESS_H
 
 #include <stddef.h>
-
-/* the core, from monad.h — forward-declared so this header stands alone */
-struct Monad_;
 
 /* ── frame kinds ──────────────────────────────────────────────────────────── */
 typedef enum {
@@ -50,8 +55,13 @@ typedef struct {
 /* Parse one line from the Chat buffer. Returns kind; fills `out`. */
 mh_support_kind mh_parse_support_line(const char *line, mh_support_line *out);
 
-/* Fold an ingested support line into the core. TODO: wire to monad.h. */
-int mh_ingest_support(struct Monad_ *m, const mh_support_line *sl);
+/* Fold an ingested support line into the core. `monad` is a `Monad *`
+ * (monad.h), passed opaque so this header need not include monad.h.
+ * HARDEN/THROTTLE and ESCALATE raise emote (positive = more irritated,
+ * ESCALATE the larger step); DEFER/HOLD change nothing; a FACE_POST
+ * carrying a non-empty intrusion tag is a warn (+small). Safe to call with
+ * monad == NULL (classifies and logs only, same as before this was wired). */
+int mh_ingest_support(void *monad, const mh_support_line *sl);
 
 /* ── the frame link ──────────────────────────────────────────────────────── */
 #define MH_FRAME_MAX 65536
@@ -82,7 +92,12 @@ int mh_send_chat(mh_harness *h, long id, const char *text,
 /* Write a raw pre-built JSON object line (no trailing newline needed). */
 int mh_send_raw(mh_harness *h, const char *json_line);
 
-/* one frame + drain chat — still TODO (frame side is done via mh_recv). */
-int mh_pump(mh_harness *h, int timeout_ms);
+/* mh_recv, but "radio" frames (a passive support-line for the Chat Tab) are
+ * intercepted, parsed, and folded into `monad` via mh_ingest_support before
+ * looping for the next frame -- the caller never sees a radio frame, only
+ * say/cmd/mode/ping/attach/quit, same as calling mh_recv() directly. `monad`
+ * may be NULL (radio frames are still classified and logged, just not
+ * folded into any core state). Same 1/0/-1 return contract as mh_recv. */
+int mh_pump(mh_harness *h, void *monad, mh_frame *out, int timeout_ms);
 
 #endif /* MONAD_HARNESS_H */

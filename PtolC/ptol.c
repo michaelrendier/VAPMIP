@@ -89,6 +89,7 @@
 #include "ptolemy.h"
 #include "monad3c.h"        /* the three language centers, one mmap-able file */
 #include "monad_harness.h"  /* the frame seam to the Python tabbed curses UI  */
+#include "monad.h"          /* the Monad radio frames fold into via mh_pump  */
 
 /* Directory containing the ptol binary (and ptol_layer.py). Set in main(). */
 static char g_ptol_dir[512] = ".";
@@ -1130,10 +1131,17 @@ static int run_console(int argc, char *argv[], int argstart)
     mh_harness *h = mh_open(sv[0], sv[0]);
     if (!h) { close(sv[0]); return 1; }
 
+    /* Ptolemy is the Monad + Harness together, so radio frames (Aule's
+     * face-posts and judgements, routed through the support-line grammar)
+     * fold into THIS Monad -- the same core answering say/cmd below, never
+     * a side channel. mh_pump() intercepts them transparently; everything
+     * else reaches this loop exactly as mh_recv() already delivered it. */
+    Monad *g_monad = monad_create(MONAD_N_DEFAULT);
+
     char mode[16] = "sentence";
     for (;;) {
         mh_frame fr;
-        int g = mh_recv(h, &fr, -1);
+        int g = mh_pump(h, g_monad, &fr, -1);
         if (g < 0) break;
         if (g == 0) continue;
 
@@ -1170,6 +1178,7 @@ static int run_console(int argc, char *argv[], int argstart)
         }
     }
 
+    if (g_monad) monad_destroy(g_monad);
     mh_close(h);
     close(sv[0]);
     int st = 0;

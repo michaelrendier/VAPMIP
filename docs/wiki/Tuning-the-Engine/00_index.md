@@ -13,8 +13,8 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*38 entries — Phases 1–37 (+ addenda 02b, 21b) + one chain-of-custody audit.
-Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–37 by a
+*40 entries — Phases 1–39 (+ addenda 02b, 21b) + one chain-of-custody audit.
+Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
 mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 
 ---
@@ -63,6 +63,8 @@ mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 | [35_the_spider_web_composition_cycle.md](35_the_spider_web_composition_cycle.md) | 35 | 2026-09-03 → 2026-09-04 | The Spider-Web Composition Cycle |
 | [36_ptol_w_the_tabbed_console_and_the_resident_monad.md](36_ptol_w_the_tabbed_console_and_the_resident_monad.md) | 36 | 2026-09-04 | `ptol -w`, the Tabbed Console, and the Resident Monad |
 | [37_the_composter_monad_eye_hands_reused_not_reinvented.md](37_the_composter_monad_eye_hands_reused_not_reinvented.md) | 37 | 2026-09-21 | The Composter Monad: Eye/Hands Reused, Not Reinvented |
+| [38_gauge_eye_gauge_hands_continuous_operators.md](38_gauge_eye_gauge_hands_continuous_operators.md) | 38 | 2026-09-22 | GaugeEye, GaugeHands: Eye and Hands as Continuous Operators |
+| [39_running_a_boxkite_hub_fiber_uft_dial.md](39_running_a_boxkite_hub_fiber_uft_dial.md) | 39 | 2026-09-24 | Running a Boxkite: Hub, Fiber, UFT Dial |
 
 ---
 

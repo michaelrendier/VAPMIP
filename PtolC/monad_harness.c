@@ -1,14 +1,20 @@
 /* monad_harness.c — the seam ptol.c crosses to drive the Python tabbed curses
  * UI. Grown from the PtolemyDesktop skeleton: the support-line grammar parser
- * is unchanged; the frame link (mh_open/mh_recv/mh_send_chat) is now real, a
+ * is unchanged; the frame link (mh_open/mh_recv/mh_send_chat) is real, a
  * newline-delimited JSON transport matching PtolemyDesktop/console_link.py.
  *
- * TODO (next build): mh_pump()'s Chat-buffer drain, and mh_ingest_support()
- * wired to monad.h (monad_emote / a supervisor-priority hook).
+ * mh_pump()/mh_ingest_support() are now real too -- the beginning of the
+ * PtolemyDesktop Event Handler for the monad. Everything here still routes
+ * through the one Monad the caller owns (monad_create() in ptol.c): Ptolemy
+ * is the Monad + Harness together, so a support line folds into the SAME
+ * core the resident console already speaks through, never a side channel.
+ * The bus function (general pub/sub beyond this one "radio" frame type) is
+ * deliberately deferred -- not built here.
  *
- * Build (standalone self-test):  cc -DMH_SELFTEST monad_harness.c -o mh_test
+ * Build (standalone self-test):  cc -DMH_SELFTEST monad_harness.c monad.c -o mh_test -lm
  */
 #include "monad_harness.h"
+#include "monad.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -105,17 +111,29 @@ mh_support_kind mh_parse_support_line(const char *line, mh_support_line *out)
     }
 }
 
-int mh_ingest_support(struct Monad_ *m, const mh_support_line *sl)
+int mh_ingest_support(void *monad, const mh_support_line *sl)
 {
-    (void)m;
-    /* TODO: wire to monad.h — HARDEN/THROTTLE -> supervisor-priority hook;
-     * ESCALATE -> raise the diagnostic weight; DEFER -> no core change;
-     * FACE_POST warn -> monad_emote(m, +small). For now: classify + log. */
     if (!sl) return -1;
+    Monad *m = (Monad *)monad;
+
     fprintf(stderr, "[mh] ingest %s face=%s intr=%s dec=%s\n",
             sl->kind == MH_S_PTOLEMY_JUDGEMENT ? "judgement"
             : sl->kind == MH_S_FACE_POST       ? "face-post" : "unknown",
             sl->face, sl->intrusion, sl->decision);
+
+    if (!m) return 0;      /* classify + log only, no core to fold into */
+
+    if (sl->kind == MH_S_PTOLEMY_JUDGEMENT) {
+        if (strcmp(sl->decision, "HARDEN") == 0 ||
+            strcmp(sl->decision, "THROTTLE") == 0) {
+            monad_emote(m, 0.15f);            /* supervisor-priority hook */
+        } else if (strcmp(sl->decision, "ESCALATE") == 0) {
+            monad_emote(m, 0.35f);            /* raise the diagnostic weight */
+        }
+        /* DEFER / HOLD: no core change, on purpose. */
+    } else if (sl->kind == MH_S_FACE_POST && sl->intrusion[0] != '\0') {
+        monad_emote(m, 0.05f);                /* a warn, +small */
+    }
     return 0;
 }
 
@@ -306,12 +324,20 @@ int mh_recv(mh_harness *h, mh_frame *out, int timeout_ms)
     }
 }
 
-int mh_pump(mh_harness *h, int timeout_ms)
+int mh_pump(mh_harness *h, void *monad, mh_frame *out, int timeout_ms)
 {
-    (void)h; (void)timeout_ms;
-    /* TODO: after mh_recv, drain the Chat buffer through
-     * mh_parse_support_line + mh_ingest_support. */
-    return 0;
+    for (;;) {
+        int g = mh_recv(h, out, timeout_ms);
+        if (g <= 0) return g;                 /* timeout or EOF/error, as-is */
+
+        if (strcmp(out->t, "radio") == 0) {
+            mh_support_line sl;
+            mh_parse_support_line(out->text, &sl);
+            mh_ingest_support(monad, &sl);
+            continue;                          /* consumed; wait for the next frame */
+        }
+        return 1;                              /* an ordinary frame for the caller */
+    }
 }
 
 #ifdef MH_SELFTEST
@@ -370,6 +396,35 @@ int main(void)
                 ok &= (strstr(rl, "\"id\":7") != NULL);
                 printf("reply: %.70s...\n", rl);
             } else ok = 0;
+            mh_close(h);
+        }
+    }
+
+    /* mh_pump: a "radio" frame must be consumed transparently (never handed
+     * to the caller) and fold into the Monad's affect via mh_ingest_support;
+     * the "say" frame right behind it must still come through untouched. */
+    {
+        int a[2], b[2];
+        if (pipe(a) == 0 && pipe(b) == 0) {
+            mh_harness *h = mh_open(a[0], b[1]);
+            Monad *m = monad_create(64);
+            float before = m ? m->affect : 0.0f;
+
+            const char *radio =
+                "{\"t\":\"radio\",\"text\":\"\xC2\xAB Ptolemy \xC2\xBB judgement "
+                "[Aule/backlog]: drift high -> decision: HARDEN  action: apply\"}\n";
+            const char *say = "{\"t\":\"say\",\"id\":9,\"text\":\"hello\"}\n";
+            if (wr_all(a[1], radio, strlen(radio))) { /* ignore */ }
+            if (wr_all(a[1], say, strlen(say))) { /* ignore */ }
+
+            mh_frame fr;
+            int g = mh_pump(h, m, &fr, 200);
+            ok &= (g == 1) && (strcmp(fr.t, "say") == 0) && (fr.id == 9);
+            ok &= (m != NULL) && (m->affect > before);
+            printf("pump: radio consumed, next frame t=%s id=%ld, "
+                   "affect %.3f -> %.3f\n", fr.t, fr.id, before, m ? m->affect : 0.0f);
+
+            if (m) monad_destroy(m);
             mh_close(h);
         }
     }
