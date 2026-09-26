@@ -4,6 +4,72 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## v5.2.0 "Virtual Action Potential" — 2026-09-26
+
+**The harness's radio-frame handling made real; the cusp re-derived and
+declared authoritative; a live sedenion system-monitor box-kite; HyperWebster
+and Blackjack-subgroup indexing tested against the plain-Horner baseline.**
+
+### The harness — `PtolC/monad_harness.c`, `monad_harness.h`
+
+- `mh_pump()` / `mh_ingest_support()` real (was stub): radio frames are
+  parsed (`mh_parse_support_line`), folded into `Monad.affect` via
+  `monad_emote` — `HARDEN`/`THROTTLE`→`+0.15`, `ESCALATE`→`+0.35`,
+  `FACE_POST` warn→`+0.05`, `DEFER`/`HOLD`→no-op. Non-radio frames pass
+  through unchanged. `ptol.c`'s `run_console()` now holds a real
+  `Monad *g_monad` and calls `mh_pump`, not raw `mh_recv`.
+- Verified via standalone `mh_test` (affect `0.000→0.150` exactly on a
+  synthetic `ESCALATE`+`HARDEN` sequence) and the full `ptol` binary
+  (`-say`, default paths unaffected).
+- The general pub/sub bus (beyond this one frame type) remains deliberately
+  deferred — this is the harness's radio-frame path made real, not a bus.
+
+### The cusp — re-derived this session, declared authoritative over any
+### earlier account in this repo or its papers
+
+A cusp (cardioid, waveform crest, any combination of superposed rotations)
+is a pure rotation-phase-alignment event — `dz/dt=0` exactly where two
+rotations' phases align, never either rotation actually stopping. Physically:
+braking into a curve, throttle out the other side — tangential deceleration
+into the turn, tangential acceleration out of it, the normal/centripetal
+component doing the actual cornering in between. Generalizes directly: a
+cusp can be one complex rotation, or **15** — one per imaginary sedenion
+component — each contributing its own phase-alignment condition
+simultaneously. This is the authoritative reading going forward; any prior,
+vaguer description of a cusp or of VAP elsewhere in this repo's history is
+superseded by it, not merely supplemented.
+
+### HyperWebster / Blackjack subgroup — tested against the plain-Horner
+### baseline, both directions
+
+- `benchmarks/hyperwebster_baseline_bench.py`: reference-machine specs +
+  measured encode/decode cost (full vs. minimal charset), O(n^1.8)-ish
+  growth confirmed independently against `FourthAgePapers`
+  `data-storage-no-location`'s own prior measurement.
+- `benchmarks/blackjack_vs_horner_bench.py`: the 21-element subgroup of
+  `PSL(2,7)` (`F₂₁ = 7:3`, normalizer of a Sylow-7 subgroup) tested as a
+  candidate box-kite-native indexer — ruled out directly: composing a word
+  of its elements collapses to 1 of 21 states (pigeonhole), and used
+  losslessly (as a size-21 digit alphabet) it is 5–21× slower than base-97
+  Horner. Real, useful negative result, not discarded.
+- `Boxkite-Catalog.txt` §8: the subgroup named precisely for the first time
+  (previously order-21 only, undetermined which group).
+
+### Aulë's System Monitor Boxkite — first build, live
+
+`PtolemyDesktop/Aule/system_boxkite.py` (ships from `PtolemyDesktop`, noted
+here as the first real consumer of this release's box-kite/HyperWebster
+work): 15 live system-telemetry channels embedded as a 16-vector, watched
+continuously (background thread, instant reads, never polls on demand).
+Two real bugs caught and fixed by running it against live data (counters
+fed as rates, not raw cumulative totals; saturated reference scales
+corrected from a real measurement). One degeneracy found and left open:
+the first-pass `e₀ := RMS(15 channels)` formula makes `fixed_point_weight`
+algebraically constant at `1/16` for any nonzero input — not yet fixed,
+documented as the next real step.
+
+---
+
 ## v5.1.0 "One File" — 2026-08-27 (in progress)
 
 **The three language centers merged into one mmap-able file; `ptol.c` gains a
