@@ -1,8 +1,33 @@
 # PtolemyHolcus — RedBlue Geometries Engine
 
-**Ptolemaious Holcaios Philadelphos** — *Ptolemy, The Extractor, Brother-Loving* — v3.0.0
+**Ptolemaious Holcaios Philadelphos** — *Ptolemy, The Extractor, Brother-Loving* — v5.2.0 "Virtual Action Potential"
 
 *Formerly SMMIP. Renamed 2026-05-26 to reflect the engine's identity.*
+
+---
+
+## Current Repo Focus
+
+*Individual files going stale between passes is fine — this project isn't
+hyper-updated daily. What has to stay current is this section and the
+version number above; check `CHANGELOG.md` for the full dated history
+behind it.*
+
+As of **v5.2.0 (2026-09-26):** the harness's radio-frame path is real
+(`PtolC/monad_harness.c`), the cusp is re-derived and authoritative
+project-wide, Aulë's System Monitor Boxkite exists as a first live build
+(`PtolemyDesktop/Aule/system_boxkite.py`), and the console (`ptol -w`) now
+has procedural monad selection with real conversational wiring for
+`19D_rotary_boxkite_monad`, `scaled_mind_eye_boxkite_kernel_monad`, and
+`monad.py`'s historical `Engine` — plus an honest survey of which of the
+24 available monads actually are conversational (6) versus genuine
+structural/utility modules that aren't (18), both kept visible, neither
+hidden. HyperWebster (plain Horner) and the Blackjack subgroup are
+baseline-benchmarked against each other (`benchmarks/`). Open thread:
+mapping Tuning-the-Engine's phase chronology to a real, directed
+reuse-weighted dependency graph — `rotary_rerun_monad.py` is the
+foundational file most of the box-kite-era monads were written on top of,
+not yet given its own node in that graph.
 
 ---
 
