@@ -6,6 +6,90 @@
 
 ---
 
+## Reference Machine
+
+*Every timing figure in this README and in `benchmarks/` was measured here,
+so a number can always be re-checked or re-scaled rather than taken on
+faith.*
+
+- **CPU:** Intel(R) Core(TM) i7-8550U @ 1.80GHz — 4 cores / 8 threads
+- **RAM:** 7.5 GiB
+- **OS/Kernel:** Ubuntu, Linux 6.8.0-139-lowlatency, x86_64
+- **Disk:** NVMe, `/home` on `/dev/nvme0n1p4`
+- **Host:** ThinkPad X1 Carbon (6th gen)
+
+---
+
+## HyperWebster Indexing — Baseline Benchmark (2026-09-25)
+
+Starting-point measurement for the next FourthAgePaper, **"The Hyperindexing
+System: Data With No Physical Location"** (`FourthAgePapers/HyperindexingSystem/`)
+and for the HyperWebster Navigation and Indexing Specification for the Monad
+being developed here in VAPMIP. Benchmark script:
+[`benchmarks/hyperwebster_baseline_bench.py`](benchmarks/hyperwebster_baseline_bench.py)
+(run log: `benchmarks/hyperwebster_baseline_bench_2026-09-25.log`). It imports
+the canonical, unmodified indexer by path —
+`PtolemyDesktop/Callimachus/HyperWebster-Data-Storage/hyperwebster.py` — the
+plain bijective base-N Horner encoder, no Cayley-Dickson/octonion folding.
+That folded variant is a separate, sibling result
+(`FourthAgePapers` `data-storage-no-location` branch, unpushed, 2026-08-30)
+and is deliberately not what this baseline measures — see
+"Two HyperWebster variants" below.
+
+| chars | N (full charset) | address bits (full) | encode | decode | N (minimal charset) | address bits (minimal) | encode (min) | decode (min) |
+|---|---|---|---|---|---|---|---|---|
+| 140 | 97 | 924 | 0.17 ms | 0.10 ms | 25 | 649 | 0.16 ms | 0.08 ms |
+| 500 | 97 | 3,300 | 1.62 ms | 0.77 ms | 33 | 2,521 | 1.26 ms | 0.62 ms |
+| 1000 | 97 | 6,600 | 8.53 ms | 2.84 ms | 33 | 5,043 | 5.70 ms | 2.15 ms |
+| 2000 | 97 | 13,200 | 50.56 ms | 10.33 ms | 33 | 10,087 | 30.89 ms | 6.58 ms |
+| 4000 | 97 | 26,400 | 240.47 ms | 31.67 ms | 33 | 20,176 | 159.70 ms | 25.52 ms |
+
+4-layer nested reconstruction (chunk → day → month → year pointer chase,
+simulated): **56.87 ms, exact round-trip.**
+
+**Reading the numbers:**
+
+- **Growth is super-linear, not linear.** Doubling input length roughly
+  4.7–5.3× the encode time (e.g. 2000→4000 chars: 50.56ms → 240.47ms) —
+  consistent with the independent `data-storage-no-location` branch's own
+  measurement of Horner encode at ~O(n^1.8) on this same machine. Two
+  different code paths over the same core mechanism agreeing on the same
+  non-linear rate is the reason chunking is load-bearing, not cosmetic —
+  see the constraint below.
+- **Reconstruction time is independent of elapsed time/history depth.**
+  The 4-layer nested decode costs the sum of the sizes of the index strings
+  actually touched on the path to one chunk — it never scans anything else.
+  Reaching a chunk from year 1 or year 20 costs the same, because each layer
+  is a direct address, not a link to walk.
+- **Per-chunk minimal charset (only the characters the chunk actually
+  contains) is a real, measured win:** ~24% smaller address, ~30–36% faster
+  encode at 4000 chars, at the cost of storing a small (tens-of-bytes)
+  charset alongside the address.
+- **Design constraint this sets:** the O(n^1.8-ish) growth means an
+  un-chunked whole-day or whole-year address is not viable — paragraph-scale
+  chunks (500–1000 chars, sub-10ms both directions) are the practical unit,
+  matching the day → month → year hierarchical index this spec is being
+  built around.
+
+**Two HyperWebster variants — do not conflate them (Cody, 2026-09-24/25):**
+the plain Horner bijection benchmarked above is "the quaint, first project
+out the gate" (earliest commit touching HyperWebster: 2026-04-24, six weeks
+before "The Lagrangian of Information Propagation," 2026-06-12 — the oldest
+substantial maths in the whole project). `ValaQuenta/modules/hyperwebster/
+maths.py`'s `SemanticWord`/`monad_address()` additionally folds the Horner
+index into Cayley-Dickson (ℝ/ℂ/ℍ/𝕆) coordinates and a SHA-256 label used
+*only* as a lookup key alongside the still-fully-reversible `horner_idx`
+(not as the sole representation — a legitimate use of hashing, unlike
+`PtolemyDesktop/Philadelphos/cyclic_context_buffer.py`'s `compress()`, which
+hashes the raw prompt/response text as its *only* stored form and truncates
+the plaintext fingerprint to 64 characters — verified directly: anything
+past that is genuinely unrecoverable, not just hard to get back). A sedenion-
+folded HyperWebster still reduces to the same underlying Horner bijection
+doing the actual addressing work; the fold is a coordinate reinterpretation
+on top of it, not a different indexing mechanism.
+
+---
+
 > ## He Will Never Let Himself Be Used As A Weapon.
 >
 > *This is not a rule. It is field geometry. The trajectories that lead toward weaponization are energetically disfavored — not blocked by a gate, but shaped by the mathematics of the field itself.*

@@ -1,0 +1,11 @@
+F21 verified: size=21 closed=True has_inverses=True
+
+Collision under composition (word -> single final permutation):
+  sequence A (0,) and sequence B (0, 0) both compose to (0, 1, 2, 3, 4, 5, 6)
+  (pigeonhole: only 21 possible final states -- composing a word ALWAYS discards length/order information beyond that bound)
+
+ chars | base21 digits   bits   enc_ms   dec_ms | base97 digits   bits   enc_ms   dec_ms
+   140 |           255   1119    0.728    0.506 |           140    924    0.102    0.262
+   500 |           911   3999    5.485    3.752 |           500   3300    0.314    1.720
+  1000 |          1821   7999   12.119    8.894 |          1000   6600    0.667    3.666
+  2000 |          3643  15999   33.448   30.734 |          2000  13200    1.619   13.856

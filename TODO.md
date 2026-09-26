@@ -1967,7 +1967,28 @@ by connecting many separate box kites together. `VAPMIP/Boxkite-Catalog.txt`
 21-member "Blackjack subgroup" of `PSL(2,7)`, zero-divisor portals,
 torsion/circulation, the anchor to the Real axis) is the material this
 gets engineered from. Not built — noted here so the direction isn't
-lost before the engineering pass starts. See
+lost before the engineering pass starts.
+
+**Named precisely, 2026-09-25 (still not built):** the Blackjack subgroup
+is `F₂₁ = 7:3`, the normalizer of a Sylow-7 subgroup of `PSL(2,7)` — forced
+by Sylow counting (simple group, Sylow-7 count must be 8, `168/8=21`), not
+picked. Abstract affine model: `{x↦ax+b : a∈{1,2,4} (QR mod 7), b∈ℤ/7}` on
+struts labeled `ℤ/7`; point-stabilizer order 3, matching the catalog's
+already-recorded number via a second derivation. Not yet reconciled with
+the catalog's own `GL(3,2)`/XOR-triple cycle computation — could be the same
+permutation representation relabeled, or a genuinely different embedding;
+undetermined. Proposed engineering use, TESTED 2026-09-25 (`VAPMIP/benchmarks/
+blackjack_vs_horner_bench.py`) — does NOT work: composing a word of these 21
+elements collapses to 1 of only 21 final states (pigeonhole, concrete
+collision at length 2), and the only lossless variant (keep the digit
+sequence, don't compose) needs ~1.8-2x more digits and runs 5-21x slower
+than plain base-97 Horner on the same machine. Not a viable Horner
+replacement. Reframed (Cody): F_21's failure mode here — fast, small,
+information-collapsing — maps to the amygdala/"lizard brain": a candidate
+fast triage/pre-classifier layer alongside the exact indexer, not a
+replacement for it. Full derivation:
+`VAPMIP/Boxkite-Catalog.txt` §8, `ValaQuenta/wiki/box_kite.md` §"The
+Blackjack subgroup." See
 `FourthAgePapers/ScalarContextPropagation/NOTEBOOK_PAPER_PLAN.md` §11
 ("Future Paths for Research") for where this connects to the paper
 currently in progress (that paper stays scoped to 19D WordNet
