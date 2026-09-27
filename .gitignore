@@ -57,6 +57,7 @@ PtolC/ptol
 ahura-mazda
 bumblebee
 totp_test
+PtolC/mh_test
 
 # python venv (2026-08-15) — see env.sh
 .venv/
