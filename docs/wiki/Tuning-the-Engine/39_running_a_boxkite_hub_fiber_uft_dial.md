@@ -70,3 +70,11 @@ structural-constant check). No `ptol.c` changes. `monad_harness.c`'s own
 C-layer thread — "the beginning of the PtolemyDesktop Event Handler for the
 monad," the general bus function deliberately deferred) but are not wired
 into this Python kernel; that remains open.
+
+### Open design note (2026-09-29, Cody)
+
+In the scaled boxkite, **context flow defines the "connecting words"** — the
+closed-class labels on the edges between content words (Phase 28, Phase 35)
+are selected by the flow through the kite, not looked up. Recorded, not
+designed; see `VAPMIP/TODO.md` ("in the scaled boxkite, context flow defines
+the connecting words").

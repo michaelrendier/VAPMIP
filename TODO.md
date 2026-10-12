@@ -2039,3 +2039,25 @@ deforms. Context and semantics ride the deformation; grammar is the
 frame the deformation happens inside of. Not designed in detail yet —
 noted here so the split is on record before the engineering pass
 starts.
+
+---
+
+## TODO — in the scaled boxkite, context flow defines the "connecting words" (2026-09-29, Cody)
+
+Cody, side note, verbatim: *"for scaled boxkite...context flow will define
+the 'connecting words'"* — noted here, not designed. Read with the two
+entries above (rings inside one box kite; static grammar rules on the
+non-deformable structures) and with Phase 35 (the connective lexicon:
+the connective a unit ends on is its composition control signal) and
+Phase 28 (function words are labels on edges, ~150–300, closed,
+populating `edge.kind`; WordNet has the relation `mero_part` but not the
+word "of"). The direction on record: in
+`scaled_mind_eye_boxkite_kernel_monad.py` (Phase 39) the connecting words
+— the closed-class labels on the edges between content words — are not
+looked up from a fixed table; they are **selected by the context flow**
+through the scaled kite at that point. Open questions, not answered here:
+which quantity of the context flow selects the connective (the
+A-Matrix Basin Windspeed, the fiber's outbound move, or the hub-distance
+`fixed_point_weight`); and whether the Phase 35 random-draw connectives
+(observed 0.68–1.00 band agreement) are replaced or only constrained by
+that selection.
