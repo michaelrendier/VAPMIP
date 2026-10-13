@@ -13,9 +13,9 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*40 entries — Phases 1–39 (+ addenda 02b, 21b) + one chain-of-custody audit.
+*42 entries — Phases 1–41 (+ addenda 02b, 21b) + one chain-of-custody audit.
 Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
-mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
+mix of Claude Opus 5 and Claude Sonnet 5; 40–41 by Claude Sonnet 5.5 (see each page's byline).*
 
 ---
 
@@ -65,6 +65,8 @@ mix of Claude Opus 5 and Claude Sonnet 5 (see each page's byline).*
 | [37_the_composter_monad_eye_hands_reused_not_reinvented.md](37_the_composter_monad_eye_hands_reused_not_reinvented.md) | 37 | 2026-09-21 | The Composter Monad: Eye/Hands Reused, Not Reinvented |
 | [38_gauge_eye_gauge_hands_continuous_operators.md](38_gauge_eye_gauge_hands_continuous_operators.md) | 38 | 2026-09-22 | GaugeEye, GaugeHands: Eye and Hands as Continuous Operators |
 | [39_running_a_boxkite_hub_fiber_uft_dial.md](39_running_a_boxkite_hub_fiber_uft_dial.md) | 39 | 2026-09-24 | Running a Boxkite: Hub, Fiber, UFT Dial |
+| [40_strut_tension_law_walsh_rows_and_entry_modes.md](40_strut_tension_law_walsh_rows_and_entry_modes.md) | 40 | 2026-10-12 | The Strut Tension Law, the Walsh Rows, and How a Wind Can Enter |
+| [41_demarrais_deformation_battery_and_the_two_constructs.md](41_demarrais_deformation_battery_and_the_two_constructs.md) | 41 | 2026-10-12 | The De Marrais Deformation Battery, and the Two Constructs Compared |
 
 ---
 

@@ -137,6 +137,9 @@ exact match against the independently-built line list.
 | glued spectrum (distinct values)| {0,4,6} | `glued_spectrum()` |
 | nonzero associators / 4096      | 1848  | `associator_census()` |
 | pencil size (lines per anchor)  | 7     | `verify_pencil_counts()` |
+| dim Der(sedenions)              | 14    | derivation equations (battery §12) |
+| monomial automorphism group     | 2,688 = 16 x 168 | GL(4,2) lift test (battery §11) |
+| annihilator of a diagonal       | 4-dim | `Rmat` rank (battery §13) |
 | point-line incidences           | 105   | `verify_pencil_counts()` |
 
 Nothing above is this project's own claim. Where this project's own
@@ -144,3 +147,182 @@ extensions pick up from here — windspeed, torsion sign, lift, the portal
 dynamics, the 21-element zero-divisor-preserving subgroup — that is
 Boxkite-Catalog.txt, kept deliberately separate so a reader always knows
 which side of the ESTABLISHED/OURS line any given fact sits on.
+
+======================================================================
+ADDED 2026-10-12/13 — DEFORMATIONS OF THE BOX-KITE: what preserves it, what opens it, what tears it
+======================================================================
+
+Still ESTABLISHED tier only: every entry is a property of the sedenion algebra itself, not a project
+extension. Method note (honest provenance): these were computed with a stand-alone Cayley-Dickson
+implementation that takes a parameter at each doubling level, (a,b)(c,d) = (ac + mu d*b, da + bc*),
+mu = -1 at every level being the standard sedenions; it reproduces `box_kite.maths.multiply` on all
+256 basis pairs and 50 random vectors (0 mismatches). Scripts, captured output and README:
+`.claude/scratchpad/2026-10-12_demarrais_deformation_battery/` (mirrored in ContextPlease). Notation:
+diagonal x = e_a +/- e_{b+8} for Assessor (a,b); "ZD pair" = ordered pair (x,y) of the 84 diagonals with
+xy = 0; Hadamard row u = the sign vector chi_u(i) = (-1)^popcount(u & i) on the 16 indices (= Walsh function).
+
+## 11. Symmetries that deform nothing (exact)
+
+- The 16 Sylvester-Hadamard (Walsh) sign vectors chi_u are algebra automorphisms: chi(x)chi(y) = chi(xy),
+  max error 0.0. They are EXACTLY the diagonal sign operators that are automorphisms: of all 65,536
+  sign operators on the 16 components, 16 qualify (the characters of (Z/2)^4).
+- Monomial automorphisms (signed index permutations) e_i -> eta_i e_{A i}: A must be linear over GF(2),
+  so A in GL(4,2) (20,160 elements). Exactly 168 of them lift to an automorphism, each in 16 sign ways
+  (the characters): monomial automorphism group of order 16 x 168 = 2,688 = (Z/2)^4 . GL(3,2).
+  All 168 fix e_8 and map the set of 42 Assessor planes onto itself; they act on the 7 struts as
+  GL(3,2) acts on the points of the Fano plane.
+- Multiplication by exp(theta e_8) = cos(theta) + sin(theta) e_8, on either side, preserves ALL 336 ZD
+  pairs for every theta tried (0.3, 1.1): both x and y transformed, or only one of them. No other basis
+  unit e_t (t = 1..7, 9..15) does (14% / 29% of pairs kept, independent of theta). Conjugation and the
+  sign flips of e_0 or e_8 alone also keep every pair (the diagonals have no e_0, e_8 component).
+
+## 12. The continuous exact deformations (the "open" directions)
+
+- dim Der(sedenions) = 14 (g2), solved from the 4096 x 256 derivation equations.
+- The tangent space, at every one of the 336 ordered ZD pairs, to {(x,y) : xy = 0} (first order, from
+  the rank of [R_y | L_x]) has dimension exactly 16 = 14 (the derivation orbit of the pair) + 2 (scaling
+  x, scaling y). There are NO ZD-preserving first-order directions beyond G2 and scaling.
+- The Der-orbit through any one diagonal has dimension 11 (stabiliser 3); through all 84 diagonals
+  together the orbit has rank 14 (stabiliser 0); the same 14 for each chart's 12 diagonals alone.
+- No derivation keeps all 84 diagonal lines invariant: every continuous exact deformation moves the
+  kite off its lattice. Flowing all 84 diagonals along exp(tD), D a random unit derivation, t = 0.05 ..
+  2.5: all 336 relations hold to 1e-15 while diagonals move up to 48 degrees off their lattice lines.
+  Control, a random orthogonal generator: defect 0.023 at t = 0.05, 0.148 at t = 0.3.
+- The stabiliser of one diagonal (dim 3) acts non-trivially on its 4 partners (rank 3).
+
+## 13. First-order response — what tears, and how fast
+
+- Every one of the 84 diagonals y has a right-annihilator {x : xy = 0} of dimension exactly 4; the
+  other 12 singular values of x -> xy are sqrt(2) (x8) and 2 (x4).
+- Every Hadamard row, used as a perturbation direction of x, produces the same response sqrt(2)|delta|
+  against every y (min = mean = max over all 84): the Walsh directions are uniformly transversal.
+- Rotating a diagonal inside its own plane, x(theta) = cos e_a + sin e_{b+8}: defect min_y |x y| =
+  2|sin(theta - pi/4)| in the first quadrant, zero at theta = pi/4 + n pi/2: a linear tear of rate 2
+  per radian (0.02 at +/- 0.01 rad).
+- Functions of the native pair z = d+ + i d- applied to a diagonal: a real-analytic map keeps the
+  real axis (the d+ line) in its ZD set; it keeps the imaginary axis (the d- line) only if it also
+  preserves that axis. Checked at magnitudes 0.3, 1.0, 2.5 (magnitude 1 is degenerate for z^2 and the
+  Moebius map): Joukowsky z + c/z (real c), z^2, tanh(z/2), 1/z, conjugation, rotation by pi/2 keep both
+  lines; exp(z), Moebius (z-z0)/(z+z0) with real z0 and a real shift keep d+ only; an imaginary shift
+  keeps d- only; a generic in-plane rotation (e^{0.3 i}) keeps neither.
+- Dense Hadamard transform (the 16x16 WHT) destroys 336/336 pairs; the Gray-code and bit-reversal index
+  maps keep 29% and 24%; a random orthogonal 16x16 keeps none of 10 draws.
+
+## 14. Deforming the ALGEBRA (generalised doubling parameter mu)
+
+Mu is the parameter in (a,b)(c,d) = (ac + mu d*b, da + bc*); standard = -1. Plane pairs that still
+contain a zero-divisor pair are found by solving, for each ordered pair of the 42 planes, the null space
+of the 16 x 4 product matrix and the rank-1 condition (no 45-degree assumption).
+- Standard sedenions: 168 ordered plane pairs, every plane has exactly 4 partners, all within its own
+  chart (the 7 octahedra), nullity 2 in each, ZD slope kappa = +/-1.
+- mu_4 = -c for any real c > 0: the SAME combinatorics (168 pairs, degree 4, within-chart); the
+  algebra is isomorphic to the standard one by rescaling e_{k+8}. The only change is geometric: the ZD
+  directions in every plane tilt to kappa = +/- 1/sqrt(c), i.e. the kite's vertices rotate in-plane by
+  arctan(1/sqrt c). Verified for c in {1/2, sqrt2, 2, e, pi, phi, ln10, Omega_ZS = 0.56714,
+  d* = 0.24631, d*_spec = 0.24600, GAP = 7.07e-4}: kappa = 1.4142, 0.8409, 0.7071, 0.6065, 0.5642,
+  0.7862, 0.659, 1.3279, 2.0149, 2.0162, 37.606.
+- mu_4 = +c (split): 84 plane pairs, every plane degree 2 — the octahedron keeps half its adjacency;
+  kappa magnitude unchanged (1/sqrt c).
+- mu_4 = 0: 1,764 pairs (every plane pair, degree 42): the kite collapses into an all-to-all degenerate
+  zero-divisor structure.
+- mu_4 = +/- i (complex): 252 pairs, degree 6 within-chart, complex slopes kappa = (+/-1 +/- i)/sqrt 2.
+- Deforming ONE lower level, others standard: mu = +1 or +2 gives 120 pairs (degrees 2 and 4);
+  mu = 0 gives 1,344 pairs; mu = -2 is isomorphic (168). Levels 1, 2, 3 give identical counts.
+- All four levels together at -c: same 168-pair structure for every c > 0 tested. (The value c = GAP
+  appeared to give 537 pairs; that was a numerical threshold artifact — mu^3 = 3.5e-10 below the
+  1e-9 tolerance — and disappears at tolerance 1e-14: 252 = the standard count.)
+
+## 15. Tension-type scalar on the pencil product (algebra facts only)
+
+For the pencil product Pi = ordered product of the seven station elements cos(phi_k) e_a + sin(phi_k) e_b
+(a XOR b = r): each factor is exactly e_a exp(eta_k e_r phi_k) with e_a^-1 e_b = eta_k e_r (checked for
+r = 1..9); the product of the bare e_a is -1 for every r. Re(Pi) = -cos(sum eps_k phi_k) to 8e-16 for
+r = 1..9 (the eps are Hadamard rows 0-3 for r <= 7), and does NOT reduce to one phase for r = 10..15
+(rank of the gradient set: 4, 4, 5, 5, 5, 5). The Assessor planes of strut s are six of the seven
+stations of pencil(s+8) (index XOR = s + 8); the pencils through the points r <= 7 contain no Assessor
+plane. Alternativity is not the cause (e_r(e_r e_a) = -e_a holds for all r, a), nor are simple
+associator counts (identical for r = 9 and r = 10..15).
+
+## 16. The {4:8:4} grading of a zero divisor, and the kite's edges
+
+For a zero divisor y = e_a +/- e_{b+8}, the map x -> xy has singular values {0 x4, |y| x8, sqrt2|y| x4}
+(for the 84 diagonals, |y| = sqrt2: 0 x4, sqrt2 x8, 2 x4) — the {4:8:4} grading, reproduced exactly from the
+multiplication table. Its three eigen-blocks, for every one of the 84 diagonals:
+- **null block (4):** exactly the span of the vertex's 4 edge-partners (the 4 diagonals x with xy = 0); rank 4,
+  norm 1.0 inside the block. Left and right annihilators coincide. So the kite's edges at a vertex ARE its null block.
+- **gain-sqrt2 block (4):** spanned by the OTHER-sign diagonals of the same four neighbour planes (the diagonal that
+  does not annihilate y). The opposite vertex (the reversal plane) lies entirely in the 8-block.
+- **isometric block (8):** the COORDINATE subspace on the indices {i : chi_u(i) = +1}, a sub-octonion, where u is the unique
+  nonzero u in F2^3 with u.a = u.b = 0 (the polar point of the Fano line {a, b, a^b}). Verified for all 84 diagonals;
+  12 diagonals per u; only u = 1..7 occur (u >= 8 never). Contains e_0 and e_8. The null and gain-sqrt2 blocks both live on
+  the complementary 8 indices, half of each, separated by the d+/d- sign of the neighbour planes.
+- Example: y = (2,3,+): u = 4, isometric block = {0,1,2,3,8,9,10,11} (= ptol.c's J_red index set), null and gain-sqrt2 on {4..7,12..15}.
+
+## 17. The Blackjack subgroup (F21) — algebra characterisation
+
+The 168 frame-preserving index maps (PSL(2,7) acting on the 7 struts as GL(3,2) on the Fano points) each lift to an automorphism
+only with a sign correction in general. Exactly 21 of them lift with ALL signs +1 (pure relabelling); the same 21, applied as
+plain unsigned permutation matrices, keep all 336 zero-divisor pairs. They form a closed subgroup with element orders 1 x1, 3 x14, 7 x6
+(the Frobenius group 7:3 = F21, the normalizer of a Sylow-7 subgroup) and are transitive on the 7 struts. De Marrais (arXiv:math/0011260
+and follow-ups) ties PSL(2,7) of order 168 to the primitive unit zero divisors; a literature search found no 21-element subgroup or the
+name "Blackjack" there — the name is this project's, the subgroup and this characterisation are computed algebra.
+
+## 18. Bracketing and firing order of the pencil product
+
+Pi = ordered product of the seven station elements cos(phi_k) e_a + sin(phi_k) e_b of pencil(r). Re(Pi) depends on how the seven factors
+are bracketed (Catalan(6) = 132) and in what order they fire (7! = 5040):
+- pencils 1, 2, 4 (and 8): the one-phase form Re(Pi) = -cos(sum eps_k phi_k) holds for ALL 132 bracketings; the sign pattern eps takes 7 distinct
+  values (pencil 8: 14), of which only 3 are +/- Sylvester-Hadamard rows on the station index (pencil 8: none).
+- the Assessor-plane pencils: pencil(9) one-phase for 52/132 bracketings (others rank 4, 6, 7); pencil(10) 0/132 (rank 4-7); pencil(12) 0/132
+  (rank 5-7); pencil(15) 10/132. Firing order (left bracketing, 300 random permutations): pencil(1) all rank 1; pencil(9) 11/300; pencil(10) 9/300.
+- hence the one-phase law is a property of (pencil, bracketing, firing order), not of the pencil alone, and "eps = Hadamard rows" holds for the
+  left-bracketed natural order. Pencil convention: the Assessor planes of strut s are six of the seven stations of pencil(s+8) (index XOR s+8); the
+  pencils through the points 1..7 contain none.
+
+## 19. What an Assessor, a strut and a kite are made of (2026-10-13)
+
+All from the multiplication table (scripts: .claude/scratchpad/2026-10-13_portals_inventory_moving_kite/genealogy*.py).
+- The lower octonion's imaginaries {1..7} form the Fano plane P (7 points, 7 lines {a,b,a^b}). e_8 is the doubling pivot.
+- An ASSESSOR is an ORDERED PAIR (a,b) of DISTINCT points of P, read as the plane span(e_a, e_{b+8}): 7 x 6 = 42. The 49 cells of
+  P x P minus the 7 diagonal cells (a,a), which are normed planes with no zero divisor.
+- The STRUT LABEL s = a^b is the third point of the line through a and b (7 values). Chart s = the six points of P other than s;
+  its three antipodal pairs (a,a^s)/(a^s,a) are the three lines of P through s. (Two senses of "strut": the label s in 1..7, and
+  De Marrais's three axes of the octahedron = the three antipodal pairs.)
+- EDGE RULE: Assessors (a,b),(c,d) are adjacent iff a^b = c^d (same strut) and (c,d) != (b,a). The necessary identity a^b^c^d = 0 comes from
+  the four basis products cancelling in pairs; the cocycle signs then select 2 of the 4 sign choices. Predicate == measured adjacency (168 ordered pairs).
+- The Assessor planes lie on the 21 lines of PG(3,2) that meet P in exactly one point and avoid e_8: 21 lines x 2 Assessors = 42.
+- SIGN GAUGE: on each edge the annihilating sign choices satisfy sigma_u sigma_v = c_uv (a fixed sign); around each of the 8 faces of a kite the
+  product of the three c is -1 (all 8 frustrated); the best assignment of one diagonal per vertex satisfies 8 of 12 edges.
+- Symmetry: the stabiliser of s in GL(3,2) has order 24 and acts faithfully on the six vertices (S3 on the axes, kernel of order 4 = octahedral rotations).
+  The antiflag (e_8, P) has stabiliser 20160/120 = 168 in GL(4,2) = A8.
+- Why zero divisors start at the sedenions: a partner needs two different lines through one point of the lower space. Quaternion->octonion doubling: 1 line
+  through a point, 0 annihilating diagonal pairs. Octonion->sedenion: 3 lines, 336. Sedenion->32-dim: 7 lines, 3696.
+
+## 20. Sub-algebra census by index subgroup
+
+- order 2: 15 (C); order 4: 35 = the lines of PG(3,2), all closed with composition (H); order 8: 15 hyperplanes = kernels of the 15 characters chi_u:
+  8 are octonions (composition, alternative, every independent triple nonassociative): u = 1..8; 7 are not (u = 9..15: composition fails, not alternative,
+  nonassociative in 72 of 168 independent triples).
+- 4096 index triples: 1576 dependent (rank <= 2), all associative; 2520 independent, 1848 nonassociative. phi = coboundary(alpha) exactly; beta(i,j) = -1 for distinct nonzero i,j;
+  beta is not a bicharacter (2520 violations); both hexagon identities of a braided monoidal category hold for (phi, beta) over all 4096 triples.
+- Left multiplication by imaginary a satisfies L_a^2 = -|a|^2 on the lower octonion (error 3.6e-15) and fails on the sedenions (error up to 16): the octonions are a Clifford
+  module Cl(0,7) under left multiplication, the sedenions are not.
+
+## 21. The continuous layer
+
+- Der(sedenions): dim 14, skew-symmetric, preserving the lower and upper halves. Common fixed subspace: span(e_0, e_8), dimension 2. Casimir eigenvalues 0 (x2), 1 (x14); commutant dim 8;
+  intertwiners lower-7 -> upper-7: dim 1. So R^16 = R e_0 + R e_8 + 7 + 7 under G2, the two sevens one representation.
+- All 84 diagonals lie on a single G2-orbit: from (2,3,+), a continuous flow reaches each of the other 83 (residual <= 1e-12). Along the flow every zero-divisor relation holds and L_x keeps a zero
+  smallest singular value; the straight line between the endpoints does not. The zero-divisor variety is connected across the seven charts.
+- Inside a zero divisor y: the annihilator N(y) is 4-dimensional, every nonzero element a zero divisor; the four lattice neighbours are an ORTHONORMAL basis of N(y); arcs between them stay in
+  N(y); N(y) is not closed under multiplication and not norm-multiplicative; the stabiliser of y (dim 3, SU(2)) acts on the neighbours with rank 3. The {4:8:4} grading of x -> xy: null block = N(y)
+  = the edges; gain-1 block = the coordinate sub-octonion on {i : chi_u(i)=+1}, u = the polar point of the line {a,b,a^b}; gain-sqrt2 block = the other-sign diagonals of the four neighbour planes.
+- Readings invariant under g = exp(tD), D a derivation: norm, e_0 weight, e_8 weight, e_0+e_8 share, lower/upper split, the singular values of L_v and R_v, the associator norm sum_ij |[v,e_i,e_j]|^2.
+  Not invariant: the chart energies, local_curvature, every Walsh coefficient W_u of v^2 (including ptol.c's Gamma = W_4), the sigma_RB tilt (sum Re psi[k] conj psi[k^4]); sum of the sigma_RB axis is identically 0.
+
+## 22. The three Lambert-W values (Third Age draft s2.2), reproduced
+
+W(0) = 0 ; W(1) = 0.5671432904097838729999686622103555497538 ; W(-1/e) = -1 (mpmath, 50 digits). f(w) = w e^w - x has simple roots at W(0), W(1) (f' = 1, 2.7632; Newton quadratic) and a
+DOUBLE root at W(-1/e) (f' = 0; Newton linear, error ratio -> 1/2; scipy returns nan there). W(1) is the attracting fixed point of x -> exp(-x) with multiplier -W(1).
+As the doubling parameter mu_4: W(0)=0 -> degenerate kite (1764 plane pairs); W(1) > 0 -> split kite (84); W(-1/e) = -1 -> exactly the standard sedenions (168).
+

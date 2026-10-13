@@ -2061,3 +2061,37 @@ A-Matrix Basin Windspeed, the fiber's outbound move, or the hub-distance
 `fixed_point_weight`); and whether the Phase 35 random-draw connectives
 (observed 0.68–1.00 band agreement) are replaced or only constrained by
 that selection.
+
+---
+
+## TODO — strut deformation follow-ups from the 2026-10-12 tension-law session (Cody + Claude)
+
+Recorded in `Boxkite-Catalog.txt` §15, `docs/wiki/Tuning-the-Engine/40_*`, and
+`ValaQuenta/wiki/pencil_hyperstring.md`. Open, not done:
+- Decide which quantity "the A-Matrix Basin windspeed" is: basin drift `w`, the
+  §9.1 construction windspeed, `local_curvature(psi)` (the only one computed), or a
+  per-station split of `basin(seeds)`. A scalar-per-read deforms exactly the struts
+  Gamma-Radial does (2,4,5,7); only a per-station wind reaches 1,3,6.
+- Test the leaky-integral entry mode (the Context Flow decay ladder as phase source).
+- Re-derive the `ε` patterns (and the `+++−−−−` factor) from the algebra; why r = 10..15
+  leave the one-phase family.
+- De Marrais deformation battery, then the same battery on both constructs; update
+  `marrais_boxkite_catalog.txt` with the ESTABLISHED part.
+- Paper `ScalarContextPropagation` §9.4/§10 (branch `scalar-context-propagation`) NOT edited —
+  it still lists "why {1,3,6}" as unresolved and `H` as discrete.
+
+---
+
+## TODO — from the 2026-10-12 De Marrais deformation battery (Cody + Claude)
+
+Write-up: `docs/wiki/Tuning-the-Engine/41_*`; algebra facts: `marrais_boxkite_catalog.txt` §11-15; ours: `Boxkite-Catalog.txt` §16.
+- `scaled_mind_eye_boxkite_kernel_monad.throw_fiber` writes `psi[a]`, `psi[b]`: energy on `e_a, e_b` = the quaternion subalgebra `{e0,e_a,e_b,e_s}` (s = a^b, emerger domain H), not the Assessor plane `(e_a, e_{b+8})` (a FRAGMENT). Reassessed 2026-10-13: a different bracketing, NOT a defect. Decide which bracket the fiber should live in. Not changed.
+- The tension law holds for the paper's `pencil(r<=7)` (no Assessor planes) but not for the Assessor-plane pencils `pencil(s+8)`, s = 2..7 (4-5 independent phase combinations). Find why; decide which pencil the "scalar boxkite" means.
+- ptol.c's Gamma is the chi_4 Walsh coefficient of the energy distribution; the other 14 coefficients are unread — candidate 16-channel readout (oscilloscope idea).
+- The projected address carries no topic (16 prompts, 4 subjects); compose the live kite from the pool's tokens (pencil idx, w, vec19, basin pull) and rerun the battery on that.
+- d*_RG has no closed form, so it could not be tested as a constant; supply a value if one exists.
+- Bracketing/firing-order dive (2026-10-13): the one-phase tension law holds for all 132 bracketings of pencils <= 8 but only some for the Assessor pencils (9: 52/132, 10/12: 0, 15: 10). Run the emerger's five brackets {1:15},{2:14},{8:8},{4:4:4:4},{4:8:4} x legal firing orders against it; look at the {4:8:4} edges of the scalar and scaled constructs.
+- Make the "3 = 4" statement explicit: 4 d* faces vs 3 Lambert-W values (three algebra classes; three distinct tilts) — Cody to state the intended rule.
+- Confirm which "three Lambert-W" is canonical: {W(0)=0, W(1)=Omega_ZS, W(-1/e)=-1} (Third Age draft) or three rotor faces of W(1) (Navier-Stokes wiki 106 / emerger).
+- The old Third-Age-draft set (d*_R=0.24600, d*_ln10=0.56644, d*_S open) and Ainulindale README Key Constants (d*=0.24600) conflict with the canonical four faces (Boundary 0.24631): reconcile or archive.
+
