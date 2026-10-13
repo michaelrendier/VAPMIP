@@ -63,3 +63,11 @@ TextTiling = eddies/sections; Centering = HUB/radius focus; RST = Phase 35 conne
 ## 7. Open
 Which of d* / W is Contractor (catastrophe, origin) vs Dilator (cardioid, outer limit) in the English path; whether the A-Matrix windspeed is scalar-per-read or per-station
 (Phase 40); the additive-vs-multiplicative response rule; the poison-check test; bracketing x emerger-bracket dive.
+
+## 8. Corrections from Cody, 2026-10-13 (supersede anything above that conflicts)
+A. **Topic shift and the orb-weaver are DESIGN TARGETS, not authoritative.** Phase 35 is the starting design and the test bench, not settled doctrine; sections 3, 5 and 6 are inputs to design.
+B. **The A-Matrix windspeed must be able to DEFORM the De Marrais kite** (i.e. act as a G2 / exp(theta e8) generator on it). Scalar-per-read (leaves the rigid struts rigid) is therefore not sufficient by itself; the deformation battery lists what is available.
+C. **Basin attractors = an anisotropic, multi-focal locus of knowledge pulled out of storage and checked against itself** (what maps onto the same objects, what does not) to EXTINGUISH response possibilities. First measurement (scratchpad 2026-10-13_extinction_by_annihilator_intersection, [MEASURED], model [HYP]): foci as zero divisors, survivors = common annihilator; 3024/3024 different-strut pairs leave nothing, same-strut pairs leave 2 or 4 dims, triples almost always nothing. One coherent context = one kite.
+D. **OPEN: how zero divisors enter the sentence-construction algebras.**
+E. **Contractor (Lagrangian path of stable action) and Dilator (cardioid attractor) are the SAME object.** After the twist of the Penrose swap of time and space, time dilation / length contraction become time contraction / length dilation. Time is a necessary component of describing length (how long it takes to get from a to b), not just distance. Earlier start/end assignment question withdrawn.
+F. **The granular .bin poisoning was improper sanitisation (those uses had never been exercised), not a design flaw.** The orb-weaver monad has its OWN sentence constructor inside it; the first ptol -w responses from it were garbage because of the poisoned granular .bin files. Fix = sanitise the granular bins; the constructor itself was never fairly tested.
