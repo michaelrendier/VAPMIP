@@ -67,6 +67,7 @@ mix of Claude Opus 5 and Claude Sonnet 5; 40–41 by Claude Sonnet 5.5 (see each
 | [39_running_a_boxkite_hub_fiber_uft_dial.md](39_running_a_boxkite_hub_fiber_uft_dial.md) | 39 | 2026-09-24 | Running a Boxkite: Hub, Fiber, UFT Dial |
 | [40_strut_tension_law_walsh_rows_and_entry_modes.md](40_strut_tension_law_walsh_rows_and_entry_modes.md) | 40 | 2026-10-12 | The Strut Tension Law, the Walsh Rows, and How a Wind Can Enter |
 | [41_demarrais_deformation_battery_and_the_two_constructs.md](41_demarrais_deformation_battery_and_the_two_constructs.md) | 41 | 2026-10-12 | The De Marrais Deformation Battery, and the Two Constructs Compared |
+| [42_every_voice_benchmark.md](42_every_voice_benchmark.md) | 42 | 2026-10-14 | Every Voice: all 24 monad modules, 12 speaking voices benchmarked on the same six prompts |
 
 ---
 
