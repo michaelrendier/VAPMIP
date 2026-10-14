@@ -20,14 +20,23 @@ project-wide, Aulë's System Monitor Boxkite exists as a first live build
 has procedural monad selection with real conversational wiring for
 `19D_rotary_boxkite_monad`, `scaled_mind_eye_boxkite_kernel_monad`, and
 `monad.py`'s historical `Engine` — plus an honest survey of which of the
-24 available monads actually are conversational (6) versus genuine
-structural/utility modules that aren't (18), both kept visible, neither
-hidden. HyperWebster (plain Horner) and the Blackjack subgroup are
+24 available monads actually are conversational versus genuine
+structural/utility modules, both kept visible, neither hidden (updated
+2026-10-14: 12 speak and all 12 are now selectable, 12 are structure or
+tooling; see the benchmark section below). HyperWebster (plain Horner) and the Blackjack subgroup are
 baseline-benchmarked against each other (`benchmarks/`). Open thread:
 mapping Tuning-the-Engine's phase chronology to a real, directed
 reuse-weighted dependency graph — `rotary_rerun_monad.py` is the
 foundational file most of the box-kite-era monads were written on top of,
 not yet given its own node in that graph.
+
+**2026-10-14 (Phase 42):** every monad voice has been benchmarked on the same six
+prompts (`benchmarks/all_voices/`, `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`).
+The console loader now selects all twelve speaking monads (`EntryPointMonadAdapter`,
+`PtolemyDesktop/ptolemy_console.py`, test `PtolemyDesktop/tests/test_monad_entry_points.py`).
+WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the GPL v3 text (`LICENSE`)
+now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
+Open thread: context flow, carrying the prompt's topic through the reply.
 
 ---
 
@@ -42,6 +51,31 @@ faith.*
 - **OS/Kernel:** Ubuntu, Linux 6.8.0-139-lowlatency, x86_64
 - **Disk:** NVMe, `/home` on `/dev/nvme0n1p4`
 - **Host:** ThinkPad X1 Carbon (6th gen)
+
+---
+
+## All-Voices Benchmark (2026-10-14)
+
+Every monad module the console lists (24, from `VAPMIP/*monad*.py`) was loaded the way `/monad use <name>`
+loads it and asked the same six prompts twice. On the reference machine above, laptop on battery: **twelve
+modules speak** (all selectable); a warm reply takes **0.3 ms to 1.5 s**; whole-laptop energy is about
+**1 µWh to 4 mWh per reply**, between 74 and about 389,000 times below the roughly 0.3 Wh public estimate for one
+typical LLM query; the compiled REPL (`ptolemy -r`, Zork parser in front of the C monad) answers in about 29 ms
+in 62 MB, measured at 66.6 µWh per reply for the whole laptop. The 0.3 Wh figure is public (Google 0.24 Wh,
+OpenAI 0.34 Wh, Epoch AI about 0.3 Wh, via secondary coverage); the monad's own share of the laptop's draw is below
+the battery method's resolution, so the whole-laptop figures are upper bounds.
+
+Reproduce (from `VAPMIP/`, with the PtolemyDesktop venv python):
+```
+python3 benchmarks/all_voices/benchmark_voices.py        # ~3 minutes; writes benchmarks/all_voices/runs/results_<date>.json
+```
+Full table, transcripts and the census: `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`.
+
+## License and third-party notices
+
+This project's code and mathematics are GPL v3 (`LICENSE`). It uses and derives data from WordNet 3.0,
+Copyright 2006 Princeton University; the WordNet license is in `WORDNET_LICENSE.txt` and the notices
+(WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.
 
 ---
 

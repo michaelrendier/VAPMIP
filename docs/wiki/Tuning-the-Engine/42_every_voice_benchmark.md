@@ -14,7 +14,7 @@
 | B. Speak through their own entry point, which the loader does not look for | 6 | `ptolemy_monad.PtolemyMonad.process_input`, `VQ_rotary_monad.ValaQuenta.speak`, `rotary_monad.AhuraMazda.speak`, `ZD_rotary_monad.AhuraMazda.speak`, `boxkite_orbweaver_monad.OrbWeaverMonad.weave`, `monad_english_io.MonadEnglish.basin` (the idea pool) |
 | C. Structure / tooling, no speaking entry point found | 12 | `19D_boxkite_context_monad`, `RF_monad`, `UDEO_monad`, `intention_monad`, `lio_monad`, `monad_addressing`, `monad_browse`, `monad_bus`, `monad_combine` (its `hear` learns), `monad_identity`, `rotary_rerun_monad`, `translator_monad` |
 
-The console's `/monad list` offers all 24 but `/monad use` can switch to only the 6 of group A; the 6 of group B each speak but are not wired (open item below).
+The console's `/monad list` offers all 24. At measurement time `/monad use` could switch to only the 6 of group A; the 6 of group B each spoke but were not wired. They are wired as of 2026-10-14 (item 1 below).
 
 ### 3. The twelve voices, fastest first (warm = second round, mean of six prompts)
 | Voice (module.class.method or adapter) | load s | RSS +MB | 1st-round ms | warm ms | whole-laptop µWh per reply | vs 0.3 Wh |
@@ -249,7 +249,7 @@ It comprises martin.  [what_does_X_do/SVO/technical]   [decompose · words: stan
 * **The idea pool is the memory-heavy part:** `MonadEnglish.basin` takes 280 MB of RSS and 0.73 s to load but answers in 4 ms; its pools are sharp for some prompts ("good morning" -> `morrow, cheer, behavior, luck, manners, fortune`) and noise for others ("can you play the piano?" -> `countess's, perizzites, hivites, caul ...`), the granular-store sanitising item already on the list.
 
 ### 7. Open items from this session
-1. `load_monad_by_name` only recognises `say()` / `generate()` and two named adapters; six speaking monads (group B) are listed but cannot be switched to. Adding `speak` / `process_input` / `weave` adapters would make all twelve selectable. Not done (no go given).
+1. ~~`load_monad_by_name` only recognised `say()` / `generate()` and two named adapters; six speaking monads (group B) were listed but could not be switched to.~~ **Done 2026-10-14** (Cody: "create all the necessary software"): `EntryPointMonadAdapter` in `PtolemyDesktop/ptolemy_console.py` selects them by `process_input` / `weave` / `speak` / `basin`; `PtolemyDesktop/tests/test_monad_entry_points.py` loads all twelve and checks a reply (passes, 19 s); `VAPMIP/benchmarks/all_voices/benchmark_voices.py` reruns the whole benchmark through the console loader alone and reproduces the table within noise (12 of 24 selectable and speaking).
 2. Whole-laptop energy per voice is dominated by baseline; resolving each voice's own share needs a longer run per voice or the display off.
 3. First-round times (up to 3.5 s) are WordNet/NLTK loads; the compiled REPL pays none of that (28.8 ms/line).
 4. Group C modules were not asked to speak; they may have conversational functions under names this survey did not match.

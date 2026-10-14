@@ -1,0 +1,1320 @@
+{
+ "date": "2026-10-14",
+ "on_battery": true,
+ "prompts": [
+  "finger pointer",
+  "what is a tree",
+  "neutron generation in different reactor types",
+  "good morning",
+  "can you play the piano?",
+  "the first reactor was built after neutrons were discovered"
+ ],
+ "results": [
+  {
+   "name": "19D_boxkite_context_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.05,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: '19D_boxkite_context_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "19D_rotary_boxkite_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.8,
+   "rss_loaded_mb": 90.0,
+   "adapter": "NineteenDMonadAdapter",
+   "kind": "19D_rotary_boxkite_monad (real, wired 2026-09-26)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 11087.39,
+     "reply": "Pointer fingers.  [direction:decompose verdict:prime licensed:['SV', 'SVO']]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 600.6,
+     "reply": "A ises tree.  [direction:situate verdict:prime licensed:['SVO']]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 6.3,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['neutron', 'generation', 'in', 'different', 'reactor'])",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 3.61,
+     "reply": "(19D: nothing resolved \u2014 no WordNet verb found, 2 content word(s) resolved. NULL, not fabricated \u2014 no sentence generated.)",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 169.05,
+     "reply": "Play cans piano into piano.  [direction:decompose verdict:prime licensed:['SV', 'SVO', 'SVOA']]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 3.4,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['first', 'reactor', 'built', 'after', 'neutrons', 'were', 'discovered'])",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.24,
+     "reply": "Pointer fingers.  [direction:decompose verdict:prime licensed:['SV', 'SVO']]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 37.96,
+     "reply": "A ises tree.  [direction:situate verdict:prime licensed:['SVO']]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.25,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['neutron', 'generation', 'in', 'different', 'reactor'])",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.07,
+     "reply": "(19D: nothing resolved \u2014 no WordNet verb found, 2 content word(s) resolved. NULL, not fabricated \u2014 no sentence generated.)",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 147.15,
+     "reply": "Play cans piano into piano.  [direction:decompose verdict:prime licensed:['SV', 'SVO', 'SVOA']]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.57,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['first', 'reactor', 'built', 'after', 'neutrons', 'were', 'discovered'])",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 396.3,
+   "warm_t0": 1791963380.5354466,
+   "warm_t1": 1791963380.7217457,
+   "warm_cpu_s": 0.186,
+   "warm_ms_mean": 31.04
+  },
+  {
+   "name": "RF_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "error": "ImportError: 'RF_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "UDEO_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'UDEO_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "VQ_rotary_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.02,
+   "rss_loaded_mb": 18.5,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "VQ_rotary_monad.ValaQuenta.speak",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 0.28,
+     "reply": "pointer",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 0.25,
+     "reply": "is",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.29,
+     "reply": "is",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 0.25,
+     "reply": "morning",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 0.36,
+     "reply": "can",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.43,
+     "reply": "is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.27,
+     "reply": "pointer",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 0.28,
+     "reply": "is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.27,
+     "reply": "is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.26,
+     "reply": "morning",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 0.28,
+     "reply": "can",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.27,
+     "reply": "is",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 18.5,
+   "warm_t0": 1791963386.4584498,
+   "warm_t1": 1791963386.4600983,
+   "warm_cpu_s": 0.002,
+   "warm_ms_mean": 0.27
+  },
+  {
+   "name": "ZD_rotary_monad",
+   "rss_start_mb": 13.9,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.02,
+   "rss_loaded_mb": 22.1,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "ZD_rotary_monad.AhuraMazda.speak",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 1.14,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 1.8,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 2.13,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 1.43,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 1.73,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 2.0,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 2.23,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 2.9,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 3.28,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 4.01,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 3.44,
+     "reply": "\u2205",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 2.66,
+     "reply": "\u2205",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 22.1,
+   "warm_t0": 1791963386.9825888,
+   "warm_t1": 1791963387.0011642,
+   "warm_cpu_s": 0.019,
+   "warm_ms_mean": 3.09
+  },
+  {
+   "name": "boxkite_orbweaver_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.07,
+   "rss_loaded_mb": 25.1,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "boxkite_orbweaver_monad.OrbWeaverMonad.weave",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 130.02,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=1  blocks=7]\nROOM  : Cassini b/c=0.640  discrete  (c=0.781 b=0.500)  sample6=[0.63, 0.62, 0.59, 0.56, 0.51, 0.47]\nBRIDGE: it belongs to the domain of finger.\nFRAME : it is part of finger.\nSCAFFOLD (centre->out):\n    [paragraph] enumerate: it includes finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 3.11,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=2  blocks=9]\nROOM  : Cassini b/c=1.028  lemniscate  (c=0.486 b=0.500)  sample6=[0.56, 0.55, 0.54, 0.53, 0.52, 0.5]\nBRIDGE: it belongs to the domain of what.\nFRAME : it is part of what.\nSCAFFOLD (centre->out):\n    [paragraph] decompose: it is made of what an",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 4.89,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=3  blocks=19]\nROOM  : Cassini b/c=0.724  discrete  (c=0.460 b=0.333)  sample6=[0.4, 0.4, 0.39, 0.37, 0.35, 0.32]\nBRIDGE: it belongs to the domain of neutron.\nFRAME : it is part of neutron.\nSCAFFOLD (centre->out):\n    [paragraph] situate: it is part of neu",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 0.73,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=1  blocks=7]\nROOM  : Cassini b/c=0.672  discrete  (c=0.744 b=0.500)  sample6=[0.62, 0.61, 0.59, 0.56, 0.52, 0.48]\nBRIDGE: it belongs to the domain of good.\nFRAME : it is part of good.\nSCAFFOLD (centre->out):\n    [paragraph] characterize: it is marked by goo",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 5.19,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=3  blocks=19]\nROOM  : Cassini b/c=1.167  continuous  (c=0.286 b=0.333)  sample6=[0.36, 0.36, 0.36, 0.35, 0.34, 0.33]\nBRIDGE: it belongs to the domain of can.\nFRAME : it is part of can.\nSCAFFOLD (centre->out):\n    [paragraph] situate: it is part of can.\n  ",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 3.41,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=2  blocks=13]\nROOM  : Cassini b/c=0.577  discrete  (c=0.495 b=0.286)  sample6=[0.38, 0.37, 0.35, 0.32, 0.29, 0.25]\nBRIDGE: it belongs to the domain of first.\nFRAME : it is part of first.\nSCAFFOLD (centre->out):\n    [paragraph] decompose: it is made of fir",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.85,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=1  blocks=7]\nROOM  : Cassini b/c=0.640  discrete  (c=0.781 b=0.500)  sample6=[0.63, 0.62, 0.59, 0.56, 0.51, 0.47]\nBRIDGE: it belongs to the domain of finger.\nFRAME : it is part of finger.\nSCAFFOLD (centre->out):\n    [paragraph] enumerate: it includes finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 2.13,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=2  blocks=9]\nROOM  : Cassini b/c=1.028  lemniscate  (c=0.486 b=0.500)  sample6=[0.56, 0.55, 0.54, 0.53, 0.52, 0.5]\nBRIDGE: it belongs to the domain of what.\nFRAME : it is part of what.\nSCAFFOLD (centre->out):\n    [paragraph] decompose: it is made of what an",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 3.69,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=3  blocks=19]\nROOM  : Cassini b/c=0.724  discrete  (c=0.460 b=0.333)  sample6=[0.4, 0.4, 0.39, 0.37, 0.35, 0.32]\nBRIDGE: it belongs to the domain of neutron.\nFRAME : it is part of neutron.\nSCAFFOLD (centre->out):\n    [paragraph] situate: it is part of neu",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.52,
+     "reply": "[paper  scale=2.0  reach=2  laminar  radii=1  blocks=7]\nROOM  : Cassini b/c=0.672  discrete  (c=0.744 b=0.500)  sample6=[0.62, 0.61, 0.59, 0.56, 0.52, 0.48]\nBRIDGE: it belongs to the domain of good.\nFRAME : it is part of good.\nSCAFFOLD (centre->out):\n    [paragraph] characterize: it is marked by goo",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 2.78,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=3  blocks=19]\nROOM  : Cassini b/c=1.167  continuous  (c=0.286 b=0.333)  sample6=[0.36, 0.36, 0.36, 0.35, 0.34, 0.33]\nBRIDGE: it belongs to the domain of can.\nFRAME : it is part of can.\nSCAFFOLD (centre->out):\n    [paragraph] situate: it is part of can.\n  ",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 2.16,
+     "reply": "[paper  scale=2.0  reach=2  turbulent  radii=2  blocks=13]\nROOM  : Cassini b/c=0.577  discrete  (c=0.495 b=0.286)  sample6=[0.38, 0.37, 0.35, 0.32, 0.29, 0.25]\nBRIDGE: it belongs to the domain of first.\nFRAME : it is part of first.\nSCAFFOLD (centre->out):\n    [paragraph] decompose: it is made of fir",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 39.9,
+   "warm_t0": 1791963387.6643546,
+   "warm_t1": 1791963387.6765058,
+   "warm_cpu_s": 0.012,
+   "warm_ms_mean": 2.02
+  },
+  {
+   "name": "intention_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "error": "ImportError: 'intention_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "lio_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.05,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'lio_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "monad",
+   "rss_start_mb": 13.9,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.02,
+   "rss_loaded_mb": 22.6,
+   "adapter": "GenerateMonadAdapter",
+   "kind": "monad.Engine (generate)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 262.48,
+     "reply": "pointer\u2009finger\u2003pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2008finger\u2003finger\u2003finger\u2003poi",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 330.83,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200ais\u200afinger\u200ais\u200aa\u2003pointer\u200aa\u2003finger\u200ais\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 732.28,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200apointer\u200aa\u2003a\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200afinger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 303.04,
+     "reply": "a\u2003finger\u200apointer\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003morning\u200ais\u200afinger\u200amorning\u200apointer\u200afinger\u200amorning\u200apointer\u200aa\u2003morning\u200ais\u200ais\u200ais\u200apointer\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200amorning\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 113.04,
+     "reply": "finger\u200ais\u200amorning\u200ain\u200apointer\u200aa\u2003play\u200ais\u200ain\u200afinger\u200aplay\u200amorning\u200aa\u2003pointer\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003play\u200amorning\u200aplay\u200amorning\u200afinger\u200apointer\u200ais\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 114.5,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200awas\u200apointer\u200afinger\u200awas\u200apointer\u200ais\u200aa\u2003finger\u200apointer\u200awas\u200aa\u2003pointer\u200apointer\u200ais\u200aa\u2003pointer\u200afinger\u200aa\u2003was\u200ais\u200apointer\u200awas\u200ais\u200aa\u2003was\u200afinger\u200aa\u2003was\u200afinger\u200apointer\u200awas\u200ais\u200aa\u2003was\u200aa\u2003pointer\u200awas\u200afinger\u200awas\u200afinger\u200ais\u200aa\u2003pointer",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 112.76,
+     "reply": "a\u200amorning\u200apointer\u2009first\u200afinger\u2003the\u200adifferent\u200aplay\u200adiscovered\u200ais\u2007a\u2009morning\u200apointer\u2009finger\u2003first\u200adifferent\u200aplay\u200amorning\u200ais\u2007a\u2009is\u2007pointer\u2009finger\u2003finger\u2003a\u2009is\u2007pointer\u2009a\u2009a\u2009finger\u2003is\u2007pointer\u2009is\u2006pointer\u2009a\u2009is\u2006finger\u2003is\u2006finger\u2003a\u2009a\u2009finger\u2003pointer\u2009pointer\u2009a\u2008a\u2008is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 113.9,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200aa\u2003is\u200apointer\u200aa\u2003is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200aa\u2003a\u2003is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 112.88,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200aa\u2003pointer\u200apointer\u200aa\u2003finger\u200afinger\u200apointer\u200apointer\u200ais\u200ais\u200apointer\u200afinger\u200aa\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 112.97,
+     "reply": "a\u2003pointer\u200afinger\u200afinger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200aa\u2003pointer\u200aa\u2003morning\u200apointer\u200afinger\u200aa\u2003is\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003is\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200afinger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 114.69,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 124.69,
+     "reply": "is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003pointer\u200ais\u200afinger\u200afinger\u200aa\u2003a\u2003is\u200aa\u2003is\u200apointer\u200apointer\u200ais\u200afinger\u200ais\u200apointer\u200apointer\u200aa\u2003a\u2003is\u200apointer\u200apointer\u200afinger",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 23.5,
+   "warm_t0": 1791963390.8501685,
+   "warm_t1": 1791963391.542082,
+   "warm_cpu_s": 0.692,
+   "warm_ms_mean": 115.31,
+   "warm_mean_W": 9.14,
+   "whole_laptop_uWh_per_reply": 292.76
+  },
+  {
+   "name": "monad_addressing",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'monad_addressing' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "monad_browse",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'monad_browse' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "monad_bus",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'monad_bus' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "monad_combine",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'monad_combine' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "monad_english_io",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.66,
+   "rss_loaded_mb": 294.0,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "monad_english_io.MonadEnglish.basin",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 198.06,
+     "reply": "idea pool: his, in, at, seven, of, a, and, on, her, my, to, he",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 0.54,
+     "reply": "idea pool: aileth, needeth, happens, knows, wonder, sort, follows, exactly, else, news, cause, ho",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.22,
+     "reply": "idea pool: ambitransitive, natures, degrees, ways, kinds, meanings, types, parts, classes, times, sort, sorts",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 0.31,
+     "reply": "idea pool: morrow, cheer, behavior, deal, luck, manners, news, madam, earnest, counsel, faith, fortune",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 25.3,
+     "reply": "idea pool: countess\u2019s, perizzites, hivites, caul, foundation\u2019s, saracens, antonines.\u2014part, wayback, doer, augustan, specifick, fourteenth",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 11.64,
+     "reply": "idea pool: countess\u2019s, perizzites, hivites, caul, foundation\u2019s, saracens, antonines.\u2014part, wayback, doer, augustan, specifick, fourteenth",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.05,
+     "reply": "idea pool: his, in, at, seven, of, a, and, on, her, my, to, he",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 0.44,
+     "reply": "idea pool: aileth, needeth, happens, knows, wonder, sort, follows, exactly, else, news, cause, ho",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.22,
+     "reply": "idea pool: ambitransitive, natures, degrees, ways, kinds, meanings, types, parts, classes, times, sort, sorts",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.31,
+     "reply": "idea pool: morrow, cheer, behavior, deal, luck, manners, news, madam, earnest, counsel, faith, fortune",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 10.11,
+     "reply": "idea pool: countess\u2019s, perizzites, hivites, caul, foundation\u2019s, saracens, antonines.\u2014part, wayback, doer, augustan, specifick, fourteenth",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 10.45,
+     "reply": "idea pool: countess\u2019s, perizzites, hivites, caul, foundation\u2019s, saracens, antonines.\u2014part, wayback, doer, augustan, specifick, fourteenth",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 295.1,
+   "warm_t0": 1791963394.8948262,
+   "warm_t1": 1791963394.9164402,
+   "warm_cpu_s": 0.022,
+   "warm_ms_mean": 3.6
+  },
+  {
+   "name": "monad_harness_diagnostic",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "load_s": 0.04,
+   "rss_loaded_mb": 23.0,
+   "adapter": "GenerateMonadAdapter",
+   "kind": "monad_harness_diagnostic.Engine (generate)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 273.41,
+     "reply": "pointer\u2009finger\u2003pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2008finger\u2003finger\u2003finger\u2003poi",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 344.86,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200ais\u200afinger\u200ais\u200aa\u2003pointer\u200aa\u2003finger\u200ais\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 746.45,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200apointer\u200aa\u2003a\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200afinger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 338.06,
+     "reply": "a\u2003finger\u200apointer\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003morning\u200ais\u200afinger\u200amorning\u200apointer\u200afinger\u200amorning\u200apointer\u200aa\u2003morning\u200ais\u200ais\u200ais\u200apointer\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200amorning\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 122.8,
+     "reply": "finger\u200ais\u200amorning\u200ain\u200apointer\u200aa\u2003play\u200ais\u200ain\u200afinger\u200aplay\u200amorning\u200aa\u2003pointer\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003play\u200amorning\u200aplay\u200amorning\u200afinger\u200apointer\u200ais\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 116.92,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200awas\u200apointer\u200afinger\u200awas\u200apointer\u200ais\u200aa\u2003finger\u200apointer\u200awas\u200aa\u2003pointer\u200apointer\u200ais\u200aa\u2003pointer\u200afinger\u200aa\u2003was\u200ais\u200apointer\u200awas\u200ais\u200aa\u2003was\u200afinger\u200aa\u2003was\u200afinger\u200apointer\u200awas\u200ais\u200aa\u2003was\u200aa\u2003pointer\u200awas\u200afinger\u200awas\u200afinger\u200ais\u200aa\u2003pointer",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 117.12,
+     "reply": "a\u200amorning\u200apointer\u2009first\u200afinger\u2003the\u200adifferent\u200aplay\u200adiscovered\u200ais\u2007a\u2009morning\u200apointer\u2009finger\u2003first\u200adifferent\u200aplay\u200amorning\u200ais\u2007a\u2009is\u2007pointer\u2009finger\u2003finger\u2003a\u2009is\u2007pointer\u2009a\u2009a\u2009finger\u2003is\u2007pointer\u2009is\u2006pointer\u2009a\u2009is\u2006finger\u2003is\u2006finger\u2003a\u2009a\u2009finger\u2003pointer\u2009pointer\u2009a\u2008a\u2008is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 116.35,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200aa\u2003is\u200apointer\u200aa\u2003is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200aa\u2003a\u2003is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 118.03,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200aa\u2003pointer\u200apointer\u200aa\u2003finger\u200afinger\u200apointer\u200apointer\u200ais\u200ais\u200apointer\u200afinger\u200aa\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 121.45,
+     "reply": "a\u2003pointer\u200afinger\u200afinger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200aa\u2003pointer\u200aa\u2003morning\u200apointer\u200afinger\u200aa\u2003is\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003is\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200afinger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 116.76,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 117.34,
+     "reply": "is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003pointer\u200ais\u200afinger\u200afinger\u200aa\u2003a\u2003is\u200aa\u2003is\u200apointer\u200apointer\u200ais\u200afinger\u200ais\u200apointer\u200apointer\u200aa\u2003a\u2003is\u200apointer\u200apointer\u200afinger",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 23.9,
+   "warm_t0": 1791963397.4750435,
+   "warm_t1": 1791963398.1821275,
+   "warm_cpu_s": 0.707,
+   "warm_ms_mean": 117.84,
+   "warm_mean_W": 9.34,
+   "whole_laptop_uWh_per_reply": 305.73
+  },
+  {
+   "name": "monad_identity",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "error": "ImportError: 'monad_identity' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "ptolemy_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.05,
+   "rss_console_mb": 17.5,
+   "load_s": 0.03,
+   "rss_loaded_mb": 18.6,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "ptolemy_monad.PtolemyMonad.process_input",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 5842.46,
+     "reply": "digit hand extremity mark little finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 20.18,
+     "reply": "woody plant ash metric linear unit hornbeam limb",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 22.83,
+     "reply": "electrical device varied linear unit difference kind",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 9.78,
+     "reply": "day early-morning hour common good advantage time period",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 11.52,
+     "reply": "container stringed instrument percussion instrument keyboard instrument grand piano",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 12.97,
+     "reply": "electrical device rank make coil nucleon",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.93,
+     "reply": "digit hand extremity mark little finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 1.38,
+     "reply": "woody plant ash metric linear unit hornbeam limb",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 1.38,
+     "reply": "electrical device varied linear unit difference kind",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.62,
+     "reply": "day early-morning hour common good advantage time period",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 1.19,
+     "reply": "container stringed instrument percussion instrument keyboard instrument grand piano",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 1.94,
+     "reply": "electrical device rank make coil nucleon",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 328.6,
+   "warm_t0": 1791963404.9051917,
+   "warm_t1": 1791963404.9126823,
+   "warm_cpu_s": 0.008,
+   "warm_ms_mean": 1.24
+  },
+  {
+   "name": "rotary_monad",
+   "rss_start_mb": 13.9,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.02,
+   "rss_loaded_mb": 22.1,
+   "adapter": "EntryPointMonadAdapter",
+   "kind": "rotary_monad.AhuraMazda.speak",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 0.24,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 0.24,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.36,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 0.34,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 0.46,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.61,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 0.5,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 0.51,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.56,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.5,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 0.51,
+     "reply": "finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.51,
+     "reply": "finger",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 22.1,
+   "warm_t0": 1791963406.0822177,
+   "warm_t1": 1791963406.0853302,
+   "warm_cpu_s": 0.003,
+   "warm_ms_mean": 0.52
+  },
+  {
+   "name": "rotary_rerun_boxkite_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 2.03,
+   "rss_loaded_mb": 170.0,
+   "adapter": "BoxKiteMonad",
+   "kind": "rotary_rerun_boxkite (loading on first turn)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 14329.75,
+     "reply": "It comprises thumb.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: pinkie, pinky, knuckle, fingernail, thumb, point, head, shaft]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 2520.91,
+     "reply": "It comprises hebrew.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: Hebrew, coward, mixture, limb, furlong, treetop]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 2172.85,
+     "reply": "It resembles time.  [what_does_X_do/SVO/technical]   [compare \u00b7 words: varied, pica, informal, mandarin, underling]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 244.79,
+     "reply": "It belongs to martin.  [how/SVA/thesis]   [situate \u00b7 words: tidings, morrow, breeding, bosom, hope, sir, time, clip]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 1295.68,
+     "reply": "It comprises service.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: service, understand, grand]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 1300.12,
+     "reply": "It comprises martin.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: standing, citizen, syllable]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 1739.42,
+     "reply": "It comprises thumb.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: pinkie, pinky, knuckle, fingernail, thumb, point, head, shaft]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 2538.06,
+     "reply": "It comprises hebrew.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: Hebrew, coward, mixture, limb, furlong, treetop]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 2149.97,
+     "reply": "It resembles time.  [what_does_X_do/SVO/technical]   [compare \u00b7 words: varied, pica, informal, mandarin, underling]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 182.37,
+     "reply": "It belongs to martin.  [how/SVA/thesis]   [situate \u00b7 words: tidings, morrow, breeding, bosom, hope, sir, time, clip]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 1239.12,
+     "reply": "It comprises service.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: service, understand, grand]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 1215.42,
+     "reply": "It comprises martin.  [what_does_X_do/SVO/technical]   [decompose \u00b7 words: standing, citizen, syllable]",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 1074.7,
+   "warm_t0": 1791963430.4409754,
+   "warm_t1": 1791963439.5054128,
+   "warm_cpu_s": 18.022,
+   "warm_ms_mean": 1510.73,
+   "warm_mean_W": 10.68,
+   "whole_laptop_uWh_per_reply": 4481.83
+  },
+  {
+   "name": "rotary_rerun_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "error": "ImportError: 'rotary_rerun_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "scaled_mind_eye_boxkite_kernel_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.5,
+   "load_s": 0.84,
+   "rss_loaded_mb": 100.6,
+   "adapter": "ScaledMindEyeMonadAdapter",
+   "kind": "scaled_mind_eye_boxkite_kernel_monad (real, wired 2026-09-26)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 11197.37,
+     "reply": "Pointer fingers.  [direction:decompose verdict:prime licensed:['SV', 'SVO']] [hub fiber: strut=6 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 329.56,
+     "reply": "A ises tree.  [direction:situate verdict:prime licensed:['SVO']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 6.34,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['neutron', 'generation', 'in', 'different', 'reactor'])",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 5.08,
+     "reply": "(19D: nothing resolved \u2014 no WordNet verb found, 2 content word(s) resolved. NULL, not fabricated \u2014 no sentence generated.)",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 476.32,
+     "reply": "Play cans piano into piano.  [direction:decompose verdict:prime licensed:['SV', 'SVO', 'SVOA']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 3.28,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['first', 'reactor', 'built', 'after', 'neutrons', 'were', 'discovered'])",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 2.58,
+     "reply": "Pointer fingers.  [direction:decompose verdict:prime licensed:['SV', 'SVO']] [hub fiber: strut=6 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 41.79,
+     "reply": "A ises tree.  [direction:situate verdict:prime licensed:['SVO']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 0.27,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['neutron', 'generation', 'in', 'different', 'reactor'])",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 0.08,
+     "reply": "(19D: nothing resolved \u2014 no WordNet verb found, 2 content word(s) resolved. NULL, not fabricated \u2014 no sentence generated.)",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 149.26,
+     "reply": "Play cans piano into piano.  [direction:decompose verdict:prime licensed:['SV', 'SVO', 'SVOA']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 0.52,
+     "reply": "(19D: direction='compare' has no speech_act mapping yet \u2014 reporting the real finding rather than forcing one: leaves=['first', 'reactor', 'built', 'after', 'neutrons', 'were', 'discovered'])",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 404.9,
+   "warm_t0": 1791963455.0659912,
+   "warm_t1": 1791963455.260519,
+   "warm_cpu_s": 0.192,
+   "warm_ms_mean": 32.42,
+   "warm_mean_W": 11.24,
+   "whole_laptop_uWh_per_reply": 101.22
+  },
+  {
+   "name": "translator_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "error": "ImportError: 'translator_monad' has no recognised chat interface (no say(), no generate(), no known structural adapter)"
+  },
+  {
+   "name": "walkwithme_monad",
+   "rss_start_mb": 13.8,
+   "console_import_s": 0.04,
+   "rss_console_mb": 17.4,
+   "load_s": 0.02,
+   "rss_loaded_mb": 22.5,
+   "adapter": "GenerateMonadAdapter",
+   "kind": "walkwithme_monad.Engine (generate)",
+   "calls": [
+    {
+     "round": 1,
+     "prompt": "finger pointer",
+     "ms": 248.04,
+     "reply": "pointer\u2009finger\u2003pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003pointer\u2009pointer\u2009pointer\u2009finger\u2003finger\u2003finger\u2003pointer\u2009pointer\u2008finger\u2003finger\u2003finger\u2003poi",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "what is a tree",
+     "ms": 318.59,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200ais\u200afinger\u200ais\u200aa\u2003pointer\u200aa\u2003finger\u200ais\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200ais\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 749.58,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200apointer\u200aa\u2003a\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200afinger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "good morning",
+     "ms": 313.78,
+     "reply": "a\u2003finger\u200apointer\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003morning\u200ais\u200afinger\u200amorning\u200apointer\u200afinger\u200amorning\u200apointer\u200aa\u2003morning\u200ais\u200ais\u200ais\u200apointer\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200aa\u2003finger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200amorning\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "can you play the piano?",
+     "ms": 115.58,
+     "reply": "finger\u200ais\u200amorning\u200ain\u200apointer\u200aa\u2003play\u200ais\u200ain\u200afinger\u200aplay\u200amorning\u200aa\u2003pointer\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003play\u200amorning\u200aplay\u200amorning\u200afinger\u200apointer\u200ais\u200afinger\u200aa\u2003a\u2003is\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003is\u200apointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger",
+     "error": null
+    },
+    {
+     "round": 1,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 116.75,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200awas\u200apointer\u200afinger\u200awas\u200apointer\u200ais\u200aa\u2003finger\u200apointer\u200awas\u200aa\u2003pointer\u200apointer\u200ais\u200aa\u2003pointer\u200afinger\u200aa\u2003was\u200ais\u200apointer\u200awas\u200ais\u200aa\u2003was\u200afinger\u200aa\u2003was\u200afinger\u200apointer\u200awas\u200ais\u200aa\u2003was\u200aa\u2003pointer\u200awas\u200afinger\u200awas\u200afinger\u200ais\u200aa\u2003pointer",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "finger pointer",
+     "ms": 118.22,
+     "reply": "a\u200amorning\u200apointer\u2009first\u200afinger\u2003the\u200adifferent\u200aplay\u200adiscovered\u200ais\u2007a\u2009morning\u200apointer\u2009finger\u2003first\u200adifferent\u200aplay\u200amorning\u200ais\u2007a\u2009is\u2007pointer\u2009finger\u2003finger\u2003a\u2009is\u2007pointer\u2009a\u2009a\u2009finger\u2003is\u2007pointer\u2009is\u2006pointer\u2009a\u2009is\u2006finger\u2003is\u2006finger\u2003a\u2009a\u2009finger\u2003pointer\u2009pointer\u2009a\u2008a\u2008is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "what is a tree",
+     "ms": 117.42,
+     "reply": "is\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200aa\u2003finger\u200ais\u200afinger\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200apointer\u200apointer\u200afinger\u200aa\u2003is\u200aa\u2003is\u200apointer\u200aa\u2003is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200aa\u2003a\u2003is",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "neutron generation in different reactor types",
+     "ms": 118.36,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003finger\u200ais\u200aa\u2003pointer\u200apointer\u200aa\u2003is\u200afinger\u200apointer\u200apointer\u200aa\u2003is\u200afinger\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200aa\u2003pointer\u200apointer\u200aa\u2003finger\u200afinger\u200apointer\u200apointer\u200ais\u200ais\u200apointer\u200afinger\u200aa\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "good morning",
+     "ms": 118.71,
+     "reply": "a\u2003pointer\u200afinger\u200afinger\u200aa\u2003finger\u200apointer\u200afinger\u200apointer\u200afinger\u200apointer\u200aa\u2003pointer\u200aa\u2003finger\u200aa\u2003is\u200amorning\u200aa\u2003pointer\u200aa\u2003morning\u200apointer\u200afinger\u200aa\u2003is\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200afinger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200aa\u2003is\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003is\u200afinger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "can you play the piano?",
+     "ms": 118.74,
+     "reply": "is\u200aa\u2003finger\u200apointer\u200apointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200aa\u2003finger\u200apointer\u200aa\u2003finger\u200aa\u2003finger\u200ais\u200aa\u2003finger\u200aa\u2003pointer\u200ais\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003a\u2003finger\u200apointer\u200afinger\u200ais\u200ais\u200afinger\u200apointer\u200ais\u200aa\u2003a\u2003finger",
+     "error": null
+    },
+    {
+     "round": 2,
+     "prompt": "the first reactor was built after neutrons were discovered",
+     "ms": 117.93,
+     "reply": "is\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200aa\u2003pointer\u200ais\u200afinger\u200apointer\u200afinger\u200aa\u2003pointer\u200ais\u200apointer\u200ais\u200aa\u2003pointer\u200ais\u200afinger\u200afinger\u200aa\u2003a\u2003is\u200aa\u2003is\u200apointer\u200apointer\u200ais\u200afinger\u200ais\u200apointer\u200apointer\u200aa\u2003a\u2003is\u200apointer\u200apointer\u200afinger",
+     "error": null
+    }
+   ],
+   "rss_end_mb": 23.5,
+   "warm_t0": 1791963459.1615918,
+   "warm_t1": 1791963459.8710084,
+   "warm_cpu_s": 0.709,
+   "warm_ms_mean": 118.23,
+   "warm_mean_W": 11.24,
+   "whole_laptop_uWh_per_reply": 369.14
+  }
+ ]
+}
