@@ -148,3 +148,5 @@ independent content) from a new angle; the σ_RB/scale question resolved to
 an exact identity between two already-built tools rather than a new one; and
 the wordnet/relational/phonetic unification remains a named plan, not yet a
 build.
+
+## **Notation correction 2026-10-13 (Cody).** The name Σ_RB for the sum J_red + J_blue, and the chain "J_red + J_blue = 0_RB = Wisdom, Σ_RB = 0_RB − 0_BR = Memory", were an older model's mistake. OFFICIAL: J_red + J_blue = J_green, and J_red + J_blue = 0_RB − 0_BR (this builds in the cross and dot product and is how an addition equals a subtraction; the inside-out works as a special case of 0_RB − 0_BR). Knowledge + Experience = Wisdom is the adage that named it. The lowercase σ_RB (tilt/axis vectors, per-channel product ψ_k ψ_(k⊕4) in ptol.c) is a different, in-use object and is unchanged. Open: older three-phase files define J_red + J_blue + J_green = 0 (so J_green there is −(J_red + J_blue)); sign convention to reconcile. Record: VAPMIP/docs/wiki/J_red-J_blue-0_RB-Record.md.
