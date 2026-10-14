@@ -1,9 +1,16 @@
 VAPMIP — the Monad
 Copyright (c) 2026 Cody Michael Allison (Michael Rendier). All rights reserved.
 
-PROPRIETARY. The Monad, which is the code in this repository, is proprietary. Its presence in a public repository grants no
-license to use, copy, modify, compile, run for any purpose beyond reading it, or distribute it. Licensing of the Monad is
-available; discuss in person or write to the.wandering.god@gmail.com.
+The Monad, which is the code in this repository, is proprietary. It is source-available: you may read it, and you may use it as
+described below.
+
+FREE to use, run, study and modify for research, education, personal and hobby use, and for development and experimentation
+that is not commercial. Researchers, developers and hobbyists are welcome to play with it.
+
+COMMERCIAL AND CORPORATE USE requires a written license. Use in, or for, a product, service or operation of a commercial or
+corporate organisation is commercial use. Licensing is available and negotiated individually; discuss in person or write to
+the.wandering.god@gmail.com. Without a written license, no right to commercial use, and no right to redistribute the Monad,
+is granted.
 
 What is NOT restricted:
   * The mathematics. Mathematics is not copyrightable, and nothing here restricts anyone from using, studying, re-deriving or

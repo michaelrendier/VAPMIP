@@ -137,10 +137,12 @@ Full table, transcripts and the census: `docs/wiki/Tuning-the-Engine/42_every_vo
 
 ## License and third-party notices
 
-**The Monad (this repository) is proprietary.** Licensing is available; discuss in person or write to the.wandering.god@gmail.com.
-The mathematics is not copyrightable and is free to use; the code is the author's engineering work. The harness
-(`harness.py`, `PtolC/monad_harness.c`, `PtolC/monad_harness.h`) and the console UI plugin in PtolemyDesktop are GNU GPL v3.0
-(`LICENSE-GPL-3.0.txt`); only VAPMIP and POE are proprietary. Full statement: `LICENSE`.
+**The Monad (this repository) is proprietary and source-available.** It is free for research, education, personal and hobby
+use, and for non-commercial development and experimentation. Commercial and corporate use requires a written license;
+licensing is available, so discuss in person or write to the.wandering.god@gmail.com. The mathematics is not copyrightable
+and is free to use; the code is the author's engineering work. The harness (`harness.py`, `PtolC/monad_harness.c`,
+`PtolC/monad_harness.h`) and the console UI plugin in PtolemyDesktop are GNU GPL v3.0 (`LICENSE-GPL-3.0.txt`); only VAPMIP
+and POE are proprietary. Full statement: `LICENSE`.
 
 The project uses and derives data from WordNet 3.0, Copyright 2006 Princeton University; the WordNet license is in
 `WORDNET_LICENSE.txt` and the notices (WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.
