@@ -8,7 +8,7 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 - **All-voices benchmark (Phase 42).** `benchmarks/all_voices/benchmark_voices.py` loads every monad the console lists (24) and times 12 speaking voices on six prompts; results and transcripts in `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`. Warm reply 0.3 ms to 1.5 s; whole-laptop energy about 1 µWh to 4 mWh per reply; compiled REPL about 29 ms, 62 MB, 66.6 µWh measured.
 - **Console loader.** `EntryPointMonadAdapter` (`PtolemyDesktop/ptolemy_console.py`) makes the six monads that speak through `process_input` / `weave` / `speak` / `basin` selectable; `PtolemyDesktop/tests/test_monad_entry_points.py` checks all twelve.
-- **Notices.** `NOTICE` and `WORDNET_LICENSE.txt` (WordNet 3.0, Copyright 2006 Princeton University, verbatim) and the GPL v3 `LICENSE` added to the repository root.
+- **Notices.** `NOTICE` and `WORDNET_LICENSE.txt` (WordNet 3.0, Copyright 2006 Princeton University, verbatim) added to the repository root. `LICENSE` states that the Monad is proprietary and that the harness and console plugin are GPL v3.0 (`LICENSE-GPL-3.0.txt`); a GPL v3 text briefly published as `LICENSE` on 2026-10-14 was a mistake and was corrected the same day.
 - **Paper draft.** `docs/paper_drafts/Forward_Propagation_of_Information_DRAFT.md` (abstract v3 and the benchmark section; labelled DRAFT).
 
 ---

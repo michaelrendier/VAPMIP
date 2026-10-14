@@ -6,6 +6,70 @@
 
 ---
 
+## Start Here — the state of the Monad (2026-10-14)
+
+### Abstract (draft; the paper is in preparation: `docs/paper_drafts/Forward_Propagation_of_Information_DRAFT.md`)
+
+**Forward Propagation of Information: Teaching The Maths how to speak English**
+
+We report a successful experiment in teaching the maths to speak English. A language engine built from engineered operators runs entirely offline on a 2018 ThinkPad X1 Carbon (Core i7-8550U, no GPU, no network). It is a family of 24 monad modules, discovered procedurally from the file system, of which twelve speak; we benchmarked every one on the same six prompts. A verb-governed parser in the Infocom/Zork tradition selects one of sixteen operators, and the store holds each word as the counts of its 19 WordNet relation pointers. Across the twelve voices a warm reply takes from 0.3 ms to 1.5 s and adds 3 to 280 MB; measured on battery, the whole laptop spends from about 1 µWh to 4 mWh per reply, between 74 and about 389,000 times less than the roughly 0.3 Wh public estimate for one typical LLM query (the compiled REPL: 29 ms, 62 MB, 66.6 µWh measured). The voices differ in kind. One answers in a millisecond with the hypernym words of the prompt ("can you play the piano?" → "container stringed instrument percussion instrument keyboard instrument grand piano"); one is grammar-gated and returns "Pointer fingers." or an honest null where no verb resolves; one chooses its sentence frame from the dominant WordNet relation ("it comprises thumb", decompose · pinkie, pinky, knuckle, fingernail, thumb); and a document planner lays out a room, a bridge and a spiral of connectives in two milliseconds. Section 1 reports these benchmarks as literal transcripts, each with its script; the sections after it define the address, the parser and the store as code that runs. The road from here is one voice that carries the prompt's topic through the reply, with a prompt-extraction front end already built (3 to 19 ms warm; a part-of-speech tagger trained offline to 93.9%).
+
+### What the Monad is, in one paragraph
+
+The Monad is an offline language engine. Each word is stored as the counts of its 19 WordNet relation pointers and carries a
+prime-number address; a verb-governed parser in the Infocom/Zork tradition (`zork_parser.py`, `PtolC/zork.c`) selects one of
+sixteen operators from the verb; the voices below turn a prompt into a reply. It runs on a laptop CPU with no GPU and no
+network, in tens of megabytes (the idea pool aside), and answers in milliseconds to about a second and a half.
+
+### What runs today (all measured 2026-10-14 on the reference machine below; warm reply, mean of six prompts)
+
+| Voice (what it returns) | warm reply | added memory | whole-laptop energy per reply |
+|---|---|---|---|
+| `VQ_rotary_monad.ValaQuenta.speak` (one word echoed from the prompt) | 0.30 ms | 3.3 MB | 0.8 µWh |
+| `rotary_monad.AhuraMazda.speak` (one word; the same word for all six prompts) | 0.53 ms | 6.9 MB | 1.4 µWh |
+| `ptolemy_monad.PtolemyMonad.process_input` (the prompt's hypernym and definition words: "can you play the piano?" → "container stringed instrument percussion instrument keyboard instrument grand piano") | 1.4 ms | 3.7 MB | 3.6 µWh |
+| `boxkite_orbweaver_monad.OrbWeaverMonad.weave` (a document plan: room, bridge, frame, scaffold, connectives) | 1.8 ms (2–8 s with real words) | 10.9 MB | 4.6 µWh |
+| `ZD_rotary_monad.AhuraMazda.speak` (the empty set ∅ for all six prompts) | 2.0 ms | 6.8 MB | 5.1 µWh |
+| `monad_english_io.MonadEnglish.basin` (an idea pool of related words) | 3.6 ms | 280 MB | 9.2 µWh |
+| `scaled_mind_eye_boxkite_kernel_monad` (grammar-gated sentence plus a hub reading) | 31 ms | 84 MB | 88 µWh |
+| `19D_rotary_boxkite_monad` (grammar-gated sentence, or an honest null: "Pointer fingers.") | 32 ms | 73 MB | 83 µWh |
+| `walkwithme_monad`, `monad`, `monad_harness_diagnostic` (one generator, three files: a stream of heard words) | 112–126 ms | 5–6 MB | 286–318 µWh |
+| `rotary_rerun_boxkite_monad` (a sentence frame chosen by the dominant WordNet relation: "It comprises thumb. [decompose · pinkie, pinky, knuckle, fingernail, thumb …]") | 1.5 s | 154 MB | 4,065 µWh |
+| compiled REPL `ptolemy -r` (Zork parser in front of the C monad: "kite its engine probe") | 29 ms per line | 62 MB | 66.6 µWh (measured on battery) |
+
+Energy is the whole laptop on battery, display and OS included; it is an upper bound for the Monad's own share. The public
+estimate for one typical LLM query is about 0.3 Wh, so every row above is between 74 and about 389,000 times lower.
+
+### Try it (about five minutes)
+
+```
+cd PtolC && make                          # builds ptol and ptolemy (needs gcc, make, libm, libxml2-dev)
+./ptolemy -r -n                           # the Zork REPL, nothing saved; try: what is a tree
+./ptol -M tree                            # one word: its store entry and Gamma-Radial windspeed
+./ptol -say "finger pointer"              # sentence creator (starts Python + NLTK; about 12 s)
+./ptol -w                                 # the tabbed console; then /monad list and /monad use ptolemy_monad
+cd .. && python3 benchmarks/all_voices/benchmark_voices.py    # the whole table above, about 3 minutes
+```
+If the system `python3` cannot import `nltk` (a pandas/numpy ABI mismatch), use `../PtolemyDesktop/.venv/bin/python`.
+
+### What is not done yet (stated plainly)
+
+* **Context flow**, carrying the prompt's topic through the reply, is the open stage. The pieces exist (a prompt-extraction front end,
+  3 to 19 ms warm, with a part-of-speech tagger trained offline to 93.9%; topic-bag sense choice; a document planner) and are
+  not yet joined into one voice. Today's replies are mostly short fragments; on some prompts they are on topic, on others not.
+* 12 of the 24 monad modules are structure or tooling and do not speak.
+* The sentence voice with real words is Python (about 1.5 to 12 s); porting the relational composter to C is the step that
+  would bring it to milliseconds.
+* The idea pool is sharp for some prompts and noise for others (the store still holds un-sanitised granular material).
+
+### Where to read next
+
+`docs/paper_drafts/` (the paper draft) · `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript and the census) ·
+`docs/wiki/Tuning-the-Engine/00_index.md` (the engineering log, phase by phase) ·
+`docs/wiki/Scaled-Kite-English-Thought-Center-Context.md` (the context-flow design record) · `CHANGELOG.md` · `LICENSE`.
+
+---
+
 ## Current Repo Focus
 
 *Individual files going stale between passes is fine — this project isn't
@@ -34,8 +98,8 @@ not yet given its own node in that graph.
 prompts (`benchmarks/all_voices/`, `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`).
 The console loader now selects all twelve speaking monads (`EntryPointMonadAdapter`,
 `PtolemyDesktop/ptolemy_console.py`, test `PtolemyDesktop/tests/test_monad_entry_points.py`).
-WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the GPL v3 text (`LICENSE`)
-now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
+WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the license statement (`LICENSE`: the Monad is proprietary;
+the harness and console plugin are GPL v3.0) now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
 Open thread: context flow, carrying the prompt's topic through the reply.
 
 ---
@@ -73,9 +137,13 @@ Full table, transcripts and the census: `docs/wiki/Tuning-the-Engine/42_every_vo
 
 ## License and third-party notices
 
-This project's code and mathematics are GPL v3 (`LICENSE`). It uses and derives data from WordNet 3.0,
-Copyright 2006 Princeton University; the WordNet license is in `WORDNET_LICENSE.txt` and the notices
-(WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.
+**The Monad (this repository) is proprietary.** Licensing is available; discuss in person or write to the.wandering.god@gmail.com.
+The mathematics is not copyrightable and is free to use; the code is the author's engineering work. The harness
+(`harness.py`, `PtolC/monad_harness.c`, `PtolC/monad_harness.h`) and the console UI plugin in PtolemyDesktop are GNU GPL v3.0
+(`LICENSE-GPL-3.0.txt`); only VAPMIP and POE are proprietary. Full statement: `LICENSE`.
+
+The project uses and derives data from WordNet 3.0, Copyright 2006 Princeton University; the WordNet license is in
+`WORDNET_LICENSE.txt` and the notices (WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.
 
 ---
 
@@ -1012,7 +1080,7 @@ ptolemy -I ~/Documents
 
 ## Build from Source
 
-Dependencies: `gcc`, `make`, `libm` (standard on every *nix).
+Dependencies: `gcc`, `make`, `libm`, and `libxml2-dev` (the build uses `-DHAVE_LIBXML2`).
 
 ```bash
 git clone https://github.com/michaelrendier/VAPMIP.git

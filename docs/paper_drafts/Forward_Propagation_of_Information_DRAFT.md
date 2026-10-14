@@ -64,3 +64,20 @@ Full transcripts for all twelve voices: `docs/wiki/Tuning-the-Engine/42_every_vo
 
 ## Conventions (cs-paper-code-conventions)
 Benchmarks = D. Parser, address, store = B (short verbatim listings) or A (path + function) by size. WordNet, NLTK and Infocom/Zork = A: cited, not re-derived; Zork is built-against, not post-hoc. The unported composter and the single-voice target = C, labelled THEORETICAL.
+
+## Outline (plan, 2026-10-14): the paper is written off machinery that already exists
+**Licensing shapes the conventions.** The Monad is proprietary (`LICENSE`) and the mathematics is free, so the paper publishes the **mechanism**, not the source: Convention **E** (named-step algorithms, one running example carried through every step) and **F** (the exhaustive small-case table) for the mechanism; **D** (literal transcripts) for behaviour and benchmarks; **A** (path + function name, no listing) for anything that is Monad code; **B** (verbatim listings) only for the GPL v3 harness and for established or third-party components. (The companion paper under FourthAgePapers already carries verbatim listings of Monad functions under GPL v3; that needs a decision before it travels with this one.)
+
+| § | Content | Convention | Source that already exists |
+|---|---|---|---|
+| 0 | Abstract (v3 above) | n/a | this file |
+| 1 | Benchmarks: every voice (this draft's §1) | D | `docs/wiki/.../42_every_voice_benchmark.md`, `benchmarks/all_voices/` |
+| 2 | The address: a word is the counts of its 19 relation pointers plus a prime; round trip | E + F (one word end to end; the n=4 table) | `wordnet_boxkite.py`, `PtolC/dump_boxkite_bin.c`, the 19-D paper |
+| 3 | The parser: verb selects one of sixteen operators; noun, preposition, anaphor | A + D | `zork_parser.py`, `PtolC/zork.c`, REPL transcripts |
+| 4 | The store: one memory-mapped file, one binary search | A | `PtolC/monad3c.h`, `monad3_c.bin` (48 MB) |
+| 5 | The voices: what each returns and why (the nine behaviours) | D | Phase 42 transcripts |
+| 6 | Energy and method (battery discharge, whole-laptop upper bound, public comparison) | D | `.claude/scratchpad/2026-10-13_monad_energy/` |
+| 7 | Prompt extraction (tagger trained offline 93.9%, chunks, topic bag) | A + D | `.claude/scratchpad/2026-10-13_nltk_extraction_pipeline/` |
+| 8 | Context flow: the open stage, stated as specified work (document planner, relation families, extinction of incompatible foci) | C, THEORETICAL | `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md` |
+| 9 | Limits and negative results as results (fragments, degenerate voices, idea-pool noise) | D | Phase 42 §6 |
+| A | Tuning the Engine appendix (long) | A | `docs/wiki/Tuning-the-Engine/` |
