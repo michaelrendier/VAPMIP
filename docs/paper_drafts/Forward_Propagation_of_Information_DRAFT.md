@@ -56,7 +56,7 @@ boxkite_orbweaver_monad.weave_via  (2 to 8 s, document plan)
 [paper  scale=2.0  reach=2  turbulent  radii=2  blocks=13]
 BRIDGE: it belongs to the domain of pinkie.
 SCAFFOLD: decompose: it is made of pinkie and pinky.  /  situate: it is part of pinkie.
-CAPTURE: hence · as for · more precisely · for instance · that is · consider · on the whole
+CAPTURE: hence · as for · more precisely · for instance · that said · overall · namely · in detail · in other words · for example · on the whole
 ```
 Full transcripts for all twelve voices: `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` §5.
 
