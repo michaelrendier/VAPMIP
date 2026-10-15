@@ -13,9 +13,9 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*42 entries — Phases 1–41 (+ addenda 02b, 21b) + one chain-of-custody audit.
+*45 pages — Phases 1–42 (+ addenda 02b, 21b) + one chain-of-custody audit.
 Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
-mix of Claude Opus 5 and Claude Sonnet 5; 40–41 by Claude Sonnet 5.5 (see each page's byline).*
+mix of Claude Opus 5 and Claude Sonnet 5; 40–42 by Claude Sonnet 5.5 (see each page's byline).*
 
 ---
 
