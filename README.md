@@ -98,8 +98,7 @@ not yet given its own node in that graph.
 prompts (`benchmarks/all_voices/`, `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`).
 The console loader now selects all twelve speaking monads (`EntryPointMonadAdapter`,
 `PtolemyDesktop/ptolemy_console.py`, test `PtolemyDesktop/tests/test_monad_entry_points.py`).
-WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the license statement (`LICENSE`: the Monad is proprietary;
-the harness and console plugin are GPL v3.0) now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
+WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the license statement (`LICENSE`) now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
 Open thread: context flow, carrying the prompt's topic through the reply.
 
 ---
@@ -137,12 +136,7 @@ Full table, transcripts and the census: `docs/wiki/Tuning-the-Engine/42_every_vo
 
 ## License and third-party notices
 
-**The Monad (this repository) is proprietary and source-available.** It is free for research, education, personal and hobby
-use, and for non-commercial development and experimentation. Commercial use (a maker selling something that uses the Monad) and corporate use require a written license, with
-preferential terms for individual makers and small builders; licensing is available, so discuss in person or write to the.wandering.god@gmail.com. The mathematics is not copyrightable
-and is free to use; the code is the author's engineering work. The harness (`harness.py`, `PtolC/monad_harness.c`,
-`PtolC/monad_harness.h`) and the console UI plugin in PtolemyDesktop are GNU GPL v3.0 (`LICENSE-GPL-3.0.txt`); only VAPMIP
-and POE are proprietary. Full statement: `LICENSE`.
+Short-term licensing available upon request with offer: the.wandering.god@gmail.com. See `LICENSE`.
 
 The project uses and derives data from WordNet 3.0, Copyright 2006 Princeton University; the WordNet license is in
 `WORDNET_LICENSE.txt` and the notices (WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.

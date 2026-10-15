@@ -1,31 +1,4 @@
 VAPMIP — the Monad
-Copyright (c) 2026 Cody Michael Allison (Michael Rendier). All rights reserved.
+Copyright (c) 2026 Cody Michael Allison (Michael Rendier).
 
-The Monad, which is the code in this repository, is proprietary. It is source-available: you may read it, and you may use it as
-described below.
-
-FREE to use, run, study and modify for research, education, personal and hobby use, and for development and experimentation
-that is not commercial. Researchers, developers and hobbyists are welcome to play with it.
-
-COMMERCIAL USE requires a written license. Commercial use means a maker selling something (a product, a service or a work) that
-uses the Monad, and any use by a corporate organisation. Individual makers and small builders are offered preferential terms;
-larger organisations are licensed on terms negotiated individually. Licensing is available; discuss in person or write to
-the.wandering.god@gmail.com. Without a written license, no right to commercial use, and no right to redistribute the Monad,
-is granted.
-
-What is NOT restricted:
-  * The mathematics. Mathematics is not copyrightable, and nothing here restricts anyone from using, studying, re-deriving or
-    publishing the mathematics, the algorithms as ideas, or the measurements described in this repository's documents.
-    What is protected is the code, which is the author's engineering work (written with Claude's code generation, directed
-    and owned by the author).
-  * The harness and the console plugin are GNU GPL v3.0 (full text: LICENSE-GPL-3.0.txt). In this repository that covers:
-        harness.py
-        PtolC/monad_harness.c
-        PtolC/monad_harness.h
-    and, in the PtolemyDesktop repository, the console UI plugin (ptolemy_console.py, console_link.py) and the rest of
-    PtolemyDesktop. Everything else in this repository is the proprietary Monad.
-
-Only VAPMIP (the Monad) and POE are proprietary; the rest of the author's projects are GPL v3.0 unless they say otherwise.
-
-Third-party material (WordNet 3.0, Open English WordNet, NLTK, the UD treebanks) keeps its own license: see NOTICE and
-WORDNET_LICENSE.txt.
+Short-term licensing available upon request with offer: the.wandering.god@gmail.com
