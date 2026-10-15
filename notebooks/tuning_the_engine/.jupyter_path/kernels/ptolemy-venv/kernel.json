@@ -1,0 +1,6 @@
+{
+ "argv": ["/home/rendier/Projects/ThePlace/PtolemyDesktop/.venv/bin/python", "-m", "ipykernel_launcher", "-f", "{connection_file}"],
+ "display_name": "PtolemyDesktop venv (PYTHONHASHSEED=0)",
+ "language": "python",
+ "env": {"PYTHONHASHSEED": "0"}
+}

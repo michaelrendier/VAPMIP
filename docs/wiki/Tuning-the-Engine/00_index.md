@@ -17,6 +17,12 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
 mix of Claude Opus 5 and Claude Sonnet 5; 40–42 by Claude Sonnet 5.5 (see each page's byline).*
 
+> **Companion notebooks (2026-10-15).** One Jupyter notebook per page — `phase_NN.ipynb`, plus 02b and 21b — in
+> [`../../../notebooks/tuning_the_engine/`](../../../notebooks/tuning_the_engine/). Each runs the machinery its page
+> describes against the live repo and ends in a claim ledger (PASS / FAIL / PROSE / SKIP); a FAIL is a page claim that no
+> longer reproduces, kept as a result. Roll-up of every FAIL: `FINDINGS.md` in that directory. New phases get a spec in
+> `specs/` and a rebuild (`README.md` there).
+
 ---
 
 ## Phases
