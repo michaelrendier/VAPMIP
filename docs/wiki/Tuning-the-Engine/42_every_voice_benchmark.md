@@ -17,6 +17,8 @@
 The console's `/monad list` offers all 24. At measurement time `/monad use` could switch to only the 6 of group A; the 6 of group B each spoke but were not wired. They are wired as of 2026-10-14 (item 1 below).
 
 ### 3. The twelve voices, fastest first (warm = second round, mean of six prompts)
+
+*"Warm" is capacitor language: the field's capacitor (`ValaQuenta/capacitor.py`: V ← V + (signal − V)/τ, τ the conversational window) holds stored charge after a first pass; here warm means the second round over the same six prompts, after the first round has charged the field and loaded WordNet. The cold/warm gap is measured as one number; the capacitor's charge and the one-time loading are not separated. See the paper draft §1.1.*
 | Voice (module.class.method or adapter) | load s | RSS +MB | 1st-round ms | warm ms | whole-laptop µWh per reply | vs 0.3 Wh |
 |---|---|---|---|---|---|---|
 | VQ_rotary_monad.ValaQuenta.speak (str) | 0.08 | 3.3 | 0.30 | 0.30 | 0.77 (derived 9.255 W) | 388,979× lower |
