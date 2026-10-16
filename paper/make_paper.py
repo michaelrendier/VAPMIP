@@ -63,12 +63,13 @@ CODE_BY_SECTION = [
     ('§17 Tuning and the surface', ['VAPMIP/monad.py', 'VAPMIP/docs/wiki/Tuning-the-Engine/00_index.md', 'VAPMIP/docs/wiki/Tuning-the-Engine/02b_the_halocline_j_blue_j_red_h_hat_rb.md',
                                     'VAPMIP/docs/wiki/Tuning-the-Engine/06_definition_from_above_the_shadow_cascade.md', 'VAPMIP/docs/wiki/Tuning-the-Engine/09_the_void_named_itself.md',
                                     'VAPMIP/docs/wiki/Tuning-the-Engine/15_the_negative_space_response_equation.md']),
+    ('§2.2 Inside Out', ['ValaQuenta/modules/inversion/maths.py']),
     ('§2 licences and third-party notices', ['VAPMIP/NOTICE', 'VAPMIP/WORDNET_LICENSE.txt', 'VAPMIP/LICENSE', 'VAPMIP/LICENSE-GPL-3.0.txt']),
 ]
 NOTEBOOKS = [
     ('§3', 'VAPMIP/notebooks/paper/17_null_operator_and_hub.ipynb'), ('§4', 'VAPMIP/notebooks/c/08c_ptol_store.ipynb'),
     ('§5', 'VAPMIP/notebooks/c/07c_ptol_projection_and_balance.ipynb'), ('§6', 'VAPMIP/notebooks/c/08c_ptol_store.ipynb'),
-    ('§7', 'VAPMIP/notebooks/c/09c_ptol_learning_step.ipynb'),
+    ('§7', 'VAPMIP/notebooks/c/09c_ptol_learning_step.ipynb'), ('§7.3', 'VAPMIP/notebooks/c/08c_ptol_store.ipynb'),
     ('§8', 'VAPMIP/notebooks/paper/18_ptol_sentence_bridge.ipynb'), ('§9', 'VAPMIP/notebooks/paper/19_parser_tables.ipynb'),
     ('§10', 'VAPMIP/notebooks/tuning_the_engine/phase_25.ipynb'), ('§10', 'VAPMIP/notebooks/tuning_the_engine/phase_39.ipynb'),
     ('§11', 'VAPMIP/notebooks/tuning_the_engine/phase_38.ipynb'), ('§12', 'VAPMIP/notebooks/paper/20_scaled_kernel_fibers.ipynb'),
@@ -80,16 +81,68 @@ NOTEBOOKS = [
 ]
 EVIDENCE = [
     ('the generator, its template and its figure', ['VAPMIP/paper/evidence.py', 'VAPMIP/paper/make_paper.py', 'VAPMIP/paper/template.md', 'VAPMIP/paper/sec17.md', 'VAPMIP/paper/build_pdf.sh',
-                                                     'VAPMIP/paper/figures/console_rotary_rerun_boxkite_2026-09-11.png']),
+                                                     'VAPMIP/paper/figures/1-funny-ptolemy.png', 'VAPMIP/paper/figures/2-Hocus-Hyperwebster.png', 'VAPMIP/paper/figures/3-TheExtractor.png', 'VAPMIP/paper/figures/4-OMFG.png', 'VAPMIP/paper/figures/5-claude-stuff.png', 'VAPMIP/paper/figures/6-Screenshot-After-Response.png', 'VAPMIP/paper/figures/7-Screenshot-Before-First-Turn.png']),
     ('the notebook builders', ['VAPMIP/notebooks/paper/pn.py', 'VAPMIP/notebooks/paper/build_paper_notebooks.py', 'VAPMIP/notebooks/paper/specs_paper.py', 'VAPMIP/notebooks/c/install_c_kernel.sh']),
     ('Tuning the Engine, and its findings roll-up', ['VAPMIP/notebooks/tuning_the_engine/FINDINGS.md', 'VAPMIP/docs/wiki/J_red-J_blue-0_RB-Record.md']),
     ('the name chronology of the Null Operator', ['Ainulindale/wiki/127_names_of_the_null_operator.md']),
     ('scratch evidence (persistent scratchpad)', ['ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper', 'ContextPlease/claude/scratchpad/2026-10-15_null_operator_names']),
     ('the skill that decides how code is shown, and the introductions it was calibrated on', ['ContextPlease/claude/skills/cs-paper-code-conventions/SKILL.md',
                                                                                               'ContextPlease/claude/skills/cs-paper-code-conventions/references/WhitePaperIntroExemplars']),
-    ('sources of the public energy figures (copies)', ['ContextPlease/claude/references/VAPMIPPaper', 'VAPMIP/paper/references']),
+    ('sources of the public energy figures (copies)', ['FourthAgePapers/ForwardPropagation/references', 'ContextPlease/claude/references/VAPMIPPaper', 'VAPMIP/paper/references']),
     ('the ledger of downloaded literature', ['ContextPlease/claude/references/INDEX.md']),
 ]
+
+
+BANNED = re.compile(r'\bGUT\b|Langlands|\bUFT\b|unified field|grand unif|theory of everything', re.I)
+CTX_PATTERN = re.compile(r'ptol\.c|monad\.c|monad3_c|scaled_mind_eye|rotary_rerun|19D_rotary|19D_boxkite|ptol_layer|ptolc_bridge|zork_parser|PtolC')
+
+
+def _describe(path: Path) -> str:
+    """First heading or first non-blank line of a text file, trimmed; nothing if it names a theory this paper leaves out."""
+    try:
+        for line in path.read_text(encoding='utf-8', errors='replace').splitlines():
+            t = line.strip().lstrip('#').strip()
+            if t and not t.startswith(('---', '```', '<!--', '!/', '!')):
+                t = ''.join(c for c in t if ord(c) <= 0xFFFF)     # the PDF fonts lack the maths-script letters
+                return '' if BANNED.search(t) else t[:110]
+    except OSError:
+        pass
+    return ''
+
+
+def context_inventory() -> str:
+    """Every ContextPlease file that mentions the code this paper presents, found by search; paths are checked by existing."""
+    root = PLACE / 'ContextPlease'
+    hits: dict[str, list[Path]] = {}
+    for f in sorted((root / 'claude').rglob('*')):
+        if not f.is_file() or '.git' in f.parts or f.suffix.lower() in ('.pdf', '.png', '.bin', '.html', '.ipynb', '.jsonl', '.pyc'):
+            continue
+        if f.stat().st_size > 3_000_000:
+            continue
+        try:
+            raw = f.read_bytes()
+        except OSError:
+            continue
+        if b'\x00' in raw[:4096]:
+            continue                                  # a binary, not a record
+        txt = raw.decode('utf-8', errors='ignore')
+        if CTX_PATTERN.search(txt):
+            rel = f.relative_to(root)
+            hits.setdefault('/'.join(rel.parts[:3] if rel.parts[1] in ('scratchpad', 'hist_wiki') else rel.parts[:-1]), []).append(f)
+    out = []
+    for d in sorted(hits):
+        files = hits[d]
+        head = f"- `ContextPlease/{d}` ({len(files)} file{'s' if len(files) != 1 else ''}"
+        if len(files) <= 12:
+            items = []
+            for f in files:
+                desc = _describe(f)
+                items.append(f"`ContextPlease/{f.relative_to(root)}`" + (f" — {desc}" if desc else ''))
+            out.append(head + '):\n' + '\n'.join('  - ' + i for i in items))
+        else:
+            names = ', '.join(f"`{f.name}`" for f in files[:40])
+            out.append(head + f"; named here: {names}{' …' if len(files) > 40 else ''})")
+    return '\n'.join(out)
 
 
 def sec19() -> tuple[str, str, str]:
@@ -159,6 +212,12 @@ def build() -> str:
     tok['COORDS_TABLE'] = md_table(['word', 'slot (of 25,000)', 'E'], [[f'`{w}`', s, e] for w, s, e in sn['coords']])
     tree_c = next((g for w, hit, eng, wn, ph, deg, g in sn['lookup'] if w == 'tree' and g), 'n/a')
     tok['TREE_C'] = f"{float(tree_c):+.6f}" if tree_c != 'n/a' else 'n/a'
+    tok['SHOT_TABLE'] = md_table(['word', 'slot on screen', 'slot today', 'slot by the replaced formula', 'E today', 'E on screen'],
+                                 [[f'`{w}`', a, b, c, d, e] for w, a, b, c, d, e in sn['shots']])
+    fp = ev.old_fault_probe()
+    tok['FAULT_RC'], tok['FAULT_FIRST'] = str(fp['rc']), fp['first'].replace('`', "'")
+    io = ev.inside_out()
+    tok['IO_N'], tok['IO_J2'], tok['IO_J4'], tok['IO_R'], tok['IO_A'] = f"{io['n']:,}", f"{io['j2']:.1e}", f"{io['j4']:.1e}", f"{io['radius']:.1e}", f"{io['angle']:.1e}"
     tok['TREE_SENSES'] = '; '.join(f"`{n}` {g:+.6f}" for n, g in ev.tree_senses() if g is not None)
     tok['EYES_TABLE'] = md_table(['prompt', 'chars', 'R (σ=1)', 'C (¾)', 'H (½)', 'O (¼)', 'S (0)', 'Γ at H'],
                                  [[esc(r['prompt']), str(r['len'])] + [f"{r['eyes'][k]:.4f}" for k in 'RCHOS'] + [f"{r['gamma']:+.4f}"] for r in qe['rows']])
@@ -213,6 +272,7 @@ def build() -> str:
     tok['LINEAGE_TABLE'] = md_table(['strut', 'lineage'], [[str(s), l] for s, l in ev.lineage_table()])
 
     tok['SEC19_CODE'], tok['SEC19_NB'], tok['SEC19_EVID'] = sec19()
+    tok['SEC19_CTX'] = context_inventory()
 
     text = TEMPLATE.read_text()
     text = text.replace('@@SEC17@@', SEC17.read_text().strip())
@@ -222,6 +282,9 @@ def build() -> str:
     left = re.findall(r'@@[A-Z0-9_]+@@', text)
     if left:
         raise SystemExit(f'unfilled tokens: {sorted(set(left))}')
+    m = BANNED.search(text)
+    if m:
+        raise SystemExit(f'the paper names a theory it leaves out: {m.group(0)!r}')
     if '[cite]' in text:
         raise SystemExit('a [cite] marker is still in the text')
     return text

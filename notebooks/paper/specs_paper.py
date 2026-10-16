@@ -428,6 +428,37 @@ int main(void) {{
     printf("%s: every energy lies between MONAD_D_STAR and MONAD_OMEGA_ZS\\n", (lo >= MONAD_D_STAR - 1e-12 && hi <= MONAD_OMEGA_ZS + 1e-12) ? "PASS" : "FAIL");
     return 0;
 }}
+"""),
+("md", "## The slots printed in two screenshots of May 2026 (paper §7.3, screenshots 2 and 3)\nThe ten (word, slot, energy) triples below are transcribed from the screenshots `2-Hocus-Hyperwebster.png` and `3-TheExtractor.png`, taken on the earlier store (`monad_wordnet.bin`, vocab 24,485); the function is today's `monad_word_coords`."),
+("code", f"""//%cflags:-I../../PtolC
+//%ldflags:-lm
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <math.h>
+#include "ptolemy.h"
+
+{_wc}
+
+int main(void) {{
+    const char *w[] = {{"can","you","hear","what","i","am","typing","is","your","name"}};
+    int z[] = {{18466,17464,19372,16194,2912,16543,21041,1894,18893,15471}};
+    double E[] = {{0.4832,0.4703,0.4949,0.4540,0.2834,0.4585,0.5163,0.2703,0.4887,0.4447}};
+    int old_ok = 1, new_same = 0;
+    for (int i = 0; i < 10; i++) {{
+        int idx; double e; monad_word_coords(w[i], 25000, &idx, &e);
+        /* the formula the comment in monad_word_coords says it replaced: fmod((double)v*MONAD_PHI, 1.0) */
+        uint64_t v = 0; for (const char *p = w[i]; *p; p++) v = v * 95ULL + (uint64_t)((unsigned char)*p - 32 + 1);
+        if (v > 0) v--;
+        int old_idx = (int)(fmod((double)v * MONAD_PHI, 1.0) * 25000);
+        int match_new = (idx == z[i]) && (fabs(e - E[i]) < 5e-5), match_old = (old_idx == z[i]);
+        if (!match_old) old_ok = 0;
+        if (match_new) new_same++;
+        printf("shot %-7s screen slot %5d | today %5d | old formula %5d | E %.4f (screen %.4f) %s\\n", w[i], z[i], idx, old_idx, e, E[i], match_new ? "match" : "DIFFERS (today)");
+    }}
+    printf("%s: the replaced formula (fmod of v*MONAD_PHI) reproduces all ten screenshot slots; today's exact-integer monad_word_coords reproduces %d of 10 (the others differ by one slot, six-character word, as monad.c's own comment says)\\n", (old_ok && new_same >= 9) ? "PASS" : "FAIL", new_same);
+    return 0;
+}}
 """)]}
 
 

@@ -431,7 +431,33 @@ def store_notebook() -> dict:
     t = nb_text('c/08c_ptol_store.ipynb')
     look = [m.groups() for m in re.finditer(r'^(\w+)\s+hit=(\d)\s+eng=(-?\d+) wn=(-?\d+) phon=(-?\d+)\s+degree=(\d+)(?:\s+gamma_radial=(\S+))?', t, re.M)]
     coords = [m.groups() for m in re.finditer(r'^(\w+)\s+slot\s+(\d+)\s+E = ([\d.]+)', t, re.M)]
-    return {'lookup': look, 'coords': coords}
+    shots = [m.groups() for m in re.finditer(r'^shot (\w+)\s+screen slot\s+(\d+) \| today\s+(\d+) \| old formula\s+(\d+) \| E ([\d.]+) \(screen ([\d.]+)\)', t, re.M)]
+    return {'lookup': look, 'coords': coords[:8], 'shots': shots}
+
+
+def old_fault_probe() -> dict:
+    """Screenshot 1 shows `ptolemy -l 'what is your name'` ending in a segmentation fault. Today's `ptolemy`, scratch HOME (no checkpoint)."""
+    env = dict(os.environ, HOME=tempfile.mkdtemp(prefix='vapmip_probe_'))
+    r = subprocess.run([str(PTOLC / 'ptolemy'), '-l', 'what is your name'], capture_output=True, text=True, cwd=PTOLC, env=env, timeout=120)
+    shutil.rmtree(env['HOME'], ignore_errors=True)
+    return {'rc': r.returncode, 'first': (r.stdout + r.stderr).strip().splitlines()[0] if (r.stdout + r.stderr).strip() else ''}
+
+
+def inside_out(n: int = 5000) -> dict:
+    """J(z) = i / conj(z), i.e. (r, theta) -> (1/r, theta + pi/2), as in ValaQuenta/modules/inversion/maths.py (InversionMap)."""
+    import cmath, random
+    rnd = random.Random(0)
+    j = lambda z: 1j / z.conjugate()
+    d2 = d4 = dr = dang = 0.0
+    for _ in range(n):
+        z = complex(rnd.uniform(-5, 5), rnd.uniform(-5, 5))
+        if abs(z) < 1e-3:
+            continue
+        d2 = max(d2, abs(j(j(z)) / z + 1))
+        d4 = max(d4, abs(j(j(j(j(z)))) - z) / abs(z))
+        dr = max(dr, abs(abs(j(z)) - 1 / abs(z)))
+        dang = max(dang, abs(((cmath.phase(j(z)) - cmath.phase(z) - cmath.pi / 2 + cmath.pi) % (2 * cmath.pi)) - cmath.pi))
+    return {'n': n, 'j2': d2, 'j4': d4, 'radius': dr, 'angle': dang}
 
 
 def c07_diff() -> str:
