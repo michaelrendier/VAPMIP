@@ -2,6 +2,8 @@
 
 **Cody Michael Allison** (Michael Rendier) · independent researcher · the.wandering.god@gmail.com · ORCID 0009-0007-7239-6760
 
+> **Pointer, 2026-10-15:** the paper's scope has moved to the compiled `ptol.c` monad and the scaled boxkite Mind's Eye monad (`scaled_mind_eye_boxkite_kernel_monad.py`); outline under discussion. This draft (24-module, twelve-voice survey) is kept as the benchmark record. A generated measured first pass is in `VAPMIP/paper/`.
+
 > **DRAFT: NOT THE PAPER.** Working abstract and the opening benchmark section, kept here until the paper is written (it will take another injection or two of insight first). Started 2026-10-13; this version 2026-10-14. The thesis "teach the maths to speak English" is first stated in this draft; `Ainulindale/AgeThird/VAPMIP_Paper.md` records it as deferred. Engineered-operator vocabulary only (no theory names), per the standing rule for the speaking engine. Companion pages: `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript), `…/Scaled-Kite-English-Thought-Center-Context.md` §22–§24.
 
 ## Abstract (draft v3)

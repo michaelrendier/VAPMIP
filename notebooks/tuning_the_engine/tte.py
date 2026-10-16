@@ -78,12 +78,22 @@ def scratch(prefix="tte_"):
     return tempfile.mkdtemp(prefix=prefix, dir=base)
 
 
+def link_nltk_data(home):
+    """Give a scratch HOME the real ~/nltk_data. `ptol -say` calls the sentence bridge, which reads NLTK corpora from $HOME/nltk_data;
+    HOME is also how python3 finds the user's site-packages, so for `ptol -say` run with the REAL HOME (it writes no files); a scratch HOME makes ptol silently fall back to the word bag (a 2026-10-15 mistake that made `-say` look 12x faster)."""
+    real = os.path.expanduser("~/nltk_data"); dst = os.path.join(home, "nltk_data")
+    if os.path.isdir(real) and not os.path.lexists(dst):
+        os.symlink(real, dst)
+    return home
+
+
 def ptol_raw(text, eye="H", home=None):
     """Run PtolC/ptol -r on `text` with HOME redirected (ptol writes papers into ~/.ptolemy).
     Returns dict(header=str, sigma_self, gamma, u, scalars[16], primes[...], sigma_rb[16])."""
     import subprocess
     home = home or scratch("ptolhome_")
     os.makedirs(os.path.join(home, ".ptolemy"), exist_ok=True)
+    link_nltk_data(home)
     pr = subprocess.run([os.path.join(VAPMIP, "PtolC", "ptol"), "-r", "-eye", eye, text],
                         capture_output=True, text=True, env=dict(os.environ, HOME=home), timeout=60)
     out = pr.stdout.splitlines()

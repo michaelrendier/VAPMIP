@@ -133,7 +133,7 @@ L.check("the in-memory session drifts as it learns over repeated prompts (no sav
 home = scratch("ph42_"); os.makedirs(os.path.join(home, ".ptolemy"), exist_ok=True)
 t0 = time.perf_counter(); subprocess.run([os.path.join(VAPMIP, "PtolC", "ptol"), "finger pointer"], capture_output=True, text=True, env=dict(os.environ, HOME=home), timeout=120); tp = time.perf_counter() - t0
 L.check("ptol '<prompt>' (plain word bag + SVG paper): 0.84–0.91 s (accept 0.3–2 s)", 0.3 < tp < 2.0, f"{tp:.2f} s")
-t0 = time.perf_counter(); sy = subprocess.run([os.path.join(VAPMIP, "PtolC", "ptol"), "-say", "finger pointer"], capture_output=True, text=True, env=dict(os.environ, HOME=home), timeout=180); ts = time.perf_counter() - t0
+t0 = time.perf_counter(); sy = subprocess.run([os.path.join(VAPMIP, "PtolC", "ptol"), "-say", "finger pointer"], capture_output=True, text=True, env=os.environ.copy(), timeout=180)   # real HOME: -say writes no files, and its sentence bridge needs ~/nltk_data; ts = time.perf_counter() - t0
 print(f"ptol -say: {ts:.1f} s;", (sy.stdout.strip().splitlines() or [''])[-1][:100])
 L.check("ptol -say (sentence creator via Python + NLTK): 12.2–12.7 s (page; accept 5–30 s)", 5 < ts < 30, f"{ts:.1f} s now — `-say` no longer goes through Python + NLTK (it returns in under a second, from the C monad's resident word store); the page's number is the earlier path. The words differ too: the page's reply form was 'Priest relates country.'")"""),
 
