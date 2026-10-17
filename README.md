@@ -72,7 +72,7 @@ If the system `python3` cannot import `nltk` (a pandas/numpy ABI mismatch), use 
 ### Where to read next
 
 `docs/semantic_orbweaver_notes.md` (the live notes on the current work) · `Wernicke/README.md` · `Broca/README.md` ·
-`Wernicke/corpus/README.md` (the standard testing corpus) · `docs/figures/epicycles/EPICYCLES.md` · `docs/paper_drafts/` (the paper draft) · `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript and the census) ·
+`Wernicke/corpus/README.md` (the standard testing corpus) · `docs/NLP_ENVIRONMENT.md` (the content-extraction stack, data and C access) · `docs/figures/epicycles/EPICYCLES.md` · `docs/paper_drafts/` (the paper draft) · `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript and the census) ·
 `docs/wiki/Tuning-the-Engine/00_index.md` (the engineering log, phase by phase) ·
 `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md` (the context-flow design record) · `CHANGELOG.md` · `LICENSE`.
 
