@@ -56,7 +56,7 @@ The primer described the v1.0 `monad_speak` (rank by J, emit top-k). The engine 
 
 ---
 
-## 2026-10-17: two trees and the monitor
+## 2026-10-17: the Broca/Wernicke trees and the monitor
 
 - **Assignment (Claude's call, Cody delegated it):** `Wernicke/` = semantic orbweaver (branch `orbweaver`); `Broca/` = scalar/scaled boxkite (branch `boxkite`). Files are copies; originals untouched. `Wernicke/first_monad_current/` builds `ptolemy` (142,024 B, same as the 2026-08-30 binary) and reproduces `holcus same stuff seemy` on the May bin in a scratch HOME.
 - **Monitor:** `tools/lemniscate_monitor.py`: Broca/Wernicke aphasia diagram (damage lobe left, damage lobe right, ∞ between = intact), points from a JSONL feed. It needs scores S (semantic) and G (structure); no scorer exists yet (T1). The transformer reference series must come from the same scorers on the same prompts. The mapping (x = G−S, y = 1−(S+G)/2, upright lemniscate, A=0.45) is a first cut, all [PARAM].
