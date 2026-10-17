@@ -35,6 +35,9 @@ line) is not scored (a gap or overlap there is drawn, nothing more).
     passive is entrained by active: dθ_yin += K_LOCK·sin(θ_yang − θ_yin)
     barycentre b = Σ A_i·c_i·e^{iθ_i} / Σ A_i   (polygon area and centroid of each half)
 
+The SHAPE of the epicycle is the measurement; the live Lyapunov exponent (--lyap) is only a cross-check.
+The two comparisons always run together: the same scores on a static centre and on a free centre.
+
 Healthy: equal rates, no dent, b = 0 (a point).  Small |rel|: the halves lock at a fixed
 phase offset and b is a circle.  Larger |rel| beats the lock: the offset drifts and b
 traces an epicycle.  Yin and yang are congruent under a 180° turn, so the two cases
@@ -46,9 +49,10 @@ the monitor only displays whatever is written to its input.  The reference
 series ("ref") is whatever a transformer scores on the SAME prompts with the
 SAME scorers; the monitor cannot invent it.
 
-Input: a JSON-lines file, one object per line, appended live:
+Input: a JSON-lines file, one object per line, appended live.  M (optional, [0,1]) is how
+well the two halves work together (the seam); absent, M = 1 − |S − G|:
 
-    {"S": 0.62, "G": 0.20, "label": "what is your name", "src": "monad"}
+    {"S": 0.62, "G": 0.20, "M": 0.50, "label": "what is your name", "src": "monad"}
     {"S": 0.71, "G": 0.80, "label": "what is your name", "src": "ref"}
 
 Usage:
@@ -71,7 +75,7 @@ import matplotlib
 A = 0.45            # [PARAM] lemniscate size: tolerated deficit/imbalance
 DEAD = 0.08         # [PARAM] |x| below this with a large deficit = both-deficit
 TRAIL = 40          # [PARAM] points kept per source
-COLOUR = {'monad': '#c0392b', 'ref': '#2471a3'}
+COLOUR = {'monad': '#c0392b', 'ref': '#2471a3', 'monad:free': '#c0392b', 'monad:static': '#2471a3', 'ref:free': '#7f8c8d'}
 
 
 def lemniscate(a=A, n=400):
@@ -126,8 +130,10 @@ class Feed:
                 try:
                     r = json.loads(line)
                     src = r.get('src', 'monad')
+                    m = r.get('M')
                     self.rows.setdefault(src, []).append(
-                        (float(r['S']), float(r['G']), r.get('label', '')))
+                        (float(r['S']), float(r['G']), r.get('label', ''),
+                         None if m is None else float(m)))
                 except (ValueError, KeyError, TypeError):
                     continue
         for k in self.rows:
@@ -138,8 +144,8 @@ def demo_rows():
     rnd = random.Random(7)
     out = {'monad': [], 'ref': []}
     for _ in range(25):
-        out['monad'].append((rnd.uniform(.25, .75), rnd.uniform(.05, .45), 'demo'))
-        out['ref'].append((rnd.uniform(.65, .95), rnd.uniform(.65, .95), 'demo'))
+        out['monad'].append((rnd.uniform(.25, .75), rnd.uniform(.05, .45), 'demo', None))
+        out['ref'].append((rnd.uniform(.65, .95), rnd.uniform(.65, .95), 'demo', None))
     return out
 
 
@@ -159,11 +165,11 @@ def draw(ax, rows):
     for src, pts in rows.items():
         if not pts:
             continue
-        xy = [to_xy(S, G) for S, G, _ in pts]
+        xy = [to_xy(p[0], p[1]) for p in pts]
         c = COLOUR.get(src, '#555')
         ax.plot([p[0] for p in xy], [p[1] for p in xy], '-', color=c, alpha=.25, lw=1)
         ax.scatter([p[0] for p in xy[:-1]], [p[1] for p in xy[:-1]], s=14, color=c, alpha=.45)
-        S, G, lab = pts[-1]
+        S, G = pts[-1][0], pts[-1][1]
         ax.scatter([xy[-1][0]], [xy[-1][1]], s=70, color=c, edgecolor='k', zorder=5,
                    label=f'{src}: {region(S, G)}')
     ax.legend(loc='lower center', fontsize=8, ncol=2, frameon=False)
@@ -272,15 +278,23 @@ def draw_tao(ax, tao, title):
     ax.set_aspect('equal'); ax.set_xlim(-1.15, 1.15); ax.set_ylim(-1.15, 1.15)
     ax.set_xticks([]); ax.set_yticks([])
     ax.add_patch(Circle((0, 0), 1.0, fill=False, ec='#999', lw=0.8, ls=':'))
+    phys = hasattr(tao, 'outline')
     for name, fc in (('yin', 'black'), ('yang', 'white')):
-        P = _rot(half_poly(name, tao.delta[name]), tao.th[name], tao.k)
+        P = tao.outline(name, tao.delta[name]) if phys else _rot(half_poly(name, tao.delta[name]), tao.th[name], tao.k)
         ax.add_patch(Polygon(P, closed=True, fc=fc, ec='#444', lw=1.0, alpha=0.9))
     for name, fc, ec in (('yang', 'black', 'black'), ('yin', 'white', 'black')):
-        x, y = _rot([DOT_AT[name]], tao.th[name], tao.k)[0]
+        x, y = tao.dot(name) if phys else _rot([DOT_AT[name]], tao.th[name], tao.k)[0]
         ax.add_patch(Circle((x, y), DOT_R * tao.k, fc=fc, ec=ec, lw=0.8))
-    ax.plot([0], [0], '+', color='#1e8449', ms=9)
-    ax.plot([tao.b.real], [tao.b.imag], 'x', color='#c0392b', ms=8, mew=2)
-    ax.set_title(title, fontsize=9)
+    if phys:
+        wx, wy = tao.whole()
+        ax.plot([wx], [wy], 'o', color='#1e8449', ms=5)                            # the whole (centre body)
+        # the barycentre: the drawn origin when free, offset by −b from the fixed centre when pinned
+        bx, by = (-tao.b.real, -tao.b.imag) if tao.pin else (0.0, 0.0)
+        ax.plot([bx], [by], 'x', color='#c0392b', ms=8, mew=2)
+    else:
+        ax.plot([0], [0], '+', color='#1e8449', ms=9)
+        ax.plot([tao.b.real], [tao.b.imag], 'x', color='#c0392b', ms=8, mew=2)
+    ax.set_title(title, fontsize=7)
 
 
 def draw_trace(ax, taos):
@@ -303,8 +317,110 @@ def draw_trace(ax, taos):
     ax.legend(loc='lower right', fontsize=7, frameon=False)
 
 
+# ── Taoist mode, three-body physics (tools/taoist_physics.py, System3) ───────
+EDGE_GAIN = 0.6         # [PARAM] outer-arc dent per unit of a half's own damage
+RHO_MM = 0.4            # [PARAM] density loss of the yin half per unit of seam damage
+CMD_Y = 1.0             # [PARAM] yang dot spins faster by this × seam damage
+CMD_W = 0.6             # [PARAM] yin dot spins slower by this × seam damage
+LYAP_WINDOW = 60.0      # s: the live chaos readout averages the local exponent over this span
+CHAOS_AT = 0.05         # /s: above this the readout says chaotic (regular baseline measured ~0.01)
+
+
+class PhysTao:
+    """The whole (a free centre body) and the two dot-weights: three anchors, two of them
+    turning together around the third.  Damage kinds, kept apart:
+        edge_y = 1 − G, edge_w = 1 − S   dents on the outside of each half (shape, mass, centre of mass)
+        seam   = 1 − M                   how badly the halves work together: the dots' rates
+                                         part company and the seam spring/damper weakens
+    Shapes that match: nothing moves.  Edges that differ: regular, periodic epicycles.
+    A distorted seam: the dots part company and throw the whole off the barycentre; measured
+    chaotic only when the mismatch is strong (see the live readout)."""
+    SUB = 0.01
+
+    def __init__(self, pin=False, measure=False):
+        import numpy as np
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import taoist_physics as TP
+        self.np, self.TP, self.pin, self.measure = np, TP, pin, measure
+        self.sys = TP.System3(pin=pin)
+        self.shadow = None
+        self.lam, self._acc, self._t = 0.0, [], 0.0
+        self.th = {'yang': 0.0, 'yin': 0.0}
+        self.k = 1.0
+        self.delta = {'yang': 0.0, 'yin': 0.0}
+        self.b = 0j
+        self.regime = 'intact'
+        self.trace = collections.deque(maxlen=TRACE_N)
+
+    def params(self, S, G, M):
+        TP = self.TP
+        M = max(0.0, min(1.0, 1.0 - abs(S - G) if M is None else M))
+        mu = 1.0 - M
+        dy, dw = EDGE_GAIN * (1.0 - G), EDGE_GAIN * (1.0 - S)
+        return (dict(delta_y=dy, delta_w=dw, rho_y=1.0, rho_w=1.0 - RHO_MM * mu,
+                     cmd_y=TP.OMEGA0 * (1.0 + CMD_Y * mu), cmd_w=TP.OMEGA0 * (1.0 - CMD_W * mu)),
+                dict(k_g=0.05 + (TP.K_G - 0.05) * M, c_g=0.01 + (TP.C_G - 0.01) * M), mu, dy, dw)
+
+    def step(self, S, G, dt, M=None):
+        TP, np = self.TP, self.np
+        p, seam, mu, dy, dw = self.params(S, G, M)
+        for sy in [self.sys] + ([self.shadow] if self.shadow else []):
+            sy.k_g, sy.c_g = seam['k_g'], seam['c_g']
+            sy.set_params(**p)
+        if self.measure and self.shadow is None:
+            self.shadow = TP.System3(pin=self.pin)
+            self.shadow.k_g, self.shadow.c_g = seam['k_g'], seam['c_g']
+            self.shadow.set_params(**p)
+            self.shadow.load(self.sys.state() + 1e-7 * np.eye(16)[0])
+        for _ in range(max(1, int(round(dt / self.SUB)))):
+            self.sys.step(self.SUB)
+            if self.shadow is not None:
+                self.shadow.step(self.SUB)
+            self._t += self.SUB
+        d = np.linalg.norm(self.shadow.state() - self.sys.state()) if self.shadow is not None else 0.0
+        if d > 0:
+            self._acc.append((self._t, math.log(d / 1e-7)))
+            self.shadow.load(self.sys.state() + (self.shadow.state() - self.sys.state()) * (1e-7 / d))
+            span = [x for x in self._acc if x[0] > self._t - LYAP_WINDOW]
+            if len(span) > 20:
+                self.lam = sum(x[1] for x in span) / (span[-1][0] - span[0][0] + self.SUB * 4)
+            self._acc = span
+        self.th = {'yang': self.sys.yaw(0), 'yin': self.sys.yaw(1)}
+        self.delta = {'yang': dy, 'yin': dw}
+        b = self.sys.barycentre()
+        self.b = complex(b[0], b[1])
+        self.regime = ('intact' if max(dy, dw, mu) < 1e-9 else 'damaged' if not self.measure
+                       else 'chaotic' if self.lam > CHAOS_AT else 'regular')
+        self.trace.append(self.b)
+
+    def _off(self):
+        """Origin of the drawn frame.  A free system drifts when the masses change, so it is
+        drawn in the barycentric frame; a pinned centre keeps its own fixed frame."""
+        if self.pin:
+            return (0.0, 0.0)
+        B = self.sys.xc - self.sys.barycentre()          # the system barycentre, lab coordinates
+        return (float(B[0]), float(B[1]))
+
+    def outline(self, name, delta):
+        """Outline of a half, carried by its own body, in the drawn frame."""
+        i = 0 if name == 'yang' else 1
+        ox, oy = self._off()
+        return [(x - ox, y - oy) for x, y in self.sys.to_lab(i, half_poly(name, delta))]
+
+    def dot(self, name):
+        i = 0 if name == 'yang' else 1
+        ox, oy = self._off()
+        x, y = self.sys.to_lab(i, [DOT_AT[name]])[0]
+        return x - ox, y - oy
+
+    def whole(self):
+        """Where the whole (the centre body) sits in the drawn frame."""
+        ox, oy = self._off()
+        return (float(self.sys.xc[0]) - ox, float(self.sys.xc[1]) - oy)
+
+
 def latest_scores(rows):
-    return {src: pts[-1][:2] for src, pts in rows.items() if pts}
+    return {src: pts[-1][:2] + (pts[-1][3] if len(pts[-1]) > 3 else None,) for src, pts in rows.items() if pts}
 
 
 def main():
@@ -313,7 +429,9 @@ def main():
     ap.add_argument('--png')
     ap.add_argument('--demo', action='store_true')
     ap.add_argument('--mode', choices=('normal', 'taoist'), default='normal')
-    ap.add_argument('--scores', help='S,G for one static monad channel (headless taoist test)')
+    ap.add_argument('--scores', help='S,G[,M] for one static monad channel (headless taoist test)')
+    ap.add_argument('--kinematic', action='store_true', help='taoist: the old two-rotor model (no physics)')
+    ap.add_argument('--lyap', action='store_true', help='taoist: also run a shadow copy and print the finite-time Lyapunov exponent (costs 2x; the SHAPE of the epicycle is the measurement)')
     ap.add_argument('--steps', type=int, default=900, help='taoist: simulation steps before a --png')
     ap.add_argument('--dt', type=float, default=0.04, help='taoist: seconds per step')
     ap.add_argument('--interval', type=int, default=40, help='ms between ticks (live)')
@@ -332,8 +450,8 @@ def main():
 
     def rows_now():
         if a.scores:
-            S, G = (float(v) for v in a.scores.split(','))
-            return {'monad': [(S, G, 'static')]}
+            v = [float(x) for x in a.scores.split(',')]
+            return {'monad': [(v[0], v[1], 'static', v[2] if len(v) > 2 else None)]}
         if a.demo:
             return demo_rows()
         feed.poll()
@@ -352,17 +470,24 @@ def main():
             draw(axes[0], rows)
             return
         sc = latest_scores(rows)
-        for src, (S, G) in sc.items():
-            t = taos.setdefault(src, Tao())
-            for _ in range(advance):
-                t.step(S, G, a.dt)
-        shown = [n for n in ('monad', 'ref') if n in taos]
+        # the two comparisons always run together: the same scores on a STATIC centre
+        # (regular, star-shaped epicycles) and on a FREE centre (the dots' mismatch throws the
+        # whole off the barycentre); a transformer reference, when present, on a free centre.
+        for src, (S, G, M) in sc.items():
+            variants = ('static', 'free') if src == 'monad' else ('free',)
+            for var in variants:
+                key = f'{src}:{var}'
+                t = taos.setdefault(key, Tao() if a.kinematic else PhysTao(pin=(var == 'static'), measure=a.lyap))
+                for _ in range(advance):
+                    t.step(S, G, a.dt) if a.kinematic else t.step(S, G, a.dt, M)
+        shown = [k for k in ('monad:static', 'monad:free') if k in taos] or [k for k in taos][:2]
+        for ax, key in zip(axes[:2], shown):
+            src = key.split(':')[0]
+            S, G = sc[src][0], sc[src][1]
+            t = taos[key]
+            draw_tao(ax, t, f"{key}: {region(S, G)} | {t.regime}" + (f" (λ={t.lam:+.2f}/s)" if getattr(t, 'measure', False) else "")
+                     + f"\n|b|={abs(t.b):.3f}R  dents {t.delta['yang']:.2f}/{t.delta['yin']:.2f}")
         axes[1].set_visible(len(shown) > 1)
-        for ax, n in zip(axes[:2], shown):
-            S, G = sc[n]
-            draw_tao(ax, taos[n], f"{n}: {region(S, G)} | {taos[n].regime} | k={taos[n].k:.2f}\n"
-                                  f"|b|={abs(taos[n].b):.3f}R  dents "
-                                  f"{taos[n].delta['yang']:.2f}/{taos[n].delta['yin']:.2f}")
         draw_trace(axes[2], taos)
 
     def on_key(ev):
