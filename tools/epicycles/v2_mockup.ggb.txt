@@ -1,5 +1,5 @@
 # v2_mockup.ggb.txt — the Taoist-mode epicycle mockup as GeoGebra commands (paste into the Input Bar, in order).
-# Matches v2_mockup.py (script of record).  Checked: the formulas below, evaluated outside GeoGebra, reproduce the
+# Matches v2_mockup.py (v2 swing rates) AND v3_mockup.py (v3 swing rates: see the wB / wW lines; the dent changes the swing).  Checked: the formulas below, evaluated outside GeoGebra, reproduce the
 # script's locked-column path to within 1.1e-4 R (the gap is the polynomial fit of the dented outline; see EPICYCLES.md).  GeoGebra itself was NOT run here: this file has not been
 # opened in GeoGebra; treat the syntax as unchecked until it is.
 #
@@ -20,8 +20,12 @@ eB = Slider(0, 0.6, 0.05)
 eW = Slider(0, 0.6, 0.05)
 # set sB = sW = 1 and sigma = 1 with SetValue(sB, 1) etc. after creating them
 # ---- swing rates (pendulum: longer or bigger = slower)
-wB = OmegaS / sqrt((L0 + dB) / L0 * sB)
-wW = OmegaS / sqrt((L0 + dW) / L0 * sW)
+# v3: the dented half is a physical pendulum hung from its dot; qB, qW = 1 + eW (-3.63991 eW^2 + 0.47992 eW + 0.00997)
+qB = 1 + eB (-3.63991 eB^2 + 0.47992 eB + 0.00997)
+qW = 1 + eW (-3.63991 eW^2 + 0.47992 eW + 0.00997)
+wB = OmegaS sqrt(L0 / (L0 + dB) * qB / sB)
+wW = OmegaS sqrt(L0 / (L0 + dW) * qW / sW)
+# (v2 used wB = OmegaS / sqrt((L0 + dB) / L0 * sB) and no dent dependence)
 # ---- each half's mass and centre-of-mass offset from its dot (fits of the dented outline, 0 <= e <= 0.6)
 aB = 0.3746 eB^2 - 0.9998 eB + 0.9998
 aW = 0.3746 eW^2 - 0.9998 eW + 0.9998

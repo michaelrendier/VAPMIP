@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 1934" width="930" height="1934" font-family="sans-serif">
 <rect width="930" height="1934" fill="#ffffff"/>
 <text x="14" y="26" font-size="17" font-weight="bold">Taoist mode: the epicycles, kinematic mockup (240 s)</text>
-<text x="916" y="26" font-size="12" text-anchor="end" fill="#8e44ad">script: v2_mockup.py (v2 (current))</text>
+<text x="916" y="26" font-size="12" text-anchor="end" fill="#8e44ad">script: v2_mockup.py (v2 (superseded by v3))</text>
 <text x="14" y="46" font-size="11" fill="#444">The Whole spins; the two dots (Broca black, Wernicke white) swing; the centre point draws the output (its offset from the barycentre). Each cell has its own scale; the half-extent is in units of R.</text>
 <text x="475.0" y="66" font-size="13" text-anchor="middle" fill="#2471a3">dots locked in step</text>
 <text x="765.0" y="66" font-size="13" text-anchor="middle" fill="#c0392b">dots independent, seam-coupled</text>

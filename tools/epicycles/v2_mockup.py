@@ -46,7 +46,7 @@ os.environ.setdefault("MPLBACKEND", "Agg")
 import lemniscate_monitor as L  # noqa: E402  (half_poly, poly_ac: the outlines)
 
 SCRIPT = os.path.basename(__file__)
-VERSION = "v2 (current)"
+VERSION = "v2 (superseded by v3)"
 OMEGA = 1.0         # [PARAM] the Whole's spin
 OMEGA_S = 1.3       # [PARAM] swing rate of an undisturbed dot
 L0 = 0.5            # arm length of an undisturbed dot (the dot sits at 1/4, 3/4 of the diameter)
