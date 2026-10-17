@@ -13,9 +13,9 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*45 pages — Phases 1–42 (+ addenda 02b, 21b) + one chain-of-custody audit.
+*46 pages — Phases 1–43 (+ addenda 02b, 21b) + one chain-of-custody audit.
 Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
-mix of Claude Opus 5 and Claude Sonnet 5; 40–42 by Claude Sonnet 5.5 (see each page's byline).*
+mix of Claude Opus 5 and Claude Sonnet 5; 40–43 by Claude Sonnet 5.5 (see each page's byline).*
 
 > **Companion notebooks (2026-10-15).** One Jupyter notebook per page — `phase_NN.ipynb`, plus 02b and 21b — in
 > [`../../../notebooks/tuning_the_engine/`](../../../notebooks/tuning_the_engine/). Each runs the machinery its page
@@ -74,6 +74,7 @@ mix of Claude Opus 5 and Claude Sonnet 5; 40–42 by Claude Sonnet 5.5 (see each
 | [40_strut_tension_law_walsh_rows_and_entry_modes.md](40_strut_tension_law_walsh_rows_and_entry_modes.md) | 40 | 2026-10-12 | The Strut Tension Law, the Walsh Rows, and How a Wind Can Enter |
 | [41_demarrais_deformation_battery_and_the_two_constructs.md](41_demarrais_deformation_battery_and_the_two_constructs.md) | 41 | 2026-10-12 | The De Marrais Deformation Battery, and the Two Constructs Compared |
 | [42_every_voice_benchmark.md](42_every_voice_benchmark.md) | 42 | 2026-10-14 | Every Voice: all 24 monad modules, 12 speaking voices benchmarked on the same six prompts |
+| [43_semantic_orbweaver_pathway_construction.md](43_semantic_orbweaver_pathway_construction.md) | 43 | 2026-10-16 | Semantic Orbweaver Pathway Construction (STUB): the first monad's semantic prime hash spun into a web, weighted heavier than the context boxkite |
 
 ---
 
