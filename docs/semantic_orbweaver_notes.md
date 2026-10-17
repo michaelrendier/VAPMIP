@@ -1,0 +1,94 @@
+# Semantic orbweaver: working notes
+
+One file, kept live, in place of a plan file. Newest entry first. Identifiers are the code's own.
+Primer: `ContextPlease/claude/hist_prime/VAPMIP/CONTEXT_PRIMER_2026-10-16_SEMANTIC_ORBWEAVER.md`.
+Stub page: `docs/wiki/Tuning-the-Engine/43_semantic_orbweaver_pathway_construction.md`.
+
+---
+
+## 2026-10-17: T0 traced (the "anomalous" first reply)
+
+### Setup (reproducible)
+
+- Binary: `PtolC/ptolemy` (built 2026-08-30, `STATE_VERSION 4`). Store: `monad_wordnet_v4_20260519.bin` (header 4, 25000, 24485, 6825748, 121914388), copied into a scratch `$HOME/.ptolemy/monad_wordnet.bin`; the store is `protected` (not saved) and the originals are `chmod a-w`.
+- Today's binary on the May bin reproduces the screenshot's `-h` rows exactly: `what z#16194 γ=15010.5116 E=0.4540`, `is z#1894 E=0.2703`, `your z#18893 E=0.4887`, `name z#15471 E=0.4447`, all β=7.552000.
+- Reply today: `holcus same stuff seemy` (four tokens; `seemy` is one token, not "see my").
+- Traces kept: `ContextPlease/claude/scratchpad/2026-10-17_T0_trace/` (`T0_trace_hv.txt`, `T0_trace_Wv.txt`, `first_word_sweep.txt`, the `monad.c` at `eb28ce8` that I read).
+
+### What the code does (`PtolC/monad.c` at `eb28ce8`, v1.215; today's `monad.c` is 1565 lines)
+
+The primer described the v1.0 `monad_speak` (rank by J, emit top-k). The engine that made the screenshot does something else:
+
+1. **Address.** `monad_word_coords`: base-95 Horner → `seed = fmod(v·φ, 1)` → `idx = seed·N`, `E = d* + seed·(Ω−d*)`. No prime anywhere.
+2. **Seed.** `J[idx] += β·E²·exp(−λ·age)` for each query slot, then spectral spread to `±MONAD_SPREAD_RADIUS` (3) neighbouring zeros with weight `exp(−1·|Δn|)`, then two A-passes.
+3. **Length.** `actual_max = 4 + max_tokens·lag_ratio`, `lag_ratio = ΣT/(ΣT+ΣV)`. On this store ΣV≈5.7e3 and ΣT<1, so `lag_ratio=0.000` and **every reply is 4 words**.
+4. **Order.** Emission is by **golden-angle walk** from the Fermat Pointer (median γ of the query's zeros), step `round(N/φ²)`=9549, gated by `cos(γ/2+φ_rot) > 0` (`-W` sets affect −1, so the gate is sin(γ/2) > 0). It is **not J-ranked**: J only decides which slots pass `J > J_floor` (1% of J_max).
+5. **First word ("demotic").** Among slots with `J > J_floor`, gate open and `token_accept`, pick the one whose **E is closest to `target_E = (ΣV/(ΣV+ΣT))·Ω`** (≈ Ω = 0.5671). Emitted outside the walk.
+6. **Surface.** `near_canonical`: each emitted slot's stored word is replaced by a "canonical" word within ±50 zeros (prose_seen preference 3 → 1 → 2 → any).
+7. **Separator.** `fermat_space_utf8`: invisible Unicode space chosen from J/J_max (U+200B for the lowest band). The screenshot's `holcussamestuffseemy` has no visible spaces; today's pipe output has plain spaces. **Open:** why (tty-gated or version change); not checked.
+8. **Feedback.** The reply is learned back (`[learn] "holcus same stuff seemy"` in the `-Wv` trace); with a protected store nothing is saved.
+
+### What the trace shows
+
+| fact | evidence |
+|---|---|
+| `holcus` is the first word for **all 8** prompts tried (`what is your name`, `who are you`, `what is a tree`, `good morning`, `the cat sat on the mat`, `how do you do`, `tell me about water`, `can you hear what i am typing`) | `first_word_sweep.txt` |
+| It is chosen by rule 5, not by the prompt: `[demotic] z#24639 E=0.5625 target_E=0.5671 holcus` in every prompt traced | `-hv` on three prompts |
+| Its address is a property of its spelling: seed 0.98560 → `idx` 24639, E 0.5625, near the top of E's range | reproduced in Python from the `monad_word_coords` arithmetic |
+| `ptolemy` (the program's own word) addresses to z#10156, E 0.376, nowhere near Ω | same computation |
+| The prompt-conditioned part is words 2–4 (`same stuff seemy`), the walk emission from the Pointer z#16194 | trace |
+| Two query words are **not in the word map** (`is`, `name`: `[new]`); their slots are held by other words (`nanti` at z#1894, `emite` at z#15471) | `[J^μ]` lines; 24,485 words on 25,000 slots |
+| β is at the cap (7.552) on every slot printed, so β carries no discrimination on this store | all traces |
+| `seemy` is z#0 (γ=14.135, E=0.2460, seed≈2.5e-5), the first zero | `[learn]` rows |
+
+### Verdict (CODE / MATHS / METHOD / emergence)
+
+- Statement of the code: `holcus` as first word is **METHOD (selector rule) + the word's address**, independent of the prompt. Whether it is "the name chosen" is not shown by the code; the sweep says the same word answers every prompt.
+- Open, not traced: **why `J[24639] > J_floor` for every prompt.** `holcus` is far (≈8,000 zeros) from the query slots, so it is neither in their ±3 spread nor, visibly, in the top-8 A-propagations. Needs a full J dump (small instrumented reader), not a guess.
+- Open: how much of words 2–4 is A-edge content vs the walk geometry (golden step from the Pointer). Test: same prompt, perturb the Pointer; same Pointer, perturb the A-edges.
+- Anomalous-but-legal results to keep chasing (Standing Protocol): the constant first word; the constant length 4; the saturated β.
+
+### What this changes about the design
+
+- The "semantic" signal in the May reply is thin: addresses plus a spread-and-walk geometry. A web does not have to reproduce it; it has to do what the walk cannot: choose words **because of** relation to the prompt.
+- Keep for the web: the J spread/A-propagation arithmetic, the Pointer idea (a centre for the emission), the demotic idea (a register choice for word 1; here driven by E, which is a spelling property).
+- Do not carry over unexamined: constant-length from the Lagrangian ratio; the ±50-zero re-surfacing (it replaces the word the field chose with a neighbour's word); saturated β.
+
+---
+
+## 2026-10-17: two trees and the monitor
+
+- **Assignment (Claude's call, Cody delegated it):** `Wernicke/` = semantic orbweaver (branch `orbweaver`); `Broca/` = scalar/scaled boxkite (branch `boxkite`). Files are copies; originals untouched. `Wernicke/first_monad_current/` builds `ptolemy` (142,024 B, same as the 2026-08-30 binary) and reproduces `holcus same stuff seemy` on the May bin in a scratch HOME.
+- **Monitor:** `tools/lemniscate_monitor.py`: Broca/Wernicke aphasia diagram (damage lobe left, damage lobe right, ∞ between = intact), points from a JSONL feed. It needs scores S (semantic) and G (structure); no scorer exists yet (T1). The transformer reference series must come from the same scorers on the same prompts. The mapping (x = G−S, y = 1−(S+G)/2, upright lemniscate, A=0.45) is a first cut, all [PARAM].
+- SemanticWordEngine: README and GitHub description now say deprecated, superseded by VAPMIP (`ad1a9d3`).
+
+## Decisions and standing statements (Cody, 2026-10-16/17)
+
+- Original semantic hash = the golden-ratio seed hash (not a prime hash).
+- Division of labour: orbweaver = semantic (word/idea selection, open vocabulary, graded); boxkite = context/structure (the Mind's Eye kite, in hypermotion, scaled). Weight: web heavier than kite; kite may extinguish, not outvote. **Open: which is Broca, which Wernicke** (see below).
+- Phonetic field = morphology = the English conjugation, a final `repass()`.
+- Engineering mode: every test is allowed to find the lowest-overhead point; code golf later.
+- The May bins are historical and read-only; never modified.
+- Pencil (scalar kite) → the orbweaver's anchoring mechanism; flashlight stays (scaling of the response).
+- A-matrix basin = vocabulary selection tool (General Stirling 10 fractal, UFFormulary of Archimedes); needs continuous operation; Γ_rad works on still kites.
+
+## Open questions
+
+1. (settled 2026-10-17, Claude's call: orbweaver = Wernicke, boxkite = Broca.)
+2. The lemniscate is the aphasia diagram (three shapes, ∞ between); monitor built, scorers (S, G) not.
+3. File lists per tree are first-pass; Cody to adjust. `constructor.py` and `harness.py` are in neither tree (they need both).
+4. Separator behaviour (U+200B vs plain space) between the screenshot and today's binary.
+
+## Timeline of the engine (code, from `git log`)
+
+| date | commit | what |
+|---|---|---|
+| 2026-05-11/12 | `bf33540` (SemanticWordEngine) | `semantic_engine.py`: golden-ratio hash + `forced_sigma` + nearest of first 20 zeros to `E·50`; `hyperwebster.py`: `_hash` = char-ordinal sum mod 360 |
+| 2026-05-15 | `fb7ba29` | v1.0 `PtolC/` C monad: learn pairs, J spread, rank emission |
+| 2026-05-16 | `bff4eeb`…`34e26f4` | v1.111–113: surface filter, `monad_English` baseline |
+| 2026-05-16/17 | `d1a43ad`, `4d2662a` | `-W` Wick speak; `sin=content cos=observer` |
+| 2026-05-18 | `eb28ce8` | v1.215: Fermat lattice, Lagrangian word count, golden walk, demotic, `near_canonical` (the engine of the screenshot) |
+| 2026-05-19 | `a2c8451` | v2.1.0 standalone engine (screenshots dated 14:14, 15:26 precede it) |
+| 2026-05-26 | `141d60d` | v2.3.0 Prime Directives, φ-walk, Three-Face Wankel |
+| 2026-08-25 | `424241a` | v5.0.0 "Box Kite": WordNet-relation context hashing, `monad3c.h` |
+| 2026-08-30 | (binary) | `PtolC/ptolemy` 142 KB, still reads PTOL v4 bins |
