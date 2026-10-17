@@ -4,6 +4,16 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## Unreleased — 2026-10-17
+
+- **Broca/Wernicke trees.** `Broca/` (scalar and scaled boxkite, branch `boxkite`) and `Wernicke/` (semantic orbweaver, branch `orbweaver`): copies of the relevant sources, docs and the sources of today's `ptolemy` (it builds and reproduces the May 2026 reply on the v4 store); originals untouched.
+- **Standard testing corpus.** `Wernicke/corpus/`: 11 public-domain works, 134 sampled sentences, 24 chat prompts, model-provided reference answers (seven-slot decompositions, unreviewed), deterministic builder.
+- **Taoist mode and epicycles.** `tools/lemniscate_monitor.py` (normal and Taoist modes), `tools/taoist_physics.py`, `tools/taoist_lyapunov.py`, `tools/epicycles/` (v1 physics, v2 and v3 kinematic mockups, GeoGebra commands), `docs/figures/epicycles/` with `EPICYCLES.md`; tests `tests/test_taoist_geometry.py`, `tests/test_taoist_physics.py`.
+- **Notes and checkpoints.** `docs/semantic_orbweaver_notes.md` (live notes), Phase 43 stub extended with the historic checkpoints (the May v4 store copied to `checkpoints/clean/`, read-only). SemanticWordEngine marked deprecated.
+- **README.** Now states that it describes the current machinery, not the paper's; adds the Broca/Wernicke section and refreshes the focus.
+
+---
+
 ## Unreleased — 2026-10-14
 
 - **All-voices benchmark (Phase 42).** `benchmarks/all_voices/benchmark_voices.py` loads every monad the console lists (24) and times 12 speaking voices on six prompts; results and transcripts in `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md`. Warm reply 0.3 ms to 1.5 s; whole-laptop energy about 1 µWh to 4 mWh per reply; compiled REPL about 29 ms, 62 MB, 66.6 µWh measured.

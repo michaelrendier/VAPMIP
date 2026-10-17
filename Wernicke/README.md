@@ -10,6 +10,7 @@ Copies only; the originals stay where they are in VAPMIP. Run Python files from 
 | `first_monad_current/` | the C sources of today's `ptolemy` (`make ptolemy`; reads PTOL v4 bins; reproduces the May reply on `checkpoints/clean/monad_wordnet_v4_20260519.bin` in a scratch `$HOME/.ptolemy/`) |
 | `first_monad_history/` | `monad.c`, `monad.h`, `ptolemy.h` exactly as committed at `fb7ba29` (v1.0, 2026-05-15) and `eb28ce8` (v1.215, 2026-05-18, the screenshot engine) |
 | `sibling/` | `semantic_engine.py`, `hyperwebster.py` from the deprecated SemanticWordEngine (golden-ratio hash, May 2026) |
+| `corpus/` | the **standard testing corpus** every orbweaver function is tested against: 11 public-domain works, 134 sampled sentences, 24 chat prompts, model-provided reference answers (see `corpus/README.md`) |
 | `docs/` | `semantic_orbweaver_notes.md` (live notes), Tuning the Engine 35, 42, 43 |
 
 The May bins (`checkpoints/clean/`) are historical and read-only. Never write to them.
