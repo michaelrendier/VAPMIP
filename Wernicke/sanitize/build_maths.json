@@ -1,0 +1,1577 @@
+{
+ "kind": "maths",
+ "bin": "/home/rendier/Projects/ThePlace/PTorrent/bin_archive/clean/monad_mathematics.bin",
+ "saved": {
+  "saved": "/home/rendier/Projects/ThePlace/PTorrent/bin_archive/clean/monad_mathematics.bin",
+  "vocab": 10855
+ },
+ "pages": [
+  {
+   "i": 0,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Prime_number",
+   "weight": 2.0,
+   "chars": 80838,
+   "runs": 980,
+   "words": 5878
+  },
+  {
+   "i": 1,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Prime_number_theorem",
+   "weight": 2.0,
+   "chars": 104159,
+   "runs": 593,
+   "words": 2784
+  },
+  {
+   "i": 2,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes",
+   "weight": 2.0,
+   "chars": 13542,
+   "runs": 304,
+   "words": 1432
+  },
+  {
+   "i": 3,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Bertrand%27s_postulate",
+   "weight": 2.0,
+   "chars": 30069,
+   "runs": 126,
+   "words": 690
+  },
+  {
+   "i": 4,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Prime_gap",
+   "weight": 2.0,
+   "chars": 31811,
+   "runs": 246,
+   "words": 1272
+  },
+  {
+   "i": 5,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Goldbach%27s_conjecture",
+   "weight": 2.0,
+   "chars": 21260,
+   "runs": 308,
+   "words": 1702
+  },
+  {
+   "i": 6,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Twin_prime",
+   "weight": 2.0,
+   "chars": 17589,
+   "runs": 206,
+   "words": 1104
+  },
+  {
+   "i": 7,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Legendre_sieve",
+   "weight": 2.0,
+   "chars": 9040,
+   "runs": 51,
+   "words": 250
+  },
+  {
+   "i": 8,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Sieve_of_Sundaram",
+   "weight": 2.0,
+   "chars": 6479,
+   "runs": 113,
+   "words": 603
+  },
+  {
+   "i": 9,
+   "tag": "PRIMES",
+   "url": "https://en.wikipedia.org/wiki/Green%E2%80%93Tao_theorem",
+   "weight": 2.0,
+   "chars": 11467,
+   "runs": 80,
+   "words": 353
+  },
+  {
+   "i": 10,
+   "tag": "PRIMES",
+   "url": "https://mathworld.wolfram.com/PrimeNumber.html",
+   "weight": 2.0,
+   "chars": 19537,
+   "runs": 180,
+   "words": 993
+  },
+  {
+   "i": 11,
+   "tag": "PRIMES",
+   "url": "https://mathworld.wolfram.com/PrimeCountingFunction.html",
+   "weight": 2.0,
+   "chars": 11163,
+   "runs": 68,
+   "words": 307
+  },
+  {
+   "i": 12,
+   "tag": "PRIMES",
+   "url": "https://mathworld.wolfram.com/PrimeNumberTheorem.html",
+   "weight": 2.0,
+   "chars": 10255,
+   "runs": 77,
+   "words": 327
+  },
+  {
+   "i": 13,
+   "tag": "PRIMES",
+   "url": "https://mathworld.wolfram.com/PrimesRacer.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 14,
+   "tag": "PRIMES",
+   "url": "https://plus.maths.org/content/prime-numbers",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 15,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Riemann_hypothesis",
+   "weight": 2.0,
+   "chars": 133148,
+   "runs": 1321,
+   "words": 6609
+  },
+  {
+   "i": 16,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Riemann_zeta_function",
+   "weight": 2.0,
+   "chars": 125112,
+   "runs": 515,
+   "words": 2380
+  },
+  {
+   "i": 17,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Critical_line_theorem",
+   "weight": 2.0,
+   "chars": 133148,
+   "runs": 1321,
+   "words": 6609
+  },
+  {
+   "i": 18,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Explicit_formulae_(L-function)",
+   "weight": 2.0,
+   "chars": 35791,
+   "runs": 198,
+   "words": 881
+  },
+  {
+   "i": 19,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Zeros_and_poles_of_the_Riemann_zeta_function",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 20,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Hilbert%E2%80%93P%C3%B3lya_conjecture",
+   "weight": 2.0,
+   "chars": 13701,
+   "runs": 127,
+   "words": 574
+  },
+  {
+   "i": 21,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Montgomery%27s_pair_correlation_conjecture",
+   "weight": 2.0,
+   "chars": 16219,
+   "runs": 89,
+   "words": 417
+  },
+  {
+   "i": 22,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Selberg_class",
+   "weight": 2.0,
+   "chars": 31176,
+   "runs": 192,
+   "words": 1022
+  },
+  {
+   "i": 23,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Analytic_continuation",
+   "weight": 2.0,
+   "chars": 64254,
+   "runs": 268,
+   "words": 1358
+  },
+  {
+   "i": 24,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/Functional_equation_(L-function)",
+   "weight": 2.0,
+   "chars": 4538,
+   "runs": 83,
+   "words": 392
+  },
+  {
+   "i": 25,
+   "tag": "RIEMANN",
+   "url": "https://en.wikipedia.org/wiki/De_Bruijn%E2%80%93Newman_constant",
+   "weight": 2.0,
+   "chars": 11911,
+   "runs": 83,
+   "words": 398
+  },
+  {
+   "i": 26,
+   "tag": "RIEMANN",
+   "url": "https://mathworld.wolfram.com/RiemannZetaFunction.html",
+   "weight": 2.0,
+   "chars": 26285,
+   "runs": 173,
+   "words": 784
+  },
+  {
+   "i": 27,
+   "tag": "RIEMANN",
+   "url": "https://mathworld.wolfram.com/RiemannHypothesis.html",
+   "weight": 2.0,
+   "chars": 15498,
+   "runs": 145,
+   "words": 657
+  },
+  {
+   "i": 28,
+   "tag": "RIEMANN",
+   "url": "https://mathworld.wolfram.com/CriticalLine.html",
+   "weight": 2.0,
+   "chars": 2926,
+   "runs": 27,
+   "words": 104
+  },
+  {
+   "i": 29,
+   "tag": "RIEMANN",
+   "url": "https://mathworld.wolfram.com/RiemannZetaFunctionZeros.html",
+   "weight": 2.0,
+   "chars": 9644,
+   "runs": 90,
+   "words": 391
+  },
+  {
+   "i": 30,
+   "tag": "RIEMANN",
+   "url": "https://dlmf.nist.gov/25",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 31,
+   "tag": "RIEMANN",
+   "url": "https://www.claymath.org/millennium/riemann-hypothesis/",
+   "weight": 2.0,
+   "chars": 2731,
+   "runs": 35,
+   "words": 210
+  },
+  {
+   "i": 32,
+   "tag": "RIEMANN",
+   "url": "https://plus.maths.org/content/missing-piece",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 33,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Spectral_theory",
+   "weight": 2.0,
+   "chars": 56953,
+   "runs": 300,
+   "words": 1441
+  },
+  {
+   "i": 34,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Random_matrix",
+   "weight": 2.0,
+   "chars": 72495,
+   "runs": 425,
+   "words": 2096
+  },
+  {
+   "i": 35,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/GUE_conjecture",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 36,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Gaussian_unitary_ensemble",
+   "weight": 2.0,
+   "chars": 89716,
+   "runs": 267,
+   "words": 1325
+  },
+  {
+   "i": 37,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Wigner_semicircle_distribution",
+   "weight": 2.0,
+   "chars": 9256,
+   "runs": 90,
+   "words": 380
+  },
+  {
+   "i": 38,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Eigenvalue",
+   "weight": 2.0,
+   "chars": 143011,
+   "runs": 1055,
+   "words": 5338
+  },
+  {
+   "i": 39,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Self-adjoint_operator",
+   "weight": 2.0,
+   "chars": 83704,
+   "runs": 470,
+   "words": 2430
+  },
+  {
+   "i": 40,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Spectral_theorem",
+   "weight": 2.0,
+   "chars": 35735,
+   "runs": 304,
+   "words": 1655
+  },
+  {
+   "i": 41,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Berry%E2%80%93Keating_conjecture",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 42,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Selberg_zeta_function",
+   "weight": 2.0,
+   "chars": 7672,
+   "runs": 59,
+   "words": 253
+  },
+  {
+   "i": 43,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Weyl_law",
+   "weight": 2.0,
+   "chars": 9748,
+   "runs": 54,
+   "words": 324
+  },
+  {
+   "i": 44,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Heat_kernel",
+   "weight": 2.0,
+   "chars": 12198,
+   "runs": 52,
+   "words": 295
+  },
+  {
+   "i": 45,
+   "tag": "SPECTRAL",
+   "url": "https://mathworld.wolfram.com/RandomMatrixTheory.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 46,
+   "tag": "SPECTRAL",
+   "url": "https://mathworld.wolfram.com/SpectralTheorem.html",
+   "weight": 2.0,
+   "chars": 839,
+   "runs": 1,
+   "words": 8
+  },
+  {
+   "i": 47,
+   "tag": "SPECTRAL",
+   "url": "https://mathworld.wolfram.com/WignerSemicircleDistribution.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 48,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Modular_form",
+   "weight": 2.0,
+   "chars": 46202,
+   "runs": 414,
+   "words": 2206
+  },
+  {
+   "i": 49,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/L-function",
+   "weight": 2.0,
+   "chars": 89616,
+   "runs": 355,
+   "words": 1736
+  },
+  {
+   "i": 50,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Langlands_program",
+   "weight": 2.0,
+   "chars": 13052,
+   "runs": 203,
+   "words": 1217
+  },
+  {
+   "i": 51,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Modularity_theorem",
+   "weight": 2.0,
+   "chars": 14645,
+   "runs": 185,
+   "words": 945
+  },
+  {
+   "i": 52,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Elliptic_curve",
+   "weight": 2.0,
+   "chars": 96462,
+   "runs": 652,
+   "words": 3144
+  },
+  {
+   "i": 53,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture",
+   "weight": 2.0,
+   "chars": 21359,
+   "runs": 188,
+   "words": 961
+  },
+  {
+   "i": 54,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Hecke_operator",
+   "weight": 2.0,
+   "chars": 13784,
+   "runs": 74,
+   "words": 466
+  },
+  {
+   "i": 55,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Dirichlet_L-function",
+   "weight": 2.0,
+   "chars": 23396,
+   "runs": 86,
+   "words": 394
+  },
+  {
+   "i": 56,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Dedekind_eta_function",
+   "weight": 2.0,
+   "chars": 52968,
+   "runs": 136,
+   "words": 683
+  },
+  {
+   "i": 57,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function",
+   "weight": 2.0,
+   "chars": 28570,
+   "runs": 57,
+   "words": 299
+  },
+  {
+   "i": 58,
+   "tag": "MODULAR",
+   "url": "https://en.wikipedia.org/wiki/Maass_form",
+   "weight": 2.0,
+   "chars": 152805,
+   "runs": 294,
+   "words": 1398
+  },
+  {
+   "i": 59,
+   "tag": "MODULAR",
+   "url": "https://mathworld.wolfram.com/ModularForm.html",
+   "weight": 2.0,
+   "chars": 3917,
+   "runs": 36,
+   "words": 173
+  },
+  {
+   "i": 60,
+   "tag": "MODULAR",
+   "url": "https://mathworld.wolfram.com/LFunction.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 61,
+   "tag": "MODULAR",
+   "url": "https://www.lmfdb.org/",
+   "weight": 2.0,
+   "chars": 1634,
+   "runs": 7,
+   "words": 34
+  },
+  {
+   "i": 62,
+   "tag": "MODULAR",
+   "url": "https://www.claymath.org/millennium/birch-and-swinnerton-dyer-conjecture/",
+   "weight": 2.0,
+   "chars": 3362,
+   "runs": 59,
+   "words": 302
+  },
+  {
+   "i": 63,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Harmonic_analysis",
+   "weight": 2.0,
+   "chars": 26023,
+   "runs": 256,
+   "words": 1677
+  },
+  {
+   "i": 64,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Fourier_transform",
+   "weight": 2.0,
+   "chars": 256690,
+   "runs": 1586,
+   "words": 7927
+  },
+  {
+   "i": 65,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Fourier_series",
+   "weight": 2.0,
+   "chars": 157286,
+   "runs": 490,
+   "words": 2704
+  },
+  {
+   "i": 66,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Pontryagin_duality",
+   "weight": 2.0,
+   "chars": 62817,
+   "runs": 490,
+   "words": 2722
+  },
+  {
+   "i": 67,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Hardy_space",
+   "weight": 2.0,
+   "chars": 56670,
+   "runs": 232,
+   "words": 1014
+  },
+  {
+   "i": 68,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Plancherel_theorem",
+   "weight": 2.0,
+   "chars": 18009,
+   "runs": 61,
+   "words": 282
+  },
+  {
+   "i": 69,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Wavelet",
+   "weight": 2.0,
+   "chars": 55885,
+   "runs": 500,
+   "words": 2897
+  },
+  {
+   "i": 70,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Gabor_transform",
+   "weight": 2.0,
+   "chars": 18432,
+   "runs": 109,
+   "words": 530
+  },
+  {
+   "i": 71,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Uncertainty_principle",
+   "weight": 2.0,
+   "chars": 218988,
+   "runs": 1116,
+   "words": 5838
+  },
+  {
+   "i": 72,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Spherical_harmonics",
+   "weight": 2.0,
+   "chars": 224441,
+   "runs": 754,
+   "words": 3538
+  },
+  {
+   "i": 73,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Laplace%E2%80%93Beltrami_operator",
+   "weight": 2.0,
+   "chars": 43003,
+   "runs": 238,
+   "words": 1052
+  },
+  {
+   "i": 74,
+   "tag": "HARMONIC",
+   "url": "https://en.wikipedia.org/wiki/Poisson_kernel",
+   "weight": 2.0,
+   "chars": 17524,
+   "runs": 123,
+   "words": 475
+  },
+  {
+   "i": 75,
+   "tag": "HARMONIC",
+   "url": "https://dlmf.nist.gov/14",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 76,
+   "tag": "HARMONIC",
+   "url": "https://mathworld.wolfram.com/SphericalHarmonic.html",
+   "weight": 2.0,
+   "chars": 6172,
+   "runs": 38,
+   "words": 188
+  },
+  {
+   "i": 77,
+   "tag": "HARMONIC",
+   "url": "https://mathworld.wolfram.com/FourierTransform.html",
+   "weight": 2.0,
+   "chars": 9220,
+   "runs": 63,
+   "words": 309
+  },
+  {
+   "i": 78,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Differential_geometry",
+   "weight": 1.0,
+   "chars": 38019,
+   "runs": 620,
+   "words": 3646
+  },
+  {
+   "i": 79,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Riemannian_geometry",
+   "weight": 1.0,
+   "chars": 11425,
+   "runs": 200,
+   "words": 1182
+  },
+  {
+   "i": 80,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Ricci_flow",
+   "weight": 1.0,
+   "chars": 76311,
+   "runs": 638,
+   "words": 3488
+  },
+  {
+   "i": 81,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture",
+   "weight": 1.0,
+   "chars": 27702,
+   "runs": 519,
+   "words": 2800
+  },
+  {
+   "i": 82,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Topology",
+   "weight": 1.0,
+   "chars": 22652,
+   "runs": 389,
+   "words": 2429
+  },
+  {
+   "i": 83,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Fiber_bundle",
+   "weight": 1.0,
+   "chars": 37557,
+   "runs": 298,
+   "words": 1639
+  },
+  {
+   "i": 84,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Gauge_theory",
+   "weight": 1.0,
+   "chars": 59270,
+   "runs": 658,
+   "words": 3615
+  },
+  {
+   "i": 85,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Hodge_conjecture",
+   "weight": 1.0,
+   "chars": 26445,
+   "runs": 246,
+   "words": 1329
+  },
+  {
+   "i": 86,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Characteristic_class",
+   "weight": 1.0,
+   "chars": 13627,
+   "runs": 137,
+   "words": 771
+  },
+  {
+   "i": 87,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Atiyah%E2%80%93Singer_index_theorem",
+   "weight": 1.0,
+   "chars": 63659,
+   "runs": 596,
+   "words": 3025
+  },
+  {
+   "i": 88,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Calabi%E2%80%93Yau_manifold",
+   "weight": 1.0,
+   "chars": 32500,
+   "runs": 311,
+   "words": 1773
+  },
+  {
+   "i": 89,
+   "tag": "GEOMETRY",
+   "url": "https://en.wikipedia.org/wiki/Chern%E2%80%93Weil_theory",
+   "weight": 1.0,
+   "chars": 37581,
+   "runs": 145,
+   "words": 582
+  },
+  {
+   "i": 90,
+   "tag": "GEOMETRY",
+   "url": "https://mathworld.wolfram.com/RicciFlow.html",
+   "weight": 1.0,
+   "chars": 1672,
+   "runs": 15,
+   "words": 75
+  },
+  {
+   "i": 91,
+   "tag": "GEOMETRY",
+   "url": "https://mathworld.wolfram.com/GaugeTheory.html",
+   "weight": 1.0,
+   "chars": 1896,
+   "runs": 14,
+   "words": 65
+  },
+  {
+   "i": 92,
+   "tag": "GEOMETRY",
+   "url": "https://www.claymath.org/millennium/hodge-conjecture/",
+   "weight": 1.0,
+   "chars": 2934,
+   "runs": 38,
+   "words": 229
+  },
+  {
+   "i": 93,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Group_theory",
+   "weight": 1.0,
+   "chars": 33686,
+   "runs": 548,
+   "words": 3279
+  },
+  {
+   "i": 94,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Representation_theory",
+   "weight": 1.0,
+   "chars": 69071,
+   "runs": 596,
+   "words": 3672
+  },
+  {
+   "i": 95,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Lie_group",
+   "weight": 1.0,
+   "chars": 75252,
+   "runs": 858,
+   "words": 5246
+  },
+  {
+   "i": 96,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Lie_algebra",
+   "weight": 1.0,
+   "chars": 137243,
+   "runs": 700,
+   "words": 3775
+  },
+  {
+   "i": 97,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Root_system",
+   "weight": 1.0,
+   "chars": 56133,
+   "runs": 596,
+   "words": 2695
+  },
+  {
+   "i": 98,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/E8_(mathematics)",
+   "weight": 1.0,
+   "chars": 56792,
+   "runs": 621,
+   "words": 2926
+  },
+  {
+   "i": 99,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Leech_lattice",
+   "weight": 1.0,
+   "chars": 29752,
+   "runs": 352,
+   "words": 1540
+  },
+  {
+   "i": 100,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Monster_group",
+   "weight": 1.0,
+   "chars": 11669,
+   "runs": 252,
+   "words": 1201
+  },
+  {
+   "i": 101,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Monstrous_moonshine",
+   "weight": 1.0,
+   "chars": 31063,
+   "runs": 439,
+   "words": 2292
+  },
+  {
+   "i": 102,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Division_algebra",
+   "weight": 1.0,
+   "chars": 7566,
+   "runs": 123,
+   "words": 804
+  },
+  {
+   "i": 103,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Octonion",
+   "weight": 1.0,
+   "chars": 46679,
+   "runs": 371,
+   "words": 1874
+  },
+  {
+   "i": 104,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Sedenion",
+   "weight": 1.0,
+   "chars": 97136,
+   "runs": 119,
+   "words": 638
+  },
+  {
+   "i": 105,
+   "tag": "ALGEBRA",
+   "url": "https://en.wikipedia.org/wiki/Clifford_algebra",
+   "weight": 1.0,
+   "chars": 83024,
+   "runs": 774,
+   "words": 3470
+  },
+  {
+   "i": 106,
+   "tag": "ALGEBRA",
+   "url": "https://mathworld.wolfram.com/LieGroup.html",
+   "weight": 1.0,
+   "chars": 2564,
+   "runs": 23,
+   "words": 112
+  },
+  {
+   "i": 107,
+   "tag": "ALGEBRA",
+   "url": "https://mathworld.wolfram.com/Octonion.html",
+   "weight": 1.0,
+   "chars": 1638,
+   "runs": 10,
+   "words": 44
+  },
+  {
+   "i": 108,
+   "tag": "ALGEBRA",
+   "url": "https://mathworld.wolfram.com/LeechLattice.html",
+   "weight": 1.0,
+   "chars": 3365,
+   "runs": 29,
+   "words": 140
+  },
+  {
+   "i": 109,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Functional_analysis",
+   "weight": 1.0,
+   "chars": 14469,
+   "runs": 166,
+   "words": 1048
+  },
+  {
+   "i": 110,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+   "weight": 1.0,
+   "chars": 153361,
+   "runs": 1490,
+   "words": 7842
+  },
+  {
+   "i": 111,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Banach_space",
+   "weight": 1.0,
+   "chars": 157468,
+   "runs": 817,
+   "words": 4616
+  },
+  {
+   "i": 112,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Operator_theory",
+   "weight": 1.0,
+   "chars": 14331,
+   "runs": 133,
+   "words": 774
+  },
+  {
+   "i": 113,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Compact_operator",
+   "weight": 1.0,
+   "chars": 55040,
+   "runs": 320,
+   "words": 2051
+  },
+  {
+   "i": 114,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Trace_class",
+   "weight": 1.0,
+   "chars": 46212,
+   "runs": 143,
+   "words": 776
+  },
+  {
+   "i": 115,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Fredholm_operator",
+   "weight": 1.0,
+   "chars": 21323,
+   "runs": 105,
+   "words": 529
+  },
+  {
+   "i": 116,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Complex_analysis",
+   "weight": 1.0,
+   "chars": 21169,
+   "runs": 214,
+   "words": 1359
+  },
+  {
+   "i": 117,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Cauchy%27s_integral_formula",
+   "weight": 1.0,
+   "chars": 75805,
+   "runs": 229,
+   "words": 1194
+  },
+  {
+   "i": 118,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Entire_function",
+   "weight": 1.0,
+   "chars": 40543,
+   "runs": 170,
+   "words": 980
+  },
+  {
+   "i": 119,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Meromorphic_function",
+   "weight": 1.0,
+   "chars": 9464,
+   "runs": 114,
+   "words": 642
+  },
+  {
+   "i": 120,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Residue_theorem",
+   "weight": 1.0,
+   "chars": 32665,
+   "runs": 112,
+   "words": 493
+  },
+  {
+   "i": 121,
+   "tag": "ANALYSIS",
+   "url": "https://en.wikipedia.org/wiki/Hadamard_factorization_theorem",
+   "weight": 1.0,
+   "chars": 29513,
+   "runs": 66,
+   "words": 388
+  },
+  {
+   "i": 122,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/5",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 123,
+   "tag": "ANALYSIS",
+   "url": "https://mathworld.wolfram.com/HilbertSpace.html",
+   "weight": 1.0,
+   "chars": 1679,
+   "runs": 8,
+   "words": 39
+  },
+  {
+   "i": 124,
+   "tag": "ANALYSIS",
+   "url": "https://mathworld.wolfram.com/GammaFunction.html",
+   "weight": 1.0,
+   "chars": 12084,
+   "runs": 71,
+   "words": 332
+  },
+  {
+   "i": 125,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Algebraic_number_theory",
+   "weight": 2.0,
+   "chars": 51201,
+   "runs": 597,
+   "words": 3298
+  },
+  {
+   "i": 126,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Analytic_number_theory",
+   "weight": 2.0,
+   "chars": 27846,
+   "runs": 361,
+   "words": 1840
+  },
+  {
+   "i": 127,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Dirichlet%27s_theorem_on_arithmetic_progressions",
+   "weight": 2.0,
+   "chars": 12468,
+   "runs": 165,
+   "words": 811
+  },
+  {
+   "i": 128,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Euler_product_formula",
+   "weight": 2.0,
+   "chars": 125112,
+   "runs": 515,
+   "words": 2380
+  },
+  {
+   "i": 129,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/M%C3%B6bius_function",
+   "weight": 2.0,
+   "chars": 37507,
+   "runs": 149,
+   "words": 694
+  },
+  {
+   "i": 130,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Von_Mangoldt_function",
+   "weight": 2.0,
+   "chars": 27692,
+   "runs": 79,
+   "words": 369
+  },
+  {
+   "i": 131,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Chebyshev_function",
+   "weight": 2.0,
+   "chars": 39273,
+   "runs": 95,
+   "words": 411
+  },
+  {
+   "i": 132,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Dedekind_zeta_function",
+   "weight": 2.0,
+   "chars": 39368,
+   "runs": 212,
+   "words": 1209
+  },
+  {
+   "i": 133,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Artin_L-function",
+   "weight": 2.0,
+   "chars": 52114,
+   "runs": 248,
+   "words": 1713
+  },
+  {
+   "i": 134,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Class_field_theory",
+   "weight": 2.0,
+   "chars": 13378,
+   "runs": 213,
+   "words": 1280
+  },
+  {
+   "i": 135,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Quadratic_reciprocity",
+   "weight": 2.0,
+   "chars": 115512,
+   "runs": 567,
+   "words": 2871
+  },
+  {
+   "i": 136,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/P-adic_number",
+   "weight": 2.0,
+   "chars": 105598,
+   "runs": 570,
+   "words": 3194
+  },
+  {
+   "i": 137,
+   "tag": "NUMBERTHEORY",
+   "url": "https://en.wikipedia.org/wiki/Adele_ring",
+   "weight": 2.0,
+   "chars": 210513,
+   "runs": 536,
+   "words": 2838
+  },
+  {
+   "i": 138,
+   "tag": "NUMBERTHEORY",
+   "url": "https://mathworld.wolfram.com/EulerProduct.html",
+   "weight": 2.0,
+   "chars": 3001,
+   "runs": 10,
+   "words": 45
+  },
+  {
+   "i": 139,
+   "tag": "NUMBERTHEORY",
+   "url": "https://mathworld.wolfram.com/DirichletSeriesGeneratingFunction.html",
+   "weight": 2.0,
+   "chars": 133,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 140,
+   "tag": "CLAY",
+   "url": "https://www.claymath.org/millennium-problems/",
+   "weight": 2.0,
+   "chars": 4431,
+   "runs": 92,
+   "words": 455
+  },
+  {
+   "i": 141,
+   "tag": "CLAY",
+   "url": "https://www.claymath.org/millennium/riemann-hypothesis/",
+   "weight": 2.0,
+   "chars": 2731,
+   "runs": 35,
+   "words": 210
+  },
+  {
+   "i": 142,
+   "tag": "CLAY",
+   "url": "https://www.claymath.org/millennium/birch-and-swinnerton-dyer-conjecture/",
+   "weight": 2.0,
+   "chars": 3362,
+   "runs": 59,
+   "words": 302
+  },
+  {
+   "i": 143,
+   "tag": "CLAY",
+   "url": "https://www.claymath.org/millennium/hodge-conjecture/",
+   "weight": 2.0,
+   "chars": 2934,
+   "runs": 38,
+   "words": 229
+  },
+  {
+   "i": 144,
+   "tag": "CLAY",
+   "url": "https://www.claymath.org/millennium/p-vs-np/",
+   "weight": 2.0,
+   "chars": 4559,
+   "runs": 91,
+   "words": 548
+  },
+  {
+   "i": 145,
+   "tag": "CLAY",
+   "url": "https://en.wikipedia.org/wiki/Millennium_Prize_Problems",
+   "weight": 2.0,
+   "chars": 23556,
+   "runs": 277,
+   "words": 1558
+  },
+  {
+   "i": 146,
+   "tag": "CLAY",
+   "url": "https://en.wikipedia.org/wiki/P_versus_NP_problem",
+   "weight": 2.0,
+   "chars": 44556,
+   "runs": 713,
+   "words": 4040
+  },
+  {
+   "i": 147,
+   "tag": "CLAY",
+   "url": "https://en.wikipedia.org/wiki/Hodge_conjecture",
+   "weight": 2.0,
+   "chars": 26445,
+   "runs": 246,
+   "words": 1329
+  },
+  {
+   "i": 148,
+   "tag": "CLAY",
+   "url": "https://en.wikipedia.org/wiki/Birch_and_Swinnerton-Dyer_conjecture",
+   "weight": 2.0,
+   "chars": 21359,
+   "runs": 188,
+   "words": 961
+  },
+  {
+   "i": 149,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 150,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/1",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 151,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/10",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 152,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/15",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 153,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/18",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 154,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/22",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 155,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/25.2",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 156,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/25.4",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 157,
+   "tag": "ANALYSIS",
+   "url": "https://dlmf.nist.gov/25.10",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 158,
+   "tag": "SPECTRAL",
+   "url": "https://dlmf.nist.gov/28",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 159,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/History_of_mathematics",
+   "weight": 1.0,
+   "chars": 72263,
+   "runs": 1360,
+   "words": 7751
+  },
+  {
+   "i": 160,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Mathematical_proof",
+   "weight": 1.0,
+   "chars": 24833,
+   "runs": 351,
+   "words": 2225
+  },
+  {
+   "i": 161,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Hilbert%27s_problems",
+   "weight": 1.0,
+   "chars": 12243,
+   "runs": 252,
+   "words": 1324
+  },
+  {
+   "i": 162,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Hilbert%27s_eighth_problem",
+   "weight": 1.0,
+   "chars": 10466,
+   "runs": 138,
+   "words": 783
+  },
+  {
+   "i": 163,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Conjecture",
+   "weight": 1.0,
+   "chars": 15653,
+   "runs": 262,
+   "words": 1714
+  },
+  {
+   "i": 164,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems",
+   "weight": 1.0,
+   "chars": 76292,
+   "runs": 1392,
+   "words": 7579
+  },
+  {
+   "i": 165,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Lambert_W_function",
+   "weight": 1.0,
+   "chars": 196841,
+   "runs": 532,
+   "words": 2406
+  },
+  {
+   "i": 166,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Fixed_point_(mathematics)",
+   "weight": 1.0,
+   "chars": 10680,
+   "runs": 147,
+   "words": 826
+  },
+  {
+   "i": 167,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Euler%27s_identity",
+   "weight": 1.0,
+   "chars": 15734,
+   "runs": 139,
+   "words": 727
+  },
+  {
+   "i": 168,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Euler%27s_totient_function",
+   "weight": 1.0,
+   "chars": 85300,
+   "runs": 321,
+   "words": 1467
+  },
+  {
+   "i": 169,
+   "tag": "CONTEXT",
+   "url": "https://mathworld.wolfram.com/LambertW-Function.html",
+   "weight": 1.0,
+   "chars": 8228,
+   "runs": 49,
+   "words": 215
+  },
+  {
+   "i": 170,
+   "tag": "CONTEXT",
+   "url": "https://mathworld.wolfram.com/FixedPoint.html",
+   "weight": 1.0,
+   "chars": 4038,
+   "runs": 34,
+   "words": 185
+  },
+  {
+   "i": 171,
+   "tag": "CONTEXT",
+   "url": "https://plus.maths.org/content/mathematical-mysteries-twin-prime-conjecture",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 172,
+   "tag": "CONTEXT",
+   "url": "https://plus.maths.org/content/riemann-hypothesis",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 173,
+   "tag": "CONTEXT",
+   "url": "https://www.ams.org/notices/200303/fea-conrey-web.pdf",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  }
+ ],
+ "words": 244343
+}

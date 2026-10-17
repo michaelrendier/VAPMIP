@@ -63,7 +63,7 @@ TOKEN_RE = re.compile(r"""
   | (?P<list>\b\d{1,2}\)(?=\s))
   | (?P<frac>\d+/\d+)
   | (?P<tech>\.[A-Za-z_]\w*(?:[._]\w+)*|[A-Za-z]+(?:[._][A-Za-z0-9]+)+|[A-Z]{2,}[a-z]*\d*|[A-Za-z]+\d+[A-Za-z0-9]*)
-  | (?P<num>\d+(?:\.\d+)?)
+  | (?P<num>\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)
   | (?P<word>[A-Za-z]+(?:['’][A-Za-z]+)*)
   | (?P<punct>[^\sA-Za-z0-9])
 """, re.X)
@@ -584,6 +584,39 @@ def granularity(T):
             "technical_or_unknown": unk, "technical_share": round(len(unk) / max(1, sum(1 for t in T if t["pos"] not in ("PUNCT", "ELL", "LIST"))), 3)}
 
 
+def seed_dict(rec):
+    """The flat python3 dict() view of one extraction, for testing: key -> value, nothing nested deeper than a list of lemmas.
+    Keys: ANCHOR, SPAN.relation, SPAN.claim, SPAN.frame, SCAFFOLD, ELABORATE, HOOK, WRAP (lemma lists over all clauses, in order,
+    duplicates kept out), SHELL.act / SHELL.polarity (lists, one per clause), SHELL.gap, content (lemma list), granularity."""
+    d = {k: [] for k in ("ANCHOR", "SPAN.relation", "SPAN.claim", "SPAN.frame", "SCAFFOLD", "ELABORATE", "HOOK", "WRAP", "SHELL.gap")}
+    d["SHELL.act"], d["SHELL.polarity"] = [], []
+
+    def add(key, items):
+        for it in items:
+            if isinstance(it, dict):
+                lem = it["lemma"]
+            elif isinstance(it, list):                    # a frame phrase: marker + words, as one string
+                lem = " ".join(x["lemma"] for x in it if isinstance(x, dict))
+            else:
+                lem = str(it)
+            if lem not in d[key]:
+                d[key].append(lem)
+    for c in rec["clauses"]:
+        sl = c["slots"]
+        add("ANCHOR", sl["ANCHOR"])
+        for f in ("relation", "claim", "frame"):
+            add("SPAN." + f, sl["SPAN"][f])
+        for r in ("SCAFFOLD", "ELABORATE", "HOOK", "WRAP"):
+            add(r, sl[r])
+        sh = sl["SHELL"]
+        d["SHELL.act"].append(sh.get("act"))
+        d["SHELL.polarity"].append(sh.get("polarity"))
+        add("SHELL.gap", sh.get("gap") or [])
+    d["content"] = [w["lemma"] for w in rec["content_words"]]
+    d["granularity"] = rec["granularity"]
+    return d
+
+
 def extract(text):
     invisible = len(text) - len(text.translate(ZERO_WIDTH))
     T = tag(tokenize(text))
@@ -600,8 +633,10 @@ def extract(text):
             if t["pos"] in ("WH", "INTJ") or (t["pos"] == "NEG"):
                 used.add(t["i"])                      # recorded in SHELL (gap, interjection, negation)
     unassigned = [{"w": t["w"], "pos": t["pos"]} for t in T if t["pos"] not in ("PUNCT", "ELL", "LIST") and t["i"] not in used]
-    return {"text": text, "invisible_chars_stripped": invisible, "unassigned": unassigned, "n_tokens": sum(1 for t in T if t["pos"] not in ("PUNCT", "ELL", "LIST")),
+    rec = {"text": text, "invisible_chars_stripped": invisible, "unassigned": unassigned, "n_tokens": sum(1 for t in T if t["pos"] not in ("PUNCT", "ELL", "LIST")),
             "clauses": [{"words": " ".join(t["w"] for t in c), "slots": slots(c, fl)} for c, fl in cls], "content_words": content, "granularity": granularity(T)}
+    rec["seed"] = seed_dict(rec)
+    return rec
 
 
 if __name__ == "__main__":
@@ -613,4 +648,10 @@ if __name__ == "__main__":
             r["id"] = d.get("id")
             out.write(json.dumps(r, ensure_ascii=False) + "\n")
     else:
-        print(json.dumps(extract(" ".join(sys.argv[1:])), indent=1, ensure_ascii=False))
+        args = [a for a in sys.argv[1:] if a != "--dict"]
+        rec = extract(" ".join(args))
+        if "--dict" in sys.argv:
+            import pprint
+            pprint.pprint(rec["seed"], width=130, sort_dicts=False)
+        else:
+            print(json.dumps(rec, indent=1, ensure_ascii=False))

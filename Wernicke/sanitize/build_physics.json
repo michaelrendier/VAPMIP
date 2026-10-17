@@ -1,0 +1,1514 @@
+{
+ "kind": "physics",
+ "bin": "/home/rendier/Projects/ThePlace/PTorrent/bin_archive/clean/monad_physics.bin",
+ "saved": {
+  "saved": "/home/rendier/Projects/ThePlace/PTorrent/bin_archive/clean/monad_physics.bin",
+  "vocab": 15454
+ },
+ "pages": [
+  {
+   "i": 0,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/waves.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 1,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/wavsou.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 2,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/standw.html",
+   "weight": 2.0,
+   "chars": 4405,
+   "runs": 95,
+   "words": 425
+  },
+  {
+   "i": 3,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/opecol.html",
+   "weight": 2.0,
+   "chars": 440,
+   "runs": 10,
+   "words": 39
+  },
+  {
+   "i": 4,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/closcol.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 5,
+   "tag": "WAVES",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/sphrh.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 6,
+   "tag": "RESONANCE",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/rescon.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 7,
+   "tag": "RESONANCE",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Waves/cavity.html",
+   "weight": 2.0,
+   "chars": 4259,
+   "runs": 85,
+   "words": 472
+  },
+  {
+   "i": 8,
+   "tag": "RESONANCE",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/electric/rlcser.html",
+   "weight": 2.0,
+   "chars": 1329,
+   "runs": 18,
+   "words": 87
+  },
+  {
+   "i": 9,
+   "tag": "RESONANCE",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/electric/schumann.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 10,
+   "tag": "RESONANCE",
+   "url": "https://en.wikipedia.org/wiki/Schumann_resonances",
+   "weight": 2.0,
+   "chars": 26098,
+   "runs": 443,
+   "words": 2543
+  },
+  {
+   "i": 11,
+   "tag": "RESONANCE",
+   "url": "https://en.wikipedia.org/wiki/Cavity_resonator",
+   "weight": 2.0,
+   "chars": 20492,
+   "runs": 221,
+   "words": 1421
+  },
+  {
+   "i": 12,
+   "tag": "RESONANCE",
+   "url": "https://en.wikipedia.org/wiki/Normal_mode",
+   "weight": 2.0,
+   "chars": 38050,
+   "runs": 314,
+   "words": 1757
+  },
+  {
+   "i": 13,
+   "tag": "RESONANCE",
+   "url": "https://en.wikipedia.org/wiki/Standing_wave",
+   "weight": 2.0,
+   "chars": 53341,
+   "runs": 585,
+   "words": 3008
+  },
+  {
+   "i": 14,
+   "tag": "RESONANCE",
+   "url": "https://en.wikipedia.org/wiki/Helmholtz_resonator",
+   "weight": 2.0,
+   "chars": 16578,
+   "runs": 282,
+   "words": 1408
+  },
+  {
+   "i": 15,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Wave_equation",
+   "weight": 2.0,
+   "chars": 169819,
+   "runs": 632,
+   "words": 2946
+  },
+  {
+   "i": 16,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Spherical_harmonics",
+   "weight": 2.0,
+   "chars": 224441,
+   "runs": 754,
+   "words": 3538
+  },
+  {
+   "i": 17,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Laplace%27s_equation",
+   "weight": 2.0,
+   "chars": 81768,
+   "runs": 431,
+   "words": 2171
+  },
+  {
+   "i": 18,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Chladni_figures",
+   "weight": 2.0,
+   "chars": 12650,
+   "runs": 234,
+   "words": 1354
+  },
+  {
+   "i": 19,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Node_(physics)",
+   "weight": 2.0,
+   "chars": 7522,
+   "runs": 176,
+   "words": 928
+  },
+  {
+   "i": 20,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Superposition_principle",
+   "weight": 2.0,
+   "chars": 25090,
+   "runs": 292,
+   "words": 1583
+  },
+  {
+   "i": 21,
+   "tag": "WAVES",
+   "url": "https://en.wikipedia.org/wiki/Dispersion_relation",
+   "weight": 2.0,
+   "chars": 18357,
+   "runs": 154,
+   "words": 812
+  },
+  {
+   "i": 22,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/quancon.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 23,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/schreq.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 24,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/eigen.html",
+   "weight": 2.0,
+   "chars": 1557,
+   "runs": 24,
+   "words": 124
+  },
+  {
+   "i": 25,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/ladder.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 26,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/hosc.html",
+   "weight": 2.0,
+   "chars": 1587,
+   "runs": 29,
+   "words": 137
+  },
+  {
+   "i": 27,
+   "tag": "QM",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/qm.html",
+   "weight": 2.0,
+   "chars": 4159,
+   "runs": 71,
+   "words": 359
+  },
+  {
+   "i": 28,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Quantum_mechanics",
+   "weight": 2.0,
+   "chars": 76823,
+   "runs": 795,
+   "words": 5065
+  },
+  {
+   "i": 29,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Hamiltonian_(quantum_mechanics)",
+   "weight": 2.0,
+   "chars": 94288,
+   "runs": 320,
+   "words": 1538
+  },
+  {
+   "i": 30,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Self-adjoint_operator",
+   "weight": 2.0,
+   "chars": 83704,
+   "runs": 470,
+   "words": 2430
+  },
+  {
+   "i": 31,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors",
+   "weight": 2.0,
+   "chars": 143011,
+   "runs": 1055,
+   "words": 5338
+  },
+  {
+   "i": 32,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Spectral_theorem",
+   "weight": 2.0,
+   "chars": 35735,
+   "runs": 304,
+   "words": 1655
+  },
+  {
+   "i": 33,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Hilbert_space",
+   "weight": 2.0,
+   "chars": 153361,
+   "runs": 1490,
+   "words": 7842
+  },
+  {
+   "i": 34,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Operator_(physics)",
+   "weight": 2.0,
+   "chars": 64381,
+   "runs": 248,
+   "words": 1195
+  },
+  {
+   "i": 35,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Uncertainty_principle",
+   "weight": 2.0,
+   "chars": 218988,
+   "runs": 1116,
+   "words": 5838
+  },
+  {
+   "i": 36,
+   "tag": "QM",
+   "url": "https://en.wikipedia.org/wiki/Wave_function",
+   "weight": 2.0,
+   "chars": 130904,
+   "runs": 1124,
+   "words": 6174
+  },
+  {
+   "i": 37,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Spectral_theory",
+   "weight": 2.0,
+   "chars": 56953,
+   "runs": 300,
+   "words": 1441
+  },
+  {
+   "i": 38,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Compact_operator",
+   "weight": 2.0,
+   "chars": 55040,
+   "runs": 320,
+   "words": 2051
+  },
+  {
+   "i": 39,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Resolvent_formalism",
+   "weight": 2.0,
+   "chars": 8746,
+   "runs": 69,
+   "words": 334
+  },
+  {
+   "i": 40,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Berry%E2%80%93Keating_conjecture",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 41,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/GUE_conjecture",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 42,
+   "tag": "SPECTRAL",
+   "url": "https://en.wikipedia.org/wiki/Random_matrix",
+   "weight": 2.0,
+   "chars": 72495,
+   "runs": 425,
+   "words": 2096
+  },
+  {
+   "i": 43,
+   "tag": "QM",
+   "url": "https://www.feynmanlectures.caltech.edu/III_01.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 44,
+   "tag": "QM",
+   "url": "https://www.feynmanlectures.caltech.edu/III_02.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 45,
+   "tag": "QM",
+   "url": "https://www.feynmanlectures.caltech.edu/III_03.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 46,
+   "tag": "QM",
+   "url": "https://www.feynmanlectures.caltech.edu/III_04.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 47,
+   "tag": "QM",
+   "url": "https://www.feynmanlectures.caltech.edu/III_05.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 48,
+   "tag": "GR",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/relcon.html",
+   "weight": 2.0,
+   "chars": 55,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 49,
+   "tag": "GR",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/grel.html",
+   "weight": 2.0,
+   "chars": 6161,
+   "runs": 105,
+   "words": 569
+  },
+  {
+   "i": 50,
+   "tag": "GR",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/genwarp.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 51,
+   "tag": "GR",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Relativ/blahol.html",
+   "weight": 2.0,
+   "chars": 5192,
+   "runs": 98,
+   "words": 562
+  },
+  {
+   "i": 52,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/General_relativity",
+   "weight": 2.0,
+   "chars": 81666,
+   "runs": 1217,
+   "words": 7595
+  },
+  {
+   "i": 53,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Einstein_field_equations",
+   "weight": 2.0,
+   "chars": 38937,
+   "runs": 279,
+   "words": 1404
+  },
+  {
+   "i": 54,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Geodesic",
+   "weight": 2.0,
+   "chars": 46344,
+   "runs": 453,
+   "words": 2489
+  },
+  {
+   "i": 55,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Schwarzschild_metric",
+   "weight": 2.0,
+   "chars": 55372,
+   "runs": 410,
+   "words": 2181
+  },
+  {
+   "i": 56,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Gravitational_wave",
+   "weight": 2.0,
+   "chars": 61266,
+   "runs": 1109,
+   "words": 6187
+  },
+  {
+   "i": 57,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Quasi-normal_mode",
+   "weight": 2.0,
+   "chars": 8852,
+   "runs": 127,
+   "words": 748
+  },
+  {
+   "i": 58,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Kerr_metric",
+   "weight": 2.0,
+   "chars": 65208,
+   "runs": 584,
+   "words": 3074
+  },
+  {
+   "i": 59,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Metric_tensor_(general_relativity)",
+   "weight": 2.0,
+   "chars": 35741,
+   "runs": 169,
+   "words": 839
+  },
+  {
+   "i": 60,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Stress%E2%80%93energy_tensor",
+   "weight": 2.0,
+   "chars": 67307,
+   "runs": 212,
+   "words": 992
+  },
+  {
+   "i": 61,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Riemann_curvature_tensor",
+   "weight": 2.0,
+   "chars": 40573,
+   "runs": 215,
+   "words": 1079
+  },
+  {
+   "i": 62,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Baryon_acoustic_oscillations",
+   "weight": 2.0,
+   "chars": 25356,
+   "runs": 260,
+   "words": 1319
+  },
+  {
+   "i": 63,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Cosmic_microwave_background",
+   "weight": 2.0,
+   "chars": 47730,
+   "runs": 889,
+   "words": 4603
+  },
+  {
+   "i": 64,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Big_Bang",
+   "weight": 2.0,
+   "chars": 54895,
+   "runs": 1106,
+   "words": 5986
+  },
+  {
+   "i": 65,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Lambda-CDM_model",
+   "weight": 2.0,
+   "chars": 46816,
+   "runs": 552,
+   "words": 3115
+  },
+  {
+   "i": 66,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Inflation_(cosmology)",
+   "weight": 2.0,
+   "chars": 53859,
+   "runs": 1000,
+   "words": 5897
+  },
+  {
+   "i": 67,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Sound_horizon",
+   "weight": 2.0,
+   "chars": 4369,
+   "runs": 80,
+   "words": 467
+  },
+  {
+   "i": 68,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Hubble%27s_law",
+   "weight": 2.0,
+   "chars": 66094,
+   "runs": 796,
+   "words": 4157
+  },
+  {
+   "i": 69,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Friedmann_equations",
+   "weight": 2.0,
+   "chars": 49901,
+   "runs": 365,
+   "words": 1823
+  },
+  {
+   "i": 70,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Cosmological_perturbation_theory",
+   "weight": 2.0,
+   "chars": 15267,
+   "runs": 130,
+   "words": 752
+  },
+  {
+   "i": 71,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Power_spectrum",
+   "weight": 2.0,
+   "chars": 81656,
+   "runs": 416,
+   "words": 2230
+  },
+  {
+   "i": 72,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Acoustic_peak",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 73,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/DESI",
+   "weight": 2.0,
+   "chars": 159,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 74,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Planck_(spacecraft)",
+   "weight": 2.0,
+   "chars": 15698,
+   "runs": 312,
+   "words": 1590
+  },
+  {
+   "i": 75,
+   "tag": "COSMOLOGY",
+   "url": "https://en.wikipedia.org/wiki/Dark_energy",
+   "weight": 2.0,
+   "chars": 35896,
+   "runs": 700,
+   "words": 4179
+  },
+  {
+   "i": 76,
+   "tag": "COSMOLOGY",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Astro/cosmo.html",
+   "weight": 2.0,
+   "chars": 8412,
+   "runs": 169,
+   "words": 887
+  },
+  {
+   "i": 77,
+   "tag": "COSMOLOGY",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Astro/hubble.html",
+   "weight": 2.0,
+   "chars": 6448,
+   "runs": 140,
+   "words": 606
+  },
+  {
+   "i": 78,
+   "tag": "COSMOLOGY",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Astro/darken.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 79,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Dark_matter",
+   "weight": 2.0,
+   "chars": 57569,
+   "runs": 972,
+   "words": 6216
+  },
+  {
+   "i": 80,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Galaxy_rotation_curve",
+   "weight": 2.0,
+   "chars": 20747,
+   "runs": 325,
+   "words": 1937
+  },
+  {
+   "i": 81,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Navarro%E2%80%93Frenk%E2%80%93White_profile",
+   "weight": 2.0,
+   "chars": 25066,
+   "runs": 145,
+   "words": 741
+  },
+  {
+   "i": 82,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Modified_Newtonian_dynamics",
+   "weight": 2.0,
+   "chars": 57164,
+   "runs": 697,
+   "words": 4203
+  },
+  {
+   "i": 83,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Dark_matter_halo",
+   "weight": 2.0,
+   "chars": 18026,
+   "runs": 221,
+   "words": 1283
+  },
+  {
+   "i": 84,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Bullet_Cluster",
+   "weight": 2.0,
+   "chars": 8446,
+   "runs": 174,
+   "words": 848
+  },
+  {
+   "i": 85,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Tully%E2%80%93Fisher_relation",
+   "weight": 2.0,
+   "chars": 5415,
+   "runs": 101,
+   "words": 543
+  },
+  {
+   "i": 86,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Radial_acceleration_relation",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 87,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Vera_Rubin",
+   "weight": 2.0,
+   "chars": 22110,
+   "runs": 415,
+   "words": 2464
+  },
+  {
+   "i": 88,
+   "tag": "DARKMATTER",
+   "url": "https://en.wikipedia.org/wiki/Fritz_Zwicky",
+   "weight": 2.0,
+   "chars": 20770,
+   "runs": 365,
+   "words": 2179
+  },
+  {
+   "i": 89,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Galaxy",
+   "weight": 1.0,
+   "chars": 51036,
+   "runs": 1001,
+   "words": 6114
+  },
+  {
+   "i": 90,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Spiral_galaxy",
+   "weight": 1.0,
+   "chars": 16063,
+   "runs": 310,
+   "words": 1716
+  },
+  {
+   "i": 91,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Dwarf_galaxy",
+   "weight": 1.0,
+   "chars": 8033,
+   "runs": 158,
+   "words": 935
+  },
+  {
+   "i": 92,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Virial_theorem",
+   "weight": 1.0,
+   "chars": 134231,
+   "runs": 414,
+   "words": 1950
+  },
+  {
+   "i": 93,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Galactic_halo",
+   "weight": 1.0,
+   "chars": 7046,
+   "runs": 107,
+   "words": 580
+  },
+  {
+   "i": 94,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Stellar_dynamics",
+   "weight": 1.0,
+   "chars": 400145,
+   "runs": 800,
+   "words": 4167
+  },
+  {
+   "i": 95,
+   "tag": "GRAVITY",
+   "url": "https://en.wikipedia.org/wiki/Gravitational_potential",
+   "weight": 1.0,
+   "chars": 28549,
+   "runs": 225,
+   "words": 936
+  },
+  {
+   "i": 96,
+   "tag": "GRAVITY",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Astro/galrot.html",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 97,
+   "tag": "GRAVITY",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Astro/galaxy.html",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 98,
+   "tag": "DARKMATTER",
+   "url": "https://www.scholarpedia.org/article/Galactic_rotation_problem",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 99,
+   "tag": "DARKMATTER",
+   "url": "https://www.scholarpedia.org/article/Modified_Newtonian_dynamics_(MOND)",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 100,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Yang%E2%80%93Mills_theory",
+   "weight": 2.0,
+   "chars": 56239,
+   "runs": 321,
+   "words": 1617
+  },
+  {
+   "i": 101,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Mass_gap",
+   "weight": 2.0,
+   "chars": 11067,
+   "runs": 76,
+   "words": 394
+  },
+  {
+   "i": 102,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Gauge_theory",
+   "weight": 2.0,
+   "chars": 59270,
+   "runs": 658,
+   "words": 3615
+  },
+  {
+   "i": 103,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Standard_Model",
+   "weight": 2.0,
+   "chars": 49898,
+   "runs": 548,
+   "words": 3082
+  },
+  {
+   "i": 104,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Quantum_chromodynamics",
+   "weight": 2.0,
+   "chars": 36960,
+   "runs": 493,
+   "words": 2814
+  },
+  {
+   "i": 105,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Gluon",
+   "weight": 2.0,
+   "chars": 10221,
+   "runs": 203,
+   "words": 1059
+  },
+  {
+   "i": 106,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Quark_confinement",
+   "weight": 2.0,
+   "chars": 5966,
+   "runs": 113,
+   "words": 613
+  },
+  {
+   "i": 107,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Lattice_gauge_theory",
+   "weight": 2.0,
+   "chars": 8206,
+   "runs": 118,
+   "words": 628
+  },
+  {
+   "i": 108,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Glueball",
+   "weight": 2.0,
+   "chars": 8657,
+   "runs": 146,
+   "words": 1009
+  },
+  {
+   "i": 109,
+   "tag": "YANGMILLS",
+   "url": "https://en.wikipedia.org/wiki/Noether%27s_theorem",
+   "weight": 2.0,
+   "chars": 216338,
+   "runs": 694,
+   "words": 3415
+  },
+  {
+   "i": 110,
+   "tag": "YANGMILLS",
+   "url": "https://www.claymath.org/millennium-problems/yang-mills-and-mass-gap",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 111,
+   "tag": "YANGMILLS",
+   "url": "https://www.scholarpedia.org/article/Yang-Mills_existence_and_mass_gap",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 112,
+   "tag": "YANGMILLS",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Forces/funfor.html",
+   "weight": 2.0,
+   "chars": 8201,
+   "runs": 154,
+   "words": 770
+  },
+  {
+   "i": 113,
+   "tag": "YANGMILLS",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Forces/qcd.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 114,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations",
+   "weight": 1.0,
+   "chars": 274686,
+   "runs": 738,
+   "words": 3951
+  },
+  {
+   "i": 115,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Turbulence",
+   "weight": 1.0,
+   "chars": 39655,
+   "runs": 517,
+   "words": 3029
+  },
+  {
+   "i": 116,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Reynolds_number",
+   "weight": 1.0,
+   "chars": 41165,
+   "runs": 525,
+   "words": 2847
+  },
+  {
+   "i": 117,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Kolmogorov_microscales",
+   "weight": 1.0,
+   "chars": 4448,
+   "runs": 54,
+   "words": 245
+  },
+  {
+   "i": 118,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Cauchy%E2%80%93Riemann_equations",
+   "weight": 1.0,
+   "chars": 70367,
+   "runs": 327,
+   "words": 1465
+  },
+  {
+   "i": 119,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Potential_flow",
+   "weight": 1.0,
+   "chars": 72235,
+   "runs": 332,
+   "words": 1775
+  },
+  {
+   "i": 120,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Euler_equations_(fluid_dynamics)",
+   "weight": 1.0,
+   "chars": 172635,
+   "runs": 672,
+   "words": 3389
+  },
+  {
+   "i": 121,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Vorticity",
+   "weight": 1.0,
+   "chars": 26119,
+   "runs": 213,
+   "words": 1175
+  },
+  {
+   "i": 122,
+   "tag": "FLUIDMECH",
+   "url": "https://en.wikipedia.org/wiki/Fluid_dynamics",
+   "weight": 1.0,
+   "chars": 27994,
+   "runs": 505,
+   "words": 2732
+  },
+  {
+   "i": 123,
+   "tag": "FLUIDMECH",
+   "url": "https://www.claymath.org/millennium-problems/navier-stokes-equation",
+   "weight": 1.0,
+   "chars": 2279,
+   "runs": 35,
+   "words": 199
+  },
+  {
+   "i": 124,
+   "tag": "FLUIDMECH",
+   "url": "https://www.scholarpedia.org/article/Navier-Stokes_equations:_regularity",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 125,
+   "tag": "FLUIDMECH",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Fluids/flucon.html",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 126,
+   "tag": "FLUIDMECH",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/Fluids/viscous.html",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 127,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_01.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 128,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_02.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 129,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_03.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 130,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_06.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 131,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_07.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 132,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_10.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 133,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_17.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 134,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_21.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 135,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_22.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 136,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_23.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 137,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_24.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 138,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_25.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 139,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_26.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 140,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_49.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 141,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/I_50.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 142,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/II_01.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 143,
+   "tag": "FOUNDATIONS",
+   "url": "https://www.feynmanlectures.caltech.edu/II_02.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 144,
+   "tag": "FOUNDATIONS",
+   "url": "https://en.wikipedia.org/wiki/Conservation_law",
+   "weight": 2.0,
+   "chars": 22586,
+   "runs": 243,
+   "words": 1284
+  },
+  {
+   "i": 145,
+   "tag": "FOUNDATIONS",
+   "url": "https://en.wikipedia.org/wiki/Lagrangian_mechanics",
+   "weight": 2.0,
+   "chars": 207392,
+   "runs": 1145,
+   "words": 5540
+  },
+  {
+   "i": 146,
+   "tag": "FOUNDATIONS",
+   "url": "https://en.wikipedia.org/wiki/Hamiltonian_mechanics",
+   "weight": 2.0,
+   "chars": 118793,
+   "runs": 360,
+   "words": 1797
+  },
+  {
+   "i": 147,
+   "tag": "FOUNDATIONS",
+   "url": "https://en.wikipedia.org/wiki/Action_(physics)",
+   "weight": 2.0,
+   "chars": 23351,
+   "runs": 280,
+   "words": 1405
+  },
+  {
+   "i": 148,
+   "tag": "FOUNDATIONS",
+   "url": "https://en.wikipedia.org/wiki/Noether%27s_theorem",
+   "weight": 2.0,
+   "chars": 216338,
+   "runs": 694,
+   "words": 3415
+  },
+  {
+   "i": 149,
+   "tag": "FOUNDATIONS",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/vect.html",
+   "weight": 2.0,
+   "chars": 3784,
+   "runs": 54,
+   "words": 258
+  },
+  {
+   "i": 150,
+   "tag": "FOUNDATIONS",
+   "url": "https://hyperphysics.phy-astr.gsu.edu/hbase/mechcon.html",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 151,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/LIGO",
+   "weight": 2.0,
+   "chars": 36771,
+   "runs": 679,
+   "words": 3727
+  },
+  {
+   "i": 152,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/GW150914",
+   "weight": 2.0,
+   "chars": 29055,
+   "runs": 539,
+   "words": 3255
+  },
+  {
+   "i": 153,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Ringdown_(physics)",
+   "weight": 2.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 154,
+   "tag": "GR",
+   "url": "https://en.wikipedia.org/wiki/Binary_black_hole",
+   "weight": 2.0,
+   "chars": 16425,
+   "runs": 292,
+   "words": 1723
+  },
+  {
+   "i": 155,
+   "tag": "GR",
+   "url": "https://gwosc.org/",
+   "weight": 2.0,
+   "chars": 1407,
+   "runs": 16,
+   "words": 93
+  },
+  {
+   "i": 156,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/History_of_physics",
+   "weight": 1.0,
+   "chars": 87639,
+   "runs": 1650,
+   "words": 9805
+  },
+  {
+   "i": 157,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Philosophy_of_physics",
+   "weight": 1.0,
+   "chars": 21560,
+   "runs": 347,
+   "words": 2386
+  },
+  {
+   "i": 158,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Mathematical_physics",
+   "weight": 1.0,
+   "chars": 34732,
+   "runs": 359,
+   "words": 2330
+  },
+  {
+   "i": 159,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Theoretical_physics",
+   "weight": 1.0,
+   "chars": 17816,
+   "runs": 310,
+   "words": 2068
+  },
+  {
+   "i": 160,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Emmy_Noether",
+   "weight": 1.0,
+   "chars": 61300,
+   "runs": 1126,
+   "words": 6987
+  },
+  {
+   "i": 161,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Michael_Berry_(physicist)",
+   "weight": 1.0,
+   "chars": 3599,
+   "runs": 61,
+   "words": 317
+  },
+  {
+   "i": 162,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/John_Keating_(mathematician)",
+   "weight": 1.0,
+   "chars": 0,
+   "runs": 0,
+   "words": 0
+  },
+  {
+   "i": 163,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Nikola_Tesla",
+   "weight": 1.0,
+   "chars": 51005,
+   "runs": 1003,
+   "words": 6053
+  },
+  {
+   "i": 164,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Richard_Feynman",
+   "weight": 1.0,
+   "chars": 69587,
+   "runs": 1262,
+   "words": 7030
+  },
+  {
+   "i": 165,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Albert_Einstein",
+   "weight": 1.0,
+   "chars": 88345,
+   "runs": 1771,
+   "words": 10609
+  },
+  {
+   "i": 166,
+   "tag": "CONTEXT",
+   "url": "https://en.wikipedia.org/wiki/Paul_Dirac",
+   "weight": 1.0,
+   "chars": 37137,
+   "runs": 699,
+   "words": 4166
+  }
+ ],
+ "words": 284322
+}

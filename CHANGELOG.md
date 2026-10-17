@@ -6,6 +6,7 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-10-17
 
+- **Sanitiser and extractor dict view.** `Wernicke/sanitize/` (`sanitize_v0.py`, `build_bins.py`, `poison_notes.py`; pure `@staticmethod` rules in `ENV` dispatch dicts) and `rec["seed"]` in `Wernicke/extractor/extract_v0.py`. New sanitised maths and physics bins built in `PTorrent/bin_archive/clean/`; the 19 old domain bins moved to `dirty/` with poison notes.
 - **Broca/Wernicke trees.** `Broca/` (scalar and scaled boxkite, branch `boxkite`) and `Wernicke/` (semantic orbweaver, branch `orbweaver`): copies of the relevant sources, docs and the sources of today's `ptolemy` (it builds and reproduces the May 2026 reply on the v4 store); originals untouched.
 - **Standard testing corpus.** `Wernicke/corpus/`: 11 public-domain works, 134 sampled sentences, 24 chat prompts, model-provided reference answers (seven-slot decompositions, unreviewed), deterministic builder.
 - **Taoist mode and epicycles.** `tools/lemniscate_monitor.py` (normal and Taoist modes), `tools/taoist_physics.py`, `tools/taoist_lyapunov.py`, `tools/epicycles/` (v1 physics, v2 and v3 kinematic mockups, GeoGebra commands), `docs/figures/epicycles/` with `EPICYCLES.md`; tests `tests/test_taoist_geometry.py`, `tests/test_taoist_physics.py`.
