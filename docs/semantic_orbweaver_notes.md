@@ -62,6 +62,10 @@ The primer described the v1.0 `monad_speak` (rank by J, emit top-k). The engine 
 - **Monitor:** `tools/lemniscate_monitor.py`: Broca/Wernicke aphasia diagram (damage lobe left, damage lobe right, ∞ between = intact), points from a JSONL feed. It needs scores S (semantic) and G (structure); no scorer exists yet (T1). The transformer reference series must come from the same scorers on the same prompts. The mapping (x = G−S, y = 1−(S+G)/2, upright lemniscate, A=0.45) is a first cut, all [PARAM].
 - SemanticWordEngine: README and GitHub description now say deprecated, superseded by VAPMIP (`ad1a9d3`).
 
+## Side note (Cody, 2026-10-17): the Zork Sentence Parser
+
+The Zork Sentence Parser (`zork_parser.py`, `PtolC/zork.c`; copy in `Wernicke/src/`) is the **starting point of the context-acquisition work** that NLTK takes over later. Cody's assessment: it is very good at decomposing a sentence for parsing. Use it as the front end for prompt decomposition (verb → operator, PREP → relation label, IT → last noun) before NLTK's tagging, sense and topic extraction; see skill `nltk-zork-wordnet`.
+
 ## Decisions and standing statements (Cody, 2026-10-16/17)
 
 - Original semantic hash = the golden-ratio seed hash (not a prime hash).
