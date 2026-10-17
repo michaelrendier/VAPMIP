@@ -1,0 +1,56 @@
+# v2_mockup.ggb.txt — the Taoist-mode epicycle mockup as GeoGebra commands (paste into the Input Bar, in order).
+# Matches v2_mockup.py (script of record).  Checked: the formulas below, evaluated outside GeoGebra, reproduce the
+# script's locked-column path to within 1.1e-4 R (the gap is the polynomial fit of the dented outline; see EPICYCLES.md).  GeoGebra itself was NOT run here: this file has not been
+# opened in GeoGebra; treat the syntax as unchecked until it is.
+#
+# The Whole spins (sigma, SIGN); the two dots swing (they do not spin); the centre point draws the output.
+# ---- constants
+Omega = 1
+OmegaS = 1.3
+L0 = 0.5
+Psi0 = 0.8
+M0 = 1.5708
+# ---- the damage sliders: ADD (displacement d), SCALE (size s), edge dents (e), SIGN (sigma)
+sigma = Slider(-1, 1, 2)
+dB = Slider(-0.15, 0.15, 0.01)
+dW = Slider(-0.15, 0.15, 0.01)
+sB = Slider(0.8, 1.3, 0.01)
+sW = Slider(0.8, 1.3, 0.01)
+eB = Slider(0, 0.6, 0.05)
+eW = Slider(0, 0.6, 0.05)
+# set sB = sW = 1 and sigma = 1 with SetValue(sB, 1) etc. after creating them
+# ---- swing rates (pendulum: longer or bigger = slower)
+wB = OmegaS / sqrt((L0 + dB) / L0 * sB)
+wW = OmegaS / sqrt((L0 + dW) / L0 * sW)
+# ---- each half's mass and centre-of-mass offset from its dot (fits of the dented outline, 0 <= e <= 0.6)
+aB = 0.3746 eB^2 - 0.9998 eB + 0.9998
+aW = 0.3746 eW^2 - 0.9998 eW + 0.9998
+exB = -0.0781 eB^2 + 0.5428 eB - 0.3187
+eyB = 0.1992 eB^2 + 0.2423 eB + 0.2502 - 0.5
+exW = -(-0.0781 eW^2 + 0.5428 eW - 0.3187)
+eyW = -(0.1992 eW^2 + 0.2423 eW + 0.2502 - 0.5)
+mB = sB^2 aB
+mW = sW^2 aW
+# ---- the locked column: one shared swing
+psi(u) = Psi0 cos((wB + wW) / 2 u)
+alB(u) = sigma Omega u + pi / 2 + psi(u)
+alW(u) = sigma Omega u - pi / 2 + psi(u)
+cmBx(u) = (L0 + dB) cos(alB(u)) + sB (exB cos(alB(u) - pi / 2) - eyB sin(alB(u) - pi / 2))
+cmBy(u) = (L0 + dB) sin(alB(u)) + sB (exB sin(alB(u) - pi / 2) + eyB cos(alB(u) - pi / 2))
+cmWx(u) = (L0 + dW) cos(alW(u)) + sW (exW cos(alW(u) + pi / 2) - eyW sin(alW(u) + pi / 2))
+cmWy(u) = (L0 + dW) sin(alW(u)) + sW (exW sin(alW(u) + pi / 2) + eyW cos(alW(u) + pi / 2))
+outx(u) = -(mB cmBx(u) + mW cmWx(u)) / (M0 + mB + mW)
+outy(u) = -(mB cmBy(u) + mW cmWy(u)) / (M0 + mB + mW)
+locked = Curve(outx(u), outy(u), u, 0, 240)
+# ---- the independent column: each dot swings at its own rate, coupled through the seam (kappa = 0.25)
+# SolveODE integrates  psiB'' = -wB^2 sin(psiB) - kappa sin(psiB - psiW)  and the same for W.
+kappa = 0.25
+sol = SolveODE({v3, v4, -wB^2 sin(v1) - kappa sin(v1 - v2), -wW^2 sin(v2) - kappa sin(v2 - v1)}, {v1, v2, v3, v4}, 0, {Psi0, Psi0, 0, 0}, 240, 0.04)
+# then use the first two solution curves in place of psi(u) in alB and alW and redraw the Curve as `independent`.
+# ---- the Whole, for the picture: the centre point and the two dots
+Centre = (0, 0)
+t = Slider(0, 240, 0.04)
+DotB = ((L0 + dB) cos(sigma Omega t + pi / 2 + psi(t)), (L0 + dB) sin(sigma Omega t + pi / 2 + psi(t)))
+DotW = ((L0 + dW) cos(sigma Omega t - pi / 2 + psi(t)), (L0 + dW) sin(sigma Omega t - pi / 2 + psi(t)))
+Out = (outx(t), outy(t))
+# Start animation of t and trace Out to watch the centre point draw the output.
