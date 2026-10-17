@@ -85,3 +85,6 @@ monad_sentences.bin
 # machine live state, like monad3_c.bin itself)
 engine/grammar/ptol_relations.json
 engine/grammar/_ptol_relations_demo.json
+
+# Cody's own session prompts (personal; used locally as test input for the extractor, never committed)
+Wernicke/corpus/session_prompts_*.jsonl
