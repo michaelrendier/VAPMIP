@@ -32,7 +32,7 @@ def imp(mod):
 
 for m in ("numpy", "scipy", "pandas", "sklearn", "networkx", "nltk", "spacy", "lemminflect", "inflect", "conllu", "wn", "rapidfuzz"):
     check("import " + m, imp(m))
-for m in ("stanza", "gensim", "textblob", "pywsd"):             # system-python extras (not in the repo venvs)
+for m in ("stanza", "gensim", "textblob", "pywsd", "transformers", "frame_semantic_transformer", "fastcoref"):             # system-python extras (not in the repo venvs)
     check("import " + m + " (optional)", imp(m))
 
 
