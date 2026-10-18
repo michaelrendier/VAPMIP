@@ -11,7 +11,9 @@ Work directory for the white paper on the simplest engine in the lineage: the Ma
 | `tools/monad_py.py` | line-for-line Python port of the C functions, bugs included (`# AS-IS:`) |
 | `tools/verify_against_c.py`, `tools/verify_learn_against_c.py` | port vs the compiled binary: replies byte-identical (8/8), learned state exact |
 | `notebooks/01…06` | executed notebooks: store, address, learn, speak, the name, shortcomings |
-| `paper/` | the white paper |
+| `paper/The_Golden_Ratio_Monad.{md,pdf}` | the white paper (arXiv-ready draft). Built from `paper/template.md` by `make_paper.py`: every number from `evidence.py` (fresh runs), every C listing cut verbatim from `src/`. `python3 paper/make_paper.py --check` fails if the committed text differs from a fresh run; `paper/build_pdf.sh` makes the PDF (pandoc + LuaLaTeX) |
+| `tools/make_notebooks.py` | writes `notebooks/` (execute with nbconvert) |
+| `figures/` | figures made by the notebooks |
 
 Rebuild the reference binary: `cp -r src/PtolC_eb28ce8 build/ && make -C build/PtolC_eb28ce8`. Reproduce the reply:
 `HOME=$PWD/scratch_home PTOLEMY_HOME=$PWD/scratch_home/.ptolemy build/PtolC_eb28ce8/ptolemy -c dirty/monad_wordnet_v4_20260519.bin -W "what is your name" -n`

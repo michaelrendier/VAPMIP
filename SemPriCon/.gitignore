@@ -6,3 +6,4 @@ build/
 scratch_home/
 __pycache__/
 .ipynb_checkpoints/
+trace/
