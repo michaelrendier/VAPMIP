@@ -1,0 +1,8 @@
+# Fresh Start Protocol: the assessments are committed first; only then are the bins listed here.
+dirty/*.bin
+clean/*.bin
+# local builds and scratch state
+build/
+scratch_home/
+__pycache__/
+.ipynb_checkpoints/
