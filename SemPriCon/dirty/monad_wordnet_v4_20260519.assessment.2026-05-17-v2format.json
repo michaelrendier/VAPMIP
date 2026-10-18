@@ -1,0 +1,259 @@
+{
+  "timestamp": "2026-05-17T17:16:51.290118+00:00",
+  "path": "/home/rendier/.ptolemy/monad_wordnet.bin",
+  "size_bytes": 110016038,
+  "size_mb": 104.92,
+  "version": 2,
+  "N": 25000,
+  "vocab_size": 24485,
+  "A_size": 6825748,
+  "word_count": 44782621,
+  "threshold": 3.776,
+  "entropy_H": 12.5012,
+  "entropy_H_max": 14.5796,
+  "entropy_pct": 85.7,
+  "entropy_band": "NATURAL",
+  "gini": 0.8168,
+  "gini_band": "SPIKED",
+  "beta_dist": {
+    "sat": 842,
+    "low": 22012,
+    "ground": 546,
+    "high": 617,
+    "mid": 983
+  },
+  "clean_count": 23252,
+  "polluted_count": 1233,
+  "pollution_pct": 5.04,
+  "pollution_by_category": {
+    "no-vowel": 344,
+    "consonant-only": 993,
+    "consonant-cluster-3": 654,
+    "hex-string": 268
+  },
+  "top_beta": [
+    {
+      "word": "seemy",
+      "beta": 7.552,
+      "E": 0.246,
+      "labels": []
+    },
+    {
+      "word": "done",
+      "beta": 7.552,
+      "E": 0.251,
+      "labels": []
+    },
+    {
+      "word": "archaic",
+      "beta": 7.552,
+      "E": 0.251,
+      "labels": []
+    },
+    {
+      "word": "time",
+      "beta": 7.552,
+      "E": 0.2523,
+      "labels": []
+    },
+    {
+      "word": "anckj",
+      "beta": 7.552,
+      "E": 0.2527,
+      "labels": []
+    },
+    {
+      "word": "yxast",
+      "beta": 7.552,
+      "E": 0.2533,
+      "labels": []
+    },
+    {
+      "word": "gr",
+      "beta": 7.552,
+      "E": 0.256,
+      "labels": []
+    },
+    {
+      "word": "dayly",
+      "beta": 7.552,
+      "E": 0.2568,
+      "labels": []
+    },
+    {
+      "word": "the",
+      "beta": 7.552,
+      "E": 0.2568,
+      "labels": []
+    },
+    {
+      "word": "lucem",
+      "beta": 7.552,
+      "E": 0.258,
+      "labels": []
+    },
+    {
+      "word": "belem",
+      "beta": 7.552,
+      "E": 0.2593,
+      "labels": []
+    },
+    {
+      "word": "reber",
+      "beta": 7.552,
+      "E": 0.2597,
+      "labels": []
+    },
+    {
+      "word": "acerate",
+      "beta": 7.552,
+      "E": 0.2611,
+      "labels": []
+    },
+    {
+      "word": "turd",
+      "beta": 7.552,
+      "E": 0.2616,
+      "labels": []
+    },
+    {
+      "word": "large",
+      "beta": 7.552,
+      "E": 0.2617,
+      "labels": []
+    },
+    {
+      "word": "qbank",
+      "beta": 7.552,
+      "E": 0.2623,
+      "labels": []
+    },
+    {
+      "word": "this",
+      "beta": 7.552,
+      "E": 0.266,
+      "labels": []
+    },
+    {
+      "word": "gyges",
+      "beta": 7.552,
+      "E": 0.2661,
+      "labels": []
+    },
+    {
+      "word": "awtad",
+      "beta": 7.552,
+      "E": 0.2669,
+      "labels": []
+    },
+    {
+      "word": "pitar",
+      "beta": 7.552,
+      "E": 0.2672,
+      "labels": []
+    }
+  ],
+  "top_edges": [
+    {
+      "word_i": "qgt",
+      "word_j": "each",
+      "weight": 1399.8579
+    },
+    {
+      "word_i": "ragu",
+      "word_j": "when",
+      "weight": 280.0121
+    },
+    {
+      "word_i": "and",
+      "word_j": "qgt",
+      "weight": 213.8007
+    },
+    {
+      "word_i": "trash",
+      "word_j": "holcus",
+      "weight": 208.0606
+    },
+    {
+      "word_i": "holia",
+      "word_j": "qgt",
+      "weight": 204.2365
+    },
+    {
+      "word_i": "seemy",
+      "word_j": "the",
+      "weight": 178.6424
+    },
+    {
+      "word_i": "holcus",
+      "word_j": "peril",
+      "weight": 176.2568
+    },
+    {
+      "word_i": "and",
+      "word_j": "holia",
+      "weight": 156.7329
+    },
+    {
+      "word_i": "mcany",
+      "word_j": "holcus",
+      "weight": 95.5104
+    },
+    {
+      "word_i": "was",
+      "word_j": "mcany",
+      "weight": 90.7672
+    },
+    {
+      "word_i": "nyala",
+      "word_j": "mcany",
+      "weight": 83.9634
+    },
+    {
+      "word_i": "haiya",
+      "word_j": "holcus",
+      "weight": 69.8816
+    },
+    {
+      "word_i": "your",
+      "word_j": "cldr",
+      "weight": 59.504
+    },
+    {
+      "word_i": "tomy",
+      "word_j": "its",
+      "weight": 57.8871
+    },
+    {
+      "word_i": "him",
+      "word_j": "lutes",
+      "weight": 57.6269
+    },
+    {
+      "word_i": "amnion",
+      "word_j": "okc",
+      "weight": 53.5093
+    },
+    {
+      "word_i": "again",
+      "word_j": "and",
+      "weight": 53.5028
+    },
+    {
+      "word_i": "qgt",
+      "word_j": "jib",
+      "weight": 50.7294
+    },
+    {
+      "word_i": "piezo",
+      "word_j": "it",
+      "weight": 49.4404
+    },
+    {
+      "word_i": "holcus",
+      "word_j": "at",
+      "weight": 44.9905
+    }
+  ],
+  "verdict": "PASS"
+}

@@ -1,0 +1,573 @@
+{
+ "file": "monad_wordnet_v4_20260519.bin",
+ "sha256": "66f70c70dcd8d860fa4af01833cf5c6e4c376194c510b5be156fe0c6064faf31",
+ "size_bytes": 110040527,
+ "bytes_consumed": 110040527,
+ "header": {
+  "version": 4,
+  "N": 25000,
+  "vocab_size": 24485,
+  "A_size": 6825748,
+  "word_count": 121914388,
+  "threshold": 3.776,
+  "affect": -1.0
+ },
+ "field": {
+  "occupied_zeros": 25000,
+  "entropy": 12.9558,
+  "entropy_max": 14.6096,
+  "entropy_pct": 88.68,
+  "gini": 0.7564,
+  "beta_saturated": 1826,
+  "beta_max": 7.552
+ },
+ "strata": {
+  "home": {
+   "1": 24485
+  },
+  "gen": {
+   "1": 24485
+  },
+  "prose_seen": {
+   "3": 13594,
+   "1": 10538,
+   "2": 158,
+   "0": 195
+  }
+ },
+ "scripts": {
+  "word_scripts": {
+   "ASCII": 24485
+  },
+  "nonascii_chars": {},
+  "nonascii_word_count": 0,
+  "nonascii_samples": []
+ },
+ "eval_checkpoint": {
+  "polluted": 1233,
+  "clean": 23252,
+  "pollution_pct": 5.04,
+  "by_category": {
+   "consonant-only": 993,
+   "consonant-cluster-3": 654,
+   "no-vowel": 344,
+   "hex-string": 268
+  }
+ },
+ "sanitiser": {
+  "tiers": {
+   "B:candidate_evidence_pending": 18409,
+   "A:in_wordnet": 4563,
+   "Q:no_vowel": 990,
+   "C:proper_noun": 450,
+   "F:function_word": 55,
+   "Q:chrome": 14,
+   "Q:single_letter": 3,
+   "Q:non_latin_or_symbol": 1
+  },
+  "samples": {
+   "B:candidate_evidence_pending": [
+    "seemy",
+    "carre",
+    "azv",
+    "xxa",
+    "diem",
+    "gaii",
+    "uxp",
+    "arcos",
+    "repnz",
+    "ofkind",
+    "fnkou",
+    "ethno"
+   ],
+   "A:in_wordnet": [
+    "fluid",
+    "papaw",
+    "pommy",
+    "quiets",
+    "farm",
+    "atrip",
+    "peaty",
+    "citric",
+    "kinks",
+    "click",
+    "java",
+    "lamina"
+   ],
+   "Q:no_vowel": [
+    "tcpd",
+    "vqr",
+    "zbk",
+    "db",
+    "hgc",
+    "fqb",
+    "plb",
+    "btlq",
+    "sdgm",
+    "vwc",
+    "rzs",
+    "dcs"
+   ],
+   "C:proper_noun": [
+    "aiai",
+    "frey",
+    "donar",
+    "ashton",
+    "stalin",
+    "speke",
+    "beria",
+    "delhi",
+    "pampas",
+    "london",
+    "benin",
+    "nubia"
+   ],
+   "F:function_word": [
+    "i's",
+    "you'd",
+    "same",
+    "then",
+    "upon",
+    "once",
+    "while",
+    "than",
+    "i'm",
+    "will",
+    "again",
+    "and"
+   ],
+   "Q:chrome": [
+    "jstor",
+    "the",
+    "this",
+    "oclc",
+    "log",
+    "edit",
+    "export",
+    "doi",
+    "main",
+    "to",
+    "what",
+    "links"
+   ],
+   "Q:single_letter": [
+    "p's",
+    "w's",
+    "b's"
+   ],
+   "Q:non_latin_or_symbol": [
+    "s''v"
+   ]
+  },
+  "quarantined": 1008,
+  "quarantined_pct": 4.12
+ },
+ "probes": {
+  "holcus": [
+   {
+    "idx": 24639,
+    "E": 0.5625,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "philadelphos": null,
+  "same": [
+   {
+    "idx": 1859,
+    "E": 0.2699,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "stuff": [
+   {
+    "idx": 18482,
+    "E": 0.4834,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "seemy": [
+   {
+    "idx": 0,
+    "E": 0.246,
+    "beta": 7.552,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "what": [
+   {
+    "idx": 16194,
+    "E": 0.454,
+    "beta": 7.552,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "is": null,
+  "your": [
+   {
+    "idx": 18893,
+    "E": 0.4887,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "name": null,
+  "tree": null,
+  "water": null,
+  "setn": [
+   {
+    "idx": 16406,
+    "E": 0.4568,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "abysmal": [
+   {
+    "idx": 16796,
+    "E": 0.4618,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "quun": [
+   {
+    "idx": 17381,
+    "E": 0.4693,
+    "beta": 1.097,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "nanti": [
+   {
+    "idx": 1894,
+    "E": 0.2703,
+    "beta": 7.552,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "emite": [
+   {
+    "idx": 15471,
+    "E": 0.4447,
+    "beta": 7.552,
+    "age": 9,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 3
+   }
+  ],
+  "ptolemy": null
+ },
+ "top_beta": [
+  {
+   "word": "seemy",
+   "idx": 0,
+   "E": 0.246,
+   "beta": 7.552
+  },
+  {
+   "word": "click",
+   "idx": 30,
+   "E": 0.2464,
+   "beta": 7.552
+  },
+  {
+   "word": "seici",
+   "idx": 154,
+   "E": 0.248,
+   "beta": 7.552
+  },
+  {
+   "word": "hope",
+   "idx": 159,
+   "E": 0.2481,
+   "beta": 7.552
+  },
+  {
+   "word": "ssu",
+   "idx": 274,
+   "E": 0.2495,
+   "beta": 7.552
+  },
+  {
+   "word": "male",
+   "idx": 362,
+   "E": 0.2507,
+   "beta": 7.552
+  },
+  {
+   "word": "nkd",
+   "idx": 370,
+   "E": 0.2508,
+   "beta": 7.552
+  },
+  {
+   "word": "done",
+   "idx": 387,
+   "E": 0.251,
+   "beta": 7.552
+  },
+  {
+   "word": "archaic",
+   "idx": 390,
+   "E": 0.251,
+   "beta": 7.552
+  },
+  {
+   "word": "liken",
+   "idx": 406,
+   "E": 0.2512,
+   "beta": 7.552
+  },
+  {
+   "word": "mown",
+   "idx": 420,
+   "E": 0.2514,
+   "beta": 7.552
+  },
+  {
+   "word": "time",
+   "idx": 486,
+   "E": 0.2523,
+   "beta": 7.552
+  },
+  {
+   "word": "anckj",
+   "idx": 522,
+   "E": 0.2527,
+   "beta": 7.552
+  },
+  {
+   "word": "yxast",
+   "idx": 568,
+   "E": 0.2533,
+   "beta": 7.552
+  },
+  {
+   "word": "espol",
+   "idx": 570,
+   "E": 0.2533,
+   "beta": 7.552
+  },
+  {
+   "word": "kyods",
+   "idx": 573,
+   "E": 0.2534,
+   "beta": 7.552
+  },
+  {
+   "word": "asa's",
+   "idx": 641,
+   "E": 0.2542,
+   "beta": 7.552
+  },
+  {
+   "word": "si",
+   "idx": 692,
+   "E": 0.2549,
+   "beta": 7.552
+  },
+  {
+   "word": "pike",
+   "idx": 714,
+   "E": 0.2552,
+   "beta": 7.552
+  },
+  {
+   "word": "nowwe",
+   "idx": 738,
+   "E": 0.2555,
+   "beta": 7.552
+  },
+  {
+   "word": "gr",
+   "idx": 781,
+   "E": 0.256,
+   "beta": 7.552
+  },
+  {
+   "word": "omsdk",
+   "idx": 802,
+   "E": 0.2563,
+   "beta": 7.552
+  },
+  {
+   "word": "dayly",
+   "idx": 837,
+   "E": 0.2568,
+   "beta": 7.552
+  },
+  {
+   "word": "the",
+   "idx": 841,
+   "E": 0.2568,
+   "beta": 7.552
+  },
+  {
+   "word": "bacoo",
+   "idx": 863,
+   "E": 0.2571,
+   "beta": 7.552
+  }
+ ],
+ "top_edges": [
+  {
+   "a": "qgt",
+   "b": "each",
+   "w": 3840.187
+  },
+  {
+   "a": "ragu",
+   "b": "when",
+   "w": 829.024
+  },
+  {
+   "a": "and",
+   "b": "qgt",
+   "w": 624.891
+  },
+  {
+   "a": "holia",
+   "b": "qgt",
+   "w": 611.704
+  },
+  {
+   "a": "trash",
+   "b": "holcus",
+   "w": 578.363
+  },
+  {
+   "a": "holcus",
+   "b": "peril",
+   "w": 528.77
+  },
+  {
+   "a": "seemy",
+   "b": "the",
+   "w": 497.318
+  },
+  {
+   "a": "and",
+   "b": "holia",
+   "w": 469.599
+  },
+  {
+   "a": "mcany",
+   "b": "holcus",
+   "w": 273.723
+  },
+  {
+   "a": "was",
+   "b": "mcany",
+   "w": 269.533
+  },
+  {
+   "a": "nyala",
+   "b": "mcany",
+   "w": 251.755
+  },
+  {
+   "a": "haiya",
+   "b": "holcus",
+   "w": 202.894
+  },
+  {
+   "a": "your",
+   "b": "cldr",
+   "w": 175.94
+  },
+  {
+   "a": "tomy",
+   "b": "its",
+   "w": 173.661
+  },
+  {
+   "a": "him",
+   "b": "lutes",
+   "w": 172.881
+  },
+  {
+   "a": "again",
+   "b": "and",
+   "w": 158.755
+  },
+  {
+   "a": "piezo",
+   "b": "it",
+   "w": 145.358
+  },
+  {
+   "a": "gptgo",
+   "b": "irish",
+   "w": 132.937
+  },
+  {
+   "a": "qgt",
+   "b": "jib",
+   "w": 131.65
+  },
+  {
+   "a": "holcus",
+   "b": "at",
+   "w": 129.517
+  },
+  {
+   "a": "and",
+   "b": "kma",
+   "w": 120.477
+  },
+  {
+   "a": "amnion",
+   "b": "okc",
+   "w": 107.019
+  },
+  {
+   "a": "woho",
+   "b": "could",
+   "w": 105.499
+  },
+  {
+   "a": "them",
+   "b": "back",
+   "w": 102.044
+  },
+  {
+   "a": "dianu",
+   "b": "was",
+   "w": 95.355
+  }
+ ]
+}
