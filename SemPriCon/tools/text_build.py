@@ -30,7 +30,7 @@ def paragraphs(path):
 
 def varcon():
     us, uk = set(), set()
-    for line in open(os.path.join(C, "lexicon", "varcon.txt"), encoding="utf-8"):
+    for line in open(os.path.join(C, "lexicon", "varcon.txt"), encoding="latin-1"):
         if line.startswith("#") or ":" not in line: continue
         for part in line.strip().split(" / "):
             tags, _, w = part.partition(":"); tags = tags.replace("v", "").split(); w = w.strip().lower()

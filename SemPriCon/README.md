@@ -14,6 +14,10 @@ Work directory for the white paper on the simplest engine in the lineage: the Ma
 | `paper/The_Golden_Ratio_Monad.{md,pdf}` | the white paper (arXiv-ready draft). Built from `paper/template.md` by `make_paper.py`: every number from `evidence.py` (fresh runs), every C listing cut verbatim from `src/`. `python3 paper/make_paper.py --check` fails if the committed text differs from a fresh run; `paper/build_pdf.sh` makes the PDF (pandoc + LuaLaTeX) |
 | `tools/make_notebooks.py` | writes `notebooks/` (execute with nbconvert) |
 | `figures/` | figures made by the notebooks |
+| `src/PtolC_unicode/`, `src/unicode_upgrade.patch` | the Unicode build of the C monad (a copy of the 2026-05 source plus the patch) |
+| `calibration/` | the 1 024-concept calibration set (`calibration_1024.tsv`) and every graded candidate |
+| `corpora/` | fetch scripts, manifest, licences, closed doors (data gitignored) |
+| **wiki** | `../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/` — the functional reference for everything here, updated in place |
 
 Rebuild the reference binary: `cp -r src/PtolC_eb28ce8 build/ && make -C build/PtolC_eb28ce8`. Reproduce the reply:
 `HOME=$PWD/scratch_home PTOLEMY_HOME=$PWD/scratch_home/.ptolemy build/PtolC_eb28ce8/ptolemy -c dirty/monad_wordnet_v4_20260519.bin -W "what is your name" -n`

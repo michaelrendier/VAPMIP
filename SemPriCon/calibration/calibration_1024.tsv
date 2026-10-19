@@ -1,0 +1,1025 @@
+id	tier	pair	pair_relation	pos	en_us	en_uk	zh_trad	sw	fi	id_	qu	grade	ranks_zh_sw_fi_id_qu	freq_zh_sw_fi_id_qu	flags	lexname	n_senses	synset	en_gloss	review
+C0001	S			n	abacus	abacus	圓柱頂板	abakasi	katelaatta	sempoa	yupana	D	0,0,0,0,1	0,2,0,5,63	Sw:contact:English;Fi:borrowed;In:borrowed,contact:Hokkien;Qu:borrowed	noun.artifact	2	abacus.n.01	a tablet placed horizontally on top of the capital of a column as an aid in supporting the architrave	pending
+C0002	S			n	ability	ability	能力	uwezo	kyky	bakat	atiy	B	0,0,0,0,1	3274,2852,167,196,76		noun.attribute	2	ability.n.01	the quality of being able to perform; a quality that permits or facilitates achievement or accomplishment	pending
+C0003	S			a	abundant	abundant	充裕+的	tele	runsas	murah	yupa	D	0,0,0,0,0	0,66,198,339,108		adj.all	1	abundant.a.01	present in great quantity	pending
+C0004	S			n	abyss	abyss	深淵	uketo	syvyys	jurang	thuñi	D	0,0,0,0,0	48,0,40,83,0		noun.object	1	abyss.n.01	a bottomless gulf or pit; any unfathomable (or apparently unfathomable) cavity or chasm or void extending below (often used figuratively)	pending
+C0005	S			v	accelerate	accelerate	加速	chapua	nopeuttaa	mempercepat	utqaychay	D	0,0,0,0,3	1067,0,36,184,0		verb.change	2	accelerate.v.01	move faster	pending
+C0006	S			n	accident	accident	事故	ajali	onnettomuus	pelanggaran	paylla	A	0,0,0,0,0	735,439,173,394,4	Sw:borrowed	noun.event	2	accident.n.01	an unfortunate mishap; especially one causing damage or injury	pending
+C0007	S			n	accountant	accountant	會計	mhasibu	kirjanpitäjä	pengawal	yupanki	A	0,0,0,0,0	561,41,6,140,84	Sw:borrowed	noun.person	1	accountant.n.01	someone who maintains and audits business accounts	pending
+C0008	S			v	accumulate	accumulate	收集	kusanya	kerätä	menarik	qutuy	D	0,0,0,0,1	653,2,105,1438,1		verb.possession	2	roll_up.v.02	get or gather together	pending
+C0009	S			v	accuse	accuse	指責	shutumu	syyttää	melibatkan	tumpay	D	0,0,0,0,1	715,2,37,1014,0		verb.communication	2	accuse.v.01	bring an accusation against; level a charge against	pending
+C0010	S			v	adapt	adapt	調整	tohoa	sopeutua	menyesuaikan	amañay	D	0,0,0,0,0	1560,0,23,138,2		verb.change	2	adjust.v.03	adapt or conform oneself to new or different conditions	pending
+C0011	S			n	addition	addition	增加	nyongeza	lisääminen	tambahan	yapay	A	0,0,0,0,0	5907,205,58,1137,29		noun.artifact	6	addition.n.01	a component that is added to something to improve it	data-verified
+C0012	S			n	advice	advice	建議	ushauri	neuvo	amanat	kunay	D	0,0,0,0,0	2546,380,20,216,0	In:borrowed	noun.communication	1	advice.n.01	a proposal for an appropriate course of action	pending
+C0013	S			n	afterlife	afterlife	後世	ahera	tuonpuoleinen	akhirat	wañu	D	0,0,0,0,1	1053,18,5,83,1	Sw:borrowed	noun.time	1	afterlife.n.01	life after death	pending
+C0014	S			n	air	air	大氣	hewa	ilma	udara	wayra	B	0,0,0,0,1	1715,1746,201,4770,213	Sw:borrowed	noun.substance	9	air.n.01	a mixture of gases (especially oxygen) required for breathing; the stuff that the wind consists of	pending
+C0015	S			n	airplane	aeroplane	飛機	eropleni	lentokone	pesawat	antanka	A	0,0,0,0,0	2767,74,120,4108,222	Sw:contact:English;In:contact:English	noun.artifact	1	airplane.n.01	an aircraft that has a fixed wing and is powered by propellers or jets	pending
+C0016	S			n	alcohol	alcohol	酒	kileo	alkoholi	arak	alkul	A	0,0,0,0,0	7339,30,90,58,10	Qu:borrowed	noun.food	2	alcohol.n.01	a liquor or brew containing alcohol as the active agent	pending
+C0017	S			a	all	all	都	ote	koko	semua	tukuy	A	0,0,0,0,0	45375,19,4859,6230,831		adj.all	2	all.a.01	quantifier; used with either mass or count nouns to indicate the whole number or amount of or every one of a class	data-verified
+C0018	S			a	alone	alone	單獨+的	pekee	yksinäinen	sendiri	paylla	D	0,0,0,0,0	0,3795,32,5689,4		adj.all	4	alone.s.02	lacking companions or companionship	pending
+C0019	S			n	alpaca	alpaca	羊駝	alpaka	alpakka	alpaka	allpaqa	A	0,0,0,0,0	13,15,4,4,6	Fi:borrowed;In:borrowed	noun.animal	3	alpaca.n.03	domesticated llama with long silky fleece; believed to be a domesticated variety of the guanaco	pending
+C0020	S			n	amusement	amusement	樂趣	burudani	hilpeys	permainan	awsay	D	0,2,0,0,0	61,329,3,1284,0	Sw:borrowed	noun.feeling	2	amusement.n.01	a feeling of delight at being entertained	pending
+C0021	S			a	ancient	ancient	古代+的	kongwe	muinainen	lama	machu	D	0,0,0,0,1	0,113,57,3475,218	In:contact:Quechua	adj.all	2	ancient.s.01	belonging to times long past especially of the historical period before the fall of the Western Roman Empire	pending
+C0022	S			n	angel	angel	天使	malaika	enkeli	bidadari	anqil	D	0,0,0,0,0	312,350,47,93,2	Sw:borrowed;Fi:borrowed;Qu:borrowed	noun.person	4	angel.n.01	spiritual being attendant upon God	pending
+C0023	S			n	announcement	announcement	宣告	tangazo	julistus	pengumuman	willay	B	0,1,0,0,0	1480,164,84,145,2309	Sw:borrowed	noun.communication	2	announcement.n.01	a formal public statement	pending
+C0024	S			v	annoy	annoy	騷擾	kera	häiritä	mengganggu	piñay	D	0,0,0,0,0	183,3,45,270,0		verb.emotion	1	annoy.v.01	cause annoyance in; disturb, especially by minor irritations	pending
+C0025	S			n	anus	anus	肛門	mkundu	peräaukko	anus	uquti	D	0,0,0,0,1	61,63,2,37,10	In:borrowed	noun.body	1	anus.n.01	the excretory opening at the end of the alimentary canal	pending
+C0026	S			n	apple	apple	蘋果	tufaha	omena	apel	mansana	A	0,0,0,0,0	1601,4,33,76,21	Ch:borrowed;Sw:borrowed;In:borrowed;Qu:borrowed	noun.food	2	apple.n.01	fruit with red or yellow or green skin and sweet to tart crisp whitish flesh	pending
+C0027	S			v	appraise	appraise	評價	thamini	arvioida	berukuran	chaninchay	D	0,1,0,0,0	2270,0,131,468,2	Sw:borrowed	verb.cognition	2	measure.v.04	evaluate or estimate the nature, quality, ability, extent, or significance of	pending
+C0028	S			v	apprehend	apprehend	逮捕	bamba	pidättää	menangkap	chapay	D	0,2,0,0,0	934,314,34,396,0		verb.contact	3	collar.v.01	take into custody	pending
+C0029	S			v	approach	approach	接近	sogea	lähestyä	hampir	chimpay	A	0,0,0,0,0	1941,10,20,2879,4		verb.motion	5	approach.v.01	move towards	data-verified
+C0030	S			n	area	area	地區	uwanja	maa	kawasan	suyu	B	0,0,0,0,1	20344,3454,2047,4106,11162		noun.location	6	area.n.01	a particular geographical region of indefinite boundary (usually serving some special purpose or distinguished by its people or culture or geography)	pending
+C0031	S			v	arrive	arrive	到	fika	tulla	mendapatkan	chamuy	D	0,0,0,0,0	73414,24,391,2237,1	Fi:contact:English	verb.motion	2	arrive.v.01	reach a destination; arrive by movement or progress	pending
+C0032	S			n	arrow	arrow	箭頭符號	mshale	osoitin	penunjuk	wach'i	D	0,0,0,0,0	0,67,12,59,33	In:borrowed	noun.communication	2	arrow.n.01	a mark to indicate a direction or relation	pending
+C0033	S			v	ascend	ascend	攀登	paa	nousta	meningkat	wichay	B	0,1,0,0,0	88,174,162,1442,37		verb.motion	8	ascend.v.01	travel up,	pending
+C0034	S			n	ash	ash	灰	jivu	tuhka	abu	uchpa	A	0,0,0,0,0	1487,6,14,1418,24	In:borrowed	noun.substance	3	ash.n.01	the residue that remains when something is burned	pending
+C0035	S			n	automobile	automobile	車	motokaa	ajoneuvo	kereta	karru	B	0,0,0,0,1	18820,105,24,2725,8	Ch:contact:English+Mandarin;Sw:borrowed,contact:English;Qu:borrowed	noun.artifact	1	car.n.01	a motor vehicle with four wheels; usually propelled by an internal combustion engine	pending
+C0036	S			v	award	award	頒發	tuza	antaa	mengeluarkan	quriy	C	0,0,0,0,2	794,4,846,1090,5		verb.possession	2	award.v.01	give, especially as an honor or reward	pending
+C0037	S			n	back	back	後面	nyuma	takaosa	belakang	wasa	A	0,0,0,0,0	383,1349,7,1482,52		noun.artifact	9	rear.n.05	the side that goes last or is not normally seen	data-verified
+C0038	S			n	banana	banana	香蕉	ndizi	banaani	pisang	latanu	D	0,0,0,0,0	130,202,14,402,1	Fi:borrowed;In:borrowed;Qu:borrowed	noun.food	2	banana.n.02	elongated crescent-shaped yellow fruit with soft sweet flesh	pending
+C0039	S			a	bare	bare	抽出鞘+的	tupu	paljas	telanjang	q'ara	D	0,0,0,0,1	0,160,12,107,28		adj.all	10	unsheathed.a.01	not having a protective covering	pending
+C0040	S			n	barrier	barrier	障礙	kizingiti	este	penghalang	hark'a	C	0,0,0,0,2	633,25,45,143,35		noun.artifact	3	barrier.n.01	a structure or object that impedes free movement	pending
+C0041	S			a	basic	basic	基本+的	msingi	olennainen	dasar	tiksi	D	0,0,0,0,1	0,3293,72,3667,153		adj.all	4	basic.a.01	pertaining to or constituting a base or basis	pending
+C0042	S			n	basin	basin	盆	beseni	malja	batil	arma	A	0,0,0,0,0	1120,296,8,14,35	Sw:contact:English;Fi:borrowed	noun.artifact	5	basin.n.01	a bowl-shaped vessel; usually used for holding food or liquids	pending
+C0043	S			n	basket	basket	籃子	kikapu	koppa	raga	isanka	A	0,0,0,0,0	37,401,3,96,92		noun.artifact	4	basket.n.01	a container that is usually woven and has handles	data-verified
+C0044	S			n	bat	bat	蝙蝠	popo	lepakko	keluang	chiñi	A	0,0,0,0,0	104,133,21,5,24	Fi:contact:English	noun.animal	5	bat.n.01	nocturnal mouselike mammal with forelimbs modified to form membranous wings and anatomical adaptations for echolocation by which they navigate	pending
+C0045	S			n	bathtub	bathtub	浴缸	hodhi	amme	pemandian	arma	D	0,0,0,0,2	7,3,0,212,35	Sw:borrowed	noun.artifact	1	bathtub.n.01	a relatively large open container that you fill with water and use to wash the body	pending
+C0046	S			n	bean	bean	豆	haragwe	papu	biji	chuwi	D	0,0,0,0,0	1638,3,2,584,5	Sw:borrowed	noun.food	4	bean.n.01	any of various edible seeds of plants of the family Leguminosae used for food	pending
+C0047	S			n	beans	beans	豆	maharage	papu	biji	chuwi	D	0,0,0,0,1	1638,66,2,584,5		noun.food	4	bean.n.01	any of various edible seeds of plants of the family Leguminosae used for food	pending
+C0048	S			n	bear	bear	熊	dubu	karhu	beruang	ukumari	A	0,0,0,0,0	1269,165,171,108,86	Sw:borrowed;Fi:contact:English	noun.animal	2	bear.n.01	massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws	pending
+C0049	S			a	beautiful	beautiful	美+的	rembo	kaunis	hasan	sumaq	D	0,0,0,0,0	0,4,62,378,203	Fi:contact:English;Qu:borrowed	adj.all	2	beautiful.a.01	delighting the senses or exciting intellectual or emotional admiration	pending
+C0050	S			n	bed	bed	床	kitanda	sänky	ranjang	puñuna	D	0,0,0,0,0	1224,104,1,19,18	Fi:borrowed;Qu:borrowed	noun.artifact	8	bed.n.01	a piece of furniture that provides a place to sleep	pending
+C0051	S			n	bedding	bedding	床上用品	malazi	petivaatteet	seprei	qata	D	0,0,0,0,2	3,58,0,0,23	In:borrowed	noun.artifact	2	bedclothes.n.01	coverings that are used on a bed	pending
+C0052	S			n	bee	bee	蜂	nyuki	mehiläinen	lebah	ch'uspi	C	0,0,0,0,2	503,215,13,104,18	In:borrowed	noun.animal	2	bee.n.01	any of numerous hairy-bodied insects including social and solitary species	pending
+C0053	S			n	belly	belly	腹	batini	vatsa	perut	wiksa	D	0,0,0,0,0	889,1,89,201,41	Sw:borrowed;In:borrowed	noun.body	5	abdomen.n.01	the region of the body of a vertebrate between the thorax and the pelvis	pending
+C0054	S			n	belt	belt	帶	ukanda	hihna	gelung	chumpi	A	0,0,0,0,0	16543,353,3,6,29	Ch:contact:Mandarin	noun.artifact	7	belt.n.01	endless loop of flexible material between two rotating shafts or pulleys	pending
+C0055	S			n	bench	bench	長凳	benchi	penkki	bangku	tiyana	C	0,0,0,0,3	10,25,3,48,28	Sw:borrowed,contact:English;Fi:borrowed;In:borrowed;Qu:borrowed	noun.artifact	7	bench.n.01	a long seat for more than one person	pending
+C0056	S			v	bend	bend	彎曲	pinda	taipua	melengkung	k'umuy	D	0,0,0,0,0	212,19,7,81,1		verb.motion	6	bend.v.01	form a curve	pending
+C0057	S			n	bicycle	bicycle	腳踏車	baiskeli	pyörä	sepeda	iskaymuyu	A	0,0,0,0,0	256,105,31,645,10	Sw:contact:English;In:borrowed;Qu:borrowed	noun.artifact	1	bicycle.n.01	a wheeled vehicle that has two wheels and is moved by foot pedals	pending
+C0058	S			n	bird	bird	鳥	ndege	lintu	burung	pisqu	A	0,0,0,0,0	3689,2962,342,1167,360	Sw:borrowed	noun.animal	5	bird.n.01	warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings	pending
+C0059	S			v	bite	bite	咬	uma	purra	gigit	kaniy	D	0,0,0,0,0	263,42,19,4,2	Sw:borrowed	verb.contact	4	bite.v.01	to grip, cut off, or tear with or as if with the teeth or jaws	pending
+C0060	S			n	blanket	blanket	毯	blanketi	huopa	selimut	qata	A	0,0,0,0,0	125,11,5,37,23	Sw:borrowed,contact:English	noun.artifact	3	blanket.n.01	bedding that keeps a person warm in bed	pending
+C0061	S			n	blood	blood	血	damu	veri	darah	yawar	A	0,0,0,0,0	4657,3029,96,1055,302	In:borrowed	noun.body	5	blood.n.01	the fluid (red in vertebrates) that is pumped through the body by the heart and contains plasma, blood cells, and platelets	pending
+C0062	S			a	blue	blue	藍	bluu	sininen	biru	anqas	A	0,0,0,0,0	3345,67,184,670,159	Sw:borrowed,contact:English	adj.all	8	blue.s.01	of the color intermediate between green and violet; having a color similar to that of a clear unclouded sky; - Helen Hunt Jackson	pending
+C0063	S			v	boast	boast	吹噓	ringa	leveillä	bercakap	kumuy	D	0,0,0,0,0	13,2,5,43,0		verb.communication	2	boast.v.01	show off	pending
+C0064	S			n	boat	boat	船	boti	vene	perahu	wamp'u	A	0,0,0,0,0	7032,86,43,370,102	Sw:contact:English	noun.artifact	2	boat.n.01	a small vessel for travel on water	pending
+C0065	S			n	boiling	boiling	蒸發	mchemko	kiehuttaminen	mendidihkan	t'impuy	D	0,0,0,0,0	257,1,0,3,4	Sw:borrowed	noun.process	2	boiling.n.01	the application of heat to change something from a liquid to a gas	pending
+C0066	S			n	bone	bone	骨	mfupa	os	tulang	tullu	A	0,0,0,0,0	3234,129,279,607,97	Ch:borrowed,contact:English	noun.body	3	bone.n.01	rigid connective tissue that makes up the skeleton of vertebrates	pending
+C0067	S			n	boss	boss	社長	bosi	esimies	ketua	pusaq	B	0,0,0,0,1	274,25,24,2479,963	Sw:borrowed,contact:English;Qu:borrowed	noun.person	6	foreman.n.01	a person who exercises control over workers	pending
+C0068	S			n	bow	bow	蝴蝶結	upinde	rusettisolmu	simpul	q'iwi	D	0,0,0,0,0	2,91,0,55,13	In:borrowed	noun.artifact	9	bow.n.01	a knot with two loops and loose ends; used to tie shoelaces	pending
+C0069	S			n	bracelet	bracelet	手鐲	kikuku	rannekoru	kaki	sipi	D	0,0,0,0,1	16,51,0,1906,48		noun.artifact	2	bracelet.n.02	jewelry worn around the wrist for decoration	pending
+C0070	S			v	brag	brag	吹噓	jigamba	leveillä	bercakap	kumuy	D	0,0,0,0,1	13,0,5,43,0		verb.communication	1	boast.v.01	show off	pending
+C0071	S			n	braid	braid	帶子	tepe	punos	renda	simp'a	D	0,0,0,0,0	21,8,0,7,1	Sw:contact:English;In:borrowed	noun.artifact	2	braid.n.02	trimming used to decorate clothes or curtains	pending
+C0072	S			a	brave	brave	勇敢+的	hodari	rohkea	berani	sinchi	D	0,0,0,0,1	0,138,29,227,259		adj.all	3	brave.a.01	possessing or displaying courage; able to face and deal with danger or fear without flinching; - Herman Melville; - William Wordsworth	pending
+C0073	S			n	bread	bread	麵包	mkate	leipä	roti	t'anta	A	0,0,0,0,0	278,234,46,275,21	Fi:contact:English;In:borrowed	noun.food	2	bread.n.01	food made from dough of flour or meal and usually raised with yeast or baking powder and then baked	pending
+C0074	S			n	breast	breast	波	ziwa	rinta	susu	ñuñu	A	0,0,0,0,0	18273,9083,81,367,34	Ch:borrowed,contact:English+Hokkien	noun.body	4	breast.n.02	either of two soft fleshy milk-secreting glandular organs on the chest of a woman	pending
+C0075	S			n	breath	breath	呼吸的空氣	pumzi	henki	nafas	samay	A	0,0,0,0,0	4,140,136,10,24	Sw:borrowed	noun.substance	5	breath.n.02	the air that is inhaled and exhaled in respiration	pending
+C0076	S			n	bridge	bridge	橋	kivuko	silta	jambatan	chaka	A	0,0,0,0,0	6899,40,199,5,49		noun.artifact	9	bridge.n.01	a structure that allows people or vehicles to cross an obstacle such as a river or canal or railway etc.	data-verified
+C0077	S			v	bring	bring	帶	leta	siirtää	mendapatkan	pusay	C	0,0,0,0,2	16543,3,290,2237,18	Ch:contact:Mandarin	verb.motion	11	bring.v.01	take something or somebody with oneself somewhere	pending
+C0078	S			n	broom	broom	帚	ufagio	luuta	penyapu	pichana	A	0,0,0,0,0	34,9,10,6,16	Qu:borrowed	noun.artifact	3	broom.n.01	a cleaning implement for sweeping; bundle of straws or twigs attached to a long handle	pending
+C0079	S			a	brown	brown	棕色+的	hudhurungi	ruskea	perang	ch'umpi	D	0,0,0,0,0	0,82,118,9998,33		adj.all	2	brown.s.01	of a color similar to that of wood or earth	pending
+C0080	S			v	bud	bud	萌芽	chanua	orastaa	bersemi	wachay	D	0,2,0,0,1	116,1,2,3,11		verb.change	2	bud.v.01	develop buds	pending
+C0081	S			n	bush	bush	灌木	msitu	pensas	semak	sach'a	C	0,2,0,0,1	96,335,10,112,1252		noun.plant	7	shrub.n.01	a low woody perennial plant usually having several major stems	pending
+C0082	S			n	buttocks	buttocks	尾部	nyash	pyrstö	belakang	siki	D	0,3,0,0,0	101,0,94,1482,39	Sw:borrowed,contact:English	noun.body	2	buttocks.n.01	the fleshy part of the human body that you sit on	pending
+C0083	S			n	cable	cable	電報	kebo	johto	kabel	waska	C	0,0,0,0,2	478,12,264,362,47	Sw:borrowed,contact:English	noun.artifact	6	cable.n.02	a conductor for transmitting electrical or optical signals or electric power	pending
+C0084	S			n	calculator	calculator	計算機	kikokotozi	laskin	kalkulator	yupana	C	0,0,0,0,2	2789,5,8,48,63	In:borrowed,contact:English;Qu:borrowed	noun.artifact	2	calculator.n.02	a small machine that is used for mathematical calculations	pending
+C0085	S			n	candle	candle	蠟	mshumaa	kynttilä	lilin	wila	A	0,0,0,0,0	303,22,3,149,156	Sw:borrowed;Fi:borrowed;In:borrowed	noun.artifact	2	candle.n.01	stick of wax with a wick in the middle	pending
+C0086	S			n	cane	cane	手杖	fimbo	kävelykeppi	tongkat	siku	D	0,0,0,0,0	27,129,0,166,23		noun.artifact	3	cane.n.01	a stick that people can lean on to help them walk	pending
+C0087	S			n	cap	cap	帽子	kofia	lakki	topi	chuku	B	0,1,0,0,1	146,151,25,70,51	Sw:borrowed;In:contact:English	noun.artifact	9	cap.n.01	a tight-fitting headdress	pending
+C0088	S			a	capable	capable	有能力+的	stadi	kykenevä	mampu	kuti	D	0,1,0,0,1	0,97,14,1801,701	Sw:borrowed	adj.all	5	capable.a.01	(usually followed by `of') having capacity or ability	pending
+C0089	S			n	car	car	車	gari	ajoneuvo	kereta	antawa	A	0,0,0,0,0	18820,841,24,2725,44	Ch:contact:English+Mandarin	noun.artifact	5	car.n.01	a motor vehicle with four wheels; usually propelled by an internal combustion engine	pending
+C0090	S			n	carpet	carpet	毯	zulia	matto	ambal	mast'a	A	0,0,0,0,0	125,24,5,14,5	Sw:borrowed	noun.artifact	2	rug.n.01	floor covering consisting of a piece of thick heavy fabric (usually with nap or pile)	pending
+C0091	S			n	carrot	carrot	胡蘿蔔	karoti	porkkana	wortel	sanawrya	A	0,0,0,0,0	36,26,7,29,3	Ch:contact:English;Sw:contact:English;Fi:borrowed,contact:English;In:borrowed;Qu:borrowed	noun.plant	4	carrot.n.01	deep orange edible root of the cultivated carrot plant	pending
+C0092	S			v	carve	carve	切片	chonga	paloitella	memotong	kuchuy	D	0,0,0,0,1	31,24,0,202,5		verb.contact	3	carve.v.03	cut to pieces	pending
+C0093	S			n	cat	cat	貓	paka	kissa	kucing	mishi	A	0,0,0,0,0	1900,275,156,438,14	Ch:borrowed,contact:English;Fi:borrowed	noun.animal	8	cat.n.01	feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats	pending
+C0094	S			n	category	category	範疇	kategoria	luokka	kelompok	katiguriya	A	0,0,0,0,0	431,58,255,4665,142	Sw:borrowed,contact:English;Qu:borrowed	noun.cognition	2	category.n.02	a general concept that marks divisions or coordinations in a conceptual scheme	pending
+C0095	S			n	caterpillar	caterpillar	毛蟲	kiwavi	hyönteistoukka	ulat	kuru	D	0,0,0,0,1	12,22,0,33,176	In:borrowed	noun.animal	2	caterpillar.n.01	a wormlike and often brightly colored and hairy or spiny larva of a butterfly or moth	pending
+C0096	S			n	cave	cave	洞	pango	luola	gua	mach'ay	A	0,0,0,0,0	3305,131,35,722,50	In:borrowed,contact:Hokkien	noun.object	1	cave.n.01	a geological formation consisting of an underground enclosure with access from the surface of the ground or from the sea	pending
+C0097	S			a	certain	certain	不容懷疑	fulanifulani	varma	pasti	chiqa	D	0,0,0,0,1	1,35,97,661,53		adj.all	7	certain.a.02	having or feeling no doubt or uncertainty; confident and assured	pending
+C0098	S			n	chain	chain	鏈	mnyororo	ketju	rangkaian	watu	C	0,0,0,0,2	4458,89,60,505,3	Fi:borrowed	noun.artifact	10	chain.n.03	a series of (usually metal) rings or links fitted into one another to make a flexible ligament	pending
+C0099	S			n	chair	chair	椅子	kiti	tuoli	kursi	tiyana	B	0,0,0,0,1	40,363,8,771,28	Fi:borrowed;Qu:borrowed	noun.artifact	5	chair.n.01	a seat for one person, with a support for the back	pending
+C0100	S			n	chalk	chalk	白堊	chaki	liitu	kapur	isku	B	0,0,0,0,1	179,11,3,295,55	Sw:contact:English;Fi:borrowed	noun.substance	4	chalk.n.01	a soft whitish calcite	pending
+C0101	S			n	cheek	cheek	臉	shavu	poski	pipi	uya	B	0,0,0,0,1	684,21,5,26,65		noun.body	4	cheek.n.01	either side of the face below the eyes	pending
+C0102	S			n	cheese	cheese	乳酪	chizi	juusto	keju	kisu	A	0,0,0,0,0	143,5,18,377,9	Sw:contact:English;In:borrowed;Qu:borrowed	noun.food	2	cheese.n.01	a solid food prepared from the pressed curd of milk	pending
+C0103	S			n	chest	chest	胸	kifua	rintakehä	dada	qhasqu	A	0,0,0,0,0	593,366,4,201,6		noun.body	4	thorax.n.02	the part of the human torso between the neck and the diaphragm or the corresponding part in other vertebrates	data-verified
+C0104	S			v	chew	chew	嚼	tafuna	jauhaa	mengunyah	khachuy	D	0,0,0,0,1	67,2,6,17,2		verb.consumption	1	chew.v.01	chew (food); to bite and grind with the teeth	pending
+C0105	S			n	chicken	chicken	雞	kuku	kana	ayam	wallpa	A	0,0,0,0,0	1856,521,36,508,50	Sw:borrowed;In:contact:Chinese	noun.animal	4	chicken.n.02	a domestic fowl bred for flesh or eggs; believed to have been developed from the red jungle fowl	pending
+C0106	S			n	chin	chin	下巴	kidevu	leuka	dagu	k'aki	A	0,0,0,0,0	43,26,7,15,10	In:borrowed	noun.body	2	chin.n.01	the protruding part of the lower jaw	pending
+C0107	S			v	circle	circle	環繞	zunguka	kierrellä	mengelilingi	muyuy	D	0,1,0,0,0	630,2,2,368,4		verb.motion	3	circle.v.02	move in circles	pending
+C0108	S			n	city	city	城	jiji	metropoli	bandar	llaqta	B	0,0,0,0,1	37550,1493,17,1620,8591	Fi:contact:English	noun.location	3	city.n.01	a large and densely populated urban area; may include several independent administrative districts	pending
+C0109	S			n	cliff	cliff	懸崖	genge	kallioseinämä	tebing	qaqa	D	0,0,0,0,2	87,42,0,229,75	Sw:contact:English	noun.object	1	cliff.n.01	a steep high face of rock	pending
+C0110	S			n	cloud	cloud	雲	wingu	pilvi	awan	phuyu	A	0,0,0,0,0	9058,116,27,455,61	Fi:contact:English	noun.object	6	cloud.n.02	a visible mass of water or ice particles suspended at a considerable altitude	pending
+C0111	S			n	colour	colour	顏料	rangi	väriaine	pewarna	llimphi	B	0,0,0,0,1	100,2726,4,77,47	Sw:borrowed;Fi:borrowed	noun.substance	8	coloring_material.n.01	any material used for its color	pending
+C0112	S			n	comb	comb	篦	kitana	kampa	sikat	ñaqch'a	D	0,0,0,0,0	10,4,2,10,9	Fi:borrowed	noun.artifact	5	comb.n.01	a flat device with narrow pointed teeth on one edge; disentangles or arranges hair	pending
+C0113	S			n	comedy	comedy	喜劇	uchekeshaji	komedia	komedi	aranwa	B	0,0,0,0,1	823,24,27,183,131	Fi:borrowed;In:borrowed	noun.communication	2	comedy.n.01	light and humorous drama with a happy ending	pending
+C0114	S			n	computer	computer	電腦	kompyuta	tietokone	komputer	Antañiqiq	A	0,0,0,0,0	2970,1492,204,1941,208	Sw:contact:English;In:borrowed,contact:English	noun.artifact	2	computer.n.01	a machine for performing calculations automatically	pending
+C0115	S			n	comrade	comrade	兄弟	komredi	veli	teman	masi	D	0,0,0,0,0	1769,0,312,843,8	Sw:borrowed,contact:English	noun.person	3	brother.n.04	used as a term of address for those male persons engaged in the same movement	pending
+C0116	S			n	cone	cone	錐形物	koni	kartio	kerucut	pikchu	D	0,0,0,0,3	0,37,8,122,166	Sw:contact:English	noun.artifact	4	cone.n.01	any cone-shaped artifact	pending
+C0117	S			v	confer	confer	授予	shauri	antaa	menyetujui	quriy	B	0,1,0,0,1	1296,143,846,425,5	Sw:borrowed	verb.possession	2	confer.v.02	present	pending
+C0118	S			v	connect	connect	聯合	bandika	yhdistää	menghubungkan	sat'iy	D	0,1,0,0,4	8922,2,427,969,0		verb.contact	11	connect.v.01	connect, fasten, or put together two or more pieces	pending
+C0119	S			v	consent	consent	接受	ridhi	hyväksyä	menerima	awñiy	D	0,1,0,0,0	4837,0,121,2310,0	Sw:borrowed	verb.communication	1	accept.v.03	give an affirmative reply to; respond favorably to	pending
+C0120	S			n	conversation	conversation	對話	maongezi	keskustelu	pertuturan	rimay	C	0,0,0,0,3	712,61,130,7,891		noun.communication	1	conversation.n.01	the use of speech for informal exchange of views or ideas or information etc.	pending
+C0121	S			n	cord	cord	索	kamba	köysi	tali	anku	B	0,1,0,0,0	8093,202,14,212,23	Sw:borrowed;In:borrowed	noun.artifact	4	cord.n.01	a line made of twisted fibers or threads	pending
+C0122	S			n	corpse	corpse	遺體	mfu	ruumis	mayat	aya	A	0,0,0,0,0	446,11,141,177,66		noun.body	1	cadaver.n.01	the dead body of a human being	data-verified
+C0123	S			a	correct	correct	對	sahihi	oikea	benar	chanin	A	0,0,0,0,0	77185,633,251,1844,33	Sw:borrowed;Fi:contact:English	adj.all	4	correct.a.01	free from error; especially conforming to fact or truth	pending
+C0124	S			n	cough	cough	咳	kikohozi	yskä	batuk	uhu	A	0,0,0,0,0	73,82,3,64,11		noun.state	1	cough.n.01	a sudden noisy expulsion of air from the lungs that clears the air passages; a common symptom of upper respiratory infection or bronchitis or pneumonia or tuberculosis	data-verified
+C0125	S			v	cough	cough	咳嗽	kohoa	yskiä	batuk	uhuy	D	0,0,0,0,0	45,1,1,64,3		verb.body	1	cough.v.01	exhale abruptly, as when one has a chest cold or congestion	pending
+C0126	S			n	counsel	counsel	律師	nasaha	asianajaja	penasihat	kunay	D	0,1,0,0,1	1098,21,120,314,0	Sw:borrowed	noun.person	2	advocate.n.02	a lawyer who pleads cases in court	pending
+C0127	S			n	cousin	cousin	堂兄	binamu	serkku	sepupu	qayri	D	0,0,0,0,0	105,149,30,115,0	Sw:borrowed	noun.person	1	cousin.n.01	the child of your aunt or uncle	pending
+C0128	S			n	cow	cow	母牛	ng'ombe	lehmä	lembu	baka	D	0,0,0,0,0	42,541,13,121,0	Qu:borrowed	noun.animal	3	cow.n.01	female of domestic cattle:	pending
+C0129	S			n	crime	crime	罪	jinai	rikos	kejahatan	millay	A	0,0,0,0,0	4631,210,142,544,64	Sw:borrowed	noun.act	2	crime.n.01	(criminal law) an act punishable by law; usually considered an evil act	pending
+C0130	S			a	crooked	crooked	彎曲+的	kombo	käyrä	bongkok	q'iwi	D	0,0,0,0,0	0,25,37,12,13		adj.all	4	crooked.a.01	having or marked by bends or angles; not straight or aligned	pending
+C0131	S			n	cross	cross	十字架	msalaba	risti	salib	chakana	A	0,0,0,0,0	186,590,140,377,50		noun.artifact	6	cross.n.01	a wooden structure consisting of an upright post with a transverse piece	data-verified
+C0132	S			n	crowd	crowd	人群	umati	joukko	keramaian	ch'unku	D	0,0,0,0,0	574,196,991,29,0	Sw:borrowed	noun.group	2	crowd.n.01	a large number of things or people considered together	pending
+C0133	S			a	cruel	cruel	兇殘+的	kaini	raaka	dahsyat	millay	D	0,0,0,0,1	0,25,319,220,64	Sw:borrowed,contact:English	adj.all	1	barbarous.s.01	(of persons or their actions) able or disposed to inflict pain or suffering	pending
+C0134	S			n	crystal	crystal	晶體	fuwele	kide	kristal	rirpu	B	0,0,0,0,1	653,82,8,476,9	In:borrowed	noun.substance	6	crystal.n.01	a solid formed by the solidification of a chemical and having a highly regular atomic structure	pending
+C0135	S			v	cure	cure	治癒	ganga	parantaa	menyembuhkan	hampiy	B	0,1,0,0,1	98,18,236,115,20		verb.body	4	bring_around.v.02	provide a cure for, make healthy again	pending
+C0136	S			a	current	current	最近+的	mamboleo	nykyinen	sekarang	kunan	D	0,0,0,0,1	0,46,856,4389,528		adj.all	1	current.a.01	occurring in or belonging to the present time	pending
+C0137	S			a	damp	damp	微溼+的	nyevu	kostea	lembap	p'api	D	0,0,0,0,0	0,14,53,156,0		adj.all	1	damp.s.01	slightly wet	pending
+C0138	S			n	dampness	dampness	溼	unyevu	kosteus	kelembapan	p'api	D	0,0,0,0,1	934,118,34,153,0		noun.state	1	damp.n.01	a slight wetness	pending
+C0139	S			v	deceive	deceive	欺騙	pemba	pettää	menipu	pantachiy	B	0,1,0,0,0	162,568,9,43,3		verb.social	2	deceive.v.01	be false to; be dishonest with	pending
+C0140	S			v	descend	descend	下降	shuka	laskea	jatuh	uray	A	0,0,0,0,0	1933,25,300,1369,36	In:contact:English	verb.motion	4	descend.v.01	move downward and lower, but not necessarily all the way	pending
+C0141	S			v	despise	despise	輕視	hakiri	halveksia	merendahkan	chiqniy	D	0,0,0,0,1	82,0,1,51,3	Sw:borrowed	verb.emotion	1	contemn.v.01	look down on with disdain	pending
+C0142	S			n	dictionary	dictionary	字典	kamusi	sanasto	kamus	simitaqi	D	0,0,0,0,0	371,885,77,254,0		noun.communication	1	dictionary.n.01	a reference book containing an alphabetical list of words with information about them	pending
+C0143	S			a	different	different	不同+的	tofauti	eri	berlainan	sapaq	D	0,0,0,0,0	0,5489,5711,70,100	Sw:borrowed	adj.all	5	different.a.01	unlike in nature or quality or form or degree	pending
+C0144	S			v	dig	dig	掘	chimba	kääntää	membalik	allay	D	0,0,0,0,0	981,3,102,12,1		verb.contact	8	dig.v.01	turn up, loosen, or remove earth	pending
+C0145	S			v	diminish	diminish	減少	punga	vähentyä	jatuh	yawyay	D	0,1,0,0,0	2584,2,30,1369,0	In:contact:English	verb.change	2	decrease.v.01	decrease in size, extent, or range	pending
+C0146	S			v	discuss	discuss	談	jadili	käsitellä	membahas	maqanakuy	D	0,1,0,0,1	5413,0,158,440,107	Sw:borrowed;Qu:borrowed	verb.communication	2	hash_out.v.01	speak with others about (something); talk (something) over in detail; have a discussion	pending
+C0147	S			n	disgrace	disgrace	辱	aibu	häpeä	noda	llaki	C	0,1,0,0,3	555,136,9,43,27	Sw:borrowed	noun.state	1	shame.n.02	a state of dishonor	pending
+C0148	S			v	disperse	disperse	撒	tawanya	levittää	menyebarkan	ch'iqichiy	D	0,2,0,0,1	2774,0,93,285,0		verb.contact	6	scatter.v.03	distribute loosely	pending
+C0149	S			n	district	district	地區	wilaya	alue	kawasan	distritu	A	0,0,0,0,0	20344,28295,1885,4106,6896	Sw:borrowed;Qu:borrowed	noun.location	1	district.n.01	a region marked off for administrative or other purposes	pending
+C0150	S			n	diversity	diversity	變化	utofauti	monimuotoisuus	keanekaragaman	ñawra	A	0,0,0,0,0	3772,75,38,229,28	Sw:borrowed;In:borrowed	noun.attribute	2	diverseness.n.01	noticeable heterogeneity	pending
+C0151	S			n	divinity	divinity	神	uungu	jumala	dewi	willka	B	0,0,0,0,1	23159,22,400,872,150	Sw:borrowed;Qu:borrowed	noun.person	4	deity.n.01	any supernatural being worshipped as controlling some part of the world or some aspect of life or who is the personification of a force	pending
+C0152	S			n	doctor	doctor	醫生	tabibu	lääkäri	Dr	jampiq	A	0,0,0,0,0	1444,85,1016,1200,3	Sw:borrowed;Fi:borrowed;Qu:borrowed	noun.person	4	doctor.n.01	a licensed medical practitioner	pending
+C0153	S			n	dog	dog	狗	mbwa	koira	anjing	alqu	D	0,0,0,0,0	1057,527,122,704,1		noun.animal	7	dog.n.01	a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds	pending
+C0154	S			n	donkey	donkey	驢	punda	aasi	keledai	asnu	A	0,0,0,0,0	156,191,10,44,9	Fi:borrowed;In:borrowed;Qu:borrowed	noun.animal	2	domestic_ass.n.01	domestic beast of burden descended from the African wild ass; patient but stubborn	pending
+C0155	S			n	door	door	門	mlango	ovi	pintu	punku	A	0,0,0,0,0	23665,396,24,737,73		noun.artifact	5	door.n.01	a swinging or sliding barrier that will close the entrance to a room or building or vehicle	data-verified
+C0156	S			v	drag	drag	拖拉	kokota	raahata	menarik	aysay	B	0,0,0,0,1	75,4,3,1438,6	Sw:borrowed;Fi:borrowed	verb.contact	11	drag.v.01	pull, as against a resistance	pending
+C0157	S			v	drink	drink	飲	nywa	nauttia	minum	upyay	D	0,0,0,0,0	2521,0,65,365,4		verb.consumption	5	drink.v.01	take in liquids	pending
+C0158	S			v	drip	drip	滴	tiririka	tippua	merebak	sut'uy	D	0,1,0,0,0	473,3,1,48,0		verb.motion	2	drip.v.01	fall in drops	pending
+C0159	S			n	drought	drought	乾旱	ukame	kuivuus	kekeringan	ch'akiy	A	0,0,0,0,0	320,192,31,108,5	Qu:borrowed	noun.state	2	drought.n.01	a shortage of rainfall	pending
+C0160	S			n	duck	duck	鴨	bata	sorsa	bebek	pili	A	0,0,0,0,0	887,208,183,105,65	Sw:borrowed;Fi:contact:English;In:borrowed	noun.animal	4	duck.n.01	small wild or domesticated web-footed broad-billed swimming bird usually having a depressed body and short legs	pending
+C0161	S			n	dung	dung	肥	mavi	jätökset	serasah	wanu	B	0,0,0,0,1	1717,75,4,7,60	Ch:contact:English	noun.substance	1	droppings.n.01	fecal matter of animals	pending
+C0162	S			n	dust	dust	灰	mavumbi	pöly	debu	allpa	C	0,0,0,0,2	1487,13,12,249,4912	In:borrowed	noun.substance	3	dust.n.01	fine powdery material such as dry earth or pollen that can be blown about in the air	pending
+C0163	S			n	eagle	eagle	鷹	tai	kotka	elang	anka	A	0,0,0,0,0	1122,134,108,125,47	Sw:borrowed,contact:English	noun.animal	4	eagle.n.01	any of various large keen-sighted diurnal birds of prey noted for their broad wings and strong soaring flight	pending
+C0164	S			n	ear	ear	耳朵	sikio	korva	telinga	rinri	A	0,0,0,0,0	132,183,40,166,52	In:borrowed	noun.body	5	ear.n.01	the sense organ for hearing and equilibrium	pending
+C0165	S			v	eat	eat	食	la	syödä	makan	mikhuy	A	0,0,0,0,0	10197,91302,126,813,44		verb.consumption	6	eat.v.01	take in solid food	data-verified
+C0166	S			n	egg	egg	蛋	yai	munat	telur	runtu	A	0,0,0,0,0	2790,184,64,349,21	In:borrowed	noun.food	3	egg.n.02	oval reproductive body of a fowl (especially a hen) used as food	pending
+C0167	S			n	enemy	enemy	敵人	adui	vastustaja	musuh	awqa	A	0,0,0,0,0	742,226,127,690,29	Sw:borrowed	noun.person	4	enemy.n.02	an armed adversary (especially a member of an opposing military force)	pending
+C0168	S			a	english	english	用英語+的	ingereza	englanninkielinen	inggris	inlis	D	0,0,0,0,0	0,2,90,8199,66	In:borrowed;Qu:borrowed	adj.pert	2	english.a.02	of or relating to the English language	pending
+C0169	S			v	enter	enter	進	ingia	tulla	masuk	yaykuy	B	0,0,0,0,1	46244,14,391,2645,32	Fi:contact:English	verb.motion	9	enter.v.01	to come or go into	pending
+C0170	S			n	entertainment	entertainment	娛樂	burudani	viihde	permainan	awsay	D	0,0,0,0,1	1443,329,60,1284,0	Sw:borrowed	noun.act	1	entertainment.n.01	an activity that is diverting and that holds the attention	pending
+C0171	S			a	equal	equal	充分+的	sawa	vastaava	cukup	yupay	D	0,0,0,0,0	0,2107,381,2936,356	Sw:borrowed	adj.all	2	adequate.a.01	having the requisite qualities or resources to meet a task	pending
+C0172	S			v	escape	escape	逃跑	kemboi	paeta	lolos	ayqiy	D	0,2,0,0,0	147,19,68,279,2	Qu:borrowed	verb.motion	7	escape.v.01	run away from confinement	pending
+C0173	S			n	essence	essence	香水	dhati	tuoksu	pewangi	kay	B	0,1,0,0,1	51,316,9,3,3462	Sw:borrowed	noun.artifact	4	perfume.n.02	a toiletry that emits and diffuses a fragrant odor	pending
+C0174	S			a	eternal	eternal	不停+的	azali	ikuinen	kekal	wiñay	D	0,0,0,0,0	0,8,44,124,3649	Sw:borrowed	adj.all	2	ageless.s.01	continuing forever or indefinitely	pending
+C0175	S			n	evaporation	evaporation	蒸發	uvukizaji	haihtuminen	penguapan	phuyuy	D	0,0,0,0,0	257,47,8,64,0		noun.process	2	vaporization.n.02	the process of becoming a vapor	pending
+C0176	S			a	evident	evident	明顯+的	dhahiri	julkinen	terang	chiqa	D	0,1,0,0,2	0,162,279,426,53		adj.all	2	apparent.s.01	clearly revealed to the mind or the senses or judgment	pending
+C0177	S			a	external	external	外部+的	nje	ulkoinen	lahiriah	hawa	D	0,0,0,0,1	0,35671,65,25,17532		adj.all	4	external.a.01	happening or arising or located outside or beyond some limits or especially surface	pending
+C0178	S			v	extinguish	extinguish	撲滅	zima	sammuttaa	menutup	thasnuy	D	0,1,0,0,0	69,255,17,288,0		verb.weather	5	snuff_out.v.02	put out, as of fires, flames, or lights	pending
+C0179	S			n	eye	eye	眼	jicho	näkö	mata	ñawi	A	0,0,0,0,0	3234,221,24,2732,65		noun.body	5	eye.n.01	the organ of sight	data-verified
+C0180	S			a	false	false	虛假	ghushi	väärä	salah	yanqa	A	0,0,0,0,0	106,7,38,9593,21	Sw:borrowed;Fi:contact:English	adj.all	10	false.a.01	not in accordance with the fact or reality or actuality	pending
+C0181	S			a	fast	fast	快速+的	haraka	nopea	laju	utqay	D	0,0,0,0,0	0,1467,227,585,5	Sw:borrowed	adj.all	10	fast.a.03	at a rapid tempo	pending
+C0182	S			a	fat	fat	胖的	nene	lihava	subur	wira	A	0,0,0,0,0	72,133,4,344,155		adj.all	5	fat.a.01	having an (over)abundance of flesh	data-verified
+C0183	S			n	father	father	父	baba	isä	ayah	yaya	A	0,0,0,0,0	9473,2832,742,791,659	Ch:contact:Mandarin	noun.person	8	father.n.01	a male parent (also used as a term of address to your father)	pending
+C0184	S			n	feather	feather	羽	unyoya	sulka	bulu	phuru	A	0,0,0,0,0	2974,5,8,652,9		noun.animal	2	feather.n.01	the light horny waterproof structure forming the external covering of birds	data-verified
+C0185	S			n	fence	fence	欄	wigo	aita	pagar	pirqa	B	0,0,0,0,1	763,79,11,139,52		noun.artifact	2	fence.n.01	a barrier that serves to enclose an area	pending
+C0186	S			n	fermentation	fermentation	動亂	uchachushaji	levottomuus	gangguan	p'uchquy	A	0,0,0,0,0	292,9,12,526,5	Sw:borrowed	noun.state	2	agitation.n.02	a state of agitation or turbulent change or development	pending
+C0187	S			n	fever	fever	發熱	homa	kuume	demam	rupha	A	0,0,0,0,0	75,1044,18,244,5	Sw:borrowed;In:borrowed	noun.state	2	fever.n.01	a rise in the temperature of the body; frequently a symptom of infection	pending
+C0188	S			v	filter	filter	流淌	chuja	tihkua	menyaring	suysuy	D	0,0,0,0,2	13,1,4,29,4		verb.motion	3	trickle.v.01	run or flow slowly, as in drops or in an unsteady stream	pending
+C0189	S			a	fine	fine	好+的	bora	hyvä	elok	allin	D	0,0,0,0,1	0,3923,599,19,580	In:borrowed	adj.all	6	all_right.s.01	being satisfactory or in satisfactory condition	pending
+C0190	S			n	finger	finger	手指	kidole	sormi	jari	ruk'ana	D	0,0,0,0,0	186,169,2,552,9		noun.body	3	finger.n.01	any of the terminal members of the hand (sometimes excepting the thumb)	pending
+C0191	S			a	first	first	首	kwanza	ensimmäinen	julung	ñawpa	A	0,0,0,0,0	28047,15755,6367,8,723		adj.all	6	first.a.01	preceding all others in time or space or degree	data-verified
+C0192	S			n	fish	fish	魚	samaki	kala	ikan	challwa	A	0,0,0,0,0	5277,1005,170,1434,251	Sw:borrowed	noun.animal	4	fish.n.01	any of various mostly cold-blooded aquatic vertebrates usually having scales and breathing through gills	pending
+C0193	S			n	flag	flag	旗	bendera	lippu	bendera	wiphala	A	0,0,0,0,0	6900,458,141,1186,11	Sw:borrowed;In:borrowed	noun.artifact	7	flag.n.01	emblem usually consisting of a rectangular piece of cloth of distinctive design	pending
+C0194	S			n	flame	flame	火	kiali	tuli	api	rawray	C	0,0,0,0,2	13131,8,6989,2695,18		noun.process	1	fire.n.03	the process of combustion of inflammable materials producing heat and light and (often) smoke	pending
+C0195	S			n	flea	flea	蚤	kiroboto	kirppu	kutu	piki	A	0,0,0,0,0	38,18,5,43,35		noun.animal	1	flea.n.01	any wingless bloodsucking parasitic insect noted for ability to leap	data-verified
+C0196	S			v	flee	flee	逃	kemboi	paeta	lari	mitikuy	D	0,1,0,0,0	3494,19,68,177,2		verb.motion	1	flee.v.01	run away quickly	pending
+C0197	S			v	float	float	浮動	elea	uida	timbul	wamp'uy	B	0,0,0,0,1	115,6,14,327,12		verb.motion	9	float.v.02	be afloat either on or below a liquid surface and not sink to the bottom	pending
+C0198	S			n	flour	flour	麵粉	unga	jauho	tepung	aku	A	0,0,0,0,0	109,229,9,175,10	In:borrowed	noun.food	1	flour.n.01	fine powdery foodstuff obtained by grinding and sifting the meal of a cereal grain	pending
+C0199	S			n	flower	flower	花	ua	kukka	bunga	wayta	A	0,0,0,0,0	11264,159,29,1016,88	In:contact:Chinese+English	noun.plant	3	flower.n.01	a plant cultivated for its blooms or blossoms	pending
+C0200	S			n	fog	fog	霧	ukungu	sumu	kabut	pukutay	A	0,0,0,0,0	657,48,33,162,5	In:borrowed	noun.phenomenon	3	fog.n.01	droplets of water vapor suspended in the air near the ground	pending
+C0201	S			n	fool	fool	愚人	bozi	torvi	tolol	upa	A	0,0,0,0,0	59,3,13,3,22		noun.person	3	fool.n.01	a person who lacks good judgment	data-verified
+C0202	S			n	forecast	forecast	預測	utabiri	ennuste	ramalan	watuy	C	0,2,0,0,0	861,142,37,76,3		noun.communication	1	prognosis.n.01	a prediction about how something (as the weather) will develop	pending
+C0203	S			n	forehead	forehead	額	paji	otsa	dahi	mat'i	A	0,0,0,0,0	3242,87,25,20,23		noun.body	2	brow.n.01	the part of the face above the eyes	data-verified
+C0204	S			a	foreign	foreign	外來+的	kigeni	vieras	asing	hawa	D	0,0,0,0,0	0,477,69,1595,17532	Sw:borrowed;In:contact:English	adj.all	4	alien.s.01	not contained in or deriving from the essential nature of something	pending
+C0205	S			n	foreigner	foreigner	外國人	mgeni	ulkomaalainen	pendatang	mitma	B	0,0,0,0,1	377,228,19,361,7		noun.person	2	foreigner.n.01	a person who comes from a foreign country; someone who does not owe allegiance to your country	pending
+C0206	S			n	fortress	fortress	城堡	ngome	linnoitus	kubu	pukara	C	0,0,0,0,2	469,293,92,241,159		noun.artifact	1	fortress.n.01	a fortified defensive structure	pending
+C0207	S			n	fortune	fortune	機會	bahati	sattuma	kesempatan	sami	A	0,0,0,0,0	1683,352,16,607,30	Sw:borrowed	noun.phenomenon	4	luck.n.02	an unknown and unpredictable phenomenon that causes an event to result one way rather than another	pending
+C0208	S			a	free	free	自由+的	huru	vapaa	bebas	qispi	D	0,0,0,0,0	0,1308,680,1831,482	Sw:borrowed	adj.all	9	free.a.01	able to act at will; not hampered; not under compulsion or restraint	pending
+C0209	S			n	friend	friend	盟友	mwenzi	ystävä	sekutu	masi	C	0,0,0,0,3	341,72,125,1075,8		noun.person	5	ally.n.02	an associate who provides cooperation or assistance	pending
+C0210	S			n	friendship	friendship	友誼	urafiki	ystävyys	persahabatan	riqsi	D	0,0,0,0,1	345,346,24,208,0		noun.state	1	friendship.n.01	the state of being friends (or friendly)	pending
+C0211	S			n	frog	frog	青蛙	chura	sammakko	katak	jamp'atu	D	0,0,0,0,0	53,172,27,69,1	In:borrowed	noun.animal	3	frog.n.01	any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species	pending
+C0212	S			n	fruit	fruit	水果	tunda	hedelmä	buah	ruru	A	0,0,0,0,0	443,253,33,1855,78		noun.plant	3	fruit.n.01	the ripened reproductive body of a seed plant	data-verified
+C0213	S			a	full	full	滿	zima	täysi	jenuh	hunt'a	C	0,2,0,0,0	9600,255,135,73,75		adj.all	8	full.a.01	containing as much or as many as is possible or normal	pending
+C0214	S			a	fundamental	fundamental	根本的	kimsingi	syvä	utama	tiksi	C	0,0,0,0,2	59,519,114,7156,153	Sw:borrowed;In:borrowed	adj.all	3	fundamental.s.03	far-reaching and thoroughgoing in effect especially on the nature of something	pending
+C0215	S			n	fungus	fungus	真菌	kuvu	jäkälä	fungi	k'allampa	A	0,0,0,0,0	185,203,5,76,148	In:borrowed	noun.plant	1	fungus.n.01	an organism of the kingdom Fungi lacking chlorophyll and feeding on organic matter; ranging from unicellular or multicellular organisms to spore-bearing syncytia	pending
+C0216	S			n	gap	gap	裂縫	pengo	rako	celah	t'uqu	B	0,0,0,0,1	61,95,6,232,25		noun.artifact	6	gap.n.03	a narrow opening	pending
+C0217	S			n	garden	garden	花園	shamba	kasvimaa	kebun	muya	D	0,0,0,0,0	746,354,0,512,6		noun.artifact	3	garden.n.01	a plot of ground where plants are cultivated	pending
+C0218	S			a	generous	generous	有雅量+的	karimu	jalomielinen	karim	ruq'a	D	0,0,0,0,0	0,7,0,109,17	Sw:borrowed;Fi:borrowed;In:borrowed	adj.all	3	generous.a.02	not petty in character and mind	pending
+C0219	S			n	girl	girl	女兒	msichana	tyttö	gadis	sipas	A	0,0,0,0,0	1662,338,115,317,29		noun.person	5	female_child.n.01	a youthful female person	data-verified
+C0220	S			n	girlfriend	girlfriend	物件	shoga	naisystävä	kekasih	salla	A	0,0,0,0,0	1820,46,6,72,3	Sw:borrowed	noun.person	2	girlfriend.n.02	a girl or young woman with whom a man is romantically involved	pending
+C0221	S			n	glass	glass	玻璃	glasi	lasi	kaca	q'ispi	A	0,0,0,0,0	683,32,52,485,21	Ch:borrowed;Sw:contact:English;Fi:borrowed,contact:English	noun.substance	7	glass.n.01	a brittle transparent solid with irregular atomic structure	pending
+C0222	S			n	goat	goat	羊	mbuzi	vuohi	kambing	karwa	D	0,0,0,0,0	1772,238,13,249,0	Qu:borrowed	noun.animal	4	goat.n.01	any of numerous agile ruminants related to sheep but having a beard and straight horns	pending
+C0223	S			n	god	god	神	mungu	jumala	dewi	Dyus	A	0,0,0,0,0	23159,7025,400,872,54	Qu:borrowed	noun.person	4	deity.n.01	any supernatural being worshipped as controlling some part of the world or some aspect of life or who is the personification of a force	pending
+C0224	S			n	gourd	gourd	葫蘆	mumunye	kalebassi	labu	p'uru	D	0,0,0,0,1	130,0,0,88,22	Ch:contact:English	noun.artifact	3	gourd.n.01	bottle made from the dried shell of a bottle gourd	pending
+C0225	S			v	grab	grab	抓住	futia	ottaa	menangkap	hap'iy	D	0,0,0,0,0	120,0,599,396,15		verb.contact	6	catch.v.04	take hold of so as to seize or restrain or stop the motion of	pending
+C0226	S			a	grand	grand	貴族的	ashirafu	vaikuttava	agung	hatun	D	0,2,0,0,2	183,0,65,2393,4340	Sw:borrowed	adj.all	8	august.s.01	of or befitting a lord	pending
+C0227	S			n	grandfather	grandfather	祖父	babu	isoisä	datuk	awki	A	0,0,0,0,0	786,339,47,217,60	Fi:borrowed	noun.person	1	grandfather.n.01	the father of your father or mother	pending
+C0228	S			n	grapefruit	grapefruit	葡萄柚	balungi	greippi	anggur	turunja	D	0,0,0,0,0	7,7,1,350,0	Ch:borrowed,contact:English;Sw:borrowed;Fi:borrowed,contact:English;Qu:borrowed	noun.plant	2	grapefruit.n.01	citrus tree bearing large round edible fruit having a thick yellow rind and juicy somewhat acid pulp	pending
+C0229	S			n	grass	grass	草	nyasi	heinä	rumput	qura	A	0,0,0,0,0	5371,341,144,323,161		noun.plant	5	grass.n.01	narrow-leaved green herbage: grown as lawns; used as pasture for grazing animals; cut and dried as hay	data-verified
+C0230	S			a	gray	grey	灰白+的	kijivu	harmaa	kelabu	uqi	D	0,0,0,0,0	0,435,138,70,39	Sw:borrowed	adj.all	4	grey.s.01	of an achromatic color of any lightness intermediate between the extremes of white and black	pending
+C0231	S			a	green	green	綠+的	kijani	vihreä	hijau	q'umir	D	0,0,0,0,0	0,460,242,837,128	In:borrowed,contact:English	adj.all	5	green.s.01	of the color between blue and yellow in the color spectrum; similar to the color of fresh grass	pending
+C0232	S			n	group	group	化學族	kundi	ryhmä	kumpulan	t'aqa	D	0,0,0,0,1	0,8887,705,632,70		noun.substance	3	group.n.02	(chemistry) two or more atoms bound together as a single unit and forming part of a molecule	pending
+C0233	S			n	guide	guide	引導者	gaidi	opas	pembimbing	pusaq	C	0,0,0,0,2	3,25,78,24,963	Sw:borrowed,contact:English;Qu:borrowed	noun.person	6	guide.n.02	someone who shows the way by leading or advising	pending
+C0234	S			n	hair	hair	頭髮	unwyele	karvoitus	rambut	chukcha	D	0,0,0,0,0	188,0,21,352,24		noun.body	6	hair.n.01	a covering for the body (or parts of it) consisting of a dense growth of threadlike structures (as on the human head); helps to prevent heat loss	pending
+C0235	S			n	harvest	harvest	產量	mavuno	sato	petikan	aymuray	A	0,0,0,0,0	966,151,29,34,237		noun.plant	4	crop.n.01	the yield from plants in a single growing season	data-verified
+C0236	S			n	hat	hat	帽子	kofia	lakki	topi	chuku	A	0,0,0,0,0	146,151,25,70,51	Sw:borrowed;In:contact:English	noun.artifact	2	hat.n.01	headdress that protects the head from bad weather; has shaped crown and usually a brim	pending
+C0237	S			v	hate	hate	恨	zira	vihata	benci	chiqniy	A	0,0,0,0,0	763,4,5,41,3		verb.emotion	1	hate.v.01	dislike intensely; feel antipathy or aversion towards	data-verified
+C0238	S			n	headband	headband	頭巾	dusumali	otsanauha	bando	chuku	D	0,0,0,0,3	55,0,1,1,51	Sw:borrowed;In:borrowed,contact:English	noun.artifact	1	headband.n.01	a band worn around or over the head	pending
+C0239	S			v	heal	heal	治癒	ganga	parantaa	menyembuhkan	hampiy	A	0,0,0,0,0	98,18,236,115,20		verb.body	3	bring_around.v.02	provide a cure for, make healthy again	data-verified
+C0240	S			n	hedgehog	hedgehog	豪豬	kalunguyeye	piikkisika	landak	askanku	D	0,0,0,0,0	26,21,0,84,5		noun.animal	2	porcupine.n.01	relatively large rodents with sharp erectile bristles mingled with the fur	pending
+C0241	S			n	helmet	helmet	頭盔	helmeti	kypärä	helm	chuku	C	0,0,0,0,2	68,8,17,40,51	Sw:borrowed,contact:English;In:borrowed	noun.artifact	2	helmet.n.02	a protective headgear made of hard material to resist blows	pending
+C0242	S			a	high	high	高+的	juu	korkea	tinggi	hanaq	D	0,0,0,0,1	0,13840,663,8297,1188	In:borrowed	adj.all	7	high.a.01	greater than normal in degree or intensity or amount	pending
+C0243	S			n	hill	hill	山	mlima	mäki	bukit	urqu	B	0,0,0,0,1	45621,3552,82,1310,3656	In:borrowed	noun.object	5	hill.n.01	a local and well-defined elevation of the land	pending
+C0244	S			n	hoe	hoe	鋤	jembe	kuokka	pacul	lampa	D	0,0,0,0,1	60,46,1,5,136		noun.artifact	1	hoe.n.01	a tool with a flat blade attached at right angles to a long handle	pending
+C0245	S			n	hole	hole	開口	shimo	aukko	rongga	t'uqu	A	0,0,0,0,0	136,347,92,118,25		noun.object	8	hole.n.01	an opening into or through something	data-verified
+C0246	S			a	holy	holy	聖	takatifu	pyhä	putih	willka	A	0,0,0,0,0	12546,587,407,2284,150	Sw:borrowed;In:borrowed;Qu:borrowed	adj.all	1	holy.a.01	belonging to or derived from or associated with a divine power	pending
+C0247	S			n	honey	honey	蜜	asali	hunaja	madu	miski	A	0,0,0,0,0	622,148,5,194,7	Ch:contact:English;Sw:borrowed;Fi:borrowed;In:contact:Chinese	noun.food	2	honey.n.01	a sweet yellow liquid produced by bees	pending
+C0248	S			n	horse	horse	馬	farasi	hevonen	kuda	kawallu	A	0,0,0,0,0	46936,364,129,810,63	Ch:borrowed,contact:English+Hokkien;Sw:borrowed;In:borrowed;Qu:borrowed	noun.animal	5	horse.n.01	solid-hoofed herbivorous quadruped domesticated since prehistoric times	pending
+C0249	S			n	hostel	hostel	宿舍	hosteli	majatalo	hostel	tampu	B	0,0,0,0,1	505,12,12,8,92	Sw:borrowed,contact:English	noun.artifact	2	hostel.n.01	a hotel providing overnight lodging for travelers	pending
+C0250	S			n	humidity	humidity	溼度	unyevuanga	kosteus	lembap	p'api	D	0,0,0,0,0	106,21,34,156,0		noun.state	1	humidity.n.01	wetness in the atmosphere	pending
+C0251	S			n	hundred	hundred	一百	mia	C	abad	pachak	A	0,0,0,0,0	1229,1369,2705,8868,137	Sw:borrowed;In:borrowed	noun.quantity	1	hundred.n.01	ten 10s	pending
+C0252	S			v	hunt	hunt	追蹤	winda	etsiä	mencari	chakuy	D	0,0,0,0,0	192,0,102,1115,3		verb.motion	7	hound.v.01	pursue or chase relentlessly	pending
+C0253	S			n	husband	husband	先生	mume	mies	laki	qusa	A	0,0,0,0,0	1513,387,610,2661,4	In:borrowed	noun.person	1	husband.n.01	a married man; a woman's partner in marriage	pending
+C0254	S			n	i	i	碘	mimi	I	iodin	ñuqa	A	0,0,0,0,0	162,601,3866,26,27	Ch:contact:English;In:borrowed,contact:English	noun.substance	3	iodine.n.01	a nonmetallic element belonging to the halogens; used especially in medicine and photography and in dyes; occurs naturally only in combination in small quantities (as in sea water or rocks)	pending
+C0255	S			n	ice	ice	甲基苯丙胺	barafu	jää	kaca	chullunku	D	0,0,0,0,0	1,551,531,485,36	Sw:borrowed	noun.artifact	8	methamphetamine.n.01	an amphetamine derivative (trade name Methedrine) used in the form of a crystalline hydrochloride; used as a stimulant to the nervous system and as an appetite suppressant	pending
+C0256	S			a	idle	idle	悠閒+的	vivu	joutava	sembarangan	qilla	D	0,0,0,0,1	0,1,1,29,12	In:borrowed	adj.all	7	idle.s.04	lacking a sense of restraint or responsibility	pending
+C0257	S			v	injure	injure	受傷	dhuru	satuttaa	mengambil	q'iwiy	D	0,1,0,0,1	1018,0,4,1996,1	Sw:borrowed	verb.body	3	injure.v.01	cause injuries or bodily harm to	pending
+C0258	S			n	interior	interior	內部	ndani	sisämaa	hulu	ukhu	B	0,1,0,0,0	2877,11614,11,730,148	In:borrowed	noun.location	3	inside.n.01	the region that is inside of something	pending
+C0259	S			n	island	island	島	kisiwa	saari	pulau	wat'a	A	0,0,0,0,0	20561,3636,451,9260,537		noun.object	2	island.n.01	a land mass (smaller than a continent) that is surrounded by water	data-verified
+C0260	S			n	jar	jar	罐	gudulia	purkki	kendi	p'uyñu	D	0,1,0,0,0	248,5,19,24,2	Sw:borrowed;Fi:borrowed	noun.artifact	3	jar.n.01	a vessel (usually cylindrical) with a wide mouth and without handles	pending
+C0261	S			n	jug	jug	小罐	gudulia	kannu	kendi	p'uyñu	D	0,2,0,0,2	2,5,4,24,2	Sw:borrowed;Fi:borrowed	noun.artifact	2	jug.n.01	a large bottle with a narrow mouth	pending
+C0262	S			n	king	king	王	mfalme	kuningas	maharaja	qapaq	B	0,0,0,0,1	56648,3379,3928,238,17		noun.person	10	king.n.01	a male sovereign; ruler of a kingdom	pending
+C0263	S			v	kiss	kiss	親	busu	suudella	kuncup	much'ay	D	0,0,0,0,0	13534,14,4,32,1		verb.contact	2	snog.v.01	touch with the lips or press the lips (against someone's mouth or other body part) as an expression of love, greeting, etc.	pending
+C0264	S			v	knead	knead	捏	kanda	muokata	menyeragamkan	q'apiy	D	0,0,0,0,1	111,2007,68,7,0	Ch:borrowed	verb.contact	2	knead.v.01	make uniform	pending
+C0265	S			n	knife	knife	刀	kisu	puukko	pisau	khuchuna	A	0,0,0,0,0	1773,81,8,175,3	Ch:borrowed,contact:English;In:borrowed;Qu:borrowed	noun.artifact	3	knife.n.01	edge tool used as a cutting instrument; has a pointed blade with a sharp edge and a handle	pending
+C0266	S			n	knot	knot	結	fundo	solmu	ikatan	kipu	A	0,0,0,0,0	31071,30,46,1144,6		noun.artifact	7	knot.n.02	any of various fastenings formed by looping and tying a rope (or cord) upon itself or to another rope or to another object	data-verified
+C0267	S			n	lack	lack	沒有	utovu	puute	kurang	muchuy	C	0,0,0,0,2	16308,86,156,2442,7	Sw:borrowed	noun.state	1	lack.n.01	the state of needing something that is absent or unavailable	pending
+C0268	S			n	ladder	ladder	階梯	ngazi	tikapuut	tangga	wicharina	D	0,0,0,0,0	135,976,4,896,2	Qu:borrowed	noun.artifact	3	ladder.n.01	steps consisting of two parallel members connected by rungs; for climbing up or down	pending
+C0269	S			n	ladle	ladle	杓	upawa	kauha	senduk	wisllasapa	D	0,0,0,0,0	20,2,8,5,0	Ch:contact:Cantonese+Hokkien+Mandarin;Qu:borrowed	noun.artifact	1	ladle.n.01	a spoon-shaped vessel with a long handle; frequently used to transfer liquids from one container to another	pending
+C0270	S			n	lady	lady	女士	bibi	nainen	wanita	palla	A	0,0,0,0,0	215,416,329,2214,7	Sw:borrowed	noun.person	3	lady.n.01	a polite name for any woman	pending
+C0271	S			n	lake	lake	湖	ziwa	järvi	tasik	qucha	A	0,0,0,0,0	12562,9083,263,23,2881		noun.object	3	lake.n.01	a body of (usually fresh) water surrounded by land	data-verified
+C0272	S			a	last	last	最後	iliyopita	viimeinen	akhir	ñawpaq	A	0,0,0,0,0	4550,707,1045,4489,1382	In:borrowed	adj.all	9	concluding.s.01	occurring at or forming an end or termination	pending
+C0273	S			v	laugh	laugh	笑	cheka	nauraa	tertawa	asiy	A	0,0,0,0,0	1356,5,16,56,15		verb.body	1	laugh.v.01	produce laughter	data-verified
+C0274	S			n	lawyer	lawyer	律師	mwanasheria	lakimies	wakil	amachaq	A	0,0,0,0,0	1098,322,329,2594,772	Qu:borrowed	noun.person	1	lawyer.n.01	a professional person authorized to practice law; conducts lawsuits or gives legal advice	pending
+C0275	S			a	lazy	lazy	懶	tepetevu	laiska	malas	qilla	A	0,0,0,0,0	141,3,16,20,12		adj.all	2	faineant.s.01	disinclined to work or exertion	data-verified
+C0276	S			n	leader	leader	領導	kiongozi	johtaja	ketua	pusaq	A	0,0,0,0,0	7647,1695,1507,2479,963	Qu:borrowed	noun.person	2	leader.n.01	a person who rules or guides or inspires others	pending
+C0277	S			n	leaf	leaf	葉	kijani	lehdet	daun	raphi	C	0,0,0,0,2	6839,460,196,717,58		noun.plant	3	leaf.n.01	the main organ of photosynthesis and transpiration in higher plants	pending
+C0278	S			n	leg	leg	傢俱腿	mguu	jalka	kaki	chaki	D	0,0,0,0,1	0,303,42,1906,84		noun.artifact	9	leg.n.03	one of the supports for a piece of furniture	pending
+C0279	S			v	lick	lick	舔	lamba	lipittää	menjilat	lampiy	D	0,0,0,0,0	35,4,0,15,0	Ch:contact:Cantonese	verb.contact	4	lick.v.02	pass the tongue over	pending
+C0280	S			n	lid	lid	蓋子	kifuniko	kansi	penutup	ch'ipchi	D	0,1,0,0,0	9,43,86,161,0		noun.artifact	3	lid.n.02	a movable top or cover (hinged or separate) for closing the opening at the top of a box, chest, jar, pan, etc.	pending
+C0281	S			n	lime	lime	石灰	chokaa	kalkki	kapur	isku	A	0,0,0,0,0	240,58,15,295,55	Fi:borrowed	noun.substance	6	calcium_oxide.n.01	a white crystalline oxide used in the production of calcium hydroxide	pending
+C0282	S			v	liquefy	liquefy	溶解	yeyuka	sulaa	mencair	unuyay	D	0,2,0,0,1	255,0,61,35,0	Qu:borrowed	verb.weather	3	liquefy.v.01	become liquid	pending
+C0283	S			a	little	little	小+的	haba	pieni	kecil	pisi	D	0,3,0,0,0	0,79,1186,5648,213	Sw:borrowed	adj.all	8	small.a.01	limited or below average in number or quantity or magnitude or extent	pending
+C0284	S			n	llama	llama	美洲駝	lama	laama	lama	llama	D	0,0,0,0,0	1,54,5,3475,81	Fi:borrowed,contact:Quechua;In:contact:Quechua	noun.animal	1	llama.n.01	wild or domesticated South American cud-chewing animal related to camels but smaller and lacking a hump	pending
+C0285	S			n	load	load	負載	mzigo	kuorma	muatan	q'ipi	B	0,0,0,0,1	86,172,118,688,16		noun.artifact	9	load.n.01	weight to be borne or conveyed	pending
+C0286	S			n	lock	lock	鎖	kufuli	lukko	kunci	p'uti	D	0,0,0,0,1	1459,42,35,535,1	Sw:borrowed;Fi:contact:English;In:contact:English	noun.artifact	6	lock.n.01	a fastener fitted to a door or drawer to keep it firmly closed	pending
+C0287	S			n	log	log	木材	gogo	tukki	balak	hallch'a	D	0,0,0,0,0	339,24,8,15,0	Fi:borrowed;In:borrowed	noun.substance	5	log.n.01	a segment of the trunk of a tree when stripped of branches	pending
+C0288	S			a	lonely	lonely	單獨+的	pweke	yksinäinen	sendiri	paylla	D	0,0,0,0,1	0,7,32,5689,4		adj.all	4	alone.s.02	lacking companions or companionship	pending
+C0289	S			a	long	long	久	refu	pitkä	lama	suni	A	0,0,0,0,0	6384,166,933,3475,219	In:contact:Quechua	adj.all	9	long.a.01	primarily temporal sense; being or indicating a relatively great or greater than average duration or passage of time or a duration as specified	pending
+C0290	S			n	louse	louse	寄生蟲	chawa	täi	kutu	usa	D	0,0,0,0,0	63,57,1,43,421		noun.animal	4	louse.n.01	wingless usually flattened bloodsucking insect parasitic on warm-blooded animals	pending
+C0291	S			a	lukewarm	lukewarm	溫	fufutende	haalea	hangat	pari	D	0,0,0,0,0	10318,7,0,318,4		adj.all	2	lukewarm.s.01	moderately warm	pending
+C0292	S			n	market	market	雜貨店	soko	kauppatori	pasar	qhatu	A	0,0,0,0,0	29,977,23,2811,65		noun.artifact	5	grocery_store.n.01	a marketplace where groceries are sold	data-verified
+C0293	S			n	match	match	火柴	mechi	tulitikku	macis	nina	D	0,0,0,0,2	95,2553,1,1,553	Sw:borrowed,contact:English	noun.artifact	9	match.n.01	lighter consisting of a thin piece of wood or cardboard tipped with combustible chemical; ignites with friction	pending
+C0294	S			n	meal	meal	餐	mlo	ateria	makanan	mikhuna	B	0,0,0,0,1	1480,130,25,2315,169	Qu:borrowed	noun.food	3	meal.n.01	the food served and eaten at one time	pending
+C0295	S			n	meat	meat	肉	nyama	liha	daging	aycha	A	0,0,0,0,0	3220,641,107,966,199		noun.food	3	meat.n.01	the flesh of animals (including fishes and birds and snails) used as food	data-verified
+C0296	S			n	medicine	medicine	藥	dawa	lääke	penawar	jampina	D	0,0,0,0,0	6227,2538,52,15,0	Sw:borrowed;Qu:borrowed	noun.artifact	4	medicine.n.02	(medicine) something that treats or prevents or alleviates the symptoms of disease	pending
+C0297	S			n	metal	metal	金屬	metali	metalli	logam	q'illay	A	0,0,0,0,0	2780,578,120,1610,222	Sw:contact:English;Fi:borrowed;In:borrowed	noun.substance	2	metallic_element.n.01	any of several chemical elements that are usually shiny solids that conduct heat or electricity and can be formed into sheets etc.	pending
+C0298	S			n	middle	middle	中央	katikati	keskus	pusat	chawpi	A	0,0,0,0,0	16832,2257,593,6624,1283		noun.location	4	center.n.01	an area that is approximately central within some larger region	data-verified
+C0299	S			n	milk	milk	奶	maziwa	maito	susu	ñukñu	A	0,0,0,0,0	1215,1925,69,367,5	Ch:contact:Cantonese+Hakka+Min Nan	noun.food	4	milk.n.01	a white nutritious liquid secreted by mammals and used as food by human beings	pending
+C0300	S			n	mineral	mineral	礦物	madini	mineraali	galian	chuqi	B	0,0,0,0,1	618,710,14,57,24	Sw:borrowed;Fi:borrowed	noun.substance	1	mineral.n.01	solid homogeneous inorganic substances occurring in nature having a definite chemical composition	pending
+C0301	S			n	mirror	mirror	鏡子	kioo	peili	cermin	rirpu	A	0,0,0,0,0	106,330,28,222,9	Fi:borrowed;In:borrowed	noun.artifact	2	mirror.n.01	polished surface that forms images by reflecting light	pending
+C0302	S			n	monkey	monkey	猴子	tumbili	apina	beruk	k'usillu	A	0,0,0,0,0	125,32,3,8,176	Fi:borrowed	noun.animal	2	monkey.n.01	any of various long-tailed primates (excluding the prosimians)	pending
+C0303	S			n	mosquito	mosquito	蚊子	mbu	sääski	nyamuk	ch'uspi	D	0,0,0,0,1	29,186,0,89,18		noun.animal	1	mosquito.n.01	two-winged insect whose female has a long proboscis to pierce the skin and suck the blood of humans and animals	pending
+C0304	S			n	mother	mother	母	mama	äiti	ibunda	mama	A	0,0,0,0,0	13062,2760,423,32,15836	Sw:contact:English	noun.person	5	mother.n.01	a woman who has given birth to a child (also used as a term of address to your mother)	pending
+C0305	S			n	mountain	mountain	山	mlima	vuori	gunung	urqu	B	0,1,0,0,0	45621,3552,131,5068,3656		noun.object	2	mountain.n.01	a land mass that projects well above its surroundings; higher than a hill	pending
+C0306	S			n	mouth	mouth	口	kinywa	suu	muara	simi	A	0,0,0,0,0	33200,190,94,593,12907		noun.body	8	mouth.n.01	the opening through which food is taken in and vocalizations emerge	data-verified
+C0307	S			n	mud	mud	泥	tope	savi	lumpur	t'uru	B	0,0,0,0,1	1356,27,33,505,80		noun.substance	2	mud.n.01	water soaked soil; soft wet earth	pending
+C0308	S			n	murder	murder	謀殺	mauaji	murha	bunuh	wañuchiy	B	0,0,0,0,1	494,824,106,255,23	Qu:borrowed	noun.act	1	murder.n.01	unlawful premeditated killing of a human being by a human being	pending
+C0309	S			n	mushroom	mushroom	蘑菇	uyoga	sieni	cendawan	k'allampa	B	0,0,0,0,1	63,50,9,11,148		noun.plant	5	mushroom.n.03	any of various fleshy fungi of the subdivision Basidiomycota consisting of a cap at the end of a stem arising from an underground mycelium	pending
+C0310	S			a	narrow	narrow	窄+的	finyu	kapea	sempit	pisiy	D	0,0,0,0,0	0,52,133,253,1	Qu:borrowed	adj.all	5	narrow.a.01	not wide	pending
+C0311	S			r	near	near	近+地	karibu	lähellä	mendekat	kaylla	D	0,0,0,0,1	0,5535,1386,66,5	Sw:borrowed,contact:English;Qu:borrowed	adv.all	2	near.r.01	near in time or place or relationship	pending
+C0312	S			n	neck	neck	頸	shingo	kaula	leher	kunka	A	0,0,0,0,0	600,285,67,141,59		noun.body	5	neck.n.01	the part of an organism (human or animal) that connects the head to the rest of the body	data-verified
+C0313	S			n	needle	needle	指標	sindano	neula	jarum	kichka	B	0,0,0,0,1	409,259,11,122,96	Fi:contact:English;In:borrowed	noun.artifact	4	needle.n.02	a slender pointer for indicating the reading on the scale of a measuring instrument	pending
+C0314	S			n	nest	nest	巢	kiota	pesä	sarang	thapa	D	0,0,0,0,0	811,43,179,115,0	Fi:contact:English	noun.object	5	nest.n.01	a structure in which animals lay eggs or give birth to their young	pending
+C0315	S			a	next	next	隔壁的	ijayo	rinnakkainen	dekat	qhipa	A	0,0,0,0,0	18,98,13,2870,123		adj.all	3	adjacent.s.01	nearest in space or position; immediately adjoining without intervening space	data-verified
+C0316	S			a	nice	nice	友好+的	murua	miellyttävä	baik	sumaq	D	0,0,0,0,1	0,18,11,5163,203	Sw:borrowed;Qu:borrowed	adj.all	5	nice.a.01	pleasant or pleasing or agreeable in nature or appearance; - George Meredith	pending
+C0317	S			a	noble	noble	貴族+的	sharifu	aatelinen	agung	tupa	D	0,0,0,0,0	0,19,55,2393,5	Sw:borrowed	adj.all	4	noble.a.02	of or belonging to or constituting the hereditary aristocracy especially as derived from feudal times	pending
+C0318	S			n	nose	nose	鼻子	pua	nenä	hidung	sinqa	A	0,0,0,0,0	92,263,30,139,39	In:borrowed	noun.body	8	nose.n.01	the organ of smell and entrance to the respiratory tract; the prominent part of the face of man or other mammals	pending
+C0319	S			v	obey	obey	服從	tii	totella	turut	kasukuy	D	0,0,0,0,0	407,3,2,1020,0	Sw:borrowed	verb.social	1	obey.v.01	be obedient to	pending
+C0320	S			n	obstacle	obstacle	障礙	noma	este	rintangan	hark'ay	A	0,0,0,0,0	633,31,45,66,17		noun.artifact	2	obstacle.n.02	an obstruction that stands in the way (and must be removed or surmounted or circumvented)	data-verified
+C0321	S			a	old	old	老年	zee	vanha	usia	machu	A	0,0,0,0,0	233,24,1176,1591,218		adj.all	8	old.a.01	(used especially of persons) having lived for a relatively long time or attained a specific age	data-verified
+C0322	S			n	onion	onion	洋蔥	kitunguu	sipuli	bawang	siwulla	A	0,0,0,0,0	129,31,9,325,4	Fi:borrowed;In:borrowed;Qu:borrowed	noun.plant	3	onion.n.01	the bulb of an onion plant	pending
+C0323	S			a	orange	orange	橙色+的	machungwa	oranssi	jingga	aruma	D	0,0,0,0,0	0,174,54,96,36	Fi:borrowed	adj.all	1	orange.s.01	of the color between red and yellow; similar to the color of a ripe orange	pending
+C0324	S			n	ore	ore	礦石	mtapo	malmi	bijih	chuqi	C	0,0,0,0,2	194,25,52,197,24	Fi:borrowed	noun.substance	2	ore.n.01	a mineral that contains metal that is valuable enough to be mined	pending
+C0325	S			n	origin	origin	開始	asili	juuri	awal	yuriy	A	0,0,0,0,0	19925,4512,1122,6331,6	Sw:borrowed	noun.location	6	beginning.n.04	the place where something begins, where it springs into being	pending
+C0326	S			n	owl	owl	鴞	bundi	pöllö	pungguk	tuku	B	0,0,0,0,1	121,67,12,3,11		noun.animal	1	owl.n.01	nocturnal bird of prey with hawk-like beak and claws and large head with front-facing eyes	pending
+C0327	S			n	palace	palace	宮	kasri	palatsi	istana	kancha	B	0,0,0,0,1	8575,41,94,1804,57	Sw:borrowed;Fi:borrowed;In:borrowed	noun.artifact	4	palace.n.04	official residence of an exalted person (as a sovereign)	pending
+C0328	S			n	pants	pants	褲子	suruali	alushousut	seluar	wara	D	0,0,0,0,0	38,57,2,1,64	Sw:borrowed	noun.artifact	4	bloomers.n.01	underpants worn by women	pending
+C0329	S			n	paper	paper	紙	karatasi	paperi	kertas	raphi	B	0,0,0,0,1	3419,450,60,752,58	Fi:borrowed	noun.substance	7	paper.n.01	a material made of cellulose pulp derived mainly from wood or rags or certain grasses	pending
+C0330	S			n	partner	partner	夫妻	mbia	puoliso	pasangan	yana	A	0,0,0,0,0	280,8,606,857,386	In:borrowed	noun.person	3	spouse.n.01	a person's partner in marriage	pending
+C0331	S			n	peach	peach	桃樹	pichi	persikkapuu	persik	turasnu	D	0,0,0,0,0	18,4,0,95,0	Sw:contact:English;In:borrowed;Qu:borrowed	noun.plant	4	peach.n.01	cultivated in temperate regions	pending
+C0332	S			n	pen	pen	鋼筆	kalamu	kynä	pena	qillqana	A	0,0,0,0,0	12,62,11,130,64	Fi:contact:English;Qu:borrowed	noun.artifact	5	pen.n.01	a writing implement with a point from which ink flows	pending
+C0333	S			a	perfect	perfect	完善	kamilifu	täydellinen	paripurna	paqta	B	0,0,0,0,1	697,34,220,88,17	Sw:borrowed	adj.all	3	perfect.a.01	being complete of its kind and without defect or blemish	pending
+C0334	S			v	perforate	perforate	打孔	tumbua	lävistää	mengetik	t'uquy	D	0,0,0,0,2	36,0,6,19,0		verb.contact	2	punch.v.03	make a hole into or between, as for ease of separation	pending
+C0335	S			n	pig	pig	豬	nguruwe	sika	babi	khuchi	A	0,0,0,0,0	994,181,23,330,48	In:borrowed	noun.animal	6	hog.n.03	domestic swine	pending
+C0336	S			n	pigeon	pigeon	鴿子	njiwa	kyyhkynen	merpati	urpi	A	0,0,0,0,0	56,86,9,155,25	Fi:borrowed;In:borrowed	noun.animal	1	pigeon.n.01	wild and domesticated birds having a heavy body and short legs	pending
+C0337	S			n	plant	plant	工廠	mmea	tehdas	kilang	yura	A	0,0,0,0,0	1106,363,150,84,1600	In:borrowed	noun.artifact	4	plant.n.01	buildings for carrying on industrial labor	pending
+C0338	S			a	pleasant	pleasant	快樂+的	kunjufu	miellyttävä	mesra	kusa	D	0,2,0,0,1	0,0,11,8,39	Sw:borrowed	adj.all	2	pleasant.a.01	affording pleasure; being in harmony with your taste or likings	pending
+C0339	S			n	poem	poem	詩	shairi	runo	sajak	harawi	A	0,0,0,0,0	9678,248,65,166,279	Sw:borrowed;Fi:borrowed,contact:English	noun.communication	1	poem.n.01	a composition written in metrical feet forming rhythmical lines	pending
+C0340	S			n	pole	pole	杆	mlingoti	sauva	tonggak	k'aspi	B	0,0,0,0,1	533,21,7,63,103		noun.artifact	10	pole.n.01	a long (usually round) rod of wood or metal or plastic	pending
+C0341	S			a	poor	poor	窮	maskini	köyhä	miskin	wakcha	B	0,0,0,0,1	1317,606,32,451,34	Sw:borrowed	adj.all	6	poor.a.02	having little money or few possessions	pending
+C0342	S			n	potato	potato	馬鈴薯	kiazi	peruna	kentang	papa	A	0,0,0,0,0	141,47,68,125,449	Fi:borrowed,contact:English;In:borrowed,contact:English;Qu:borrowed	noun.plant	2	potato.n.02	annual native to South America having underground stolons bearing edible starchy tubers; widely cultivated as a garden vegetable; vines are poisonous	pending
+C0343	S			v	pound	pound	跳動	gongagonga	lyödä	mengalahkan	takay	D	0,0,0,0,2	38,0,43,1017,4		verb.motion	8	beat.v.04	move rhythmically	pending
+C0344	S			n	poverty	poverty	貧困	umaskini	köyhyys	kemiskinan	muchuy	A	0,0,0,0,0	366,312,57,331,7	In:borrowed	noun.state	1	poverty.n.01	the state of having little or no money and few or no material possessions	pending
+C0345	S			n	president	president	總統	rais	presidentti	Presiden	pusaq	C	0,0,0,0,3	13448,4417,5394,8084,963	Fi:borrowed;In:borrowed,contact:English;Qu:borrowed	noun.person	6	president.n.03	the chief executive of a republic	pending
+C0346	S			n	province	province	州	mkoa	osavaltio	kawasan	marka	B	0,0,0,0,1	42623,33133,176,4106,1966		noun.location	2	state.n.01	the territory occupied by one of the constituent administrative districts of a nation	pending
+C0347	S			n	pudding	pudding	布丁	pudini	vanukas	manisan	api	D	0,0,0,0,2	29,0,1,27,11	Ch:borrowed,contact:English;Sw:borrowed,contact:English	noun.food	3	pudding.n.03	any of various soft sweet desserts thickened usually with flour and baked or boiled or steamed	pending
+C0348	S			n	punishment	punishment	懲罰	rada	rangaistus	hukum	wanay	A	0,0,0,0,0	368,38,101,5048,43	Sw:borrowed,contact:English	noun.act	1	punishment.n.01	the act of punishing	pending
+C0349	S			n	pupil	pupil	學生	mwanafunzi	opiskelija	mahasiswa	yachakuq	B	0,1,0,0,0	7340,653,115,1338,7	Sw:borrowed;In:contact:Chinese;Qu:borrowed	noun.person	3	student.n.01	a learner who is enrolled in an educational institution	pending
+C0350	S			a	purple	purple	紫	zambarau	violetti	ungu	kulli	A	0,0,0,0,0	2607,89,25,124,53	Sw:borrowed;Fi:borrowed;In:borrowed	adj.all	3	purple.s.01	of a color intermediate between red and blue	pending
+C0351	S			v	push	push	推	sukuma	painaa	memaksa	tanqay	D	0,0,0,0,0	14618,29,202,459,2	Ch:contact:Cantonese+Hakka+Mandarin	verb.motion	10	push.v.01	move with force,	pending
+C0352	S			v	put	put	放	weka	asettaa	terletak	churay	A	0,0,0,0,0	18084,40,269,5551,17		verb.contact	9	put.v.01	put into a certain place or abstract location	data-verified
+C0353	S			n	queen	queen	蜂王	malkia	kuningatar	ratu	quya	A	0,0,0,0,0	3,691,701,1258,75	Sw:borrowed;In:borrowed,contact:English	noun.animal	10	queen.n.01	the only fertile female in a colony of social insects such as bees and ants and termites; its function is to lay eggs	pending
+C0354	S			n	rain	rain	雨	mvua	sade	hujan	para	A	0,0,0,0,0	3986,1056,58,2229,1326		noun.phenomenon	3	rain.n.01	water falling in drops from vapor condensed in the atmosphere	data-verified
+C0355	S			a	rare	rare	少見+的	adimu	harvinainen	pelik	pisi	D	0,0,0,0,4	0,127,155,10,213	Sw:borrowed	adj.all	6	rare.s.02	recurring only at long intervals	pending
+C0356	S			n	ray	ray	射線	mwale	säde	pancaran	illa	B	0,0,0,0,1	789,7,101,67,16		noun.phenomenon	7	beam.n.04	a column of light (as from a beacon)	pending
+C0357	S			n	rear	rear	尾部	nyuma	pyrstö	belakang	t'ikra	D	0,1,0,0,0	101,1349,94,1482,1		noun.body	5	buttocks.n.01	the fleshy part of the human body that you sit on	pending
+C0358	S			n	rebel	rebel	叛徒	mwasi	vapaustaistelija	pemberontak	awqa	B	0,0,0,0,1	101,39,44,397,29		noun.person	3	insurgent.n.01	a person who takes part in an armed rebellion against the constituted authority (especially in the hope of improving conditions)	pending
+C0359	S			a	red	red	紅+的	ekundu	punainen	kemerahan	puka	D	0,0,0,0,0	0,0,412,57,397		adj.all	3	red.s.01	of a color at the end of the color spectrum (next to orange); resembling the color of blood or cherries or tomatoes or rubies	pending
+C0360	S			n	region	region	區域	eneo	vyöhyke	kawasan	suyu	A	0,0,0,0,0	4460,13010,82,4106,11162		noun.location	5	region.n.03	a large indefinite location on the surface of the Earth	data-verified
+C0361	S			a	repugnant	repugnant	厭惡+的	chukivu	vastenmielinen	mengejutkan	millay	D	0,0,0,0,2	0,0,8,108,64	Sw:borrowed	adj.all	1	abhorrent.s.01	offensive to the mind	pending
+C0362	S			a	ripe	ripe	熟+的	bivu	kypsä	masak	puqu	D	0,0,0,0,0	0,3,11,112,25		adj.all	5	ripe.a.01	fully developed or matured and ready to be eaten or used	pending
+C0363	S			n	ripeness	ripeness	成熟	ubivu	kypsyys	kematangan	puqu	D	0,0,0,0,0	760,0,2,20,25	Sw:borrowed	noun.state	1	ripeness.n.01	the state of being ripe	pending
+C0364	S			n	river	river	河	mto	joki	sungai	mayu	A	0,0,0,0,0	25691,41340,234,5635,5282		noun.object	1	river.n.01	a large natural stream of water (larger than a creek)	data-verified
+C0365	S			n	road	road	路	barabara	tie	jalan	ñan	A	0,0,0,0,0	32762,1452,400,5350,166		noun.artifact	2	road.n.01	an open way (generally public) for travel or transportation	data-verified
+C0366	S			n	robot	robot	機器人	roboti	automaatti	robot	Antapunqu	A	0,0,0,0,0	441,91,23,107,13	Sw:contact:English;In:borrowed,contact:English;Qu:borrowed	noun.artifact	1	automaton.n.02	a mechanism that can move automatically	pending
+C0367	S			a	robust	robust	健壯+的	hadidi	jykevätekoinen	teguh	nanaq	D	0,2,0,0,0	0,0,0,162,0	Sw:borrowed;Qu:borrowed	adj.all	4	robust.a.01	sturdy and strong in form, constitution, or construction	pending
+C0368	S			n	rock	rock	石	mwamba	kivi	batu	rumi	A	0,0,0,0,0	18029,486,239,2570,249	Ch:borrowed;In:contact:Chinese	noun.object	7	rock.n.01	a lump or mass of hard consolidated mineral matter	pending
+C0369	S			n	root	root	根	mzizi	juuri	akar	pisi	A	0,0,0,0,0	17074,132,1122,403,213		noun.plant	8	root.n.01	(botany) the usually underground organ that lacks buds or leaves or nodes; absorbs water and mineral salts; usually it anchors the plant to the ground	data-verified
+C0370	S			n	rope	rope	繩子	kamba	köysi	tali	waska	A	0,0,0,0,0	57,202,14,212,47	Sw:borrowed;In:borrowed	noun.artifact	2	rope.n.01	a strong line	pending
+C0371	S			v	rotate	rotate	旋轉	duru	kiertää	berkisar	muyuy	B	0,0,0,0,1	724,64,179,739,4		verb.motion	6	revolve.v.01	turn on or around an axis or a center	pending
+C0372	S			a	rotten	rotten	噁心+的	bovu	surkea	dahsyat	ismu	D	0,0,0,0,0	0,12,14,220,9		adj.all	3	icky.s.01	very bad	pending
+C0373	S			v	rub	rub	磨	sugua	hangata	bergeser	thupay	D	0,0,0,0,0	967,3,1,121,0	Ch:contact:Cantonese	verb.contact	3	rub.v.01	move over something with pressure	pending
+C0374	S			n	salt	salt	鹽	chumvi	suola	garam	kachi	A	0,0,0,0,0	3066,576,74,520,333	In:borrowed	noun.substance	4	salt.n.01	a compound formed by replacing hydrogen in an acid by a metal (or a radical that acts like a metal)	pending
+C0375	S			n	sand	sand	沙	mchanga	hiekka	pasir	aqu	A	0,0,0,0,0	12380,548,83,724,66		noun.substance	3	sand.n.01	a loose material consisting of grains of rock or coral	data-verified
+C0376	S			n	sash	sash	腰帶	shuka	vyönauha	selempang	chumpi	D	0,0,0,0,2	59,25,0,18,29		noun.artifact	2	girdle.n.02	a band of material around the waist that strengthens a skirt or trousers	pending
+C0377	S			a	satisfied	satisfied	平息+的	radhi	sammutettu	puas	saksa	D	0,0,0,0,1	0,55,3,136,0	Sw:borrowed	adj.all	2	quenched.s.01	allayed	pending
+C0378	S			n	saying	saying	措辭	msemo	ilmaisu	peribahasa	ñiy	B	0,0,0,0,1	51,59,52,66,3		noun.communication	1	saying.n.01	a word or phrase that particular people use in particular situations	pending
+C0379	S			n	school	school	學校	chuo	koulurakennus	sekolah	yachaywasi	A	0,0,0,0,0	10500,7239,23,4759,609		noun.artifact	7	school.n.02	a building where young people receive education	data-verified
+C0380	S			v	scrape	scrape	刮出刺耳聲	kuna	raapia	mengukur	aspiy	D	0,0,0,0,1	0,8414,0,331,1		verb.contact	6	scrape.v.01	scratch repeatedly	pending
+C0381	S			v	scratch	scratch	劃	kuna	naarmuttaa	bergeser	aspiy	D	0,1,0,0,0	14815,8414,0,121,1		verb.contact	7	scratch.v.02	cut the surface of; wear away the surface of	pending
+C0382	S			n	seat	seat	座位	siti	paikka	tempat	tiyana	A	0,0,0,0,0	190,126,384,7760,28	Sw:borrowed,contact:English;Fi:contact:English;Qu:borrowed	noun.location	9	seat.n.01	a space reserved for sitting (as in a theater or on a train or airplane)	pending
+C0383	S			n	seed	saeed	籽	mbegu	siemen	biji	muru	A	0,0,0,0,0	109,935,22,584,80		noun.plant	5	seed.n.01	a small hard fruit	data-verified
+C0384	S			v	seize	seize	抓住	duma	tarttua	terus	chapay	D	0,1,0,0,2	120,112,17,2519,0	Sw:borrowed	verb.contact	8	seize.v.01	take hold of; grab	pending
+C0385	S			v	send	send	送	tuma	lähettää	mengirim	kachay	A	0,0,0,0,0	5465,5,341,660,8	Ch:contact:Cantonese	verb.motion	8	send.v.01	cause to go somewhere	pending
+C0386	S			v	shake	shake	搖	tikisa	sekoittaa	menghasut	chuhchuy	D	0,0,0,0,1	1254,32,146,47,0		verb.motion	9	shake.v.01	move or cause to move back and forth	pending
+C0387	S			n	sheep	sheep	綿羊	kondoo	lammas	kambing	uwiha	A	0,0,0,0,0	74,257,41,249,17	Fi:contact:English;Qu:borrowed	noun.animal	3	sheep.n.01	woolly usually horned ruminant mammal related to the goat	pending
+C0388	S			v	shine	shine	反射	angaza	heijastaa	mencerminkan	llimphiy	D	0,0,0,0,0	657,2,54,299,28		verb.weather	10	reflect.v.04	be bright by reflecting or casting light	pending
+C0389	S			n	shoulder	shoulder	肩	bega	olkapää	pundak	rikra	D	0,0,0,0,0	414,91,2,30,4		noun.body	5	shoulder.n.01	the part of the body between the neck and the upper arm	pending
+C0390	S			n	silver	silver	銀	fedha	hopea	perak	q'illay	B	0,0,0,0,1	8111,1322,89,1088,222	Sw:borrowed	noun.substance	5	silver.n.01	a soft white precious univalent metallic element having the highest electrical and thermal conductivity of any metal; occurs in argentite and in free form; used in coins and jewelry and tableware and photography	pending
+C0391	S			v	sit	sit	坐	kaa	istuutua	menempatkan	tiyay	D	0,0,0,0,0	2373,143,0,511,93		verb.contact	10	sit.v.01	be seated	pending
+C0392	S			a	skillful	skilful	精通的	stadi	taitava	pakar	amawt'a	D	0,0,0,0,0	5,97,55,473,1	Sw:borrowed	adj.all	2	adept.s.01	having or showing knowledge and skill and aptitude	pending
+C0393	S			n	skin	skin	皮	ngozi	iho	kulit	qara	A	0,0,0,0,0	5191,1558,60,1459,107		noun.body	6	skin.n.01	a natural protective body covering and site of the sense of touch	data-verified
+C0394	S			n	slave	slave	奴隸	mtumwa	orja	hamba	punqu	A	0,0,0,0,0	1471,167,43,153,8	In:borrowed	noun.person	3	slave.n.01	a person who is owned by someone	pending
+C0395	S			r	slowly	slowly	徐緩+地	polepole	lento	tergontai-gontai	pallay	D	0,0,0,0,0	0,571,346,0,13		adv.all	2	lento.r.01	in music	pending
+C0396	S			a	small	small	小+的	dogo	pieni	kecil	huch'uy	D	0,0,0,0,0	0,632,1186,5648,632		adj.all	10	small.a.01	limited or below average in number or quantity or magnitude or extent	pending
+C0397	S			v	smile	smile	笑	tabasamu	hymyillä	tersenyum	asiy	D	0,0,0,0,1	1356,21,0,33,15	Sw:borrowed	verb.body	2	smile.v.01	change one's facial expression by spreading the lips, often to signal pleasure	pending
+C0398	S			a	smooth	smooth	光滑+的	laini	pehmeä	halus	api	D	0,0,0,0,1	0,389,37,349,11	Sw:borrowed,contact:English	adj.all	8	smooth.a.01	having a surface free from roughness or bumps or ridges or irregularities	pending
+C0399	S			n	snack	snack	小吃	kitafunio	välipala	gigitan	quqawi	D	0,0,0,0,0	400,4,2,60,0	Sw:borrowed	noun.food	1	bite.n.04	a light informal meal	pending
+C0400	S			n	snail	snail	蝸牛	konokono	etana	siput	ch'uru	D	0,0,0,0,0	37,102,1,30,26	In:borrowed	noun.animal	2	snail.n.01	freshwater or marine or terrestrial gastropod mollusk usually having an external enclosing spiral shell	pending
+C0401	S			n	snake	snake	蛇	nyoka	käärme	ular	amaru	A	0,0,0,0,0	854,693,31,314,126	Ch:borrowed,contact:English;In:borrowed	noun.animal	5	snake.n.01	limbless scaly elongate reptile; some are venomous	pending
+C0402	S			v	snatch	snatch	奪取	dokoa	kaapata	mencakup	qichuy	D	0,0,0,0,1	753,2,31,1505,15	Fi:borrowed	verb.contact	3	snatch.v.01	to grasp hastily or eagerly	pending
+C0403	S			v	sneeze	sneeze	噴嚏	chafya	aivastaa	bersin	achhiy	D	0,0,0,0,0	18,25,1,19,1		verb.body	1	sneeze.v.01	exhale spasmodically, as when an irritant entered one's nose	pending
+C0404	S			n	snow	snow	雪	theluji	lumi	salju	rit'i	A	0,0,0,0,0	3633,240,101,309,868	Sw:borrowed;In:borrowed	noun.phenomenon	4	snow.n.01	precipitation falling from clouds in the form of ice crystals	pending
+C0405	S			n	soldier	soldier	兵	askari	työläinen	serdadu	awqaq	A	0,0,0,0,0	16550,963,8,130,731	Qu:borrowed	noun.person	2	soldier.n.01	an enlisted man or woman who serves in an army	pending
+C0406	S			n	soot	soot	煤煙	masizi	noki	arang	uchpa	B	0,0,0,0,1	11,5,3,178,24		noun.substance	1	carbon_black.n.01	a black colloidal substance consisting wholly or principally of amorphous carbon and used to make pigments and ink	pending
+C0407	S			n	soul	soul	精神	nafsi	sielu	nyawa	nuna	B	0,0,0,0,1	2649,579,65,157,72	Fi:borrowed,contact:English	noun.person	5	soul.n.01	the immaterial part of a person; the actuating cause of an individual life	pending
+C0408	S			n	soup	soup	湯	supu	liemi	sup	chupi	A	0,0,0,0,0	2829,53,4,106,5	Sw:borrowed,contact:English;In:borrowed	noun.food	3	soup.n.01	liquid food especially of meat or fish or vegetable stock often containing pieces of solid food	pending
+C0409	S			n	source	source	開始	chanzo	juuri	awal	pukyu	A	0,0,0,0,0	19925,1463,1122,6331,2102		noun.location	9	beginning.n.04	the place where something begins, where it springs into being	data-verified
+C0410	S			n	south	south	美利堅聯盟國	kusini	Etelävaltiot	South	urin	A	0,0,0,0,0	72,15571,20,446,1142	Sw:borrowed	noun.location	5	confederacy.n.01	the southern states that seceded from the United States in 1861	pending
+C0411	S			v	sparkle	sparkle	反光	ng'ala	säteillä	bercahaya	chinpiy	D	0,2,0,0,0	79,0,7,46,0		verb.weather	4	sparkle.v.01	reflect brightly	pending
+C0412	S			n	speaker	speaker	說話的人	spika	puhuja	pembicara	rimaq	A	0,0,0,0,0	3,110,62,96,493	Sw:contact:English;Qu:borrowed	noun.person	3	speaker.n.01	someone who expresses in language; someone who talks (especially someone who delivers a public speech or someone especially garrulous)	pending
+C0413	S			n	spider	spider	蜘蛛	buibui	hämähäkki	lelabah	apasanka	D	0,0,0,0,0	187,130,9,0,7		noun.animal	3	spider.n.01	predatory arachnid with eight legs, two poison fangs, two feelers, and usually two silk-spinning organs at the back end of the body; they spin silk to make cocoons for eggs or traps for prey	pending
+C0414	S			v	spit	spit	吐	sua	sylkeä	ludah	thuqay	A	0,0,0,0,0	1772,33,3,18,9		verb.body	4	spit.v.01	expel or eject (saliva or phlegm or sputum) from the mouth	data-verified
+C0415	S			v	squeeze	squeeze	擠	bana	puristaa	menumpas	ñit'iy	C	0,0,0,0,2	486,18,8,81,16		verb.contact	9	squash.v.01	to compress with violence, out of natural shape or condition	pending
+C0416	S			v	stack	stack	堆	lundika	kasata	tersusun	pirway	D	0,1,0,0,0	1370,1,3,256,2		verb.contact	3	stack.v.02	arrange in stacks	pending
+C0417	S			n	star	star	專家	nyota	tähti	bintang	quyllur	A	0,0,0,0,0	1626,2640,214,3521,175	Fi:contact:English;In:contact:English	noun.person	8	ace.n.03	someone who is dazzlingly skilled in any field	pending
+C0418	S			n	stick	stick	棍	kijiti	risu	kayu	k'aspi	A	0,0,0,0,0	321,31,4,1401,103	Sw:borrowed;In:borrowed	noun.artifact	9	stick.n.01	an implement consisting of a length of wood	pending
+C0419	S			n	stomach	stomach	胃	tumbo	maha	perut	wiksa	B	0,0,0,0,1	366,516,23,201,41	In:borrowed	noun.body	4	stomach.n.01	an enlarged and muscular saclike organ of the alimentary canal; the principal organ of digestion	pending
+C0420	S			n	stove	stove	廚灶	jiko	liesi	dapur	q'uncha	D	0,0,0,0,0	0,55,5,185,7		noun.artifact	2	stove.n.01	a kitchen appliance used for cooking food	pending
+C0421	S			v	strangle	strangle	抑制	nyonga	tukahduttaa	menindas	sipiy	A	0,0,0,0,0	473,28,27,40,7		verb.body	6	choke.v.04	constrict (someone's) throat and keep from breathing	data-verified
+C0422	S			n	street	street	馬路	mtaa	katu	jalan	ñan	C	0,0,0,0,3	113,403,75,5350,166	Ch:contact:English;Fi:borrowed	noun.artifact	5	street.n.02	the part of a thoroughfare between the sidewalks; the part of the thoroughfare on which vehicles travel	pending
+C0423	S			n	stripe	stripe	帶	mlia	nauha	pita	siq'i	B	0,0,0,0,1	16543,60,34,354,189	Ch:contact:Mandarin	noun.artifact	5	band.n.04	an adornment consisting of a strip of a contrasting color or material	pending
+C0424	S			a	strong	strong	強	imara	vahva	bertenaga	sinchi	A	0,0,0,0,0	16590,501,411,93,259	Sw:borrowed	adj.all	10	strong.a.01	having strength or power greater than average or expected	pending
+C0425	S			n	student	student	學生	mwanafunzi	opiskelija	mahasiswa	yachakuq	B	0,0,0,0,1	7340,653,115,1338,7	Sw:borrowed;In:contact:Chinese;Qu:borrowed	noun.person	2	student.n.01	a learner who is enrolled in an educational institution	pending
+C0426	S			a	stupid	stupid	愚	pumbavu	tyhmä	jahil	upa	A	0,0,0,0,0	570,3,4,11,22	Sw:borrowed	adj.all	3	stupid.a.01	lacking or marked by lack of intellectual acuity	pending
+C0427	S			n	sugar	sugar	糖	sukari	sokeri	gula	misk'i	A	0,0,0,0,0	2168,342,45,738,280	Fi:borrowed	noun.food	3	sugar.n.01	a white crystalline carbohydrate used as a sweetener and preservative	pending
+C0428	S			v	surround	surround	圈	zunguka	piirittää	membatasi	kanchay	D	0,2,0,0,0	2555,2,23,405,3		verb.contact	4	surround.v.01	extend on all sides of simultaneously; encircle	pending
+C0429	S			v	sweep	sweep	掃	fagia	lakaista	menyapu	pichay	D	0,0,0,0,0	1074,0,2,44,4		verb.contact	9	sweep.v.03	sweep with a broom or as if with a broom	pending
+C0430	S			a	sweet	sweet	甜+的	tamu	makea	kandis	misk'i	D	0,0,0,0,0	0,102,23,21,280		adj.all	10	sweet.a.01	having or denoting the characteristic taste of sugar	pending
+C0431	S			v	swim	swim	游泳	ogelea	uida	renang	wayt'ay	D	0,0,0,0,0	520,2,14,176,69		verb.motion	5	swim.v.01	travel through water	pending
+C0432	S			n	swine	swine	豬	nguruwe	sika	babi	khuchi	B	0,1,0,0,1	994,181,23,330,48	In:borrowed	noun.animal	1	swine.n.01	stout-bodied short-legged omnivorous animals	pending
+C0433	S			n	tail	tail	尾	mkia	häntä	ekor	chupa	A	0,0,0,0,0	3968,546,1431,427,39	In:borrowed	noun.animal	8	tail.n.01	the posterior part of the body of a vertebrate especially when elongated and extending beyond the trunk or main part of the body	pending
+C0434	S			a	tepid	tepid	溫	fufutende	haalea	hangat	pari	D	0,1,0,0,1	10318,7,0,318,4		adj.all	2	lukewarm.s.01	moderately warm	pending
+C0435	S			n	thigh	thigh	股	paja	reisi	paha	chanka	D	0,0,0,0,0	4109,23,1,41,122		noun.body	2	thigh.n.01	the part of the leg between the hip and the knee	pending
+C0436	S			n	thorn	thorn	刺	mwiba	oas	duri	kichka	A	0,0,0,0,0	3965,40,21,135,96		noun.plant	3	spine.n.03	a small sharp-pointed tip resembling a spike on a stem or leaf	data-verified
+C0437	S			n	thousand	thousand	千	elfu	K	ribu	waranqa	A	0,0,0,0,0	9515,577,33721,623,139	Sw:borrowed;In:borrowed	noun.quantity	1	thousand.n.01	the cardinal number that is the product of 10 and 100	pending
+C0438	S			n	thread	thread	線	uzi	lanka	benang	q'aytu	A	0,0,0,0,0	24536,75,34,105,25	In:borrowed	noun.artifact	4	thread.n.01	a fine cord of twisted fibers (of cotton or silk or wool or nylon etc.) used in sewing and weaving	pending
+C0439	S			n	throat	throat	咽	koo	nielu	faring	kunka	B	0,0,0,0,1	160,479,4,12,59		noun.body	4	throat.n.01	the passage to the stomach and lungs; in the front part of the neck below the chin and above the collarbone	pending
+C0440	S			n	tomato	tomato	番茄	nyanya	tomaatti	tomat	tumati	A	0,0,0,0,0	94,117,7,98,10	Fi:borrowed;In:borrowed,contact:English;Qu:borrowed	noun.food	2	tomato.n.01	mildly acid red or yellow pulpy fruit eaten as a vegetable	pending
+C0441	S			n	tongue	tongue	舌	ulimi	kieli	lidah	qallu	A	0,0,0,0,0	794,100,1215,132,109		noun.body	8	tongue.n.01	a mobile mass of muscular tissue covered with mucous membrane and located in the oral cavity	data-verified
+C0442	S			n	tooth	tooth	牙	jino	hammas	gigi	kiru	A	0,0,0,0,0	9189,88,13,367,81	Ch:contact:Cantonese;In:borrowed	noun.body	5	tooth.n.01	hard bonelike structures in the jaws of vertebrates; used for biting and chewing or for attack and defense	pending
+C0443	S			n	tower	tower	塔	mnara	torni	menara	pukara	B	0,0,0,0,1	11343,378,150,698,159	Sw:borrowed;Fi:borrowed;In:borrowed	noun.artifact	3	tower.n.01	a structure taller than its diameter; can stand alone or be attached to a larger building	pending
+C0444	S			n	town	town	城	mji	kaupunki	bandar	llaqta	A	0,0,0,0,0	37550,21419,2176,1620,8591	Fi:borrowed	noun.location	4	town.n.01	an urban area with a fixed boundary that is smaller than a city	pending
+C0445	S			a	transparent	transparent	水晶+的	bayana	läpinäkyvä	bersinar	q'ispi	D	0,0,0,0,1	0,89,9,102,21		adj.all	4	crystalline.s.02	transmitting light; able to be seen through with clarity	pending
+C0446	S			n	tree	tree	樹	mti	puu	pohon	sach'a	A	0,0,0,0,0	5251,569,213,1133,1252		noun.plant	3	tree.n.01	a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms	data-verified
+C0447	S			v	trick	trick	欺騙	pemba	huijata	menipu	pantachiy	B	0,0,0,0,1	162,568,6,43,3		verb.social	1	flim-flam.v.01	deceive somebody	pending
+C0448	S			r	truly	truly	真誠地	kweli	todella	bahwasanya	y	B	0,1,0,0,1	7,1350,222,65,6020		adv.all	4	sincerely.r.01	with sincerity; without pretense	pending
+C0449	S			v	twist	twist	蠕動	potoa	kiemurrella	memutar	q'iwiy	D	0,0,0,0,0	11,3,1,76,1		verb.motion	10	writhe.v.01	to move in a twisting or contorted motion, (especially when struggling)	pending
+C0450	S			n	universe	universe	世界	ulimwengu	maailma	alam	pacha	D	0,1,0,0,4	21627,1217,267,3698,1526		noun.object	3	universe.n.01	everything that exists anywhere	pending
+C0451	S			a	upright	upright	公正+的	wima	hyvä	baik	chiqan	D	0,0,0,0,1	0,91,599,5163,53		adj.all	3	good.s.05	of moral excellence	pending
+C0452	S			n	urine	urine	尿	mkojo	virtsa	urine	ispa	A	0,0,0,0,0	517,321,6,49,5	In:borrowed	noun.substance	1	urine.n.01	liquid excretory product	pending
+C0453	S			n	victory	victory	成功	ushindi	voitto	kejayaan	llalli	A	0,0,0,0,0	6045,943,220,204,3		noun.event	1	victory.n.01	a successful ending of a struggle or contest	data-verified
+C0454	S			n	virgin	virgin	處女	bikira	neitsyt	gadis	taski	B	0,0,0,0,1	194,918,91,317,3	Sw:borrowed	noun.person	3	virgin.n.01	a person who has never had sex	pending
+C0455	S			v	walk	walk	走	enda	kävellä	jalan	riy	B	0,0,0,0,1	5248,10,15,5350,64		verb.motion	10	walk.v.01	use one's feet to advance; advance by steps	pending
+C0456	S			n	wall	wall	牆	ukuta	seinä	tembok	pirqa	A	0,0,0,0,0	2052,426,13,464,52		noun.artifact	8	wall.n.01	an architectural partition with a height and length greater than its thickness; used to divide or enclose an area or to support another structure	data-verified
+C0457	S			v	wander	wander	漫遊	tanga	liikkua	berkisar	chutay	D	0,0,0,0,2	205,1540,89,739,0		verb.motion	5	roll.v.12	move about aimlessly or without any destination, often in search of food or employment	pending
+C0458	S			a	warm	warm	暖和	vuguvugu	lämmin	hangat	q’uñi	A	0,0,0,0,0	35,142,81,318,5		adj.all	10	warm.a.01	having or producing a comfortable and agreeable degree of heat or imparting or maintaining heat	data-verified
+C0459	S			n	well	well	井	kisima	lähde	sumur	pukyu	C	0,0,0,0,2	2585,127,300,238,2102	Fi:contact:English	noun.artifact	5	well.n.01	a deep hole or shaft dug or drilled to obtain water or oil or gas or brine	pending
+C0460	S			a	wide	wide	寬廣	pana	leveä	bidang	mast'a	A	0,0,0,0,0	94,353,163,3501,5		adj.all	7	wide.a.01	having great (or a certain) extent from one side to the other	data-verified
+C0461	S			n	widow	widow	寡婦	mjane	leski	duda	ikma	D	0,0,0,0,0	78,123,64,10,2		noun.person	1	widow.n.01	a woman whose husband is dead especially one who has not remarried	pending
+C0462	S			n	wilderness	wilderness	荒地	koko	erämaa	hutan	purun	A	0,0,0,0,0	66,23,38,2314,48	Fi:borrowed	noun.location	4	wilderness.n.03	a wild and uninhabited area left in its natural condition	pending
+C0463	S			n	willpower	willpower	毅力	utashi	hallinta	keteguhan	munay	A	0,0,0,0,0	36,276,97,20,77		noun.attribute	1	self-control.n.02	the trait of resolutely controlling your own behavior	data-verified
+C0464	S			n	wind	wind	風	upepo	tuuli	angin	wayra	A	0,0,0,0,0	16090,463,141,1043,213		noun.phenomenon	8	wind.n.01	air moving (sometimes with considerable force) from an area of high pressure to an area of low pressure	data-verified
+C0465	S			v	wipe	wipe	擦	pangusa	pyyhkiä	melampaui	pichay	D	0,0,0,0,4	616,1,4,229,4		verb.contact	1	wipe.v.01	rub with a circular motion	pending
+C0466	S			n	wizard	wizard	專家	mchawi	tähti	bintang	layqa	B	0,0,0,0,1	1626,84,214,3521,28	Fi:contact:English;In:contact:English	noun.person	2	ace.n.03	someone who is dazzlingly skilled in any field	pending
+C0467	S			n	woman	woman	女性	mwanamke	nainen	wanita	warmi	A	0,0,0,0,0	4166,1663,329,2214,2617		noun.person	4	woman.n.01	an adult female person (as opposed to a man)	data-verified
+C0468	S			n	worker	worker	工人	mfanyakazi	työntekijä	pekerja	ruraq	A	0,0,0,0,0	1869,151,59,1004,108	Qu:borrowed	noun.person	4	worker.n.01	a person who works at a specific occupation	pending
+C0469	S			n	world	world	世界	ulimwengu	maailma	alam	pacha	C	0,0,0,0,2	21627,1217,267,3698,1526		noun.object	8	universe.n.01	everything that exists anywhere	pending
+C0470	S			n	worm	worm	蟲	mnyoo	mato	cacing	kuru	A	0,0,0,0,0	1881,28,24,88,176		noun.animal	4	worm.n.01	any of numerous relatively small elongated soft-bodied animals especially of the phyla Annelida and Chaetognatha and Nematoda and Nemertea and Platyhelminthes; also many insect larvae	data-verified
+C0471	S			a	yellow	yellow	黃+的	njano	keltainen	cukup	q'illu	D	0,0,0,0,0	0,524,165,2936,170		adj.all	6	yellow.s.01	of the color intermediate between green and orange in the color spectrum; of something resembling the color of an egg yolk	pending
+C0472	L			v	accede	accede	繼承	kubali	nousta	menyerah	uynikuy	D	0,0,0,0,1	2633,5,162,402,0	Sw:borrowed;In:borrowed	verb.social	3	accede.v.02	take on duties or office	pending
+C0473	L			v	accept	accept	相信	kiri	hyväksyä	menerima	chaskiy	C	0,0,0,0,2	1579,9,121,2310,6	Sw:borrowed	verb.cognition	11	accept.v.01	consider or hold as true	pending
+C0474	L			v	accompany	accompany	伴隨	unga	liittyä	mengiringi	yanay	B	0,1,0,0,0	465,229,205,68,3		verb.stative	4	attach_to.v.01	be present or associated with an event or entity	pending
+C0475	L			n	accumulation	accumulation	增長	limbikizo	lisääntyminen	kumpulan	qisa	D	0,0,0,0,1	3567,2,421,632,1		noun.process	4	accretion.n.01	an increase by natural growth or addition	pending
+C0476	L			v	ache	ache	痛	umwa	pakottaa	mengalami	nanay	B	0,1,0,0,1	1717,3,62,3230,71		verb.perception	3	hurt.v.06	feel physical pain	pending
+C0477	L			v	advise	advise	通知	nasihi	ilmoittaa	melaporkan	kunay	D	0,0,0,0,0	646,0,156,457,0	Sw:borrowed	verb.communication	3	advise.v.02	inform (somebody) of something	pending
+C0478	L			n	affliction	affliction	折磨	utaabishaji	kärsimys	penderitaan	llakiy	D	0,0,0,0,1	122,0,19,195,5	Sw:borrowed	noun.state	3	affliction.n.01	a state of great suffering and distress due to adversity	pending
+C0479	L			v	age	age	變老	konga	ikääntyä	berusia	ruk'uyay	D	0,0,0,0,1	3,11,0,1005,0	Qu:borrowed	verb.change	3	age.v.01	begin to seem older; get older	pending
+C0480	L			v	agree	agree	同意	kubali	sopia	setuju	allipunakuy	D	0,2,0,0,0	2513,5,34,498,0	Sw:borrowed	verb.communication	7	agree.v.01	be in accord; be in agreement	pending
+C0481	L			n	aim	aim	目的	azimio	tarkoitus	tujuan	paqtay	D	0,0,0,0,1	3396,357,810,2259,1	Sw:borrowed	noun.cognition	4	purpose.n.01	an anticipated outcome that is intended or that guides your planned actions	pending
+C0482	L			v	allow	allow	讓	ruhusu	sallia	memberi	saqiy	D	0,1,0,0,3	8741,11,39,1602,2	Ch:borrowed;Sw:borrowed;Fi:contact:English	verb.social	10	let.v.01	make it possible through a specific action or lack of action for something to happen	pending
+C0483	L			n	anger	anger	憤怒	maya	viha	marah	phiña	D	0,0,0,0,0	363,70,54,307,0		noun.feeling	3	anger.n.01	a strong emotion; a feeling that is oriented toward some real or supposed grievance	pending
+C0484	L			v	appear	appear	像是	wajihi	vaikuttaa	lihat	yuriy	B	0,0,0,0,1	766,3,887,4486,6	Sw:borrowed	verb.perception	7	look.v.02	give a certain impression or have a certain outward aspect	pending
+C0485	L			n	appearance	appearance	外表	muonekano	ulkonäkö	wajah	rikch'a	C	0,0,0,0,2	207,93,383,338,358		noun.attribute	6	appearance.n.01	outward or visible aspect of a person or thing	pending
+C0486	L			v	apply	apply	運用	paka	koskea	melibatkan	ruray	D	0,2,0,0,4	1155,275,25,1014,54		verb.stative	10	apply.v.02	be pertinent or relevant or applicable	pending
+C0487	L			v	argue	argue	討論	lumba	perustella	berargumen	maqanakuy	B	0,1,0,0,0	2346,3,45,62,107	Qu:borrowed	verb.communication	3	argue.v.01	present reasons and arguments	pending
+C0488	L			n	article	article	文章	makala	artikkeli	artikel	umalli	B	0,0,0,0,1	2109,11519,141,864,4	Sw:borrowed;Fi:borrowed;In:borrowed	noun.communication	4	article.n.01	nonfictional prose forming an independent part of a publication	pending
+C0489	L			v	ask	ask	問	uliza	kysyä	bertanya	tapuy	D	0,0,0,0,0	18065,1,28,183,10		verb.communication	7	ask.v.01	inquire about	pending
+C0490	L			v	assemble	assemble	組合	konga	yhdistää	mengumpulkan	aylluy	A	0,0,0,0,0	1391,11,427,505,3		verb.creation	3	assemble.v.01	create by putting components or members together	data-verified
+C0491	L			n	association	association	協會	jumuia	liitto	persatuan	waki	B	0,1,0,0,1	3013,408,619,968,628		noun.group	8	association.n.01	a formal organization of people or groups of people	pending
+C0492	L			n	attention	attention	注意	makini	huomio	perhatian	uyay	D	0,0,0,0,0	1639,233,53,645,0	Sw:borrowed;In:borrowed	noun.cognition	6	attention.n.01	the process whereby a person concentrates on some features of the environment to the (relative) exclusion of others	pending
+C0493	L			a	bad	bad	壞+的	baya	mätä	busuk	millay	D	0,0,0,0,0	0,87,2,54,64		adj.all	14	bad.s.03	(of foodstuffs) not in an edible or usable condition	pending
+C0494	L			v	bake	bake	烤	oka	leipoa	dibakar	kankay	D	0,0,0,0,1	436,14,1,229,1		verb.creation	4	bake.v.02	prepare with dry heat in an oven	pending
+C0495	L			n	ball	ball	球	bonge	pallo	bola	lunq'u	B	0,1,0,0,1	28505,17,169,4229,4	Fi:borrowed	noun.artifact	12	ball.n.01	round object that is hit or thrown or kicked in games	pending
+C0496	L			n	band	band	樂隊	bendi	soittokunta	orkes	watu	C	0,0,0,0,3	943,1093,8,39,3	Sw:borrowed,contact:English;In:borrowed	noun.group	13	band.n.02	instrumentalists not including string players	pending
+C0497	L			n	base	base	基地	msingi	tukikohta	dasar	tiksi	A	0,0,0,0,0	2396,3293,60,3667,153		noun.artifact	20	base.n.01	installation from which a military force initiates operations	data-verified
+C0498	L			v	be	be	是	wa	olla	makhluk	kay	A	0,0,0,0,0	202498,354799,4380,688,3462		verb.stative	13	be.v.01	have the quality of being; (copula, used with an adjective or a predicate noun)	data-verified
+C0499	L			v	beat	beat	征服	chapa	voittaa	mengalahkan	thatkiy	A	0,0,0,0,0	1228,186,163,1017,3		verb.competition	23	beat.v.01	come out better in a competition, race, or conflict	data-verified
+C0500	L			v	beautify	beautify	裝飾	remba	koristaa	menghiasi	achalay	D	0,0,0,0,3	597,3,9,47,0		verb.stative	3	deck.v.01	be beautiful to look at	pending
+C0501	L			v	become	become	適合	siri	sopia	menjadi	t'ikray	A	0,0,0,0,0	956,746,34,32470,23	Sw:borrowed;In:contact:English	verb.stative	4	become.v.04	enhance the appearance of	pending
+C0502	L			v	beg	beg	求	sihi	toivoa	pohon	uyllay	D	0,1,0,0,0	14283,0,44,1133,0	Sw:borrowed	verb.communication	4	beg.v.01	call upon in supplication; entreat	pending
+C0503	L			v	begin	begin	開始	anza	alkaa	mulai	qallariy	A	0,0,0,0,0	19925,21,1123,6509,55		verb.change	10	get_down.v.07	take the first step or steps in carrying out an action	data-verified
+C0504	L			n	beginning	beginning	開始	asasi	alku	awal	qallariy	A	0,0,0,0,0	19925,144,304,6331,55	Sw:borrowed	noun.time	5	beginning.n.02	the time at which something is supposed to begin	pending
+C0505	L			v	believe	believe	認為	amini	pitää	merasa	iñiy	B	0,1,0,0,0	19184,43,1748,1004,617	Sw:borrowed;Fi:contact:English	verb.cognition	5	think.v.01	judge or regard; look upon; judge	pending
+C0506	L			v	bewitch	bewitch	著迷	roga	valloittaa	menawan	layqay	D	0,0,0,0,0	50,2,72,60,0		verb.emotion	3	capture.v.02	attract; cause to be enamored	pending
+C0507	L			n	billion	billion	十億	bilioni	miljardi	miliar	lluna	A	0,0,0,0,0	177,497,58,1508,12	Sw:contact:English;Fi:borrowed;In:borrowed	noun.quantity	3	billion.n.03	the number that is represented as a one followed by 9 zeros	pending
+C0508	L			n	birth	birth	出生	uzazi	synnytys	kelahiran	wachay	A	0,0,0,0,0	15643,843,17,1798,11		noun.process	5	parturition.n.01	the process of giving birth	data-verified
+C0509	L			a	black	black	黑	eusi	musta	aswad	yana	D	0,0,0,0,0	9994,2,625,32,386	Ch:contact:English	adj.all	14	black.a.01	being of the achromatic color of maximum darkness; having little or no hue owing to absorption of almost all incident light	pending
+C0510	L			v	blame	blame	歸咎於	aili	syyttää	menuduh	tumpay	D	0,0,0,0,0	67,2,37,194,0	Sw:borrowed	verb.communication	3	blame.v.01	put or pin the blame on	pending
+C0511	L			v	bless	bless	祝福	tabaruku	siunata	memberkati	añaychay	D	0,0,0,0,0	141,6,3,39,1	Sw:borrowed;Fi:borrowed	verb.communication	4	bless.v.01	give a benediction to	pending
+C0512	L			v	block	block	阻礙	ziba	estää	menahan	hark'ay	C	0,0,0,0,3	345,6,432,306,17		verb.social	16	obstruct.v.01	hinder or prevent the progress or accomplishment of	pending
+C0513	L			n	blow	blow	打	dharuba	isku	pukulan	taka	B	0,1,0,0,1	10785,10,163,153,5	Ch:contact:English+Mandarin+Min Nan;Sw:borrowed	noun.act	7	blow.n.01	a powerful stroke with the fist or a weapon	pending
+C0514	L			v	boil	boil	沸騰	chemka	kiehua	mendidih	t'impuy	D	0,0,0,0,0	80,1,4,39,4		verb.change	5	boil.v.01	come to the boiling point and change from a liquid to vapor	pending
+C0515	L			n	book	book	書	kitabu	kirja	kitab	liwru	A	0,0,0,0,0	35808,2795,654,4213,76	Sw:borrowed;Qu:borrowed	noun.communication	11	book.n.01	a written work or composition that has been published (printed on pages bound together)	pending
+C0516	L			v	bother	bother	擔心	sumbua	viitsiä	mengganggu	piñay	D	0,2,0,0,3	664,0,0,270,0		verb.social	6	trouble_oneself.v.01	take the trouble to do something; concern oneself	pending
+C0517	L			v	break	break	結束	vunja	kukistaa	menghentikan	p'akiy	A	0,0,0,0,0	5549,11,44,390,10		verb.change	59	interrupt.v.04	terminate	data-verified
+C0518	L			a	broken	broken	破+的	kachara	katkennut	pecah	p'aki	D	0,1,0,0,1	0,0,15,376,7	Sw:borrowed	adj.all	13	broken.a.01	physically and forcibly separated into pieces or cracked or split	pending
+C0519	L			n	bundle	bundle	包	mtumba	pakkaus	bundel	q'ipi	A	0,0,0,0,0	25480,4,27,6,16		noun.group	3	package.n.01	a collection of things wrapped or boxed together	data-verified
+C0520	L			v	burn	burn	燒燬	waka	polttaa	menyala	ruphay	A	0,0,0,0,0	131,49,39,68,41		verb.change	15	burn.v.01	destroy by fire	data-verified
+C0521	L			v	bury	bury	隱藏	zika	kätkeä	melupakan	pampay	A	0,0,0,0,0	272,5,9,39,4		verb.perception	6	bury.v.01	cover from sight	data-verified
+C0522	L			v	buy	buy	獲得	nunua	ostaa	memperoleh	rantiy	A	0,0,0,0,0	10032,5,189,1470,8	Fi:contact:English	verb.possession	5	buy.v.01	obtain by purchase; acquire by means of a financial transaction	pending
+C0523	L			v	call	call	稱為	ita	kutsua	menyebut	qayay	A	0,0,0,0,0	12540,10,349,1216,12		verb.communication	28	name.v.01	assign a specified (usually proper) proper name to	data-verified
+C0524	L			n	call	call	電話	mwito	puhelu	panggilan	qapariy	D	0,0,0,0,0	1187,26,15,328,2	Sw:borrowed;In:borrowed	noun.communication	13	call.n.01	a telephone connection	pending
+C0525	L			n	callus	callus	繭	sagamba	kovettuma	kapalan	khacha	D	0,0,0,0,0	30,0,1,1,0		noun.state	3	callosity.n.01	an area of skin that is thick or hard from continual pressure or friction (as the sole of the foot)	pending
+C0526	L			v	capture	capture	著迷	bamba	valloittaa	menawan	chariy	D	0,0,0,0,4	50,314,72,60,1		verb.emotion	6	capture.v.02	attract; cause to be enamored	pending
+C0527	L			v	catch	catch	瞭解	gundua	havaita	menangkap	jap'iy	D	0,0,0,0,0	1565,1,166,396,0		verb.perception	29	catch.v.02	perceive with the senses quickly, suddenly, or momentarily	pending
+C0528	L			n	challenge	challenge	挑戰	changamoto	haaste	tantangan	tupaq	A	0,0,0,0,0	890,319,37,259,171	In:borrowed;Qu:borrowed	noun.state	5	challenge.n.01	a demanding or stimulating situation	pending
+C0529	L			v	change	change	改變	badili	muuttaa	berubah	tukuchiy	D	0,0,0,0,0	3234,8,532,1713,1	Sw:borrowed;Qu:borrowed	verb.change	10	change.v.01	cause to change; make different; cause a transformation	pending
+C0530	L			v	cheat	cheat	欺騙	laghai	ryöstää	menipu	pallquy	D	0,1,0,0,1	162,4,26,43,0	Sw:borrowed	verb.social	4	cheat.v.01	deprive somebody of something by deceit	pending
+C0531	L			n	choice	choice	選擇	hiari	valinta	pemilihan	akllay	A	0,0,0,0,0	3084,328,195,2138,26	Sw:borrowed	noun.cognition	3	option.n.02	one of a number of things from which only one can be chosen	pending
+C0532	L			v	choose	choose	選	chagua	ottaa	mengambil	akllay	A	0,0,0,0,0	27151,9,599,1996,26		verb.cognition	3	choose.v.01	pick out, select, or choose from a number of alternatives	data-verified
+C0533	L			n	circle	circle	橢圓形	duara	ympyrä	lilitan	muyu	A	0,0,0,0,0	100,224,57,53,94		noun.shape	8	circle.n.01	ellipse in which the two axes are of equal length; a plane curve generated by one point moving at a constant distance from a fixed point	data-verified
+C0534	L			a	clean	clean	乾淨	safi	puhdas	tahir	llimphu	A	0,0,0,0,0	116,466,79,41,6	Sw:borrowed	adj.all	18	clean.a.01	free from dirt or impurities; or having clean habits	pending
+C0535	L			a	clear	clear	清晰+的	angavu	selvä	jelas	q'ispi	D	0,0,0,0,0	0,347,118,1352,21	In:borrowed	adj.all	17	clear.a.01	readily apparent to the mind	pending
+C0536	L			v	close	close	關	funga	sulkea	mengakhiri	wichq'ay	A	0,0,0,0,0	41041,23,68,587,7		verb.contact	17	close.v.01	move so that an opening or passage is obstructed; make shut	data-verified
+C0537	L			n	club	club	團體	kilabu	yhdistys	persatuan	maqana	A	0,0,0,0,0	4636,197,248,968,4	Sw:contact:English	noun.group	7	club.n.02	a formal association of people with similar interests	pending
+C0538	L			a	cold	cold	冷	baridi	kylmä	dingin	chiri	A	0,0,0,0,0	3754,1058,196,1580,75	Ch:borrowed;Sw:borrowed;In:borrowed	adj.all	13	cold.a.01	having a low or inadequate temperature or feeling a sensation of coldness or having been made cold by e.g. ice or refrigeration	pending
+C0539	L			n	cold	cold	感冒	baridi	vilustuminen	pilek	chiri	D	0,0,0,0,1	90,1058,0,18,75	Sw:borrowed	noun.state	3	cold.n.01	a mild viral infection involving the nose and respiratory passages (but not the lungs)	pending
+C0540	L			v	collect	collect	收集	changa	kerätä	menarik	pallay	B	0,0,0,0,1	653,56,105,1438,13		verb.possession	5	roll_up.v.02	get or gather together	pending
+C0541	L			v	come	come	到	ja	tulla	mendapatkan	hamuy	D	0,0,0,0,0	73414,58,391,2237,1	Fi:contact:English	verb.motion	21	arrive.v.01	reach a destination; arrive by movement or progress	pending
+C0542	L			n	commerce	commerce	商業	biashara	kauppa	perdagangan	qhatuy	C	0,2,0,0,1	3901,3858,408,2425,18	Sw:borrowed;In:borrowed	noun.act	3	commerce.n.01	transactions (sales and purchases) having the objective of supplying commodities (goods and services)	pending
+C0543	L			v	communicate	communicate	傳播	wasiliana	tartuttaa	mengirimkan	willay	C	0,0,0,0,3	2123,3,8,582,2309		verb.possession	7	convey.v.03	transfer to another	pending
+C0544	L			v	comprehend	comprehend	感知	maizi	käsittää	melihat	aypay	D	0,2,0,0,0	183,1,304,1714,4	Fi:contact:English	verb.perception	3	perceive.v.01	to become aware of through the senses	pending
+C0545	L			n	confusion	confusion	騷亂	mkanganyiko	sekasorto	kekacauan	pantay	A	0,0,0,0,0	276,17,7,170,7	Sw:borrowed	noun.state	5	confusion.n.01	disorder resulting from a failure to behave predictably	pending
+C0546	L			n	connection	connection	連結	uunganishaji	yhteys	ikatan	sat'iy	D	0,0,0,0,1	5526,18,378,1144,0		noun.relation	9	connection.n.01	a relation between things or events (as in the case of one causing the other or sharing features with it)	pending
+C0547	L			v	contend	contend	爭論	hasimu	keskustella	membatasi	atipanakuy	A	0,0,0,0,0	717,9,38,405,17	Sw:borrowed	verb.communication	6	argue.v.02	have an argument about something	pending
+C0548	L			v	convert	convert	皈依	hidi	kääntyä	masuk	tukuchiy	D	0,0,0,0,2	200,1,44,2645,1	Ch:borrowed;Sw:borrowed;Qu:borrowed	verb.change	11	convert.v.03	change religious beliefs, or adopt a religious belief	pending
+C0549	L			v	cool	cool	使冷卻	poa	viilentää	mendinginkan	chiriyachiy	D	0,0,0,0,0	2,28,26,37,0		verb.change	3	cool.v.01	make cool or cooler	pending
+C0550	L			v	copy	copy	模仿	iga	kopioida	meniru	yachapayay	D	0,0,0,0,1	441,9,15,118,1		verb.creation	4	imitate.v.01	reproduce someone's behavior or looks	pending
+C0551	L			v	correct	correct	賠償	sahihi	korjata	membenarkan	allinchay	B	0,0,0,0,1	370,633,78,120,16	Sw:borrowed;Qu:borrowed	verb.social	8	right.v.01	make reparations or amends for	pending
+C0552	L			n	country	country	國	nchi	yhteiskunta	bangsa	suyu	D	0,0,0,0,4	354305,17344,262,5785,11162		noun.group	5	state.n.04	a politically organized body of people under a single government	pending
+C0553	L			n	court	court	法院	korti	oikeudenistunto	pengadilan	kancha	D	0,0,0,0,0	3698,56,0,1213,57	Sw:contact:English	noun.group	11	court.n.01	an assembly (including one or more judges) to conduct judicial business	pending
+C0554	L			v	crack	crack	發出噼啪聲	alika	pamahtaa	menindas	laray	D	0,0,0,0,1	0,0,0,40,0		verb.perception	13	crack.v.02	make a very sharp explosive sound	pending
+C0555	L			v	create	create	創造	umba	perustaa	menciptakan	kamay	A	0,0,0,0,0	2104,34,263,1283,257		verb.creation	6	create.v.02	bring into existence	data-verified
+C0556	L			n	creation	creation	發明	uumbaji	luominen	penciptaan	wallpay	A	0,0,0,0,0	2593,127,68,235,3	Fi:borrowed	noun.act	6	creation.n.01	the human act of creating	pending
+C0557	L			v	crucify	crucify	十字架上釘死	sulubu	ristiinnaulita	menyalib	chakatay	D	0,0,0,0,0	0,4,2,3,1	Sw:borrowed	verb.social	4	crucify.v.01	kill by nailing onto a cross	pending
+C0558	L			v	crush	crush	禁止	ponda	tukahduttaa	menekan	chanqay	D	0,0,0,0,0	2038,16,27,245,0		verb.social	8	oppress.v.01	come down on or keep down by unjust use of one's authority	pending
+C0559	L			v	cry	cry	叫	lia	huutaa	menyebut	waqay	A	0,0,0,0,0	3245,11,14,1216,9		verb.communication	7	shout.v.02	utter a sudden loud cry	data-verified
+C0560	L			v	cultivate	cultivate	教育	lima	kehittää	memperoleh	yapuy	B	0,0,0,0,1	11469,81,316,1470,237		verb.social	4	educate.v.03	teach or refine to be discriminative in taste or judgment	pending
+C0561	L			n	culture	culture	文明	utamaduni	sivilisaatio	kebudayaan	kawsay	B	0,0,0,0,1	2094,2681,13,1574,3871		noun.group	7	culture.n.01	a particular society at a particular time and place	pending
+C0562	L			n	curve	curve	曲線	mchirizo	käyrä	lengkungan	q'iwi	C	0,0,0,0,2	590,10,37,49,13		noun.shape	5	curve.n.01	the trace of a point whose direction of motion changes	pending
+C0563	L			v	cut	cut	減少	kata	vähentää	mengurangi	kuchuy	A	0,0,0,0,0	2584,14833,331,974,5		verb.change	41	reduce.v.01	cut down on; make a reduction in	data-verified
+C0564	L			n	dance	dance	舞蹈	dansi	tanssiminen	tari	tusuy	A	0,0,0,0,0	742,252,7,721,118	Sw:borrowed,contact:English	noun.act	4	dancing.n.01	taking a series of rhythmical steps (and movements) in time to music	pending
+C0565	L			v	dance	dance	跳舞	rombosa	tanssia	menari	tusuy	D	0,0,0,0,0	140,0,46,81,118		verb.creation	3	dance.v.02	move in a pattern; usually to musical accompaniment; do or perform a dance	pending
+C0566	L			n	darkness	darkness	暗	giza	pimeys	gelap	laqha	A	0,0,0,0,0	2907,354,10,526,17		noun.state	6	dark.n.01	absence of light or illumination	data-verified
+C0567	L			n	dawn	dawn	黎明	mashariki	aamunkoitto	fajar	paqariy	A	0,0,0,0,0	391,11947,6,97,22	Sw:borrowed	noun.time	3	dawn.n.01	the first light of day	pending
+C0568	L			v	dawn	dawn	出現	cha	sarastaa	sinar	paqariy	D	0,0,0,0,0	10176,45228,1,782,22	In:borrowed	verb.stative	3	dawn.v.02	appear or develop	pending
+C0569	L			n	day	day	日	siku	päivä	hari	p'unchaw	A	0,0,0,0,0	139620,6785,1463,11691,996		noun.time	10	day.n.01	time for Earth to make a complete rotation on its axis	data-verified
+C0570	L			n	death	death	死	kifo	kuolema	maut	wañuy	A	0,0,0,0,0	16188,3181,335,94,68	Qu:borrowed	noun.event	8	death.n.01	the event of dying or departure from life	pending
+C0571	L			n	decay	decay	衰變	uozaji	rappeutuminen	kerusakan	ismuy	B	0,1,0,0,0	411,3,7,523,11	Sw:borrowed	noun.process	5	decay.n.01	the process of gradually becoming inferior	pending
+C0572	L			v	decay	decay	衰變	oza	hajota	membusuk	ismuy	D	0,2,0,0,1	411,0,49,26,11		verb.change	3	disintegrate.v.03	lose a stored charge, magnetic flux, or current	pending
+C0573	L			v	decorate	decorate	裝飾	pamba	koristaa	menghiasi	achalay	D	0,0,0,0,2	597,197,9,47,0	Sw:borrowed	verb.stative	4	deck.v.01	be beautiful to look at	pending
+C0574	L			v	defend	defend	保衛	linda	puolustaa	mempertahankan	amachay	B	0,1,0,0,0	577,80,98,1093,25		verb.competition	7	defend.v.03	protect against a challenge or attack	pending
+C0575	L			n	defense	defence	防禦機制	utetezi	puolustus	pertahanan	amachay	A	0,0,0,0,0	14,161,96,1615,25		noun.process	12	defense_mechanism.n.01	(psychiatry) an unconscious process that tries to reduce the anxiety associated with instinctive desires	data-verified
+C0576	L			v	delay	delay	延遲	kawa	pysäyttää	tahan	apatatay	D	0,0,0,0,0	203,19,54,370,0		verb.change	4	delay.v.01	cause to be slowed down or delayed	pending
+C0577	L			v	design	design	設計	chora	suunnitella	merencanakan	chantay	D	0,1,0,0,0	8286,5,117,218,2		verb.creation	7	design.v.04	make a design of; plan out in systematic, often graphic form	pending
+C0578	L			n	desire	desire	慾望	uchu	halu	kehendak	munay	C	0,0,0,0,2	259,44,82,216,77		noun.feeling	3	desire.n.01	the feeling that accompanies an unsatisfied state	pending
+C0579	L			n	destruction	destruction	破壞	maangamizi	hävitys	kehancuran	qulluy	A	0,0,0,0,0	2021,122,18,200,12		noun.event	3	destruction.n.02	an event (or the result of an event) that completely destroys something	data-verified
+C0580	L			v	develop	develop	開發	endelea	kehittää	berkembang	wiñay	C	0,3,0,0,2	5675,10,316,2478,3649	Sw:borrowed	verb.creation	21	develop.v.01	make something new, such as a product or a mental or artistic creation	pending
+C0581	L			v	die	die	死亡	fa	kuolla	hidup	wañuy	A	0,0,0,0,0	4175,236,83,4257,68	Qu:borrowed	verb.change	11	die.v.01	pass from physical life and lose all bodily attributes and functions necessary to sustain life	pending
+C0582	L			n	direction	direction	移動路線	mwelekeo	suunta	arah	kuska	D	0,0,0,0,4	0,441,123,1991,137	In:borrowed	noun.relation	9	direction.n.02	the spatial relation between something and the course along which it points or moves	pending
+C0583	L			a	dirty	dirty	髒+的	chafu	likainen	kumuh	khuchi	D	0,0,0,0,0	0,65,19,39,48		adj.all	12	dirty.a.01	soiled or likely to soil with dirt or grime	pending
+C0584	L			v	disturb	disturb	擾亂	sumbua	liikuttaa	mengganggu	piñay	D	0,0,0,0,4	93,0,24,270,0		verb.emotion	5	disturb.v.01	move deeply	pending
+C0585	L			v	divide	divide	分	gawa	jakaa	membatasi	rak'iy	B	0,0,0,0,1	81534,5,732,405,32		verb.social	6	divide.v.01	separate into parts or portions	pending
+C0586	L			n	division	division	師	mgawanyiko	divisioona	pasukan	t'aqa	A	0,0,0,0,0	20161,167,81,4408,70		noun.group	12	division.n.01	an army unit large enough to sustain combat	data-verified
+C0587	L			v	do	do	作	fanya	tehdä	membuat	ruway	A	0,0,0,0,0	86640,62,1066,5046,94		verb.social	13	make.v.01	engage in	data-verified
+C0588	L			n	downfall	downfall	毀滅	maanguko	romahdus	keruntuhan	urma	D	0,0,0,0,0	349,3,28,110,0		noun.event	3	downfall.n.01	failure that results in a loss of position or reputation	pending
+C0589	L			n	drama	drama	戲劇	drama	näytelmä	pementasan	aranwa	A	0,0,0,0,0	1665,115,123,66,131	Sw:contact:English	noun.communication	4	play.n.01	a dramatic work intended for performance by actors on a stage	pending
+C0590	L			n	dream	dream	夢	ndoto	uni	mimpi	musquy	A	0,0,0,0,0	2875,286,45,170,3		noun.cognition	6	dream.n.01	a series of mental images and emotions occurring during sleep	data-verified
+C0591	L			n	drop	drop	珠	tone	helmi	titik	sut'u	B	0,0,0,0,1	3413,53,105,2080,6	In:borrowed	noun.shape	9	drop.n.01	a shape that is spherical and small	pending
+C0592	L			n	drunkenness	drunkenness	酗酒	nishai	alkoholismi	alkoholisme	machay	D	0,0,0,0,0	100,2,35,5,6	Sw:borrowed	noun.state	3	alcoholism.n.01	habitual intoxication; prolonged and excessive intake of alcoholic drinks leading to a breakdown in health and an addiction to alcohol such that abrupt deprivation leads to severe withdrawal symptoms	pending
+C0593	L			a	dry	dry	幹+的	kavu	kuiva	dahaga	ch'aki	D	0,0,0,0,0	0,527,102,8,62		adj.all	16	dry.a.01	free from liquid or moisture; lacking natural or normal moisture or depleted of water; or no longer wet	pending
+C0594	L			n	east	east	東	matlai	I	Timur	anti	D	0,0,0,0,0	57530,0,3866,10900,337	Sw:borrowed;In:borrowed	noun.relation	5	east.n.01	the cardinal compass point that is at 90 degrees	pending
+C0595	L			n	edge	edge	範圍	ukingo	raja	tebing	pata	A	0,0,0,0,0	3773,111,576,229,155	Fi:borrowed	noun.shape	6	boundary.n.02	a line determining the limits of an area	pending
+C0596	L			v	educate	educate	教育	funza	kasvattaa	memelihara	uyway	D	0,0,0,0,3	11469,11,155,265,1		verb.social	3	educate.v.01	give an education to	pending
+C0597	L			n	education	education	教育	elimu	koulutus	pendidikan	yachachiy	C	0,0,0,0,2	11469,4769,541,4714,857	Sw:borrowed;Qu:borrowed	noun.act	6	education.n.01	the activities of educating or instructing; activities that impart knowledge or skill	pending
+C0598	L			n	eight	eight	八	nane	kahdeksan	delapan	pusaq	A	0,0,0,0,0	14804,949,848,851,963	Sw:borrowed;In:borrowed;Qu:borrowed	noun.quantity	3	eight.n.01	the cardinal number that is the sum of seven and one	pending
+C0599	L			n	elevation	elevation	頂點	mwinuko	huippu	puncak	huqari	D	0,0,0,0,0	295,137,125,1477,0	Sw:borrowed	noun.state	8	acme.n.01	the highest level or degree attainable; the highest stage of development	pending
+C0600	L			n	embrace	embrace	擁抱	pambaja	syleily	pelukan	marq'ay	D	0,0,0,0,0	88,0,1,7,0		noun.act	3	embrace.n.01	the act of clasping another person in the arms (as in greeting or affection)	pending
+C0601	L			v	embrace	embrace	包括	kubali	sisältää	mencakup	marq'ay	D	0,3,0,0,0	16905,5,1074,1505,0	Sw:borrowed	verb.stative	3	embrace.v.01	include in scope; include as part of something broader; have as one's sphere or territory	pending
+C0602	L			v	emerge	emerge	出現	ibuka	seurata	muncul	qispiy	D	0,0,0,0,1	10176,9,144,2802,2	Fi:contact:English	verb.stative	5	come_forth.v.02	happen or occur as a result of something	pending
+C0603	L			n	emptiness	emptiness	空虛	utupu	tyhjyys	kehampaan	chusaq	A	0,0,0,0,0	96,32,4,6,5	Sw:borrowed	noun.state	4	emptiness.n.01	the state of containing nothing	pending
+C0604	L			v	enchant	enchant	著迷	roga	valloittaa	menawan	watuy	D	0,1,0,0,0	50,2,72,60,3		verb.emotion	3	capture.v.02	attract; cause to be enamored	pending
+C0605	L			n	encounter	encounter	邂逅	makabiliano	tapaaminen	pertemuan	tupay	D	0,0,0,0,1	43,13,42,1194,2		noun.event	4	meeting.n.03	a casual or unexpected convergence	pending
+C0606	L			v	end	end	完	maliza	loppua	menyelesaikan	qispichiy	B	0,1,0,0,0	14818,3,127,829,13	Qu:borrowed	verb.stative	4	end.v.01	have an end, in a temporal, spatial, or quantitative sense; either spatial or metaphorical	pending
+C0607	L			n	error	error	錯誤	kasoro	virhe	kesalahan	alqa	B	0,1,0,0,0	1749,248,76,466,15	Sw:borrowed	noun.act	7	mistake.n.01	a wrong action attributable to bad judgment or ignorance or inattention	pending
+C0608	L			n	eternity	eternity	永遠	milele	ikuisuus	kekekalan	wiñay	D	0,0,0,0,0	713,675,2,88,3649	Sw:borrowed	noun.time	3	eternity.n.01	time without end	pending
+C0609	L			v	excavate	excavate	發掘	chimba	löytää	menggali	allay	D	0,1,0,0,3	516,3,254,76,1	In:borrowed,contact:English	verb.perception	4	excavate.v.01	recover through digging	pending
+C0610	L			v	exceed	exceed	超過	pita	ylittää	melebihi	yalliy	D	0,1,0,0,2	4897,16,167,397,0		verb.stative	3	exceed.v.01	be greater in scope or size than some standard	pending
+C0611	L			v	expect	expect	預期	rajua	odottaa	menduga	suyay	D	0,0,0,0,1	452,1,104,148,0	Sw:borrowed	verb.cognition	6	expect.v.01	regard something as probable or likely	pending
+C0612	L			v	explain	explain	解釋	hadithi	selittää	menyatakan	alayrichiy	D	0,0,0,0,0	3189,1731,252,3564,0	Sw:borrowed	verb.communication	3	explain.v.01	make plain and comprehensible	pending
+C0613	L			v	expose	expose	暴露	gundua	ilmaista	memberikan	rikuchiy	D	0,2,0,0,1	404,1,183,3922,39	Qu:borrowed	verb.communication	9	unwrap.v.02	make known to the public information that was previously known only to a few people or that was meant to be kept a secret	pending
+C0614	L			n	expression	expression	措辭	usemi	ilmaisu	peribahasa	ñiy	A	0,0,0,0,0	51,75,52,66,3		noun.communication	9	saying.n.01	a word or phrase that particular people use in particular situations	data-verified
+C0615	L			v	extend	extend	延伸	tanda	laajentaa	memperluas	mast'ay	C	0,1,0,0,3	1868,22,114,454,7		verb.change	17	widen.v.04	extend in scope or range or area	pending
+C0616	L			n	face	face	面	uso	kasvot	wajah	uya	A	0,0,0,0,0	40403,1044,70,338,65		noun.body	13	face.n.01	the front of the human head from the forehead to the chin and ear to ear	data-verified
+C0617	L			v	fail	fail	忽略	feli	laiminlyödä	jatuh	qulluy	D	0,0,0,0,0	363,3,1,1369,12	Sw:contact:English;Fi:borrowed;In:contact:English	verb.social	11	fail.v.01	fail to do something; leave something undone	pending
+C0618	L			n	failure	failure	失敗	ushinde	epäonnistuminen	kegagalan	alqa	B	0,0,0,0,1	2037,6,27,366,15	Sw:borrowed	noun.state	7	failure.n.03	lack of success	pending
+C0619	L			n	fall	fall	下降	anguko	rinne	keturunan	urmay	A	0,0,0,0,0	1933,51,103,1731,3	Sw:borrowed	noun.object	12	descent.n.05	a downward slope or bend	pending
+C0620	L			v	fall	fall	落	anguka	pudota	jatuh	urmay	D	0,0,0,0,0	9347,1,17,1369,3	Sw:borrowed;In:contact:English	verb.motion	32	fall.v.01	descend in free fall under the influence of gravity	pending
+C0621	L			n	family	family	戶	familia	talous	keluarga	miray	C	0,0,0,0,2	6941,4381,1165,3098,30	Sw:borrowed;In:borrowed	noun.group	8	family.n.01	a social unit living together	pending
+C0622	L			v	farm	farm	務農	lima	viljellä	berkebun	chahrakuy	D	0,1,0,0,0	81,81,49,17,0		verb.social	3	farm.v.01	be a farmer; work as a farmer	pending
+C0623	L			n	fatigue	fatigue	疲勞	uchovu	uupumus	letih	sayk'uy	D	0,0,0,0,2	72,99,3,14,0	Sw:borrowed	noun.state	4	fatigue.n.01	temporary loss of strength and energy resulting from hard physical or mental work	pending
+C0624	L			n	fault	fault	錯誤	kosa	virhe	kesalahan	hucha	B	0,0,0,0,1	1749,321,76,466,7		noun.act	7	mistake.n.01	a wrong action attributable to bad judgment or ignorance or inattention	pending
+C0625	L			v	fear	fear	怕	cha	pelätä	takut	may	A	0,0,0,0,0	865,45228,24,290,160		verb.emotion	5	fear.v.02	be afraid or scared of; be frightened of	data-verified
+C0626	L			v	feel	feel	感	hisi	kokea	mengalami	kullay	D	0,0,0,0,0	9781,311,62,3230,2	Sw:borrowed	verb.emotion	13	feel.v.01	undergo an emotional sensation or be in a particular state of mind	pending
+C0627	L			v	fill	fill	填補	jaza	täyttää	memenuhi	hunt'achiy	D	0,1,0,0,0	126,7,137,874,1	Qu:borrowed	verb.change	9	fill.v.01	make full, also in a metaphorical sense	pending
+C0628	L			v	find	find	碰巧	kuta	löytää	terdapat	tariy	B	0,1,0,0,0	21,284,254,7530,13		verb.possession	16	find.v.01	come upon, as if by accident; meet with	pending
+C0629	L			v	finish	finish	結束	maliza	päättää	menyelesaikan	tukuchiy	D	0,0,0,0,3	5549,3,286,829,1	Qu:borrowed	verb.change	6	complete.v.01	come or bring to a finish or an end	pending
+C0630	L			v	fit	fit	符合	faa	sopia	sesuai	paqtay	D	0,0,0,0,1	1228,8,34,2240,1		verb.stative	9	suit.v.01	be agreeable or acceptable to	pending
+C0631	L			n	five	five	五	tano	V	lima	pichqa	A	0,0,0,0,0	24181,1593,1533,2722,238	In:borrowed	noun.quantity	3	five.n.01	the cardinal number that is the sum of four and one	pending
+C0632	L			v	follow	follow	隨	fuata	seurata	ikut	qatiy	A	0,0,0,0,0	13521,9,144,1059,13	Fi:contact:English	verb.motion	24	follow.v.01	to travel behind, go after, come after	pending
+C0633	L			n	food	food	食物	chakula	ravinto	makanan	mikhuy	A	0,0,0,0,0	1318,2520,405,2315,44		noun.Tops	3	food.n.01	any substance that can be metabolized by an animal to give energy and build tissue	data-verified
+C0634	L			n	foot	foot	足	futi	jalka	kaki	chaki	A	0,0,0,0,0	11275,285,42,1906,84	Ch:borrowed;Sw:borrowed,contact:English	noun.body	11	foot.n.01	the part of the leg of a human being below the ankle joint	pending
+C0635	L			n	force	force	勢力	mkazo	voima	kehebatan	kallpa	B	0,0,0,0,1	2522,135,265,37,50	Sw:borrowed	noun.attribute	10	force.n.03	physical energy or intensity	pending
+C0636	L			v	forget	forget	忘	sahau	unohtaa	menahan	qunqay	D	0,0,0,0,0	874,3,9,306,2	Sw:borrowed	verb.cognition	4	forget.v.02	be unable to remember	pending
+C0637	L			n	form	form	形式	fomu	muoto	berbentuk	rikch'a	B	0,0,0,0,1	5039,102,568,1217,358	Sw:borrowed,contact:English	noun.cognition	16	form.n.03	a perceptual structure	pending
+C0638	L			v	found	found	建立	asisi	perustaa	diri	kamay	C	0,0,0,0,2	11014,3,263,4321,257	Sw:borrowed	verb.social	19	establish.v.01	set up or found	pending
+C0639	L			n	foundation	foundation	基礎	msingi	pohja	dasar	tiqsi	B	0,1,0,0,0	5461,3293,94,3667,20		noun.relation	7	foundation.n.01	the basis on which something is grounded	pending
+C0640	L			n	fraction	fraction	分數	sehemu	murtoluku	pecahan	ch'iqta	C	0,2,0,0,2	366,11056,7,259,6	Sw:borrowed	noun.quantity	3	fraction.n.03	the quotient of two rational numbers	pending
+C0641	L			n	freedom	freedom	自由	uhuru	vapaus	kemerdekaan	qispiy	D	0,0,0,0,0	8524,2841,186,2627,2		noun.state	2	freedom.n.01	the condition of being free; the power to act or speak or think without externally imposed restraints	pending
+C0642	L			v	freeze	freeze	凍結	ganda	jäätyä	membeku	alalay	B	0,1,0,0,1	144,288,56,50,24		verb.change	10	freeze.v.02	change to ice	pending
+C0643	L			a	fresh	fresh	鮮	pya	tuore	baru	p'api	D	0,1,0,0,1	9934,1,37,11228,0		adj.all	12	fresh.a.01	recently made, produced, or harvested	pending
+C0644	L			n	future	future	以後	mustakabali	tulevaisuus	bakal	qhipa	A	0,0,0,0,0	3278,31,91,271,123	Sw:borrowed	noun.time	3	future.n.01	the time yet to come	pending
+C0645	L			v	gain	gain	得到	nufaika	saada	mendapat	usachiy	D	0,1,0,0,2	5686,0,1165,1850,0	Sw:borrowed;Qu:borrowed	verb.possession	9	derive.v.02	obtain	pending
+C0646	L			n	game	game	遊戲	mchezo	peli	olahraga	pukllay	A	0,0,0,0,0	5516,1470,383,1824,231	Fi:borrowed	noun.act	11	game.n.01	a contest with rules to determine a winner	pending
+C0647	L			v	gather	gather	集合	chuma	kokoontua	mengumpulkan	pallay	A	0,0,0,0,0	1934,673,16,505,13		verb.social	9	meet.v.07	collect in one place	data-verified
+C0648	L			n	gathering	gathering	大會	mkusanyiko	kokoontuminen	pertemuan	tanta	B	0,0,0,0,1	5282,441,14,1194,39		noun.act	4	assembly.n.06	the social act of assembling	pending
+C0649	L			v	get	get	獲得	pata	saada	dapat	chaskiy	B	0,0,0,0,1	10032,39,1165,18977,6		verb.possession	36	get.v.01	come into the possession of something concrete or abstract	pending
+C0650	L			v	give	give	給	toa	aiheuttaa	membuat	quy	A	0,0,0,0,0	13393,24,1025,5046,19	Ch:borrowed,contact:English+Mandarin	verb.possession	44	give.v.01	cause to have, in the abstract sense or physical sense	pending
+C0651	L			n	glory	glory	輝煌	utukufu	kunnia	pemujaan	yupaychay	B	0,0,0,0,1	224,260,53,208,3	Sw:borrowed;Fi:contact:English;Qu:borrowed	noun.state	3	glory.n.01	a state of high honor	pending
+C0652	L			v	go	go	執行	enda	siirtyä	hidup	puriy	B	0,1,0,0,0	3923,10,151,4257,1450		verb.motion	30	travel.v.01	change location; move, travel, or proceed, also metaphorically	pending
+C0653	L			n	gold	gold	金幣	dhahabu	kulta	emas	quri	A	0,0,0,0,0	72,1063,259,2067,202	Sw:borrowed;Fi:contact:English	noun.possession	5	gold.n.01	coins made of gold	pending
+C0654	L			a	good	good	體面	ema	hyvä	sopan	allin	A	0,0,0,0,0	43,6,599,74,580		adj.all	21	estimable.s.01	deserving of esteem and respect	data-verified
+C0655	L			n	goods	goods	優良	bidhaa	hyvä	kebaikan	kapuy	B	0,1,0,0,1	211,1309,599,150,6	Sw:borrowed	noun.attribute	4	good.n.02	moral excellence or admirableness	pending
+C0656	L			n	grace	grace	赦免	neema	armo	anugerah	k'acha	B	0,0,0,0,1	173,857,26,267,4	Sw:borrowed	noun.state	7	grace.n.01	(Christian theology) a state of sanctification by God; the state of one who is under such divine influence	pending
+C0657	L			v	grant	grant	讓	jalia	antaa	memberikan	quriy	D	0,0,0,0,0	8741,1,846,3922,5	Ch:borrowed;Sw:borrowed	verb.possession	7	allow.v.03	let have	pending
+C0658	L			v	greet	greet	使受到	amkia	kohdata	menyambut	rimaykuy	D	0,0,0,0,0	6,0,23,182,1	Qu:borrowed	verb.perception	4	greet.v.04	be perceived by	pending
+C0659	L			n	grief	grief	痛苦	majonzi	murhe	kesedihan	llaki	B	0,0,0,0,1	349,14,3,57,27		noun.feeling	2	grief.n.01	intense sorrow caused by loss of a loved one (especially by death)	pending
+C0660	L			v	grind	grind	辛苦工作	saga	ahkeroida	mencungkil	kutay	D	0,0,0,0,0	2,60,1,4,0		verb.social	7	labor.v.02	work hard	pending
+C0661	L			v	grow	grow	成熟	kua	kasvaa	mematangkan	wiñay	A	0,0,0,0,0	760,139,971,4,3649		verb.change	10	mature.v.01	develop and reach maturity; undergo maturation	data-verified
+C0662	L			n	guilt	guilt	罪行	hatia	syyllisyys	kesalahan	hucha	B	0,1,0,0,0	428,179,6,466,7	Sw:borrowed	noun.state	2	guilt.n.01	the state of having committed an offense	pending
+C0663	L			n	half	half	半	nusu	puolet	separuh	ch'iqta	A	0,0,0,0,0	12028,1269,896,170,6	Sw:borrowed	noun.quantity	2	one-half.n.01	one of two equal parts of a divisible whole	pending
+C0664	L			n	hand	hand	手	mkono	käsi	tangan	maki	A	0,0,0,0,0	23996,1288,105,1850,97	In:borrowed	noun.body	14	hand.n.01	the (prehensile) extremity of the superior limb	pending
+C0665	L			v	hang	hang	掛	nyonga	ripustaa	tergantung	sipiy	C	0,2,0,0,1	1291,28,7,665,7	Fi:borrowed	verb.contact	15	hang.v.02	cause to be hanging or suspended	pending
+C0666	L			v	happen	happen	發生	tukia	mennä	terdapat	tukuy	D	0,1,0,0,0	9415,0,109,7530,831		verb.change	5	happen.v.01	come to pass	pending
+C0667	L			a	hard	hard	難	gumu	vaikea	berat	rumi	A	0,0,0,0,0	8099,99,410,1354,249		adj.all	12	difficult.a.01	not easy; requiring great physical or mental effort to accomplish or comprehend or endure	data-verified
+C0668	L			n	head	head	頭	kichwa	pää	kepala	uma	A	0,0,0,0,0	13408,1439,363,3549,6665	In:borrowed,contact:English	noun.body	33	head.n.01	the upper part of the human body or the front part of the body in animals; contains the face and brains	pending
+C0669	L			v	hear	hear	聽	sikia	kuulla	mendengar	uyariy	A	0,0,0,0,0	3592,5,118,463,19	Ch:borrowed,contact:English	verb.perception	5	hear.v.01	perceive (sound) via the auditory sense	pending
+C0670	L			n	heart	heart	心	moyo	sydän	hati	sunqu	A	0,0,0,0,0	28629,1949,210,1128,105		noun.cognition	10	heart.n.01	the locus of feelings and intuitions	data-verified
+C0671	L			n	heat	heat	激動	joto	intohimo	perasaan	ruphay	A	0,0,0,0,0	87,1781,9,273,41		noun.attribute	7	heat.n.04	the trait of being intensely emotional	data-verified
+C0672	L			a	heavy	heavy	重+的	zito	raskas	berat	llasaq	D	0,0,0,0,0	0,47,101,1354,36		adj.all	27	heavy.a.01	of comparatively great physical weight or density	pending
+C0673	L			n	height	height	頂點	urefu	huippu	puncak	hatun	B	0,0,0,0,1	295,2338,125,1477,4340		noun.state	4	acme.n.01	the highest level or degree attainable; the highest stage of development	pending
+C0674	L			v	help	help	幫	saidia	auttaa	menyumbang	yanapay	A	0,0,0,0,0	3273,13,202,287,14	Sw:borrowed	verb.social	8	help.v.01	give help or assistance; be of service	pending
+C0675	L			v	hesitate	hesitate	不願	sita	epäröidä	ragu-ragu	iskayyay	D	0,0,0,0,0	757,1977,4,0,0	Sw:borrowed	verb.stative	2	hesitate.v.01	pause or hold back in uncertainty or unwillingness	pending
+C0676	L			v	hide	hide	藏	ficha	piilottaa	menutup	pakay	D	0,0,0,0,0	10017,0,32,288,24	Ch:borrowed	verb.perception	4	hide.v.01	prevent from being seen or discovered	pending
+C0677	L			v	hire	hire	聘	ajiri	palkata	mengambil	mink'ay	D	0,0,0,0,3	980,9,15,1996,0	Sw:borrowed	verb.social	3	hire.v.01	engage or hire for work	pending
+C0678	L			v	hit	hit	擊	piga	osua	melanda	takay	C	0,0,0,0,3	16823,28,17,178,4		verb.contact	17	hit.v.02	hit against; come into sudden contact with	pending
+C0679	L			v	honor	honour	授予榮譽	sharifu	palkita	kehormatan	yupaychay	A	0,0,0,0,0	23,19,7,775,3	Sw:borrowed;Qu:borrowed	verb.social	3	honor.v.01	bestow honor or rewards upon	pending
+C0680	L			n	honor	honour	榮譽	staha	kunnia	penghargaan	sumay	B	0,1,0,0,0	1686,6,53,1813,3	Sw:borrowed;Fi:contact:English;Qu:borrowed	noun.state	4	honor.n.02	the state of being honored	pending
+C0681	L			n	hope	hope	希望	matumaini	toivo	harapan	suyay	D	0,0,0,0,0	2938,198,404,716,0		noun.feeling	6	hope.n.02	the general feeling that some desire will be fulfilled	pending
+C0682	L			n	hour	hour	小時	saa	h	jam	phani	A	0,0,0,0,0	2479,1107,1494,1847,4	Sw:borrowed	noun.time	4	hour.n.01	a period of time equal to 1/24th of a day	pending
+C0683	L			n	humour	humour	情緒	ucheshi	tuuli	angin	asipayay	D	0,0,0,0,0	580,92,141,1043,0		noun.feeling	6	temper.n.02	a characteristic (habitual or relatively temporary) state of feeling	pending
+C0684	L			n	hunger	hunger	渴望	njaa	nälkä	kelaparan	yarqay	A	0,0,0,0,0	169,358,24,289,5		noun.state	2	hunger.n.01	a physiological need for food; the consequence of food deprivation	data-verified
+C0685	L			n	hurry	hurry	倉促	haraka	hoppu	bersegera	utqay	A	0,0,0,0,0	57,1467,16,3,5	Sw:borrowed	noun.state	3	hurry.n.01	a condition of urgency making it necessary to hurry	pending
+C0686	L			v	hurt	hurt	疼	dhuru	koskea	sakit	nanay	D	0,0,0,0,0	169,0,25,1720,71	Sw:borrowed	verb.perception	7	ache.v.03	be the source of pain	pending
+C0687	L			n	idea	idaea	思想	wazo	ajatus	pendapat	yuyay	B	0,1,0,0,1	5598,461,346,1049,131	Sw:borrowed	noun.cognition	5	idea.n.01	the content of cognition; the main thing you are thinking about	pending
+C0688	L			v	illuminate	illuminate	照明	mulika	valaista	menerangkan	achikyay	A	0,0,0,0,0	164,8,5,78,8		verb.change	3	light.v.01	make lighter or brighter	data-verified
+C0689	L			n	image	image	形象	taswira	mielikuva	bayangan	rikch'a	A	0,0,0,0,0	1548,132,13,177,358	Sw:borrowed	noun.cognition	9	image.n.01	an iconic mental representation	pending
+C0690	L			v	imitate	imitate	模仿	geza	kopioida	meniru	yachapayay	D	0,0,0,0,2	441,5,15,118,1		verb.creation	3	imitate.v.01	reproduce someone's behavior or looks	pending
+C0691	L			v	improve	improve	提高	boresha	parantaa	memajukan	allinchay	D	0,0,0,0,4	1979,1,236,143,16	Qu:borrowed	verb.change	2	better.v.02	to make better	pending
+C0692	L			n	increase	increase	增加量	zaidi	lisäys	tambahan	yapa	D	0,0,0,0,2	1,20246,71,1137,8		noun.quantity	5	addition.n.03	a quantity that is added	pending
+C0693	L			v	introduce	introduce	瞭解	ingiza	tutustuttaa	memperkenalkan	apaykuy	D	0,3,0,0,0	1565,5,3,633,0		verb.communication	10	introduce.v.01	cause to come to know personally	pending
+C0694	L			v	invent	invent	製造	buni	keksiä	membuat	wallpay	B	0,1,0,0,1	3774,20,23,5046,3	Sw:borrowed;Fi:borrowed	verb.creation	2	fabricate.v.02	make up something artificial or untrue	pending
+C0695	L			v	invite	invite	請	alika	kutsua	undang	qayay	D	0,0,0,0,1	6883,0,349,4085,12		verb.social	8	invite.v.02	invite someone to one's house	pending
+C0696	L			v	join	join	加入	unga	liittyä	masuk	huñuy	A	0,0,0,0,0	4603,229,205,2645,5		verb.social	5	join.v.01	become part of; become a member of a group or organization	data-verified
+C0697	L			n	joy	joy	快樂	furaha	onni	kegembiraan	kusi	B	0,0,0,0,1	347,455,170,44,56	Sw:borrowed	noun.feeling	2	joy.n.01	the emotion of great happiness	pending
+C0698	L			n	judgement	judgement	判決書	uamuzi	päätös	pengadilan	taripay	B	0,1,0,0,0	34,403,256,1213,830	Sw:borrowed;Qu:borrowed	noun.communication	7	opinion.n.04	the legal document stating the reasons for a judicial decision	pending
+C0699	L			n	justice	justice	正義	insafu	oikeudenmukaisuus	keadilan	taripay	D	0,1,0,0,1	628,0,25,376,830	Sw:borrowed;Qu:borrowed	noun.attribute	4	justice.n.01	the quality of being just or fair	pending
+C0700	L			n	key	key	鑰匙	ufunguo	avain	kunci	p'uti	D	0,0,0,0,2	87,54,54,535,1	In:contact:English	noun.artifact	15	key.n.01	metal device shaped in such a way that when it is inserted into the appropriate lock the lock's mechanism can be rotated	pending
+C0701	L			n	kick	kick	反衝	teke	potku	tendangan	hayt'a	D	0,0,0,0,0	25,14,3,83,1		noun.cognition	6	kick.n.05	the sudden stimulation provided by strong drink (or certain drugs)	pending
+C0702	L			v	kill	kill	殺	ua	murhata	bunuh	wañuchiy	A	0,0,0,0,0	10975,159,55,255,23	Ch:borrowed;Qu:borrowed	verb.contact	15	kill.v.01	cause to die; put to death, usually intentionally or knowingly	pending
+C0703	L			v	know	know	會	jua	osata	mengetahui	yachay	A	0,0,0,0,0	123933,1546,25,818,5455	Ch:contact:Min Nan	verb.cognition	11	know.v.02	know how to do or perform something	pending
+C0704	L			n	labor	labour	無產階級	leba	työläiset	pegawai	llamkay	D	0,1,0,0,1	673,15,68,483,2	Sw:borrowed,contact:English	noun.group	7	labor.n.01	a social class comprising those who do manual labor or work for wages	pending
+C0705	L			n	land	land	不動產	ardhi	maa	tanah	allpa	A	0,0,0,0,0	35,1726,2047,5427,4912		noun.possession	11	land.n.01	the land on which real estate is located	data-verified
+C0706	L			n	language	language	語言	lugha	kieli	bahasa	parlay	D	0,0,0,0,1	10002,43425,1215,25178,0	Qu:borrowed	noun.communication	6	language.n.01	a systematic means of communicating by the use of sounds or conventional symbols	pending
+C0707	L			n	law	law	法律系統	sheria	laki	hukum	kamachiy	B	0,0,0,0,1	18,3701,646,5048,264	Sw:borrowed;Fi:borrowed;Qu:borrowed	noun.group	7	law.n.01	the collection of rules imposed by authority	pending
+C0708	L			v	leak	leak	漏	vuja	vuotaa	bocor	suruy	D	0,0,0,0,3	706,0,11,49,2		verb.change	4	leak.v.03	enter or escape as through a hole or crack or fissure	pending
+C0709	L			v	leave	leave	離開	acha	lähteä	tinggal	ripuy	D	0,0,0,0,0	2425,38,136,2486,2		verb.motion	14	exit.v.01	move out of or depart from	pending
+C0710	L			n	lie	lie	謊言	uongo	vale	tipu	llulla	A	0,0,0,0,0	77,181,9,38,20		noun.communication	3	lie.n.01	a statement that deviates from or perverts the truth	data-verified
+C0711	L			v	lie	lie	位於	danganya	olla	terletak	siriy	D	0,0,0,0,0	9938,1,4380,5551,14		verb.stative	7	lie.v.01	be located or situated somewhere; occupy a certain position	pending
+C0712	L			v	lift	lift	提高	inua	nostaa	naik	huqariy	B	0,0,0,0,1	1979,10,275,1179,3	Sw:borrowed	verb.motion	24	raise.v.02	raise from a lower to a higher position	pending
+C0713	L			n	light	light	光源	mwanga	valo	lampu	sut'i	A	0,0,0,0,0	143,779,283,309,16		noun.artifact	15	light.n.02	any device serving as a source of illumination	data-verified
+C0714	L			a	light	light	輕+的	epesi	kevyt	ringan	chhalla	D	0,0,0,0,0	0,1,78,658,11		adj.all	25	light.a.01	of comparatively little physical weight or density	pending
+C0715	L			v	like	like	喜歡	penda	pitää	menggemari	khuyay	B	0,1,0,0,1	1141,14,1748,28,12	Fi:contact:English	verb.emotion	5	like.v.03	be fond of	pending
+C0716	L			n	line	line	排隊	mstari	jono	deretan	siq'i	A	0,0,0,0,0	60,595,30,67,189	Sw:borrowed	noun.group	30	line.n.03	a formation of people or things one behind another	pending
+C0717	L			n	liquid	liquid	液態	kiowevu	neste	cairan	puriqlla	A	0,0,0,0,0	258,267,104,500,26		noun.state	4	liquid.n.02	the state in which a substance exhibits a characteristic readiness to flow with little or no tendency to disperse and relatively high incompressibility	data-verified
+C0718	L			v	listen	listen	聽	sikiza	kuunnella	dengar	uyariy	D	0,0,0,0,1	3592,0,35,54,19	Ch:borrowed,contact:English	verb.perception	3	listen.v.01	hear with intention	pending
+C0719	L			v	live	live	住	ishi	elää	hidup	kawsay	A	0,0,0,0,0	9394,12,825,4257,3871	Sw:borrowed	verb.stative	7	populate.v.01	inhabit or live in; be an inhabitant of	pending
+C0720	L			v	lose	lose	喪失	pota	hukata	kalah	chinkachiy	D	0,0,0,0,0	467,3,2,613,2	Qu:borrowed	verb.possession	11	lose.v.01	fail to keep or to maintain; cease to have, either physically or in an abstract sense	pending
+C0721	L			n	loss	loss	損失	hasara	menetys	kehilangan	chinka	D	0,0,0,0,0	1219,270,64,888,1	Sw:borrowed;In:borrowed	noun.possession	8	loss.n.01	something that is lost	pending
+C0722	L			n	love	love	愛的物件	upendo	rakkaus	cinta	munay	D	0,0,0,0,1	1,1907,141,845,77		noun.cognition	6	love.n.02	any object of warm affection or devotion	pending
+C0723	L			n	luck	luck	情況	sudi	osa	nasib	ataw	A	0,0,0,0,0	5509,27,6318,270,12	Sw:borrowed	noun.state	3	fortune.n.04	your overall circumstances or condition in life (including everything that happens to you)	pending
+C0724	L			v	make	make	作	tengeneza	tehdä	membuat	ruway	B	0,0,0,0,1	86640,7,1066,5046,94		verb.social	49	make.v.01	engage in	pending
+C0725	L			n	man	man	男人	mwanaume	mies	lelaki	qhari	A	0,0,0,0,0	369,137,610,285,4510	In:borrowed	noun.person	11	man.n.01	an adult person who is male (as opposed to a woman)	pending
+C0726	L			n	manner	manner	方式	namna	käytös	cara	hina	B	0,1,0,0,0	6552,2185,64,3253,816	Sw:borrowed	noun.attribute	3	manner.n.02	a way of acting or behaving	pending
+C0727	L			n	marriage	marriage	婚姻	ndoa	liitto	kesatuan	kasarakuy	A	0,0,0,0,0	1798,1015,619,726,7	Sw:borrowed	noun.state	4	marriage.n.01	the state of being a married couple voluntarily joined for life (or until divorce)	pending
+C0728	L			n	matter	matter	物質	maada	materia	bahan	imayay	B	0,1,0,0,0	3744,111,13,3493,39	Sw:borrowed;In:borrowed	noun.Tops	6	matter.n.03	that which has mass and occupies space	pending
+C0729	L			n	measure	measure	措施	kiasi	keino	jalan	tupuy	B	0,1,0,0,1	1263,3103,111,5350,75	Sw:borrowed	noun.act	9	measure.n.01	any maneuver made as part of progress toward a goal	pending
+C0730	L			v	meet	meet	見	laki	nähdä	menghadapi	huñunakuy	B	0,0,0,0,1	19032,60,333,863,39	Sw:borrowed	verb.motion	13	meet.v.01	come together	pending
+C0731	L			v	melt	melt	溶解	yeyuka	sulaa	larut	unuyay	D	0,1,0,0,0	255,0,61,211,0	Qu:borrowed	verb.change	6	dissolve.v.09	become or cause to become soft or liquid	pending
+C0732	L			n	memory	memory	回憶	ukumbuko	muisto	kenangan	yuyay	D	0,0,0,0,0	989,0,32,91,131	Sw:borrowed	noun.cognition	5	memory.n.01	something that is remembered	pending
+C0733	L			v	mention	mention	提	taja	viitata	menyatakan	willay	D	0,0,0,0,4	31906,2,126,3564,2309		verb.communication	3	mention.v.01	make reference to	pending
+C0734	L			n	mercy	mercy	仁慈	huruma	armo	pengampunan	k'acha	C	0,0,0,0,2	70,371,26,73,4	Sw:borrowed;In:borrowed	noun.act	5	clemency.n.02	leniency and compassion shown toward offenders by a person or agency charged with administering justice	pending
+C0735	L			n	million	million	一百萬	milioni	meg	juta	hunu	A	0,0,0,0,0	159,3215,8,4107,293	Sw:contact:English;In:borrowed	noun.quantity	2	million.n.01	the number that is represented as a one followed by 6 zeros	pending
+C0736	L			n	minute	minute	分	dakika	min	menit	chinini	A	0,0,0,0,0	81534,656,259,679,5	In:borrowed	noun.time	6	minute.n.01	a unit of time equal to 60 seconds or 1/60th of an hour	pending
+C0737	L			n	misery	misery	不幸	taabu	kurjuus	kesengsaraan	muchuy	C	0,2,0,0,1	357,34,12,49,7	Sw:borrowed	noun.state	2	misery.n.01	a state of ill-being due to affliction or misfortune	pending
+C0738	L			n	mistake	mistake	錯誤	manza	virhe	kesalahan	panta	A	0,0,0,0,0	1749,14,76,466,12	Sw:borrowed	noun.act	3	mistake.n.01	a wrong action attributable to bad judgment or ignorance or inattention	pending
+C0739	L			n	money	money	錢	doo	raha	uang	qullqi	A	0,0,0,0,0	4573,30,151,2415,209	Sw:contact:English;In:borrowed,contact:Hokkien	noun.possession	3	money.n.01	the most common medium of exchange; functions as legal tender	pending
+C0740	L			n	moon	moon	朔望月	mwezi	kuukausi	bulan	killa	A	0,0,0,0,0	81,2642,202,8512,976		noun.time	6	lunar_month.n.01	the period between successive new moons (29.531 days)	data-verified
+C0741	L			n	morning	morning	上午	asubuhi	aamu	pagi	paqarin	A	0,0,0,0,0	478,347,40,497,43	Sw:borrowed	noun.time	4	morning.n.01	the time period between dawn and noon	pending
+C0742	L			n	multiplication	multiplication	增加	uzidishaji	moninkertaistuminen	perkalian	miray	D	0,0,0,0,1	5907,1,0,180,30		noun.process	3	multiplication.n.02	a multiplicative increase	pending
+C0743	L			n	music	music	音樂	muziki	musiikki	musik	taki	C	0,0,0,0,2	9187,5314,562,3033,447	Sw:borrowed,contact:English;Fi:borrowed;In:borrowed	noun.communication	5	music.n.01	an artistic form of auditory communication incorporating instrumental or vocal tones in a structured and continuous manner	pending
+C0744	L			n	name	name	名	jina	nimi	bernama	suti	A	0,0,0,0,0	65793,15148,1994,3774,152		noun.communication	6	name.n.01	a language unit by which a person or thing is known	data-verified
+C0745	L			n	nation	nation	國	taifa	yhteiskunta	bangsa	suyu	D	0,0,0,0,5	354305,5865,262,5785,11162	Sw:borrowed	noun.group	4	state.n.04	a politically organized body of people under a single government	pending
+C0746	L			a	new	new	新+的	pya	uusi	baru	musuq	D	0,0,0,0,0	0,1,2401,11228,986		adj.all	11	new.a.01	not of long duration; having just (or relatively recently) come into being or been made or acquired or discovered	pending
+C0747	L			n	night	night	夜	usiku	yö	malam	tuta	A	0,0,0,0,0	3834,1134,151,1521,42		noun.time	8	night.n.01	the time after sunset and before sunrise while it is dark outside	data-verified
+C0748	L			n	nine	nine	九	tisa	yhdeksän	sembilan	isqun	A	0,0,0,0,0	12623,901,592,702,118	In:borrowed	noun.quantity	3	nine.n.01	the cardinal number that is the sum of eight and one	pending
+C0749	L			n	noise	noise	噪音	kelele	ääni	bunyi	buulla	D	0,0,0,0,0	168,116,394,483,0		noun.event	6	noise.n.01	sound of any kind (especially unintelligible or dissonant sound)	pending
+C0750	L			n	north	north	北	kaskazini	N	utara	chincha	A	0,0,0,0,0	60530,12333,16079,9350,319	Ch:contact:Cantonese+Mandarin;Sw:borrowed	noun.relation	7	north.n.03	the cardinal compass point that is at 0 or 360 degrees	pending
+C0751	L			n	number	number	數	nambari	luku	bilangan	yupay	B	0,0,0,0,1	54445,265,2157,1756,356	Sw:contact:English	noun.attribute	11	number.n.01	the property possessed by a sum or total or indefinite quantity of units or individuals	pending
+C0752	L			n	object	object	目標	kiolwa	esine	benda	riqsisqa	A	0,0,0,0,0	2607,44,60,1979,388		noun.Tops	5	object.n.01	a tangible and visible entity; an entity that can cast a shadow	data-verified
+C0753	L			n	objective	objective	目的	shabaha	tarkoitus	tujuan	paqtay	D	0,0,0,0,0	3396,377,810,2259,1		noun.cognition	2	aim.n.02	the goal intended to be attained (and which is believed to be attainable)	pending
+C0754	L			v	observe	observe	發現	angalia	löytää	terdapat	qhaway	B	0,1,0,0,1	9435,1090,254,7530,12752		verb.perception	9	detect.v.01	discover or determine the existence, presence, or fact of	pending
+C0755	L			n	offense	offence	得罪	manza	hyökkäys	kebiadaban	hucha	C	0,2,0,0,3	118,14,301,6,7	Sw:borrowed	noun.act	5	discourtesy.n.03	a lack of politeness; a failure to show regard for others; wounding the feelings or others	pending
+C0756	L			v	offer	offer	提供	fadhili	tarjota	memberikan	hayway	C	0,1,0,0,3	7030,127,154,3922,4	Sw:borrowed	verb.possession	13	offer.v.02	present for acceptance or rejection	pending
+C0757	L			n	offering	offering	捐款	upaji	kolehti	persembahan	hayway	D	0,0,0,0,2	280,2,2,143,4	Sw:borrowed;Fi:borrowed	noun.possession	4	offering.n.02	money contributed to a religious organization	pending
+C0758	L			n	one	one	數目1	moja	yksi	satu	huk	D	0,0,0,0,0	0,11710,4833,18248,20743		noun.quantity	2	one.n.01	the smallest whole number or a numeral representing this number	pending
+C0759	L			n	opening	opening	開	ufunguzi	avaaminen	pembukaan	kicha	A	0,0,0,0,0	61064,123,25,374,110	Ch:borrowed,contact:English	noun.act	13	opening.n.03	becoming open or being made open	pending
+C0760	L			n	order	order	階級	oda	järjestys	kelas	ñiqi	A	0,0,0,0,0	2928,457,81,1787,68	Sw:contact:English;In:contact:English	noun.state	15	order.n.03	established customary state (especially of society)	pending
+C0761	L			v	order	order	規定	amuru	hallita	menentukan	kamachiy	B	0,1,0,0,0	3962,302,139,1077,264	Sw:borrowed;Qu:borrowed	verb.social	9	regulate.v.02	bring into conformity with rules or principles or usage; impose regulations	pending
+C0762	L			v	organize	organise	組織	andaa	muodostaa	mengadakan	paway	D	0,2,0,0,0	11710,8,795,1033,0		verb.social	6	form.v.01	create (as an entity)	pending
+C0763	L			v	pack	pack	裝	fungasha	pakata	membungkus	mayt'uy	D	0,0,0,0,3	11887,0,13,29,0	Fi:borrowed,contact:English	verb.contact	13	pack.v.01	arrange in a container	pending
+C0764	L			n	page	page	面	ukurasa	sivu	halaman	raphi	A	0,0,0,0,0	40403,529,114,724,58	Sw:borrowed;Fi:borrowed	noun.communication	6	page.n.01	one side of one leaf (of a book or magazine or newspaper or letter etc.) or the written or pictorial matter it contains	pending
+C0765	L			n	pain	pain	痛	maumivu	kipu	sakit	nanay	A	0,0,0,0,0	1717,929,19,1720,71		noun.state	5	pain.n.01	a symptom of some physical hurt or disorder	data-verified
+C0766	L			n	pardon	pardon	特赦	shufaa	armahdus	pengampunan	pampachay	D	0,1,0,0,0	197,1,11,73,0	Sw:borrowed;In:borrowed;Qu:borrowed	noun.communication	3	pardon.n.02	a warrant granting release from punishment for an offense	pending
+C0767	L			n	part	part	部分	upande	osa	bagian	rak'i	A	0,0,0,0,0	16211,6287,6318,13441,4	In:borrowed,contact:English	noun.relation	12	part.n.01	something determined in relation to something that includes it	pending
+C0768	L			n	party	party	社交聚會	tafrija	seurue	jamuan	raymi	B	0,0,0,0,1	3,7,15,28,1098	Sw:borrowed	noun.group	5	party.n.02	a group of people gathered together for pleasure	pending
+C0769	L			v	pass	pass	過	pita	käydä	lalu	hayway	D	0,0,0,0,4	52737,16,198,3827,4		verb.motion	25	pass.v.01	go across or through	pending
+C0770	L			n	path	path	路	njia	suunta	jalan	ñan	B	0,0,0,0,1	32762,6192,123,5350,166		noun.act	4	way.n.05	a course of conduct	pending
+C0771	L			v	pay	pay	納	lipa	maksaa	menjelaskan	kañiy	D	0,0,0,0,0	17104,4,250,1190,0		verb.possession	11	pay.v.01	give money, usually in exchange for goods or services	pending
+C0772	L			n	peak	peak	極值	kilele	huippu	puncak	pikchu	C	0,0,0,0,2	23,760,125,1477,166	Sw:borrowed	noun.quantity	7	extremum.n.02	the most extreme possible amount or value	pending
+C0773	L			v	pick	pick	精選	chokoa	valita	pilih	pallay	D	0,1,0,0,3	245,0,262,137,13		verb.cognition	12	pick.v.01	select carefully from a group	pending
+C0774	L			n	piece	piece	部分	kipande	osa	keping	p'aki	A	0,0,0,0,0	16211,318,6318,82,7		noun.artifact	13	piece.n.01	a separate part of a whole	data-verified
+C0775	L			v	pierce	pierce	穿透	dunga	leikata	melirik	wach'iy	D	0,0,0,0,1	147,16,29,7,0		verb.perception	5	pierce.v.03	sound sharply or shrilly	pending
+C0776	L			n	pile	pile	許多	lundo	pino	timbunan	qullu	A	0,0,0,0,0	10796,3,13,19,107		noun.group	8	pile.n.01	a collection of objects laid on top of each other	data-verified
+C0777	L			n	pit	pit	洞	shimo	kuoppa	rongga	muru	B	0,1,0,0,1	3305,347,32,118,80		noun.object	11	pit.n.01	a sizeable hole (usually in the ground)	pending
+C0778	L			n	pitcher	pitcher	一水壺量	gudulia	kannullinen	isi	p'uyñu	D	0,0,0,0,1	0,5,0,660,2	Sw:borrowed	noun.quantity	5	pitcher.n.03	the quantity contained in a pitcher	pending
+C0779	L			n	place	place	地方	pahali	paikka	tempat	kuska	A	0,0,0,0,0	7183,63,384,7760,137	Sw:borrowed;Fi:contact:English	noun.location	16	topographic_point.n.01	a point located with respect to surface features of some region	pending
+C0780	L			n	plate	plate	碟	sahani	lautanen	piring	chuwa	D	0,0,0,0,0	847,113,1,65,21	Ch:borrowed;Sw:borrowed	noun.artifact	15	plate.n.04	dish on which food is served or from which food is eaten	pending
+C0781	L			v	play	play	打	cheza	pelata	bermain	pukllay	A	0,0,0,0,0	10785,16,161,811,231	Ch:contact:English+Mandarin+Min Nan	verb.competition	35	play.v.01	participate in games or sport	pending
+C0782	L			n	play	play	戲劇	tamthilia	näytelmä	pementasan	pukllay	B	0,0,0,0,1	1665,529,123,66,231	Sw:borrowed	noun.communication	17	play.n.01	a dramatic work intended for performance by actors on a stage	pending
+C0783	L			n	pollution	pollution	汙染	uchafuzi	saastuminen	polusi	miyuy	A	0,0,0,0,0	1220,110,20,131,3	Sw:borrowed;In:borrowed	noun.state	3	pollution.n.01	undesirable state of the natural environment being contaminated with harmful substances as a consequence of human activities	pending
+C0784	L			n	portion	portion	部分	hisa	osa	bagian	t'aqa	C	0,0,0,0,3	16211,580,6318,13441,70	Sw:borrowed;In:borrowed,contact:English	noun.relation	7	part.n.01	something determined in relation to something that includes it	pending
+C0785	L			a	positive	positive	陽性+的	chanya	positiivinen	pasti	chiqa	D	0,0,0,0,3	0,247,155,661,53		adj.all	11	positive.a.04	indicating existence or presence of a suspected condition or pathogen	pending
+C0786	L			v	pray	pray	祈禱	sali	rukoilla	berdoa	mañay	D	0,0,0,0,3	214,10,10,187,2		verb.communication	2	pray.v.01	address a deity, a prophet, a saint or an object of worship; say a prayer	pending
+C0787	L			v	prepare	prepare	準備	andaa	valmistaa	bersedia	allichay	A	0,0,0,0,0	1909,8,314,235,18		verb.change	8	fix.v.12	make ready or suitable or equip in advance for a particular purpose or for some use, event, etc	data-verified
+C0788	L			v	present	present	展示	gaia	esittää	menyelenggarakan	rikuchiy	C	0,0,0,0,2	992,15,551,381,39	Qu:borrowed	verb.perception	13	show.v.01	give an exhibition of to an interested audience	pending
+C0789	L			v	preserve	preserve	保持	hifadhi	jatkaa	mempertahankan	hallch'ay	D	0,0,0,0,1	2523,1348,408,1093,1	Sw:borrowed	verb.stative	6	continue.v.03	keep or maintain in unaltered condition; cause to remain or last	pending
+C0790	L			n	problem	problem	困難	tatizo	ongelma	persoalan	sasachakuy	A	0,0,0,0,0	1087,725,315,229,47	Sw:borrowed;Fi:borrowed	noun.state	3	problem.n.01	a state of difficulty that needs to be resolved	pending
+C0791	L			v	protect	protect	保護	kinga	suojella	menjaga	amachay	B	0,0,0,0,1	5782,822,80,757,25		verb.competition	2	protect.v.01	shield from danger, injury, destruction, or damage	pending
+C0792	L			n	protection	protection	保護	kinga	suojelu	perlindungan	amachay	B	0,0,0,0,1	5782,822,65,654,25		noun.act	7	protection.n.01	the activity of protecting someone or something	pending
+C0793	L			v	pull	pull	拉	vuta	vetää	menarik	aysay	A	0,0,0,0,0	44281,16,115,1438,6		verb.contact	17	pull.v.01	cause to move by pulling	data-verified
+C0794	L			n	punch	punch	打	panchi	isku	pukul	taka	A	0,0,0,0,0	10785,7,163,619,5	Ch:contact:English+Mandarin+Min Nan;Sw:borrowed,contact:English	noun.act	3	punch.n.01	(boxing) a blow with the fist	pending
+C0795	L			v	puncture	puncture	毀壞	toboa	puhkaista	bocor	t'uksiy	D	0,1,0,0,2	130,0,1,49,0	Qu:borrowed	verb.change	5	puncture.v.04	cause to lose air pressure or collapse by piercing	pending
+C0796	L			n	pyramid	pyramid	稜錐	piramidi	pyramidi	limas	pikchu	D	0,0,0,0,4	72,111,5,15,166	Sw:borrowed,contact:English	noun.shape	3	pyramid.n.01	a polyhedron having a polygonal base and triangular sides with a common vertex	pending
+C0797	L			n	quarter	quarter	四分之一	robo	neljäsosa	suku	yaqa	B	0,1,0,0,0	210,259,47,5686,460	Sw:borrowed;In:contact:English	noun.quantity	14	one-fourth.n.01	one of four equal parts	pending
+C0798	L			n	question	question	問題	suala	tutkimus	persoalan	tapu	A	0,0,0,0,0	11163,594,539,229,3		noun.communication	6	question.n.01	an instance of questioning	data-verified
+C0799	L			v	raise	raise	提高	paa	nostaa	naik	huqariy	A	0,0,0,0,0	1979,174,275,1179,3		verb.motion	27	raise.v.02	raise from a lower to a higher position	data-verified
+C0800	L			a	raw	raw	未加工的	bichi	maustamaton	asli	chawa	D	0,0,0,0,0	1,59,1,2412,8	In:borrowed	adj.all	13	natural.s.03	(used especially of commodities) being unprocessed or manufactured using only simple or minimal processes	pending
+C0801	L			v	read	read	看	soma	lukea	membaca	ñawiriy	A	0,0,0,0,0	9275,113,185,536,34		verb.cognition	11	read.v.01	interpret something that is written or printed	data-verified
+C0802	L			v	realize	realise	知道	maizi	käsittää	mengakui	yachay	D	0,0,0,0,2	1711,1,304,824,5455	Fi:contact:English	verb.cognition	6	recognize.v.02	be fully aware or cognizant of	pending
+C0803	L			v	reap	reap	獲得	vuna	saada	menerima	aymuray	D	0,1,0,0,0	10032,0,1165,2310,237		verb.possession	2	reap.v.02	get or derive	pending
+C0804	L			v	rear	rear	培養	lea	kasvattaa	meningkatkan	uyway	D	0,1,0,0,1	1195,28,155,1524,1		verb.social	5	rear.v.02	bring up	pending
+C0805	L			n	reason	reason	原因	ajili	syy	alasan	yuya	D	0,1,0,0,1	3356,4885,325,1174,2	Sw:borrowed	noun.communication	6	reason.n.02	an explanation of the cause of some phenomenon	pending
+C0806	L			v	receive	receive	拿	pokea	saada	mengalami	chaskiy	A	0,0,0,0,0	6353,7,1165,3230,6		verb.possession	13	receive.v.01	get something; come into possession of	data-verified
+C0807	L			n	reception	reception	接待	mapokezi	vastaanotto	layanan	chaski	A	0,0,0,0,0	316,79,75,1358,65		noun.communication	5	reception.n.01	the manner in which something is greeted	data-verified
+C0808	L			v	recognize	recognise	承認	tambua	tunnustaa	mengakui	riqsiy	B	0,0,0,0,1	2930,11,55,824,12	Qu:borrowed	verb.cognition	9	acknowledge.v.06	accept (someone) to be what is claimed or accept his power and authority	pending
+C0809	L			v	reconcile	reconcile	使一致	suluhisha	sovittaa	menampung	allipanakuy	D	0,0,0,0,0	0,1,29,298,0	Sw:borrowed	verb.change	4	accommodate.v.07	make (one thing) compatible with (another)	pending
+C0810	L			n	record	record	最高紀錄	rekodi	saldo	catatan	hallch'a	D	0,0,0,0,1	52,1181,6,2370,0	Sw:borrowed,contact:English;Fi:borrowed	noun.quantity	8	record.n.03	the number of wins versus losses and ties a team has had	pending
+C0811	L			v	remain	remain	留	baki	jatkaa	tinggal	puchuy	D	0,0,0,0,0	9220,17,408,2486,0	Sw:borrowed	verb.stative	4	stay.v.04	continue in a place, position, or situation	pending
+C0812	L			v	remember	remember	回憶	kumbuka	muistaa	mengambil	yuyay	A	0,0,0,0,0	989,44,47,1996,131		verb.cognition	8	remember.v.01	recall knowledge from memory; have a recollection	data-verified
+C0813	L			n	remembrance	remembrance	紀念	ukumbusho	kunnianosoitus	peringatan	yarpay	B	0,1,0,0,0	4516,120,33,1059,8	Sw:borrowed	noun.communication	2	memorial.n.01	a recognition of meritorious service	pending
+C0814	L			v	rent	rent	租	kodi	vuokrata	menyewakan	arinsay	D	0,0,0,0,0	1978,2227,27,17,0		verb.social	5	rent.v.01	let for money	pending
+C0815	L			v	repair	repair	修復	rekebisha	korjata	membenarkan	allinchay	D	0,0,0,0,3	438,0,78,120,16	Qu:borrowed	verb.change	5	repair.v.01	restore by replacing a part or putting together what is torn or broken	pending
+C0816	L			n	repetition	repetition	重複	marudio	uusinta	pengulangan	yapa	C	0,0,0,0,3	627,153,25,74,8		noun.event	3	repeat.n.01	an event that repeats	pending
+C0817	L			n	republic	republic	共和國	jamhuri	tasavalta	republik	ripuwlika	A	0,0,0,0,0	14327,4112,747,5760,52	In:borrowed;Qu:borrowed	noun.group	2	democracy.n.02	a political system in which the supreme power lies in a body of citizens who can elect people to represent them	pending
+C0818	L			n	reputation	reputation	名譽	nemsi	maine	reputasi	sumay	D	0,1,0,0,1	719,1,117,158,3	Fi:borrowed,contact:English;In:borrowed;Qu:borrowed	noun.state	3	repute.n.01	the state of being held in high esteem and honor	pending
+C0819	L			n	request	request	要求	ombi	esitys	rayuan	watukuy	D	0,0,0,0,0	6154,201,98,8,0	Qu:borrowed	noun.communication	2	request.n.01	a formal message requesting something that is submitted to an authority	pending
+C0820	L			n	reservoir	reservoir	大量儲備	tangi	reservi	cadangan	hark'a	C	0,1,0,0,3	3,89,13,505,35	Sw:contact:English;Fi:borrowed	noun.quantity	4	reservoir.n.01	a large or extra supply of something	pending
+C0821	L			v	reside	reside	住	sakini	asua	terdapat	takuy	D	0,0,0,0,4	9394,0,53,7530,2	Sw:borrowed	verb.stative	3	occupy.v.02	live (in a certain place)	pending
+C0822	L			v	respect	respect	重視	stahi	arvostaa	memandang	yupaychay	D	0,0,0,0,4	1349,0,37,371,3	Sw:borrowed;Qu:borrowed	verb.cognition	2	respect.v.01	regard highly; think much of	pending
+C0823	L			n	rest	rest	剩餘	buraha	loput	selebihnya	puchu	D	0,0,0,0,0	487,0,333,145,4	Sw:borrowed	noun.relation	7	remainder.n.01	something left after other parts have been taken away	pending
+C0824	L			n	return	return	返回	marejeo	paluu	kembali	kutiy	D	0,0,0,0,0	1939,19946,161,6787,2		noun.act	13	return.n.02	a coming to or returning home	pending
+C0825	L			v	return	return	回	rudia	palata	kembali	kutiy	D	0,0,0,0,0	18969,4,148,6787,2	Ch:borrowed	verb.motion	16	return.v.01	go or come back to place, condition, or activity where one has been before	pending
+C0826	L			v	reveal	reveal	顯示	bukua	paljastaa	menyatakan	rikuchiy	D	0,0,0,0,3	3468,0,69,3564,39	Qu:borrowed	verb.perception	3	uncover.v.01	make visible	pending
+C0827	L			a	rich	rich	闊	tajiri	rikas	berada	tupaq	B	0,0,0,0,1	1166,430,57,6176,171	In:borrowed;Qu:borrowed	adj.all	12	rich.a.01	possessing material wealth	pending
+C0828	L			a	right	right	對	sahihi	oikea	benar	paña	C	0,2,0,0,0	77185,633,251,1844,44	Sw:borrowed;Fi:contact:English	adj.all	14	correct.a.01	free from error; especially conforming to fact or truth	pending
+C0829	L			n	ring	ring	鈴聲	pete	sävy	nada	siwi	A	0,0,0,0,0	18,171,37,492,24	Fi:borrowed;In:borrowed	noun.attribute	9	ring.n.01	a characteristic sound	pending
+C0830	L			n	ripening	ripening	成熟	upevushaji	kypsyminen	pematangan	puquy	D	0,0,0,0,1	760,0,3,38,819	Sw:borrowed	noun.process	2	maturation.n.01	coming to full development; becoming mature	pending
+C0831	L			n	ritual	ritual	禮	tambiko	rituaali	istiadat	raymi	C	0,0,0,0,3	7410,20,9,224,1098	Sw:borrowed;Fi:contact:English	noun.act	3	ritual.n.01	any customary observance or practice	pending
+C0832	L			v	rob	rob	搶	pora	varastaa	merampas	suway	D	0,0,0,0,1	906,0,17,45,6		verb.possession	2	rob.v.01	take something away by force or without the consent of the owner	pending
+C0833	L			n	ruin	ruin	毀滅	gofu	perikato	keruntuhan	urma	D	0,0,0,0,2	349,44,6,110,0	Sw:contact:English	noun.state	6	ruin.n.01	an irrecoverable state of devastation and destruction	pending
+C0834	L			n	rule	rule	規則	utawala	sääntö	peraturan	kamachiy	C	0,0,0,0,2	1722,2905,61,1147,264	Qu:borrowed	noun.cognition	12	rule.n.01	a principle or condition that customarily governs behavior	pending
+C0835	L			v	rumble	rumble	轆轆響	nguruma	jylistä	bergemuruh	kunununuy	D	0,0,0,0,0	0,0,0,7,0		verb.perception	2	rumble.v.01	make a low noise	pending
+C0836	L			v	run	run	跑	kimbia	juosta	hidup	utqay	C	0,0,0,0,2	1388,5,13,4257,5	Ch:contact:English	verb.motion	41	run.v.01	move fast by using one's feet, with one foot off the ground at any given time	pending
+C0837	L			n	sacrifice	sacrifice	損失	kafara	tappio	kerugian	hayway	B	0,0,0,0,1	1219,66,50,290,4	Sw:borrowed;In:borrowed	noun.possession	5	sacrifice.n.03	a loss entailed by giving up or selling something at less than its value	pending
+C0838	L			n	sadness	sadness	悲傷	huzuni	suru	kesedihan	llakiy	A	0,0,0,0,0	131,240,13,57,5	Sw:borrowed	noun.state	3	sadness.n.02	the state of being sad	pending
+C0839	L			n	salvation	salvation	拯救	wokovu	pelastus	keselamatan	qispichiy	B	0,1,0,0,0	256,592,27,423,13	Qu:borrowed	noun.state	4	salvation.n.03	the state of being saved or preserved from harm	pending
+C0840	L			n	satisfaction	satisfaction	滿足	ridhaa	tyytyväisyys	kepuasan	saksay	D	0,3,0,0,0	1151,34,10,52,1	Sw:borrowed	noun.feeling	5	satisfaction.n.01	the contentment one feels when one has fulfilled a desire, need, or expectation	pending
+C0841	L			v	satisfy	satisfy	符合	kuta	täyttää	memenuhi	saksay	D	0,0,0,0,0	1228,284,137,874,1		verb.stative	3	satisfy.v.01	meet the requirements or expectations of	pending
+C0842	L			v	save	save	拯救	afu	pelastaa	mengurangi	waqaychay	B	0,0,0,0,1	256,4,66,974,33	Sw:borrowed;Fi:borrowed	verb.social	11	salvage.v.01	save from ruin, destruction, or harm	pending
+C0843	L			v	say	say	說	sema	kertoa	menyatakan	ñiy	A	0,0,0,0,0	32130,46,98,3564,3	Fi:contact:English	verb.communication	11	state.v.01	express in words	pending
+C0844	L			n	scar	scar	傷痕	kovu	arpi	parut	q'illa	D	0,0,0,0,0	44,40,2,8,2		noun.state	2	scar.n.01	a mark left (usually on the skin) by the healing of injured tissue	pending
+C0845	L			n	science	science	科學	sayansi	tiede	sains	riqsiy	A	0,0,0,0,0	14211,2644,227,627,12	Sw:borrowed,contact:English;In:borrowed,contact:English;Qu:borrowed	noun.cognition	2	science.n.01	a particular branch of scientific knowledge	pending
+C0846	L			n	scissors	scissors	剪式跳法	mkasi	sakset	gunting	k'utuna	D	0,0,0,0,0	0,43,3,22,2	Sw:borrowed;Fi:borrowed;In:borrowed,contact:Chinese;Qu:borrowed	noun.act	3	scissors.n.03	a gymnastic exercise performed on the pommel horse when the gymnast moves his legs as the blades of scissors move	pending
+C0847	L			v	scrub	scrub	取消	sugua	perua	mengurungkan	khituy	D	0,1,0,0,0	1387,3,62,9,0		verb.social	3	cancel.v.01	postpone indefinitely or annul something that was scheduled	pending
+C0848	L			n	second	second	秒	sekunde	s	saat	sikundu	A	0,0,0,0,0	1645,368,31831,13619,6	Sw:borrowed,contact:English;In:borrowed;Qu:borrowed	noun.time	10	second.n.01	1/60 of a minute; the basic unit of time adopted under the Systeme International d'Unites	pending
+C0849	L			v	secure	secure	獲得	hifadhi	hankkia	mendapatkan	khipuy	D	0,4,0,0,1	10032,1348,113,2237,2	Sw:borrowed	verb.possession	6	procure.v.01	get by special effort	pending
+C0850	L			n	security	security	安全	usalama	turvallisuus	keamanan	waqaychay	A	0,0,0,0,0	3979,832,163,1518,33		noun.state	9	security.n.01	the state of being free from danger or injury	data-verified
+C0851	L			v	see	see	見	ona	nähdä	lihat	rikuy	B	0,0,0,0,1	19032,74,333,4486,78		verb.perception	24	see.v.01	perceive by sight or have the power to perceive by sight	pending
+C0852	L			n	selection	selection	選擇	uchaguzi	valikoima	pemilihan	akllay	B	0,0,0,0,1	3084,2983,69,2138,26		noun.group	5	selection.n.02	an assortment of things from which a choice can be made	pending
+C0853	L			v	sell	sell	售	uza	myydä	jual	qhatuy	D	0,0,0,0,0	3546,1,130,96,18		verb.possession	8	sell.v.01	exchange or deliver for money or its equivalent	pending
+C0854	L			v	sense	sense	覺得	hisi	tuntea	rasa	musyay	B	0,1,0,0,0	683,311,54,1193,19	Sw:borrowed	verb.perception	4	feel.v.03	perceive by a physical sensation, e.g., coming from the skin or muscles	pending
+C0855	L			v	separate	separate	分	tenga	jakaa	membatasi	haytarakuy	D	0,1,0,0,0	81534,8,732,405,0		verb.stative	13	separate.v.01	act as a barrier between; stand between	pending
+C0856	L			n	service	service	服務	huduma	palvelus	layanan	mink'a	A	0,0,0,0,0	5532,2322,23,1358,5		noun.act	15	service.n.02	an act of help or assistance	data-verified
+C0857	L			v	set	set	放	chwa	asettaa	terletak	churay	C	0,0,0,0,3	18084,3,269,5551,17		verb.contact	25	put.v.01	put into a certain place or abstract location	pending
+C0858	L			n	seven	seven	七	saba	seitsemän	tujuh	qanchis	A	0,0,0,0,0	11938,1655,927,1290,163	Sw:borrowed	noun.quantity	2	seven.n.01	the cardinal number that is the sum of six and one	pending
+C0859	L			n	shade	shade	陰暗	kivuli	varjo	naungan	llanthu	D	0,1,0,0,1	43,137,31,130,2		noun.state	8	shade.n.01	relative darkness caused by light rays being intercepted by an opaque body	pending
+C0860	L			n	shadow	shadow	陰影	kivuli	varjo	bayangan	llanthu	D	0,0,0,0,0	168,137,31,177,2		noun.state	9	shadow.n.01	shade within clear boundaries	pending
+C0861	L			v	share	share	共有	gawanya	jakaa	menyertai	rak'iy	D	0,1,0,0,2	2740,2,732,53,32		verb.stative	5	share.v.01	have in common	pending
+C0862	L			v	shell	shell	征服	menya	voittaa	mengalahkan	hephq'ay	D	0,3,0,0,0	1228,1,163,1017,0		verb.competition	8	beat.v.01	come out better in a competition, race, or conflict	pending
+C0863	L			n	shift	shift	工作班次	shifti	työaika	giliran	mit'a	D	0,0,0,0,0	0,0,8,60,104	Sw:borrowed,contact:English	noun.time	10	shift.n.03	the time period during which you are at work	pending
+C0864	L			a	short	short	短+的	fupi	lyhyt	pendek	pisi	D	0,0,0,0,2	0,674,339,927,213		adj.all	11	short.a.01	primarily temporal sense; indicating or being or seeming to be limited in duration	pending
+C0865	L			v	show	show	展示	koga	esittää	menyelenggarakan	rikuchiy	A	0,0,0,0,0	992,11,551,381,39	Qu:borrowed	verb.perception	12	show.v.01	give an exhibition of to an interested audience	pending
+C0866	L			n	sickness	sickness	疾病	maradhi	tauti	penyakit	unquy	B	0,0,0,0,1	1656,512,118,2123,384	Sw:borrowed	noun.state	3	illness.n.01	impairment of normal physiological function affecting part or all of an organism	pending
+C0867	L			n	silence	silence	無聲	kimya	hiljaisuus	diam	upalla	D	0,0,0,0,0	92,154,11,503,0	Sw:borrowed	noun.state	4	silence.n.01	the state of being silent (as when no one is speaking)	pending
+C0868	L			n	sin	sin	罪	dhambi	synti	dosa	hucha	C	0,0,0,0,2	4631,874,14,465,7	Sw:borrowed;Fi:borrowed;In:borrowed	noun.act	6	sin.n.02	an act that is regarded by theologians as a transgression of God's will	pending
+C0869	L			v	sing	sing	唱	imba	laulaa	menyanyikan	takiy	A	0,0,0,0,0	6995,9,80,146,18	Ch:borrowed,contact:English	verb.creation	5	sing.v.02	produce tones with the voice	pending
+C0870	L			n	sink	sink	自然排列	karo	nielu	rosot	arma	D	0,0,0,0,1	0,49,4,0,35	Sw:borrowed	noun.process	4	sink.n.02	(technology) a process that acts to absorb or remove energy or a substance from a system	pending
+C0871	L			n	six	six	六	sita	kuusi	enam	suqta	A	0,0,0,0,0	16881,1977,1039,1552,246	Sw:borrowed	noun.quantity	2	six.n.01	the cardinal number that is the sum of five and one	pending
+C0872	L			n	size	size	規模	ukubwa	koko	ukuran	hatun	A	0,0,0,0,0	4463,1336,4859,1089,4340		noun.attribute	5	size.n.01	the physical magnitude of something (how big it is)	data-verified
+C0873	L			v	smash	smash	粉碎	vunja	rikkoa	pecah	takay	D	0,3,0,0,4	167,11,34,376,4		verb.change	10	smash.v.02	break into pieces, as by striking or knocking over	pending
+C0874	L			v	smell	smell	聞	nuka	haistaa	berbau	q'apay	D	0,0,0,0,0	7356,2,5,106,1		verb.perception	5	smell.v.01	inhale the odor of; perceive by the olfactory sense	pending
+C0875	L			n	smell	smell	味道	harufu	haju	bau	q'apay	D	0,0,0,0,0	282,153,30,188,1	Sw:borrowed;In:borrowed	noun.attribute	5	olfactory_property.n.01	any property detected by the olfactory system	pending
+C0876	L			v	sniff	sniff	聞	nusa	nuuhkia	mengendus	sinq'ay	D	0,0,0,0,0	7356,13,0,6,0		verb.perception	2	sniff.v.01	perceive by inhaling through the nose	pending
+C0877	L			n	society	society	社會	chama	yhteiskunta	persatuan	waki	B	0,1,0,0,0	17958,3674,262,968,628	Ch:borrowed	noun.group	4	society.n.01	an extended social group having a distinctive cultural and economic organization	pending
+C0878	L			a	soft	soft	軟+的	teke	heikko	halus	llamp'u	D	0,0,0,0,0	0,14,232,349,42		adj.all	19	soft.a.01	yielding readily to pressure or weight	pending
+C0879	L			n	song	song	鳥語	wimbo	linnunlaulu	bunyi	taki	D	0,0,0,0,0	7,4160,2,483,447		noun.communication	6	birdcall.n.01	the characteristic sound produced by a bird	pending
+C0880	L			n	sorrow	sorrow	遺憾	simanzi	suru	kesedihan	llaki	B	0,1,0,0,0	193,6,13,57,27		noun.feeling	4	sorrow.n.02	sadness associated with some wrong done or some disappointment	pending
+C0881	L			v	speak	speak	講話	ongea	puhua	menyatakan	rimay	A	0,0,0,0,0	606,6,219,3564,891		verb.communication	5	speak.v.03	use language	data-verified
+C0882	L			n	speech	speech	演說	hotuba	puhe	ucapan	rimay	B	0,0,0,0,1	672,392,155,271,891	Sw:borrowed	noun.communication	8	address.n.03	the act of delivering a formal spoken communication to an audience	pending
+C0883	L			n	sphere	sphere	場	mviringo	alue	kawasan	lunq'u	A	0,0,0,0,0	29005,156,1885,4106,4		noun.state	7	sphere.n.01	a particular environment or walk of life	data-verified
+C0884	L			n	spirit	spirit	情緒	roho	henki	semangat	nuna	A	0,0,0,0,0	580,1986,136,441,72		noun.state	8	spirit.n.02	the general atmosphere of a place or situation and the effect that it has on people	data-verified
+C0885	L			v	split	split	分	pasua	jakaa	membatasi	laray	D	0,0,0,0,0	81534,9,732,405,0		verb.social	5	divide.v.01	separate into parts or portions	pending
+C0886	L			v	spread	spread	擴張	paka	levitä	meluas	sisiy	D	0,0,0,0,0	1193,275,93,372,0		verb.stative	10	spread.v.03	spread across or over	pending
+C0887	L			v	start	start	開始	amiri	alkaa	mulai	qallariy	B	0,0,0,0,1	19925,49,1123,6509,55	Sw:borrowed	verb.change	14	get_down.v.07	take the first step or steps in carrying out an action	pending
+C0888	L			v	steal	steal	盜	iba	varastaa	mengambil	suway	D	0,0,0,0,0	1044,1,17,1996,6		verb.possession	3	steal.v.01	take without the owner's consent	pending
+C0889	L			n	step	step	措施	kidato	keino	jalan	thatki	A	0,0,0,0,0	1263,206,111,5350,12		noun.act	11	measure.n.01	any maneuver made as part of progress toward a goal	data-verified
+C0890	L			v	stink	stink	差	nuka	haista	berbau	asnay	D	0,1,0,0,0	6148,2,6,106,0		verb.stative	2	stink.v.01	be extremely bad in quality or in one's performance	pending
+C0891	L			n	stone	stone	石	jiwe	kivi	batu	rumi	B	0,0,0,0,1	18029,287,239,2570,249	Ch:borrowed;In:contact:Chinese	noun.object	13	rock.n.01	a lump or mass of hard consolidated mineral matter	pending
+C0892	L			a	straight	straight	直+的	nyoofu	suora	terus	chiqan	D	0,0,0,0,0	0,11,254,2519,53		adj.all	15	straight.a.02	having no deviations	pending
+C0893	L			n	strength	strength	力氣	nguvu	voimakkuus	kehebatan	kallpa	A	0,0,0,0,0	39,3265,69,37,50		noun.attribute	9	strength.n.01	the property of being physically or mentally strong	data-verified
+C0894	L			v	strip	strip	喪失	menya	riistää	membebaskan	q'aray	D	0,2,0,0,1	467,1,7,249,0		verb.possession	13	deprive.v.01	take away possessions from someone	pending
+C0895	L			n	stroke	stroke	中風	kiharusi	aivohalvaus	stroke	qillqa	B	0,0,0,0,1	196,109,3,68,895		noun.state	12	stroke.n.03	a sudden loss of consciousness resulting when the rupture or occlusion of a blood vessel leads to oxygen lack in the brain	pending
+C0896	L			n	substance	substance	物質	dutu	aine	unsur	imayay	B	0,0,0,0,1	3744,316,287,2718,39	Sw:borrowed;Fi:borrowed;In:borrowed	noun.Tops	7	substance.n.01	the real physical matter of which a person or thing consists	pending
+C0897	L			n	suffering	suffering	痛苦	mateso	kärsimys	penderitaan	llaki	C	0,0,0,0,2	349,573,19,195,27		noun.state	4	agony.n.02	a state of acute pain	pending
+C0898	L			n	sum	sum	款項	jumla	summa	isi	sumay	A	0,0,0,0,0	85,2667,209,660,3	Sw:borrowed;Qu:borrowed	noun.possession	6	sum.n.01	a quantity of money	pending
+C0899	L			n	support	support	支援	tegemeo	tuki	pertolongan	q'imi	A	0,0,0,0,0	10463,14,654,105,17	Sw:borrowed	noun.act	11	support.n.02	aiding the cause or policy or interests of	pending
+C0900	L			v	swell	swell	擴大	tuna	paisua	mengembang	punkiy	D	0,0,0,0,0	1782,66,1,65,10		verb.change	6	swell.v.03	expand abnormally	pending
+C0901	L			v	take	take	佔	chukua	viedä	mengambil	hap'iy	C	0,0,0,0,2	17882,26,120,1996,15		verb.possession	42	take.v.02	require (time or space)	pending
+C0902	L			v	talk	talk	講話	bonga	puhua	menyatakan	rimay	B	0,0,0,0,1	606,3,219,3564,891		verb.communication	6	speak.v.03	use language	pending
+C0903	L			v	taste	taste	有某種味道	onja	maistua	merasa	llamiy	D	0,0,0,0,0	0,1,2,1004,4		verb.perception	6	taste.v.01	have flavor; taste of something	pending
+C0904	L			n	teaching	teaching	教育	ualimu	opettaja	pendidikan	yachachiy	A	0,0,0,0,0	11469,187,724,4714,857	Sw:borrowed;Qu:borrowed	noun.act	3	teaching.n.01	the profession of a teacher	pending
+C0905	L			v	tell	tell	說	hadithi	kertoa	menyatakan	willay	B	0,1,0,0,1	32130,1731,98,3564,2309	Sw:borrowed;Fi:contact:English	verb.communication	8	state.v.01	express in words	pending
+C0906	L			n	ten	ten	十	kumi	X	X	chunka	A	0,0,0,0,0	46382,2205,1508,1970,791		noun.quantity	2	ten.n.01	the cardinal number that is the sum of nine and one; the base of the decimal system	data-verified
+C0907	L			n	thing	thing	情況	jambo	tilanne	benda	ima	A	0,0,0,0,0	5509,1364,546,1979,3987		noun.state	12	thing.n.01	a special situation	data-verified
+C0908	L			n	thought	thought	思想	ono	ajatus	pendapat	yuyay	C	0,0,0,0,2	5598,34,346,1049,131		noun.cognition	4	idea.n.01	the content of cognition; the main thing you are thinking about	pending
+C0909	L			n	three	three	三	tatu	kolme	tiga	kimsa	A	0,0,0,0,0	56652,4442,3037,5631,729		noun.quantity	2	three.n.01	the cardinal number that is the sum of one and one and one	data-verified
+C0910	L			v	throw	throw	投	tupa	lennättää	melancarkan	wikch'uy	D	0,0,0,0,0	10824,38,5,381,0		verb.contact	15	throw.v.01	propel through the air	pending
+C0911	L			n	top	top	頂方	juu	päällys	permukaan	uma	B	0,0,0,0,1	4,13840,3,2366,6665		noun.location	11	top.n.02	the highest or uppermost side of anything	pending
+C0912	L			n	trial	trial	測試	jaribio	koe	uji	yaña	D	0,1,0,0,1	1345,430,99,338,0		noun.act	6	test.n.05	the act of testing something	pending
+C0913	L			a	true	true	真	kweli	tosi	benar	chiqa	A	0,0,0,0,0	11120,1350,132,1844,53		adj.all	12	true.a.01	consistent with fact or reality; not false; ; - B. Russell	data-verified
+C0914	L			n	truth	truth	真理	kweli	todenmukaisuus	kebenaran	chiqa	A	0,0,0,0,0	547,1350,5,535,53		noun.state	5	truth.n.02	conformity to reality or actuality	data-verified
+C0915	L			v	try	try	試	jaribu	yrittää	menguji	malliy	A	0,0,0,0,0	9297,35,187,135,3	Sw:borrowed	verb.social	9	try.v.01	make an effort or attempt	pending
+C0916	L			n	two	two	二	mbili	kaksi	dua	iskay	A	0,0,0,0,0	47817,5240,5102,11165,1554		noun.quantity	2	two.n.01	the cardinal number that is the sum of one and one or a numeral representing this number	data-verified
+C0917	L			n	understanding	understanding	協議	uelewano	sopimus	perjanjian	yuyay	D	0,0,0,0,4	2547,20,490,3112,131		noun.communication	4	agreement.n.01	the statement (oral or written) of an exchange of promises	pending
+C0918	L			n	union	union	聯合	muungano	yhteisyys	ikatan	t'inki	D	0,0,0,0,0	8922,1510,0,1144,22		noun.state	11	union.n.04	the state of being joined or united or linked	pending
+C0919	L			v	urge	urge	推動	himiza	vaatia	memaksa	utqaychay	D	0,0,0,0,2	1768,0,107,459,0		verb.communication	3	urge.v.01	force or impel in an indicated direction	pending
+C0920	L			n	value	value	值	kima	arvo	harga	chanin	C	0,2,0,0,0	9678,203,957,1347,33	Sw:borrowed	noun.cognition	6	value.n.01	a numerical quantity measured or assigned or computed	pending
+C0921	L			n	village	village	村	kaya	kylä	desa	ayllu	A	0,0,0,0,0	6772,207,332,3856,1642	In:borrowed	noun.group	3	village.n.01	a community of people smaller than a town	pending
+C0922	L			n	vision	vision	幻象	maono	mielikuva	bayangan	rikuy	A	0,0,0,0,0	41,192,13,177,78		noun.cognition	5	vision.n.01	a vivid mental image	data-verified
+C0923	L			v	wait	wait	等	ngoja	odotella	menunggu	suyay	D	0,0,0,0,0	64038,7,3,255,0		verb.stative	4	wait.v.01	stay in one place and anticipate or expect something	pending
+C0924	L			v	want	want	要	taka	tahtoa	ingin	munay	A	0,0,0,0,0	59819,201,53,1457,77		verb.emotion	5	desire.v.01	feel or have a desire for; want strongly	data-verified
+C0925	L			n	war	war	戰爭	kita	sotatila	perang	awqanakuy	A	0,0,0,0,0	11730,18,32,9998,22		noun.state	4	war.n.02	a legal state created by a declaration of war and ended by official declaration during which the international rules of war apply	data-verified
+C0926	L			v	wash	wash	洗	nawa	puhdistaa	mencuci	mayllakuy	A	0,0,0,0,0	1455,37,37,71,5	Qu:borrowed	verb.body	13	wash.v.02	cleanse (one's body) with soap and water	pending
+C0927	L			v	waste	waste	消耗	fuja	tuhlata	membuang	hich'ay	D	0,1,0,0,2	454,0,4,109,1		verb.possession	10	waste.v.01	spend thoughtlessly; throw away	pending
+C0928	L			v	watch	watch	觀	tazama	seurata	mengawasi	qhaway	B	0,1,0,0,0	18013,24442,144,263,12752	Sw:borrowed;Fi:contact:English	verb.perception	7	watch.v.01	look attentively	pending
+C0929	L			n	way	way	方式	jinsi	tapa	jalan	ñan	C	0,0,0,0,2	6552,2185,412,5350,166	Sw:borrowed	noun.act	12	means.n.01	how a result is obtained or an end is achieved	pending
+C0930	L			a	weak	weak	弱+的	dhaifu	heikko	rapuh	sansa	D	0,0,0,0,0	0,281,232,87,12		adj.all	12	weak.a.01	wanting in physical strength	pending
+C0931	L			n	wealth	wealth	富有	mali	rikkaus	kekayaan	kapuy	A	0,0,0,0,0	449,1611,7,593,6		noun.state	4	wealth.n.01	the state of being rich and affluent; having a plentiful supply of material goods and money	data-verified
+C0932	L			n	wedding	wedding	婚禮	harusi	häät	pernikahan	kasarakuy	B	0,0,0,0,1	315,179,81,677,7		noun.event	3	wedding.n.01	the social event at which the ceremony of marriage is performed	pending
+C0933	L			n	week	week	星期	wiki	viikko	minggu	simana	A	0,0,0,0,0	1250,2767,93,1096,70	Sw:contact:English;Qu:borrowed	noun.time	3	week.n.01	any period of seven consecutive days	pending
+C0934	L			n	weight	weight	重量	uzito	paino	berat	llasa	A	0,0,0,0,0	672,793,354,1354,7		noun.attribute	8	weight.n.01	the vertical force exerted by a mass as a result of gravity	data-verified
+C0935	L			a	white	white	白	eupe	valkoinen	safa	yuraq	D	0,0,0,0,0	18827,0,435,11,586		adj.all	12	white.a.01	being of the achromatic color of maximum lightness; having little or no hue owing to reflection of almost all incident light	pending
+C0936	L			n	wing	wing	翼	mrengo	siipi	sayap	raphra	D	0,0,0,0,0	2202,57,68,797,0		noun.animal	11	wing.n.01	a movable organ for flying (one of a pair)	pending
+C0937	L			v	wink	wink	閃光	konyeza	vilkkua	berkilau	ch'ipihyay	D	0,0,0,0,0	59,23,2,21,0		verb.perception	4	flash.v.01	gleam or glow intermittently	pending
+C0938	L			n	work	work	工作	kazi	työ	tugas	harawi	C	0,0,0,0,2	10401,12580,388,1320,279		noun.act	7	employment.n.02	the occupation for which you are paid	pending
+C0939	L			v	worry	worry	擔心	sukasuka	murehtia	mengkhawatirkan	phutiy	D	0,1,0,0,0	664,0,1,54,0		verb.emotion	6	worry.v.01	be worried, concerned, anxious, troubled, or uneasy	pending
+C0940	L			v	write	write	寫	andika	kirjoittaa	tulis	qillqay	A	0,0,0,0,0	14383,15,405,406,90	Qu:borrowed	verb.communication	10	write.v.02	communicate or express by writing	pending
+C0941	L			n	year	year	年	mwaka	v	tahun	wata	A	0,0,0,0,0	403564,58107,1533,56335,2299		noun.time	4	year.n.01	a period of time containing 365 (or 366) days	data-verified
+C0942	L			n	zero	zero	無	sifuri	tyhjyys	kosong	chusaq	A	0,0,0,0,0	31962,120,4,300,5	Sw:borrowed	noun.quantity	4	nothing.n.01	a quantity of no importance	pending
+C0943	S	1	derivationally related	n	drawing	drawing	圖片	uchoraji	piirros	lukisan	qillqa	A	0,0,0,0,0	483,234,20,469,895	In:borrowed	noun.artifact	6	drawing.n.02	a representation of forms or objects on a surface by means of lines	pending
+C0944	L	1	derivationally related	v	draw	draw	拉	chora	vetää	menarik	siq'iy	A	0,0,0,0,0	44281,5,115,1438,11		verb.contact	36	pull.v.01	cause to move by pulling	data-verified
+C0945	S	2	derivationally related	n	fly	fly	蠅	nzi	kärpänen	lalat	ch'uspi	A	0,0,0,0,0	102,171,7,66,18	In:borrowed	noun.animal	5	fly.n.01	two-winged insects characterized by active flight	pending
+C0946	L	2	derivationally related	v	fly	fly	飛	anga	lentää	melayang	phaway	A	0,0,0,0,0	11315,983,104,56,5		verb.motion	14	fly.v.01	travel through the air; be airborne	data-verified
+C0947	S	3	derivationally related	n	poison	poison	毒藥	liga	myrkky	racun	miyu	A	0,0,0,0,0	94,158,28,187,27		noun.substance	2	poison.n.01	any substance that causes injury or illness or death of a living organism	data-verified
+C0948	L	3	derivationally related	v	poison	poison	汙染	liga	myrkyttää	menghancurkan	miyuy	A	0,0,0,0,0	1220,158,3,570,3	In:borrowed	verb.social	5	poison.v.01	spoil as if by poison	pending
+C0949	S	4	derivationally related	n	pressure	pressure	壓力	shinikizo	paine	tekanan	ñit'iy	A	0,0,0,0,0	1402,717,155,1185,16		noun.phenomenon	7	pressure.n.01	the force applied to a unit area of surface; measured in pascals (SI unit) or in dynes (cgs unit)	data-verified
+C0950	L	4	derivationally related	v	press	press	壓	songa	painaa	menekan	ñit'iy	A	0,0,0,0,0	7071,21,202,245,16		verb.contact	14	press.v.01	exert pressure or force to or upon	data-verified
+C0951	S	5	derivationally related	v	reply	reply	回	jibu	vastata	jawab	kutichiy	B	0,1,0,0,1	18969,167,94,1073,17	Ch:borrowed;Sw:borrowed;Qu:borrowed	verb.communication	1	answer.v.01	react verbally	pending
+C0952	L	5	derivationally related	v	answer	answer	回	jibu	vastata	jawab	kutichiy	A	0,0,0,0,0	18969,167,94,1073,17	Ch:borrowed;Sw:borrowed;Qu:borrowed	verb.communication	10	answer.v.01	react verbally	pending
+C0953	S	6	derivationally related	n	lover	lover	愛好者	mpenzi	harrastaja	penggemar	salla	B	0,0,0,0,1	289,267,36,252,3	Sw:borrowed	noun.person	3	fan.n.03	an ardent follower and admirer	pending
+C0954	L	6	derivationally related	v	love	love	喜愛	penda	nauttia	kasih	khuyay	A	0,0,0,0,0	516,14,65,435,12		verb.emotion	4	love.v.02	get pleasure from	data-verified
+C0955	S	7	derivationally related	v	encounter	encounter	見	pambana	nähdä	menghadapi	tinkuy	B	0,0,0,0,1	19032,3,333,863,9		verb.motion	5	meet.v.01	come together	pending
+C0956	L	7	derivationally related	n	meeting	meeting	邂逅	mkutano	tapaaminen	pertemuan	tanta	A	0,0,0,0,0	43,1271,42,1194,39	Sw:borrowed	noun.event	6	meeting.n.03	a casual or unexpected convergence	pending
+C0957	S	8	derivationally related	n	sprout	sprout	芽	chipukizi	oras	pucuk	yuri	B	0,1,0,0,1	522,73,14,124,15	Sw:borrowed	noun.plant	2	sprout.n.01	any new growth of a plant such as a new branch or a bud	pending
+C0958	L	8	derivationally related	v	sprout	sprout	萌芽	ota	kasvaa	menembak	wachay	A	0,0,0,0,0	116,7,971,171,11		verb.change	2	shoot.v.19	produce buds, branches, or germinate	data-verified
+C0959	S	9	derivationally related	v	halt	halt	停	tua	pysähtyä	mati	hark'ay	B	0,0,0,0,1	6111,7,16,1534,17		verb.motion	4	stop.v.01	come to a halt, stop moving	pending
+C0960	L	9	derivationally related	v	stop	stop	停	koma	pysähtyä	mati	hark'ay	A	0,0,0,0,0	6111,25,16,1534,17	Sw:contact:English	verb.motion	11	stop.v.01	come to a halt, stop moving	pending
+C0961	S	10	derivationally related	v	travel	travel	執行	safiri	siirtyä	hidup	riy	C	0,0,0,0,2	3923,14,151,4257,64	Sw:borrowed	verb.motion	6	travel.v.01	change location; move, travel, or proceed, also metaphorically	pending
+C0962	L	10	derivationally related	v	move	move	執行	hama	siirtyä	hidup	kuyuy	A	0,0,0,0,0	3923,12,151,4257,84		verb.motion	16	travel.v.01	change location; move, travel, or proceed, also metaphorically	data-verified
+C0963	S	11	derivationally related	n	cook	cook	廚師	mpishi	kokki	masak	wayk'uq	D	0,0,0,0,0	95,65,57,112,2	Fi:borrowed;Qu:borrowed	noun.person	2	cook.n.01	someone who cooks food	pending
+C0964	L	11	derivationally related	v	cook	cook	做	pika	tehdä	membuat	yanuy	A	0,0,0,0,0	8749,5,1066,5046,3	Ch:contact:Mandarin	verb.creation	5	cook.v.02	prepare for eating by applying heat	pending
+C0965	S	12	derivationally related	n	counter	counter	籌碼	kaunta	pelimerkki	pembilang	yupana	D	0,0,0,0,0	38,6,0,4,63	Sw:borrowed,contact:English;Qu:borrowed	noun.artifact	9	counter.n.02	game equipment (as a piece of wood, plastic, or ivory) used for keeping a count or reserving a space in various card or board games	pending
+C0966	L	12	derivationally related	v	count	count	數	wanga	laskea	berjumlah	yupay	A	0,0,0,0,0	54445,84,300,961,356		verb.communication	9	count.v.01	determine the number or amount of	data-verified
+C0967	S	13	derivationally related	a	happy	happy	幸福+的	furufu	onnellinen	berdaulat	kusi	D	0,0,0,0,0	0,0,34,247,56		adj.all	4	happy.a.01	enjoying or showing or marked by joy or pleasure	pending
+C0968	L	13	derivationally related	n	happiness	happiness	快樂	raha	onnellisuus	keamanan	kusi	A	0,0,0,0,0	347,140,13,1518,56		noun.state	2	happiness.n.01	state of well-being characterized by emotions ranging from contentment to intense joy	data-verified
+C0969	S	14	derivationally related	v	pile	pile	堆	rusu	kasata	tersusun	pirway	D	0,0,0,0,1	1370,40,3,256,2	Sw:borrowed	verb.contact	3	stack.v.02	arrange in stacks	pending
+C0970	L	14	derivationally related	n	heap	heap	許多	chungu	pino	timbunan	qutu	A	0,0,0,0,0	10796,127,13,19,88		noun.group	3	pile.n.01	a collection of objects laid on top of each other	data-verified
+C0971	S	15	derivationally related	n	teacher	teacher	教師	mwalimu	opettaja	pengajar	yachachiq	A	0,0,0,0,0	1366,1364,724,157,252	Sw:borrowed;Qu:borrowed	noun.person	2	teacher.n.01	a person whose occupation is teaching	pending
+C0972	L	15	derivationally related	v	teach	teach	教	funza	opettaa	belajar	yachachiy	B	0,1,0,0,0	60313,11,111,1035,857	Qu:borrowed	verb.communication	2	teach.v.01	impart skills or knowledge to	pending
+C0973	S	16	derivationally related	n	spring	spring	彈簧	chemchemi	jousi	pegas	pukyu	B	0,0,0,0,1	102,170,39,75,2102		noun.artifact	6	spring.n.02	a metal elastic device that returns to its shape or position when pushed or pulled or pressed	pending
+C0974	L	16	derivationally related	v	jump	jump	跳	ruka	hypätä	membatasi	tusuy	B	0,0,0,0,1	1315,3,9,405,118		verb.motion	15	jump.v.01	move forward by leaps and bounds	pending
+C0975	S	17	derivationally related	v	transport	transport	運輸	beba	kuljettaa	membawa	wantuy	C	0,0,0,0,2	1983,3,142,1831,23		verb.motion	5	transport.v.01	move something or somebody around; usually over long distances	pending
+C0976	L	17	derivationally related	v	carry	carry	運	beba	kantaa	membawa	apay	B	0,1,0,0,0	35668,3,317,1831,7		verb.contact	40	transport.v.02	move while supporting, either in a vehicle or in one's hands or on one's body	pending
+C0977	S	18	derivationally related	n	cover	cover	掩蔽物	kifuniko	suoja	penutup	qata	D	0,0,0,0,1	1,43,60,161,23		noun.artifact	10	screen.n.04	a covering that serves to conceal or shelter something	pending
+C0978	L	18	derivationally related	v	cover	cover	蓋	tanda	peittää	mencakup	pakay	B	0,0,0,0,1	4776,22,111,1505,24		verb.contact	26	cover.v.01	provide with a covering or cause to be covered	pending
+C0979	S	19	derivationally related	n	earth	earth	世界	dunia	maa	alam	pacha	A	0,0,0,0,0	21627,5968,2047,3698,1526		noun.object	7	earth.n.01	the 3rd planet from the sun; the planet we live on	data-verified
+C0980	L	19	derivationally related	n	ground	ground	地	uwanja	maa	tanah	pacha	C	0,2,0,0,1	116092,3454,2047,5427,1526		noun.object	11	land.n.04	the solid part of the earth's surface	pending
+C0981	S	20	derivationally related	v	cost	cost	值	gharimu	olla	makhluk	chaniy	D	0,0,0,0,0	9678,1,4380,688,0	Sw:borrowed	verb.stative	2	cost.v.01	be priced at	pending
+C0982	L	20	derivationally related	n	price	price	價值	bei	hinta	harga	chani	C	0,0,0,0,2	2273,545,256,1347,14		noun.attribute	7	monetary_value.n.01	the property of having material worth (often indicated by the amount of money something would bring if sold)	pending
+C0983	S	21	derivationally related	n	guard	guard	衛兵	mgambo	vartija	penjaga	kamayuq	A	0,0,0,0,0	298,24,24,326,1026		noun.person	10	guard.n.01	a person who keeps watch over something or someone	data-verified
+C0984	L	21	derivationally related	v	guard	guard	保衛	chunga	vahtia	menjaga	hallch'ay	D	0,1,0,0,0	577,4,2,757,1		verb.social	4	guard.v.01	to keep watch over	pending
+C0985	S	22	derivationally related	v	tear	tear	飛奔	chana	törmätä	menembak	p'akiy	B	0,0,0,0,1	11,6,7,171,10		verb.motion	5	tear.v.03	move quickly and violently	pending
+C0986	L	22	derivationally related	n	tear	tear	撕	chozi	repiminen	koyak	wiqi	D	0,0,0,0,0	169,91,1,7,29		noun.act	4	tear.n.04	the act of tearing	pending
+C0987	S	23	derivationally related	n	announcer	announcer	告知者	mtangazaji	kuuluttaja	penyiar	willaq	C	0,0,0,0,3	3,360,6,99,39	Sw:borrowed;Qu:borrowed	noun.person	2	announcer.n.01	someone who proclaims a message publicly	pending
+C0988	L	23	derivationally related	v	announce	announce	表示	tangaza	osoittaa	mengumumkan	willay	D	0,0,0,0,0	8920,1,365,1037,2309		verb.communication	4	announce.v.01	make known; make an announcement	pending
+C0989	S	24	derivationally related	n	bark	barque | <n> (-) ship	三桅帆船	gamba	parkkilaiva	kapal	qara	D	0,0,0,0,2	13,176,1,3747,107	In:borrowed,contact:English	noun.artifact	4	bark.n.03	a sailing ship with 3 (or more) masts	pending
+C0990	L	24	derivationally related	v	bark	barque | <n> (-) ship	吠	bweka	haukkua	salak	ayñay	D	0,0,0,0,0	217,1,2,107,0		verb.communication	5	bark.v.04	make barking sounds	pending
+C0991	S	25	derivationally related	a	large	large	大+的	kubwa	suuri	besar	suni	D	0,1,0,0,2	0,8864,3059,16922,219		adj.all	7	large.a.01	above average in size or number or quantity or magnitude or extent	pending
+C0992	L	25	derivationally related	a	big	big	大+的	kubwa	suuri	besar	hatun	D	0,0,0,0,0	0,8864,3059,16922,4340		adj.all	13	large.a.01	above average in size or number or quantity or magnitude or extent	pending
+C0993	S	26	derivationally related	v	glitter	glitter	發光	ng'aa	säteillä	bersinar	phaqsay	D	0,1,0,0,0	168,0,7,102,0		verb.perception	1	glitter.v.01	be shiny, as if wet	pending
+C0994	L	26	derivationally related	v	gleam	gleam	發光	ng'ala	säteillä	bersinar	lliphlliy	D	0,1,0,0,2	168,0,7,102,0		verb.perception	3	glitter.v.01	be shiny, as if wet	pending
+C0995	S	27	derivationally related	a	mature	mature	成熟+的	pevu	täysikasvuinen	dewasa	puqu	D	0,0,0,0,1	0,3,14,636,25	In:borrowed	adj.all	5	mature.a.03	having reached full natural growth or development	pending
+C0996	L	27	derivationally related	n	maturity	maturity	成熟	ukomavu	aikuisuus	kematangan	puqu	D	0,0,0,0,1	760,42,2,20,25		noun.time	3	adulthood.n.01	the period of time in your life after your physical growth has stopped and you are fully developed	pending
+C0997	S	28	derivationally related	a	filthy	filthy	惡劣+的	chafu	likainen	busuk	saqra	D	0,1,0,0,0	0,65,19,54,15		adj.all	3	filthy.s.01	disgustingly dirty; filled or smeared with offensive matter	pending
+C0998	L	28	derivationally related	n	soil	soil	汙穢	udongo	likaisuus	kesan	allpa	D	0,1,0,0,4	10,587,0,153,4912		noun.state	4	dirt.n.02	the state of being covered with unclean things	pending
+C0999	S	29	hypernym link	n	being	being	存在	dhati	olemassaolo	kehidupan	kay	A	0,0,0,0,0	7976,316,121,2812,3462	Sw:borrowed	noun.state	2	being.n.01	the state or fact of existing	pending
+C1000	L	29	hypernym link	n	life	life	生活	uhai	elämä	hidup	kawsay	A	0,0,0,0,0	6474,538,620,4257,3871		noun.state	14	life.n.01	a characteristic state or mode of living	data-verified
+C1001	S	30	hypernym link	n	knowledge	knowledge	知識	ujuzi	tietoisuus	ilmu	yachay	A	0,0,0,0,0	3238,730,86,4023,5455		noun.Tops	1	cognition.n.01	the psychological result of perception and learning and reasoning	data-verified
+C1002	L	30	hypernym link	n	power	power	能力	enzi	valta	kebolehan	atiy	A	0,0,0,0,0	3274,463,712,11,76	Sw:borrowed	noun.cognition	9	ability.n.02	possession of the qualities (especially mental qualities) required to do something or get something done	pending
+C1003	S	31	hypernym link	n	building	building	建築	ujenzi	rakennus	bangunan	wasi	B	0,0,0,0,1	7722,1108,362,2227,693		noun.artifact	4	building.n.01	a structure that has a roof and walls and stands more or less permanently in one place	pending
+C1004	L	31	hypernym link	n	house	house	家	nyumba	talo	rumah	wasi	A	0,0,0,0,0	103200,2608,402,5531,693		noun.artifact	12	house.n.01	a dwelling that serves as living quarters for one or more families	data-verified
+C1005	S	32	hypernym link	n	festival	festival	節	tamasha	juhla	festival	raymi	C	0,0,0,0,2	17189,567,193,971,1098	Sw:borrowed	noun.act	2	festival.n.02	an organized series of acts and performances (usually in one place)	pending
+C1006	L	32	hypernym link	n	celebration	celebration	慶典	kani	juhla	perayaan	raymi	A	0,0,0,0,0	250,132,193,713,1098		noun.act	3	celebration.n.02	any joyous diversion	data-verified
+C1007	S	33	hypernym link	v	select	select	選	teua	ottaa	mengambil	akllay	D	0,0,0,0,1	27151,1,599,1996,26		verb.cognition	1	choose.v.01	pick out, select, or choose from a number of alternatives	pending
+C1008	L	33	hypernym link	v	sieve	sieve	過濾	chunga	tutkia	menyaring	suysuy	A	0,0,0,0,0	259,4,224,29,4		verb.social	4	screen.v.03	examine in order to test suitability	data-verified
+C1009	S	34	hypernym link	v	arrange	arrange	安排	panga	järjestää	mengatur	allinchay	A	0,0,0,0,0	1068,37,391,900,16	Qu:borrowed	verb.contact	7	arrange.v.01	put into a proper or systematic order	pending
+C1010	L	34	hypernym link	v	place	place	放	tia	asettaa	terletak	churay	B	0,1,0,0,1	18084,21,269,5551,17		verb.contact	16	put.v.01	put into a certain place or abstract location	pending
+C1011	S	35	hypernym link	n	leftover	leftover	剩餘	salio	jäänne	sisa	puchu	C	0,1,0,0,2	487,6,26,916,4	In:borrowed	noun.relation	1	leftover.n.01	a small part or portion that remains after the main part no longer exists	pending
+C1012	L	35	hypernym link	n	remainder	remainder	剩餘	salio	loput	selebihnya	puchu	B	0,0,0,0,1	487,6,333,145,4		noun.relation	4	remainder.n.01	something left after other parts have been taken away	pending
+C1013	S	36	hypernym link	v	prohibit	prohibit	禁止	harimu	kieltää	mencegah	amatay	D	0,1,0,0,0	2038,0,143,723,1	Sw:borrowed	verb.communication	1	forbid.v.01	command against	pending
+C1014	L	36	hypernym link	v	command	command	命令	amuru	määrätä	membuat	kamachiy	B	0,0,0,0,1	1971,302,109,5046,264	Sw:borrowed;Qu:borrowed	verb.communication	5	command.v.02	make someone do something	pending
+C1015	S	37	hypernym link	v	can	can	開除	weza	erottaa	dapat	atiy	B	0,1,0,0,1	403,17,534,18977,76		verb.social	2	displace.v.03	terminate the employment of; discharge from an office or position	pending
+C1016	L	37	hypernym link	v	remove	remove	開除	futa	erottaa	mengeluarkan	hurquy	C	0,2,0,0,1	403,30,534,1090,3		verb.social	8	remove.v.02	remove from a position or an office	pending
+C1017	S	38	hypernym link	n	belief	belief	信仰	tumaini	käsitys	kepercayaan	iñi	A	0,0,0,0,0	2718,487,273,979,61	Sw:borrowed	noun.cognition	2	belief.n.01	any cognitive content held as true	pending
+C1018	L	38	hypernym link	n	expectation	expectation	期望	kusudio	odotus	harapan	suyay	D	0,0,0,0,1	437,10,16,716,0	Sw:borrowed	noun.cognition	4	expectation.n.01	belief about (or mental picture of) the future	pending
+C1019	S	39	hypernym link	v	climb	climb	攀登	panda	nousta	meningkat	siqay	A	0,0,0,0,0	88,100,162,1442,3		verb.motion	6	climb.v.01	go upward with gradual or continuous progress	data-verified
+C1020	L	39	hypernym link	v	rise	rise	出現	cha	nousta	meningkat	yarquy	D	0,1,0,0,0	10176,45228,162,1442,0		verb.motion	17	rise.v.01	move upward	pending
+C1021	S	40	hypernym link	v	pant	pant	喘息	hema	puhkua	berembus	sayk'uy	D	0,2,0,0,1	32,70,0,11,0	Sw:borrowed	verb.body	2	pant.v.01	breathe noisily, as when one is exhausted	pending
+C1022	L	40	hypernym link	v	blow	blow	吹	puliza	puhaltaa	berembus	phukuy	D	0,0,0,0,0	883,1,29,11,0		verb.body	22	blow.v.01	exhale hard	pending
+C1023	S	41	hypernym link	v	punish	punish	懲罰	adhibu	rangaista	hukum	maqakuy	D	0,0,0,0,0	368,0,40,5048,0	Sw:borrowed;Qu:borrowed	verb.social	1	punish.v.01	impose a penalty on; inflict punishment on	pending
+C1024	L	41	hypernym link	v	execute	execute	處決	nafidhi	teloittaa	melaksanakan	hayratachiy	D	0,1,0,0,0	671,0,29,685,0	Sw:borrowed	verb.social	7	execute.v.01	kill as a means of socially sanctioned punishment	pending
