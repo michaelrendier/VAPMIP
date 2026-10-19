@@ -17,3 +17,7 @@ Seed `J` from the prompt's slots (`β E² e^{−0.05 age}`) → spread to ±3 sl
 The zeros are Newton approximations; reply length is ≈ 4 for short prompts; β saturates at 7.552; `MONAD_TAU`, `MONAD_WINDOW_MIN`, `MONAD_EMIT_THRESH` are unused; the stored `emission_threshold` is never read. Each is measured in the paper's §17.
 
 **Check:** `python3 SemPriCon/tools/verify_unicode_against_c.py` and `verify_learn_against_c.py`.
+
+
+## State version 6
+Fresh Start v2.0 raised the state version to 6: the address is Horner over the language's alphabet (see [09](09_the_test_bins.md)), and a store is refused by any build whose state version differs. The file layout is the same as v5.

@@ -56,7 +56,7 @@
 /* Monad state file magic and version.
  * States of an education — not training checkpoints. */
 #define STATE_MAGIC          "PTOL"
-#define STATE_VERSION        5   /* v5: Unicode build -- words are addressed by code point (v4: affect field; byte addressing) */
+#define STATE_VERSION        6   /* v6: words are addressed through the language alphabet (ASCII-95 or table); v5: by code point; v4: affect field, by byte */
 
 /* Native Space — Dixon tower strata (Cayley-Dickson doubling: ℝ→ℂ→ℍ→𝕆→𝕊).
  * All Hamiltonian expressions live in Native Space (radial complex spherical

@@ -27,6 +27,7 @@
 
 #include "ptolemy.h"
 #include "unicode.h"
+#include "alphabet.h"
 #include "monad.h"
 #include "filter.h"
 #include "tokenizer.h"
@@ -185,6 +186,15 @@ void monad_word_coords(const char *surface, int N, int *idx, double *E)
         unsigned char c = (unsigned char)*p;
         int ci = (c >= 32 && c < 127) ? (int)(c - 32 + 1) : 0;
         v = v * 95ULL + (uint64_t)ci;
+    }
+    if (v > 0) v--;
+#elif defined(ALPHABET_TABLE)
+    /* Table build: the alphabet is the language's own set of characters (alphabet.h); the digit is the 1-based rank in it and the base is its size
+     * (bijective base-n, wraps mod 2^64 as the ASCII-95 build does).  One Han character is one digit, so its address is its rank. */
+    uint64_t v = 0;
+    for (const char *p = surface; *p; ) {
+        uint32_t cp = u8_next(&p);
+        v = v * (uint64_t)ALPHA_N + (uint64_t)alpha_rank(cp);
     }
     if (v > 0) v--;
 #else

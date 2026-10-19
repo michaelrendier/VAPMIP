@@ -36,5 +36,5 @@ Old stores (versions 1–4) are **refused** by `state_load`: their slots were ma
 **Open:** the address is a function of spelling. The prime-concept hash replaces it with a function of concept, placed by The Baseline ([05](05_the_baseline.md)); this page will then specify the concept key in front of this code.
 
 
-## English build (ASCII-95)
-The English store is built with `-DALPHABET_ASCII95`: Horner base 95 over printable ASCII, then the same exact-integer seed as above. See [09](09_the_test_bins.md).
+## Language alphabets
+Since Fresh Start v2.0 every store uses Horner over **its own alphabet**, base = the alphabet's size (ASCII-95 for English and Indonesian, a table for Chinese and Finnish). The code-point Horner (base `0x110001`) described above was the v1.0 Chinese build and is archived. See [09](09_the_test_bins.md).

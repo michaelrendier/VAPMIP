@@ -70,9 +70,9 @@ int state_load(Monad *m, const char *path)
         fprintf(stderr, "[state] header read error\n");
         fclose(f); return -1;
     }
-    if (version < 5) {
-        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
-                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
+    if (version < STATE_VERSION) {
+        fprintf(stderr, "[state] %s is version %u: an earlier address scheme. This build addresses through a language "
+                        "alphabet (version 6), so its slots would not match. Refusing.\n", path, version);
         fclose(f); return -1;
     }
 
@@ -306,9 +306,9 @@ int state_load_vocab(Monad *m, const char *path)
         fprintf(stderr, "[state] header read error\n");
         fclose(f); return -1;
     }
-    if (version < 5) {
-        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
-                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
+    if (version < STATE_VERSION) {
+        fprintf(stderr, "[state] %s is version %u: an earlier address scheme. This build addresses through a language "
+                        "alphabet (version 6), so its slots would not match. Refusing.\n", path, version);
         fclose(f); return -1;
     }
 

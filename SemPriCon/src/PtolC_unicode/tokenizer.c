@@ -7,6 +7,7 @@
 #include <string.h>
 #include "tokenizer.h"
 #include "unicode.h"
+#include "alphabet.h"
 
 static void tok_push(char ***out, int *cap, int *count, const char *buf, int blen)
 {
@@ -35,7 +36,10 @@ char **tok_split(const char *text, int *count)
 
     for (;;) {
         uint32_t cp = *p ? u8_next(&p) : 0;                 /* 0: end of text, flush */
-#ifdef ALPHABET_ASCII95
+#if defined(ALPHABET_TABLE)
+        /* Table build: a letter is any character of the language's alphabet (U+2019 counts as the apostrophe where the alphabet has one). */
+        int word_char = cp && alpha_rank(u_lower(cp == 0x2019 ? '\'' : cp)) > 0;
+#elif defined(ALPHABET_ASCII95)
         /* English build: the alphabet is ASCII.  A letter is [A-Za-z] or an apostrophe; every other code point separates words. */
         int word_char = cp && ((cp < 128 && isalpha((int)cp)) || cp == '\'');
 #else

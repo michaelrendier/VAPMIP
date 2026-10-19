@@ -27,4 +27,4 @@ Everything is under `VAPMIP/SemPriCon/`. Data is gitignored; the fetch scripts, 
 
 
 ## Test-bin tools
-`tools/ingest_corpora.py` builds `corpora/text/{zh,en}_v1.txt` (equal token counts). The two binaries are built from `src/PtolC_unicode` with and without `-DALPHABET_ASCII95`. Details: [09](09_the_test_bins.md).
+`tools/ingest_corpora.py` builds `corpora/text/{zh,en,id,fi}_v1.txt` (equal token counts). `tools/gen_alphabet.py` writes `alphabet_zh.h` and `alphabet_fi.h`. `tools/calibration_v2.py` builds the Finnish/Indonesian candidate columns. The binaries are built from `src/PtolC_unicode` with `-DALPHABET_ASCII95` or `-DALPHABET_TABLE`. Details: [09](09_the_test_bins.md).

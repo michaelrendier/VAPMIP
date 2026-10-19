@@ -37,3 +37,7 @@ WordNet's senses and OMW alignments are not perfect: a few pairs are a near rath
 
 ## On hold: the six-language set
 Swahili, Finnish, Indonesian and Quechua are on hold (Quechua and Swahili data are thin: only 158 of the earlier 1 024-concept six-language set were data-verified). The earlier files are kept, unchanged, in `SemPriCon/calibration/on_hold/` and are not part of this specification.
+
+
+## Version 2 candidate: Finnish and Indonesian
+`calibration/calibration_v2_en_zh_fi_id.tsv` (built by `tools/calibration_v2.py`) carries every v1 row unchanged and adds `fi_word`, `fi_note`, `id_word`, `id_note`. Words come from the Open Multilingual WordNet lemmas of the row's synset, single words only, chosen by corpus frequency. Coverage of the 1 024 rows: Finnish 808 ok, 141 repeat, 61 unattested, 14 no lemma; Indonesian 874 ok, 86 repeat, 18 unattested, 46 no lemma. This is a machine-made **candidate**: it is frozen only after a speaker reviews it. v1 is not changed.

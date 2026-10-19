@@ -1,14 +1,17 @@
-# clean/ — Fresh Start v1.0 (2026-10-19)
-# test_chinese_v1.0.bin and test_english_v1.0.bin are the frozen results of one Fresh Start: ground state -> one learning pass over one corpus.
-# They are read-only. The version number in the name rises only when a Fresh Start is triggered; the old pair is then archived, never edited.
+# clean/ — Fresh Start v2.0 (2026-10-19)
+# Four single-language stores, read-only. Each is: ground state -> one learning pass over one corpus -> frozen. State format v6.
+# Fresh Start from v1.0: the Chinese address changed (code-point Horner, base 0x110001 -> Han-ideograph alphabet, base 97 518); v1.0 is archived in clean/archive/v1.0/.
+# English v2.0 is the v1.0 bytes with the version field 5 -> 6 and nothing else (checked byte for byte): the rebuild is deterministic.
 
-file	sha256	build	corpus
-test_chinese_v1.0.bin	de8d7146c82b3278f8215acf60de77b287884373bf5ac72c4ba2c020ecd8d7b8	build/zh/ptolemy_zh (sha256 a087191298832978)	corpora/text/zh_v1.txt (sha256 d6317bbd814a4764)
-test_english_v1.0.bin	6731ac57ef1a469fe752275d685d32c4e045437ca8ff8ecb093433e6fb3882cd	build/en/ptolemy_en (sha256 6af14317cf489557)	corpora/text/en_v1.txt (sha256 705dfc199913a548)
+file	sha256	binary	alphabet	corpus (sha256 prefix)
+test_chinese_v2.0.bin	54191ff85a7f648fc71a77f65f32705aa5542151db09f736b3ab0ff80ddb7a64	build/v2/ptolemy_zh (7a23d47b4a2bd211)	table: alphabet_zh.h, 97 518 Han ideographs (base 97 518)	corpora/text/zh_v1.txt (d6317bbd814a4764)
+test_english_v2.0.bin	6470c4d4a814882702c3cbafd4cad1afe6331ac218d8db886173c16106aa2864	build/v2/ptolemy_en (5f53fbd1284027e5)	ASCII-95 (base 95)	corpora/text/en_v1.txt (705dfc199913a548)
+test_finnish_v2.0.bin	a14bf7448d7ef8fce8ec6101db2587abda3aac3dee55fe7949301bbd31ac41b5	build/v2/ptolemy_fi (b847575f80b362fc)	table: alphabet_fi.h, 32 characters (base 32)	corpora/text/fi_v1.txt (f834f922942e5301)
+test_indonesian_v2.0.bin	088731d1bb77fb911613da27e4f1aee80ac890d74b9d10c59e23ad9136339860	build/v2/ptolemy_en (5f53fbd1284027e5)	ASCII-95 (base 95), same binary as English	corpora/text/id_v1.txt (b6414b980be2dad5)
 
-# Commands (HOME pointed at a throwaway directory so nothing touches ~/.ptolemy):
-#   python3 -c "import ptol_bin; ptol_bin.write_ground('clean/test_chinese_v1.0.bin', version=5)"   (same for english)
-#   build/zh/ptolemy_zh -q -c clean/test_chinese_v1.0.bin -l corpora/text/zh_v1.txt     # Unicode code-point alphabet (Horner base 0x110001 mod 2^61-1)
-#   build/en/ptolemy_en -q -c clean/test_english_v1.0.bin -l corpora/text/en_v1.txt     # ASCII-95 alphabet (Horner base 95), -DALPHABET_ASCII95
-# Counts as the engine reported them: zh vocab 5981, word_count 5902011, A_edges 2064975.  en vocab 24940, word_count 5858570, A_edges 9373394.
-# Not examined: no speak/lookup was run on either file (instruction: ingest both, do not look at results).
+# Structural check (no lookups, no speaking): every stored slot equals the address recomputed in Python from the alphabet; every E lies in [d*, Ω]; sigma = 1/2 by the engine's Noether forcing.
+#   chinese  vocab 5 975  A 2 056 905  wc 5 902 011    finnish  vocab 25 000  A 15 457 197  wc 5 865 040
+#   english  vocab 24 940  A 9 373 394  wc 5 858 570    indonesian  vocab 24 972  A 8 728 395  wc 5 863 906
+# Whole Han repertoire (97 518 ideographs, Unicode 15.0 Lo): every one maps to a slot in 0..24 999 and an E in [0.24600, 0.56714]; all 25 000 slots are reached, at most 5 characters per slot (mean 3.9).
+# Swahili and Quechua: on hold, no store.
+# Rebuild: see wiki 09. HOME must point at a throwaway directory; the ground file must exist before -l (else the engine saves to its protected default and the ingest is lost).

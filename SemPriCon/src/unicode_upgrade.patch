@@ -1,4 +1,31 @@
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/filter.c PtolC_unicode/filter.c
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/alphabet.h PtolC_unicode/alphabet.h
+--- PtolC_eb28ce8/alphabet.h	1969-12-31 16:00:00.000000000 -0800
++++ PtolC_unicode/alphabet.h	2026-10-19 03:33:50.084445773 -0700
+@@ -0,0 +1,23 @@
++/*
++ * PtolC/alphabet.h — the per-language alphabet of the table build (-DALPHABET_TABLE).
++ * ALPHABET_HEADER names a generated header (tools/gen_alphabet.py) that defines ALPHA[ALPHA_N], the sorted code points of the language's writing.
++ * alpha_rank(cp) is the character's digit: its 1-based position in ALPHA, or 0 when it is not in the alphabet.
++ */
++#ifndef ALPHABET_H
++#define ALPHABET_H
++#ifdef ALPHABET_TABLE
++#include <stdint.h>
++#include ALPHABET_HEADER
++static inline int alpha_rank(uint32_t cp)
++{
++    int lo = 0, hi = ALPHA_N - 1;
++    while (lo <= hi) {
++        int mid = (lo + hi) / 2;
++        if (cp < ALPHA[mid]) hi = mid - 1;
++        else if (cp > ALPHA[mid]) lo = mid + 1;
++        else return mid + 1;
++    }
++    return 0;
++}
++#endif
++#endif
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/filter.c PtolC_unicode/filter.c
 --- PtolC_eb28ce8/filter.c	2026-05-18 23:06:30.000000000 -0700
 +++ PtolC_unicode/filter.c	2026-10-18 17:14:55.486343650 -0700
 @@ -16,6 +16,7 @@
@@ -70,7 +97,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/filter.c PtolC_unicode/filt
      }
  
      /* Trailing apostrophe fragment: "pins'", "ban'" */
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/Makefile PtolC_unicode/Makefile
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/Makefile PtolC_unicode/Makefile
 --- PtolC_eb28ce8/Makefile	2026-05-18 23:06:30.000000000 -0700
 +++ PtolC_unicode/Makefile	2026-10-18 17:15:05.514939876 -0700
 @@ -12,7 +12,7 @@
@@ -82,18 +109,19 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/Makefile PtolC_unicode/Make
  OBJS    = $(SRCS:.c=.o)
  
  PREFIX       ?= /usr/local
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad.c
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad.c
 --- PtolC_eb28ce8/monad.c	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/monad.c	2026-10-19 00:59:58.714217908 -0700
-@@ -26,6 +26,7 @@
++++ PtolC_unicode/monad.c	2026-10-19 03:33:50.104446014 -0700
+@@ -26,6 +26,8 @@
  #include <unistd.h>
  
  #include "ptolemy.h"
 +#include "unicode.h"
++#include "alphabet.h"
  #include "monad.h"
  #include "filter.h"
  #include "tokenizer.h"
-@@ -167,8 +168,18 @@
+@@ -167,8 +169,18 @@
  
  /* ── Word addressing ─────────────────────────────────────────────────────── */
  
@@ -112,7 +140,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
      uint64_t v = 0;
      for (const char *p = surface; *p; p++) {
          unsigned char c = (unsigned char)*p;
-@@ -176,14 +187,20 @@
+@@ -176,14 +188,29 @@
          v = v * 95ULL + (uint64_t)ci;
      }
      if (v > 0) v--;
@@ -121,6 +149,15 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
 -    if (seed < 0.0) seed += 1.0;
 -
 -    *idx = (int)(seed * N);
++#elif defined(ALPHABET_TABLE)
++    /* Table build: the alphabet is the language's own set of characters (alphabet.h); the digit is the 1-based rank in it and the base is its size
++     * (bijective base-n, wraps mod 2^64 as the ASCII-95 build does).  One Han character is one digit, so its address is its rank. */
++    uint64_t v = 0;
++    for (const char *p = surface; *p; ) {
++        uint32_t cp = u8_next(&p);
++        v = v * (uint64_t)ALPHA_N + (uint64_t)alpha_rank(cp);
++    }
++    if (v > 0) v--;
 +#else
 +    const uint64_t P = (1ULL << 61) - 1;
 +    uint64_t v = 0;
@@ -138,7 +175,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
      *E = MONAD_D_STAR + seed * (MONAD_OMEGA_ZS - MONAD_D_STAR);
  }
  
-@@ -433,9 +450,12 @@
+@@ -433,9 +460,12 @@
  
      while (*p) {
          int slen = 0;
@@ -154,7 +191,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
          sbuf[slen] = '\0';
          if (slen < 2) continue;
  
-@@ -618,22 +638,26 @@
+@@ -618,22 +648,26 @@
  
  static int surface_canonical(const char *w)
  {
@@ -192,28 +229,28 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
      return 1;
  }
  
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/ptolemy.h PtolC_unicode/ptolemy.h
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/ptolemy.h PtolC_unicode/ptolemy.h
 --- PtolC_eb28ce8/ptolemy.h	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/ptolemy.h	2026-10-18 17:14:55.488343368 -0700
++++ PtolC_unicode/ptolemy.h	2026-10-19 03:33:50.104446014 -0700
 @@ -56,7 +56,7 @@
  /* Monad state file magic and version.
   * States of an education — not training checkpoints. */
  #define STATE_MAGIC          "PTOL"
 -#define STATE_VERSION        4   /* v4: affect field (e7 octonion slot) */
-+#define STATE_VERSION        5   /* v5: Unicode build -- words are addressed by code point (v4: affect field; byte addressing) */
++#define STATE_VERSION        6   /* v6: words are addressed through the language alphabet (ASCII-95 or table); v5: by code point; v4: affect field, by byte */
  
  /* Native Space — Dixon tower strata (Cayley-Dickson doubling: ℝ→ℂ→ℍ→𝕆→𝕊).
   * All Hamiltonian expressions live in Native Space (radial complex spherical
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/state.c PtolC_unicode/state.c
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/state.c PtolC_unicode/state.c
 --- PtolC_eb28ce8/state.c	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/state.c	2026-10-18 17:15:05.514939876 -0700
++++ PtolC_unicode/state.c	2026-10-19 03:34:04.501617771 -0700
 @@ -70,6 +70,11 @@
          fprintf(stderr, "[state] header read error\n");
          fclose(f); return -1;
      }
-+    if (version < 5) {
-+        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
-+                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
++    if (version < STATE_VERSION) {
++        fprintf(stderr, "[state] %s is version %u: an earlier address scheme. This build addresses through a language "
++                        "alphabet (version 6), so its slots would not match. Refusing.\n", path, version);
 +        fclose(f); return -1;
 +    }
  
@@ -223,22 +260,23 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/state.c PtolC_unicode/state
          fprintf(stderr, "[state] header read error\n");
          fclose(f); return -1;
      }
-+    if (version < 5) {
-+        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
-+                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
++    if (version < STATE_VERSION) {
++        fprintf(stderr, "[state] %s is version %u: an earlier address scheme. This build addresses through a language "
++                        "alphabet (version 6), so its slots would not match. Refusing.\n", path, version);
 +        fclose(f); return -1;
 +    }
  
      if ((int)N != m->N) {
          fprintf(stderr, "[state] vocab load: N mismatch — file=%u monad=%d\n", N, m->N);
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/tokenizer.c
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/tokenizer.c
 --- PtolC_eb28ce8/tokenizer.c	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/tokenizer.c	2026-10-19 00:59:58.715217899 -0700
-@@ -6,7 +6,20 @@
++++ PtolC_unicode/tokenizer.c	2026-10-19 03:33:50.104446014 -0700
+@@ -6,7 +6,21 @@
  #include <stdlib.h>
  #include <string.h>
  #include "tokenizer.h"
 +#include "unicode.h"
++#include "alphabet.h"
  
 +static void tok_push(char ***out, int *cap, int *count, const char *buf, int blen)
 +{
@@ -255,7 +293,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/t
  char **tok_split(const char *text, int *count)
  {
      int   cap  = 512;
-@@ -15,28 +28,34 @@
+@@ -15,28 +29,37 @@
      if (!out || !text) return out;
  
      int   tlen = strlen(text);
@@ -268,7 +306,10 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/t
 +
 +    for (;;) {
 +        uint32_t cp = *p ? u8_next(&p) : 0;                 /* 0: end of text, flush */
-+#ifdef ALPHABET_ASCII95
++#if defined(ALPHABET_TABLE)
++        /* Table build: a letter is any character of the language's alphabet (U+2019 counts as the apostrophe where the alphabet has one). */
++        int word_char = cp && alpha_rank(u_lower(cp == 0x2019 ? '\'' : cp)) > 0;
++#elif defined(ALPHABET_ASCII95)
 +        /* English build: the alphabet is ASCII.  A letter is [A-Za-z] or an apostrophe; every other code point separates words. */
 +        int word_char = cp && ((cp < 128 && isalpha((int)cp)) || cp == '\'');
 +#else
@@ -309,7 +350,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/t
      }
  
      free(buf);
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/unicode.c PtolC_unicode/unicode.c
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/unicode.c PtolC_unicode/unicode.c
 --- PtolC_eb28ce8/unicode.c	1969-12-31 16:00:00.000000000 -0800
 +++ PtolC_unicode/unicode.c	2026-10-18 17:14:15.112250905 -0700
 @@ -0,0 +1,95 @@
@@ -408,7 +449,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/unicode.c PtolC_unicode/uni
 +        default: return 0;
 +    }
 +}
-diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/unicode.h PtolC_unicode/unicode.h
+diff -ruN '--exclude=unicode_tables.h' '--exclude=alphabet_*.h' PtolC_eb28ce8/unicode.h PtolC_unicode/unicode.h
 --- PtolC_eb28ce8/unicode.h	1969-12-31 16:00:00.000000000 -0800
 +++ PtolC_unicode/unicode.h	2026-10-18 17:14:15.106251813 -0700
 @@ -0,0 +1,27 @@
