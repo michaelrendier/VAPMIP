@@ -1,0 +1,6 @@
+synsets with >=2 English and >=2 Mandarin lemmas: 6954
+english frequencies done
+chinese frequencies done
+pairs: 610
+wrote /home/rendier/Projects/ThePlace/VAPMIP/SemPriCon/calibration/calibration_v1_en_zh.tsv rows 928 sha256 6b07adcc63cd4870b3cd75e12db504b418a5dad48a73c9d18d061532160e47a6
+lexnames: {'noun.artifact': 52, 'verb.social': 28, 'noun.act': 28, 'noun.person': 27, 'noun.state': 23, 'noun.communication': 23, 'verb.stative': 21, 'verb.communication': 20} | median depth 1.9648045204966034

@@ -15,7 +15,7 @@ Work directory for the white paper on the simplest engine in the lineage: the Ma
 | `tools/make_notebooks.py` | writes `notebooks/` (execute with nbconvert) |
 | `figures/` | figures made by the notebooks |
 | `src/PtolC_unicode/`, `src/unicode_upgrade.patch` | the Unicode build of the C monad (a copy of the 2026-05 source plus the patch) |
-| `calibration/` | the 1 024-concept calibration set (`calibration_1024.tsv`) and every graded candidate |
+| `calibration/` | the frozen 1 024-word calibration set, English + Chinese (`calibration_v1_en_zh.tsv`, pinned by `FROZEN.sha256`); the six-language set is in `on_hold/` |
 | `corpora/` | fetch scripts, manifest, licences, closed doors (data gitignored) |
 | **wiki** | `../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/` — the functional reference for everything here, updated in place |
 

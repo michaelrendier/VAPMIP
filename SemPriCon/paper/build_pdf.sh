@@ -6,7 +6,7 @@ T="${TMPDIR:-/tmp}"
 cd "$(dirname "$0")"
 true  # text is built by make_paper.py; run it first
 cat The_Golden_Ratio_Monad.md > $T/goldmonad_clean.md   # timing markers are for --check only
-pandoc $T/goldmonad_clean.md -s -o $T/goldmonad.tex -V geometry:margin=1in -V fontsize=10pt -V colorlinks=true \
+pandoc --resource-path="$PWD" $T/goldmonad_clean.md -s -o $T/goldmonad.tex -V geometry:margin=1in -V fontsize=10pt -V colorlinks=true \
   -V mainfont="DejaVu Serif" -V mainfontoptions="RawFeature={fallback=fbk}" -V monofont="DejaVu Sans Mono" \
   -V monofontoptions="Scale=0.8,RawFeature={fallback=fbk}" -H header.tex \
   -V title-meta="The Golden-Ratio Monad" -V author-meta="Cody Michael Allison"

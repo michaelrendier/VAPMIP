@@ -1,57 +1,39 @@
 # 06 — The calibration set (testing and debugging data set)
 
-**Job.** A fixed list of **1 024 concepts**, each with a **direct word in every language of the test bed**, used to calibrate and debug the engine: if the semantic prime-concept hash is working, a concept's words in different languages must behave as one concept (semantic collisions, [03](03_the_slots_and_collisions.md)), and a simple concept and its layered analogue must stand in the relation the construction predicts. Files: `SemPriCon/calibration/calibration_1024.tsv` (the set), `calibration_pool_all.tsv` (every candidate, graded). Builder: `SemPriCon/tools/calibration_build.py`.
+**Job.** A fixed, **non-mutating** list of **1 024 words** to calibrate and debug the engine against. Written language only: it is about writing, not about how people speak. English (US and UK spellings) and Chinese (Traditional) are the only languages in version 1; the other four are on hold.
 
-## Specification
-1. **Languages:** English (US and UK spellings), Mandarin (Traditional), Swahili, Finnish, Indonesian, Quechua.
-2. **Inclusion rule (Cody, 2026-10-18).** A concept is in the set only if *every* language has a **direct** analogue: one word, not a phrase, not a loan from another test-bed language, meaning the same thing. **One missing analogue in one language fails the concept.**
-3. **Two tiers, 512 each.** **S**: simple concepts (concrete, few senses). **L**: layered concepts, "analogous vocabulary carrying more complexity" (abstract, many senses). Tiers are assigned by an explicit score, not by hand: `layer_score = 3·[abstract lexicographer class] + n_senses/3` on the English WordNet synset; the lower half of the selected 1 024 is S, the upper half is L. A pair (S, L) is recorded when WordNet ties them (derivationally related form or hypernym link).
-4. **Concept unit:** an English WordNet synset (the first synset of an English word and part of speech that has lemmas in the Open Multilingual WordNet for Mandarin, Finnish and Indonesian).
-5. **Word choice per language:** Mandarin, Finnish, Indonesian: the lemmas of that synset in the Open Multilingual WordNet (Mandarin converted to Traditional with OpenCC `s2twp`); Swahili, Quechua (no WordNet): the Wiktionary headword whose gloss is the English word (rank 0 = primary gloss). Among several candidates the **most frequent in that language's Wikipedia text** is taken, then the non-borrowed one.
-6. **Evidence grade** (the worst across languages): **A** primary gloss in Swahili and Quechua and every chosen word attested at least 3 times in its Wikipedia sample; **B** gloss within the first two; **C** within the first four; **D** weaker, or a word not attested. Only grade A meets the data criterion for "direct analogue" by itself.
-7. **Review column.** `data-verified` = grade A and no etymology flag (no `borrowed`, no mention of another test-bed language in the etymology). Everything else is `pending` until a speaker of each language confirms the word. Pending is not a pass.
+## Specification (Cody, 2026-10-18)
+1. **Two halves of 512.** The **first half (S)**: simple words for contextually simple, prime concepts. The **second half (L)**: *different words that carry the same meaning* as the first half but have a **deeper contextual interpretation** available (S *ball*, *city*, *road*; L *globe*, *metropolis*, *route*). The two halves are the calibration mechanism to shoot towards: the engine is calibrated when an S word and its L partner behave as one meaning with different depth.
+2. **Direct analogues.** Every concept has a word in English and a word in written Chinese. One missing analogue fails the concept.
+3. **It does not mutate.** `calibration/calibration_v1_en_zh.tsv` is read-only and pinned by `calibration/FROZEN.sha256`. A correction is a **new version** (`calibration_v2_…`), never an edit.
+4. **Each language gets its own ruleset.** Languages differ in how writing carries meaning: strongly phonetic alphabets (Spanish and the other Romance languages), near-phonemic agglutinative writing (Finnish), opaque alphabetic orthography (English), logographic writing in which a character is a morpheme (Chinese). Their semantics differ, so each type of semantic association is its own experiment and its own ruleset. The current engine has one generic ruleset ([02](02_the_tokenizer.md)); this page fixes only the standard to measure against.
 
-## Status (1024 concepts selected from 1070 candidates)
-| | S | L | total |
-|---|---|---|---|
-| concepts | 512 | 512 | 1024 |
-| grade A | 198 | 175 | 373 |
-| grade B | 75 | 87 | 162 |
-| grade C | 33 | 41 | 74 |
-| grade D | 206 | 209 | 415 |
+## How version 1 was built (`SemPriCon/tools/calibration_v1.py`; nothing typed by hand)
+- **Concept:** a WordNet synset with at least two single-word English lemmas and two single-token Mandarin lemmas in the Open Multilingual WordNet (Mandarin converted to Traditional with OpenCC `s2twp`); S's word is one of the synset's first three senses.
+- **English:** S = the most frequent lemma in English Wikipedia text; L = a rarer lemma (at most 2/3 of S's frequency, at least 8 occurrences) with the most WordNet senses.
+- **Chinese:** the same over the synset's Mandarin lemmas, each **confirmed by CC-CEDICT** (its definition contains a lemma of the synset); L has the most CEDICT definitions among the rarer ones.
+- **Selection:** 512 concepts by *depth evidence* (log₁₀ frequency ratio S:L in English plus in Chinese, each capped at 3, plus a polysemy term); every English word and every Chinese word occurs once; at most 20 % of concepts from one lexicographer class. 
 
-- **Data-verified (A, no flags): 158 of 1024.** Grade A alone: 373. The rest awaits review: the open data cannot reach 1 024 verified concepts, because Quechua is thin (2 150 Wiktionary headwords, a 13 MB Wikipedia). That shortfall is a finding, not a defect of the list.
-- Parts of speech: {'n': 588, 'a': 103, 'v': 330, 'r': 3}. Concepts whose US and UK spellings differ: 15. Concepts with an etymology flag in at least one language: 555. Pairs (S, L): 41.
-- Known noise (examples in the file): OMW sometimes gives a near rather than direct match (Indonesian *pelanggaran* for *accident*); Mandarin picks are frequent words, not always the best match; Wikipedia frequency is a weak proxy for Quechua.
+## The file (`calibration_v1_en_zh.tsv`, sha256 `6180c3c60e446640b59516c2a3ba7346208de1e1bf8a11f034c5669cf64beaa8`)
+`id, half, pair, pos, en_us, en_uk, zh_trad, synset, lexname, freq_en, freq_zh, wn_senses, cedict_defs, depth_evidence, definition`. 1 024 rows: each pair is two consecutive rows, S then L. Nouns 341, verbs 171 (no adjective passed the gates). US and UK spellings differ in 21 rows. Largest lexicographer classes: {'noun.artifact': 64, 'noun.act': 34, 'noun.person': 30, 'verb.communication': 29, 'verb.social': 26}.
 
-## Columns of `calibration_1024.tsv`
-`id, tier, pair, pair_relation, pos, en_us, en_uk, zh_trad, sw, fi, id_, qu, grade, ranks_zh_sw_fi_id_qu, freq_zh_sw_fi_id_qu, flags, lexname, n_senses, synset, en_gloss, review`
+| S (en) | L (en) | S (zh) | L (zh) | meaning |
+|---|---|---|---|---|
+| feather | plume | 羽 | 羽毛 | the light horny waterproof structure forming the external co |
+| road | route | 路 | 道路 | an open way (generally public) for travel or transportation |
+| width | breadth | 寬度 | 廣度 | the extent of something from side to side |
+| heart | bosom | 心 | 內心 | the locus of feelings and intuitions |
+| anger | ire | 憤怒 | 火氣 | a strong emotion; a feeling that is oriented toward some rea |
+| city | metropolis | 城 | 城市 | a large and densely populated urban area; may include severa |
+| ball | globe | 球 | 球狀物 | an object with a spherical shape |
 
-## Sample (grade A, no flags)
-| id | en | pos | zh | sw | fi | id | qu | grade |
-|---|---|---|---|---|---|---|---|---|
-| C0011 | addition | n | 增加 | nyongeza | lisääminen | tambahan | yapay | A |
-| C0017 | all | a | 都 | ote | koko | semua | tukuy | A |
-| C0029 | approach | v | 接近 | sogea | lähestyä | hampir | chimpay | A |
-| C0037 | back | n | 後面 | nyuma | takaosa | belakang | wasa | A |
-| C0043 | basket | n | 籃子 | kikapu | koppa | raga | isanka | A |
-| C0076 | bridge | n | 橋 | kivuko | silta | jambatan | chaka | A |
-| C0103 | chest | n | 胸 | kifua | rintakehä | dada | qhasqu | A |
-| C0122 | corpse | n | 遺體 | mfu | ruumis | mayat | aya | A |
-| C0490 | assemble | v | 組合 | konga | yhdistää | mengumpulkan | aylluy | A |
-| C0497 | base | n | 基地 | msingi | tukikohta | dasar | tiksi | A |
-| C0498 | be | v | 是 | wa | olla | makhluk | kay | A |
-| C0499 | beat | v | 征服 | chapa | voittaa | mengalahkan | thatkiy | A |
-| C0503 | begin | v | 開始 | anza | alkaa | mulai | qallariy | A |
-| C0508 | birth | n | 出生 | uzazi | synnytys | kelahiran | wachay | A |
-| C0517 | break | v | 結束 | vunja | kukistaa | menghentikan | p'akiy | A |
-| C0519 | bundle | n | 包 | mtumba | pakkaus | bundel | q'ipi | A |
+## Known noise (version 1 is frozen as it stands; corrections go to version 2)
+WordNet's senses and OMW alignments are not perfect: a few pairs are a near rather than a direct match (*despite/contempt* as a noun sense, *mood/temper*). Frequency is measured on Wikipedia, which is not everyday speech (and the set is about writing). No adjectives passed the gates.
 
 ## Use
-- *Calibration:* every concept's six words must be addressable (tokenise to the expected tokens; Mandarin words split into characters).
-- *Debugging:* a concept whose words land far apart after the hash is a finding about the hash or about the concept; a concept the engine cannot address at all is a tokenizer or filter bug.
-- *Fitting:* the set is the held-out check for the fit of English and the other languages to The Baseline ([05](05_the_baseline.md)): fit on other alignments, test on these.
+- *Calibration:* an S word and its L partner, in English and in Chinese, must each tokenise as expected (Chinese words split into characters, [02](02_the_tokenizer.md)); then they are the targets of the concept key ([01](01_the_address.md)).
+- *Debugging:* a pair whose words land far apart after the hash is a finding about the hash or about the pair; a word the engine cannot address is a tokenizer or filter bug.
+- *Fitting:* the set is the held-out check for the fit of English to The Baseline ([05](05_the_baseline.md)): fit on other alignments, test on these.
 
-## Open
-- "Analogous" for the S/L pairs: the current relation is lexical (derivation, hypernymy), which gives 41 pairs; Cody's intended relation may be broader.
-- Review by speakers of each language; replacement of failed concepts from the candidate pool (the next grade-A candidates are in `calibration_pool_all.tsv`).
+## On hold: the six-language set
+Swahili, Finnish, Indonesian and Quechua are on hold (Quechua and Swahili data are thin: only 158 of the earlier 1 024-concept six-language set were data-verified). The earlier files are kept, unchanged, in `SemPriCon/calibration/on_hold/` and are not part of this specification.

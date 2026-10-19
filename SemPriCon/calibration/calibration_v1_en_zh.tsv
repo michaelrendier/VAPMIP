@@ -1,0 +1,1025 @@
+id	half	pair	pos	en_us	en_uk	zh_trad	synset	lexname	freq_en	freq_zh	wn_senses	cedict_defs	depth_evidence	definition
+K0001	S	1	n	act	act	作為	act.n.02	noun.Tops	3452	11398	15		2.99	something that people do or cause to happen
+K0002	L	1	n	deed	deed	動作	act.n.02	noun.Tops	37	1094	2	2	2.99	something that people do or cause to happen
+K0003	S	2	n	knowledge	knowledge	知識	cognition.n.01	noun.Tops	1079	3238	1		1.82	the psychological result of perception and learning and reasoning
+K0004	L	2	n	cognition	cognition	認知	cognition.n.01	noun.Tops	98	539	1	8	1.82	the psychological result of perception and learning and reasoning
+K0005	S	3	n	being	being	生物	organism.n.01	noun.Tops	9429	6775	15		3.58	a living thing that has (or can develop) the ability to act or function independently
+K0006	L	3	n	organism	organism	有機體	organism.n.01	noun.Tops	182	92	2	1	3.58	a living thing that has (or can develop) the ability to act or function independently
+K0007	S	4	n	plant	plant	植物	plant.n.02	noun.Tops	1321	3990	10		2.76	(botany) a living organism lacking the power of locomotion
+K0008	L	4	n	flora	flora	植物群	plant.n.02	noun.Tops	255	36	2	1	2.76	(botany) a living organism lacking the power of locomotion
+K0009	S	5	n	attack	attack	攻擊	attack.n.01	noun.act	2092	2654	15		2.80	(military) an offensive against an enemy (using weapons)
+K0010	L	5	n	onslaught	onslaught	突擊	attack.n.01	noun.act	24	370	3	4	2.80	(military) an offensive against an enemy (using weapons)
+K0011	S	6	n	behavior	behaviour	行為	behavior.n.01	noun.act	979	4641	4		1.23	manner of acting or controlling yourself
+K0012	L	6	n	conduct	conduct	為人	behavior.n.01	noun.act	388	1746	8	4	1.23	manner of acting or controlling yourself
+K0013	S	7	n	competition	competition	比賽	competition.n.03	noun.act	1219	2293	4		1.32	the act of competing as for profit or a prize
+K0014	L	7	n	contention	contention	競爭	competition.n.03	noun.act	88	1512	3	2	1.32	the act of competing as for profit or a prize
+K0015	S	8	n	contribution	contribution	貢獻	contribution.n.03	noun.act	363	1916	5		1.88	act of giving in common with others for a common purpose especially to a charity
+K0016	L	8	n	donation	donation	捐助	contribution.n.03	noun.act	86	106	2	4	1.88	act of giving in common with others for a common purpose especially to a charity
+K0017	S	9	n	crime	crime	罪	crime.n.01	noun.act	896	4631	2		1.75	(criminal law) an act punishable by law; usually considered an evil act
+K0018	L	9	n	offense	offence	犯罪	crime.n.01	noun.act	170	868	5	2	1.75	(criminal law) an act punishable by law; usually considered an evil act
+K0019	S	10	n	dance	dance	舞蹈	dancing.n.01	noun.act	1016	742	7		1.33	taking a series of rhythmical steps (and movements) in time to music
+K0020	L	10	n	dancing	dancing	跳舞	dancing.n.01	noun.act	254	140	4	1	1.33	taking a series of rhythmical steps (and movements) in time to music
+K0021	S	11	n	demonstration	demonstration	遊行	demonstration.n.03	noun.act	207	1031	5		1.69	a public display of group feelings (usually of a political nature)
+K0022	L	11	n	manifestation	manifestation	示威遊行	demonstration.n.03	noun.act	59	74	5	1	1.69	a public display of group feelings (usually of a political nature)
+K0023	S	12	n	recreation	recreation	娛樂	diversion.n.01	noun.act	166	1443	2		2.38	an activity that diverts or amuses or stimulates
+K0024	L	12	n	diversion	diversion	消遣	diversion.n.01	noun.act	29	43	3	5	2.38	an activity that diverts or amuses or stimulates
+K0025	S	13	n	responsibility	responsibility	任務	duty.n.01	noun.act	505	2758	3		1.79	the social force that binds you to the courses of action demanded by that force; ; - John D.Rockefeller Jr
+K0026	L	13	n	obligation	obligation	職責	duty.n.01	noun.act	74	485	5	3	1.79	the social force that binds you to the courses of action demanded by that force; ; - John D.Rockefeller Jr
+K0027	S	14	n	work	work	工作	employment.n.02	noun.act	6755	10401	34		1.83	the occupation for which you are paid
+K0028	L	14	n	employment	employment	勞動	employment.n.02	noun.act	486	2117	4	4	1.83	the occupation for which you are paid
+K0029	S	15	n	exchange	exchange	交換	exchange.n.03	noun.act	1148	1171	17		2.74	the act of changing one thing for another thing
+K0030	L	15	n	interchange	interchange	調換	exchange.n.03	noun.act	153	16	8	3	2.74	the act of changing one thing for another thing
+K0031	S	16	n	execution	execution	處死	execution.n.01	noun.act	461	630	7		2.38	putting a condemned person to death
+K0032	L	16	n	executing	executing	極刑	execution.n.01	noun.act	73	21	8	2	2.38	putting a condemned person to death
+K0033	S	17	n	exercise	exercise	運動	exercise.n.01	noun.act	361	15666	10		3.24	the activity of exerting your muscles in various ways to keep fit
+K0034	L	17	n	exercising	exercising	鍛鍊	exercise.n.01	noun.act	35	94	6	6	3.24	the activity of exerting your muscles in various ways to keep fit
+K0035	S	18	n	experiment	experiment	實驗	experiment.n.01	noun.act	458	4858	5		1.34	the act of conducting a controlled test or investigation
+K0036	L	18	n	experimentation	experimentation	試驗	experiment.n.01	noun.act	78	1291	2	5	1.34	the act of conducting a controlled test or investigation
+K0037	S	19	n	explosion	explosion	爆發	explosion.n.02	noun.act	194	4008	7		1.30	the act of exploding or bursting
+K0038	L	19	n	burst	burst	爆炸	explosion.n.02	noun.act	85	1463	12	4	1.30	the act of exploding or bursting
+K0039	S	20	n	leave	leave	分別	farewell.n.02	noun.act	896	5643	17		3.16	the act of departing politely
+K0040	L	20	n	parting	parting	告別	farewell.n.02	noun.act	16	219	7	2	3.16	the act of departing politely
+K0041	S	21	n	agriculture	agriculture	農業	farming.n.01	noun.act	993	3836	4		1.86	the practice of cultivating the land or raising stock
+K0042	L	21	n	farming	farming	畜牧業	farming.n.01	noun.act	392	213	6	3	1.86	the practice of cultivating the land or raising stock
+K0043	S	22	n	fighting	fighting	戰鬥	fight.n.02	noun.act	1212	2574	6		3.58	the act of fighting; any contest or struggle
+K0044	L	22	n	scrap	scrap	打架	fight.n.02	noun.act	45	23	7	4	3.58	the act of fighting; any contest or struggle
+K0045	S	23	n	raid	raid	襲擊	foray.n.01	noun.act	256	1209	6		2.09	a sudden short attack
+K0046	L	23	n	foray	foray	突襲	foray.n.01	noun.act	14	179	4	2	2.09	a sudden short attack
+K0047	S	24	n	case	case	案	lawsuit.n.01	noun.act	3493	13056	22		2.15	a comprehensive term for any proceeding in a court of law whereby an individual seeks a legal remedy
+K0048	L	24	n	suit	suit	案件	lawsuit.n.01	noun.act	445	720	10	3	2.15	a comprehensive term for any proceeding in a court of law whereby an individual seeks a legal remedy
+K0049	S	25	n	lecture	lecture	演講	lecture.n.03	noun.act	213	913	5		1.52	teaching by giving a discourse on some subject (typically to a class)
+K0050	L	25	n	lecturing	lecturing	講座	lecture.n.03	noun.act	21	282	3	2	1.52	teaching by giving a discourse on some subject (typically to a class)
+K0051	S	26	n	magic	magic	魔術	magic_trick.n.01	noun.act	486	130	3		1.89	an illusory feat; considered magical by naive observers
+K0052	L	26	n	trick	trick	把戲	magic_trick.n.01	noun.act	198	13	8	2	1.89	an illusory feat; considered magical by naive observers
+K0053	S	27	n	error	error	錯誤	mistake.n.01	noun.act	505	1749	7		1.81	a wrong action attributable to bad judgment or ignorance or inattention
+K0054	L	27	n	fault	fault	失誤	mistake.n.01	noun.act	106	164	8	5	1.81	a wrong action attributable to bad judgment or ignorance or inattention
+K0055	S	28	n	move	move	遷移	move.n.02	noun.act	1423	633	21		1.64	the act of changing your residence or place of business
+K0056	L	28	n	relocation	relocation	搬遷	move.n.02	noun.act	72	287	2	3	1.64	the act of changing your residence or place of business
+K0057	S	29	n	practice	practise | <v>	實行	practice.n.03	noun.act	1775	2790	10		2.45	translating an idea into action
+K0058	L	29	n	praxis	praxis	實踐	practice.n.03	noun.act	19	935	1	4	2.45	translating an idea into action
+K0059	S	30	n	process	process	過程	procedure.n.01	noun.act	2834	5127	13		2.42	a particular course of action intended to achieve a result
+K0060	L	30	n	procedure	procedure	手續	procedure.n.01	noun.act	396	140	4	3	2.42	a particular course of action intended to achieve a result
+K0061	S	31	n	protest	protest	抗議	protest.n.02	noun.act	236	1138	6		1.45	the act of protesting; a public (often organized) manifestation of dissent
+K0062	L	31	n	dissent	dissent	異議	protest.n.02	noun.act	50	190	6	1	1.45	the act of protesting; a public (often organized) manifestation of dissent
+K0063	S	32	n	rebellion	rebellion	起義	rebellion.n.02	noun.act	467	2173	2		1.64	organized opposition to authority; a conflict in which one faction tries to wrest control from another
+K0064	L	32	n	uprising	uprising	暴動	rebellion.n.02	noun.act	212	545	9	2	1.64	organized opposition to authority; a conflict in which one faction tries to wrest control from another
+K0065	S	33	n	return	return	返回	return.n.02	noun.act	2232	1939	29		2.89	a coming to or returning home
+K0066	L	33	n	homecoming	homecoming	歸國	return.n.02	noun.act	24	233	2	2	2.89	a coming to or returning home
+K0067	S	34	n	slavery	slavery	奴隸制	slavery.n.02	noun.act	600	458	3		2.47	the practice of owning slaves
+K0068	L	34	n	slaveholding	slaveholding	奴隸制度	slavery.n.02	noun.act	9	103	2	1	2.47	the practice of owning slaves
+K0069	S	35	n	surge	surge	高潮	surge.n.02	noun.act	79	331	8		1.44	a sudden or abrupt strong increase
+K0070	L	35	n	upsurge	upsurge	高漲	surge.n.02	noun.act	8	118	2	3	1.44	a sudden or abrupt strong increase
+K0071	S	36	n	teaching	teaching	教學	teaching.n.01	noun.act	725	1786	5		2.01	the profession of a teacher
+K0072	L	36	n	pedagogy	pedagogy	教育學	teaching.n.01	noun.act	20	632	3	1	2.01	the profession of a teacher
+K0073	S	37	n	vibration	vibration	振動	vibration.n.01	noun.act	80	253	4		2.61	the act of vibrating
+K0074	L	37	n	quiver	quiver	顫動	vibration.n.01	noun.act	11	9	7	2	2.61	the act of vibrating
+K0075	S	38	n	war	war	戰	war.n.03	noun.act	11312	56367	5		2.07	an active struggle between competing entities
+K0076	L	38	n	warfare	warfare	戰爭	war.n.03	noun.act	463	11730	2	2	2.07	an active struggle between competing entities
+K0077	S	39	n	algae	algae	藻類	alga.n.01	noun.animal	238	128	1		1.45	primitive chlorophyll-containing mainly aquatic eukaryotic organisms lacking true stems and roots and leaves
+K0078	L	39	n	alga	alga	海藻	alga.n.01	noun.animal	32	34	1	3	1.45	primitive chlorophyll-containing mainly aquatic eukaryotic organisms lacking true stems and roots and leaves
+K0079	S	40	n	feather	feather	羽	feather.n.01	noun.animal	91	2974	7		1.45	the light horny waterproof structure forming the external covering of birds
+K0080	L	40	n	plume	plume	羽毛	feather.n.01	noun.animal	43	353	9	3	1.45	the light horny waterproof structure forming the external covering of birds
+K0081	S	41	n	rabbit	rabbit	兔	rabbit.n.01	noun.animal	104	304	4		1.88	any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food
+K0082	L	41	n	coney	coney	兔子	rabbit.n.01	noun.animal	12	35	4	3	1.88	any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food
+K0083	S	42	n	knee	knee	膝	stifle.n.01	noun.animal	159	172	3		1.97	joint between the femur and tibia in a quadruped; corresponds to the human knee
+K0084	L	42	n	stifle	stifle	膝蓋	stifle.n.01	noun.animal	9	52	5	2	1.97	joint between the femur and tibia in a quadruped; corresponds to the human knee
+K0085	S	43	n	supplement	supplement	附件	accessory.n.02	noun.artifact	179	160	6		1.23	a supplementary component that improves capability
+K0086	L	43	n	accessory	accessory	配件	accessory.n.02	noun.artifact	17	99	5	5	1.23	a supplementary component that improves capability
+K0087	S	44	n	airport	airport	機場	airport.n.01	noun.artifact	1536	4592	1		4.04	an airfield equipped with control tower and hangars as well as accommodations for passengers and cargo
+K0088	L	44	n	aerodrome	aerodrome	飛機場	airport.n.01	noun.artifact	27	24	1	3	4.04	an airfield equipped with control tower and hangars as well as accommodations for passengers and cargo
+K0089	S	45	n	ammunition	ammunition	彈藥	ammunition.n.01	noun.artifact	203	488	3		1.92	projectiles to be fired from a gun
+K0090	L	45	n	ammo	ammo	軍火	ammunition.n.01	noun.artifact	8	148	1	3	1.92	projectiles to be fired from a gun
+K0091	S	46	n	armour	armour	裝甲	armor.n.01	noun.artifact	357	1148	4		1.69	protective covering made of metal and used in combat
+K0092	L	46	n	armor	armour	盔甲	armor.n.01	noun.artifact	159	53	4	2	1.69	protective covering made of metal and used in combat
+K0093	S	47	n	dress	dress	服裝	attire.n.01	noun.artifact	271	473	21		1.56	clothing of a distinctive style or for a particular occasion
+K0094	L	47	n	attire	attire	打扮	attire.n.01	noun.artifact	55	64	2	6	1.56	clothing of a distinctive style or for a particular occasion
+K0095	S	48	n	robot	robot	機器人	automaton.n.02	noun.artifact	211	441	1		2.56	a mechanism that can move automatically
+K0096	L	48	n	automaton	automaton	機械人	automaton.n.02	noun.artifact	13	25	2	1	2.56	a mechanism that can move automatically
+K0097	S	49	n	avenue	avenue	大道	avenue.n.02	noun.artifact	465	743	2		1.67	a wide street or thoroughfare
+K0098	L	49	n	boulevard	boulevard	大路	avenue.n.02	noun.artifact	94	79	1	2	1.67	a wide street or thoroughfare
+K0099	S	50	n	banner	banner	橫幅	banner.n.01	noun.artifact	174	26	4		1.53	long strip of cloth or paper used for decoration or advertising
+K0100	L	50	n	streamer	streamer	飄帶	banner.n.01	noun.artifact	33	4	4	2	1.53	long strip of cloth or paper used for decoration or advertising
+K0101	S	51	n	barrel	barrel	桶	barrel.n.02	noun.artifact	170	425	6		1.36	a cylindrical container that holds liquids
+K0102	L	51	n	cask	cask	木桶	barrel.n.02	noun.artifact	35	91	2	1	1.36	a cylindrical container that holds liquids
+K0103	S	52	n	basement	basement	地下室	basement.n.01	noun.artifact	92	67	2		1.52	the lowermost portion of a structure partly or wholly below ground level; often used for storage
+K0104	L	52	n	cellar	cellar	地窖	basement.n.01	noun.artifact	26	9	3	2	1.52	the lowermost portion of a structure partly or wholly below ground level; often used for storage
+K0105	S	53	n	cover	cover	毯	blanket.n.01	noun.artifact	1023	125	36		2.65	bedding that keeps a person warm in bed
+K0106	L	53	n	blanket	blanket	毯子	blanket.n.01	noun.artifact	36	8	6	2	2.65	bedding that keeps a person warm in bed
+K0107	S	54	n	pants	pants	褲子	bloomers.n.01	noun.artifact	116	38	6		2.04	underpants worn by women
+K0108	L	54	n	knickers	knickers	燈籠褲	bloomers.n.01	noun.artifact	8	5	2	3	2.04	underpants worn by women
+K0109	S	55	n	building	building	建築	building.n.01	noun.artifact	2917	7722	14		3.42	a structure that has a roof and walls and stands more or less permanently in one place
+K0110	L	55	n	edifice	edifice	建築物	building.n.01	noun.artifact	11	775	1	3	3.42	a structure that has a roof and walls and stands more or less permanently in one place
+K0111	S	56	n	bullet	bullet	子彈	bullet.n.01	noun.artifact	86	1029	3		2.10	a projectile that is fired from a gun
+K0112	L	56	n	slug	slug	槍彈	bullet.n.01	noun.artifact	19	185	10	1	2.10	a projectile that is fired from a gun
+K0113	S	57	n	taxi	taxi	計程車	cab.n.03	noun.artifact	127	460	3		2.76	a car driven by a person whose job is to take passengers where they want to go in exchange for money
+K0114	L	57	n	hack	hack	出租汽車	cab.n.03	noun.artifact	30	34	16	4	2.76	a car driven by a person whose job is to take passengers where they want to go in exchange for money
+K0115	S	58	n	cage	cage	籠	cage.n.01	noun.artifact	109	461	6		2.54	an enclosure made or wire or metal bars in which birds or animals can be kept
+K0116	L	58	n	coop	coop	籠子	cage.n.01	noun.artifact	12	12	2	2	2.54	an enclosure made or wire or metal bars in which birds or animals can be kept
+K0117	S	59	n	camp	camp	營地	camp.n.01	noun.artifact	934	176	12		2.44	temporary living quarters specially built by the army for soldiers
+K0118	L	59	n	encampment	encampment	露營	camp.n.01	noun.artifact	23	26	3	2	2.44	temporary living quarters specially built by the army for soldiers
+K0119	S	60	n	cape	cape	斗篷	cape.n.02	noun.artifact	736	27	2		2.00	a sleeveless garment like a cloak but shorter
+K0120	L	60	n	mantle	mantle	披肩	cape.n.02	noun.artifact	140	9	10	3	2.00	a sleeveless garment like a cloak but shorter
+K0121	S	61	n	car	car	車	car.n.01	noun.artifact	1500	18820	5		1.66	a motor vehicle with four wheels; usually propelled by an internal combustion engine
+K0122	L	61	n	automobile	automobile	汽車	car.n.01	noun.artifact	248	2512	2	4	1.66	a motor vehicle with four wheels; usually propelled by an internal combustion engine
+K0123	S	62	n	saber	sabre	佩劍	cavalry_sword.n.01	noun.artifact	169	23	4		1.29	a stout sword with a curved blade and thick back
+K0124	L	62	n	sabre	sabre	馬刀	cavalry_sword.n.01	noun.artifact	20	10	4	2	1.29	a stout sword with a curved blade and thick back
+K0125	S	63	n	center	centre	中心	center.n.03	noun.artifact	3565	10976	23		3.00	a building dedicated to a particular activity
+K0126	L	63	n	centre	centre	中心點	center.n.03	noun.artifact	2057	19	11	3	3.00	a building dedicated to a particular activity
+K0127	S	64	n	element	element	成分	component.n.03	noun.artifact	1399	1066	7		1.25	an artifact that is one of the individual parts of which a composite entity is made up; especially a part that can be separated from or attached to a system
+K0128	L	64	n	constituent	constituent	組成部分	component.n.03	noun.artifact	203	417	6	4	1.25	an artifact that is one of the individual parts of which a composite entity is made up; especially a part that can be separated from or attached to a system
+K0129	S	65	n	dagger	dagger	匕首	dagger.n.01	noun.artifact	48	55	2		1.24	a short knife with a pointed blade used for piercing or stabbing
+K0130	L	65	n	sticker	sticker	短劍	dagger.n.01	noun.artifact	12	20	4	1	1.24	a short knife with a pointed blade used for piercing or stabbing
+K0131	S	66	n	dam	dam	壩	dam.n.01	noun.artifact	254	841	4		1.92	a barrier constructed to contain the flow of water or to keep out the sea
+K0132	L	66	n	dyke	dyke	水壩	dam.n.01	noun.artifact	25	103	3	2	1.92	a barrier constructed to contain the flow of water or to keep out the sea
+K0133	S	67	n	decoration	decoration	裝飾	decoration.n.01	noun.artifact	152	597	3		1.96	something used to beautify
+K0134	L	67	n	ornament	ornament	裝潢	decoration.n.01	noun.artifact	25	40	3	5	1.96	something used to beautify
+K0135	S	68	n	die	die	色子	die.n.01	noun.artifact	814	197	14		1.54	a small cube with 1 to 6 spots on the six faces; used in gambling to generate random numbers
+K0136	L	68	n	dice	dice	骰子	die.n.01	noun.artifact	99	47	3	1	1.54	a small cube with 1 to 6 spots on the six faces; used in gambling to generate random numbers
+K0137	S	69	n	antimicrobial	antimicrobial	消毒劑	disinfectant.n.01	noun.artifact	149	25	2		2.07	an agent (as heat or radiation or a chemical) that destroys microorganisms that might carry disease
+K0138	L	69	n	disinfectant	disinfectant	殺菌劑	disinfectant.n.01	noun.artifact	8	4	2	1	2.07	an agent (as heat or radiation or a chemical) that destroys microorganisms that might carry disease
+K0139	S	70	n	floppy	floppy	磁碟	diskette.n.01	noun.artifact	154	181	2		2.21	a small plastic magnetic disk enclosed in a stiff envelope with a radial slit; used to store data or programs for a microcomputer
+K0140	L	70	n	diskette	diskette	軟盤	diskette.n.01	noun.artifact	9	19	1	1	2.21	a small plastic magnetic disk enclosed in a stiff envelope with a radial slit; used to store data or programs for a microcomputer
+K0141	S	71	n	dose	dose	劑	dose.n.01	noun.artifact	227	2136	6		2.09	a measured portion of medicine taken at any one time
+K0142	L	71	n	dosage	dosage	劑量	dose.n.01	noun.artifact	26	150	2	2	2.09	a measured portion of medicine taken at any one time
+K0143	S	72	n	home	home	住宅	dwelling.n.01	noun.artifact	5109	573	17		2.26	housing that someone is living in
+K0144	L	72	n	dwelling	dwelling	住所	dwelling.n.01	noun.artifact	89	182	6	4	2.26	housing that someone is living in
+K0145	S	73	n	export	export	出口	export.n.01	noun.artifact	357	1514	4		1.70	commodities (goods or services) sold to a foreign country
+K0146	L	73	n	exportation	exportation	輸出	export.n.01	noun.artifact	12	901	2	2	1.70	commodities (goods or services) sold to a foreign country
+K0147	S	74	n	material	material	布	fabric.n.01	noun.artifact	1743	31950	11		3.98	artifact made by weaving or felting or knitting or crocheting natural or synthetic fibers
+K0148	L	74	n	fabric	fabric	織物	fabric.n.01	noun.artifact	125	47	2	1	3.98	artifact made by weaving or felting or knitting or crocheting natural or synthetic fibers
+K0149	S	75	n	factory	factory	廠	factory.n.01	noun.artifact	575	4776	1		1.71	a plant consisting of one or more buildings with facilities for manufacturing
+K0150	L	75	n	mill	mill	工廠	factory.n.01	noun.artifact	306	1106	9	2	1.71	a plant consisting of one or more buildings with facilities for manufacturing
+K0151	S	76	n	floor	floor	地板	floor.n.01	noun.artifact	555	78	12		2.57	the inside lower horizontal surface (as of a room, hallway, tent, or other structure)
+K0152	L	76	n	flooring	flooring	樓板	floor.n.01	noun.artifact	9	13	4	2	2.57	the inside lower horizontal surface (as of a room, hallway, tent, or other structure)
+K0153	S	77	n	fuse	fuse	導火線	fuse.n.02	noun.artifact	47	80	6		1.44	any igniter that is used to initiate the burning of a propellant
+K0154	L	77	n	priming	priming	引信	fuse.n.02	noun.artifact	15	18	9	1	1.44	any igniter that is used to initiate the burning of a propellant
+K0155	S	78	n	gap	gap	裂縫	gap.n.03	noun.artifact	259	61	7		1.75	a narrow opening
+K0156	L	78	n	crack	crack	縫隙	gap.n.03	noun.artifact	88	32	24	2	1.75	a narrow opening
+K0157	S	79	n	gymnasium	gymnasium	體育館	gymnasium.n.02	noun.artifact	112	418	2		1.69	athletic facility equipped for sports or physical training
+K0158	L	79	n	gym	gym	健身房	gymnasium.n.02	noun.artifact	46	21	1	1	1.69	athletic facility equipped for sports or physical training
+K0159	S	80	n	hall	hall	走廊	hallway.n.01	noun.artifact	2039	330	13		3.45	an interior passage or corridor onto which rooms open
+K0160	L	80	n	hallway	hallway	門廳	hallway.n.01	noun.artifact	12	20	1	2	3.45	an interior passage or corridor onto which rooms open
+K0161	S	81	n	hospital	hospital	醫院	hospital.n.01	noun.artifact	1035	2580	2		4.33	a health facility where patients receive treatment
+K0162	L	81	n	infirmary	infirmary	醫務室	hospital.n.01	noun.artifact	25	5	1	3	4.33	a health facility where patients receive treatment
+K0163	S	82	n	inn	inn	宿舍	hostel.n.01	noun.artifact	148	505	1		2.19	a hotel providing overnight lodging for travelers
+K0164	L	82	n	hostel	hostel	旅店	hostel.n.01	noun.artifact	18	34	2	2	2.19	a hotel providing overnight lodging for travelers
+K0165	S	83	n	hut	hut	寮	hovel.n.01	noun.artifact	100	533	2		1.84	small crude shelter used as a dwelling
+K0166	L	83	n	shack	shack	小屋	hovel.n.01	noun.artifact	14	69	3	6	1.84	small crude shelter used as a dwelling
+K0167	S	84	n	internet	internet	網際網路	internet.n.01	noun.artifact	987	916	1		2.16	a computer network consisting of a worldwide network of computer networks that use the TCP/IP network protocols to facilitate data transmission and exchange
+K0168	L	84	n	net	net	因特網	internet.n.01	noun.artifact	656	95	12	1	2.16	a computer network consisting of a worldwide network of computer networks that use the TCP/IP network protocols to facilitate data transmission and exchange
+K0169	S	85	n	jail	jail	監禁	jail.n.01	noun.artifact	143	309	2		2.28	a correctional institution used to detain persons who are in the lawful custody of the government (either accused persons awaiting trial or convicted persons serving a sentence)
+K0170	L	85	n	gaol	gaol	監牢	jail.n.01	noun.artifact	33	7	2	2	2.28	a correctional institution used to detain persons who are in the lawful custody of the government (either accused persons awaiting trial or convicted persons serving a sentence)
+K0171	S	86	n	link	link	連結	link.n.02	noun.artifact	605	2752	13		3.75	a fastener that serves to join or connect
+K0172	L	86	n	tie	tie	鏈環	link.n.02	noun.artifact	236	4	18	1	3.75	a fastener that serves to join or connect
+K0173	S	87	n	engine	engine	機車	locomotive.n.01	noun.artifact	1342	298	4		2.05	a wheeled vehicle consisting of a self-propelled engine that is used to draw trains along railway tracks
+K0174	L	87	n	locomotive	locomotive	火車頭	locomotive.n.01	noun.artifact	137	26	2	2	2.05	a wheeled vehicle consisting of a self-propelled engine that is used to draw trains along railway tracks
+K0175	S	88	n	attic	attic	閣樓	loft.n.02	noun.artifact	75	39	5		1.67	floor consisting of open space at the top of a house just below roof; often used for storage
+K0176	L	88	n	loft	loft	頂樓	loft.n.02	noun.artifact	14	9	8	6	1.67	floor consisting of open space at the top of a house just below roof; often used for storage
+K0177	S	89	n	speaker	speaker	喇叭	loudspeaker.n.01	noun.artifact	350	87	3		2.40	electro-acoustic transducer that converts electrical signals into sounds loud enough to be heard at a distance
+K0178	L	89	n	loudspeaker	loudspeaker	擴音器	loudspeaker.n.01	noun.artifact	10	12	1	4	2.40	electro-acoustic transducer that converts electrical signals into sounds loud enough to be heard at a distance
+K0179	S	90	n	medicine	medicine	藥	medicine.n.02	noun.artifact	1050	6227	5		1.59	(medicine) something that treats or prevents or alleviates the symptoms of disease
+K0180	L	90	n	medication	medication	藥物	medicine.n.02	noun.artifact	157	1076	2	5	1.59	(medicine) something that treats or prevents or alleviates the symptoms of disease
+K0181	S	91	n	product	product	產品	merchandise.n.01	noun.artifact	1449	3258	6		2.25	commodities offered for sale
+K0182	L	91	n	ware	ware	貨物	merchandise.n.01	noun.artifact	49	536	3	4	2.25	commodities offered for sale
+K0183	S	92	n	underground	underground	地鐵	metro.n.01	noun.artifact	433	1332	6		2.31	an electric railway operating below the surface of the ground (usually in a city)
+K0184	L	92	n	subway	subway	地下鐵路	metro.n.01	noun.artifact	108	26	2	1	2.31	an electric railway operating below the surface of the ground (usually in a city)
+K0185	S	93	n	cast	cast	模具	mold.n.02	noun.artifact	929	41	20		1.77	container into which liquid is poured to create a given shape when it hardens
+K0186	L	93	n	mold	mould	模子	mold.n.02	noun.artifact	65	10	14	3	1.77	container into which liquid is poured to create a given shape when it hardens
+K0187	S	94	n	radio	radio	無線電	radio.n.03	noun.artifact	2885	1098	5		2.45	a communication system based on broadcasting electromagnetic waves
+K0188	L	94	n	wireless	wireless	收音機	radio.n.03	noun.artifact	209	54	5	2	2.45	a communication system based on broadcasting electromagnetic waves
+K0189	S	95	n	railway	railway	鐵路	railroad_track.n.01	noun.artifact	1479	5828	2		3.04	a line of track providing a runway for wheels
+K0190	L	95	n	railroad	railroad	鐵軌	railroad_track.n.01	noun.artifact	508	31	5	3	3.04	a line of track providing a runway for wheels
+K0191	S	96	n	spread	spread	牧場	ranch.n.01	noun.artifact	1007	128	23		1.79	farm consisting of a large tract of land along with facilities needed to raise livestock (especially cattle)
+K0192	L	96	n	ranch	ranch	大農場	ranch.n.01	noun.artifact	131	16	2	1	1.79	farm consisting of a large tract of land along with facilities needed to raise livestock (especially cattle)
+K0193	S	97	n	road	road	路	road.n.01	noun.artifact	2337	32762	2		1.87	an open way (generally public) for travel or transportation
+K0194	L	97	n	route	route	道路	road.n.01	noun.artifact	1117	1858	5	4	1.87	an open way (generally public) for travel or transportation
+K0195	S	98	n	satellite	satellite	衛星	satellite.n.01	noun.artifact	460	2806	5		2.33	man-made equipment that orbits around the earth or the moon
+K0196	L	98	n	orbiter	orbiter	人造衛星	satellite.n.01	noun.artifact	41	147	1	1	2.33	man-made equipment that orbits around the earth or the moon
+K0197	S	99	n	store	store	店	shop.n.01	noun.artifact	558	4215	6		1.42	a mercantile establishment for the retail sale of goods or services
+K0198	L	99	n	shop	shop	商店	shop.n.01	noun.artifact	279	406	7	2	1.42	a mercantile establishment for the retail sale of goods or services
+K0199	S	100	n	stable	stable	廄	stable.n.01	noun.artifact	773	34	7		2.69	a farm building for housing horses or other livestock
+K0200	L	100	n	stalls	stalls	馬廄	stable.n.01	noun.artifact	20	17	15	1	2.69	a farm building for housing horses or other livestock
+K0201	S	101	n	stock	stock	庫存	stock.n.02	noun.artifact	717	79	27		1.34	the merchandise that a shop has on hand
+K0202	L	101	n	inventory	inventory	存貨	stock.n.02	noun.artifact	107	24	6	2	1.34	the merchandise that a shop has on hand
+K0203	S	102	n	rooms	rooms	套房	suite.n.02	noun.artifact	323	63	6		1.37	apartment consisting of a series of connected rooms used as a living unit (as in a hotel)
+K0204	L	102	n	suite	suite	套間	suite.n.02	noun.artifact	173	5	4	4	1.37	apartment consisting of a series of connected rooms used as a living unit (as in a hotel)
+K0205	S	103	n	telephone	telephone	電話	telephone.n.01	noun.artifact	510	1187	3		2.10	electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds
+K0206	L	103	n	phone	phone	電話機	telephone.n.01	noun.artifact	318	19	4	1	2.10	electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds
+K0207	S	104	n	television	television	電視	television_receiver.n.01	noun.artifact	3746	11089	3		2.04	an electronic device that receives television signals and displays them on a screen
+K0208	L	104	n	tv	tv	電視機	television_receiver.n.01	noun.artifact	1902	198	2	2	2.04	an electronic device that receives television signals and displays them on a screen
+K0209	S	105	n	thread	thread	線	thread.n.01	noun.artifact	109	24536	9		2.87	a fine cord of twisted fibers (of cotton or silk or wool or nylon etc.) used in sewing and weaving
+K0210	L	105	n	yarn	yarn	紗	thread.n.01	noun.artifact	12	298	3	2	2.87	a fine cord of twisted fibers (of cotton or silk or wool or nylon etc.) used in sewing and weaving
+K0211	S	106	n	vessel	vessel	船	vessel.n.02	noun.artifact	295	7032	3		2.37	a craft designed for water transportation
+K0212	L	106	n	watercraft	watercraft	船隻	vessel.n.02	noun.artifact	15	588	2	3	2.37	a craft designed for water transportation
+K0213	S	107	n	advantage	advantage	優勢	advantage.n.03	noun.attribute	692	1361	4		1.82	benefit resulting from some event or action
+K0214	L	107	n	reward	reward	好處	advantage.n.03	noun.attribute	151	237	8	4	1.82	benefit resulting from some event or action
+K0215	S	108	n	appeal	appeal	魅力	appeal.n.02	noun.attribute	565	251	9		2.16	attractiveness that interests or pleases or stimulates
+K0216	L	108	n	charm	charm	感染力	appeal.n.02	noun.attribute	45	22	8	2	2.16	attractiveness that interests or pleases or stimulates
+K0217	S	109	n	cold	cold	冷	coldness.n.03	noun.attribute	891	3754	16		3.18	the absence of heat
+K0218	L	109	n	coldness	coldness	寒冷	coldness.n.03	noun.attribute	8	274	3	3	3.18	the absence of heat
+K0219	S	110	n	courage	courage	勇氣	courage.n.01	noun.attribute	101	320	1		1.90	a quality of spirit that enables you to face danger or pain without showing fear
+K0220	L	110	n	bravery	bravery	膽量	courage.n.01	noun.attribute	57	9	2	3	1.90	a quality of spirit that enables you to face danger or pain without showing fear
+K0221	S	111	n	length	length	時間	duration.n.03	noun.attribute	1524	9446	5		2.58	continuance in time
+K0222	L	111	n	duration	duration	長短	duration.n.03	noun.attribute	211	178	3	3	2.58	continuance in time
+K0223	S	112	n	use	use	作用	function.n.02	noun.attribute	9662	5036	13		1.90	what something is used for
+K0224	L	112	n	function	function	機能	function.n.02	noun.attribute	2454	250	10	1	1.90	what something is used for
+K0225	S	113	n	good	good	優良	good.n.02	noun.attribute	2319	211	27		2.03	moral excellence or admirableness
+K0226	L	113	n	goodness	goodness	善良	good.n.02	noun.attribute	45	101	2	2	2.03	moral excellence or admirableness
+K0227	S	114	n	humor	humour	幽默	humor.n.02	noun.attribute	129	224	7		1.31	the trait of appreciating (and being able to express) the humorous
+K0228	L	114	n	humour	humour	幽默感	humor.n.02	noun.attribute	67	21	7	1	1.31	the trait of appreciating (and being able to express) the humorous
+K0229	S	115	n	identity	identity	身份	identity.n.01	noun.attribute	865	1887	4		2.30	the distinct personality of an individual regarded as a persisting entity
+K0230	L	115	n	individuality	individuality	個性	identity.n.01	noun.attribute	22	376	2	2	2.30	the distinct personality of an individual regarded as a persisting entity
+K0231	S	116	n	cost	cost	價格	monetary_value.n.01	noun.attribute	1230	1286	5		2.12	the property of having material worth (often indicated by the amount of money something would bring if sold)
+K0232	L	116	n	price	price	價錢	monetary_value.n.01	noun.attribute	767	39	9	1	2.12	the property of having material worth (often indicated by the amount of money something would bring if sold)
+K0233	S	117	n	number	number	數	number.n.01	noun.attribute	8823	54445	17		2.39	the property possessed by a sum or total or indefinite quantity of units or individuals
+K0234	L	117	n	figure	figure	數字	number.n.01	noun.attribute	1155	2116	18	7	2.39	the property possessed by a sum or total or indefinite quantity of units or individuals
+K0235	S	118	n	rate	rate	速度	pace.n.03	noun.attribute	2137	2973	7		2.18	the relative speed of progress or change
+K0236	L	118	n	pace	pace	速率	pace.n.03	noun.attribute	205	407	10	1	2.18	the relative speed of progress or change
+K0237	S	119	n	realism	realism	現實主義	realism.n.01	noun.attribute	178	274	5		1.92	the attribute of accepting the facts of life and favoring practicality and literal truth
+K0238	L	119	n	pragmatism	pragmatism	實用主義	realism.n.01	noun.attribute	13	45	2	1	1.92	the attribute of accepting the facts of life and favoring practicality and literal truth
+K0239	S	120	n	vote	vote	投票	right_to_vote.n.01	noun.attribute	977	1697	10		2.61	a legal right guaranteed by the 15th amendment to the US Constitution; guaranteed to women by the 19th amendment
+K0240	L	120	n	suffrage	suffrage	參政權	right_to_vote.n.01	noun.attribute	130	31	1	2	2.61	a legal right guaranteed by the 15th amendment to the US Constitution; guaranteed to women by the 19th amendment
+K0241	S	121	n	width	width	寬度	width.n.01	noun.attribute	325	249	1		1.94	the extent of something from side to side
+K0242	L	121	n	breadth	breadth	廣度	width.n.01	noun.attribute	39	30	2	1	1.94	the extent of something from side to side
+K0243	S	122	n	beard	beard	鬍子	beard.n.01	noun.body	68	129	6		1.25	the hair growing on the lower part of a man's face
+K0244	L	122	n	whiskers	whiskers	鬍鬚	beard.n.01	noun.body	13	38	4	2	1.25	the hair growing on the lower part of a man's face
+K0245	S	123	n	bone	bone	骨	bone.n.01	noun.body	630	3234	6		1.97	rigid connective tissue that makes up the skeleton of vertebrates
+K0246	L	123	n	os	os	骨頭	bone.n.01	noun.body	277	125	8	5	1.97	rigid connective tissue that makes up the skeleton of vertebrates
+K0247	S	124	n	remains	remains	遺體	cadaver.n.01	noun.body	1753	446	6		3.40	the dead body of a human being
+K0248	L	124	n	stiff	stiff	死屍	cadaver.n.01	noun.body	76	13	11	1	3.40	the dead body of a human being
+K0249	S	125	n	eye	eye	眼	eye.n.01	noun.body	622	3234	6		1.76	the organ of sight
+K0250	L	125	n	optic	optic	眼睛	eye.n.01	noun.body	79	442	3	2	1.76	the organ of sight
+K0251	S	126	n	lid	lid	瞼	eyelid.n.01	noun.body	36	48	3		1.28	either of two folds of skin that can be moved to cover or open the eye
+K0252	L	126	n	eyelid	eyelid	蓋子	eyelid.n.01	noun.body	10	9	1	3	1.28	either of two folds of skin that can be moved to cover or open the eye
+K0253	S	127	n	foot	foot	足	foot.n.01	noun.body	583	11275	14		2.46	the part of the leg of a human being below the ankle joint
+K0254	L	127	n	pes	pes	腳	foot.n.01	noun.body	11	2080	2	6	2.46	the part of the leg of a human being below the ankle joint
+K0255	S	128	n	neck	neck	頸	neck.n.01	noun.body	347	600	6		1.66	the part of an organism (human or animal) that connects the head to the rest of the body
+K0256	L	128	n	cervix	cervix	脖子	neck.n.01	noun.body	89	51	2	2	1.66	the part of an organism (human or animal) that connects the head to the rest of the body
+K0257	S	129	n	stomach	stomach	胃	stomach.n.01	noun.body	126	366	6		2.09	an enlarged and muscular saclike organ of the alimentary canal; the principal organ of digestion
+K0258	L	129	n	tum	tum	肚子	stomach.n.01	noun.body	9	42	1	4	2.09	an enlarged and muscular saclike organ of the alimentary canal; the principal organ of digestion
+K0259	S	130	n	tear	tear	眼淚	tear.n.01	noun.body	68	60	9		1.53	a drop of the clear salty saline solution secreted by the lacrimal glands
+K0260	L	130	n	teardrop	teardrop	淚水	tear.n.01	noun.body	8	15	2	2	1.53	a drop of the clear salty saline solution secreted by the lacrimal glands
+K0261	S	131	n	chest	chest	胸	thorax.n.02	noun.body	225	593	4		1.86	the part of the human torso between the neck and the diaphragm or the corresponding part in other vertebrates
+K0262	L	131	n	thorax	thorax	胸部	thorax.n.02	noun.body	24	76	3	2	1.86	the part of the human torso between the neck and the diaphragm or the corresponding part in other vertebrates
+K0263	S	132	n	throat	throat	咽	throat.n.01	noun.body	90	160	4		2.12	the passage to the stomach and lungs; in the front part of the neck below the chin and above the collarbone
+K0264	L	132	n	pharynx	pharynx	嗓子	throat.n.01	noun.body	10	11	1	3	2.12	the passage to the stomach and lungs; in the front part of the neck below the chin and above the collarbone
+K0265	S	133	n	tongue	tongue	舌	tongue.n.01	noun.body	174	794	10		1.60	a mobile mass of muscular tissue covered with mucous membrane and located in the oral cavity
+K0266	L	133	n	lingua	lingua	舌頭	tongue.n.01	noun.body	62	56	1	3	1.60	a mobile mass of muscular tissue covered with mucous membrane and located in the oral cavity
+K0267	S	134	n	power	power	能力	ability.n.02	noun.cognition	4841	3274	10		2.56	possession of the qualities (especially mental qualities) required to do something or get something done
+K0268	L	134	n	ability	ability	才智	ability.n.02	noun.cognition	1120	39	2	1	2.56	possession of the qualities (especially mental qualities) required to do something or get something done
+K0269	S	135	n	shadow	shadow	幽靈	apparition.n.03	noun.cognition	287	92	12		1.45	something existing in perception only
+K0270	L	135	n	apparition	apparition	幻影	apparition.n.03	noun.cognition	21	45	4	2	1.45	something existing in perception only
+K0271	S	136	n	attention	attention	注意	attention.n.01	noun.cognition	862	1639	6		1.85	the process whereby a person concentrates on some features of the environment to the (relative) exclusion of others
+K0272	L	136	n	attending	attending	專心	attention.n.01	noun.cognition	222	114	7	1	1.85	the process whereby a person concentrates on some features of the environment to the (relative) exclusion of others
+K0273	S	137	n	hook	hook	餌	bait.n.01	noun.cognition	143	90	20		1.26	anything that serves as an enticement
+K0274	L	137	n	bait	bait	誘餌	bait.n.01	noun.cognition	35	20	5	1	1.26	anything that serves as an enticement
+K0275	S	138	n	bias	bias	偏見	bias.n.01	noun.cognition	171	214	5		1.45	a partiality that prevents objective consideration of an issue or situation
+K0276	L	138	n	prejudice	prejudice	成見	bias.n.01	noun.cognition	65	20	3	3	1.45	a partiality that prevents objective consideration of an issue or situation
+K0277	S	139	n	concept	concept	概念	concept.n.01	noun.cognition	1255	3479	1		1.90	an abstract or general idea inferred or derived from specific instances
+K0278	L	139	n	construct	construct	觀念	concept.n.01	noun.cognition	227	965	7	7	1.90	an abstract or general idea inferred or derived from specific instances
+K0279	S	140	n	creed	creed	教義	creed.n.01	noun.cognition	235	552	2		2.23	any system of principles or beliefs
+K0280	L	140	n	credo	credo	信條	creed.n.01	noun.cognition	9	84	1	2	2.23	any system of principles or beliefs
+K0281	S	141	n	tradition	tradition	傳統	custom.n.02	noun.cognition	1335	6528	2		1.67	a specific practice of long standing
+K0282	L	141	n	custom	custom	習慣	custom.n.02	noun.cognition	348	1067	5	5	1.67	a specific practice of long standing
+K0283	S	142	n	design	design	設計	design.n.02	noun.cognition	2777	8286	14		2.13	an arrangement scheme
+K0284	L	142	n	plan	plan	構思	design.n.02	noun.cognition	1440	119	7	9	2.13	an arrangement scheme
+K0285	S	143	n	philosophy	philosophy	主義	doctrine.n.01	noun.cognition	1460	19844	3		2.64	a belief (or system of beliefs) accepted as authoritative by some group or school
+K0286	L	143	n	doctrine	doctrine	教條	doctrine.n.01	noun.cognition	553	121	1	4	2.64	a belief (or system of beliefs) accepted as authoritative by some group or school
+K0287	S	144	n	technology	technology	技術	engineering.n.02	noun.cognition	2078	9741	2		1.49	the discipline dealing with the art or science of applying scientific knowledge to practical problems
+K0288	L	144	n	engineering	engineering	工程學	engineering.n.02	noun.cognition	1302	1015	5	1	1.49	the discipline dealing with the art or science of applying scientific knowledge to practical problems
+K0289	S	145	n	example	example	例	example.n.01	noun.cognition	5557	17745	6		2.18	an item of information that is typical of a class or group
+K0290	L	145	n	representative	representative	例子	example.n.01	noun.cognition	578	1430	7	4	2.18	an item of information that is typical of a class or group
+K0291	S	146	n	heart	heart	心	heart.n.01	noun.cognition	1328	28629	10		4.10	the locus of feelings and intuitions
+K0292	L	146	n	bosom	bosom	內心	heart.n.01	noun.cognition	14	215	8	2	4.10	the locus of feelings and intuitions
+K0293	S	147	n	theory	theory	論	hypothesis.n.02	noun.cognition	3272	31835	3		1.56	a tentative insight into the natural world; a concept that is not yet verified but that if true would explain certain facts or phenomena
+K0294	L	147	n	possibility	possibility	理論	hypothesis.n.02	noun.cognition	453	7978	4	4	1.56	a tentative insight into the natural world; a concept that is not yet verified but that if true would explain certain facts or phenomena
+K0295	S	148	n	fantasy	fantasy	幻想	illusion.n.02	noun.cognition	392	588	4		2.38	something many people believe that is false
+K0296	L	148	n	fancy	fancy	幻覺	illusion.n.02	noun.cognition	41	37	6	3	2.38	something many people believe that is false
+K0297	S	149	n	tendency	tendency	傾向	inclination.n.01	noun.cognition	221	1318	4		2.14	an attitude of mind especially one that favors one alternative over others
+K0298	L	149	n	inclination	inclination	意向	inclination.n.01	noun.cognition	41	129	8	5	2.14	an attitude of mind especially one that favors one alternative over others
+K0299	S	150	n	memory	memory	記憶	memory.n.03	noun.cognition	1323	773	5		2.72	the power of retaining and recalling past experience
+K0300	L	150	n	retention	retention	記憶力	memory.n.03	noun.cognition	65	30	3	1	2.72	the power of retaining and recalling past experience
+K0301	S	151	n	outlook	outlook	心理	mentality.n.01	noun.cognition	86	2032	3		2.10	a habitual or characteristic mental attitude that determines how you will interpret and respond to situations
+K0302	L	151	n	mentality	mentality	心態	mentality.n.01	noun.cognition	16	86	2	4	2.10	a habitual or characteristic mental attitude that determines how you will interpret and respond to situations
+K0303	S	152	n	head	head	頭	mind.n.01	noun.cognition	2905	13408	42		2.71	that which is responsible for one's thoughts and feelings; the seat of the faculty of reason
+K0304	L	152	n	mind	mind	頭腦	mind.n.01	noun.cognition	804	95	13	6	2.71	that which is responsible for one's thoughts and feelings; the seat of the faculty of reason
+K0305	S	153	n	alternative	alternative	選擇	option.n.02	noun.cognition	1351	3084	4		1.56	one of a number of things from which only one can be chosen
+K0306	L	153	n	choice	choice	選項	option.n.02	noun.cognition	894	162	5	2	1.56	one of a number of things from which only one can be chosen
+K0307	S	154	n	religion	religion	信仰	religion.n.01	noun.cognition	1364	2718	2		1.28	a strong belief in a supernatural power or powers that control human destiny
+K0308	L	154	n	faith	faith	信義	religion.n.01	noun.cognition	831	373	4	3	1.28	a strong belief in a supernatural power or powers that control human destiny
+K0309	S	155	n	problem	problem	問題	trouble.n.01	noun.cognition	1511	11163	3		3.47	a source of difficulty
+K0310	L	155	n	trouble	trouble	難題	trouble.n.01	noun.cognition	204	177	11	1	3.47	a source of difficulty
+K0311	S	156	n	version	version	版本	version.n.02	noun.cognition	3267	3687	6		2.71	something a little different from others of the same type
+K0312	L	156	n	variation	variation	變種	version.n.02	noun.cognition	462	161	11	2	2.71	something a little different from others of the same type
+K0313	S	157	n	view	view	觀點	view.n.02	noun.cognition	1723	2647	13		1.61	the visual percept of a region
+K0314	L	157	n	scene	scene	景色	view.n.02	noun.cognition	979	114	10	1	1.61	the visual percept of a region
+K0315	S	158	n	world	world	世界	world.n.03	noun.cognition	14838	21627	9		2.71	all of your experiences that determine how things appear to you
+K0316	L	158	n	reality	reality	現實	world.n.03	noun.cognition	522	1201	4	3	2.71	all of your experiences that determine how things appear to you
+K0317	S	159	n	response	response	回答	answer.n.01	noun.communication	1476	596	7		2.25	a statement (either spoken or written) that is made to reply to a question or request or criticism or accusation
+K0318	L	159	n	answer	answer	答覆	answer.n.01	noun.communication	312	101	15	3	2.25	a statement (either spoken or written) that is made to reply to a question or request or criticism or accusation
+K0319	S	160	n	engagement	engagement	約定	betrothal.n.01	noun.communication	242	322	7		1.97	a mutual promise to marry
+K0320	L	160	n	troth	troth	約會	betrothal.n.01	noun.communication	8	105	2	5	1.97	a mutual promise to marry
+K0321	S	161	n	pamphlet	pamphlet	冊	booklet.n.01	noun.communication	84	2890	2		2.27	a small book usually having a paper cover
+K0322	L	161	n	leaflet	leaflet	小冊子	booklet.n.01	noun.communication	16	102	3	6	2.27	a small book usually having a paper cover
+K0323	S	162	n	program	programme | <n>	節目	broadcast.n.02	noun.communication	3080	2917	10		2.50	a radio or television show
+K0324	L	162	n	programme	programme	廣播節目	broadcast.n.02	noun.communication	515	55	9	1	2.50	a radio or television show
+K0325	S	163	n	reference	reference	引用	citation.n.03	noun.communication	1080	1510	11		2.24	a short note recognizing a source of information or of a quoted passage
+K0326	L	163	n	credit	credit	引文	citation.n.03	noun.communication	482	31	13	2	2.24	a short note recognizing a source of information or of a quoted passage
+K0327	S	164	n	condition	condition	前提	condition.n.02	noun.communication	811	456	13		3.15	an assumption on which rests the validity or effect of something else
+K0328	L	164	n	precondition	precondition	先決條件	condition.n.02	noun.communication	11	24	4	1	3.15	an assumption on which rests the validity or effect of something else
+K0329	S	165	n	dialect	dialect	話	dialect.n.01	noun.communication	542	13871	1		1.97	the usage or vocabulary that is characteristic of a specific group of people
+K0330	L	165	n	accent	accent	方言	dialect.n.01	noun.communication	126	2569	7	3	1.97	the usage or vocabulary that is characteristic of a specific group of people
+K0331	S	166	n	dialogue	dialogue	對話	dialogue.n.02	noun.communication	225	712	4		2.28	the lines spoken by characters in drama or fiction
+K0332	L	166	n	dialog	dialog	臺詞	dialogue.n.02	noun.communication	19	44	3	2	2.28	the lines spoken by characters in drama or fiction
+K0333	S	167	n	journal	journal	日記	diary.n.01	noun.communication	1025	690	5		1.65	a daily written record of (usually personal) experiences and observations
+K0334	L	167	n	diary	diary	日誌	diary.n.01	noun.communication	166	96	2	2	1.65	a daily written record of (usually personal) experiences and observations
+K0335	S	168	n	test	test	考試	examination.n.02	noun.communication	1837	1210	13		1.92	a set of questions or exercises evaluating skill or knowledge
+K0336	L	168	n	examination	examination	測驗	examination.n.02	noun.communication	255	105	5	3	1.92	a set of questions or exercises evaluating skill or knowledge
+K0337	S	169	n	legend	legend	傳說	legend.n.01	noun.communication	512	1773	2		2.29	a story about mythical or supernatural beings or events
+K0338	L	169	n	fable	fable	寓言	legend.n.01	noun.communication	45	129	3	2	2.29	a story about mythical or supernatural beings or events
+K0339	S	170	n	list	list	列表	list.n.01	noun.communication	4193	3898	7		2.84	a database containing an ordered array of items (names or topics)
+K0340	L	170	n	listing	listing	單子	list.n.01	noun.communication	279	84	7	6	2.84	a database containing an ordered array of items (names or topics)
+K0341	S	171	n	manuscript	manuscript	手稿	manuscript.n.01	noun.communication	445	300	2		1.67	the form of a literary work submitted for publication
+K0342	L	171	n	ms	ms	原稿	manuscript.n.01	noun.communication	263	86	11	2	1.67	the form of a literary work submitted for publication
+K0343	S	172	n	meaning	meaning	意義	meaning.n.01	noun.communication	1998	2377	10		1.23	the message that is intended or expressed or signified
+K0344	L	172	n	import	import	意思	meaning.n.01	noun.communication	182	1547	8	11	1.23	the message that is intended or expressed or signified
+K0345	S	173	n	film	film	電影	movie.n.01	noun.communication	7730	12397	7		2.51	a form of entertainment that enacts a story by sound and a sequence of images giving the illusion of continuous movement
+K0346	L	173	n	picture	picture	影片	movie.n.01	noun.communication	599	1573	12	4	2.51	a form of entertainment that enacts a story by sound and a sequence of images giving the illusion of continuous movement
+K0347	S	174	n	story	storey | level of building	故事	narrative.n.01	noun.communication	2600	3396	6		2.55	a message that tells the particulars of an act or occurrence or course of events; presented in writing or drama or cinema or as a radio or television program
+K0348	L	174	n	narration	narration	敘述	narrative.n.01	noun.communication	51	489	3	7	2.55	a message that tells the particulars of an act or occurrence or course of events; presented in writing or drama or cinema or as a radio or television program
+K0349	S	175	n	poetry	poetry	詩	poetry.n.01	noun.communication	683	9678	2		2.11	literature in metrical form
+K0350	L	175	n	verse	verse	詩集	poetry.n.01	noun.communication	311	330	5	1	2.11	literature in metrical form
+K0351	S	176	n	proposal	proposal	建議	proposal.n.03	noun.communication	387	2546	3		1.34	the act of making a proposal
+K0352	L	176	n	proposition	proposition	提議	proposal.n.03	noun.communication	107	836	6	1	1.34	the act of making a proposal
+K0353	S	177	n	satire	satire	諷刺	sarcasm.n.01	noun.communication	97	456	1		2.47	witty language used to convey insults or scorn; ; ; --Jonathan Swift
+K0354	L	177	n	irony	irony	反語	sarcasm.n.01	noun.communication	30	8	3	1	2.47	witty language used to convey insults or scorn; ; ; --Jonathan Swift
+K0355	S	178	n	smile	smile	微笑	smile.n.01	noun.communication	93	76	3		1.35	a facial expression characterized by turning up the corners of the mouth; usually shows pleasure or amusement
+K0356	L	178	n	smiling	smiling	笑容	smile.n.01	noun.communication	18	22	4	3	1.35	a facial expression characterized by turning up the corners of the mouth; usually shows pleasure or amusement
+K0357	S	179	n	standard	standard	標準	standard.n.01	noun.communication	2578	5264	11		1.40	a basis for comparison; a reference point against which other things can be evaluated
+K0358	L	179	n	measure	measure	規範	standard.n.01	noun.communication	688	1244	13	9	1.40	a basis for comparison; a reference point against which other things can be evaluated
+K0359	S	180	n	subject	subject	主題	subject.n.01	noun.communication	1564	2196	15		1.20	the subject matter of a conversation or discussion
+K0360	L	180	n	theme	theme	話題	subject.n.01	noun.communication	694	312	6	2	1.20	the subject matter of a conversation or discussion
+K0361	S	181	n	text	text	教科書	textbook.n.01	noun.communication	1913	308	4		1.99	a book prepared for use in schools or colleges
+K0362	L	181	n	textbook	textbook	課本	textbook.n.01	noun.communication	83	73	2	2	1.99	a book prepared for use in schools or colleges
+K0363	S	182	n	treaty	treaty	條約	treaty.n.01	noun.communication	1186	3823	1		1.73	a written agreement between two states or sovereigns
+K0364	L	182	n	accord	accord	協議	treaty.n.01	noun.communication	104	2547	6	4	1.73	a written agreement between two states or sovereigns
+K0365	S	183	n	wording	wording	用語	wording.n.01	noun.communication	39	506	2		1.51	the manner in which something is expressed in words; - G.S.Patton
+K0366	L	183	n	phrasing	phrasing	措辭	wording.n.01	noun.communication	19	51	4	4	1.51	the manner in which something is expressed in words; - G.S.Patton
+K0367	S	184	n	decrease	decrease	減少	decrease.n.01	noun.event	363	2584	6		2.91	a change downward
+K0368	L	184	n	lessening	lessening	減小	decrease.n.01	noun.event	9	127	4	3	2.91	a change downward
+K0369	S	185	n	destruction	destruction	破壞	destruction.n.02	noun.event	518	2021	3		1.87	an event (or the result of an event) that completely destroys something
+K0370	L	185	n	demolition	demolition	毀壞	destruction.n.02	noun.event	109	130	2	5	1.87	an event (or the result of an event) that completely destroys something
+K0371	S	186	n	beat	beat	心跳	pulse.n.02	noun.event	846	59	34		1.57	the rhythmic contraction and expansion of the arteries with each beat of the heart
+K0372	L	186	n	pulse	pulse	脈動	pulse.n.02	noun.event	111	12	7	3	1.57	the rhythmic contraction and expansion of the arteries with each beat of the heart
+K0373	S	187	n	repeat	repeat	重複	repeat.n.01	noun.event	126	627	7		1.34	an event that repeats
+K0374	L	187	n	repetition	repetition	重演	repeat.n.01	noun.event	72	50	3	2	1.34	an event that repeats
+K0375	S	188	n	scandal	scandal	醜聞	scandal.n.02	noun.event	237	306	2		3.04	a disgraceful event
+K0376	L	188	n	outrage	outrage	醜事	scandal.n.02	noun.event	52	4	7	1	3.04	a disgraceful event
+K0377	S	189	n	marvel	marvel	奇蹟	wonder.n.02	noun.event	317	251	3		1.25	something that causes feelings of wonder
+K0378	L	189	n	wonder	wonder	驚奇	wonder.n.02	noun.event	165	54	6	3	1.25	something that causes feelings of wonder
+K0379	S	190	n	anger	anger	憤怒	anger.n.01	noun.feeling	121	363	5		2.39	a strong emotion; a feeling that is oriented toward some real or supposed grievance
+K0380	L	190	n	ire	ire	火氣	anger.n.01	noun.feeling	30	6	2	2	2.39	a strong emotion; a feeling that is oriented toward some real or supposed grievance
+K0381	S	191	n	despite	despite	輕視	contempt.n.01	noun.feeling	2461	82	2		2.10	lack of respect accompanied by a feeling of intense dislike
+K0382	L	191	n	contempt	contempt	蔑視	contempt.n.01	noun.feeling	52	49	4	3	2.10	lack of respect accompanied by a feeling of intense dislike
+K0383	S	192	n	shock	shock	昏迷	daze.n.01	noun.feeling	227	95	17		1.74	the feeling of distress and disbelief that you have when something bad happens accidentally
+K0384	L	192	n	stupor	stupor	休克	daze.n.01	noun.feeling	10	39	2	1	1.74	the feeling of distress and disbelief that you have when something bad happens accidentally
+K0385	S	193	n	defeat	defeat	失敗	frustration.n.01	noun.feeling	1069	2037	4		2.89	the feeling that accompanies an experience of being thwarted in attaining your goals
+K0386	L	193	n	frustration	frustration	挫折	frustration.n.01	noun.feeling	37	75	3	11	2.89	the feeling that accompanies an experience of being thwarted in attaining your goals
+K0387	S	194	n	rue	rue	遺憾	sorrow.n.02	noun.feeling	79	193	5		1.81	sadness associated with some wrong done or some disappointment
+K0388	L	194	n	sorrow	sorrow	懊悔	sorrow.n.02	noun.feeling	39	6	5	3	1.81	sadness associated with some wrong done or some disappointment
+K0389	S	195	n	mood	mood	情緒	temper.n.02	noun.feeling	241	580	3		2.77	a characteristic (habitual or relatively temporary) state of feeling
+K0390	L	195	n	temper	temper	心境	temper.n.02	noun.feeling	28	34	9	3	2.77	a characteristic (habitual or relatively temporary) state of feeling
+K0391	S	196	n	sweet	sweet	點心	dessert.n.01	noun.food	293	51	16		1.56	a dish served as the last course of a meal
+K0392	L	196	n	dessert	dessert	甜食	dessert.n.01	noun.food	37	11	1	2	1.56	a dish served as the last course of a meal
+K0393	S	197	n	lunch	lunch	午餐	lunch.n.01	noun.food	83	58	3		1.60	a midday meal
+K0394	L	197	n	luncheon	luncheon	午飯	lunch.n.01	noun.food	11	11	1	2	1.60	a midday meal
+K0395	S	198	n	pop	pop	蘇打	pop.n.02	noun.food	928	43	19		1.63	a sweet drink containing carbonated water and flavoring
+K0396	L	198	n	tonic	tonic	汽水	pop.n.02	noun.food	43	22	9	1	1.63	a sweet drink containing carbonated water and flavoring
+K0397	S	199	n	whiskey	whisky | drink	威士忌	whiskey.n.01	noun.food	55	525	1		1.84	a liquor made from fermented mash of grain
+K0398	L	199	n	whisky	whisky	威士忌酒	whiskey.n.01	noun.food	22	19	1	1	1.84	a liquor made from fermented mash of grain
+K0399	S	200	n	feast	feast	宴會	banquet.n.01	noun.group	320	181	7		1.62	a ceremonial dinner party for many people
+K0400	L	200	n	banquet	banquet	盛宴	banquet.n.01	noun.group	55	25	4	1	1.62	a ceremonial dinner party for many people
+K0401	S	201	n	cluster	cluster	束	bunch.n.01	noun.group	216	6757	3		2.42	a grouping of a number of similar things
+K0402	L	201	n	clump	clump	串	bunch.n.01	noun.group	10	1396	7	11	2.42	a grouping of a number of similar things
+K0403	S	202	n	generation	generation	代	coevals.n.01	noun.group	961	69916	7		2.74	all the people living at the same time or of approximately the same age
+K0404	L	202	n	contemporaries	contemporaries	輩	coevals.n.01	noun.group	148	834	2	6	2.74	all the people living at the same time or of approximately the same age
+K0405	S	203	n	court	court	法院	court.n.01	noun.group	3742	3698	14		3.23	an assembly (including one or more judges) to conduct judicial business
+K0406	L	203	n	judicature	judicature	法庭	court.n.01	noun.group	10	811	4	1	3.23	an assembly (including one or more judges) to conduct judicial business
+K0407	S	204	n	republic	republic	共和國	democracy.n.02	noun.group	2696	14327	2		1.31	a political system in which the supreme power lies in a body of citizens who can elect people to represent them
+K0408	L	204	n	commonwealth	commonwealth	聯邦	democracy.n.02	noun.group	623	4858	4	6	1.31	a political system in which the supreme power lies in a body of citizens who can elect people to represent them
+K0409	S	205	n	exhibition	exhibition	博覽會	exhibition.n.02	noun.group	398	359	2		1.30	a collection of things (goods or works of art etc.) for public display
+K0410	L	205	n	exposition	exposition	展覽會	exhibition.n.02	noun.group	145	79	4	1	1.30	a collection of things (goods or works of art etc.) for public display
+K0411	S	206	n	family	family	戶	family.n.01	noun.group	6023	6941	8		2.59	a social unit living together
+K0412	L	206	n	household	household	人家	family.n.01	noun.group	376	284	1	11	2.59	a social unit living together
+K0413	S	207	n	house	house	企業	firm.n.01	noun.group	4470	4173	14		2.00	the members of a business organization that owns or operates one or more establishments
+K0414	L	207	n	firm	firm	事務所	firm.n.01	noun.group	519	358	14	1	2.00	the members of a business organization that owns or operates one or more establishments
+K0415	S	208	n	government	government	政府	government.n.01	noun.group	7929	27137	4		2.27	the organization that is the governing authority of a political unit
+K0416	L	208	n	authorities	authorities	政權	government.n.01	noun.group	708	4120	8	2	2.27	the organization that is the governing authority of a political unit
+K0417	S	209	n	package	package	包	package.n.01	noun.group	224	25480	4		2.78	a collection of things wrapped or boxed together
+K0418	L	209	n	bundle	bundle	包裹	package.n.01	noun.group	136	140	7	6	2.78	a collection of things wrapped or boxed together
+K0419	S	210	n	system	system	系統	system.n.02	noun.group	8309	13779	9		1.68	a group of independent but interrelated elements comprising a unified whole
+K0420	L	210	n	scheme	scheme	制度	system.n.02	noun.group	428	5546	7	3	1.68	a group of independent but interrelated elements comprising a unified whole
+K0421	S	211	n	team	team	隊	team.n.01	noun.group	6335	24270	3		2.43	a cooperative unit (especially in sports)
+K0422	L	211	n	squad	squad	球隊	team.n.01	noun.group	334	1716	3	1	2.43	a cooperative unit (especially in sports)
+K0423	S	212	n	village	village	村	village.n.01	noun.group	1538	6772	3		1.45	a community of people smaller than a town
+K0424	L	212	n	settlement	settlement	農村	village.n.01	noun.group	950	967	7	3	1.45	a community of people smaller than a town
+K0425	S	213	n	field	field	戰場	battlefield.n.01	noun.location	3654	844	21		2.78	a region where a battle is being (or has been) fought
+K0426	L	213	n	battlefield	battlefield	沙場	battlefield.n.01	noun.location	245	21	1	3	2.78	a region where a battle is being (or has been) fought
+K0427	S	214	n	bottom	bottom	底	bottom.n.01	noun.location	751	7999	12		3.35	the lower side of anything
+K0428	L	214	n	underside	underside	底面	bottom.n.01	noun.location	38	70	1	3	3.35	the lower side of anything
+K0429	S	215	n	city	city	城	city.n.01	noun.location	12110	37550	3		2.75	a large and densely populated urban area; may include several independent administrative districts
+K0430	L	215	n	metropolis	metropolis	城市	city.n.01	noun.location	69	11625	2	2	2.75	a large and densely populated urban area; may include several independent administrative districts
+K0431	S	216	n	district	district	行政區	district.n.01	noun.location	2944	4118	2		2.11	a region marked off for administrative or other purposes
+K0432	L	216	n	dominion	dominion	領地	district.n.01	noun.location	143	830	3	2	2.11	a region marked off for administrative or other purposes
+K0433	S	217	n	heaven	heaven	天堂	eden.n.01	noun.location	379	651	2		1.85	any place of complete bliss and delight and peace
+K0434	L	217	n	paradise	paradise	香格里拉	eden.n.01	noun.location	146	24	2	2	1.85	any place of complete bliss and delight and peace
+K0435	S	218	n	horizon	horizon	地平線	horizon.n.01	noun.location	206	113	4		1.76	the line at which the sky and Earth appear to meet
+K0436	L	218	n	skyline	skyline	天邊	horizon.n.01	noun.location	27	15	2	3	1.76	the line at which the sky and Earth appear to meet
+K0437	S	219	n	outside	outside	外部	outside.n.02	noun.location	1967	5418	14		1.50	the outer side or surface of something
+K0438	L	219	n	exterior	exterior	表面	outside.n.02	noun.location	146	2333	3	4	1.50	the outer side or surface of something
+K0439	S	220	n	top	top	頂	peak.n.04	noun.location	3223	3501	22		1.77	the top or extreme point of something (usually a mountain or hill)
+K0440	L	220	n	crown	crown	頂峰	peak.n.04	noun.location	870	220	16	4	1.77	the top or extreme point of something (usually a mountain or hill)
+K0441	S	221	n	harbour	harbour	港	seaport.n.01	noun.location	268	29860	6		2.24	a sheltered port where ships can take on or discharge cargo
+K0442	L	221	n	seaport	seaport	港口	seaport.n.01	noun.location	39	1179	1	2	2.24	a sheltered port where ships can take on or discharge cargo
+K0443	S	222	n	forest	forest	森林	forest.n.02	noun.object	1281	1618	3		2.01	land that is covered with trees and shrubs
+K0444	L	222	n	timber	timber	林地	forest.n.02	noun.object	161	199	5	1	2.01	land that is covered with trees and shrubs
+K0445	S	223	n	marsh	marsh	沼澤	marsh.n.01	noun.object	161	215	3		1.66	low-lying wet land with grassy vegetation; usually is a transition zone between land and water
+K0446	L	223	n	fen	fen	沼澤地	marsh.n.01	noun.object	16	47	2	3	1.66	low-lying wet land with grassy vegetation; usually is a transition zone between land and water
+K0447	S	224	n	mountain	mountain	山	mountain.n.01	noun.object	1222	45621	2		2.68	a land mass that projects well above its surroundings; higher than a hill
+K0448	L	224	n	mount	mount	山脈	mountain.n.01	noun.object	721	1624	13	2	2.68	a land mass that projects well above its surroundings; higher than a hill
+K0449	S	225	n	coast	coast	岸	seashore.n.01	noun.object	1974	6612	5		2.74	the shore of a sea or ocean
+K0450	L	225	n	seashore	seashore	海岸	seashore.n.01	noun.object	15	1572	1	2	2.74	the shore of a sea or ocean
+K0451	S	226	n	spring	spring	泉	spring.n.03	noun.object	969	3273	11		2.81	a natural flow of ground water
+K0452	L	226	n	fountain	fountain	源泉	spring.n.03	noun.object	135	36	4	4	2.81	a natural flow of ground water
+K0453	S	227	n	valley	valley	山谷	valley.n.01	noun.object	1338	171	1		1.73	a long depression in the surface of the land that usually contains a river
+K0454	L	227	n	vale	vale	溪谷	valley.n.01	noun.object	123	35	1	2	1.73	a long depression in the surface of the land that usually contains a river
+K0455	S	228	n	confederate	confederate	同謀	accomplice.n.01	noun.person	419	30	7		1.91	a person who joins with another in carrying out some plan (especially an unethical or illegal plan)
+K0456	L	228	n	accomplice	accomplice	共犯	accomplice.n.01	noun.person	13	12	1	1	1.91	a person who joins with another in carrying out some plan (especially an unethical or illegal plan)
+K0457	S	229	n	controller	controller	會計	accountant.n.01	noun.person	236	561	3		1.69	someone who maintains and audits business accounts
+K0458	L	229	n	accountant	accountant	會計師	accountant.n.01	noun.person	44	61	1	1	1.69	someone who maintains and audits business accounts
+K0459	S	230	n	friend	friend	朋友	acquaintance.n.03	noun.person	969	1278	5		3.26	a person with whom you are acquainted
+K0460	L	230	n	acquaintance	acquaintance	熟人	acquaintance.n.03	noun.person	38	18	3	2	3.26	a person with whom you are acquainted
+K0461	S	231	n	opponent	opponent	對手	adversary.n.01	noun.person	454	860	3		2.20	someone who offers opposition
+K0462	L	231	n	antagonist	antagonist	敵手	adversary.n.01	noun.person	84	29	3	5	2.20	someone who offers opposition
+K0463	S	232	n	advisor	advisor	顧問	adviser.n.01	noun.person	110	1056	1		2.36	an expert who gives advice
+K0464	L	232	n	adviser	adviser	指導教授	adviser.n.01	noun.person	72	7	1	2	2.36	an expert who gives advice
+K0465	S	233	n	graduate	graduate	校友	alumnus.n.01	noun.person	403	2142	6		1.64	a person who has received a degree from a school (high school or college or university)
+K0466	L	233	n	alum	alum	畢業生	alumnus.n.01	noun.person	40	498	4	1	1.64	a person who has received a degree from a school (high school or college or university)
+K0467	S	234	n	tender	tender	隨從	attendant.n.01	noun.person	89	108	18		1.57	someone who waits on or tends to or attends to the needs of another
+K0468	L	234	n	attendant	attendant	跟班	attendant.n.01	noun.person	52	5	5	2	1.57	someone who waits on or tends to or attends to the needs of another
+K0469	S	235	n	king	king	大王	baron.n.03	noun.person	5171	340	10		1.77	a very wealthy or powerful businessman
+K0470	L	235	n	baron	baron	巨頭	baron.n.03	noun.person	306	98	3	4	1.77	a very wealthy or powerful businessman
+K0471	S	236	n	candidate	candidate	候選人	campaigner.n.01	noun.person	705	1340	2		1.50	a politician who is running for public office
+K0472	L	236	n	nominee	nominee	候補	campaigner.n.01	noun.person	86	351	1	4	1.50	a politician who is running for public office
+K0473	S	237	n	child	child	孩子	child.n.02	noun.person	1474	1496	4		2.16	a human offspring (son or daughter) of any age
+K0474	L	237	n	kid	kid	小孩	child.n.02	noun.person	122	252	7	2	2.16	a human offspring (son or daughter) of any age
+K0475	S	238	n	coach	coach	指導	coach.n.02	noun.person	1701	1180	7		3.08	a person who gives private instruction (as in singing, acting, etc.)
+K0476	L	238	n	tutor	tutor	指導員	coach.n.02	noun.person	88	19	3	3	3.08	a person who gives private instruction (as in singing, acting, etc.)
+K0477	S	239	n	defendant	defendant	被告	defendant.n.01	noun.person	142	268	1		1.45	a person or institution against whom an action is brought in a court of law; the person being sued or accused
+K0478	L	239	n	suspect	suspect	嫌疑人	defendant.n.01	noun.person	93	46	6	1	1.45	a person or institution against whom an action is brought in a court of law; the person being sued or accused
+K0479	S	240	n	god	god	神	deity.n.01	noun.person	3202	23159	4		2.89	any supernatural being worshipped as controlling some part of the world or some aspect of life or who is the personification of a force
+K0480	L	240	n	divinity	divinity	上帝	deity.n.01	noun.person	75	1267	4	1	2.89	any supernatural being worshipped as controlling some part of the world or some aspect of life or who is the personification of a force
+K0481	S	241	n	witch	witch	女巫	enchantress.n.02	noun.person	169	63	5		2.25	a female sorcerer or magician
+K0482	L	241	n	enchantress	enchantress	巫婆	enchantress.n.02	noun.person	10	6	2	3	2.25	a female sorcerer or magician
+K0483	S	242	n	fairy	fairy	仙女	fairy.n.01	noun.person	178	178	2		1.91	a small being, human in form, playful and having magical powers
+K0484	L	242	n	faerie	faerie	仙子	fairy.n.01	noun.person	10	39	2	1	1.91	a small being, human in form, playful and having magical powers
+K0485	S	243	n	farmer	farmer	農民	farmer.n.01	noun.person	169	1671	3		2.38	a person who operates a farm
+K0486	L	243	n	granger	granger	農夫	farmer.n.01	noun.person	14	84	1	2	2.38	a person who operates a farm
+K0487	S	244	n	fisher	fisher	漁民	fisherman.n.01	noun.person	200	166	2		1.98	someone whose occupation is catching fish
+K0488	L	244	n	fisherman	fisherman	漁夫	fisherman.n.01	noun.person	15	23	1	1	1.98	someone whose occupation is catching fish
+K0489	S	245	n	alien	alien	外國人	foreigner.n.01	noun.person	365	377	7		1.44	a person who comes from a foreign country; someone who does not owe allegiance to your country
+K0490	L	245	n	foreigner	foreigner	外人	foreigner.n.01	noun.person	21	236	2	3	1.44	a person who comes from a foreign country; someone who does not owe allegiance to your country
+K0491	S	246	n	chief	chief	老闆	foreman.n.01	noun.person	1803	181	4		2.36	a person who exercises control over workers
+K0492	L	246	n	boss	boss	領班	foreman.n.01	noun.person	226	16	8	3	2.36	a person who exercises control over workers
+K0493	S	247	n	grandmother	grandmother	祖母	grandma.n.01	noun.person	147	320	1		2.28	the mother of your father or mother
+K0494	L	247	n	nan	nan	奶奶	grandma.n.01	noun.person	15	33	4	5	2.28	the mother of your father or mother
+K0495	S	248	n	justice	justice	法官	judge.n.01	noun.person	1218	1109	4		2.39	a public official authorized to decide questions brought before a court of justice
+K0496	L	248	n	judge	judge	裁判官	judge.n.01	noun.person	688	16	7	1	2.39	a public official authorized to decide questions brought before a court of justice
+K0497	S	249	n	walker	walker	行者	pedestrian.n.01	noun.person	272	444	6		1.72	a person who travels by foot
+K0498	L	249	n	pedestrian	pedestrian	步行者	pedestrian.n.01	noun.person	89	26	2	1	1.72	a person who travels by foot
+K0499	S	250	n	pioneer	pioneer	先驅	pioneer.n.01	noun.person	276	534	5		1.27	someone who helps to open up a new line of research or technology or art
+K0500	L	250	n	innovator	innovator	先鋒	pioneer.n.01	noun.person	23	341	1	1	1.27	someone who helps to open up a new line of research or technology or art
+K0501	S	251	n	officer	officer	警察	policeman.n.01	noun.person	1368	1440	5		2.81	a member of a police force
+K0502	L	251	n	policeman	policeman	警官	policeman.n.01	noun.person	47	65	1	1	2.81	a member of a police force
+K0503	S	252	n	politician	politician	政治家	politician.n.02	noun.person	2661	1589	3		2.93	a person active in party politics
+K0504	L	252	n	pol	pol	政客	politician.n.02	noun.person	49	101	1	1	2.93	a person active in party politics
+K0505	S	253	n	sailor	sailor	水手	sailor.n.01	noun.person	129	205	3		1.68	any member of a ship's crew
+K0506	L	253	n	crewman	crewman	海員	sailor.n.01	noun.person	9	62	3	1	1.68	any member of a ship's crew
+K0507	S	254	n	student	student	學者	scholar.n.01	noun.person	1267	4811	2		1.47	a learned person (especially in the humanities); someone who by long study has gained mastery in one or more disciplines
+K0508	L	254	n	scholar	scholar	文人	scholar.n.01	noun.person	586	440	3	1	1.47	a learned person (especially in the humanities); someone who by long study has gained mastery in one or more disciplines
+K0509	S	255	n	singer	singer	歌手	singer.n.01	noun.person	2258	5694	3		2.87	a person who sings
+K0510	L	255	n	vocalist	vocalist	歌唱家	singer.n.01	noun.person	195	88	1	1	2.87	a person who sings
+K0511	S	256	n	sister	sister	妹	sister.n.01	noun.person	955	2658	4		2.21	a female person who has the same parents as another person
+K0512	L	256	n	sis	sis	姐妹	sister.n.01	noun.person	36	432	4	3	2.21	a female person who has the same parents as another person
+K0513	S	257	n	soul	soul	靈魂	soul.n.01	noun.person	578	594	5		2.79	the immaterial part of a person; the actuating cause of an individual life
+K0514	L	257	n	psyche	psyche	魂魄	soul.n.01	noun.person	43	13	3	1	2.79	the immaterial part of a person; the actuating cause of an individual life
+K0515	S	258	n	gravity	gravity	引力	gravity.n.01	noun.phenomenon	248	1405	3		1.28	(physics) the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface; ; ; --Albert Einstein
+K0516	L	258	n	gravitation	gravitation	重力	gravity.n.01	noun.phenomenon	31	584	3	1	1.28	(physics) the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface; ; ; --Albert Einstein
+K0517	S	259	n	chance	chance	機會	luck.n.02	noun.phenomenon	474	1683	9		3.07	an unknown and unpredictable phenomenon that causes an event to result one way rather than another
+K0518	L	259	n	hazard	hazard	偶然性	luck.n.02	noun.phenomenon	76	9	6	3	3.07	an unknown and unpredictable phenomenon that causes an event to result one way rather than another
+K0519	S	260	n	snow	snow	雪	snow.n.01	noun.phenomenon	567	3633	6		2.15	precipitation falling from clouds in the form of ice crystals
+K0520	L	260	n	snowfall	snowfall	降雪	snow.n.01	noun.phenomenon	101	145	1	2	2.15	precipitation falling from clouds in the form of ice crystals
+K0521	S	261	n	sun	sun	陽光	sunlight.n.01	noun.phenomenon	1150	527	7		1.25	the rays of the sun
+K0522	L	261	n	sunshine	sunshine	太陽光	sunlight.n.01	noun.phenomenon	272	126	3	1	1.25	the rays of the sun
+K0523	S	262	n	leaf	leaf	葉	leaf.n.01	noun.plant	291	6839	6		2.55	the main organ of photosynthesis and transpiration in higher plants
+K0524	L	262	n	foliage	foliage	葉子	leaf.n.01	noun.plant	45	125	2	2	2.55	the main organ of photosynthesis and transpiration in higher plants
+K0525	S	263	n	benny	benny	芝麻	sesame.n.01	noun.plant	103	130	2		2.06	East Indian annual erect herb; source of sesame seed or benniseed and sesame oil
+K0526	L	263	n	sesame	sesame	胡麻	sesame.n.01	noun.plant	39	3	1	3	2.06	East Indian annual erect herb; source of sesame seed or benniseed and sesame oil
+K0527	S	264	n	soy	soy	大豆	soy.n.02	noun.plant	44	189	4		1.82	erect bushy hairy annual herb having trifoliate leaves and purple to pink flowers; extensively cultivated for food and forage and soil improvement but especially for its nutritious oil-rich seeds; native to Asia
+K0528	L	264	n	soybean	soybean	青豆	soy.n.02	noun.plant	21	6	3	2	1.82	erect bushy hairy annual herb having trifoliate leaves and purple to pink flowers; extensively cultivated for food and forage and soil improvement but especially for its nutritious oil-rich seeds; native to Asia
+K0529	S	265	n	trunk	trunk	幹	trunk.n.01	noun.plant	140	8164	5		3.40	the main stem of a tree; usually covered with bark; the bole is usually the part that is commercially useful for lumber
+K0530	L	265	n	bole	bole	樹幹	trunk.n.01	noun.plant	9	51	3	1	3.40	the main stem of a tree; usually covered with bark; the bole is usually the part that is commercially useful for lumber
+K0531	S	266	n	revenue	revenue	收入	gross.n.02	noun.possession	426	2085	2		2.18	the entire amount of income before any deductions are made
+K0532	L	266	n	receipts	receipts	毛利	gross.n.02	noun.possession	56	207	5	1	2.18	the entire amount of income before any deductions are made
+K0533	S	267	n	award	award	獎	prize.n.01	noun.possession	3216	16006	5		2.40	something given for victory or superiority in a contest or competition or for winning a lottery
+K0534	L	267	n	prize	prise | otherwise	獎金	prize.n.01	noun.possession	1655	198	7	3	2.40	something given for victory or superiority in a contest or competition or for winning a lottery
+K0535	S	268	n	property	property	資產	property.n.01	noun.possession	1373	1256	5		2.63	something owned; any tangible or intangible possession that is owned by someone
+K0536	L	268	n	holding	holding	所有物	property.n.01	noun.possession	654	62	38	2	2.63	something owned; any tangible or intangible possession that is owned by someone
+K0537	S	269	n	pay	pay	工資	wage.n.01	noun.possession	777	431	12		1.31	something that remunerates
+K0538	L	269	n	wage	wage	報酬	wage.n.01	noun.possession	136	121	2	2	1.31	something that remunerates
+K0539	S	270	n	absorption	absorption	同化	assimilation.n.02	noun.process	275	235	6		2.45	the social process of absorbing one cultural group into harmony with another
+K0540	L	270	n	assimilation	assimilation	同化作用	assimilation.n.02	noun.process	77	3	6	3	2.45	the social process of absorbing one cultural group into harmony with another
+K0541	S	271	n	development	development	發展	development.n.02	noun.process	4648	16990	9		2.29	a process in which something passes by degrees to a different stage (especially a more advanced or mature stage)
+K0542	L	271	n	evolution	evolution	進化	development.n.02	noun.process	709	569	2	1	2.29	a process in which something passes by degrees to a different stage (especially a more advanced or mature stage)
+K0543	S	272	n	fire	fire	火	fire.n.03	noun.process	2202	13131	18		3.39	the process of combustion of inflammable materials producing heat and light and (often) smoke
+K0544	L	272	n	flaming	flaming	燃燒	fire.n.03	noun.process	18	660	6	5	3.39	the process of combustion of inflammable materials producing heat and light and (often) smoke
+K0545	S	273	n	growth	growth	增加	increase.n.03	noun.process	1768	5907	7		3.46	a process of becoming larger or longer or more numerous or more important
+K0546	L	273	n	increment	increment	增值	increase.n.03	noun.process	25	146	2	3	3.46	a process of becoming larger or longer or more numerous or more important
+K0547	S	274	n	defining	defining	成形	shaping.n.01	noun.process	236	131	6		1.26	any process serving to define the shape of something
+K0548	L	274	n	shaping	shaping	整形	shaping.n.01	noun.process	71	24	6	3	1.26	any process serving to define the shape of something
+K0549	S	275	n	slump	slump	蕭條	slump.n.01	noun.process	56	329	6		2.45	a noticeable deterioration in performance or quality
+K0550	L	275	n	slack	slack	暴跌	slump.n.01	noun.process	21	31	17	2	2.45	a noticeable deterioration in performance or quality
+K0551	S	276	n	smoke	smoke	煙	smoke.n.02	noun.process	200	2251	10		2.86	a hot vapor containing fine particles of carbon being produced by combustion
+K0552	L	276	n	smoking	smoking	冒煙	smoke.n.02	noun.process	124	5	5	2	2.86	a hot vapor containing fine particles of carbon being produced by combustion
+K0553	S	277	n	melting	melting	融化	thaw.n.01	noun.process	218	111	8		1.22	the process whereby heat changes something from a solid to a liquid
+K0554	L	277	n	melt	melt	解凍	thaw.n.01	noun.process	49	30	7	4	1.22	the process whereby heat changes something from a solid to a liquid
+K0555	S	278	n	cm	cm	釐米	centimeter.n.01	noun.quantity	658	492	2		2.00	a metric unit of length equal to one hundredth of a meter
+K0556	L	278	n	centimeter	centimetre	公分	centimeter.n.01	noun.quantity	10	322	1	2	2.00	a metric unit of length equal to one hundredth of a meter
+K0557	S	279	n	factor	factor	因子	divisor.n.01	noun.quantity	694	395	10		1.42	one of two or more integers that can be exactly divided into another integer
+K0558	L	279	n	divisor	divisor	因數	divisor.n.01	noun.quantity	63	166	2	2	1.42	one of two or more integers that can be exactly divided into another integer
+K0559	S	280	n	enough	enough	夠	enough.n.01	noun.quantity	1240	5288	3		2.38	an adequate quantity; a quantity that is large enough to achieve a purpose
+K0560	L	280	n	sufficiency	sufficiency	足夠	enough.n.01	noun.quantity	33	835	3	1	2.38	an adequate quantity; a quantity that is large enough to achieve a purpose
+K0561	S	281	n	g	g	克	gram.n.01	noun.quantity	5062	54706	9		4.44	a metric unit of weight equal to one thousandth of a kilogram
+K0562	L	281	n	gram	gram	公克	gram.n.01	noun.quantity	136	74	2	1	4.44	a metric unit of weight equal to one thousandth of a kilogram
+K0563	S	282	n	kg	kg	公斤	kilogram.n.01	noun.quantity	261	453	1		1.34	one thousand grams; the basic unit of mass adopted under the Systeme International d'Unites
+K0564	L	282	n	kilogram	kilogram	千克	kilogram.n.01	noun.quantity	27	198	1	1	1.34	one thousand grams; the basic unit of mass adopted under the Systeme International d'Unites
+K0565	S	283	n	km	km	公里	kilometer.n.01	noun.quantity	1451	7107	1		2.42	a metric unit of length equal to 1000 meters (or 0.621371 miles)
+K0566	L	283	n	kilometer	kilometre	千米	kilometer.n.01	noun.quantity	51	773	1	1	2.42	a metric unit of length equal to 1000 meters (or 0.621371 miles)
+K0567	S	284	n	l	l	升	liter.n.01	noun.quantity	4049	7783	5		3.63	a metric unit of capacity, formerly defined as the volume of one kilogram of pure water under standard conditions; now equal to 1,000 cubic centimeters (or approximately 1.75 pints)
+K0568	L	284	n	litre	litre	公升	liter.n.01	noun.quantity	103	72	1	1	3.63	a metric unit of capacity, formerly defined as the volume of one kilogram of pure water under standard conditions; now equal to 1,000 cubic centimeters (or approximately 1.75 pints)
+K0569	S	285	n	m	m	米	meter.n.01	noun.quantity	6402	21031	7		2.55	the basic unit of length adopted under the Systeme International d'Unites (approximately 1.094 yards)
+K0570	L	285	n	meter	metre | <n> metric meter, rhythmic pattern	公尺	meter.n.01	noun.quantity	293	1293	6	1	2.55	the basic unit of length adopted under the Systeme International d'Unites (approximately 1.094 yards)
+K0571	S	286	n	yuan	yuan	元	yuan.n.01	noun.quantity	75	39931	2		1.71	the basic unit of money in China
+K0572	L	286	n	kwai	kwai	圓	yuan.n.01	noun.quantity	14	4171	1	8	1.71	the basic unit of money in China
+K0573	S	287	n	zero	zero	零	zero.n.02	noun.quantity	796	2660	10		1.78	a mathematical element that when added to another number yields the same number
+K0574	L	287	n	cipher	cipher	〇	zero.n.02	noun.quantity	201	173	7	1	1.78	a mathematical element that when added to another number yields the same number
+K0575	S	288	n	east	east	東	east.n.01	noun.relation	5148	57530	7		3.26	the cardinal compass point that is at 90 degrees
+K0576	L	288	n	eastward	eastward	東方	east.n.01	noun.relation	87	1870	3	3	3.26	the cardinal compass point that is at 90 degrees
+K0577	S	289	n	north	north	北	north.n.03	noun.relation	7678	60530	9		3.42	the cardinal compass point that is at 0 or 360 degrees
+K0578	L	289	n	northward	northward	北方	north.n.03	noun.relation	74	2361	3	3	3.42	the cardinal compass point that is at 0 or 360 degrees
+K0579	S	290	n	part	part	部分	part.n.01	noun.relation	9059	16211	18		2.80	something determined in relation to something that includes it
+K0580	L	290	n	portion	portion	要素	part.n.01	noun.relation	758	306	8	2	2.80	something determined in relation to something that includes it
+K0581	S	291	n	percent	percent	百分之	percentage.n.01	noun.relation	1365	243	1		2.03	a proportion in relation to a whole (which is usually the amount per hundred)
+K0582	L	291	n	percentage	percentage	百分率	percentage.n.01	noun.relation	488	8	2	2	2.03	a proportion in relation to a whole (which is usually the amount per hundred)
+K0583	S	292	n	opposite	opposite	相反	reverse.n.01	noun.relation	517	901	11		1.63	a relation of direct opposition
+K0584	L	292	n	reverse	reverse	反面	reverse.n.01	noun.relation	288	75	14	5	1.63	a relation of direct opposition
+K0585	S	293	n	south	south	南	south.n.03	noun.relation	8969	67568	7		3.64	the cardinal compass point that is at 180 degrees
+K0586	L	293	n	southward	southward	南方	south.n.03	noun.relation	53	2633	3	2	3.64	the cardinal compass point that is at 180 degrees
+K0587	S	294	n	west	west	西	west.n.02	noun.relation	6125	74318	10		3.09	the cardinal compass point that is a 270 degrees
+K0588	L	294	n	westward	westward	西方	west.n.02	noun.relation	102	3651	3	3	3.09	the cardinal compass point that is a 270 degrees
+K0589	S	295	n	ball	ball	球	ball.n.03	noun.shape	1328	28505	13		3.70	an object with a spherical shape
+K0590	L	295	n	globe	globe	球狀物	ball.n.03	noun.shape	263	2	3	1	3.70	an object with a spherical shape
+K0591	S	296	n	block	block	方塊	block.n.03	noun.shape	927	162	28		1.50	a three-dimensional shape with six square or rectangular sides
+K0592	L	296	n	cube	cube	立方體	block.n.03	noun.shape	111	43	7	2	1.50	a three-dimensional shape with six square or rectangular sides
+K0593	S	297	n	branch	branch	分支	branch.n.03	noun.shape	1081	1453	8		1.95	a part of a forked or branching shape
+K0594	L	297	n	leg	leg	分叉	branch.n.03	noun.shape	457	48	9	2	1.95	a part of a forked or branching shape
+K0595	S	298	n	drop	drop	珠	drop.n.01	noun.shape	430	3413	32		1.66	a shape that is spherical and small
+K0596	L	298	n	bead	bead	滴	drop.n.01	noun.shape	68	473	6	4	1.66	a shape that is spherical and small
+K0597	S	299	n	channel	channel	溝	groove.n.01	noun.shape	1340	1801	11		3.49	a long narrow furrow cut either by a natural process (such as erosion) or by a tool (as e.g. a groove in a phonograph record)
+K0598	L	299	n	groove	groove	凹槽	groove.n.01	noun.shape	43	18	5	4	3.49	a long narrow furrow cut either by a natural process (such as erosion) or by a tool (as e.g. a groove in a phonograph record)
+K0599	S	300	n	tube	tube	管	pipe.n.03	noun.shape	344	22566	9		2.97	a hollow cylindrical shape
+K0600	L	300	n	pipe	pipe	管子	pipe.n.03	noun.shape	135	61	9	6	2.97	a hollow cylindrical shape
+K0601	S	301	n	hardship	hardship	不幸	adversity.n.01	noun.state	42	357	3		1.77	a state of misfortune or affliction
+K0602	L	301	n	adversity	adversity	逆境	adversity.n.01	noun.state	18	14	2	2	1.77	a state of misfortune or affliction
+K0603	S	302	n	ill	ill	疾病	ailment.n.01	noun.state	425	1656	9		2.39	an often persistent bodily disorder or disease; a cause for complaining
+K0604	L	302	n	complaint	complaint	病痛	ailment.n.01	noun.state	82	35	5	3	2.39	an often persistent bodily disorder or disease; a cause for complaining
+K0605	S	303	n	disaster	disaster	災難	catastrophe.n.02	noun.state	262	437	3		2.26	a state of extreme (usually irremediable) ruin and misfortune
+K0606	L	303	n	catastrophe	catastrophe	禍患	catastrophe.n.02	noun.state	33	19	3	2	2.26	a state of extreme (usually irremediable) ruin and misfortune
+K0607	S	304	n	dark	dark	暗	dark.n.01	noun.state	1079	2907	16		2.56	absence of light or illumination
+K0608	L	304	n	darkness	darkness	陰暗	dark.n.01	noun.state	200	43	6	10	2.56	absence of light or illumination
+K0609	S	305	n	stalemate	stalemate	僵局	deadlock.n.01	noun.state	38	93	3		1.23	a situation in which no progress can be made or no advancement is possible
+K0610	L	305	n	standstill	standstill	末路	deadlock.n.01	noun.state	13	16	2	2	1.23	a situation in which no progress can be made or no advancement is possible
+K0611	S	306	n	upset	upset	擾動	disturbance.n.02	noun.state	118	97	17		1.25	an unhappy and worried mental state
+K0612	L	306	n	disturbance	disturbance	心煩	disturbance.n.02	noun.state	58	11	7	4	1.25	an unhappy and worried mental state
+K0613	S	307	n	disruption	disruption	騷亂	disturbance.n.03	noun.state	74	276	4		1.76	a disorderly outburst or tumult
+K0614	L	307	n	flutter	flutter	騷動	disturbance.n.03	noun.state	16	70	9	3	1.76	a disorderly outburst or tumult
+K0615	S	308	n	respect	respect	尊重	esteem.n.01	noun.state	576	645	9		1.59	the condition of being honored (esteemed or respected or well regarded)
+K0616	L	308	n	esteem	esteem	尊敬	esteem.n.01	noun.state	50	193	5	2	1.59	the condition of being honored (esteemed or respected or well regarded)
+K0617	S	309	n	health	health	健康	health.n.01	noun.state	2467	1519	2		3.14	a healthy state of wellbeing free from disease
+K0618	L	309	n	wellness	wellness	康復	health.n.01	noun.state	19	144	1	3	3.14	a healthy state of wellbeing free from disease
+K0619	S	310	n	need	need	需要	need.n.01	noun.state	1445	6203	7		1.41	a condition requiring relief
+K0620	L	310	n	demand	demand	需求	need.n.01	noun.state	628	1390	11	3	1.41	a condition requiring relief
+K0621	S	311	n	pain	pain	痛	pain.n.01	noun.state	489	1717	7		2.25	a symptom of some physical hurt or disorder
+K0622	L	311	n	hurting	hurting	痛苦	pain.n.01	noun.state	17	349	8	4	2.25	a symptom of some physical hurt or disorder
+K0623	S	312	n	potential	potential	潛力	potential.n.01	noun.state	1243	186	4		2.20	the inherent capacity for coming into being
+K0624	L	312	n	potency	potency	潛能	potential.n.01	noun.state	26	56	4	2	2.20	the inherent capacity for coming into being
+K0625	S	313	n	plight	plight	困境	predicament.n.01	noun.state	40	293	4		1.69	a situation from which extrication is difficult especially an unpleasant or trying one
+K0626	L	313	n	predicament	predicament	困局	predicament.n.01	noun.state	16	15	1	3	1.69	a situation from which extrication is difficult especially an unpleasant or trying one
+K0627	S	314	n	pregnancy	pregnancy	懷孕	pregnancy.n.01	noun.state	227	410	1		1.77	the state of being pregnant; the period from conception to birth when a woman carries a developing fetus in her uterus
+K0628	L	314	n	gestation	gestation	妊娠	pregnancy.n.01	noun.state	36	70	3	2	1.77	the state of being pregnant; the period from conception to birth when a woman carries a developing fetus in her uterus
+K0629	S	315	n	recognition	recognition	承認	recognition.n.01	noun.state	630	2930	8		2.13	the state or quality of being recognized or acknowledged
+K0630	L	315	n	acknowledgment	acknowledgement	認可	recognition.n.01	noun.state	19	717	3	4	2.13	the state or quality of being recognized or acknowledged
+K0631	S	316	n	reputation	reputation	名譽	repute.n.01	noun.state	516	719	3		2.21	the state of being held in high esteem and honor
+K0632	L	316	n	repute	repute	聲譽	repute.n.01	noun.state	9	256	2	2	2.21	the state of being held in high esteem and honor
+K0633	S	317	n	shame	shame	辱	shame.n.02	noun.state	74	555	7		1.46	a state of dishonor
+K0634	L	317	n	disgrace	disgrace	羞辱	shame.n.02	noun.state	24	59	4	4	1.46	a state of dishonor
+K0635	S	318	n	bite	bite	叮	sting.n.03	noun.state	77	69	13		1.22	a painful wound caused by the thrust of an insect's stinger into skin
+K0636	L	318	n	sting	sting	刺痛	sting.n.03	noun.state	32	10	9	2	1.22	a painful wound caused by the thrust of an insect's stinger into skin
+K0637	S	319	n	storm	storm	風潮	storm.n.02	noun.state	428	152	8		1.59	a violent commotion or disturbance
+K0638	L	319	n	tempest	tempest	暴風雨	storm.n.02	noun.state	25	67	2	3	1.59	a violent commotion or disturbance
+K0639	S	320	n	black	black	黑	total_darkness.n.01	noun.state	5217	9994	22		3.65	total absence of light
+K0640	L	320	n	blackness	blackness	黑色	total_darkness.n.01	noun.state	16	736	2	1	3.65	total absence of light
+K0641	S	321	n	alkene	alkene	烯	alkene.n.01	noun.substance	47	644	1		1.90	any unsaturated aliphatic hydrocarbon
+K0642	L	321	n	olefin	olefin	烯烴	alkene.n.01	noun.substance	9	42	1	1	1.90	any unsaturated aliphatic hydrocarbon
+K0643	S	322	n	board	board	板	board.n.02	noun.substance	2172	4185	13		3.81	a stout length of sawn timber; made in a wide variety of sizes and used for many purposes
+K0644	L	322	n	plank	plank	木板	board.n.02	noun.substance	20	70	5	4	3.81	a stout length of sawn timber; made in a wide variety of sizes and used for many purposes
+K0645	S	323	n	lime	lime	石灰	calcium_oxide.n.01	noun.substance	104	240	8		2.97	a white crystalline oxide used in the production of calcium hydroxide
+K0646	L	323	n	calx	calx	生石灰	calcium_oxide.n.01	noun.substance	9	3	1	2	2.97	a white crystalline oxide used in the production of calcium hydroxide
+K0647	S	324	n	catalyst	catalyst	催化劑	catalyst.n.01	noun.substance	170	158	2		2.00	(chemistry) a substance that initiates or accelerates a chemical reaction without itself being affected
+K0648	L	324	n	accelerator	accelerator	觸媒	catalyst.n.01	noun.substance	33	13	4	1	2.00	(chemistry) a substance that initiates or accelerates a chemical reaction without itself being affected
+K0649	S	325	n	straw	straw	糠	chaff.n.01	noun.substance	67	47	7		1.41	material consisting of seed coverings and small pieces of stem or leaves that have been separated from the seeds
+K0650	L	325	n	stalk	stalk	稻殼	chaff.n.01	noun.substance	22	7	8	1	1.41	material consisting of seed coverings and small pieces of stem or leaves that have been separated from the seeds
+K0651	S	326	n	dust	dust	碎石	debris.n.01	noun.substance	218	34	7		1.32	the remains of something that has been destroyed or broken up
+K0652	L	326	n	junk	junk	瓦礫	debris.n.01	noun.substance	21	17	3	2	1.32	the remains of something that has been destroyed or broken up
+K0653	S	327	n	diamond	diamond	鑽石	diamond.n.02	noun.substance	418	389	6		2.48	very hard native crystalline carbon valued as a gem
+K0654	L	327	n	adamant	adamant	金剛石	diamond.n.02	noun.substance	12	45	2	2	2.48	very hard native crystalline carbon valued as a gem
+K0655	S	328	n	clay	clay	泥	mud.n.01	noun.substance	365	1356	5		1.64	water soaked soil; soft wet earth
+K0656	L	328	n	mud	mud	泥土	mud.n.01	noun.substance	137	83	4	1	1.64	water soaked soil; soft wet earth
+K0657	S	329	n	parchment	parchment	羊皮	parchment.n.02	noun.substance	47	39	2		1.27	skin of a sheep or goat prepared for writing on
+K0658	L	329	n	lambskin	lambskin	羊皮紙	parchment.n.02	noun.substance	9	11	2	1	1.27	skin of a sheep or goat prepared for writing on
+K0659	S	330	n	soil	soil	土地	soil.n.02	noun.substance	566	2998	5		1.53	the part of the earth's surface consisting of humus and disintegrated rock
+K0660	L	330	n	dirt	dirt	土壤	soil.n.02	noun.substance	71	707	5	1	1.53	the part of the earth's surface consisting of humus and disintegrated rock
+K0661	S	331	n	sulfur	sulfur	硫	sulfur.n.01	noun.substance	232	1458	2		3.08	an abundant tasteless odorless multivalent nonmetallic element; best known in yellow crystals; occurs in many sulphide and sulphate minerals and even in native form (especially in volcanic regions)
+K0662	L	331	n	sulphur	sulphur	硫黃	sulfur.n.01	noun.substance	40	7	2	1	3.08	an abundant tasteless odorless multivalent nonmetallic element; best known in yellow crystals; occurs in many sulphide and sulphate minerals and even in native form (especially in volcanic regions)
+K0663	S	332	n	vapor	vapour	蒸氣	vapor.n.01	noun.substance	120	237	2		1.66	a visible suspension in the air of particles of some substance
+K0664	L	332	n	vapour	vapour	水汽	vapor.n.01	noun.substance	26	24	2	3	1.66	a visible suspension in the air of particles of some substance
+K0665	S	333	n	first	first	開始	beginning.n.02	noun.time	26233	19925	16		3.86	the time at which something is supposed to begin
+K0666	L	333	n	start	start	開端	beginning.n.02	noun.time	1373	208	22	2	3.86	the time at which something is supposed to begin
+K0667	S	334	n	even	even	晚上	evening.n.01	noun.time	5057	580	14		1.80	the latter part of the day (the period of decreasing daylight from late afternoon until nightfall)
+K0668	L	334	n	evening	evening	傍晚	evening.n.01	noun.time	423	110	6	5	1.80	the latter part of the day (the period of decreasing daylight from late afternoon until nightfall)
+K0669	S	335	n	future	future	以後	future.n.01	noun.time	1722	3278	7		2.42	the time yet to come
+K0670	L	335	n	hereafter	hereafter	未來	future.n.01	noun.time	12	1793	5	6	2.42	the time yet to come
+K0671	S	336	n	hour	hour	小時	hour.n.01	noun.time	768	2479	4		3.40	a period of time equal to 1/24th of a day
+K0672	L	336	n	hr	hr	鐘頭	hour.n.01	noun.time	94	8	1	1	3.40	a period of time equal to 1/24th of a day
+K0673	S	337	n	present	present	目前	present.n.01	noun.time	3459	6074	18		2.65	the period of time that is happening now; any continuous stretch of time including the moment of speech
+K0674	L	337	n	nowadays	nowadays	當今	present.n.01	noun.time	135	351	2	2	2.65	the period of time that is happening now; any continuous stretch of time including the moment of speech
+K0675	S	338	n	rest	rest	休息	respite.n.04	noun.time	1441	295	18		2.23	a pause for relaxation
+K0676	L	338	n	relief	relief	歇息	respite.n.04	noun.time	413	6	11	4	2.23	a pause for relaxation
+K0677	S	339	n	s	s	秒	second.n.01	noun.time	99450	1645	6		3.33	1/60 of a minute; the basic unit of time adopted under the Systeme International d'Unites
+K0678	L	339	n	second	second	秒鐘	second.n.01	noun.time	8513	71	15	1	3.33	1/60 of a minute; the basic unit of time adopted under the Systeme International d'Unites
+K0679	S	340	n	summer	summer	夏	summer.n.01	noun.time	2010	10167	3		3.45	the warmest season of the year; in the northern hemisphere it extends from the summer solstice to the autumnal equinox
+K0680	L	340	n	summertime	summertime	夏天	summer.n.01	noun.time	20	363	1	2	3.45	the warmest season of the year; in the northern hemisphere it extends from the summer solstice to the autumnal equinox
+K0681	S	341	n	sunset	sunset	日落	sunset.n.01	noun.time	98	121	5		1.72	the time in the evening at which the sun begins to fall below the horizon
+K0682	L	341	n	sundown	sundown	日沒	sunset.n.01	noun.time	14	16	1	2	1.72	the time in the evening at which the sun begins to fall below the horizon
+K0683	S	342	v	crimson	crimson	變紅	blush.v.01	verb.body	65	10	5		1.72	turn red, as if in embarrassment or shame
+K0684	L	342	v	flush	flush	臉紅	blush.v.01	verb.body	25	5	18	2	1.72	turn red, as if in embarrassment or shame
+K0685	S	343	v	recover	recover	恢復	recuperate.v.04	verb.body	210	2974	6		2.42	get over an illness or shock
+K0686	L	343	v	recuperate	recuperate	復原	recuperate.v.04	verb.body	13	184	4	3	2.42	get over an illness or shock
+K0687	S	344	v	wake	wake	醒	wake_up.v.02	verb.body	209	744	9		2.43	stop sleeping
+K0688	L	344	v	arouse	arouse	喚醒	wake_up.v.02	verb.body	12	48	7	2	2.43	stop sleeping
+K0689	S	345	v	speed	speed	加速	accelerate.v.01	verb.change	1584	1067	10		1.96	move faster
+K0690	L	345	v	accelerate	accelerate	加快	accelerate.v.01	verb.change	58	316	2	1	1.96	move faster
+K0691	S	346	v	better	better	提高	better.v.02	verb.change	1522	1979	50		2.87	to make better
+K0692	L	346	v	amend	amend	改正	better.v.02	verb.change	36	113	3	5	2.87	to make better
+K0693	S	347	v	mix	mix	聯合	blend.v.03	verb.change	431	8922	9		1.43	mix together different elements
+K0694	L	347	v	flux	flux	結合	blend.v.03	verb.change	97	2344	11	5	1.43	mix together different elements
+K0695	S	348	v	change	change	變	change.v.03	verb.change	2367	25675	20		1.98	become different in some particular way, without permanently losing one's or its former characteristics or essence
+K0696	L	348	v	alter	alter	改變	change.v.03	verb.change	199	3234	5	3	1.98	become different in some particular way, without permanently losing one's or its former characteristics or essence
+K0697	S	349	v	end	end	結束	end.v.02	verb.change	5891	5549	18		2.87	bring to an end or halt
+K0698	L	349	v	terminate	terminate	終止	end.v.02	verb.change	74	593	4	1	2.87	bring to an end or halt
+K0699	S	350	v	eliminate	eliminate	消除	extinguish.v.04	verb.change	181	451	7		1.41	terminate, end, or take out
+K0700	L	350	v	extinguish	extinguish	除去	extinguish.v.04	verb.change	16	197	5	4	1.41	terminate, end, or take out
+K0701	S	351	v	mash	mash	磨	grind.v.05	verb.change	38	967	5		2.22	reduce to small pieces or particles by pounding or abrading
+K0702	L	351	v	grind	grind	研磨	grind.v.05	verb.change	12	74	11	6	2.22	reduce to small pieces or particles by pounding or abrading
+K0703	S	352	v	occur	occur	發生	happen.v.01	verb.change	1065	9415	3		3.56	come to pass
+K0704	L	352	v	happen	happen	碰巧	happen.v.01	verb.change	208	21	5	3	3.56	come to pass
+K0705	S	353	v	light	light	照明	light.v.01	verb.change	2813	164	47		2.78	make lighter or brighter
+K0706	L	353	v	illuminate	illuminate	照亮	light.v.01	verb.change	15	51	3	3	2.78	make lighter or brighter
+K0707	S	354	v	reform	reform	改造	reform.v.02	verb.change	693	903	9		2.68	bring, lead, or force to abandon a wrong or evil course of life, conduct, and adopt a right one
+K0708	L	354	v	regenerate	regenerate	矯正	reform.v.02	verb.change	22	75	10	6	2.68	bring, lead, or force to abandon a wrong or evil course of life, conduct, and adopt a right one
+K0709	S	355	v	doctor	doctor	修復	repair.v.01	verb.change	555	438	7		2.27	restore by replacing a part or putting together what is torn or broken
+K0710	L	355	v	fix	fix	修理	repair.v.01	verb.change	113	115	17	6	2.27	restore by replacing a part or putting together what is torn or broken
+K0711	S	356	v	limit	limit	限制	restrict.v.03	verb.change	587	2792	9		3.55	place limits on (extent or access)
+K0712	L	356	v	confine	confine	拘束	restrict.v.03	verb.change	11	42	6	7	3.55	place limits on (extent or access)
+K0713	S	357	v	conquer	conquer	征服	suppress.v.01	verb.change	141	1228	3		1.25	to put down by force or authority
+K0714	L	357	v	curb	kerb | street edge	抑制	suppress.v.01	verb.change	65	473	8	3	1.25	to put down by force or authority
+K0715	S	358	v	assume	assume	假設	assume.v.01	verb.cognition	191	1213	9		2.16	take to be the case or to be true; accept without verification or proof
+K0716	L	358	v	presume	presume	假定	assume.v.01	verb.cognition	8	199	4	6	2.16	take to be the case or to be true; accept without verification or proof
+K0717	S	359	v	reflect	reflect	思考	chew_over.v.01	verb.cognition	333	540	7		2.02	reflect deeply on a subject
+K0718	L	359	v	speculate	speculate	沉思	chew_over.v.01	verb.cognition	30	57	4	4	2.02	reflect deeply on a subject
+K0719	S	360	v	except	except	排除	exclude.v.01	verb.cognition	1178	472	2		1.76	prevent from being included or considered or accepted
+K0720	L	360	v	exclude	exclude	排斥	exclude.v.01	verb.cognition	77	253	5	5	1.76	prevent from being included or considered or accepted
+K0721	S	361	v	expect	expect	預期	expect.v.01	verb.cognition	129	452	6		1.50	regard something as probable or likely
+K0722	L	361	v	anticipate	anticipate	預料	expect.v.01	verb.cognition	23	80	6	3	1.50	regard something as probable or likely
+K0723	S	362	v	learn	learn	學	memorize.v.01	verb.cognition	389	173795	6		3.50	commit to memory; learn by heart
+K0724	L	362	v	con	con	記住	memorize.v.01	verb.cognition	124	69	6	3	3.50	commit to memory; learn by heart
+K0725	S	363	v	believe	believe	認為	think.v.01	verb.cognition	846	19184	5		2.20	judge or regard; look upon; judge
+K0726	L	363	v	think	think	相信	think.v.01	verb.cognition	519	1579	14	1	2.20	judge or regard; look upon; judge
+K0727	S	364	v	see	see	理解	understand.v.02	verb.cognition	6452	1490	25		2.61	perceive (an idea or situation) mentally
+K0728	L	364	v	realize	realise	明白	understand.v.02	verb.cognition	90	265	6	3	2.61	perceive (an idea or situation) mentally
+K0729	S	365	v	abuse	abuse	虐待	abuse.v.03	verb.communication	279	276	7		1.80	use foul or abusive language towards
+K0730	L	365	v	shout	shout	辱罵	abuse.v.03	verb.communication	28	44	5	4	1.80	use foul or abusive language towards
+K0731	S	366	v	accuse	accuse	指控	accuse.v.01	verb.communication	31	615	2		1.50	bring an accusation against; level a charge against
+K0732	L	366	v	impeach	impeach	控訴	accuse.v.01	verb.communication	9	84	3	4	1.50	bring an accusation against; level a charge against
+K0733	S	367	v	promote	promote	宣揚	advertise.v.02	verb.communication	527	253	5		2.77	make publicity for; try to sell (a product)
+K0734	L	367	v	push	push	登廣告	advertise.v.02	verb.communication	250	9	15	1	2.77	make publicity for; try to sell (a product)
+K0735	S	368	v	acclaim	acclaim	鼓掌	applaud.v.01	verb.communication	123	41	3		2.36	clap one's hands or shout after performances to indicate approval
+K0736	L	368	v	spat	spat	拍手	applaud.v.01	verb.communication	10	22	14	1	2.36	clap one's hands or shout after performances to indicate approval
+K0737	S	369	v	reason	reason	爭論	argue.v.01	verb.communication	1046	717	9		2.54	present reasons and arguments
+K0738	L	369	v	argue	argue	評理	argue.v.01	verb.communication	358	6	3	2	2.54	present reasons and arguments
+K0739	S	370	v	ask	ask	問	ask.v.01	verb.communication	284	18065	7		3.30	inquire about
+K0740	L	370	v	inquire	enquire	查詢	ask.v.01	verb.communication	9	287	3	5	3.30	inquire about
+K0741	S	371	v	evidence	evidence	顯示	attest.v.01	verb.communication	2247	3468	6		2.58	provide evidence for; stand as proof of; show by one's behavior, attitude, or external attributes
+K0742	L	371	v	manifest	manifest	論證	attest.v.01	verb.communication	66	308	5	4	2.58	provide evidence for; stand as proof of; show by one's behavior, attitude, or external attributes
+K0743	S	372	v	gas	gas	吹噓	boast.v.01	verb.communication	1581	13	8		2.25	show off
+K0744	L	372	v	blow	blow	吹牛	boast.v.01	verb.communication	191	6	29	2	2.25	show off
+K0745	S	373	v	broadcast	broadcast	傳	circulate.v.02	verb.communication	1164	32759	5		3.19	cause to become widely known
+K0746	L	373	v	distribute	distribute	推廣	circulate.v.02	verb.communication	75	1044	10	5	3.19	cause to become widely known
+K0747	S	374	v	plain	plain	抱怨	complain.v.01	verb.communication	443	111	11		1.58	express complaints, discontent, displeasure, or unhappiness
+K0748	L	374	v	kick	kick	埋怨	complain.v.01	verb.communication	130	20	14	4	1.58	express complaints, discontent, displeasure, or unhappiness
+K0749	S	375	v	deceive	deceive	欺騙	deceive.v.02	verb.communication	31	162	2		2.14	cause someone to believe an untruth
+K0750	L	375	v	betray	betray	哄騙	deceive.v.02	verb.communication	13	7	6	2	2.14	cause someone to believe an untruth
+K0751	S	376	v	describe	describe	描述	describe.v.01	verb.communication	746	3168	4		1.39	give a description of
+K0752	L	376	v	depict	depict	描寫	describe.v.01	verb.communication	151	638	3	2	1.39	give a description of
+K0753	S	377	v	delete	delete	刪除	erase.v.03	verb.communication	42	494	3		1.57	wipe out digitally or magnetically recorded information
+K0754	L	377	v	erase	erase	抹去	erase.v.03	verb.communication	28	20	3	1	1.57	wipe out digitally or magnetically recorded information
+K0755	S	378	v	pardon	pardon	原諒	excuse.v.01	verb.communication	75	78	5		1.58	accept an excuse for
+K0756	L	378	v	excuse	excuse	饒恕	excuse.v.01	verb.communication	39	10	9	3	1.58	accept an excuse for
+K0757	S	379	v	veto	veto	禁止	forbid.v.01	verb.communication	73	2038	4		2.22	command against
+K0758	L	379	v	interdict	interdict	嚴禁	forbid.v.01	verb.communication	8	112	4	1	2.22	command against
+K0759	S	380	v	foster	foster	培養	foster.v.03	verb.communication	332	1195	5		3.02	help develop, help grow
+K0760	L	380	v	nurture	nurture	撫育	foster.v.03	verb.communication	19	20	5	4	3.02	help develop, help grow
+K0761	S	381	v	ensure	ensure	保證	guarantee.v.02	verb.communication	510	965	2		2.29	make certain of
+K0762	L	381	v	guarantee	guarantee	擔保	guarantee.v.02	verb.communication	112	72	7	2	2.29	make certain of
+K0763	S	382	v	point	point	指	indicate.v.02	verb.communication	4211	24619	40		3.22	indicate a place, direction, person, or thing; either spatially or figuratively
+K0764	L	382	v	designate	designate	指示	indicate.v.02	verb.communication	66	937	6	6	3.22	indicate a place, direction, person, or thing; either spatially or figuratively
+K0765	S	383	v	mean	mean	意味著	mean.v.03	verb.communication	988	821	16		1.81	denote or connote
+K0766	L	383	v	intend	intend	意指	mean.v.03	verb.communication	48	261	4	2	1.81	denote or connote
+K0767	S	384	v	name	name	稱為	name.v.01	verb.communication	7007	12540	15		2.31	assign a specified (usually proper) proper name to
+K0768	L	384	v	call	call	命名	name.v.01	verb.communication	1285	3374	41	6	2.31	assign a specified (usually proper) proper name to
+K0769	S	385	v	note	note	提	note.v.01	verb.communication	878	31906	13		3.64	make mention of
+K0770	L	385	v	observe	observe	說起	note.v.01	verb.communication	156	41	9	4	3.64	make mention of
+K0771	S	386	v	allow	allow	讓	permit.v.01	verb.communication	1352	8741	10		1.25	consent to, give permission
+K0772	L	386	v	let	let	許可	permit.v.01	verb.communication	791	840	8	2	1.25	consent to, give permission
+K0773	S	387	v	question	question	提問	question.v.03	verb.communication	897	80	11		1.60	pose a question
+K0774	L	387	v	query	query	審問	question.v.03	verb.communication	45	40	2	3	1.60	pose a question
+K0775	S	388	v	request	request	要求	request.v.01	verb.communication	456	6154	5		1.36	express the need or desire for; ask for
+K0776	L	388	v	quest	quest	請求	request.v.01	verb.communication	179	1078	7	2	1.36	express the need or desire for; ask for
+K0777	S	389	v	sign	sign	簽署	sign.v.01	verb.communication	877	2093	20		2.63	mark with one's signature; write one's name (on)
+K0778	L	389	v	subscribe	subscribe	簽名	sign.v.01	verb.communication	21	207	5	3	2.63	mark with one's signature; write one's name (on)
+K0779	S	390	v	state	state	說	state.v.01	verb.communication	10540	32130	11		2.84	express in words
+K0780	L	390	v	say	say	告訴	state.v.01	verb.communication	831	750	12	2	2.84	express in words
+K0781	S	391	v	teach	teach	教	teach.v.01	verb.communication	404	60313	3		3.41	impart skills or knowledge to
+K0782	L	391	v	instruct	instruct	教導	teach.v.01	verb.communication	27	351	3	4	3.41	impart skills or knowledge to
+K0783	S	392	v	show	show	證明	testify.v.02	verb.communication	3637	2660	16		2.37	provide evidence for
+K0784	L	392	v	prove	prove	作證	testify.v.02	verb.communication	353	118	9	2	2.37	provide evidence for
+K0785	S	393	v	total	total	加	total.v.02	verb.communication	3379	51019	7		2.84	determine the sum of
+K0786	L	393	v	sum	sum	總數	total.v.02	verb.communication	530	592	8	3	2.84	determine the sum of
+K0787	S	394	v	shoot	shoot	射	blast.v.07	verb.competition	227	11083	22		2.10	fire a shot
+K0788	L	394	v	blast	blast	開槍	blast.v.07	verb.competition	101	197	16	2	2.10	fire a shot
+K0789	S	395	v	guard	guard	守	guard.v.02	verb.competition	661	8361	14		2.45	watch over or shield from danger or harm; protect
+K0790	L	395	v	ward	ward	警惕	guard.v.02	verb.competition	359	55	8	5	2.45	watch over or shield from danger or harm; protect
+K0791	S	396	v	sample	sample	嘗	sample.v.01	verb.consumption	501	1473	4		2.76	take a sample of
+K0792	L	396	v	taste	taste	品嚐	sample.v.01	verb.consumption	225	45	13	1	2.76	take a sample of
+K0793	S	397	v	bond	bond	附著	adhere.v.06	verb.contact	576	71	14		2.54	stick to firmly
+K0794	L	397	v	stick	stick	黏附	adhere.v.06	verb.contact	168	7	25	2	2.54	stick to firmly
+K0795	S	398	v	arrest	arrest	逮捕	collar.v.01	verb.contact	500	934	6		2.75	take into custody
+K0796	L	398	v	collar	collar	擒獲	collar.v.01	verb.contact	74	45	12	3	2.75	take into custody
+K0797	S	399	v	flood	flood	氾濫	deluge.v.01	verb.contact	200	153	10		2.14	fill quickly beyond capacity; as with a liquid
+K0798	L	399	v	deluge	deluge	浸水	deluge.v.01	verb.contact	20	11	6	2	2.14	fill quickly beyond capacity; as with a liquid
+K0799	S	400	v	knife	knife	刺	knife.v.01	verb.contact	131	3965	4		2.40	use a knife on
+K0800	L	400	v	stab	stab	戳	knife.v.01	verb.contact	17	192	6	10	2.40	use a knife on
+K0801	S	401	v	control	control	控制	operate.v.03	verb.contact	3877	6112	19		2.13	handle and cause to function
+K0802	L	401	v	operate	operate	操縱	operate.v.03	verb.contact	580	302	7	4	2.13	handle and cause to function
+K0803	S	402	v	pick	pick	採	pick.v.02	verb.contact	275	10125	21		2.73	look for and gather
+K0804	L	402	v	pluck	pluck	摘	pick.v.02	verb.contact	13	403	8	3	2.73	look for and gather
+K0805	S	403	v	polish	polish	拋光	polish.v.01	verb.contact	977	28	8		1.72	make (a surface) shine
+K0806	L	403	v	smooth	smooth	擦亮	polish.v.01	verb.contact	263	5	12	1	1.72	make (a surface) shine
+K0807	S	404	v	set	set	放	put.v.01	verb.contact	5740	18084	45		2.11	put into a certain place or abstract location
+K0808	L	404	v	position	position	擱	put.v.01	verb.contact	2783	289	18	5	2.11	put into a certain place or abstract location
+K0809	S	405	v	scratch	scratch	劃	scratch.v.02	verb.contact	57	14815	17		2.43	cut the surface of; wear away the surface of
+K0810	L	405	v	scrape	scrape	刮	scratch.v.02	verb.contact	14	222	10	5	2.43	cut the surface of; wear away the surface of
+K0811	S	406	v	search	search	找	search.v.01	verb.contact	1161	3320	9		2.29	try to locate or discover, or try to establish the existence of
+K0812	L	406	v	seek	seek	找尋	search.v.01	verb.contact	389	51	6	3	2.29	try to locate or discover, or try to establish the existence of
+K0813	S	407	v	kiss	kiss	親	snog.v.01	verb.contact	109	13534	6		2.95	touch with the lips or press the lips (against someone's mouth or other body part) as an expression of love, greeting, etc.
+K0814	L	407	v	buss	buss	吻	snog.v.01	verb.contact	8	414	9	3	2.95	touch with the lips or press the lips (against someone's mouth or other body part) as an expression of love, greeting, etc.
+K0815	S	408	v	stack	stack	堆	stack.v.02	verb.contact	266	1370	8		1.77	arrange in stacks
+K0816	L	408	v	pile	pile	堆積	stack.v.02	verb.contact	59	208	11	3	1.77	arrange in stacks
+K0817	S	409	v	border	border	圈	surround.v.01	verb.contact	1436	2555	10		2.23	extend on all sides of simultaneously; encircle
+K0818	L	409	v	skirt	skirt	環繞	surround.v.01	verb.contact	34	630	8	3	2.23	extend on all sides of simultaneously; encircle
+K0819	S	410	v	sweep	sweep	掃	sweep.v.03	verb.contact	83	1074	15		2.57	sweep with a broom or as if with a broom
+K0820	L	410	v	broom	broom	清掃	sweep.v.03	verb.contact	12	20	5	3	2.57	sweep with a broom or as if with a broom
+K0821	S	411	v	transport	transport	運	transport.v.02	verb.contact	1573	35668	11		1.63	move while supporting, either in a vehicle or in one's hands or on one's body
+K0822	L	411	v	carry	carry	帶	transport.v.02	verb.contact	794	16543	41	17	1.63	move while supporting, either in a vehicle or in one's hands or on one's body
+K0823	S	412	v	piece	piece	組合	assemble.v.01	verb.creation	742	1391	18		3.24	create by putting components or members together
+K0824	L	412	v	tack	tack	拼湊	assemble.v.01	verb.creation	28	21	12	2	3.24	create by putting components or members together
+K0825	S	413	v	manufacture	manufacture	製造	fabricate.v.02	verb.creation	259	3774	6		2.82	make up something artificial or untrue
+K0826	L	413	v	invent	invent	編造	fabricate.v.02	verb.creation	28	53	2	7	2.82	make up something artificial or untrue
+K0827	S	414	v	copy	copy	模仿	imitate.v.01	verb.creation	385	441	8		1.51	reproduce someone's behavior or looks
+K0828	L	414	v	simulate	simulate	效法	imitate.v.01	verb.creation	62	84	3	2	1.51	reproduce someone's behavior or looks
+K0829	S	415	v	level	level	拆卸	level.v.02	verb.creation	3136	67	19		2.85	tear down so as to make flat with the ground
+K0830	L	415	v	dismantle	dismantle	夷平	level.v.02	verb.creation	14	21	3	1	2.85	tear down so as to make flat with the ground
+K0831	S	416	v	tissue	tissue	織	weave.v.02	verb.creation	376	13960	3		3.70	create a piece of cloth by interlacing strands of fabric, such as wool or cotton
+K0832	L	416	v	weave	weave	編織	weave.v.02	verb.creation	22	76	5	2	3.70	create a piece of cloth by interlacing strands of fabric, such as wool or cotton
+K0833	S	417	v	devil	devil	攪擾	annoy.v.01	verb.emotion	215	22	7		1.87	cause annoyance in; disturb, especially by minor irritations
+K0834	L	417	v	rag	rag	煩擾	annoy.v.01	verb.emotion	32	5	11	3	1.87	cause annoyance in; disturb, especially by minor irritations
+K0835	S	418	v	scare	scare	嚇	frighten.v.01	verb.emotion	32	391	4		1.49	cause fear in
+K0836	L	418	v	fright	fright	驚嚇	frighten.v.01	verb.emotion	17	24	2	3	1.49	cause fear in
+K0837	S	419	v	spite	spite	傷	hurt.v.05	verb.emotion	198	5432	3		2.39	hurt the feelings of
+K0838	L	419	v	hurt	hurt	傷害	hurt.v.05	verb.emotion	85	520	14	1	2.39	hurt the feelings of
+K0839	S	420	v	near	near	接近	approach.v.01	verb.motion	3641	1941	9		1.58	move towards
+K0840	L	420	v	approach	approach	靠近	approach.v.01	verb.motion	1072	546	14	2	1.58	move towards
+K0841	S	421	v	come	come	到	arrive.v.01	verb.motion	1673	73414	22		2.64	reach a destination; arrive by movement or progress
+K0842	L	421	v	arrive	arrive	抵達	arrive.v.01	verb.motion	203	1389	2	2	2.64	reach a destination; arrive by movement or progress
+K0843	S	422	v	crawl	crawl	爬	crawl.v.01	verb.motion	36	471	8		2.85	move slowly; in the case of people or animals with the body near the ground
+K0844	L	422	v	creep	creep	蛇行	crawl.v.01	verb.motion	12	2	8	4	2.85	move slowly; in the case of people or animals with the body near the ground
+K0845	S	423	v	fall	fall	下降	descend.v.01	verb.motion	1363	1933	44		2.61	move downward and lower, but not necessarily all the way
+K0846	L	423	v	descend	descend	落下	descend.v.01	verb.motion	61	106	4	3	2.61	move downward and lower, but not necessarily all the way
+K0847	S	424	v	dispatch	dispatch	派遣	dispatch.v.01	verb.motion	49	1046	9		2.31	send away towards a designated goal
+K0848	L	424	v	despatch	despatch	調遣	dispatch.v.01	verb.motion	9	28	5	3	2.31	send away towards a designated goal
+K0849	S	425	v	disperse	disperse	分散	disperse.v.02	verb.motion	41	404	6		1.27	to cause to separate and go in different directions
+K0850	L	425	v	scatter	scatter	驅散	disperse.v.02	verb.motion	27	52	8	2	1.27	to cause to separate and go in different directions
+K0851	S	426	v	dive	dive	跳水	dive.v.01	verb.motion	71	89	7		1.34	drop steeply
+K0852	L	426	v	plunge	plunge	俯衝	dive.v.01	verb.motion	11	52	10	2	1.34	drop steeply
+K0853	S	427	v	trail	trail	拖	drag.v.05	verb.motion	270	739	8		2.12	to lag or linger behind
+K0854	L	427	v	drag	drag	拖拉	drag.v.05	verb.motion	161	75	17	7	2.12	to lag or linger behind
+K0855	S	428	v	eddy	eddy	旋轉	eddy.v.01	verb.motion	37	724	3		1.71	flow in a circular current, of liquids
+K0856	L	428	v	swirl	swirl	漩渦	eddy.v.01	verb.motion	11	47	3	4	1.71	flow in a circular current, of liquids
+K0857	S	429	v	funk	funk	退卻	flinch.v.01	verb.motion	118	46	4		1.60	draw back, as with fear or pain
+K0858	L	429	v	shrink	shrink	畏縮	flinch.v.01	verb.motion	36	6	6	1	1.60	draw back, as with fear or pain
+K0859	S	430	v	wing	wing	飛	fly.v.01	verb.motion	986	11315	12		1.81	travel through the air; be airborne
+K0860	L	430	v	fly	fly	飛行	fly.v.01	verb.motion	482	2276	20	1	1.81	travel through the air; be airborne
+K0861	S	431	v	hunt	hunt	追蹤	hound.v.01	verb.motion	417	192	15		1.38	pursue or chase relentlessly
+K0862	L	431	v	trace	trace	獵取	hound.v.01	verb.motion	256	13	14	2	1.38	pursue or chase relentlessly
+K0863	S	432	v	pilot	pilot	駕駛	navigate.v.02	verb.motion	739	594	8		2.36	act as the navigator in a car, plane, or vessel and plan, direct, plot the path and position of the conveyance
+K0864	L	432	v	navigate	navigate	領航	navigate.v.02	verb.motion	48	40	3	3	2.36	act as the navigator in a car, plane, or vessel and plan, direct, plot the path and position of the conveyance
+K0865	S	433	v	rise	rise	出現	rise.v.01	verb.motion	1239	10176	27		2.56	move upward
+K0866	L	433	v	lift	lift	上升	rise.v.01	verb.motion	254	1078	36	3	2.56	move upward
+K0867	S	434	v	rock	rock	搖擺	rock.v.01	verb.motion	2339	102	9		3.10	move back and forth or sideways
+K0868	L	434	v	shake	shake	搖動	rock.v.01	verb.motion	50	15	15	2	3.10	move back and forth or sideways
+K0869	S	435	v	range	range	漫遊	roll.v.12	verb.motion	2951	205	17		2.40	move about aimlessly or without any destination, often in search of food or employment
+K0870	L	435	v	roll	roll	漫步	roll.v.12	verb.motion	487	50	33	4	2.40	move about aimlessly or without any destination, often in search of food or employment
+K0871	S	436	v	race	race	加緊	rush.v.01	verb.motion	1770	88	10		2.69	move fast
+K0872	L	436	v	rush	rush	飛馳	rush.v.01	verb.motion	254	5	16	2	2.69	move fast
+K0873	S	437	v	flag	flag	下垂	sag.v.01	verb.motion	548	26	12		2.05	droop, sink, or settle from or as if from pressure or loss of tautness
+K0874	L	437	v	sag	sag	低垂	sag.v.01	verb.motion	14	9	3	2	2.05	droop, sink, or settle from or as if from pressure or loss of tautness
+K0875	S	438	v	run	run	跑	scat.v.01	verb.motion	2462	1388	57		1.53	flee; take to one's heels; cut and run
+K0876	L	438	v	escape	escape	逃走	scat.v.01	verb.motion	607	166	15	3	1.53	flee; take to one's heels; cut and run
+K0877	S	439	v	slide	slide	滑落	skid.v.04	verb.motion	125	48	10		2.00	move obliquely or sideways, usually in an uncontrolled manner
+K0878	L	439	v	slip	slip	打滑	skid.v.04	verb.motion	75	8	26	3	2.00	move obliquely or sideways, usually in an uncontrolled manner
+K0879	S	440	v	step	step	邁	step.v.02	verb.motion	721	1955	21		2.33	put down or press the foot, place the foot
+K0880	L	440	v	tread	tread	踏	step.v.02	verb.motion	10	658	10	6	2.33	put down or press the foot, place the foot
+K0881	S	441	v	pass	pass	經過	travel_by.v.01	verb.motion	905	3995	43		3.25	move past
+K0882	L	441	v	surpass	surpass	走過	travel_by.v.01	verb.motion	29	70	4	2	3.25	move past
+K0883	S	442	v	find	find	發現	detect.v.01	verb.perception	1264	9435	18		2.65	discover or determine the existence, presence, or fact of
+K0884	L	442	v	notice	notice	察覺	detect.v.01	verb.perception	200	132	11	4	2.65	discover or determine the existence, presence, or fact of
+K0885	S	443	v	sense	sense	覺得	feel.v.03	verb.perception	1137	683	9		2.46	perceive by a physical sensation, e.g., coming from the skin or muscles
+K0886	L	443	v	feel	feel	感覺到	feel.v.03	verb.perception	341	50	17	5	2.46	perceive by a physical sensation, e.g., coming from the skin or muscles
+K0887	S	444	v	hide	hide	藏	hide.v.01	verb.perception	108	10017	6		1.99	prevent from being seen or discovered
+K0888	L	444	v	conceal	conceal	隱藏	hide.v.01	verb.perception	41	272	2	13	1.99	prevent from being seen or discovered
+K0889	S	445	v	nose	nose	刺探	intrude.v.03	verb.perception	213	14	14		1.96	search or inquire in a meddlesome way
+K0890	L	445	v	poke	poke	窺探	intrude.v.03	verb.perception	11	3	10	6	1.96	search or inquire in a meddlesome way
+K0891	S	446	v	appear	appear	顯得	look.v.02	verb.perception	1288	294	7		1.23	give a certain impression or have a certain outward aspect
+K0892	L	446	v	look	look	好像	look.v.02	verb.perception	669	166	14	2	1.23	give a certain impression or have a certain outward aspect
+K0893	S	447	v	monitor	monitor	監督	monitor.v.01	verb.perception	234	1106	9		1.61	keep tabs on; keep an eye on; keep under surveillance
+K0894	L	447	v	supervise	supervise	監測	monitor.v.01	verb.perception	30	211	2	1	1.61	keep tabs on; keep an eye on; keep under surveillance
+K0895	S	448	v	ring	ring	反響	resound.v.01	verb.perception	977	156	15		1.25	ring or echo with sound
+K0896	L	448	v	echo	echo	迴響	resound.v.01	verb.perception	133	65	9	6	1.25	ring or echo with sound
+K0897	S	449	v	spot	spot	區別	spot.v.02	verb.perception	363	1114	20		2.57	detect with the senses
+K0898	L	449	v	recognise	recognise	辨明	spot.v.02	verb.perception	90	12	8	3	2.57	detect with the senses
+K0899	S	450	v	reveal	reveal	透露	uncover.v.01	verb.perception	176	359	3		1.31	make visible
+K0900	L	450	v	uncover	uncover	揭開	uncover.v.01	verb.perception	30	104	2	2	1.31	make visible
+K0901	S	451	v	account	account	記錄	account.v.02	verb.possession	1271	2650	14		3.77	keep an account of
+K0902	L	451	v	calculate	calculate	算賬	account.v.02	verb.possession	144	4	6	2	3.77	keep an account of
+K0903	S	452	v	adopt	adopt	採用	adopt.v.02	verb.possession	213	4279	7		1.71	take up and practice as one's own
+K0904	L	452	v	borrow	borrow	採納	adopt.v.02	verb.possession	46	389	2	2	1.71	take up and practice as one's own
+K0905	S	453	v	have	have	有	have.v.01	verb.possession	27986	182860	20		4.87	have or possess, either in a concrete or an abstract sense
+K0906	L	453	v	hold	hold	佔有	have.v.01	verb.possession	1089	636	45	6	4.87	have or possess, either in a concrete or an abstract sense
+K0907	S	454	v	loan	loan	借	lend.v.02	verb.possession	241	2726	3		1.70	give temporarily; let have for a limited time
+K0908	L	454	v	lend	lend	貸款	lend.v.02	verb.possession	46	285	3	4	1.70	give temporarily; let have for a limited time
+K0909	S	455	v	pawn	pawn	典當	pawn.v.01	verb.possession	72	17	5		2.43	leave as a guarantee in return for money
+K0910	L	455	v	soak	soak	當掉	pawn.v.01	verb.possession	9	2	11	4	2.43	leave as a guarantee in return for money
+K0911	S	456	v	value	value	重視	prize.v.01	verb.possession	1963	1349	11		3.20	hold dear
+K0912	L	456	v	treasure	treasure	珍視	prize.v.01	verb.possession	140	12	6	2	3.20	hold dear
+K0913	S	457	v	gain	gain	獲利	profit.v.01	verb.possession	625	118	13		1.44	derive a benefit from
+K0914	L	457	v	profit	profit	贏利	profit.v.01	verb.possession	380	7	4	3	1.44	derive a benefit from
+K0915	S	458	v	ransom	ransom	贖	ransom.v.01	verb.possession	118	404	4		1.91	exchange or buy back for money; under threat
+K0916	L	458	v	redeem	redeem	贖回	ransom.v.01	verb.possession	19	49	6	1	1.91	exchange or buy back for money; under threat
+K0917	S	459	v	decline	decline	拒絕	refuse.v.02	verb.possession	651	2387	11		2.54	refuse to accept
+K0918	L	459	v	reject	reject	回絕	refuse.v.02	verb.possession	145	31	8	3	2.54	refuse to accept
+K0919	S	460	v	free	free	擺脫	rid.v.01	verb.possession	3259	362	22		3.47	relieve from
+K0920	L	460	v	rid	rid	幹掉	rid.v.01	verb.possession	66	6	1	1	3.47	relieve from
+K0921	S	461	v	collect	collect	收集	roll_up.v.02	verb.possession	227	653	8		1.91	get or gather together
+K0922	L	461	v	hoard	hoard	積聚	roll_up.v.02	verb.possession	48	38	3	3	1.91	get or gather together
+K0923	S	462	v	provide	provide	提供	supply.v.01	verb.possession	1854	7030	7		3.23	give something useful or necessary to
+K0924	L	462	v	render	render	供給	supply.v.01	verb.possession	85	452	14	3	3.23	give something useful or necessary to
+K0925	S	463	v	trade	trade	交易	trade.v.01	verb.possession	2674	1399	12		2.45	engage in the trade of
+K0926	L	463	v	merchandise	merchandise	經商	trade.v.01	verb.possession	83	159	2	3	2.45	engage in the trade of
+K0927	S	464	v	back	back	支援	back.v.01	verb.social	4357	10463	28		3.63	be behind; approve of
+K0928	L	464	v	endorse	endorse	擁護	back.v.01	verb.social	30	359	4	1	3.63	be behind; approve of
+K0929	S	465	v	ban	ban	流放	banish.v.02	verb.social	409	414	9		2.15	ban from a place of residence, as for punishment
+K0930	L	465	v	banish	banish	放逐	banish.v.02	verb.social	9	132	4	4	2.15	ban from a place of residence, as for punishment
+K0931	S	466	v	pressure	pressure	勒索	blackmail.v.01	verb.social	1275	65	9		1.48	exert pressure on someone through threats
+K0932	L	466	v	blackjack	blackjack	敲詐	blackmail.v.01	verb.social	115	24	5	4	1.48	exert pressure on someone through threats
+K0933	S	467	v	inter	inter	葬	bury.v.02	verb.social	311	2695	1		1.57	place in a grave or tomb
+K0934	L	467	v	bury	bury	埋	bury.v.02	verb.social	88	808	6	2	1.57	place in a grave or tomb
+K0935	S	468	v	close	close	關	close_up.v.01	verb.social	1922	41041	37		2.88	cease to operate or cause to cease operating
+K0936	L	468	v	fold	fold	關閉	close_up.v.01	verb.social	142	737	12	2	2.88	cease to operate or cause to cease operating
+K0937	S	469	v	force	force	迫	coerce.v.01	verb.social	3786	4520	19		2.80	to cause to do through pressure or necessity, by physical, moral or intellectual means :
+K0938	L	469	v	squeeze	squeeze	逼	coerce.v.01	verb.social	25	1074	17	8	2.80	to cause to do through pressure or necessity, by physical, moral or intellectual means :
+K0939	S	470	v	avoid	avoid	避免	debar.v.02	verb.social	836	1757	5		2.92	prevent the occurrence of; prevent from happening
+K0940	L	470	v	deflect	deflect	迴避	debar.v.02	verb.social	16	110	5	7	2.92	prevent the occurrence of; prevent from happening
+K0941	S	471	v	desert	desert	叛變	defect.v.01	verb.social	483	246	4		2.94	desert (a cause, a country or an army), often in order to join the opposing cause, country, or army
+K0942	L	471	v	defect	defect	開小差	defect.v.01	verb.social	86	2	5	4	2.94	desert (a cause, a country or an army), often in order to join the opposing cause, country, or army
+K0943	S	472	v	do	do	做	do.v.03	verb.social	4344	8749	16		2.30	get (something) done
+K0944	L	472	v	perform	perform	履行	do.v.03	verb.social	727	263	4	4	2.30	get (something) done
+K0945	S	473	v	found	found	建立	establish.v.01	verb.social	6780	11014	21		1.91	set up or found
+K0946	L	473	v	launch	launch	確立	establish.v.01	verb.social	1007	904	8	2	1.91	set up or found
+K0947	S	474	v	fail	fail	忽略	fail.v.01	verb.social	174	363	11		1.57	fail to do something; leave something undone
+K0948	L	474	v	neglect	neglect	疏忽	fail.v.01	verb.social	53	32	9	4	1.57	fail to do something; leave something undone
+K0949	S	475	v	rule	rule	治	govern.v.03	verb.social	1960	44114	19		2.08	exercise authority over; as of nations
+K0950	L	475	v	govern	govern	統治	govern.v.03	verb.social	123	5800	4	4	2.08	exercise authority over; as of nations
+K0951	S	476	v	guide	guide	帶領	guide.v.03	verb.social	639	818	11		1.67	be a guiding or motivating force or drive
+K0952	L	476	v	steer	steer	引導	guide.v.03	verb.social	37	300	5	6	1.67	be a guiding or motivating force or drive
+K0953	S	477	v	marry	marry	結婚	marry.v.01	verb.social	237	1662	2		1.49	take in marriage
+K0954	L	477	v	wed	wed	嫁	marry.v.01	verb.social	19	1064	4	3	1.49	take in marriage
+K0955	S	478	v	off	off	殺	murder.v.01	verb.social	3668	10975	9		2.75	kill intentionally and with premeditation
+K0956	L	478	v	hit	hit	謀殺	murder.v.01	verb.social	1452	494	24	3	2.75	kill intentionally and with premeditation
+K0957	S	479	v	overthrow	overthrow	推翻	overthrow.v.01	verb.social	113	1176	4		1.76	cause the downfall of; of rulers
+K0958	L	479	v	overturn	overturn	顛覆	overthrow.v.01	verb.social	36	160	8	5	1.76	cause the downfall of; of rulers
+K0959	S	480	v	baby	baby	放任	pamper.v.01	verb.social	367	100	8		2.17	treat with excessive indulgence
+K0960	L	480	v	spoil	spoil	放縱	pamper.v.01	verb.social	12	41	11	10	2.17	treat with excessive indulgence
+K0961	S	481	v	poll	poll	民意調查	poll.v.01	verb.social	311	130	9		1.61	get the opinions (of people) by asking specific questions
+K0962	L	481	v	canvas	canvas	民意測驗	poll.v.01	verb.social	124	10	10	1	1.61	get the opinions (of people) by asking specific questions
+K0963	S	482	v	further	further	提升	promote.v.01	verb.social	4252	1345	11		2.66	contribute to the progress or growth of
+K0964	L	482	v	advance	advance	激勵	promote.v.01	verb.social	703	142	20	4	2.66	contribute to the progress or growth of
+K0965	S	483	v	charter	charter	租	rent.v.04	verb.social	403	1978	5		2.34	hold under a lease or rental agreement; of goods and services
+K0966	L	483	v	rent	rent	租用	rent.v.04	verb.social	116	79	9	3	2.34	hold under a lease or rental agreement; of goods and services
+K0967	S	484	v	rescue	rescue	拯救	rescue.v.01	verb.social	301	256	3		1.56	free from harm or evil
+K0968	L	484	v	deliver	deliver	解救	rescue.v.01	verb.social	196	87	12	3	1.56	free from harm or evil
+K0969	S	485	v	right	right	賠償	right.v.01	verb.social	3622	370	36		1.19	make reparations or amends for
+K0970	L	485	v	correct	correct	補償	right.v.01	verb.social	446	196	12	2	1.19	make reparations or amends for
+K0971	S	486	v	screen	screen	篩	screen.v.03	verb.social	694	209	16		1.67	examine in order to test suitability
+K0972	L	486	v	sort	sort	分揀	screen.v.03	verb.social	344	9	6	1	1.67	examine in order to test suitability
+K0973	S	487	v	replace	replace	取代	supplant.v.01	verb.social	519	2405	4		2.23	take the place or move into the position of
+K0974	L	487	v	supplant	supplant	接替	supplant.v.01	verb.social	14	524	1	2	2.23	take the place or move into the position of
+K0975	S	488	v	treat	treat	處理	treat.v.01	verb.social	382	4212	10		1.23	interact in a certain way
+K0976	L	488	v	handle	handle	對待	treat.v.01	verb.social	245	384	7	2	1.23	interact in a certain way
+K0977	S	489	v	attempt	attempt	試	try.v.01	verb.social	1335	9297	4		2.17	make an effort or attempt
+K0978	L	489	v	try	try	企圖	try.v.01	verb.social	467	719	10	4	2.17	make an effort or attempt
+K0979	S	490	v	become	become	成	become.v.02	verb.stative	3704	116937	4		3.23	undergo a change or development
+K0980	L	490	v	turn	turn	變成	become.v.02	verb.stative	1381	1868	38	3	3.23	undergo a change or development
+K0981	S	491	v	stay	stay	停留	bide.v.01	verb.stative	567	294	16		1.76	dwell
+K0982	L	491	v	abide	abide	逗留	bide.v.01	verb.stative	32	91	2	1	1.76	dwell
+K0983	S	492	v	company	company	陪	company.v.01	verb.stative	4927	804	10		1.44	be a companion to somebody
+K0984	L	492	v	companion	companion	伴隨	company.v.01	verb.stative	306	465	4	4	1.44	be a companion to somebody
+K0985	S	493	v	stop	stop	停	discontinue.v.01	verb.stative	891	6111	22		2.32	put an end to a state or an activity
+K0986	L	493	v	quit	quit	中止	discontinue.v.01	verb.stative	104	252	5	5	2.32	put an end to a state or an activity
+K0987	S	494	v	threaten	threaten	威脅	endanger.v.01	verb.stative	69	1552	3		1.58	pose a threat to; present a danger to
+K0988	L	494	v	menace	menace	危及	endanger.v.01	verb.stative	43	105	5	3	1.58	pose a threat to; present a danger to
+K0989	S	495	v	form	form	組成	form.v.02	verb.stative	6084	6720	23		1.66	to compose or represent:
+K0990	L	495	v	make	make	構成	form.v.02	verb.stative	3663	2422	51	5	1.66	to compose or represent:
+K0991	S	496	v	front	front	向	front.v.01	verb.stative	1813	26275	13		2.62	be oriented in a certain direction, often with respect to another reference point; be opposite to
+K0992	L	496	v	face	face	面向	front.v.01	verb.stative	1153	790	22	2	2.62	be oriented in a certain direction, often with respect to another reference point; be opposite to
+K0993	S	497	v	help	help	幫助	help.v.03	verb.stative	1773	2048	12		2.27	be of use
+K0994	L	497	v	facilitate	facilitate	幫忙	help.v.03	verb.stative	186	105	3	4	2.27	be of use
+K0995	S	498	v	pause	pause	暫停	hesitate.v.02	verb.stative	52	329	4		1.25	interrupt temporarily an activity before continuing
+K0996	L	498	v	hesitate	hesitate	停頓	hesitate.v.02	verb.stative	12	81	2	3	1.25	interrupt temporarily an activity before continuing
+K0997	S	499	v	contain	contain	包括	incorporate.v.02	verb.stative	937	16905	6		2.49	include or contain; have as a component
+K0998	L	499	v	incorporate	incorporate	容納	incorporate.v.02	verb.stative	149	345	5	4	2.49	include or contain; have as a component
+K0999	S	500	v	last	last	持續	last.v.01	verb.stative	4296	2891	21		3.09	persist for a specified period of time
+K1000	L	500	v	endure	endure	持久	last.v.01	verb.stative	41	249	7	8	3.09	persist for a specified period of time
+K1001	S	501	v	result	result	留	leave.v.07	verb.stative	3257	9220	7		2.62	have as a result or residue
+K1002	L	501	v	lead	lead	致使	leave.v.07	verb.stative	2168	330	31	2	2.62	have as a result or residue
+K1003	S	502	v	match	match	對應	match.v.01	verb.stative	1455	1560	19		1.97	be compatible, similar or consistent; coincide in their characteristics
+K1004	L	502	v	check	cheque | <n> bank	配合	match.v.01	verb.stative	273	892	38	12	1.97	be compatible, similar or consistent; coincide in their characteristics
+K1005	S	503	v	lack	lack	缺	miss.v.06	verb.stative	1321	4185	2		2.71	be without
+K1006	L	503	v	miss	miss	缺少	miss.v.06	verb.stative	361	297	12	5	2.71	be without
+K1007	S	504	v	live	live	住	populate.v.01	verb.stative	2500	9394	19		3.48	inhabit or live in; be an inhabitant of
+K1008	L	504	v	dwell	dwell	居住於	populate.v.01	verb.stative	37	211	5	1	3.48	inhabit or live in; be an inhabitant of
+K1009	S	505	v	table	table	推遲	postpone.v.01	verb.stative	1218	191	8		2.39	hold back to a later time
+K1010	L	505	v	remit	remit	延期	postpone.v.01	verb.stative	14	85	9	4	2.39	hold back to a later time
+K1011	S	506	v	ray	ray	輻射	radiate.v.03	verb.stative	788	1364	10		1.85	extend or spread outward from a center or focus or inward towards a center
+K1012	L	506	v	radiate	radiate	放射	radiate.v.03	verb.stative	24	628	10	2	1.85	extend or spread outward from a center or focus or inward towards a center
+K1013	S	507	v	refer	refer	有關	refer.v.02	verb.stative	1260	4571	7		2.28	be relevant to
+K1014	L	507	v	touch	touch	涉及	refer.v.02	verb.stative	235	1291	27	1	2.28	be relevant to
+K1015	S	508	v	separate	separate	分	separate.v.01	verb.stative	1496	81534	19		2.53	act as a barrier between; stand between
+K1016	L	508	v	divide	divide	劃分	separate.v.01	verb.stative	245	1477	8	3	2.53	act as a barrier between; stand between
+K1017	S	509	v	define	define	規定	specify.v.03	verb.stative	424	3962	5		2.01	determine the essential quality of
+K1018	L	509	v	specify	specify	界定	specify.v.03	verb.stative	129	202	7	2	2.01	determine the essential quality of
+K1019	S	510	v	holiday	holiday	度假	vacation.v.01	verb.stative	391	355	3		1.48	spend or take a vacation
+K1020	L	510	v	vacation	vacation	休假	vacation.v.01	verb.stative	50	91	3	1	1.48	spend or take a vacation
+K1021	S	511	v	wind	wind	彎曲	wind.v.02	verb.stative	565	212	15		3.10	extend in curves and turns
+K1022	L	511	v	twist	twist	卷繞	wind.v.02	verb.stative	101	6	23	5	3.10	extend in curves and turns
+K1023	S	512	v	beam	beam	照	shine.v.02	verb.weather	220	8233	13		3.49	emit light; be bright, as of the sun or a light
+K1024	L	512	v	shine	shine	發亮	shine.v.02	verb.weather	65	9	11	2	3.49	emit light; be bright, as of the sun or a light

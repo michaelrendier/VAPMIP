@@ -24,6 +24,8 @@
 
 A small language engine is easiest to trust when every step between a prompt and a reply is arithmetic that a reader can follow and re-run. The May-2026 C monad of this project is such an engine: {{nfuncs}} functions in five C files, no trained weights, no gradient descent, no network. It hashes a word's spelling to one of 25 000 positions by multiplying a base-95 number by the golden ratio; it learns by adding weights between positions that occur near each other in text; and it replies by spreading weight from the prompt's positions through those links and reading positions out in golden-angle order. It once answered "what is your name" with `holcus same stuff seemy`. No complete account of how exists: the descriptions on file (comments, wiki pages, session notes) disagree with the code and with each other. This paper is that account. It describes each function in the order the program runs, identifies the store the program loaded ({{hdr.vocab}} occupied positions, {{hdr.A}} weighted links, byte-identical to the screenshot's header), reproduces the reply from source, and checks a line-for-line Python port against the compiled binary ({{equiv.ok}} replies identical; learned state exact). It then measures what the engine's address function, word display rule and constants do, and records ten limits as results. The first word of the reply is explained mechanically: it is the display label of the position that the word *in* addresses to. The store contains no non-ASCII word, and the program's tokenizer cannot admit one. The source is not changed, tuned or improved here; the account is the baseline against which the next version is measured.
 
+![The first attempt (file dated 2026-05-17): `ptolemy -l 'what is your name'` in `Projects/Ptol/Ptolemy3` on the HP EliteBook 820 G3 ends in `Segmentation fault (core dumped)`. File: `VAPMIP/SemPriCon/paper/figures/1-funny-ptolemy.png`. Shoutout to Max Cohen's Computer - Euclid](figures/1-funny-ptolemy.png){width=90%}
+
 ---
 
 ## 1. Introduction
@@ -680,6 +682,12 @@ The port runs the same functions on the same store and returns, besides the repl
 {{tbl.equiv}}
 
 The first prompt is the screenshot's: `holcussamestuffseemy` is the reply `{{reply}}` with zero-width separators. The second is the other screenshot reply, `holcus setn abysmal quun`. In the row for `the cat sat on the mat` a separator of the em-space band (U+2003) appears: the separator is not always zero-width.
+
+**Figure 2 and Figure 3 are screenshots of the engine this paper describes, running.**
+
+![The first question put to the engine that got a response (file dated 2026-05-19): `ls ~/.ptolemy`, then `ptolemy -h 'what is your name'` and `ptolemy -W 'what is your name'`. The `-W` reply is `holcussamestuffseemy`. File: `VAPMIP/SemPriCon/paper/figures/3-TheExtractor.png`.](figures/3-TheExtractor.png){width=95%}
+
+![A second, unconnected prompt, intentionally complicated in context (file dated 2026-05-19): `ptolemy -W 'can you hear what i am typing'` and then `ptolemy -h` on the same prompt, in `Ptol/SMMIP/PtolC`. The reply is `holcus setn abysmal quun`. Provenance only: nothing in the engineering depends on it. File: `VAPMIP/SemPriCon/paper/figures/2-Hocus-Hyperwebster.png`.](figures/2-Hocus-Hyperwebster.png){width=95%}
 
 ### 14.4 What the reply is, as arithmetic
 

@@ -18,7 +18,7 @@ Working directory: `VAPMIP/SemPriCon/`. Test bed: English (US, UK), Mandarin (Tr
 | [03_the_slots_and_collisions.md](03_the_slots_and_collisions.md) | slots | N = 25 000, placement, occupancy, which collisions are errors and which are the point |
 | [04_learn_and_speak.md](04_learn_and_speak.md) | engine | learning weights and speaking, as they run now; state version 5 |
 | [05_the_baseline.md](05_the_baseline.md) | The Baseline | the Chinese reference, what is frozen, the fitting rules, Fresh Start |
-| [06_the_calibration_set.md](06_the_calibration_set.md) | calibration | the 1 024-word testing-and-debugging set: criteria, tiers, file format, status |
+| [06_the_calibration_set.md](06_the_calibration_set.md) | calibration | the frozen 1 024-word testing-and-debugging set (English + Chinese; 512 simple, 512 deeper synonyms) |
 | [07_data_and_tools.md](07_data_and_tools.md) | data | corpora, licences, closed doors, and every tool with its command |
 | [08_verification.md](08_verification.md) | tests | what is verified against the compiled binary, how to re-run it, what is weak |
 
