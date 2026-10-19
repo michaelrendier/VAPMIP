@@ -32,3 +32,7 @@ A value put in by hand with none of these is a guess, and is not allowed. Mathem
 
 ## Topic Space
 "My Topic Space" is the geometry of The Baseline's slots and links, not WordNet's. Which topic labels define it (the 11 Vital-article categories, the 19 chapters of the 爾雅, radical classes) is open.
+
+
+## Test bins
+The first frozen pair, `test_chinese_v1.0.bin` and `test_english_v1.0.bin`, is described in [09](09_the_test_bins.md). It is not yet The Baseline: nothing has been fitted.

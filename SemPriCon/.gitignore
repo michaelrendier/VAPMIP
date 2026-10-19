@@ -12,3 +12,5 @@ corpora/*
 !corpora/fetch.sh
 !corpora/README.md
 !corpora/fetch_zh.sh
+!corpora/text/
+corpora/text/*.txt

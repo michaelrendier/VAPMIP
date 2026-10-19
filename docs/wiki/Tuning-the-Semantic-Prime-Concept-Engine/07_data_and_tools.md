@@ -24,3 +24,7 @@ Everything is under `VAPMIP/SemPriCon/`. Data is gitignored; the fetch scripts, 
 | `opencc_local.sh` | OpenCC from the Ubuntu packages, no root (`opencc_local.sh s2twp`) |
 | `en_translations.py`, `concept_index.py`, `calibration_build.py` | the calibration set ([06](06_the_calibration_set.md)) |
 | `monad_pyu.py`, `ptol_bin.py`, `verify_*.py` | the port, the store reader, the checks ([08](08_verification.md)) |
+
+
+## Test-bin tools
+`tools/ingest_corpora.py` builds `corpora/text/{zh,en}_v1.txt` (equal token counts). The two binaries are built from `src/PtolC_unicode` with and without `-DALPHABET_ASCII95`. Details: [09](09_the_test_bins.md).

@@ -34,3 +34,7 @@ Old stores (versions 1–4) are **refused** by `state_load`: their slots were ma
 
 **Check:** `python3 SemPriCon/tools/verify_unicode_against_c.py` (binary vs port, learned state exact); `SemPriCon/tools/unicode_address_measure.py` (resolution on real headwords).
 **Open:** the address is a function of spelling. The prime-concept hash replaces it with a function of concept, placed by The Baseline ([05](05_the_baseline.md)); this page will then specify the concept key in front of this code.
+
+
+## English build (ASCII-95)
+The English store is built with `-DALPHABET_ASCII95`: Horner base 95 over printable ASCII, then the same exact-integer seed as above. See [09](09_the_test_bins.md).

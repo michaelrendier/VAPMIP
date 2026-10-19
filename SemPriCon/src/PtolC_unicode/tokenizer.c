@@ -35,7 +35,12 @@ char **tok_split(const char *text, int *count)
 
     for (;;) {
         uint32_t cp = *p ? u8_next(&p) : 0;                 /* 0: end of text, flush */
+#ifdef ALPHABET_ASCII95
+        /* English build: the alphabet is ASCII.  A letter is [A-Za-z] or an apostrophe; every other code point separates words. */
+        int word_char = cp && ((cp < 128 && isalpha((int)cp)) || cp == '\'');
+#else
         int word_char = cp && (u_is_word(cp) || cp == '\'' || cp == 0x2019);
+#endif
 
         if (word_char && u_is_han(cp)) {
             if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);

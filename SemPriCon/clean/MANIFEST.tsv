@@ -1,0 +1,14 @@
+# clean/ — Fresh Start v1.0 (2026-10-19)
+# test_chinese_v1.0.bin and test_english_v1.0.bin are the frozen results of one Fresh Start: ground state -> one learning pass over one corpus.
+# They are read-only. The version number in the name rises only when a Fresh Start is triggered; the old pair is then archived, never edited.
+
+file	sha256	build	corpus
+test_chinese_v1.0.bin	de8d7146c82b3278f8215acf60de77b287884373bf5ac72c4ba2c020ecd8d7b8	build/zh/ptolemy_zh (sha256 a087191298832978)	corpora/text/zh_v1.txt (sha256 d6317bbd814a4764)
+test_english_v1.0.bin	6731ac57ef1a469fe752275d685d32c4e045437ca8ff8ecb093433e6fb3882cd	build/en/ptolemy_en (sha256 6af14317cf489557)	corpora/text/en_v1.txt (sha256 705dfc199913a548)
+
+# Commands (HOME pointed at a throwaway directory so nothing touches ~/.ptolemy):
+#   python3 -c "import ptol_bin; ptol_bin.write_ground('clean/test_chinese_v1.0.bin', version=5)"   (same for english)
+#   build/zh/ptolemy_zh -q -c clean/test_chinese_v1.0.bin -l corpora/text/zh_v1.txt     # Unicode code-point alphabet (Horner base 0x110001 mod 2^61-1)
+#   build/en/ptolemy_en -q -c clean/test_english_v1.0.bin -l corpora/text/en_v1.txt     # ASCII-95 alphabet (Horner base 95), -DALPHABET_ASCII95
+# Counts as the engine reported them: zh vocab 5981, word_count 5902011, A_edges 2064975.  en vocab 24940, word_count 5858570, A_edges 9373394.
+# Not examined: no speak/lookup was run on either file (instruction: ingest both, do not look at results).

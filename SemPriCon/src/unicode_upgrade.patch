@@ -84,7 +84,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/Makefile PtolC_unicode/Make
  PREFIX       ?= /usr/local
 diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad.c
 --- PtolC_eb28ce8/monad.c	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/monad.c	2026-10-18 17:14:55.488343368 -0700
++++ PtolC_unicode/monad.c	2026-10-19 00:59:58.714217908 -0700
 @@ -26,6 +26,7 @@
  #include <unistd.h>
  
@@ -93,7 +93,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
  #include "monad.h"
  #include "filter.h"
  #include "tokenizer.h"
-@@ -167,23 +168,26 @@
+@@ -167,8 +168,18 @@
  
  /* ── Word addressing ─────────────────────────────────────────────────────── */
  
@@ -105,22 +105,30 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
 + * eight or more letters had seed 0.  Here every code point of any word reaches the address, at any length. */
  void monad_word_coords(const char *surface, int N, int *idx, double *E)
  {
-+    const uint64_t P = (1ULL << 61) - 1;
++#ifdef ALPHABET_ASCII95
++    /* English build: the alphabet is the 95 printable ASCII characters and the Horner base is 95, exactly as in eb28ce8
++     * (wraps mod 2^64 past nine letters).  The seed below is the same exact-integer one as the Unicode build; the float
++     * seed of eb28ce8 is the only thing replaced, because it maps every word of 8+ letters to slot 0. */
      uint64_t v = 0;
--    for (const char *p = surface; *p; p++) {
--        unsigned char c = (unsigned char)*p;
--        int ci = (c >= 32 && c < 127) ? (int)(c - 32 + 1) : 0;
--        v = v * 95ULL + (uint64_t)ci;
-+    for (const char *p = surface; *p; ) {
-+        uint32_t cp = u8_next(&p);
-+        v = (uint64_t)(((unsigned __int128)v * 0x110001ULL + (uint64_t)(cp + 1)) % P);
+     for (const char *p = surface; *p; p++) {
+         unsigned char c = (unsigned char)*p;
+@@ -176,14 +187,20 @@
+         v = v * 95ULL + (uint64_t)ci;
      }
--    if (v > 0) v--;
+     if (v > 0) v--;
 -
 -    double seed = fmod((double)v * MONAD_PHI, 1.0);
 -    if (seed < 0.0) seed += 1.0;
 -
 -    *idx = (int)(seed * N);
++#else
++    const uint64_t P = (1ULL << 61) - 1;
++    uint64_t v = 0;
++    for (const char *p = surface; *p; ) {
++        uint32_t cp = u8_next(&p);
++        v = (uint64_t)(((unsigned __int128)v * 0x110001ULL + (uint64_t)(cp + 1)) % P);
++    }
++#endif
 +    uint64_t seed64 = v * 0x9E3779B97F4A7C15ULL;
 +    *idx = (int)(((unsigned __int128)seed64 * (unsigned)N) >> 64);
      if (*idx >= N) *idx = N - 1;
@@ -130,7 +138,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
      *E = MONAD_D_STAR + seed * (MONAD_OMEGA_ZS - MONAD_D_STAR);
  }
  
-@@ -433,9 +437,12 @@
+@@ -433,9 +450,12 @@
  
      while (*p) {
          int slen = 0;
@@ -146,7 +154,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad
          sbuf[slen] = '\0';
          if (slen < 2) continue;
  
-@@ -618,22 +625,26 @@
+@@ -618,22 +638,26 @@
  
  static int surface_canonical(const char *w)
  {
@@ -225,7 +233,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/state.c PtolC_unicode/state
          fprintf(stderr, "[state] vocab load: N mismatch — file=%u monad=%d\n", N, m->N);
 diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/tokenizer.c
 --- PtolC_eb28ce8/tokenizer.c	2026-05-18 23:06:30.000000000 -0700
-+++ PtolC_unicode/tokenizer.c	2026-10-18 17:14:55.480344497 -0700
++++ PtolC_unicode/tokenizer.c	2026-10-19 00:59:58.715217899 -0700
 @@ -6,7 +6,20 @@
  #include <stdlib.h>
  #include <string.h>
@@ -247,7 +255,7 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/t
  char **tok_split(const char *text, int *count)
  {
      int   cap  = 512;
-@@ -15,28 +28,29 @@
+@@ -15,28 +28,34 @@
      if (!out || !text) return out;
  
      int   tlen = strlen(text);
@@ -260,7 +268,12 @@ diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/t
 +
 +    for (;;) {
 +        uint32_t cp = *p ? u8_next(&p) : 0;                 /* 0: end of text, flush */
++#ifdef ALPHABET_ASCII95
++        /* English build: the alphabet is ASCII.  A letter is [A-Za-z] or an apostrophe; every other code point separates words. */
++        int word_char = cp && ((cp < 128 && isalpha((int)cp)) || cp == '\'');
++#else
 +        int word_char = cp && (u_is_word(cp) || cp == '\'' || cp == 0x2019);
++#endif
  
 -    for (int i = 0; i <= tlen; i++) {
 -        unsigned char c = (unsigned char)text[i];

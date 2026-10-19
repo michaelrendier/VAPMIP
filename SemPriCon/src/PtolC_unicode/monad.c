@@ -176,12 +176,25 @@ static void generate_zeros(double *z, int N)
  * eight or more letters had seed 0.  Here every code point of any word reaches the address, at any length. */
 void monad_word_coords(const char *surface, int N, int *idx, double *E)
 {
+#ifdef ALPHABET_ASCII95
+    /* English build: the alphabet is the 95 printable ASCII characters and the Horner base is 95, exactly as in eb28ce8
+     * (wraps mod 2^64 past nine letters).  The seed below is the same exact-integer one as the Unicode build; the float
+     * seed of eb28ce8 is the only thing replaced, because it maps every word of 8+ letters to slot 0. */
+    uint64_t v = 0;
+    for (const char *p = surface; *p; p++) {
+        unsigned char c = (unsigned char)*p;
+        int ci = (c >= 32 && c < 127) ? (int)(c - 32 + 1) : 0;
+        v = v * 95ULL + (uint64_t)ci;
+    }
+    if (v > 0) v--;
+#else
     const uint64_t P = (1ULL << 61) - 1;
     uint64_t v = 0;
     for (const char *p = surface; *p; ) {
         uint32_t cp = u8_next(&p);
         v = (uint64_t)(((unsigned __int128)v * 0x110001ULL + (uint64_t)(cp + 1)) % P);
     }
+#endif
     uint64_t seed64 = v * 0x9E3779B97F4A7C15ULL;
     *idx = (int)(((unsigned __int128)seed64 * (unsigned)N) >> 64);
     if (*idx >= N) *idx = N - 1;
