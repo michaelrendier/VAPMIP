@@ -10,3 +10,5 @@ trace/
 corpora/*
 !corpora/MANIFEST.tsv
 !corpora/fetch.sh
+!corpora/README.md
+!corpora/fetch_zh.sh
