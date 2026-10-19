@@ -1,0 +1,467 @@
+{
+ "file": "test_english_v1.0.bin",
+ "sha256": "6731ac57ef1a469fe752275d685d32c4e045437ca8ff8ecb093433e6fb3882cd",
+ "size_bytes": 150896163,
+ "bytes_consumed": 150896163,
+ "header": {
+  "version": 5,
+  "N": 25000,
+  "vocab_size": 24940,
+  "A_size": 9373394,
+  "word_count": 5858570,
+  "threshold": 3.776,
+  "affect": 0.0
+ },
+ "field": {
+  "occupied_zeros": 25000,
+  "entropy": 12.539,
+  "entropy_max": 14.6096,
+  "entropy_pct": 85.83,
+  "gini": 0.7883,
+  "beta_saturated": 104,
+  "beta_max": 7.552
+ },
+ "strata": {
+  "home": {
+   "1": 24940
+  },
+  "gen": {
+   "1": 24940
+  },
+  "prose_seen": {
+   "1": 24940
+  }
+ },
+ "scripts": {
+  "word_scripts": {
+   "ASCII": 24940
+  },
+  "nonascii_chars": {},
+  "nonascii_word_count": 0,
+  "nonascii_samples": []
+ },
+ "eval_checkpoint": {
+  "polluted": 60,
+  "clean": 24880,
+  "pollution_pct": 0.24,
+  "by_category": {
+   "consonant-only": 41,
+   "no-vowel": 24,
+   "consonant-cluster-3": 18,
+   "hex-string": 16,
+   "low-vowel-ratio": 4
+  }
+ },
+ "sanitiser": {
+  "tiers": {
+   "B:candidate_evidence_pending": 14796,
+   "A:in_wordnet": 9176,
+   "C:proper_noun": 909,
+   "F:function_word": 32,
+   "Q:chrome": 22,
+   "Q:non_latin_or_symbol": 4,
+   "Q:consonant_run": 1
+  },
+  "samples": {
+   "A:in_wordnet": [
+    "coagulating",
+    "defections",
+    "gandhian",
+    "farm",
+    "affricates",
+    "dichotomously",
+    "charting",
+    "throwbacks",
+    "essentials",
+    "supervise",
+    "pawned",
+    "followings"
+   ],
+   "B:candidate_evidence_pending": [
+    "rostaing",
+    "survivorship",
+    "nicephorus",
+    "tetragraph",
+    "burhaniye",
+    "pvrgation",
+    "zora",
+    "eosa",
+    "benvenuto",
+    "loury",
+    "puti",
+    "openldap"
+   ],
+   "C:proper_noun": [
+    "indochina",
+    "gropius's",
+    "kingston's",
+    "planos",
+    "turing",
+    "arrhenius",
+    "hawthorne's",
+    "ibrahim's",
+    "maitland's",
+    "frey",
+    "o'hara",
+    "stalin"
+   ],
+   "Q:chrome": [
+    "archived",
+    "the",
+    "community",
+    "this",
+    "oclc",
+    "account",
+    "italiano",
+    "log",
+    "print",
+    "edit",
+    "events",
+    "wikipedia"
+   ],
+   "F:function_word": [
+    "haven't",
+    "once",
+    "while",
+    "unless",
+    "these",
+    "than",
+    "i'm",
+    "will",
+    "and",
+    "weren't",
+    "hasn't",
+    "should"
+   ],
+   "Q:non_latin_or_symbol": [
+    "scaleno'''hedron",
+    "archipelago'''s",
+    "wine'''s",
+    "gamefan'''s"
+   ],
+   "Q:consonant_run": [
+    "schorschbrau"
+   ]
+  },
+  "quarantined": 27,
+  "quarantined_pct": 0.11
+ },
+ "probes": {
+  "holcus": null,
+  "philadelphos": null,
+  "same": null,
+  "stuff": [
+   {
+    "idx": 18482,
+    "E": 0.4834,
+    "beta": 2.612,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "seemy": null,
+  "what": null,
+  "is": null,
+  "your": [
+   {
+    "idx": 18893,
+    "E": 0.4887,
+    "beta": 0.663,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "name": null,
+  "tree": null,
+  "water": null,
+  "setn": null,
+  "abysmal": null,
+  "quun": null,
+  "nanti": null,
+  "emite": null,
+  "ptolemy": null
+ },
+ "top_beta": [
+  {
+   "word": "the",
+   "idx": 841,
+   "E": 0.2568,
+   "beta": 7.552
+  },
+  {
+   "word": "this",
+   "idx": 1556,
+   "E": 0.266,
+   "beta": 7.552
+  },
+  {
+   "word": "muster",
+   "idx": 1894,
+   "E": 0.2703,
+   "beta": 7.552
+  },
+  {
+   "word": "temperature's",
+   "idx": 2612,
+   "E": 0.2796,
+   "beta": 7.552
+  },
+  {
+   "word": "borschette",
+   "idx": 3727,
+   "E": 0.2939,
+   "beta": 7.552
+  },
+  {
+   "word": "used",
+   "idx": 3854,
+   "E": 0.2955,
+   "beta": 7.552
+  },
+  {
+   "word": "hoxton",
+   "idx": 4350,
+   "E": 0.3019,
+   "beta": 7.552
+  },
+  {
+   "word": "nitration",
+   "idx": 5798,
+   "E": 0.3205,
+   "beta": 7.552
+  },
+  {
+   "word": "while",
+   "idx": 6152,
+   "E": 0.325,
+   "beta": 7.552
+  },
+  {
+   "word": "these",
+   "idx": 6173,
+   "E": 0.3253,
+   "beta": 7.552
+  },
+  {
+   "word": "funeral",
+   "idx": 6624,
+   "E": 0.3311,
+   "beta": 7.552
+  },
+  {
+   "word": "khushal",
+   "idx": 6994,
+   "E": 0.3359,
+   "beta": 7.552
+  },
+  {
+   "word": "expectance",
+   "idx": 7612,
+   "E": 0.3438,
+   "beta": 7.552
+  },
+  {
+   "word": "and",
+   "idx": 7919,
+   "E": 0.3477,
+   "beta": 7.552
+  },
+  {
+   "word": "implication",
+   "idx": 8017,
+   "E": 0.349,
+   "beta": 7.552
+  },
+  {
+   "word": "ico",
+   "idx": 8090,
+   "E": 0.3499,
+   "beta": 7.552
+  },
+  {
+   "word": "number",
+   "idx": 8131,
+   "E": 0.3505,
+   "beta": 7.552
+  },
+  {
+   "word": "kurth",
+   "idx": 8551,
+   "E": 0.3559,
+   "beta": 7.552
+  },
+  {
+   "word": "unruh",
+   "idx": 9169,
+   "E": 0.3638,
+   "beta": 7.552
+  },
+  {
+   "word": "carner",
+   "idx": 9248,
+   "E": 0.3648,
+   "beta": 7.552
+  },
+  {
+   "word": "apostolat",
+   "idx": 9780,
+   "E": 0.3716,
+   "beta": 7.552
+  },
+  {
+   "word": "ima'as",
+   "idx": 10542,
+   "E": 0.3814,
+   "beta": 7.552
+  },
+  {
+   "word": "earless",
+   "idx": 10680,
+   "E": 0.3832,
+   "beta": 7.552
+  },
+  {
+   "word": "season's",
+   "idx": 10767,
+   "E": 0.3843,
+   "beta": 7.552
+  },
+  {
+   "word": "to",
+   "idx": 11228,
+   "E": 0.3902,
+   "beta": 7.552
+  }
+ ],
+ "top_edges": [
+  {
+   "a": "implication",
+   "b": "hendrik",
+   "w": 155.722
+  },
+  {
+   "a": "ressam",
+   "b": "sibilants",
+   "w": 54.116
+  },
+  {
+   "a": "and",
+   "b": "implication",
+   "w": 41.611
+  },
+  {
+   "a": "bedouins",
+   "b": "implication",
+   "w": 31.468
+  },
+  {
+   "a": "the",
+   "b": "monopolistic",
+   "w": 22.088
+  },
+  {
+   "a": "sibilants",
+   "b": "pelham",
+   "w": 17.812
+  },
+  {
+   "a": "out",
+   "b": "pondering",
+   "w": 17.547
+  },
+  {
+   "a": "and",
+   "b": "bedouins",
+   "w": 17.03
+  },
+  {
+   "a": "monoliths",
+   "b": "sibilants",
+   "w": 13.755
+  },
+  {
+   "a": "tzedek",
+   "b": "april",
+   "w": 13.517
+  },
+  {
+   "a": "roi",
+   "b": "sibilants",
+   "w": 12.522
+  },
+  {
+   "a": "tzedek",
+   "b": "sibilants",
+   "w": 12.199
+  },
+  {
+   "a": "tzedek",
+   "b": "monoliths",
+   "w": 10.231
+  },
+  {
+   "a": "tzedek",
+   "b": "ruimtevaarder",
+   "w": 9.941
+  },
+  {
+   "a": "elements",
+   "b": "ghurid",
+   "w": 9.029
+  },
+  {
+   "a": "duration",
+   "b": "sibilants",
+   "w": 8.839
+  },
+  {
+   "a": "implication",
+   "b": "number",
+   "w": 8.682
+  },
+  {
+   "a": "sibilants",
+   "b": "pedemontanus",
+   "w": 7.954
+  },
+  {
+   "a": "witchcraft",
+   "b": "and",
+   "w": 7.772
+  },
+  {
+   "a": "homogenises",
+   "b": "philologically",
+   "w": 7.599
+  },
+  {
+   "a": "monoliths",
+   "b": "hevia",
+   "w": 6.965
+  },
+  {
+   "a": "miladin",
+   "b": "python",
+   "w": 6.269
+  },
+  {
+   "a": "nebulosus",
+   "b": "conventional",
+   "w": 6.07
+  },
+  {
+   "a": "sibilants",
+   "b": "peril",
+   "w": 5.892
+  },
+  {
+   "a": "to",
+   "b": "catasterismi",
+   "w": 5.838
+  }
+ ]
+}
