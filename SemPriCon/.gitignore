@@ -7,3 +7,6 @@ scratch_home/
 __pycache__/
 .ipynb_checkpoints/
 trace/
+corpora/*
+!corpora/MANIFEST.tsv
+!corpora/fetch.sh

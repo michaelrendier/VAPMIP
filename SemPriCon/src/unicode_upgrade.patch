@@ -1,0 +1,428 @@
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/filter.c PtolC_unicode/filter.c
+--- PtolC_eb28ce8/filter.c	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/filter.c	2026-10-18 17:14:55.486343650 -0700
+@@ -16,6 +16,7 @@
+ #include <strings.h>
+ #include <stddef.h>
+ #include "filter.h"
++#include "unicode.h"
+ 
+ /* ── Filetype rule table ──────────────────────────────────────────────────── */
+ /*                       ft           max  hex   /    dig  caps  b64  vowel */
+@@ -134,14 +135,19 @@
+     return ok * 100 / (int)len >= 95;
+ }
+ 
+-static int vowel_count(const char *s)
+-{
+-    int n = 0;
+-    for (; *s; s++) {
+-        char c = *s | 0x20;  /* to lower */
+-        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') n++;
++/* The vowel gate is a Latin-script rule.  Returns 1 and sets *vc when every letter of the token is a Latin letter
++ * (apostrophes are neutral); returns 0 for any other script (Han, Cyrillic, Greek, Arabic ...), which the gate does not apply to. */
++static int latin_vowels(const char *s, int *vc)
++{
++    int letters = 0; *vc = 0;
++    while (*s) {
++        uint32_t cp = u8_next(&s);
++        if (cp == '\'') continue;
++        if (!u_is_latin(cp)) return 0;
++        letters++;
++        if (u_is_vowel(u_lower(cp))) (*vc)++;
+     }
+-    return n;
++    return letters > 0;
+ }
+ 
+ static int high_digit_ratio(const char *s, size_t len)
+@@ -171,13 +177,15 @@
+ 
+ int token_accept(const char *tok, NSFiletype ft)
+ {
+-    size_t len = strlen(tok);
++    size_t len = strlen(tok);              /* bytes: the byte-oriented gates below */
++    int    nch = u8_len(tok);              /* code points: the length rules */
+     const FTRules *r = rules_for(ft);
++    const char *pp = tok; uint32_t first = u8_next(&pp);
+ 
+     /* ── Universal gates (all filetypes) ─────────────────────────────────── */
+ 
+-    if (len < 2)                          return 0;  /* single char          */
+-    if ((int)len > r->max_len)            return 0;  /* too long             */
++    if (nch < 1 || (nch < 2 && !u_is_han(first))) return 0;  /* single char (a Han character is a word) */
++    if (nch > r->max_len)                 return 0;  /* too long, in code points */
+     if (is_pure_numeric(tok))             return 0;  /* 12345                */
+     if (is_uuid(tok, len))                return 0;  /* UUID                 */
+     if (strchr(tok, '='))                 return 0;  /* key=value            */
+@@ -195,11 +203,11 @@
+ 
+     /* ── Vowel gate (prose/markup/doc) ──────────────────────────────────────── */
+ 
+-    if (r->require_vowel) {
+-        int vc = vowel_count(tok);
++    int vc;
++    if (r->require_vowel && latin_vowels(tok, &vc)) {
+         if (vc == 0)                                         return 0;
+         /* Very low vowel ratio in longer tokens: "wlvfe", "schzr", etc. */
+-        if ((int)len >= 6 && vc * 100 / (int)len < 15)      return 0;
++        if (nch >= 6 && vc * 100 / nch < 15)                 return 0;
+     }
+ 
+     /* Trailing apostrophe fragment: "pins'", "ban'" */
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/Makefile PtolC_unicode/Makefile
+--- PtolC_eb28ce8/Makefile	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/Makefile	2026-10-18 17:15:05.514939876 -0700
+@@ -12,7 +12,7 @@
+ endif
+ 
+ TARGET  = ptolemy
+-SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c
++SRCS    = main.c monad.c state.c tokenizer.c filter.c ingest.c log.c daemon.c unicode.c
+ OBJS    = $(SRCS:.c=.o)
+ 
+ PREFIX       ?= /usr/local
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/monad.c PtolC_unicode/monad.c
+--- PtolC_eb28ce8/monad.c	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/monad.c	2026-10-18 17:14:55.488343368 -0700
+@@ -26,6 +26,7 @@
+ #include <unistd.h>
+ 
+ #include "ptolemy.h"
++#include "unicode.h"
+ #include "monad.h"
+ #include "filter.h"
+ #include "tokenizer.h"
+@@ -167,23 +168,26 @@
+ 
+ /* ── Word addressing ─────────────────────────────────────────────────────── */
+ 
++/* Address of a word: Horner over CODE POINTS in exact integer arithmetic, then the golden-ratio multiplicative hash.
++ *   v    = (v * 0x110001 + (cp + 1)) mod (2^61 - 1)            for each code point of the word
++ *   seed = v * round(2^64/phi)  mod 2^64                        (the fraction of v/phi, in units of 2^-64)
++ *   idx  = floor(seed * N / 2^64),  E = d* + seed * (Omega - d*)
++ * The 2026-05 build took the fraction of (double)v * phi, which has no fractional bits once v*phi > 2^52, so every word of
++ * eight or more letters had seed 0.  Here every code point of any word reaches the address, at any length. */
+ void monad_word_coords(const char *surface, int N, int *idx, double *E)
+ {
++    const uint64_t P = (1ULL << 61) - 1;
+     uint64_t v = 0;
+-    for (const char *p = surface; *p; p++) {
+-        unsigned char c = (unsigned char)*p;
+-        int ci = (c >= 32 && c < 127) ? (int)(c - 32 + 1) : 0;
+-        v = v * 95ULL + (uint64_t)ci;
++    for (const char *p = surface; *p; ) {
++        uint32_t cp = u8_next(&p);
++        v = (uint64_t)(((unsigned __int128)v * 0x110001ULL + (uint64_t)(cp + 1)) % P);
+     }
+-    if (v > 0) v--;
+-
+-    double seed = fmod((double)v * MONAD_PHI, 1.0);
+-    if (seed < 0.0) seed += 1.0;
+-
+-    *idx = (int)(seed * N);
++    uint64_t seed64 = v * 0x9E3779B97F4A7C15ULL;
++    *idx = (int)(((unsigned __int128)seed64 * (unsigned)N) >> 64);
+     if (*idx >= N) *idx = N - 1;
+     if (*idx < 0)  *idx = 0;
+ 
++    double seed = (double)(seed64 >> 11) / 9007199254740992.0;   /* the top 53 bits, in [0, 1) */
+     *E = MONAD_D_STAR + seed * (MONAD_OMEGA_ZS - MONAD_D_STAR);
+ }
+ 
+@@ -433,9 +437,12 @@
+ 
+     while (*p) {
+         int slen = 0;
+-        while (*p && *p != '.' && *p != '!' && *p != '?' && *p != '\n')
+-            sbuf[slen++] = *p++;
+-        if (*p) p++;
++        while (*p) {                                  /* a sentence ends at . ! ? newline or their CJK/fullwidth forms */
++            const char *q = p;
++            if (u_is_sentence_end(u8_next(&q))) break;
++            while (p < q) sbuf[slen++] = *p++;
++        }
++        if (*p) { const char *q = p; u8_next(&q); p = q; }
+         sbuf[slen] = '\0';
+         if (slen < 2) continue;
+ 
+@@ -618,22 +625,26 @@
+ 
+ static int surface_canonical(const char *w)
+ {
+-    int len = (int)strlen(w);
+-    if (len < 3 || len > 15) return 0;
+-    int vowels = 0, digits = 0, uppers = 0, specials = 0;
+-    for (int i = 0; w[i]; i++) {
+-        unsigned char c = (unsigned char)w[i];
++    int len = 0, vowels = 0, digits = 0, uppers = 0, specials = 0, latin = 0, han = 0;
++    for (const char *p = w; *p; ) {
++        uint32_t c = u8_next(&p);
++        len++;
+         if (c >= '0' && c <= '9') digits++;
+-        if (c >= 'A' && c <= 'Z') uppers++;
+-        if (c == 'a'||c == 'e'||c == 'i'||c == 'o'||c == 'u'||
+-            c == 'A'||c == 'E'||c == 'I'||c == 'O'||c == 'U') vowels++;
+-        if (c == '_' || c == '-' || c == '\'' || c > 127) specials++;
++        if (u_lower(c) != c) uppers++;
++        if (u_is_vowel(u_lower(c))) vowels++;
++        if (u_is_latin(c)) latin++;
++        if (u_is_han(c)) han++;
++        if (c == '_' || c == '-' || c == '\'') specials++;
+     }
++    int minlen = han ? 1 : 3;                         /* a Han character is a word */
++    if (len < minlen || len > 15) return 0;
+     if (digits > 0)               return 0;
+     if (uppers > 1)               return 0;  /* no camelCase */
+     if (specials > 1)             return 0;
+-    if (len >= 5 && vowels * 100 / len < 20) return 0;
+-    if (len <  5 && vowels == 0)  return 0;
++    if (latin == len) {                              /* the vowel rule is a Latin-script rule */
++        if (len >= 5 && vowels * 100 / len < 20) return 0;
++        if (len <  5 && vowels == 0)             return 0;
++    }
+     return 1;
+ }
+ 
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/ptolemy.h PtolC_unicode/ptolemy.h
+--- PtolC_eb28ce8/ptolemy.h	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/ptolemy.h	2026-10-18 17:14:55.488343368 -0700
+@@ -56,7 +56,7 @@
+ /* Monad state file magic and version.
+  * States of an education — not training checkpoints. */
+ #define STATE_MAGIC          "PTOL"
+-#define STATE_VERSION        4   /* v4: affect field (e7 octonion slot) */
++#define STATE_VERSION        5   /* v5: Unicode build -- words are addressed by code point (v4: affect field; byte addressing) */
+ 
+ /* Native Space — Dixon tower strata (Cayley-Dickson doubling: ℝ→ℂ→ℍ→𝕆→𝕊).
+  * All Hamiltonian expressions live in Native Space (radial complex spherical
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/state.c PtolC_unicode/state.c
+--- PtolC_eb28ce8/state.c	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/state.c	2026-10-18 17:15:05.514939876 -0700
+@@ -70,6 +70,11 @@
+         fprintf(stderr, "[state] header read error\n");
+         fclose(f); return -1;
+     }
++    if (version < 5) {
++        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
++                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
++        fclose(f); return -1;
++    }
+ 
+     if ((int)N != m->N) {
+         /* File N is authoritative — resize the monad to match. */
+@@ -301,6 +306,11 @@
+         fprintf(stderr, "[state] header read error\n");
+         fclose(f); return -1;
+     }
++    if (version < 5) {
++        fprintf(stderr, "[state] %s is version %u: addressed by ASCII byte (2026-05 build). This build addresses by Unicode "
++                        "code point (version 5), so its slots would not match. Refusing.\n", path, version);
++        fclose(f); return -1;
++    }
+ 
+     if ((int)N != m->N) {
+         fprintf(stderr, "[state] vocab load: N mismatch — file=%u monad=%d\n", N, m->N);
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/tokenizer.c PtolC_unicode/tokenizer.c
+--- PtolC_eb28ce8/tokenizer.c	2026-05-18 23:06:30.000000000 -0700
++++ PtolC_unicode/tokenizer.c	2026-10-18 17:14:55.480344497 -0700
+@@ -6,7 +6,20 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include "tokenizer.h"
++#include "unicode.h"
+ 
++static void tok_push(char ***out, int *cap, int *count, const char *buf, int blen)
++{
++    char *t = malloc(blen + 1);
++    memcpy(t, buf, blen); t[blen] = '\0';
++    if (*count >= *cap) { *cap *= 2; *out = realloc(*out, *cap * sizeof(char *)); }
++    (*out)[(*count)++] = t;
++}
++
++/* Unicode tokeniser: a word is a maximal run of letters and combining marks (General_Category L*, M*) and apostrophes,
++ * lower-cased code point by code point.  Every Han character is a token by itself (there is no word segmenter).
++ * A token must have at least two code points (a Han character is one) and must not start with an apostrophe.
++ * Invalid UTF-8 bytes are separators.  U+2019 is read as the apostrophe. */
+ char **tok_split(const char *text, int *count)
+ {
+     int   cap  = 512;
+@@ -15,28 +28,29 @@
+     if (!out || !text) return out;
+ 
+     int   tlen = strlen(text);
+-    char *buf  = malloc(tlen + 2);
++    char *buf  = malloc(tlen * 2 + 8);
+     if (!buf) return out;
+-    int blen = 0;
++    int blen = 0, ncp = 0;
++    const char *p = text;
++
++    for (;;) {
++        uint32_t cp = *p ? u8_next(&p) : 0;                 /* 0: end of text, flush */
++        int word_char = cp && (u_is_word(cp) || cp == '\'' || cp == 0x2019);
+ 
+-    for (int i = 0; i <= tlen; i++) {
+-        unsigned char c = (unsigned char)text[i];
+-        int word_char = isalpha(c) || c == '\'';
+-
+-        if (word_char) {
+-            buf[blen++] = (char)tolower(c);
+-        } else if (blen > 0) {
+-            buf[blen] = '\0';
+-            /* filter: len >= 2, not pure apostrophe */
+-            if (blen >= 2 && buf[0] != '\'') {
+-                if (*count >= cap) {
+-                    cap *= 2;
+-                    out = realloc(out, cap * sizeof(char *));
+-                }
+-                out[(*count)++] = strdup(buf);
+-            }
+-            blen = 0;
++        if (word_char && u_is_han(cp)) {
++            if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);
++            blen = 0; ncp = 0;
++            char one[4]; int n = u8_put(cp, one);
++            tok_push(&out, &cap, count, one, n);
++        } else if (word_char) {
++            if (cp == 0x2019) cp = '\'';
++            blen += u8_put(u_lower(cp), buf + blen);
++            ncp++;
++        } else if (ncp > 0) {
++            if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);
++            blen = 0; ncp = 0;
+         }
++        if (!cp) break;
+     }
+ 
+     free(buf);
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/unicode.c PtolC_unicode/unicode.c
+--- PtolC_eb28ce8/unicode.c	1969-12-31 16:00:00.000000000 -0800
++++ PtolC_unicode/unicode.c	2026-10-18 17:14:15.112250905 -0700
+@@ -0,0 +1,95 @@
++/*
++ * PtolC/unicode.c — see unicode.h.
++ */
++#include <stddef.h>
++#include "unicode.h"
++#include "unicode_tables.h"
++
++uint32_t u8_next(const char **s)
++{
++    const unsigned char *p = (const unsigned char *)*s;
++    uint32_t c = p[0];
++    if (c < 0x80)                         { *s += 1; return c; }
++    if (c >= 0xC2 && c <= 0xDF && (p[1] & 0xC0) == 0x80)
++                                          { *s += 2; return ((c & 0x1F) << 6) | (p[1] & 0x3F); }
++    if (c >= 0xE0 && c <= 0xEF && (p[1] & 0xC0) == 0x80 && (p[2] & 0xC0) == 0x80) {
++        uint32_t cp = ((c & 0x0F) << 12) | ((p[1] & 0x3F) << 6) | (p[2] & 0x3F);
++        if (cp >= 0x800 && !(cp >= 0xD800 && cp <= 0xDFFF)) { *s += 3; return cp; }
++    }
++    if (c >= 0xF0 && c <= 0xF4 && (p[1] & 0xC0) == 0x80 && (p[2] & 0xC0) == 0x80 && (p[3] & 0xC0) == 0x80) {
++        uint32_t cp = ((c & 0x07) << 18) | ((p[1] & 0x3F) << 12) | ((p[2] & 0x3F) << 6) | (p[3] & 0x3F);
++        if (cp >= 0x10000 && cp <= 0x10FFFF) { *s += 4; return cp; }
++    }
++    *s += 1;
++    return 0xFFFD;
++}
++
++int u8_put(uint32_t cp, char *out)
++{
++    if (cp < 0x80)    { out[0] = (char)cp; return 1; }
++    if (cp < 0x800)   { out[0] = (char)(0xC0 | (cp >> 6)); out[1] = (char)(0x80 | (cp & 0x3F)); return 2; }
++    if (cp < 0x10000) { out[0] = (char)(0xE0 | (cp >> 12)); out[1] = (char)(0x80 | ((cp >> 6) & 0x3F)); out[2] = (char)(0x80 | (cp & 0x3F)); return 3; }
++    out[0] = (char)(0xF0 | (cp >> 18)); out[1] = (char)(0x80 | ((cp >> 12) & 0x3F));
++    out[2] = (char)(0x80 | ((cp >> 6) & 0x3F)); out[3] = (char)(0x80 | (cp & 0x3F));
++    return 4;
++}
++
++int u8_len(const char *s)
++{
++    int n = 0;
++    while (*s) { u8_next(&s); n++; }
++    return n;
++}
++
++static int in_ranges(const uint32_t (*r)[2], int n, uint32_t cp)
++{
++    int lo = 0, hi = n - 1;
++    while (lo <= hi) {
++        int mid = (lo + hi) / 2;
++        if (cp < r[mid][0]) hi = mid - 1;
++        else if (cp > r[mid][1]) lo = mid + 1;
++        else return 1;
++    }
++    return 0;
++}
++
++int u_is_word(uint32_t cp)  { return in_ranges(U_WORD,  U_WORD_N,  cp); }
++int u_is_han(uint32_t cp)   { return in_ranges(U_HAN,   U_HAN_N,   cp); }
++int u_is_latin(uint32_t cp) { return in_ranges(U_LATIN, U_LATIN_N, cp); }
++
++int u_is_vowel(uint32_t cp)
++{
++    int lo = 0, hi = U_VOWEL_N - 1;
++    while (lo <= hi) {
++        int mid = (lo + hi) / 2;
++        if (cp < U_VOWEL[mid]) hi = mid - 1;
++        else if (cp > U_VOWEL[mid]) lo = mid + 1;
++        else return 1;
++    }
++    return 0;
++}
++
++uint32_t u_lower(uint32_t cp)
++{
++    int lo = 0, hi = U_LOWER_N - 1;
++    while (lo <= hi) {
++        int mid = (lo + hi) / 2;
++        if (cp < U_LOWER[mid][0]) hi = mid - 1;
++        else if (cp > U_LOWER[mid][0]) lo = mid + 1;
++        else return U_LOWER[mid][1];
++    }
++    return cp;
++}
++
++int u_is_sentence_end(uint32_t cp)
++{
++    switch (cp) {
++        case '.': case '!': case '?': case '\n':
++        case 0x2026:                 /* …  */
++        case 0x203C: case 0x2047: case 0x2048: case 0x2049:   /* ‼ ⁇ ⁈ ⁉ */
++        case 0x3002:                 /* 。 */
++        case 0xFF01: case 0xFF1F: case 0xFF0E:                /* ！ ？ ． */
++            return 1;
++        default: return 0;
++    }
++}
+diff -ruN '--exclude=unicode_tables.h' PtolC_eb28ce8/unicode.h PtolC_unicode/unicode.h
+--- PtolC_eb28ce8/unicode.h	1969-12-31 16:00:00.000000000 -0800
++++ PtolC_unicode/unicode.h	2026-10-18 17:14:15.106251813 -0700
+@@ -0,0 +1,27 @@
++/*
++ * PtolC/unicode.h — Unicode helpers for the C Monad (SemPriCon upgrade, 2026-10-18).
++ *
++ * The 2026-05 build addressed and tokenised BYTES: ASCII letters only, every other byte a separator or a zero digit.
++ * This build addresses and tokenises CODE POINTS (UTF-8 in, UTF-8 out).  The character classes come from unicode_tables.h,
++ * generated from Python's unicodedata (version in UNICODE_DATA_VERSION), so behaviour does not depend on the C library's locale.
++ * Input is expected in NFC; the ingest step is responsible for normalising (the monad does not normalise).
++ */
++#ifndef UNICODE_H
++#define UNICODE_H
++#include <stdint.h>
++
++/* Decode one code point at *s and advance *s.  An invalid byte yields U+FFFD and consumes one byte. */
++uint32_t u8_next(const char **s);
++/* Encode cp as UTF-8 into out (no terminator); returns the byte count, 1..4. */
++int      u8_put(uint32_t cp, char *out);
++/* Number of code points in a UTF-8 string. */
++int      u8_len(const char *s);
++
++int      u_is_word(uint32_t cp);        /* General_Category L* or M* */
++int      u_is_han(uint32_t cp);         /* CJK ideograph blocks: one token per character */
++int      u_is_latin(uint32_t cp);       /* Latin-script letter */
++int      u_is_vowel(uint32_t cp);       /* lower-case Latin vowel (accented included) */
++uint32_t u_lower(uint32_t cp);          /* simple lower-case mapping */
++int      u_is_sentence_end(uint32_t cp);/* . ! ? \n and the CJK / fullwidth / ellipsis equivalents */
++
++#endif

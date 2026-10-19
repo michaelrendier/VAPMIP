@@ -1,0 +1,64 @@
+PtolC NEWS — user-visible changes by release
+
+See CHANGELOG.md in the repository root for full detail.
+
+Version 1.115 (2026-05-17)
+  * Vowel filter: token_accept() for prose/markup/doc now rejects any
+    token with no a/e/i/o/u vowels (consonant-only strings like "ydrx",
+    "wlvf", etc.) and any token ending in a trailing apostrophe.
+    Tokens ≥ 6 chars with vowel ratio < 15% are also rejected.
+    This fixes monad_speak() surface output on post-Documents fields.
+  * corpora/english_grammar.txt: 5 000-word seed corpus covering all
+    English function words in natural prose sentences.
+  * make grammar: ingests the grammar seed after make corpus.
+    Correct ingest order: make corpus → make grammar → ptolemy -I <dir>.
+  * fresh_start.sh: fixed sys.argv bug that caused IndexError when
+    extracting stats from the assessment JSON for the README block.
+
+Version 1.114 (2026-05-17)
+  * -W <prompt>: Wick-rotated speak mode.  Applies σ → iσ to the Noether
+    current: J_wick = β × E² × sin(σ·E).  Selects words by the imaginary
+    (oscillatory) component of the field.  Run alongside -h to measure
+    the divergence between real and imaginary Noether currents.
+  * monad_speak_wick() added to monad.c / monad.h.
+
+Version 1.113 (2026-05-17)
+  * monad_speak() output filtered through token_accept(NS_FT_PROSE):
+    consonant clusters, apostrophe fragments, and hex strings are now
+    skipped in responses.  Internal field topology unchanged.
+  * monad_English.bin: clean WordNet-only baseline released.
+    14,164 vocab / 766,027 A-edges / deepest word: "philadelphos".
+
+Version 1.112 (2026-05-16)
+  * Auto-assessment: after every -I ingest, ptolemy runs eval_checkpoint.py
+    on the saved checkpoint and writes <checkpoint>.assessment.json.
+    Locates the script via $SMMIP_REPO or ~/Projects/Ptol/SMMIP/tools/.
+  * Bug fix: ptolemy -s without -c now loads ~/.ptolemy/monad_wordnet.bin
+    correctly.
+  * Version and usage strings updated to "RedBlue Geometries Engine".
+  * PtolC/TODO added (GNU-standard open work items).
+
+Version 1.111 (2026-05-16)
+  * Learn-time token filter: per-filetype rules (prose/code/markup/doc)
+    reject numeric, UUID, hex, base64, long-caps, and overlength tokens
+    silently; count visible in -F field health report.
+  * Filesystem ingest: -I <path> walks a directory tree, dispatches
+    to pdftotext/catdoc/pandoc/libxml2 by extension, honours .ptolemyignore,
+    saves checkpoint every 500 files.
+  * Daemon mode: -d starts a resident monad over a Unix domain socket;
+    -D <query> sends a query to a running daemon.  Systemd socket
+    activation supported without libsystemd.
+  * Field health: -F prints beta distribution, field entropy, top A-edges,
+    vocabulary coverage, pollution indicators, and rejection count.
+  * Checkpoint v2: VocabEntry carries home_stratum and gen_stratum
+    (NS_SIGMA_* constants from the Dixon tower).  v1 checkpoints load
+    without modification.
+  * PEM guard: monad_learn() refuses text beginning with "-----BEGIN ".
+  * CMakeLists.txt added alongside Makefile.
+  * Man pages: ptolemy(1), ptolemyignore(5).
+  * Systemd user units: ptolemy.socket, ptolemy.service.
+  * Logging: 4-hour rotating slots in ~/.ptolemy/logs/, 30-day GC.
+
+Version 1.0 (2026-05-16)
+  * Initial release.  learn (-l), hear/speak (-h), status (-s),
+    word lookup (-w), verbosity levels, checkpoint v1, make corpus target.

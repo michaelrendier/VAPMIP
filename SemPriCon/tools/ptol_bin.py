@@ -50,10 +50,10 @@ def load(path, with_edges=True):
                 bytes_total=len(raw), bytes_consumed=end)
 
 
-def write_ground(path, N=25000, ground_abs=1.888, threshold=3.776):
+def write_ground(path, N=25000, ground_abs=1.888, threshold=3.776, version=4):
     """Write an empty (ground-state) PTOL v4 file: every β at |L_GROUND|/N, no vocab, no edges.  Used only to give the C binary a
     checkpoint path that exists, so that `-c <file> -l <text>` saves back to it instead of the protected monad_wordnet.bin."""
     with open(path, "wb") as f:
-        f.write(b"PTOL" + struct.pack("<5I", 4, N, 0, 0, 0) + struct.pack("<d", threshold) + struct.pack("<f", 0.0))
+        f.write(b"PTOL" + struct.pack("<5I", version, N, 0, 0, 0) + struct.pack("<d", threshold) + struct.pack("<f", 0.0))
         f.write(np.full(N, ground_abs / N, dtype="<f8").tobytes())
         f.write(np.zeros(N, dtype="<i4").tobytes())
