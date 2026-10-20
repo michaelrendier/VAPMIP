@@ -88,3 +88,8 @@ engine/grammar/_ptol_relations_demo.json
 
 # Cody's own session prompts (personal; used locally as test input for the extractor, never committed)
 Wernicke/corpus/session_prompts_*.jsonl
+
+# zh/en experiment: big debug feeds and the throwaway HOME stay local
+SemPriCon/experiment_v2/logs/*.dprint.log
+SemPriCon/experiment_v2/home/
+SemPriCon/experiment_v2/text_*.txt

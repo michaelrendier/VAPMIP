@@ -1,3 +1,5 @@
+> **2026-10-19:** `test_chinese_v2.0.bin` and `test_english_v2.0.bin` described below were deleted and replaced by the word-list bins `test_{chinese,english,chinese_english,english_chinese}_v2.bin` (see [11](11_baseline_mapping_zh_en.md)). The Finnish and Indonesian v2.0 stores below are unchanged.
+
 # 09 — The test bins (Fresh Start v2.0)
 
 Four single-language stores, each built separately with **its own alphabet**. Nothing here is multilingual: no word of one language is ever learned by another store. Swahili and Quechua are on hold.

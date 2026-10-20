@@ -1,0 +1,2279 @@
+{
+ "engine_rejected_words(english feed)": [
+  "cm",
+  "hr",
+  "kg",
+  "km",
+  "ms",
+  "scratch",
+  "tv"
+ ],
+ "slot_sharing_events_distinct_pairs": {
+  "en_pure": 29,
+  "zh_pure": 18
+ },
+ "test_chinese_v2": {
+  "zh": {
+   "words": 960,
+   "states": {
+    "NOT-IN-ALPHABET": 1,
+    "SEATED": 911,
+    "NEVER-IN-CORPUS": 36,
+    "OUTRANKED-BY-HIGHER-E": 12
+   }
+  },
+  "slots_shared_by_list_words": {
+   "5590": [
+    [
+     "zh",
+     "下降"
+    ],
+    [
+     "zh",
+     "箱"
+    ]
+   ],
+   "2067": [
+    [
+     "zh",
+     "主音"
+    ],
+    [
+     "zh",
+     "克"
+    ]
+   ],
+   "5164": [
+    [
+     "zh",
+     "任"
+    ],
+    [
+     "zh",
+     "裝飾"
+    ]
+   ],
+   "24516": [
+    [
+     "zh",
+     "加速器"
+    ],
+    [
+     "zh",
+     "熟人"
+    ]
+   ],
+   "23537": [
+    [
+     "zh",
+     "名譽"
+    ],
+    [
+     "zh",
+     "旗"
+    ]
+   ],
+   "8313": [
+    [
+     "zh",
+     "否決"
+    ],
+    [
+     "zh",
+     "被"
+    ]
+   ],
+   "11101": [
+    [
+     "zh",
+     "大紅"
+    ],
+    [
+     "zh",
+     "蔑視"
+    ]
+   ],
+   "23104": [
+    [
+     "zh",
+     "尾流"
+    ],
+    [
+     "zh",
+     "工程學"
+    ]
+   ],
+   "2177": [
+    [
+     "zh",
+     "得"
+    ],
+    [
+     "zh",
+     "憤怒"
+    ]
+   ],
+   "9016": [
+    [
+     "zh",
+     "戰事"
+    ],
+    [
+     "zh",
+     "池子"
+    ]
+   ],
+   "14422": [
+    [
+     "zh",
+     "東方"
+    ],
+    [
+     "zh",
+     "法院"
+    ]
+   ],
+   "12670": [
+    [
+     "zh",
+     "比賽"
+    ],
+    [
+     "zh",
+     "羽"
+    ]
+   ],
+   "12447": [
+    [
+     "zh",
+     "溪谷"
+    ],
+    [
+     "zh",
+     "響"
+    ]
+   ]
+  },
+  "cross_language_slot_sharing": 0,
+  "header": {
+   "vocab": 911,
+   "A": 146346,
+   "word_count": 1887788,
+   "version": 6
+  },
+  "address_port_check": {
+   "seated": 911,
+   "stored_E_mismatch": 0
+  }
+ },
+ "test_english_v2": {
+  "en": {
+   "words": 1059,
+   "states": {
+    "DROPPED-BY-TOKENIZER(<2 letters)": 6,
+    "SEATED": 1025,
+    "OUTRANKED-BY-HIGHER-E": 17,
+    "REJECTED-BY-FILTER": 7,
+    "NEVER-IN-CORPUS": 4
+   }
+  },
+  "slots_shared_by_list_words": {
+   "8017": [
+    [
+     "en",
+     "acquaintance"
+    ],
+    [
+     "en",
+     "of"
+    ]
+   ],
+   "6994": [
+    [
+     "en",
+     "an"
+    ],
+    [
+     "en",
+     "diary"
+    ]
+   ],
+   "15113": [
+    [
+     "en",
+     "appeal"
+    ],
+    [
+     "en",
+     "flush"
+    ]
+   ],
+   "2401": [
+    [
+     "en",
+     "avoid"
+    ],
+    [
+     "en",
+     "case"
+    ]
+   ],
+   "8452": [
+    [
+     "en",
+     "beam"
+    ],
+    [
+     "en",
+     "textbook"
+    ]
+   ],
+   "9757": [
+    [
+     "en",
+     "benny"
+    ],
+    [
+     "en",
+     "constituent"
+    ]
+   ],
+   "21152": [
+    [
+     "en",
+     "calx"
+    ],
+    [
+     "en",
+     "package"
+    ]
+   ],
+   "8931": [
+    [
+     "en",
+     "cognition"
+    ],
+    [
+     "en",
+     "reflect"
+    ]
+   ],
+   "12622": [
+    [
+     "en",
+     "defining"
+    ],
+    [
+     "en",
+     "recognition"
+    ]
+   ],
+   "4338": [
+    [
+     "en",
+     "describe"
+    ],
+    [
+     "en",
+     "tradition"
+    ]
+   ],
+   "14259": [
+    [
+     "en",
+     "dialect"
+    ],
+    [
+     "en",
+     "scene"
+    ]
+   ],
+   "10866": [
+    [
+     "en",
+     "faith"
+    ],
+    [
+     "en",
+     "loan"
+    ]
+   ],
+   "24067": [
+    [
+     "en",
+     "govern"
+    ],
+    [
+     "en",
+     "hurting"
+    ]
+   ],
+   "17282": [
+    [
+     "en",
+     "gravitation"
+    ],
+    [
+     "en",
+     "have"
+    ]
+   ],
+   "11749": [
+    [
+     "en",
+     "holding"
+    ],
+    [
+     "en",
+     "procedure"
+    ]
+   ],
+   "23187": [
+    [
+     "en",
+     "intend"
+    ],
+    [
+     "en",
+     "olefin"
+    ]
+   ],
+   "17807": [
+    [
+     "en",
+     "pressure"
+    ],
+    [
+     "en",
+     "raid"
+    ]
+   ]
+  },
+  "cross_language_slot_sharing": 0,
+  "header": {
+   "vocab": 1025,
+   "A": 82832,
+   "word_count": 1332955,
+   "version": 6
+  },
+  "address_port_check": {
+   "seated": 1025,
+   "stored_E_mismatch": 0
+  }
+ },
+ "test_chinese_english_v2": {
+  "zh": {
+   "words": 960,
+   "states": {
+    "NOT-IN-ALPHABET": 1,
+    "SEATED": 894,
+    "NEVER-IN-CORPUS": 36,
+    "OUTRANKED-BY-HIGHER-E": 29
+   }
+  },
+  "en": {
+   "words": 1059,
+   "states": {
+    "DROPPED-BY-TOKENIZER(<2 letters)": 6,
+    "SEATED": 995,
+    "OUTRANKED-BY-HIGHER-E": 47,
+    "REJECTED-BY-FILTER": 7,
+    "NEVER-IN-CORPUS": 2,
+    "NOT-IN-ALPHABET": 2
+   }
+  },
+  "slots_shared_by_list_words": {
+   "21908": [
+    [
+     "zh",
+     "休息"
+    ],
+    [
+     "zh",
+     "土"
+    ]
+   ],
+   "10135": [
+    [
+     "zh",
+     "便利"
+    ],
+    [
+     "en",
+     "appear"
+    ]
+   ],
+   "7436": [
+    [
+     "zh",
+     "保證"
+    ],
+    [
+     "en",
+     "justice"
+    ]
+   ],
+   "23840": [
+    [
+     "zh",
+     "偏見"
+    ],
+    [
+     "en",
+     "charm"
+    ]
+   ],
+   "1487": [
+    [
+     "zh",
+     "停"
+    ],
+    [
+     "en",
+     "kick"
+    ]
+   ],
+   "23194": [
+    [
+     "zh",
+     "催化劑"
+    ],
+    [
+     "zh",
+     "夠"
+    ]
+   ],
+   "22355": [
+    [
+     "zh",
+     "共和國"
+    ],
+    [
+     "en",
+     "process"
+    ]
+   ],
+   "15844": [
+    [
+     "zh",
+     "刀"
+    ],
+    [
+     "en",
+     "try"
+    ]
+   ],
+   "19994": [
+    [
+     "zh",
+     "卡"
+    ],
+    [
+     "en",
+     "orbiter"
+    ]
+   ],
+   "23109": [
+    [
+     "zh",
+     "即"
+    ],
+    [
+     "zh",
+     "支援"
+    ]
+   ],
+   "20827": [
+    [
+     "zh",
+     "參考"
+    ],
+    [
+     "en",
+     "threaten"
+    ]
+   ],
+   "12982": [
+    [
+     "zh",
+     "同謀"
+    ],
+    [
+     "zh",
+     "語者"
+    ]
+   ],
+   "16065": [
+    [
+     "zh",
+     "含"
+    ],
+    [
+     "en",
+     "books"
+    ]
+   ],
+   "15862": [
+    [
+     "zh",
+     "呢"
+    ],
+    [
+     "en",
+     "wind"
+    ]
+   ],
+   "3280": [
+    [
+     "zh",
+     "哲學"
+    ],
+    [
+     "en",
+     "check"
+    ]
+   ],
+   "12377": [
+    [
+     "zh",
+     "外面"
+    ],
+    [
+     "en",
+     "ammunition"
+    ]
+   ],
+   "22372": [
+    [
+     "zh",
+     "天堂"
+    ],
+    [
+     "en",
+     "pace"
+    ]
+   ],
+   "7975": [
+    [
+     "zh",
+     "奴隸制"
+    ],
+    [
+     "zh",
+     "膠著"
+    ]
+   ],
+   "5855": [
+    [
+     "zh",
+     "對白"
+    ],
+    [
+     "zh",
+     "裂"
+    ]
+   ],
+   "8701": [
+    [
+     "zh",
+     "尾流"
+    ],
+    [
+     "en",
+     "fly"
+    ]
+   ],
+   "14798": [
+    [
+     "zh",
+     "工作"
+    ],
+    [
+     "en",
+     "example"
+    ]
+   ],
+   "5167": [
+    [
+     "zh",
+     "張"
+    ],
+    [
+     "zh",
+     "抹去"
+    ]
+   ],
+   "17221": [
+    [
+     "zh",
+     "快"
+    ],
+    [
+     "zh",
+     "攻擊"
+    ]
+   ],
+   "4565": [
+    [
+     "zh",
+     "意義"
+    ],
+    [
+     "zh",
+     "水滸"
+    ]
+   ],
+   "9174": [
+    [
+     "zh",
+     "打擊"
+    ],
+    [
+     "en",
+     "portion"
+    ]
+   ],
+   "8145": [
+    [
+     "zh",
+     "拉"
+    ],
+    [
+     "en",
+     "parchment"
+    ]
+   ],
+   "9006": [
+    [
+     "zh",
+     "拖"
+    ],
+    [
+     "en",
+     "transport"
+    ]
+   ],
+   "23366": [
+    [
+     "zh",
+     "搬遷"
+    ],
+    [
+     "en",
+     "sabre"
+    ]
+   ],
+   "15536": [
+    [
+     "zh",
+     "撕"
+    ],
+    [
+     "en",
+     "view"
+    ]
+   ],
+   "19202": [
+    [
+     "zh",
+     "更"
+    ],
+    [
+     "en",
+     "plan"
+    ]
+   ],
+   "9280": [
+    [
+     "zh",
+     "有機體"
+    ],
+    [
+     "en",
+     "shame"
+    ]
+   ],
+   "11161": [
+    [
+     "zh",
+     "植物"
+    ],
+    [
+     "en",
+     "eyelid"
+    ]
+   ],
+   "1835": [
+    [
+     "zh",
+     "植物群"
+    ],
+    [
+     "en",
+     "complaint"
+    ]
+   ],
+   "13071": [
+    [
+     "zh",
+     "樓板"
+    ],
+    [
+     "zh",
+     "的士"
+    ]
+   ],
+   "24243": [
+    [
+     "zh",
+     "模仿"
+    ],
+    [
+     "zh",
+     "醫"
+    ]
+   ],
+   "1563": [
+    [
+     "zh",
+     "樹"
+    ],
+    [
+     "en",
+     "figure"
+    ]
+   ],
+   "22431": [
+    [
+     "zh",
+     "欺"
+    ],
+    [
+     "en",
+     "recover"
+    ]
+   ],
+   "13582": [
+    [
+     "zh",
+     "沼澤"
+    ],
+    [
+     "en",
+     "forest"
+    ]
+   ],
+   "21208": [
+    [
+     "zh",
+     "海員"
+    ],
+    [
+     "en",
+     "railroad"
+    ]
+   ],
+   "17379": [
+    [
+     "zh",
+     "漠"
+    ],
+    [
+     "en",
+     "top"
+    ]
+   ],
+   "7577": [
+    [
+     "zh",
+     "男人"
+    ],
+    [
+     "zh",
+     "補"
+    ]
+   ],
+   "10759": [
+    [
+     "zh",
+     "病房"
+    ],
+    [
+     "en",
+     "banquet"
+    ]
+   ],
+   "19210": [
+    [
+     "zh",
+     "百分率"
+    ],
+    [
+     "zh",
+     "音"
+    ]
+   ],
+   "21868": [
+    [
+     "zh",
+     "碰巧"
+    ],
+    [
+     "en",
+     "ban"
+    ]
+   ],
+   "13089": [
+    [
+     "zh",
+     "神話"
+    ],
+    [
+     "en",
+     "accelerator"
+    ]
+   ],
+   "929": [
+    [
+     "zh",
+     "租用"
+    ],
+    [
+     "en",
+     "stay"
+    ]
+   ],
+   "4547": [
+    [
+     "zh",
+     "組織"
+    ],
+    [
+     "en",
+     "judge"
+    ]
+   ],
+   "9866": [
+    [
+     "zh",
+     "結"
+    ],
+    [
+     "zh",
+     "雜物"
+    ]
+   ],
+   "20826": [
+    [
+     "zh",
+     "義"
+    ],
+    [
+     "zh",
+     "蛇行"
+    ]
+   ],
+   "5025": [
+    [
+     "zh",
+     "習慣"
+    ],
+    [
+     "en",
+     "deflect"
+    ]
+   ],
+   "4457": [
+    [
+     "zh",
+     "認同"
+    ],
+    [
+     "en",
+     "shout"
+    ]
+   ],
+   "20338": [
+    [
+     "zh",
+     "調"
+    ],
+    [
+     "en",
+     "speaker"
+    ]
+   ],
+   "24273": [
+    [
+     "zh",
+     "進"
+    ],
+    [
+     "en",
+     "religion"
+    ]
+   ],
+   "6897": [
+    [
+     "zh",
+     "過"
+    ],
+    [
+     "en",
+     "agriculture"
+    ]
+   ],
+   "24844": [
+    [
+     "zh",
+     "金剛石"
+    ],
+    [
+     "en",
+     "respect"
+    ]
+   ],
+   "19173": [
+    [
+     "zh",
+     "錯"
+    ],
+    [
+     "en",
+     "off"
+    ]
+   ],
+   "17469": [
+    [
+     "zh",
+     "長"
+    ],
+    [
+     "zh",
+     "門廳"
+    ]
+   ],
+   "2518": [
+    [
+     "zh",
+     "驚奇"
+    ],
+    [
+     "en",
+     "supplement"
+    ]
+   ],
+   "24913": [
+    [
+     "en",
+     "accelerate"
+    ],
+    [
+     "en",
+     "picture"
+    ]
+   ],
+   "23422": [
+    [
+     "en",
+     "advantage"
+    ],
+    [
+     "en",
+     "stick"
+    ]
+   ],
+   "23719": [
+    [
+     "en",
+     "alter"
+    ],
+    [
+     "en",
+     "width"
+    ]
+   ],
+   "467": [
+    [
+     "en",
+     "alternative"
+    ],
+    [
+     "en",
+     "tutor"
+    ]
+   ],
+   "10867": [
+    [
+     "en",
+     "beat"
+    ],
+    [
+     "en",
+     "spread"
+    ]
+   ],
+   "13057": [
+    [
+     "en",
+     "change"
+    ],
+    [
+     "en",
+     "right"
+    ]
+   ],
+   "7904": [
+    [
+     "en",
+     "commonwealth"
+    ],
+    [
+     "en",
+     "inclination"
+    ]
+   ],
+   "23327": [
+    [
+     "en",
+     "dancing"
+    ],
+    [
+     "en",
+     "sample"
+    ]
+   ],
+   "6441": [
+    [
+     "en",
+     "disperse"
+    ],
+    [
+     "en",
+     "praxis"
+    ]
+   ],
+   "21844": [
+    [
+     "en",
+     "divisor"
+    ],
+    [
+     "en",
+     "pedagogy"
+    ]
+   ],
+   "13857": [
+    [
+     "en",
+     "eat"
+    ],
+    [
+     "en",
+     "pass"
+    ]
+   ],
+   "6784": [
+    [
+     "en",
+     "esteem"
+    ],
+    [
+     "en",
+     "surge"
+    ]
+   ],
+   "16790": [
+    [
+     "en",
+     "fen"
+    ],
+    [
+     "en",
+     "show"
+    ]
+   ],
+   "24477": [
+    [
+     "en",
+     "find"
+    ],
+    [
+     "en",
+     "tissue"
+    ]
+   ],
+   "9559": [
+    [
+     "en",
+     "free"
+    ],
+    [
+     "en",
+     "wellness"
+    ]
+   ],
+   "18244": [
+    [
+     "en",
+     "gap"
+    ],
+    [
+     "en",
+     "kilometer"
+    ]
+   ],
+   "20785": [
+    [
+     "en",
+     "kg"
+    ],
+    [
+     "en",
+     "theory"
+    ]
+   ],
+   "7204": [
+    [
+     "en",
+     "leg"
+    ],
+    [
+     "en",
+     "watercraft"
+    ]
+   ],
+   "20677": [
+    [
+     "en",
+     "memory"
+    ],
+    [
+     "en",
+     "whisky"
+    ]
+   ],
+   "22391": [
+    [
+     "en",
+     "name"
+    ],
+    [
+     "en",
+     "pilot"
+    ]
+   ],
+   "1070": [
+    [
+     "en",
+     "priming"
+    ],
+    [
+     "en",
+     "recuperate"
+    ]
+   ],
+   "20560": [
+    [
+     "en",
+     "profit"
+    ],
+    [
+     "en",
+     "stab"
+    ]
+   ],
+   "21674": [
+    [
+     "en",
+     "student"
+    ],
+    [
+     "en",
+     "weave"
+    ]
+   ]
+  },
+  "cross_language_slot_sharing": 42,
+  "header": {
+   "vocab": 1889,
+   "A": 228914,
+   "word_count": 3220743,
+   "version": 6
+  },
+  "address_port_check": {
+   "seated": 1889,
+   "stored_E_mismatch": 0
+  },
+  "edges_joining_an_en_slot_and_a_zh_slot": 9818
+ },
+ "test_english_chinese_v2": {
+  "zh": {
+   "words": 960,
+   "states": {
+    "NOT-IN-ALPHABET": 1,
+    "SEATED": 894,
+    "NEVER-IN-CORPUS": 36,
+    "OUTRANKED-BY-HIGHER-E": 29
+   }
+  },
+  "en": {
+   "words": 1059,
+   "states": {
+    "DROPPED-BY-TOKENIZER(<2 letters)": 6,
+    "SEATED": 995,
+    "OUTRANKED-BY-HIGHER-E": 47,
+    "REJECTED-BY-FILTER": 7,
+    "NEVER-IN-CORPUS": 2,
+    "NOT-IN-ALPHABET": 2
+   }
+  },
+  "slots_shared_by_list_words": {
+   "21908": [
+    [
+     "zh",
+     "休息"
+    ],
+    [
+     "zh",
+     "土"
+    ]
+   ],
+   "10135": [
+    [
+     "zh",
+     "便利"
+    ],
+    [
+     "en",
+     "appear"
+    ]
+   ],
+   "7436": [
+    [
+     "zh",
+     "保證"
+    ],
+    [
+     "en",
+     "justice"
+    ]
+   ],
+   "23840": [
+    [
+     "zh",
+     "偏見"
+    ],
+    [
+     "en",
+     "charm"
+    ]
+   ],
+   "1487": [
+    [
+     "zh",
+     "停"
+    ],
+    [
+     "en",
+     "kick"
+    ]
+   ],
+   "23194": [
+    [
+     "zh",
+     "催化劑"
+    ],
+    [
+     "zh",
+     "夠"
+    ]
+   ],
+   "22355": [
+    [
+     "zh",
+     "共和國"
+    ],
+    [
+     "en",
+     "process"
+    ]
+   ],
+   "15844": [
+    [
+     "zh",
+     "刀"
+    ],
+    [
+     "en",
+     "try"
+    ]
+   ],
+   "19994": [
+    [
+     "zh",
+     "卡"
+    ],
+    [
+     "en",
+     "orbiter"
+    ]
+   ],
+   "23109": [
+    [
+     "zh",
+     "即"
+    ],
+    [
+     "zh",
+     "支援"
+    ]
+   ],
+   "20827": [
+    [
+     "zh",
+     "參考"
+    ],
+    [
+     "en",
+     "threaten"
+    ]
+   ],
+   "12982": [
+    [
+     "zh",
+     "同謀"
+    ],
+    [
+     "zh",
+     "語者"
+    ]
+   ],
+   "16065": [
+    [
+     "zh",
+     "含"
+    ],
+    [
+     "en",
+     "books"
+    ]
+   ],
+   "15862": [
+    [
+     "zh",
+     "呢"
+    ],
+    [
+     "en",
+     "wind"
+    ]
+   ],
+   "3280": [
+    [
+     "zh",
+     "哲學"
+    ],
+    [
+     "en",
+     "check"
+    ]
+   ],
+   "12377": [
+    [
+     "zh",
+     "外面"
+    ],
+    [
+     "en",
+     "ammunition"
+    ]
+   ],
+   "22372": [
+    [
+     "zh",
+     "天堂"
+    ],
+    [
+     "en",
+     "pace"
+    ]
+   ],
+   "7975": [
+    [
+     "zh",
+     "奴隸制"
+    ],
+    [
+     "zh",
+     "膠著"
+    ]
+   ],
+   "5855": [
+    [
+     "zh",
+     "對白"
+    ],
+    [
+     "zh",
+     "裂"
+    ]
+   ],
+   "8701": [
+    [
+     "zh",
+     "尾流"
+    ],
+    [
+     "en",
+     "fly"
+    ]
+   ],
+   "14798": [
+    [
+     "zh",
+     "工作"
+    ],
+    [
+     "en",
+     "example"
+    ]
+   ],
+   "5167": [
+    [
+     "zh",
+     "張"
+    ],
+    [
+     "zh",
+     "抹去"
+    ]
+   ],
+   "17221": [
+    [
+     "zh",
+     "快"
+    ],
+    [
+     "zh",
+     "攻擊"
+    ]
+   ],
+   "4565": [
+    [
+     "zh",
+     "意義"
+    ],
+    [
+     "zh",
+     "水滸"
+    ]
+   ],
+   "9174": [
+    [
+     "zh",
+     "打擊"
+    ],
+    [
+     "en",
+     "portion"
+    ]
+   ],
+   "8145": [
+    [
+     "zh",
+     "拉"
+    ],
+    [
+     "en",
+     "parchment"
+    ]
+   ],
+   "9006": [
+    [
+     "zh",
+     "拖"
+    ],
+    [
+     "en",
+     "transport"
+    ]
+   ],
+   "23366": [
+    [
+     "zh",
+     "搬遷"
+    ],
+    [
+     "en",
+     "sabre"
+    ]
+   ],
+   "15536": [
+    [
+     "zh",
+     "撕"
+    ],
+    [
+     "en",
+     "view"
+    ]
+   ],
+   "19202": [
+    [
+     "zh",
+     "更"
+    ],
+    [
+     "en",
+     "plan"
+    ]
+   ],
+   "9280": [
+    [
+     "zh",
+     "有機體"
+    ],
+    [
+     "en",
+     "shame"
+    ]
+   ],
+   "11161": [
+    [
+     "zh",
+     "植物"
+    ],
+    [
+     "en",
+     "eyelid"
+    ]
+   ],
+   "1835": [
+    [
+     "zh",
+     "植物群"
+    ],
+    [
+     "en",
+     "complaint"
+    ]
+   ],
+   "13071": [
+    [
+     "zh",
+     "樓板"
+    ],
+    [
+     "zh",
+     "的士"
+    ]
+   ],
+   "24243": [
+    [
+     "zh",
+     "模仿"
+    ],
+    [
+     "zh",
+     "醫"
+    ]
+   ],
+   "1563": [
+    [
+     "zh",
+     "樹"
+    ],
+    [
+     "en",
+     "figure"
+    ]
+   ],
+   "22431": [
+    [
+     "zh",
+     "欺"
+    ],
+    [
+     "en",
+     "recover"
+    ]
+   ],
+   "13582": [
+    [
+     "zh",
+     "沼澤"
+    ],
+    [
+     "en",
+     "forest"
+    ]
+   ],
+   "21208": [
+    [
+     "zh",
+     "海員"
+    ],
+    [
+     "en",
+     "railroad"
+    ]
+   ],
+   "17379": [
+    [
+     "zh",
+     "漠"
+    ],
+    [
+     "en",
+     "top"
+    ]
+   ],
+   "7577": [
+    [
+     "zh",
+     "男人"
+    ],
+    [
+     "zh",
+     "補"
+    ]
+   ],
+   "10759": [
+    [
+     "zh",
+     "病房"
+    ],
+    [
+     "en",
+     "banquet"
+    ]
+   ],
+   "19210": [
+    [
+     "zh",
+     "百分率"
+    ],
+    [
+     "zh",
+     "音"
+    ]
+   ],
+   "21868": [
+    [
+     "zh",
+     "碰巧"
+    ],
+    [
+     "en",
+     "ban"
+    ]
+   ],
+   "13089": [
+    [
+     "zh",
+     "神話"
+    ],
+    [
+     "en",
+     "accelerator"
+    ]
+   ],
+   "929": [
+    [
+     "zh",
+     "租用"
+    ],
+    [
+     "en",
+     "stay"
+    ]
+   ],
+   "4547": [
+    [
+     "zh",
+     "組織"
+    ],
+    [
+     "en",
+     "judge"
+    ]
+   ],
+   "9866": [
+    [
+     "zh",
+     "結"
+    ],
+    [
+     "zh",
+     "雜物"
+    ]
+   ],
+   "20826": [
+    [
+     "zh",
+     "義"
+    ],
+    [
+     "zh",
+     "蛇行"
+    ]
+   ],
+   "5025": [
+    [
+     "zh",
+     "習慣"
+    ],
+    [
+     "en",
+     "deflect"
+    ]
+   ],
+   "4457": [
+    [
+     "zh",
+     "認同"
+    ],
+    [
+     "en",
+     "shout"
+    ]
+   ],
+   "20338": [
+    [
+     "zh",
+     "調"
+    ],
+    [
+     "en",
+     "speaker"
+    ]
+   ],
+   "24273": [
+    [
+     "zh",
+     "進"
+    ],
+    [
+     "en",
+     "religion"
+    ]
+   ],
+   "6897": [
+    [
+     "zh",
+     "過"
+    ],
+    [
+     "en",
+     "agriculture"
+    ]
+   ],
+   "24844": [
+    [
+     "zh",
+     "金剛石"
+    ],
+    [
+     "en",
+     "respect"
+    ]
+   ],
+   "19173": [
+    [
+     "zh",
+     "錯"
+    ],
+    [
+     "en",
+     "off"
+    ]
+   ],
+   "17469": [
+    [
+     "zh",
+     "長"
+    ],
+    [
+     "zh",
+     "門廳"
+    ]
+   ],
+   "2518": [
+    [
+     "zh",
+     "驚奇"
+    ],
+    [
+     "en",
+     "supplement"
+    ]
+   ],
+   "24913": [
+    [
+     "en",
+     "accelerate"
+    ],
+    [
+     "en",
+     "picture"
+    ]
+   ],
+   "23422": [
+    [
+     "en",
+     "advantage"
+    ],
+    [
+     "en",
+     "stick"
+    ]
+   ],
+   "23719": [
+    [
+     "en",
+     "alter"
+    ],
+    [
+     "en",
+     "width"
+    ]
+   ],
+   "467": [
+    [
+     "en",
+     "alternative"
+    ],
+    [
+     "en",
+     "tutor"
+    ]
+   ],
+   "10867": [
+    [
+     "en",
+     "beat"
+    ],
+    [
+     "en",
+     "spread"
+    ]
+   ],
+   "13057": [
+    [
+     "en",
+     "change"
+    ],
+    [
+     "en",
+     "right"
+    ]
+   ],
+   "7904": [
+    [
+     "en",
+     "commonwealth"
+    ],
+    [
+     "en",
+     "inclination"
+    ]
+   ],
+   "23327": [
+    [
+     "en",
+     "dancing"
+    ],
+    [
+     "en",
+     "sample"
+    ]
+   ],
+   "6441": [
+    [
+     "en",
+     "disperse"
+    ],
+    [
+     "en",
+     "praxis"
+    ]
+   ],
+   "21844": [
+    [
+     "en",
+     "divisor"
+    ],
+    [
+     "en",
+     "pedagogy"
+    ]
+   ],
+   "13857": [
+    [
+     "en",
+     "eat"
+    ],
+    [
+     "en",
+     "pass"
+    ]
+   ],
+   "6784": [
+    [
+     "en",
+     "esteem"
+    ],
+    [
+     "en",
+     "surge"
+    ]
+   ],
+   "16790": [
+    [
+     "en",
+     "fen"
+    ],
+    [
+     "en",
+     "show"
+    ]
+   ],
+   "24477": [
+    [
+     "en",
+     "find"
+    ],
+    [
+     "en",
+     "tissue"
+    ]
+   ],
+   "9559": [
+    [
+     "en",
+     "free"
+    ],
+    [
+     "en",
+     "wellness"
+    ]
+   ],
+   "18244": [
+    [
+     "en",
+     "gap"
+    ],
+    [
+     "en",
+     "kilometer"
+    ]
+   ],
+   "20785": [
+    [
+     "en",
+     "kg"
+    ],
+    [
+     "en",
+     "theory"
+    ]
+   ],
+   "7204": [
+    [
+     "en",
+     "leg"
+    ],
+    [
+     "en",
+     "watercraft"
+    ]
+   ],
+   "20677": [
+    [
+     "en",
+     "memory"
+    ],
+    [
+     "en",
+     "whisky"
+    ]
+   ],
+   "22391": [
+    [
+     "en",
+     "name"
+    ],
+    [
+     "en",
+     "pilot"
+    ]
+   ],
+   "1070": [
+    [
+     "en",
+     "priming"
+    ],
+    [
+     "en",
+     "recuperate"
+    ]
+   ],
+   "20560": [
+    [
+     "en",
+     "profit"
+    ],
+    [
+     "en",
+     "stab"
+    ]
+   ],
+   "21674": [
+    [
+     "en",
+     "student"
+    ],
+    [
+     "en",
+     "weave"
+    ]
+   ]
+  },
+  "cross_language_slot_sharing": 42,
+  "header": {
+   "vocab": 1889,
+   "A": 228914,
+   "word_count": 3220743,
+   "version": 6
+  },
+  "address_port_check": {
+   "seated": 1889,
+   "stored_E_mismatch": 0
+  },
+  "edges_joining_an_en_slot_and_a_zh_slot": 9818
+ },
+ "pairs_pure(en bin vs zh bin)": {
+  "pairs": 1051,
+  "same_slot": 0,
+  "within_1": 0,
+  "within_3": 0,
+  "within_10": 1,
+  "expected_uniform": {
+   "same_slot": 0.042,
+   "within_1": 0.13,
+   "within_3": 0.29,
+   "within_10": 0.88
+  },
+  "abs_dslot_over_N_quartiles": [
+   0.1484,
+   0.3138,
+   0.534
+  ],
+  "expected_if_unrelated_quartiles": [
+   0.134,
+   0.2929,
+   0.5
+  ],
+  "dgamma_spacings_abs_quartiles": [
+   3711.9,
+   7896.4,
+   13491.4
+  ],
+  "dE_abs_quartiles": [
+   0.0477,
+   0.1008,
+   0.1715
+  ],
+  "expected_dE_abs_quartiles_if_unrelated": [
+   0.043,
+   0.0941,
+   0.1606
+  ],
+  "dslot_hist_over_N_10bins": [
+   178,
+   181,
+   151,
+   132,
+   117,
+   103,
+   81,
+   62,
+   33,
+   13
+  ]
+ },
+ "pairs_test_chinese_english_v2": {
+  "pairs": 1051,
+  "same_slot": 0,
+  "within_1": 0,
+  "within_3": 0,
+  "within_10": 1,
+  "expected_uniform": {
+   "same_slot": 0.042,
+   "within_1": 0.13,
+   "within_3": 0.29,
+   "within_10": 0.88
+  },
+  "abs_dslot_over_N_quartiles": [
+   0.1403,
+   0.3057,
+   0.5323
+  ],
+  "expected_if_unrelated_quartiles": [
+   0.134,
+   0.2929,
+   0.5
+  ],
+  "dgamma_spacings_abs_quartiles": [
+   3507.7,
+   7670.4,
+   13380.8
+  ],
+  "dE_abs_quartiles": [
+   0.045,
+   0.0982,
+   0.1709
+  ],
+  "expected_dE_abs_quartiles_if_unrelated": [
+   0.043,
+   0.0941,
+   0.1606
+  ],
+  "dslot_hist_over_N_10bins": [
+   192,
+   172,
+   153,
+   133,
+   111,
+   97,
+   84,
+   61,
+   34,
+   14
+  ]
+ },
+ "pairs_test_english_chinese_v2": {
+  "pairs": 1051,
+  "same_slot": 0,
+  "within_1": 0,
+  "within_3": 0,
+  "within_10": 1,
+  "expected_uniform": {
+   "same_slot": 0.042,
+   "within_1": 0.13,
+   "within_3": 0.29,
+   "within_10": 0.88
+  },
+  "abs_dslot_over_N_quartiles": [
+   0.1403,
+   0.3057,
+   0.5323
+  ],
+  "expected_if_unrelated_quartiles": [
+   0.134,
+   0.2929,
+   0.5
+  ],
+  "dgamma_spacings_abs_quartiles": [
+   3507.7,
+   7670.4,
+   13380.8
+  ],
+  "dE_abs_quartiles": [
+   0.045,
+   0.0982,
+   0.1709
+  ],
+  "expected_dE_abs_quartiles_if_unrelated": [
+   0.043,
+   0.0941,
+   0.1606
+  ],
+  "dslot_hist_over_N_10bins": [
+   192,
+   172,
+   153,
+   133,
+   111,
+   97,
+   84,
+   61,
+   34,
+   14
+  ]
+ },
+ "second_pass_effect_on_zh_test_chinese_english_v2": {
+  "first_language": "zh",
+  "state_transitions": {
+   "NOT-IN-ALPHABET -> NOT-IN-ALPHABET": 1,
+   "SEATED -> SEATED": 894,
+   "NEVER-IN-CORPUS -> NEVER-IN-CORPUS": 36,
+   "OUTRANKED-BY-HIGHER-E -> OUTRANKED-BY-HIGHER-E": 13,
+   "SEATED -> OUTRANKED-BY-HIGHER-E": 16
+  },
+  "slots_whose_word_changed": 16,
+  "first_pass_vocab": 910,
+  "final_vocab": 1889,
+  "first_language_words_beta_changed": 35,
+  "seated_words": 910,
+  "beta_change_quartiles": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.00245278438468
+  ],
+  "degree_change_nonzero": 41
+ },
+ "second_pass_effect_on_en_test_english_chinese_v2": {
+  "first_language": "en",
+  "state_transitions": {
+   "DROPPED-BY-TOKENIZER(<2 letters) -> DROPPED-BY-TOKENIZER(<2 letters)": 6,
+   "SEATED -> SEATED": 995,
+   "OUTRANKED-BY-HIGHER-E -> OUTRANKED-BY-HIGHER-E": 22,
+   "SEATED -> OUTRANKED-BY-HIGHER-E": 25,
+   "REJECTED-BY-FILTER -> REJECTED-BY-FILTER": 7,
+   "NEVER-IN-CORPUS -> NEVER-IN-CORPUS": 2,
+   "NOT-IN-ALPHABET -> NOT-IN-ALPHABET": 2
+  },
+  "slots_whose_word_changed": 25,
+  "first_pass_vocab": 1020,
+  "final_vocab": 1889,
+  "first_language_words_beta_changed": 41,
+  "seated_words": 1020,
+  "beta_change_quartiles": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   7.5003655676367815
+  ],
+  "degree_change_nonzero": 41
+ },
+ "order_effect(zh_first_vs_en_first)": {
+  "slots_with_different_word": 0,
+  "vocab": [
+   1889,
+   1889
+  ],
+  "beta_max_abs_diff": 0.0001530030095802104,
+  "beta_slots_differing": 31,
+  "edges": [
+   228914,
+   228914
+  ],
+  "edges_only_in_zh_first": 0,
+  "edges_only_in_en_first": 0,
+  "edge_weight_max_abs_diff": 5.347471802963355e-05,
+  "edge_weights_differing": 3364
+ },
+ "slot_unchanged_pure_vs_union_en": {
+  "words": 1059,
+  "same_slot": 1
+ },
+ "slot_unchanged_pure_vs_union_zh": {
+  "words": 960,
+  "same_slot": 1
+ }
+}

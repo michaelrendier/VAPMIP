@@ -23,5 +23,7 @@ Working directory: `VAPMIP/SemPriCon/`. Test bed: Chinese (Traditional), English
 | [08_verification.md](08_verification.md) | tests | what is verified against the compiled binary, how to re-run it, what is weak |
 | [09_the_test_bins.md](09_the_test_bins.md) | test bins | `test_{chinese,english,finnish,indonesian}_v2.0.bin`: one alphabet each, how they were built, versioning |
 | [10_design_notes.md](10_design_notes.md) | design notes | decided-but-unbuilt ideas, e.g. the invisible tone / tense / conjugation prefix |
+| [11_baseline_mapping_zh_en.md](11_baseline_mapping_zh_en.md) | workbench | LIVE SNAPSHOT: the four zh/en word-list bins, where every list word landed, pair offsets, second-pass effects, order effect, fault rows; pull a block with `tools/wb_pull.py` |
+| [1024.md](1024.md) | word list | the English row headers, their Chinese words and the slot of each in every bin; updated in place |
 
-*10 pages.*
+*12 pages.*

@@ -1,0 +1,11 @@
+[state] loaded bins/test_english_v2.bin  vocab=0  A=0  wc=0
+[ptolemy] learning (6172034 bytes)
+[monad] N=25000  vocab=1025  A_edges=82832  word_count=1332955
+        ground=0.00007552  deepest_β=7.5520 (z#841  γ=1234.6160  "the")
+        σ=0.5 (Noether forcing)  wm=1042/65536  am=82832/131072
+        affect(e7)=0.00  (neutral)
+[state] saved bins/test_english_v2.bin  vocab=1025  A=82832
+
+real	0m0.856s
+user	0m0.846s
+sys	0m0.010s

@@ -8,6 +8,7 @@
 #include "tokenizer.h"
 #include "unicode.h"
 #include "alphabet.h"
+#include "dprint.h"
 
 static void tok_push(char ***out, int *cap, int *count, const char *buf, int blen)
 {
@@ -32,6 +33,9 @@ char **tok_split(const char *text, int *count)
     char *buf  = malloc(tlen * 2 + 8);
     if (!buf) return out;
     int blen = 0, ncp = 0;
+#if defined(HAN_RUN)
+    int buf_han = 0;
+#endif
     const char *p = text;
 
     for (;;) {
@@ -46,6 +50,33 @@ char **tok_split(const char *text, int *count)
         int word_char = cp && (u_is_word(cp) || cp == '\'' || cp == 0x2019);
 #endif
 
+#if defined(HAN_RUN)
+        /* HAN_RUN: a run of Han characters is ONE token (a word); the corpus is segmented into words before it reaches the engine
+         * (tools/exp_v2.py, longest match over the word list).  A Han word of one character is a word; a Latin word still needs two. */
+        if (word_char && u_is_han(cp)) {
+            if (ncp > 0 && !buf_han) {
+                if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);
+                blen = 0; ncp = 0;
+            }
+            blen += u8_put(cp, buf + blen); ncp++; buf_han = 1;
+            DPRINT_I("tok.han_run_len", ncp);
+        } else if (word_char) {
+            if (ncp > 0 && buf_han) {
+                tok_push(&out, &cap, count, buf, blen);
+                DPRINT_S("tok.push_han", buf); DPRINT_I("tok.count", *count);
+                blen = 0; ncp = 0; buf_han = 0;
+            }
+            if (cp == 0x2019) cp = '\'';
+            blen += u8_put(u_lower(cp), buf + blen);
+            ncp++;
+        } else if (ncp > 0) {
+            if ((buf_han || ncp >= 2) && buf[0] != '\'') {
+                tok_push(&out, &cap, count, buf, blen);
+                DPRINT_I("tok.count", *count);
+            }
+            blen = 0; ncp = 0; buf_han = 0;
+        }
+#else
         if (word_char && u_is_han(cp)) {
             if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);
             blen = 0; ncp = 0;
@@ -59,6 +90,7 @@ char **tok_split(const char *text, int *count)
             if (ncp >= 2 && buf[0] != '\'') tok_push(&out, &cap, count, buf, blen);
             blen = 0; ncp = 0;
         }
+#endif
         if (!cp) break;
     }
 

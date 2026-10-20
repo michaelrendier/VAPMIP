@@ -5,6 +5,7 @@ The alphabet is the set of code points the language's WRITING needs, sorted by c
 alphabet).  The Horner base is the alphabet size.  This is the eb28ce8 construction (95 printable ASCII characters, base 95) with the alphabet changed per language.
   zh  every assigned CJK ideograph in the engine's Han ranges (unicodedata 15.0, category Lo): the whole Han repertoire, no Latin, no kana, no punctuation.
   fi  ' a-z å ä ö š ž    (Finnish; š and ž occur in loanwords and names)
+  un  ' a-z + every Han ideograph (the zh set): the union alphabet for the mixed zh+en bins.
 English and Indonesian write in ASCII and use the unmodified ASCII-95 build (-DALPHABET_ASCII95), as before.
 """
 import os, unicodedata as ud
@@ -17,6 +18,12 @@ def zh():
 def fi():
     return sorted([0x27] + list(range(0x61, 0x7B)) + [ord(c) for c in "åäöšž"])
 
+def union():
+    return fi_ascii() + zh()
+
+def fi_ascii():
+    return [0x27] + list(range(0x61, 0x7B))
+
 def write(name, cps):
     cps = sorted(set(cps))
     with open(os.path.join(OUT, f"alphabet_{name}.h"), "w") as f:
@@ -28,4 +35,4 @@ def write(name, cps):
     print(name, len(cps), "characters; first", hex(cps[0]), "last", hex(cps[-1]))
 
 if __name__ == "__main__":
-    write("zh", zh()); write("fi", fi())
+    write("zh", zh()); write("fi", fi()); write("un", union())

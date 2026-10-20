@@ -29,6 +29,7 @@
 #include "unicode.h"
 #include "alphabet.h"
 #include "monad.h"
+#include "dprint.h"
 #include "filter.h"
 #include "tokenizer.h"
 
@@ -480,7 +481,7 @@ void monad_learn_ex(Monad *m, const char *text, int verbose, NSFiletype ft)
 
         for (int t = 0; t < ntok; t++) {
             const char *word = toks[t];
-            if (!token_accept(word, ft)) { m->rejected_count++; continue; }
+            if (!token_accept(word, ft)) { m->rejected_count++; DPRINT_S("learn.rejected", word); continue; }
             int idx; double E;
             monad_wm_get(m, word, &idx, &E);
             monad_wm_set(m, word, (uint32_t)idx);
@@ -491,6 +492,10 @@ void monad_learn_ex(Monad *m, const char *text, int verbose, NSFiletype ft)
             if (nb > MONAD_BETA_SAT) nb = MONAD_BETA_SAT;
             m->beta[idx] = nb;
 
+            if (m->vocab[idx].present && strcmp(m->vocab[idx].word, word) != 0) {
+                DPRINT_I("learn.slot_shared", idx); DPRINT_S("learn.slot_shared.held", m->vocab[idx].word); DPRINT_S("learn.slot_shared.arriving", word);
+                DPRINT_D("learn.slot_shared.held_E", m->vocab[idx].E); DPRINT_D("learn.slot_shared.arriving_E", E);
+            }
             if (!m->vocab[idx].present || E > m->vocab[idx].E) {
                 strncpy(m->vocab[idx].word, word, MAX_WORD_LEN - 1);
                 m->vocab[idx].word[MAX_WORD_LEN - 1] = '\0';

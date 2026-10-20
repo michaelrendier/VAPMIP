@@ -1,0 +1,11 @@
+[state] loaded bins/test_chinese_english_v2.bin  vocab=0  A=0  wc=0
+[ptolemy] learning (8070068 bytes)
+[monad] N=25000  vocab=910  A_edges=146242  word_count=1887788
+        ground=0.00007552  deepest_β=7.5520 (z#387  γ=664.4010  "的")
+        σ=0.5 (Noether forcing)  wm=923/65536  am=146242/262144
+        affect(e7)=0.00  (neutral)
+[state] saved bins/test_chinese_english_v2.bin  vocab=910  A=146242
+
+real	0m2.297s
+user	0m2.262s
+sys	0m0.024s

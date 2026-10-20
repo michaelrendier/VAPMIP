@@ -3,9 +3,15 @@
 # Fresh Start from v1.0: the Chinese address changed (code-point Horner, base 0x110001 -> Han-ideograph alphabet, base 97 518); v1.0 is archived in clean/archive/v1.0/.
 # English v2.0 is the v1.0 bytes with the version field 5 -> 6 and nothing else (checked byte for byte): the rebuild is deterministic.
 
+# 2026-10-19 (zh/en experiment): test_chinese_v2.0.bin and test_english_v2.0.bin DELETED (by instruction) and replaced by the four word-list bins below; the four were built from
+# experiment_v2/list.tsv-filtered corpora by tools/exp_v2_run.sh; see wiki 11_baseline_mapping_zh_en.md. test_finnish_v2.0.bin and test_indonesian_v2.0.bin are untouched.
+file	sha256	binary	alphabet	corpus
+test_chinese_v2.bin	bc74a57bbc900b04429147888e60d636cb29f7cd4148cfd6b8108b8d89f9e532	build/exp_v2/ptolemy_zh	Han table, -DHAN_RUN	experiment_v2/text_zh.txt
+test_english_v2.bin	78d2e3e1cbcdb4a69b24a1c2877f66cbecea1ac054fab1c461b4aaea7f9b69fe	build/exp_v2/ptolemy_en	ASCII-95	experiment_v2/text_en.txt
+test_chinese_english_v2.bin	675e13d00bb65275d1a8198fc7b7d3bdc341648c77bd65ce6c81748bf8901214	build/exp_v2/ptolemy_un	union ' a-z + Han (97 545), -DHAN_RUN	text_zh then text_en
+test_english_chinese_v2.bin	49786833cf5ec2f0c6ca7f3c21b096ddd27e9495a58d2b79f9955b2543fb4e02	build/exp_v2/ptolemy_un	union ' a-z + Han (97 545), -DHAN_RUN	text_en then text_zh
+
 file	sha256	binary	alphabet	corpus (sha256 prefix)
-test_chinese_v2.0.bin	54191ff85a7f648fc71a77f65f32705aa5542151db09f736b3ab0ff80ddb7a64	build/v2/ptolemy_zh (7a23d47b4a2bd211)	table: alphabet_zh.h, 97 518 Han ideographs (base 97 518)	corpora/text/zh_v1.txt (d6317bbd814a4764)
-test_english_v2.0.bin	6470c4d4a814882702c3cbafd4cad1afe6331ac218d8db886173c16106aa2864	build/v2/ptolemy_en (5f53fbd1284027e5)	ASCII-95 (base 95)	corpora/text/en_v1.txt (705dfc199913a548)
 test_finnish_v2.0.bin	a14bf7448d7ef8fce8ec6101db2587abda3aac3dee55fe7949301bbd31ac41b5	build/v2/ptolemy_fi (b847575f80b362fc)	table: alphabet_fi.h, 32 characters (base 32)	corpora/text/fi_v1.txt (f834f922942e5301)
 test_indonesian_v2.0.bin	088731d1bb77fb911613da27e4f1aee80ac890d74b9d10c59e23ad9136339860	build/v2/ptolemy_en (5f53fbd1284027e5)	ASCII-95 (base 95), same binary as English	corpora/text/id_v1.txt (b6414b980be2dad5)
 
