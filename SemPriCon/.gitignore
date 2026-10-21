@@ -1,5 +1,6 @@
 # Fresh Start Protocol: the assessments are committed first; only then are the bins listed here.
 dirty/*.bin
+dirty/**/*.bin
 clean/*.bin
 # local builds and scratch state
 build/
@@ -14,3 +15,8 @@ corpora/*
 !corpora/fetch_zh.sh
 !corpora/text/
 corpora/text/*.txt
+
+# zero-finder checkpoint
+SpecTools/zeros/*.ckpt
+data/zh_structure.pkl
+data/zh_half_line_addresses.tsv

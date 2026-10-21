@@ -1,0 +1,71 @@
+{
+ "M3_words_checked": 47233,
+ "M3_float_differs_from_M1": 0,
+ "M1_words_of_8_or_more_letters_at_slot_0": 13097,
+ "M3_exact_integer_differs_from_M1_among_words_under_8_letters": 8101,
+ "M3_exact_integer_differs_from_M1_among_words_8_plus": 13096,
+ "M3_equator": true,
+ "M3_replies": [
+  {
+   "prompt": "what is your name",
+   "binary": "holcus​same​stuff​seemy",
+   "uns_port": "holcus​same​stuff​seemy",
+   "identical": true
+  },
+  {
+   "prompt": "can you hear what i am typing",
+   "binary": "holcus​setn​abysmal​quun",
+   "uns_port": "holcus​setn​abysmal​quun",
+   "identical": true
+  },
+  {
+   "prompt": "who are you",
+   "binary": "holcus​abysmal​quun​tuxen",
+   "uns_port": "holcus​abysmal​quun​tuxen",
+   "identical": true
+  },
+  {
+   "prompt": "what is a tree",
+   "binary": "holcus​jome​logzh​cold",
+   "uns_port": "holcus​jome​logzh​cold",
+   "identical": true
+  },
+  {
+   "prompt": "good morning",
+   "binary": "holcus​conoy​nland​abusive",
+   "uns_port": "holcus​conoy​nland​abusive",
+   "identical": true
+  },
+  {
+   "prompt": "the cat sat on the mat",
+   "binary": "holcus​bacoo seemy​nanti",
+   "uns_port": "holcus​bacoo seemy​nanti",
+   "identical": true
+  },
+  {
+   "prompt": "how do you do",
+   "binary": "holcus​behim​celiac​stuff",
+   "uns_port": "holcus​behim​celiac​stuff",
+   "identical": true
+  },
+  {
+   "prompt": "tell me about water",
+   "binary": "holcus​piezo​nazri​geolb",
+   "uns_port": "holcus​piezo​nazri​geolb",
+   "identical": true
+  }
+ ],
+ "M3_replies_identical": 8,
+ "M4_characters": 97518,
+ "M4_differs_from_M2": 0,
+ "M4_off_equator": 0,
+ "M4_r_range": [
+  1.000020327799943,
+  2.3025019488376746
+ ],
+ "radial_shell_expected": [
+  1.0,
+  2.302585092994046
+ ],
+ "golden_angle_degrees": 137.50776405003785
+}

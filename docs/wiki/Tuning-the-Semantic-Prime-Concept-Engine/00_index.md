@@ -24,6 +24,11 @@ Working directory: `VAPMIP/SemPriCon/`. Test bed: Chinese (Traditional), English
 | [09_the_test_bins.md](09_the_test_bins.md) | test bins | `test_{chinese,english,finnish,indonesian}_v2.0.bin`: one alphabet each, how they were built, versioning |
 | [10_design_notes.md](10_design_notes.md) | design notes | decided-but-unbuilt ideas, e.g. the invisible tone / tense / conjugation prefix |
 | [11_baseline_mapping_zh_en.md](11_baseline_mapping_zh_en.md) | workbench | LIVE SNAPSHOT: the four zh/en word-list bins, where every list word landed, pair offsets, second-pass effects, order effect, fault rows; pull a block with `tools/wb_pull.py` |
+| [12_four_mechanisms.md](12_four_mechanisms.md) | mechanisms | the four address mechanisms (M1 English ½ line, M2 Chinese ½ line, M3 English in UNS, M4 Chinese in UNS), why English and Chinese differ, shared constants, order of work |
+| [13_M1_english_to_half_line.md](13_M1_english_to_half_line.md) | M1 | the machinery behind `holcus·same·stuff·seemy` as it ran (eb28ce8), and what it measurably is |
+| [14_M2_chinese_to_half_line.md](14_M2_chinese_to_half_line.md) | M2 | single Chinese character → dictionary position → exact zero; E from the golden-ratio hash of the key component; self-test and held-out probes |
+| [15_M3_english_in_uns.md](15_M3_english_in_uns.md) | M3 | M1 as golden-angle rotations on the π/2 equatorial great circle of UNS; byte-identical replies |
+| [16_M4_chinese_in_uns.md](16_M4_chinese_in_uns.md) | M4 | M2 as an azimuth turn on the equator with the key component as radius |
 | [1024.md](1024.md) | word list | the English row headers, their Chinese words and the slot of each in every bin; updated in place |
 
-*12 pages.*
+*17 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).
