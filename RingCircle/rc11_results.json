@@ -1,0 +1,33 @@
+{
+ "three_slot_sets: (is_a_line_of_PG(3,2), distinct_results) -> count": {
+  "(True, 6)": 35,
+  "(False, 12)": 252,
+  "(False, 8)": 168
+ },
+ "four_slot_sets: (deforming pairs inside, XOR of the four = 0, outcome) -> count": {
+  "('deforming_pairs_inside=0', 'xor_of_four_is_zero=False', 'pure')": 119,
+  "('deforming_pairs_inside=2', 'xor_of_four_is_zero=False', 'pure')": 399,
+  "('deforming_pairs_inside=3', 'xor_of_four_is_zero=False', 'pure')": 406,
+  "('deforming_pairs_inside=0', 'xor_of_four_is_zero=True', 'pure')": 21,
+  "('deforming_pairs_inside=1', 'xor_of_four_is_zero=False', 'pure')": 84,
+  "('deforming_pairs_inside=2', 'xor_of_four_is_zero=True', 'pure')": 42,
+  "('deforming_pairs_inside=4', 'xor_of_four_is_zero=False', 'pure')": 84,
+  "('deforming_pairs_inside=4', 'xor_of_four_is_zero=False', 'deforms')": 84,
+  "('deforming_pairs_inside=4', 'xor_of_four_is_zero=True', 'deforms')": 42,
+  "('deforming_pairs_inside=3', 'xor_of_four_is_zero=False', 'deforms')": 84
+ },
+ "balanced_bracket_((ab)(cd))_on_1,2,4,8: pairing -> set of sign\u00b7(-1)^parity": {
+  "((1, 2), (4, 8))": [
+   -1,
+   1
+  ],
+  "((1, 4), (2, 8))": [
+   -1,
+   1
+  ],
+  "((1, 8), (2, 4))": [
+   -1,
+   1
+  ]
+ }
+}

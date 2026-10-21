@@ -1,0 +1,5 @@
+# rc3b — smallest generating set of circle operators; produced by the loop in the session (alg_dim over itertools.combinations of range(1,16), size 5, full ring dim 256); script text: sizes 1-4 are in results_part1.json (counts 0)
+pair {1,10} 8  {1,9} 4  {1,2,10} 16  {1,8} 4
+5 generate full 256: 1008 of 3003 [(1, 2, 3, 9, 12), (1, 2, 3, 9, 13), (1, 2, 3, 9, 14), (1, 2, 3, 9, 15)] 679.5 s
+
+[exited with code 0]

@@ -1,0 +1,647 @@
+{
+ "single_slots": {
+  "0": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL"
+   ],
+   "leaf": "LLLL",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "1": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLR"
+   ],
+   "leaf": "LLLR",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "2": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LL",
+    "LLR",
+    "LLRL"
+   ],
+   "leaf": "LLRL",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "3": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LL",
+    "LLR",
+    "LLRR"
+   ],
+   "leaf": "LLRR",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "4": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LR",
+    "LRL",
+    "LRLL"
+   ],
+   "leaf": "LRLL",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "5": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LR",
+    "LRL",
+    "LRLR"
+   ],
+   "leaf": "LRLR",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "6": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LR",
+    "LRR",
+    "LRRL"
+   ],
+   "leaf": "LRRL",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "7": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "L",
+    "LR",
+    "LRR",
+    "LRRR"
+   ],
+   "leaf": "LRRR",
+   "firing_order_first_8": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL",
+    "RLLR",
+    "RLR",
+    "RLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "8": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLL"
+   ],
+   "leaf": "RLLL",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "9": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RL",
+    "RLL",
+    "RLLR"
+   ],
+   "leaf": "RLLR",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "10": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RL",
+    "RLR",
+    "RLRL"
+   ],
+   "leaf": "RLRL",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "11": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RL",
+    "RLR",
+    "RLRR"
+   ],
+   "leaf": "RLRR",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "12": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RR",
+    "RRL",
+    "RRLL"
+   ],
+   "leaf": "RRLL",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "13": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RR",
+    "RRL",
+    "RRLR"
+   ],
+   "leaf": "RRLR",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "14": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RR",
+    "RRR",
+    "RRRL"
+   ],
+   "leaf": "RRRL",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  },
+  "15": {
+   "nonzero_chain_root_to_leaf": [
+    "root",
+    "R",
+    "RR",
+    "RRR",
+    "RRRR"
+   ],
+   "leaf": "RRRR",
+   "firing_order_first_8": [
+    "root",
+    "L",
+    "LL",
+    "LLL",
+    "LLLL",
+    "LLLR",
+    "LLR",
+    "LLRL"
+   ],
+   "all_nodes_isometry_exact": true
+  }
+ },
+ "pairs": {
+  "vectors_e_a_plus_minus_e_b": 240,
+  "zero_divisor_vectors": 84,
+  "zero_divisor_vectors_list": [
+   [
+    1,
+    10,
+    1
+   ],
+   [
+    1,
+    10,
+    -1
+   ],
+   [
+    1,
+    11,
+    1
+   ],
+   [
+    1,
+    11,
+    -1
+   ],
+   [
+    1,
+    12,
+    1
+   ],
+   [
+    1,
+    12,
+    -1
+   ],
+   [
+    1,
+    13,
+    1
+   ],
+   [
+    1,
+    13,
+    -1
+   ],
+   [
+    1,
+    14,
+    1
+   ],
+   [
+    1,
+    14,
+    -1
+   ],
+   [
+    1,
+    15,
+    1
+   ],
+   [
+    1,
+    15,
+    -1
+   ],
+   [
+    2,
+    9,
+    1
+   ],
+   [
+    2,
+    9,
+    -1
+   ],
+   [
+    2,
+    11,
+    1
+   ],
+   [
+    2,
+    11,
+    -1
+   ],
+   [
+    2,
+    12,
+    1
+   ],
+   [
+    2,
+    12,
+    -1
+   ],
+   [
+    2,
+    13,
+    1
+   ],
+   [
+    2,
+    13,
+    -1
+   ],
+   [
+    2,
+    14,
+    1
+   ],
+   [
+    2,
+    14,
+    -1
+   ],
+   [
+    2,
+    15,
+    1
+   ],
+   [
+    2,
+    15,
+    -1
+   ],
+   [
+    3,
+    9,
+    1
+   ],
+   [
+    3,
+    9,
+    -1
+   ],
+   [
+    3,
+    10,
+    1
+   ],
+   [
+    3,
+    10,
+    -1
+   ],
+   [
+    3,
+    12,
+    1
+   ],
+   [
+    3,
+    12,
+    -1
+   ],
+   [
+    3,
+    13,
+    1
+   ],
+   [
+    3,
+    13,
+    -1
+   ],
+   [
+    3,
+    14,
+    1
+   ],
+   [
+    3,
+    14,
+    -1
+   ],
+   [
+    3,
+    15,
+    1
+   ],
+   [
+    3,
+    15,
+    -1
+   ],
+   [
+    4,
+    9,
+    1
+   ],
+   [
+    4,
+    9,
+    -1
+   ],
+   [
+    4,
+    10,
+    1
+   ],
+   [
+    4,
+    10,
+    -1
+   ],
+   [
+    4,
+    11,
+    1
+   ],
+   [
+    4,
+    11,
+    -1
+   ],
+   [
+    4,
+    13,
+    1
+   ],
+   [
+    4,
+    13,
+    -1
+   ],
+   [
+    4,
+    14,
+    1
+   ],
+   [
+    4,
+    14,
+    -1
+   ],
+   [
+    4,
+    15,
+    1
+   ],
+   [
+    4,
+    15,
+    -1
+   ],
+   [
+    5,
+    9,
+    1
+   ],
+   [
+    5,
+    9,
+    -1
+   ],
+   [
+    5,
+    10,
+    1
+   ],
+   [
+    5,
+    10,
+    -1
+   ],
+   [
+    5,
+    11,
+    1
+   ],
+   [
+    5,
+    11,
+    -1
+   ],
+   [
+    5,
+    12,
+    1
+   ],
+   [
+    5,
+    12,
+    -1
+   ],
+   [
+    5,
+    14,
+    1
+   ],
+   [
+    5,
+    14,
+    -1
+   ],
+   [
+    5,
+    15,
+    1
+   ],
+   [
+    5,
+    15,
+    -1
+   ]
+  ],
+  "all_have_a_under_8_and_b_8_or_over": true
+ }
+}

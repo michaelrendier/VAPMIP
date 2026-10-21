@@ -1,0 +1,910 @@
+{
+ "RC1_slots_are_circles": {
+  "L_k_squared_is_minus_I": 15,
+  "L_k_skew_orthogonal": 15,
+  "R_k_squared_is_minus_I": 15,
+  "span_e0_ek_closed_copy_of_C": 15,
+  "of": 15
+ },
+ "RC2_pairs": {
+  "pairs": 105,
+  "anticommuting (Clifford-compatible)": 63,
+  "deforming (anticommutator nonzero)": 42,
+  "pairs inside the octonion slots 1..7": 21,
+  "of_those_anticommuting": 21,
+  "anticommutator_norm_values": [
+   5.656854
+  ],
+  "deforming_pairs_with_both_slots_under_8": 0
+ },
+ "RC2_table_anticommutator_norm": [
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   5.6569,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ ],
+ "RC2_deforming_pairs": [
+  [
+   1,
+   10
+  ],
+  [
+   1,
+   11
+  ],
+  [
+   1,
+   12
+  ],
+  [
+   1,
+   13
+  ],
+  [
+   1,
+   14
+  ],
+  [
+   1,
+   15
+  ],
+  [
+   2,
+   9
+  ],
+  [
+   2,
+   11
+  ],
+  [
+   2,
+   12
+  ],
+  [
+   2,
+   13
+  ],
+  [
+   2,
+   14
+  ],
+  [
+   2,
+   15
+  ],
+  [
+   3,
+   9
+  ],
+  [
+   3,
+   10
+  ],
+  [
+   3,
+   12
+  ],
+  [
+   3,
+   13
+  ],
+  [
+   3,
+   14
+  ],
+  [
+   3,
+   15
+  ],
+  [
+   4,
+   9
+  ],
+  [
+   4,
+   10
+  ],
+  [
+   4,
+   11
+  ],
+  [
+   4,
+   13
+  ],
+  [
+   4,
+   14
+  ],
+  [
+   4,
+   15
+  ],
+  [
+   5,
+   9
+  ],
+  [
+   5,
+   10
+  ],
+  [
+   5,
+   11
+  ],
+  [
+   5,
+   12
+  ],
+  [
+   5,
+   14
+  ],
+  [
+   5,
+   15
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   6,
+   10
+  ],
+  [
+   6,
+   11
+  ],
+  [
+   6,
+   12
+  ],
+  [
+   6,
+   13
+  ],
+  [
+   6,
+   15
+  ],
+  [
+   7,
+   9
+  ],
+  [
+   7,
+   10
+  ],
+  [
+   7,
+   11
+  ],
+  [
+   7,
+   12
+  ],
+  [
+   7,
+   13
+  ],
+  [
+   7,
+   14
+  ]
+ ],
+ "RC3_dimension_of_generated_operator_ring": {
+  "{1}": 2,
+  "{1,2}": 4,
+  "{1,2,4}": 8,
+  "{1,2,4,8}": 16,
+  "all 15 L_k": 256,
+  "{1,2,4,8} L and R": 256,
+  "all 15 L_k and R_k": 256,
+  "octonion (8-dim) {1,2,4}": 8,
+  "octonion (8-dim) all 7": 64,
+  "quaternion (4-dim) {1,2}": 4,
+  "complex (2-dim) {1}": 2
+ },
+ "RC3_pair_dimensions": {
+  "{1,9} (anticommuting)": 4,
+  "{1,10} (deforming)": 8,
+  "{1,2,10}": 16,
+  "{1,2,4,8}": 16
+ },
+ "RC3_lie_closure_and_orbit_of_e0": {
+  "{1}": {
+   "lie_algebra_dim": 1,
+   "orbit_of_e0_dim": 1
+  },
+  "{1,2}": {
+   "lie_algebra_dim": 3,
+   "orbit_of_e0_dim": 3
+  },
+  "{1,2,4}": {
+   "lie_algebra_dim": 6,
+   "orbit_of_e0_dim": 6
+  },
+  "{1,2,4,8}": {
+   "lie_algebra_dim": 10,
+   "orbit_of_e0_dim": 10
+  },
+  "{1,9}": {
+   "lie_algebra_dim": 3,
+   "orbit_of_e0_dim": 3
+  },
+  "{1,10}": {
+   "lie_algebra_dim": 5,
+   "orbit_of_e0_dim": 3
+  },
+  "all 15": {
+   "lie_algebra_dim": 120,
+   "orbit_of_e0_dim": 15
+  }
+ },
+ "RC4_generator_products_per_slot": {
+  "1": {
+   "slot": 1,
+   "generators": [
+    1
+   ],
+   "firing_orders": 1,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 0
+   },
+   "bracketing_constant_c": {
+    "0": 1
+   }
+  },
+  "2": {
+   "slot": 2,
+   "generators": [
+    2
+   ],
+   "firing_orders": 1,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 0
+   },
+   "bracketing_constant_c": {
+    "0": 1
+   }
+  },
+  "3": {
+   "slot": 3,
+   "generators": [
+    1,
+    2
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "4": {
+   "slot": 4,
+   "generators": [
+    4
+   ],
+   "firing_orders": 1,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 0
+   },
+   "bracketing_constant_c": {
+    "0": 1
+   }
+  },
+  "5": {
+   "slot": 5,
+   "generators": [
+    1,
+    4
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "6": {
+   "slot": 6,
+   "generators": [
+    2,
+    4
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "7": {
+   "slot": 7,
+   "generators": [
+    1,
+    2,
+    4
+   ],
+   "firing_orders": 6,
+   "bracketings": 2,
+   "sign_counts": {
+    "+": 6,
+    "-": 6
+   },
+   "bracketing_constant_c": {
+    "(0(12))": -1,
+    "((01)2)": 1
+   }
+  },
+  "8": {
+   "slot": 8,
+   "generators": [
+    8
+   ],
+   "firing_orders": 1,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 0
+   },
+   "bracketing_constant_c": {
+    "0": 1
+   }
+  },
+  "9": {
+   "slot": 9,
+   "generators": [
+    1,
+    8
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "10": {
+   "slot": 10,
+   "generators": [
+    2,
+    8
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "11": {
+   "slot": 11,
+   "generators": [
+    1,
+    2,
+    8
+   ],
+   "firing_orders": 6,
+   "bracketings": 2,
+   "sign_counts": {
+    "+": 6,
+    "-": 6
+   },
+   "bracketing_constant_c": {
+    "(0(12))": -1,
+    "((01)2)": 1
+   }
+  },
+  "12": {
+   "slot": 12,
+   "generators": [
+    4,
+    8
+   ],
+   "firing_orders": 2,
+   "bracketings": 1,
+   "sign_counts": {
+    "+": 1,
+    "-": 1
+   },
+   "bracketing_constant_c": {
+    "(01)": 1
+   }
+  },
+  "13": {
+   "slot": 13,
+   "generators": [
+    1,
+    4,
+    8
+   ],
+   "firing_orders": 6,
+   "bracketings": 2,
+   "sign_counts": {
+    "+": 6,
+    "-": 6
+   },
+   "bracketing_constant_c": {
+    "(0(12))": -1,
+    "((01)2)": 1
+   }
+  },
+  "14": {
+   "slot": 14,
+   "generators": [
+    2,
+    4,
+    8
+   ],
+   "firing_orders": 6,
+   "bracketings": 2,
+   "sign_counts": {
+    "+": 6,
+    "-": 6
+   },
+   "bracketing_constant_c": {
+    "(0(12))": -1,
+    "((01)2)": 1
+   }
+  },
+  "15": {
+   "slot": 15,
+   "generators": [
+    1,
+    2,
+    4,
+    8
+   ],
+   "firing_orders": 24,
+   "bracketings": 5,
+   "sign_counts": {
+    "+": 60,
+    "-": 60
+   },
+   "bracketing_constant_c": {
+    "(0(1(23)))": -1,
+    "(0((12)3))": 1,
+    "((01)(23))": "order-dependent beyond parity",
+    "((0(12))3)": -1,
+    "(((01)2)3)": 1
+   }
+  }
+ },
+ "RC5_conjugation_by_circle_k_of_slot_j (j=0 included)": {
+  "ordered_pairs": 225,
+  "exact_in_place_rotation_both_bracketings": 210,
+  "exact_rotation_left_bracketing_only": 0,
+  "exact_rotation_right_bracketing_only": 0,
+  "neither": 15
+ },
+ "RC5_examples_of_neither": [
+  [
+   1,
+   0
+  ],
+  [
+   2,
+   0
+  ],
+  [
+   3,
+   0
+  ],
+  [
+   4,
+   0
+  ],
+  [
+   5,
+   0
+  ],
+  [
+   6,
+   0
+  ],
+  [
+   7,
+   0
+  ],
+  [
+   8,
+   0
+  ]
+ ],
+ "RC5_pairs_where_in_place_rotation_fails": [],
+ "RC5_failing_pairs_equal_the_42_deforming_pairs": false,
+ "RC6_two_circles_product_norm_defect_max_over_all_pairs": 2.220446049250313e-16,
+ "RC6_norm_ratio_|xy|/(|x||y|)_by_subalgebra_dimension": {
+  "1": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "2": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "4": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "8": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "16": {
+   "min": 0.626302,
+   "max": 1.289463
+  }
+ },
+ "RC6_two_sparse_zero_divisor_pairs (x=e_i\u00b1e_j, y=e_k\u00b1e_l, directed)": 336,
+ "RC6_zero_divisor_pairs_all_with_i_under_8_and_j_8_or_over": true,
+ "RC9_circle_products_by_slot_set": {
+  "2": {
+   "slot_sets": 105,
+   "pure_rotation_all_bracketings_and_orders": 105,
+   "ever_leave_unit_sphere": 0,
+   "examples_of_deforming": [],
+   "distinct_results_per_set_histogram (max over phase draws)": {
+    "2": 105
+   },
+   "result_count_per_set_maximum_possible": 2
+  },
+  "3": {
+   "slot_sets": 455,
+   "pure_rotation_all_bracketings_and_orders": 455,
+   "ever_leave_unit_sphere": 0,
+   "examples_of_deforming": [],
+   "distinct_results_per_set_histogram (max over phase draws)": {
+    "6": 35,
+    "8": 168,
+    "12": 252
+   },
+   "result_count_per_set_maximum_possible": 12
+  },
+  "4": {
+   "slot_sets": 1365,
+   "pure_rotation_all_bracketings_and_orders": 1155,
+   "ever_leave_unit_sphere": 210,
+   "examples_of_deforming": [
+    [
+     [
+      1,
+      2,
+      12,
+      13
+     ],
+     0.0197
+    ],
+    [
+     [
+      1,
+      2,
+      12,
+      14
+     ],
+     0.2066
+    ],
+    [
+     [
+      1,
+      2,
+      12,
+      15
+     ],
+     0.0578
+    ],
+    [
+     [
+      1,
+      2,
+      13,
+      14
+     ],
+     0.0456
+    ],
+    [
+     [
+      1,
+      2,
+      13,
+      15
+     ],
+     0.2842
+    ]
+   ],
+   "distinct_results_per_set_histogram (max over phase draws)": {
+    "48": 28,
+    "60": 84,
+    "64": 42,
+    "76": 84,
+    "96": 168,
+    "104": 252,
+    "108": 224,
+    "112": 336,
+    "120": 147
+   },
+   "result_count_per_set_maximum_possible": 120
+  }
+ },
+ "RC7_UNS_operator_count": {
+  "lie_dim {Jz}": 1,
+  "lie_dim {Jz,Jy} (azimuth, polar)": 3,
+  "lie_dim {Jz,Jy,D} (adding the radial dilation)": 4,
+  "reading": "radial complex spherical chart: in the log radial coordinate u = ln r the dilation is a translation along u, so the radial operator is one additive generator; the angular part is two circle generators"
+ }
+}
