@@ -20,7 +20,7 @@ import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, ".."))
 for d in ("UNS", "Flat"):                                   # the mapping machinery is run from mappings/ (mirrors of tools/)
     sys.path.insert(0, os.path.join(ROOT, "mappings", d))
-sys.path.insert(0, os.path.join(ROOT, "EnglishSpeaking"))     # live toolset: the WordNet layer (needs nltk: run with PtolemyDesktop/.venv)
+sys.path.insert(0, os.path.join(ROOT, "EnglishSpeaking"))     # live toolset: the WordNet layer (needs nltk, installed in SemPriCon/.venv)
 sys.path.insert(0, os.path.join(ROOT, "tools"))             # monad_pyu (the Unicode port of the monad) is shared machinery
 import numpy as np
 import monad_pyu as pyu

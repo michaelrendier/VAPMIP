@@ -11,8 +11,8 @@ It is the original WordNet method (NLTK + Princeton WordNet 3.0), not the boxkit
 Limits, stated: no determiners, no tense; the only inflection is third-person -s on a verb that follows a noun; senses are chosen by relatedness only,
 so a short list gives weak context (nltk-zork-wordnet skill §4).
 
-    PtolemyDesktop/.venv/bin/python english_speaking_wordnet.py [--order given|english|chain|all] word word ...
-The system python3 crashes on `import nltk` (pandas ABI mismatch); use the PtolemyDesktop venv.
+    .venv/bin/python EnglishSpeaking/english_speaking_wordnet.py   (run from SemPriCon/) [--order given|english|chain|all] word word ...
+Use SemPriCon/.venv (nltk 3.10.4 installed there; WordNet 3.0 data in ~/nltk_data, which nltk reads only while it is not group/world-writable: chmod go-w).
 """
 import sys, itertools
 from nltk.corpus import wordnet as wn
