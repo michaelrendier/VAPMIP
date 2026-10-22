@@ -102,3 +102,8 @@ Carried from the v2 four-bin run (page 11): 0 of 1,051 matched English–Chinese
 | S4 | English: stem/affix tokenization so word families share a key; test whether families cluster. |
 | S5 | Chinese: character/radical components as the unit, using the Baseline stores already in the repo (Unihan, makemeahanzi, cjkvi-ids, Shuowen). |
 | S6 | Report every result with its chance baseline (the triangle for slot distance), as page 11 does. |
+
+## 9. v3.0 (2026-10-21)
+- **Baseline language.** Chinese is the baseline for the measurement (Cody): ideographic; alive and spoken well today; over five millennia old; believed one of the most efficient partitionings of idea space (assumption, unmeasured). Bare minimum of ideas space; separates couch from chair. Recorded in wiki 17.
+- **Word list v3.0.** `calibration/calibration_v3_en_zh.tsv`, frozen: 512 × 2, single Chinese characters. **Bins:** `clean/test_english_v3.0.bin` (M3) and `clean/test_chinese_v3.0.bin` (M4), exact zeros, no token filter, no A edges.
+- **First survey:** English 732 occupied slots with 210 words on slot 0 (M1 float-seed defect carried by M3); Chinese 996 occupied slots, at most 3 per slot; same concept in the same slot in 0 of 1 024 rows. X6 (assign English words to Chinese idea slots) is the next discussion, not started.

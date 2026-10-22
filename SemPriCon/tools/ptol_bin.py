@@ -57,3 +57,18 @@ def write_ground(path, N=25000, ground_abs=1.888, threshold=3.776, version=4):
         f.write(b"PTOL" + struct.pack("<5I", version, N, 0, 0, 0) + struct.pack("<d", threshold) + struct.pack("<f", 0.0))
         f.write(np.full(N, ground_abs / N, dtype="<f8").tobytes())
         f.write(np.zeros(N, dtype="<i4").tobytes())
+
+
+def write_state(path, N, beta, age, vocab, edges=(), word_count=0, threshold=3.776, affect=0.0, version=6):
+    """Write a PTOL state file (STATE_VERSION 4..6) from Python: the inverse of load().  Layout as in load(): header, affect f32, beta f64[N], age i32[N],
+    vocab sorted by slot (idx u32, wlen u16, E f64, home_stratum u8, gen_stratum u8, prose_seen u8, word), edges (i u32, j u32, w f64).
+    :param vocab: iterable of (idx, word, E, hs, gs, ps).  :param edges: iterable of (i, j, w).  Verified byte-identical against load() of a C-written v6 file (tools/v3_build.py --selftest)."""
+    vocab = sorted(vocab, key=lambda v: v[0]); edges = list(edges)
+    with open(path, "wb") as f:
+        f.write(b"PTOL" + struct.pack("<5I", version, N, len(vocab), len(edges), word_count) + struct.pack("<d", threshold) + struct.pack("<f", affect))
+        f.write(np.asarray(beta, dtype="<f8").tobytes()); f.write(np.asarray(age, dtype="<i4").tobytes())
+        for idx, word, E, hs, gs, ps in vocab:
+            wb = word.encode("utf-8")
+            f.write(struct.pack("<IHd", idx, len(wb), E) + bytes([hs, gs, ps]) + wb)
+        for i, j, w in edges:
+            f.write(struct.pack("<IId", i, j, w))

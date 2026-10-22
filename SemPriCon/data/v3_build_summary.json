@@ -1,0 +1,62 @@
+{
+ "list_sha256": "d130d2b43e2fe0fbf65dbaad193bf6ed8451c3cfe49ed93b2169e96b716ed1f1",
+ "english": {
+  "occupied_slots": 732,
+  "max_words_in_a_slot": 210,
+  "slots_with_more_than_one": 45,
+  "outranked_words": 292,
+  "slot_0_words": 210,
+  "words_of_8_or_more_letters": 208,
+  "filter_would_reject": 8,
+  "rejected_words": [
+   "cry",
+   "fly",
+   "pharynx",
+   "scratch",
+   "strength",
+   "stretch",
+   "stylish",
+   "yr"
+  ]
+ },
+ "chinese": {
+  "occupied_slots": 996,
+  "max_words_in_a_slot": 3,
+  "slots_with_more_than_one": 26,
+  "outranked_words": 28,
+  "slot_0_words": 1
+ },
+ "bins": {
+  "test_english_v3.0.bin": "5fecfabee487cc793812f09a9390cc4e912f033d75e983158d3c13d5d20a2888",
+  "test_chinese_v3.0.bin": "f2de1e456fff18c86d8ac6fe6e3acb00da3360cef677fc5a0f073952547cc3bd"
+ },
+ "english_vs_chinese_same_row_turn_distance": {
+  "median": 0.24149357966210605,
+  "mean": 0.24196130453545117,
+  "shuffled_median": 0.2561014376832995,
+  "uniform_expected_mean": 0.25,
+  "within_0_01": 19,
+  "shuffled_within_0_01": 26
+ },
+ "same_slot": 0,
+ "SL_partner_turn_distance": {
+  "english_median": 0.23576311767101288,
+  "english_shuffled_median": 0.22762489318847656,
+  "chinese_median": 0.1815562255173404,
+  "chinese_shuffled_median": 0.2656637748928403,
+  "english_within_0_01": 39,
+  "chinese_within_0_01": 67,
+  "english_shuffled_within_0_01": 27,
+  "chinese_shuffled_within_0_01": 20
+ },
+ "r_range": {
+  "english": [
+   0.9987527710453253,
+   2.298505036163162
+  ],
+  "chinese": [
+   1.0048813072176621,
+   2.297428093935268
+  ]
+ }
+}

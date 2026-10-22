@@ -29,6 +29,7 @@ Working directory: `VAPMIP/SemPriCon/`. Test bed: Chinese (Traditional), English
 | [14_M2_chinese_to_half_line.md](14_M2_chinese_to_half_line.md) | M2 | single Chinese character → dictionary position → exact zero; E from the golden-ratio hash of the key component; self-test and held-out probes |
 | [15_M3_english_in_uns.md](15_M3_english_in_uns.md) | M3 | M1 as golden-angle rotations on the π/2 equatorial great circle of UNS; byte-identical replies |
 | [16_M4_chinese_in_uns.md](16_M4_chinese_in_uns.md) | M4 | M2 as an azimuth turn on the equator with the key component as radius |
+| [17_v3_word_list_and_uns_bins.md](17_v3_word_list_and_uns_bins.md) | v3.0 | the v3.0 word list (single Chinese characters), why Chinese is the baseline, the two UNS bins, M3 and M4 side by side, first survey |
 | [1024.md](1024.md) | word list | the English row headers, their Chinese words and the slot of each in every bin; updated in place |
 
-*17 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).
+*18 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).

@@ -1,2 +1,6 @@
-# clean/ — empty on purpose (Fresh Start to v3.0, 2026-10-21)
-# v2.0 archived: bins dirty/v2.0/ (gitignored, sha256 in dirty/v2.0/MANIFEST_v2.0.tsv); assessments + manifest clean/archive/v2.0/. v3.0 bins are not built yet.
+# clean/ — Fresh Start v3.0 (2026-10-21)
+# Two single-language Universal Native Space bins, read-only, built by tools/v3_build.py from calibration/calibration_v3_en_zh.tsv (sha256 below).
+# Each is: ground state -> one learning pass over its half of the 1 024-row list -> frozen.  State format v6.  v2.0 is archived in dirty/v2.0/ (bins) and clean/archive/v2.0/.
+file	sha256	address	word list
+test_english_v3.0.bin	5fecfabee487cc793812f09a9390cc4e912f033d75e983158d3c13d5d20a2888	M3: English in UNS (tools/uns_mech.en_uns; eb28ce8 float seed, golden-angle turns on the pi/2 equator)	calibration_v3_en_zh.tsv d130d2b43e2fe0fb (en_us column)
+test_chinese_v3.0.bin	f2de1e456fff18c86d8ac6fe6e3acb00da3360cef677fc5a0f073952547cc3bd	M4: Chinese in UNS (tools/uns_mech.zh_uns; dictionary-order turn, key-component radius, exact zeros)	calibration_v3_en_zh.tsv d130d2b43e2fe0fb (zh_trad column)

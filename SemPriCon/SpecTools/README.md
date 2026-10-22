@@ -27,7 +27,7 @@ Wiki = `../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/`. Requirements, f
 | v1.0 | `test_chinese_v1.0.bin`, `test_english_v1.0.bin` | `bin_creation/build_v1.0_zh_en_bins.md`; archive `clean/archive/v1.0/` |
 | v2.0 | `test_finnish_v2.0.bin`, `test_indonesian_v2.0.bin` | `bin_creation/build_v2.0_fi_id_bins.md` |
 | v2.0 | the four zh/en word-list bins (`test_{chinese,english,chinese_english,english_chinese}_v2.bin`) | `bin_creation/build_v2.0_zh_en_wordlist_bins.sh` (copy of `tools/exp_v2_run.sh`) |
-| v3.0 | not built yet (Fresh Start 2026-10-21: v2.0 archived in `dirty/v2.0/`, gitignored; assessments in `clean/archive/v2.0/`) | |
+| v3.0 | `test_english_v3.0.bin`, `test_chinese_v3.0.bin` (UNS mechanisms M3 and M4 over the v3.0 word list) | `tools/v3_build.py` (needs `calibration/calibration_v3_en_zh.tsv`); v2.0 archived in `dirty/v2.0/`, gitignored; assessments in `clean/archive/v2.0/` |
 Common pieces: `tools/ptol_bin.py` (state-file reader/writer), `tools/gen_alphabet.py`, `tools/ingest_corpora.py`, `tools/vocab_build.py`, `tools/text_build.py`, `tools/exp_v2_filter.py`, `tools/exp_v2_list.py`, `src/PtolC_unicode/` (+ `src/unicode_upgrade.patch`).
 
 ## 4 · The 1024-word list and the calibration sets
@@ -36,6 +36,7 @@ Common pieces: `tools/ptol_bin.py` (state-file reader/writer), `tools/gen_alphab
 | the word list as mapped in the four v2.0 bins (updated in place) | wiki `1024.md`; source rows `experiment_v2/list.tsv` |
 | frozen calibration set v1 (1 024 EN+ZH), pinned | `calibration/calibration_v1_en_zh.tsv`, `calibration/FROZEN.sha256` |
 | calibration v2 (EN+ZH+FI+ID, candidate) | `calibration/calibration_v2_en_zh_fi_id.tsv`; builders `tools/calibration_v1.py`, `calibration_v2.py`, `calibration_build.py` |
+| v3.0 list (1 024 rows, single Chinese characters, frozen) | `calibration/calibration_v3_en_zh.tsv`, `calibration/FROZEN_v3.sha256`; builder `tools/calibration_v3.py` with `tools/en_word_freq.py`, `tools/zh_char_freq.py` (system python3 + pyarrow); PDF of the list and its map `tools/v3_pdf.py`, wiki 17 |
 | six-language set (on hold) | `calibration/on_hold/` |
 
 ## 5 · Assessments and probes
