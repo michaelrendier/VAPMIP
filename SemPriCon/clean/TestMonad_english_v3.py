@@ -9,6 +9,7 @@ Both v3 speakers are copies of the same engine step (monad_py.Monad.speak: hear,
 observed side by side. Every deviation from the engine is marked  # TESTMONAD-Fn  and listed in clean/ notepad (wiki_notepad/v3/).
   TESTMONAD-S1  (attempt 2) the spread radius and decay are rescaled by the bin's mean vocabulary spacing N/|vocab| (spread was +-3 slots, e^-dn; a 732-word bin has a word every 34 slots).
   TESTMONAD-S2  (attempt 2) say(): the reply framed as a sentence (English: spaces, capital, full stop; Chinese: 。).
+  TESTMONAD-W1  (attempt 3) --wordnet [--order given|english|chain|all]: the chosen words go through EnglishSpeaking/english_speaking_wordnet.py last.
   TESTMONAD-F3  (attempt 2) SEP was an empty range, so separators were never recognised (the same slip is in tools/v3_speak.py, left as is).
   TESTMONAD-F2  trace only: tr['funnel'] counts the candidates left after each gate.
   TESTMONAD-F1  the absolute floor GAP is dropped from J_floor (found 2026-10-22: all three v3 bins spoke '' because J_max < GAP).
@@ -19,6 +20,7 @@ import os, sys, math
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, ".."))
 for d in ("UNS", "Flat"):                                   # the mapping machinery is run from mappings/ (mirrors of tools/)
     sys.path.insert(0, os.path.join(ROOT, "mappings", d))
+sys.path.insert(0, os.path.join(ROOT, "EnglishSpeaking"))     # live toolset: the WordNet layer (needs nltk: run with PtolemyDesktop/.venv)
 sys.path.insert(0, os.path.join(ROOT, "tools"))             # monad_pyu (the Unicode port of the monad) is shared machinery
 import numpy as np
 import monad_pyu as pyu
@@ -128,9 +130,15 @@ class TestMonadEnglish(pyu.MonadU):
                        golden_step=step, target_E=target_E, demotic=dem, emitted=emitted, phi_rot=phi_rot))
         return out
 
-    def say(self, query, max_tokens=50, tr=None):
-        """TESTMONAD-S2 (attempt 2): the reply as a sentence: Fermat-space separators read as ordinary spaces, first letter capitalised, a full stop."""
+    def say(self, query, max_tokens=50, tr=None, layer=None, order="given"):
+        """TESTMONAD-S2 (attempt 2): the reply as a sentence: Fermat-space separators read as ordinary spaces, first letter capitalised, a full stop.
+        TESTMONAD-W1 (attempt 3): with layer=EnglishWordNetLayer the chosen words go through the WordNet layer last (order given|english|chain)."""
+        tr = tr if tr is not None else {}
         out = self.speak_wick(query, max_tokens, tr)
+        if layer is not None:
+            words = [e[3] for e in tr["emitted"]]
+            r = layer.sentence(words, order); tr["wordnet"] = r
+            return r["sentence"]
         w = "".join(" " if c in SEP else c for c in out).split()
         return (" ".join(w)[:1].upper() + " ".join(w)[1:] + ".") if w else ""
 
@@ -148,7 +156,8 @@ def main(argv):
     exact = "--exact-zeros" in argv
     path = os.path.join(HERE, "test_english_v3.bin")
     if "--bin" in argv: path = argv[argv.index("--bin") + 1]
-    prompts = [a for a in argv if not a.startswith("--") and a != path] or ['what is your name', 'water fire']
+    skip = {path} | ({argv[argv.index("--order") + 1]} if "--order" in argv else set())
+    prompts = [a for a in argv if not a.startswith("--") and a not in skip] or ['what is your name', 'water fire']
     for p in prompts:
         m = TestMonadEnglish.from_bin(path)
         if exact: Z = exact_zeros(); m.zeros = [Z[k + 1] for k in range(m.N)]
@@ -157,6 +166,13 @@ def main(argv):
         m2 = TestMonadEnglish.from_bin(path)
         if exact: m2.zeros = m.zeros
         print(f"  sentence: {m2.say(p)}")
+        if "--wordnet" in argv:                                  # TESTMONAD-W1
+            from english_speaking_wordnet import EnglishWordNetLayer
+            lay = EnglishWordNetLayer(); od = argv[argv.index("--order") + 1] if "--order" in argv else "all"
+            for o in (["given", "english", "chain"] if od == "all" else [od]):
+                m3 = TestMonadEnglish.from_bin(path); tr3 = {}
+                print(f"  wordnet[{o:7s}]: {m3.say(p, tr=tr3, layer=lay, order=o)}")
+            print("  senses: " + "; ".join(f"{w}={n}" for w, n, d in tr3["wordnet"]["senses"]))
         print(f"  heard: {[(t, i, 'known' if k else 'new') for i, E, k, t in m.hear_raw(p)]}")
         print(f"  lag {tr['lag_ratio']:.3f}  target_E {tr['target_E']:.5f}  J_max {tr['J_max']:.3g}  floor {tr['J_floor']:.3g}  demotic {tr['demotic']}  emitted {[(e[0], e[1], e[2]) for e in tr['emitted']]}\n  funnel {tr['funnel']}")
 

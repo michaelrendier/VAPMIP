@@ -1,5 +1,7 @@
 # SemPriCon — the golden-ratio monad, as it was
 
+> **SemPriCon is a live snapshot of live work.** It is the workbench: the tooling, scripts and "current state of the experiments" notes for software being engineered right now. It holds no historical artefacts; Git history already is the archive (commit and push, then look back with `git log`). The only historic documentation is the experiment-version write-up made at the end of each experiment battery (`../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/`). The live notes in `wiki_notepad/` keep only what is pertinent to *now* and are archived into that wiki when a battery finishes. Everything here is subject to change at any moment.
+
 Work directory for the white paper on the simplest engine in the lineage: the May-2026 C monad (`PtolC/` at commit `eb28ce8`, v1.215) that answered "what is your name" with `holcus same stuff seemy`. SemPriCon = Semantic Prime Concept; the prime-concept hash itself is **not** in the baseline documented here.
 
 | path | what |
@@ -15,6 +17,10 @@ Work directory for the white paper on the simplest engine in the lineage: the Ma
 | `tools/make_notebooks.py` | writes `notebooks/` (execute with nbconvert) |
 | `figures/` | figures made by the notebooks |
 | `src/PtolC_unicode/`, `src/unicode_upgrade.patch` | the Unicode build of the C monad (a copy of the 2026-05 source plus the patch) |
+| `clean/` | the current battery: bins `test_*_v{V}.bin`, speakers `TestMonad_*_v{V}.py`, assessments (naming: `SpecTools/NAMING_CONVENTION.md`) |
+| `mappings/{UNS,Flat}/` | the mapping algorithms in use, mirrored byte-identically from `tools/` (`mappings/verify_mirror.sh`); run them from here |
+| `EnglishSpeaking/` | live toolset attached to English TestMonads as the last layer before speaking (WordNet context) |
+| `wiki_notepad/` | live workbench notes per battery, not archival, not in ContextPlease |
 | `calibration/` | the frozen 1 024-word calibration set, English + Chinese (`calibration_v1_en_zh.tsv`, pinned by `FROZEN.sha256`); the six-language set is in `on_hold/` |
 | `corpora/` | fetch scripts, manifest, licences, closed doors (data gitignored) |
 | **wiki** | `../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/` — the functional reference for everything here, updated in place |

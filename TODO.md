@@ -4,6 +4,12 @@
 
 ---
 
+## ADD — Amygdala analogue for the scaled boxkite Mind's Eye (noted 2026-10-22; not SemPriCon)
+
+An amygdala analogue for the scaled boxkite Mind's Eye: threat detection and the fight-or-flight response. In PtolemyDesktop the amygdala role is Aulë plus the system-monitoring process harness. When the Mind's Eye runs WITHOUT the desktop (for example in an Android app) there is no such harness, so it needs the same automatic, built-in functional tooling: **threat detection** and a specific **fight-or-flight response**. Methodology is being designed on the fly; treat the details as open.
+
+---
+
 ## ARCHIVING — TDI / Wankel (SIGMA_RB Is the Baseline, 2026-06-17)
 
 *Decision: TDI and Wankel/Rotary engines are RETIRED. SIGMA_RB (h_rb_hat/maths.py) is the baseline.*
