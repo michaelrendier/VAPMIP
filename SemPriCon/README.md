@@ -4,6 +4,8 @@
 
 Work directory for the white paper on the simplest engine in the lineage: the May-2026 C monad (`PtolC/` at commit `eb28ce8`, v1.215) that answered "what is your name" with `holcus same stuff seemy`. SemPriCon = Semantic Prime Concept; the prime-concept hash itself is **not** in the baseline documented here.
 
+**Python environment.** All SemPriCon code runs in `SemPriCon/.venv` (Python 3.12; gitignored, rebuilt from the list below). The live dependency list is **[requirements.txt](requirements.txt)**: it is `pip freeze` of that venv and is rewritten by `SpecTools/freeze_venv.sh` after any `pip install`, so it always matches what is installed. Rebuild: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt` (run from `SemPriCon/`). Run scripts with `.venv/bin/python`, not the system `python3`. WordNet data comes from `~/nltk_data`, which nltk reads only while it is not group- or world-writable (`chmod -R go-w ~/nltk_data`).
+
 | path | what |
 |---|---|
 | `src/PtolC_eb28ce8/` | the source at commit `eb28ce8`, unmodified (`git archive`); the authority for everything else here |
