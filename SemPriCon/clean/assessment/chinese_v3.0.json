@@ -1,0 +1,309 @@
+{
+ "file": "test_chinese_v3.0.bin",
+ "sha256": "f2de1e456fff18c86d8ac6fe6e3acb00da3360cef677fc5a0f073952547cc3bd",
+ "size_bytes": 319956,
+ "bytes_consumed": 319956,
+ "header": {
+  "version": 6,
+  "N": 25000,
+  "vocab_size": 996,
+  "A_size": 0,
+  "word_count": 1024,
+  "threshold": 3.776,
+  "affect": 0.0
+ },
+ "field": {
+  "occupied_zeros": 25000,
+  "entropy": 13.0546,
+  "entropy_max": 14.6096,
+  "entropy_pct": 89.36,
+  "gini": 0.3588,
+  "beta_saturated": 0,
+  "beta_max": 0.011260582569405748
+ },
+ "strata": {
+  "home": {
+   "1": 996
+  },
+  "gen": {
+   "1": 996
+  },
+  "prose_seen": {
+   "1": 996
+  }
+ },
+ "scripts": {
+  "word_scripts": {
+   "CJK": 996
+  },
+  "nonascii_chars": {
+   "CJK": 996
+  },
+  "nonascii_word_count": 996,
+  "nonascii_samples": [
+   "一",
+   "丁",
+   "丈",
+   "三",
+   "下",
+   "世",
+   "丫",
+   "中",
+   "丸",
+   "主",
+   "乂",
+   "乃",
+   "乎",
+   "乖",
+   "乘",
+   "也",
+   "亂",
+   "了",
+   "事",
+   "二",
+   "于",
+   "井",
+   "亞",
+   "亭",
+   "今",
+   "介",
+   "仂",
+   "仄",
+   "仗",
+   "以",
+   "仙",
+   "令",
+   "伍",
+   "伋",
+   "伎",
+   "仳",
+   "伏",
+   "佚",
+   "佐",
+   "佈",
+   "低",
+   "位",
+   "供",
+   "例",
+   "來",
+   "侏",
+   "侷",
+   "便",
+   "俏",
+   "俗",
+   "倞",
+   "倪",
+   "倒",
+   "倅",
+   "倭",
+   "倡",
+   "值",
+   "停",
+   "假",
+   "偪"
+  ]
+ },
+ "eval_checkpoint": {
+  "polluted": 996,
+  "clean": 0,
+  "pollution_pct": 100.0,
+  "by_category": {
+   "single-char": 996
+  }
+ },
+ "sanitiser": {
+  "tiers": {
+   "Q:garbage": 996
+  },
+  "samples": {
+   "Q:garbage": [
+    "一",
+    "丁",
+    "丈",
+    "三",
+    "下",
+    "世",
+    "丫",
+    "中",
+    "丸",
+    "主",
+    "乂",
+    "乃"
+   ]
+  },
+  "quarantined": 996,
+  "quarantined_pct": 100.0
+ },
+ "probes": {
+  "holcus": null,
+  "philadelphos": null,
+  "same": null,
+  "stuff": null,
+  "seemy": null,
+  "what": null,
+  "is": null,
+  "your": null,
+  "name": null,
+  "tree": null,
+  "water": null,
+  "setn": null,
+  "abysmal": null,
+  "quun": null,
+  "nanti": null,
+  "emite": null,
+  "ptolemy": null
+ },
+ "top_beta": [
+  {
+   "word": "捆",
+   "idx": 6686,
+   "E": 0.5557,
+   "beta": 0.011
+  },
+  {
+   "word": "泉",
+   "idx": 9468,
+   "E": 0.511,
+   "beta": 0.009
+  },
+  {
+   "word": "井",
+   "idx": 226,
+   "E": 0.5639,
+   "beta": 0.008
+  },
+  {
+   "word": "疵",
+   "idx": 12115,
+   "E": 0.5641,
+   "beta": 0.007
+  },
+  {
+   "word": "牝",
+   "idx": 11021,
+   "E": 0.5559,
+   "beta": 0.006
+  },
+  {
+   "word": "仙",
+   "idx": 310,
+   "E": 0.4947,
+   "beta": 0.005
+  },
+  {
+   "word": "丈",
+   "idx": 3,
+   "E": 0.518,
+   "beta": 0.005
+  },
+  {
+   "word": "瞧",
+   "idx": 12836,
+   "E": 0.5583,
+   "beta": 0.005
+  },
+  {
+   "word": "廠",
+   "idx": 5381,
+   "E": 0.5614,
+   "beta": 0.005
+  },
+  {
+   "word": "闡",
+   "idx": 21619,
+   "E": 0.5535,
+   "beta": 0.005
+  },
+  {
+   "word": "寸",
+   "idx": 4343,
+   "E": 0.5647,
+   "beta": 0.005
+  },
+  {
+   "word": "牛",
+   "idx": 11018,
+   "E": 0.5495,
+   "beta": 0.005
+  },
+  {
+   "word": "風",
+   "idx": 22626,
+   "E": 0.5647,
+   "beta": 0.005
+  },
+  {
+   "word": "隊",
+   "idx": 21748,
+   "E": 0.5629,
+   "beta": 0.005
+  },
+  {
+   "word": "議",
+   "idx": 18797,
+   "E": 0.5571,
+   "beta": 0.005
+  },
+  {
+   "word": "青",
+   "idx": 22141,
+   "E": 0.5471,
+   "beta": 0.005
+  },
+  {
+   "word": "槽",
+   "idx": 8528,
+   "E": 0.5652,
+   "beta": 0.005
+  },
+  {
+   "word": "例",
+   "idx": 399,
+   "E": 0.5621,
+   "beta": 0.005
+  },
+  {
+   "word": "剋",
+   "idx": 1221,
+   "E": 0.5368,
+   "beta": 0.005
+  },
+  {
+   "word": "一",
+   "idx": 0,
+   "E": 0.5359,
+   "beta": 0.005
+  },
+  {
+   "word": "更",
+   "idx": 7895,
+   "E": 0.5359,
+   "beta": 0.005
+  },
+  {
+   "word": "晉",
+   "idx": 7623,
+   "E": 0.5359,
+   "beta": 0.005
+  },
+  {
+   "word": "西",
+   "idx": 18217,
+   "E": 0.5359,
+   "beta": 0.005
+  },
+  {
+   "word": "位",
+   "idx": 383,
+   "E": 0.5346,
+   "beta": 0.005
+  },
+  {
+   "word": "抒",
+   "idx": 6535,
+   "E": 0.5528,
+   "beta": 0.005
+  }
+ ],
+ "top_edges": []
+}

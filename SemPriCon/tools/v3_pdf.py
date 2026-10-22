@@ -2,7 +2,7 @@
 """v3_pdf.py — the v3.0 word list and where each word lands, English and Chinese side by side (UNS mechanisms M3 and M4), as a PDF.
 
 Reads data/v3_map.tsv and data/v3_build_summary.json (written by tools/v3_build.py); nothing is recomputed or typed by hand.
-    .venv/bin/python tools/v3_pdf.py <out.pdf>
+    .venv/bin/python tools/v3_pdf.py /home/rendier/Desktop/SpaceClaude/SemPriCon/SemPriCon_v3.0_word_list_map.pdf
 """
 import csv, json, os, sys
 from xml.sax.saxutils import escape

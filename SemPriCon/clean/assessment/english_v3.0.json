@@ -1,0 +1,296 @@
+{
+ "file": "test_english_v3.0.bin",
+ "sha256": "5fecfabee487cc793812f09a9390cc4e912f033d75e983158d3c13d5d20a2888",
+ "size_bytes": 315988,
+ "bytes_consumed": 315988,
+ "header": {
+  "version": 6,
+  "N": 25000,
+  "vocab_size": 732,
+  "A_size": 0,
+  "word_count": 1024,
+  "threshold": 3.776,
+  "affect": 0.0
+ },
+ "field": {
+  "occupied_zeros": 25000,
+  "entropy": 12.653,
+  "entropy_max": 14.6096,
+  "entropy_pct": 86.61,
+  "gini": 0.4705,
+  "beta_saturated": 0,
+  "beta_max": 0.19969737696326972
+ },
+ "strata": {
+  "home": {
+   "1": 732
+  },
+  "gen": {
+   "1": 732
+  },
+  "prose_seen": {
+   "1": 732
+  }
+ },
+ "scripts": {
+  "word_scripts": {
+   "ASCII": 732
+  },
+  "nonascii_chars": {},
+  "nonascii_word_count": 0,
+  "nonascii_samples": []
+ },
+ "eval_checkpoint": {
+  "polluted": 3,
+  "clean": 729,
+  "pollution_pct": 0.41,
+  "by_category": {
+   "consonant-cluster-3": 2,
+   "consonant-only": 2,
+   "hex-string": 1
+  }
+ },
+ "sanitiser": {
+  "tiers": {
+   "A:in_wordnet": 720,
+   "Q:chrome": 7,
+   "F:function_word": 5
+  },
+  "samples": {
+   "A:in_wordnet": [
+    "watchful",
+    "gem",
+    "gap",
+    "mark",
+    "hope",
+    "lock",
+    "fan",
+    "heat",
+    "trench",
+    "dwarf",
+    "narrow",
+    "pall"
+   ],
+   "F:function_word": [
+    "while",
+    "will",
+    "so",
+    "can",
+    "down"
+   ],
+   "Q:chrome": [
+    "link",
+    "help",
+    "free",
+    "search",
+    "hide",
+    "in",
+    "jump"
+   ]
+  },
+  "quarantined": 7,
+  "quarantined_pct": 0.96
+ },
+ "probes": {
+  "holcus": null,
+  "philadelphos": null,
+  "same": null,
+  "stuff": [
+   {
+    "idx": 18482,
+    "E": 0.4834,
+    "beta": 0.006,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "seemy": null,
+  "what": null,
+  "is": null,
+  "your": null,
+  "name": [
+   {
+    "idx": 15471,
+    "E": 0.4447,
+    "beta": 0.003,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "tree": [
+   {
+    "idx": 3109,
+    "E": 0.2859,
+    "beta": 0.001,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "water": null,
+  "setn": null,
+  "abysmal": null,
+  "quun": null,
+  "nanti": null,
+  "emite": null,
+  "ptolemy": null
+ },
+ "top_beta": [
+  {
+   "word": "watchful",
+   "idx": 0,
+   "E": 0.246,
+   "beta": 0.2
+  },
+  {
+   "word": "crumble",
+   "idx": 18359,
+   "E": 0.4818,
+   "beta": 0.018
+  },
+  {
+   "word": "example",
+   "idx": 21875,
+   "E": 0.527,
+   "beta": 0.014
+  },
+  {
+   "word": "stretch",
+   "idx": 21093,
+   "E": 0.517,
+   "beta": 0.013
+  },
+  {
+   "word": "parting",
+   "idx": 24218,
+   "E": 0.5571,
+   "beta": 0.012
+  },
+  {
+   "word": "ecstasy",
+   "idx": 8203,
+   "E": 0.3514,
+   "beta": 0.01
+  },
+  {
+   "word": "fasting",
+   "idx": 23046,
+   "E": 0.5421,
+   "beta": 0.009
+  },
+  {
+   "word": "apparel",
+   "idx": 10546,
+   "E": 0.3815,
+   "beta": 0.009
+  },
+  {
+   "word": "dialect",
+   "idx": 14453,
+   "E": 0.4317,
+   "beta": 0.009
+  },
+  {
+   "word": "correct",
+   "idx": 17187,
+   "E": 0.4668,
+   "beta": 0.009
+  },
+  {
+   "word": "turning",
+   "idx": 16406,
+   "E": 0.4567,
+   "beta": 0.008
+  },
+  {
+   "word": "network",
+   "idx": 8984,
+   "E": 0.3614,
+   "beta": 0.008
+  },
+  {
+   "word": "rede",
+   "idx": 19780,
+   "E": 0.5001,
+   "beta": 0.008
+  },
+  {
+   "word": "strange",
+   "idx": 18750,
+   "E": 0.4869,
+   "beta": 0.007
+  },
+  {
+   "word": "product",
+   "idx": 17968,
+   "E": 0.4768,
+   "beta": 0.007
+  },
+  {
+   "word": "foreign",
+   "idx": 7031,
+   "E": 0.3363,
+   "beta": 0.007
+  },
+  {
+   "word": "mistake",
+   "idx": 23437,
+   "E": 0.5471,
+   "beta": 0.007
+  },
+  {
+   "word": "decline",
+   "idx": 15234,
+   "E": 0.4417,
+   "beta": 0.007
+  },
+  {
+   "word": "crooked",
+   "idx": 19531,
+   "E": 0.4969,
+   "beta": 0.007
+  },
+  {
+   "word": "realize",
+   "idx": 6250,
+   "E": 0.3263,
+   "beta": 0.007
+  },
+  {
+   "word": "blanket",
+   "idx": 16015,
+   "E": 0.4517,
+   "beta": 0.006
+  },
+  {
+   "word": "promise",
+   "idx": 19921,
+   "E": 0.5019,
+   "beta": 0.006
+  },
+  {
+   "word": "bruiser",
+   "idx": 10156,
+   "E": 0.3765,
+   "beta": 0.006
+  },
+  {
+   "word": "stuff",
+   "idx": 18482,
+   "E": 0.4834,
+   "beta": 0.006
+  },
+  {
+   "word": "corrupt",
+   "idx": 1562,
+   "E": 0.2661,
+   "beta": 0.006
+  }
+ ],
+ "top_edges": []
+}

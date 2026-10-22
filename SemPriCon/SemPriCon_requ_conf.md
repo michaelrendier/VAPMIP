@@ -50,7 +50,7 @@ Source: `clean/archive/v1.0/test_english_v1.0.bin` (vocab 24,940, A-edges 9,373,
 - `valence` (slot 9992, E 0.374) and `hydrogen` (slot 8062, E 0.350) are 1,930 slots apart in this bin, but share 241 edge targets (of 537 and 1,409): beryllium, halogens, berkelium, bonding, alkali, dioxide, plus hub words (be, was, per). Hub words are not removed from that count.
 - Caveat for all of the above: edges are slot-to-slot, so a slot shared by six words mixes six words' contexts. This was read by taking the most frequent token per slot.
 
-Slot dictionary of this bin, every word per slot in order of first appearance, plus the full assessment: `/home/rendier/Desktop/SpaceClaude/SemPriCon_dict_english_v1.0.pdf` (built by `tools/en1_dict_pdf.py`, run with `SemPriCon/.venv`).
+Slot dictionary of this bin, every word per slot in order of first appearance, plus the full assessment: `/home/rendier/Desktop/SpaceClaude/SemPriCon/SemPriCon_dict_english_v1.0.pdf` (built by `tools/en1_dict_pdf.py`, run with `SemPriCon/.venv`).
 
 Carried from the v2 four-bin run (page 11): 0 of 1,051 matched English–Chinese pairs within 3 slots; quartiles indistinguishable from independent placement; 42 cross-language shared slots are hash collisions.
 
@@ -107,3 +107,4 @@ Carried from the v2 four-bin run (page 11): 0 of 1,051 matched English–Chinese
 - **Baseline language.** Chinese is the baseline for the measurement (Cody): ideographic; alive and spoken well today; over five millennia old; believed one of the most efficient partitionings of idea space (assumption, unmeasured). Bare minimum of ideas space; separates couch from chair. Recorded in wiki 17.
 - **Word list v3.0.** `calibration/calibration_v3_en_zh.tsv`, frozen: 512 × 2, single Chinese characters. **Bins:** `clean/test_english_v3.0.bin` (M3) and `clean/test_chinese_v3.0.bin` (M4), exact zeros, no token filter, no A edges.
 - **First survey:** English 732 occupied slots with 210 words on slot 0 (M1 float-seed defect carried by M3); Chinese 996 occupied slots, at most 3 per slot; same concept in the same slot in 0 of 1 024 rows. X6 (assign English words to Chinese idea slots) is the next discussion, not started.
+- **Assignment experiment (2026-10-21):** `clean/test_chinese_english_v3.0.bin`: English words assigned to the slot of their Chinese partner, each keeping its own energy; 611 Chinese / 385 English labels. All three v3.0 bins are silent on "what is your name" (no edges; β below the engine's GAP floor; one phase-filter rejection). Assessments in `clean/assessment/`; the assessors misgrade single-character and mixed-script bins (data, not repaired). See wiki 17.

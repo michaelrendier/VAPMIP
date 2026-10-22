@@ -1,0 +1,88 @@
+{
+ "file": "test_chinese_v3.0.bin",
+ "vocab": 996,
+ "unit": "logographic",
+ "explore": {
+  "script_census": {
+   "HAN": 996
+  },
+  "dictionary_coverage_pct": {
+   "English": 0.0,
+   "Chinese": 100.0,
+   "Finnish": 0.0,
+   "Indonesian": 0.0
+  },
+  "trigram_vote": {},
+  "chosen_dictionary": "Chinese",
+  "choice_margin_pct": null,
+  "profile": {
+   "note": "logographic: one Han code point per entry; shape tests that count letters do not apply"
+  },
+  "tests_applied": "logographic rule"
+ },
+ "summary": {
+  "prose_confirmed": 992,
+  "prose_dict_words": 992,
+  "prose_names": 0,
+  "dict_entries_that_are_inflected_forms": 0,
+  "unlisted_well_formed": 0,
+  "nonprose": 4,
+  "prose_confirmed_pct": 99.6,
+  "unlisted_pct": 0.0,
+  "nonprose_pct": 0.4
+ },
+ "grades": {
+  "PROSE:dict": 992,
+  "NONPROSE:dict-soft-redirect": 4
+ },
+ "samples": {
+  "PROSE:dict": [
+   "一",
+   "丁",
+   "丈",
+   "三",
+   "下",
+   "世",
+   "丫",
+   "中",
+   "丸",
+   "主",
+   "乂",
+   "乃",
+   "乎",
+   "乖",
+   "乘",
+   "也",
+   "亂",
+   "了",
+   "事",
+   "二",
+   "于",
+   "井",
+   "亞",
+   "亭",
+   "今",
+   "介",
+   "仂",
+   "仄",
+   "仗",
+   "以",
+   "仙",
+   "令",
+   "伍",
+   "伋",
+   "伎",
+   "仳",
+   "伏",
+   "佚",
+   "佐",
+   "佈"
+  ],
+  "NONPROSE:dict-soft-redirect": [
+   "囗",
+   "栞",
+   "炤",
+   "虖"
+  ]
+ }
+}

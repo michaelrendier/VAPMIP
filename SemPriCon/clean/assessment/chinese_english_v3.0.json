@@ -1,0 +1,364 @@
+{
+ "file": "test_chinese_english_v3.0.bin",
+ "sha256": "38caac0910781247ba9fc1b06af82ba15e947659ac56a5f3185c831923639fa0",
+ "size_bytes": 320719,
+ "bytes_consumed": 320719,
+ "header": {
+  "version": 6,
+  "N": 25000,
+  "vocab_size": 996,
+  "A_size": 0,
+  "word_count": 2048,
+  "threshold": 3.776,
+  "affect": 0.0
+ },
+ "field": {
+  "occupied_zeros": 25000,
+  "entropy": 12.2938,
+  "entropy_max": 14.6096,
+  "entropy_pct": 84.15,
+  "gini": 0.3471,
+  "beta_saturated": 0,
+  "beta_max": 0.023140117504835557
+ },
+ "strata": {
+  "home": {
+   "1": 996
+  },
+  "gen": {
+   "1": 996
+  },
+  "prose_seen": {
+   "1": 996
+  }
+ },
+ "scripts": {
+  "word_scripts": {
+   "CJK": 611,
+   "ASCII": 385
+  },
+  "nonascii_chars": {
+   "CJK": 611
+  },
+  "nonascii_word_count": 611,
+  "nonascii_samples": [
+   "一",
+   "丈",
+   "三",
+   "丫",
+   "乂",
+   "乃",
+   "乖",
+   "乘",
+   "也",
+   "亂",
+   "事",
+   "于",
+   "井",
+   "亞",
+   "亭",
+   "介",
+   "仂",
+   "仄",
+   "仗",
+   "仙",
+   "伋",
+   "伎",
+   "仳",
+   "低",
+   "位",
+   "供",
+   "例",
+   "侏",
+   "侷",
+   "便",
+   "俗",
+   "倞",
+   "倪",
+   "倒",
+   "倅",
+   "倭",
+   "倡",
+   "值",
+   "停",
+   "假",
+   "偪",
+   "傒",
+   "傾",
+   "儋",
+   "儒",
+   "允",
+   "兌",
+   "克",
+   "免",
+   "兜",
+   "全",
+   "八",
+   "共",
+   "典",
+   "兼",
+   "冥",
+   "冰",
+   "冷",
+   "凜",
+   "刑"
+  ]
+ },
+ "eval_checkpoint": {
+  "polluted": 614,
+  "clean": 382,
+  "pollution_pct": 61.65,
+  "by_category": {
+   "single-char": 611,
+   "consonant-cluster-3": 2,
+   "consonant-only": 2,
+   "hex-string": 1
+  }
+ },
+ "sanitiser": {
+  "tiers": {
+   "Q:garbage": 611,
+   "A:in_wordnet": 375,
+   "Q:chrome": 7,
+   "F:function_word": 3
+  },
+  "samples": {
+   "Q:garbage": [
+    "一",
+    "丈",
+    "三",
+    "丫",
+    "乂",
+    "乃",
+    "乖",
+    "乘",
+    "也",
+    "亂",
+    "事",
+    "于"
+   ],
+   "A:in_wordnet": [
+    "fourth",
+    "age",
+    "hit",
+    "globe",
+    "master",
+    "finish",
+    "two",
+    "use",
+    "dictate",
+    "mate",
+    "doomed",
+    "aide"
+   ],
+   "F:function_word": [
+    "down",
+    "can",
+    "just"
+   ],
+   "Q:chrome": [
+    "in",
+    "current",
+    "hide",
+    "help",
+    "free",
+    "search",
+    "jump"
+   ]
+  },
+  "quarantined": 618,
+  "quarantined_pct": 62.05
+ },
+ "probes": {
+  "holcus": null,
+  "philadelphos": null,
+  "same": null,
+  "stuff": null,
+  "seemy": null,
+  "what": null,
+  "is": null,
+  "your": null,
+  "name": [
+   {
+    "idx": 1890,
+    "E": 0.4447,
+    "beta": 0.0,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "tree": [
+   {
+    "idx": 7998,
+    "E": 0.2859,
+    "beta": 0.002,
+    "age": 0,
+    "home": 1,
+    "gen": 1,
+    "prose_seen": 1
+   }
+  ],
+  "water": null,
+  "setn": null,
+  "abysmal": null,
+  "quun": null,
+  "nanti": null,
+  "emite": null,
+  "ptolemy": null
+ },
+ "top_beta": [
+  {
+   "word": "mold",
+   "idx": 6686,
+   "E": 0.5642,
+   "beta": 0.023
+  },
+  {
+   "word": "泉",
+   "idx": 9468,
+   "E": 0.511,
+   "beta": 0.015
+  },
+  {
+   "word": "井",
+   "idx": 226,
+   "E": 0.5639,
+   "beta": 0.013
+  },
+  {
+   "word": "疵",
+   "idx": 12115,
+   "E": 0.5641,
+   "beta": 0.01
+  },
+  {
+   "word": "牝",
+   "idx": 11021,
+   "E": 0.5559,
+   "beta": 0.01
+  },
+  {
+   "word": "廠",
+   "idx": 5381,
+   "E": 0.5614,
+   "beta": 0.01
+  },
+  {
+   "word": "mistake",
+   "idx": 18563,
+   "E": 0.5471,
+   "beta": 0.009
+  },
+  {
+   "word": "utter",
+   "idx": 6535,
+   "E": 0.5657,
+   "beta": 0.009
+  },
+  {
+   "word": "two",
+   "idx": 223,
+   "E": 0.539,
+   "beta": 0.009
+  },
+  {
+   "word": "例",
+   "idx": 399,
+   "E": 0.5621,
+   "beta": 0.009
+  },
+  {
+   "word": "風",
+   "idx": 22626,
+   "E": 0.5647,
+   "beta": 0.008
+  },
+  {
+   "word": "buss",
+   "idx": 2286,
+   "E": 0.5647,
+   "beta": 0.008
+  },
+  {
+   "word": "寸",
+   "idx": 4343,
+   "E": 0.5647,
+   "beta": 0.008
+  },
+  {
+   "word": "牛",
+   "idx": 11018,
+   "E": 0.5495,
+   "beta": 0.008
+  },
+  {
+   "word": "鼓",
+   "idx": 24767,
+   "E": 0.5254,
+   "beta": 0.008
+  },
+  {
+   "word": "mate",
+   "idx": 323,
+   "E": 0.4773,
+   "beta": 0.008
+  },
+  {
+   "word": "槽",
+   "idx": 8528,
+   "E": 0.5652,
+   "beta": 0.008
+  },
+  {
+   "word": "爾",
+   "idx": 10933,
+   "E": 0.5359,
+   "beta": 0.008
+  },
+  {
+   "word": "consume",
+   "idx": 9205,
+   "E": 0.5471,
+   "beta": 0.008
+  },
+  {
+   "word": "詮",
+   "idx": 18513,
+   "E": 0.5121,
+   "beta": 0.008
+  },
+  {
+   "word": "upset",
+   "idx": 18425,
+   "E": 0.5384,
+   "beta": 0.008
+  },
+  {
+   "word": "pig",
+   "idx": 18960,
+   "E": 0.553,
+   "beta": 0.008
+  },
+  {
+   "word": "ray",
+   "idx": 23637,
+   "E": 0.5313,
+   "beta": 0.008
+  },
+  {
+   "word": "辟",
+   "idx": 20028,
+   "E": 0.5595,
+   "beta": 0.008
+  },
+  {
+   "word": "advance",
+   "idx": 6753,
+   "E": 0.5571,
+   "beta": 0.008
+  }
+ ],
+ "top_edges": []
+}
