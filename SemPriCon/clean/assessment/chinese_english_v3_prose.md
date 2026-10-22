@@ -1,4 +1,4 @@
-# Prose-word assessment — `test_chinese_english_v3.0.bin`
+# Prose-word assessment — `test_chinese_english_v3.bin`
 
 - vocabulary 996; unit type **alphabetic**; language/dictionary chosen by trigram vote: **Indonesian** (coverage % by dictionary: {'English': 38.65, 'Chinese': 64.86, 'Finnish': 2.31, 'Indonesian': 3.21}; trigram vote {'Indonesian': 658, 'English': 318, 'Finnish': 20}; margin 34.14 points)
 - scripts: {'HAN': 611, 'ASCII-letter': 385}

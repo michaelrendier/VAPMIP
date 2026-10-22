@@ -1,4 +1,4 @@
-# Prose-word assessment — `test_chinese_v3.0.bin`
+# Prose-word assessment — `test_chinese_v3.bin`
 
 - vocabulary 996; unit type **logographic**; language/dictionary chosen by trigram vote: **Chinese** (coverage % by dictionary: {'English': 0.0, 'Chinese': 100.0, 'Finnish': 0.0, 'Indonesian': 0.0}; trigram vote {}; margin None points)
 - scripts: {'HAN': 996}

@@ -39,7 +39,7 @@ def speak(path, prompt, exact):
 
 def main(argv):
     exact = "--exact-zeros" in argv; prompts = [a for a in argv if not a.startswith("--")] or ["what is your name"]
-    bins = [("test_english_v3.0.bin", "M3 English"), ("test_chinese_v3.0.bin", "M4 Chinese"), ("test_chinese_english_v3.0.bin", "Chinese + English assigned")]
+    bins = [("test_english_v3.bin", "M3 English"), ("test_chinese_v3.bin", "M4 Chinese"), ("test_chinese_english_v3.bin", "Chinese + English assigned")]
     print("zeros:", "EXACT (SpecTools)" if exact else "the engine's own approximation (generate_zeros)")
     for p in prompts:
         print(f"\n=== prompt: {p!r}")

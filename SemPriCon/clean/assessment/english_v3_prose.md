@@ -1,4 +1,4 @@
-# Prose-word assessment — `test_english_v3.0.bin`
+# Prose-word assessment — `test_english_v3.bin`
 
 - vocabulary 732; unit type **alphabetic**; language/dictionary chosen by trigram vote: **English** (coverage % by dictionary: {'English': 100.0, 'Chinese': 8.88, 'Finnish': 5.33, 'Indonesian': 9.56}; trigram vote {'English': 596, 'Indonesian': 96, 'Finnish': 40}; margin 68.31 points)
 - scripts: {'ASCII-letter': 732}

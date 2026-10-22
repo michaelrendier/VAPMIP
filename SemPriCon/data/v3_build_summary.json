@@ -27,9 +27,9 @@
   "slot_0_words": 1
  },
  "bins": {
-  "test_english_v3.0.bin": "5fecfabee487cc793812f09a9390cc4e912f033d75e983158d3c13d5d20a2888",
-  "test_chinese_v3.0.bin": "f2de1e456fff18c86d8ac6fe6e3acb00da3360cef677fc5a0f073952547cc3bd",
-  "test_chinese_english_v3.0.bin": "38caac0910781247ba9fc1b06af82ba15e947659ac56a5f3185c831923639fa0"
+  "test_english_v3.bin": "5fecfabee487cc793812f09a9390cc4e912f033d75e983158d3c13d5d20a2888",
+  "test_chinese_v3.bin": "f2de1e456fff18c86d8ac6fe6e3acb00da3360cef677fc5a0f073952547cc3bd",
+  "test_chinese_english_v3.bin": "38caac0910781247ba9fc1b06af82ba15e947659ac56a5f3185c831923639fa0"
  },
  "chinese_english": {
   "occupied_slots": 996,

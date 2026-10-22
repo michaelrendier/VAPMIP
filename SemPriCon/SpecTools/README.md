@@ -1,5 +1,7 @@
 # SpecTools — the specification toolset
 
+**File naming for bins, speakers (TestMonad), assessments and mappings: `NAMING_CONVENTION.md` (this folder).**
+
 Start here. Everything we use to create the SemPriCon bins, measure them, and place words on the critical line, with a pointer to where it lives and how to run it. Nothing in this folder is a result to be trusted blindly: each entry says how to regenerate it and what it was checked against.
 
 Setup: `python3 -m venv .venv && .venv/bin/pip install numpy mpmath scipy reportlab` (run from `SemPriCon/`; the venv is gitignored). Rules: bins are read-only; HOME at a throwaway directory when running the engine; never touch `~/.ptolemy/monad_wordnet.bin`.
@@ -27,7 +29,7 @@ Wiki = `../docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/`. Requirements, f
 | v1.0 | `test_chinese_v1.0.bin`, `test_english_v1.0.bin` | `bin_creation/build_v1.0_zh_en_bins.md`; archive `clean/archive/v1.0/` |
 | v2.0 | `test_finnish_v2.0.bin`, `test_indonesian_v2.0.bin` | `bin_creation/build_v2.0_fi_id_bins.md` |
 | v2.0 | the four zh/en word-list bins (`test_{chinese,english,chinese_english,english_chinese}_v2.bin`) | `bin_creation/build_v2.0_zh_en_wordlist_bins.sh` (copy of `tools/exp_v2_run.sh`) |
-| v3.0 | `test_english_v3.0.bin`, `test_chinese_v3.0.bin` (UNS mechanisms M3 and M4 over the v3.0 word list), `test_chinese_english_v3.0.bin` (English words assigned to the Chinese slots); speaking test `tools/v3_speak.py` | `tools/v3_build.py` (needs `calibration/calibration_v3_en_zh.tsv`); v2.0 archived in `dirty/v2.0/`, gitignored; assessments in `clean/archive/v2.0/` |
+| v3.0 | `test_english_v3.bin`, `test_chinese_v3.bin` (UNS mechanisms M3 and M4 over the v3.0 word list), `test_chinese_english_v3.bin` (English words assigned to the Chinese slots); speaking test `tools/v3_speak.py` | `tools/v3_build.py` (needs `calibration/calibration_v3_en_zh.tsv`); v2.0 archived in `dirty/v2.0/`, gitignored; assessments in `clean/archive/v2.0/` |
 Common pieces: `tools/ptol_bin.py` (state-file reader/writer), `tools/gen_alphabet.py`, `tools/ingest_corpora.py`, `tools/vocab_build.py`, `tools/text_build.py`, `tools/exp_v2_filter.py`, `tools/exp_v2_list.py`, `src/PtolC_unicode/` (+ `src/unicode_upgrade.patch`).
 
 ## 4 · The 1024-word list and the calibration sets

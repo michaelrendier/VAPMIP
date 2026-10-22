@@ -32,7 +32,7 @@ def main(out):
     doc = SimpleDocTemplate(out, pagesize=A4, leftMargin=36, rightMargin=36, topMargin=36, bottomMargin=40, title="SemPriCon v3.0 word list and its UNS map", author="Cody Michael Allison (Michael Rendier)")
     st = [P("SemPriCon v3.0 — the 1 024-word list and where each word lands", h1),
           P(f"English (M3, Universal Native Space) and Chinese (M4, Universal Native Space), side by side. Word list <b>calibration_v3_en_zh.tsv</b>, sha256 {S['list_sha256'][:32]}…. "
-            "Bins: <b>test_english_v3.0.bin</b> and <b>test_chinese_v3.0.bin</b> (state v6, read-only, Fresh Start 2026-10-21). Each row: the word pair as the row header; for each language the <b>slot</b> (0 … 24 999) and "
+            "Bins: <b>test_english_v3.bin</b> and <b>test_chinese_v3.bin</b> (state v6, read-only, Fresh Start 2026-10-21). Each row: the word pair as the row header; for each language the <b>slot</b> (0 … 24 999) and "
             "the <b>critical-line number γ</b> of that slot's exact zero ρ = ½ + iγ of ζ. Flat mechanisms (M1, M2) are not used."),
           P("Why Chinese is the baseline (Cody's stated rationale)", h2),
           P("Chinese is the baseline for measuring English because: <b>A)</b> it is ideographic, so a character is an idea and not a spelling; <b>B)</b> it is alive and spoken well today (not dead, not recently dead, not dying like Navajo and Comanche); "
@@ -89,7 +89,7 @@ def main(out):
     st.append(lt)
 
     def foot(c, dc):
-        c.saveState(); c.setFont("DJ", 7); c.setFillColor(colors.grey); c.drawString(36, 22, "SemPriCon v3.0 · word list and UNS map · test_english_v3.0.bin / test_chinese_v3.0.bin"); c.drawRightString(A4[0] - 36, 22, f"page {dc.page}"); c.restoreState()
+        c.saveState(); c.setFont("DJ", 7); c.setFillColor(colors.grey); c.drawString(36, 22, "SemPriCon v3.0 · word list and UNS map · test_english_v3.bin / test_chinese_v3.bin"); c.drawRightString(A4[0] - 36, 22, f"page {dc.page}"); c.restoreState()
     doc.build(st, onFirstPage=foot, onLaterPages=foot)
     print("wrote", out)
 

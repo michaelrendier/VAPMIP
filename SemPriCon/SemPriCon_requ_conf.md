@@ -105,6 +105,11 @@ Carried from the v2 four-bin run (page 11): 0 of 1,051 matched English–Chinese
 
 ## 9. v3.0 (2026-10-21)
 - **Baseline language.** Chinese is the baseline for the measurement (Cody): ideographic; alive and spoken well today; over five millennia old; believed one of the most efficient partitionings of idea space (assumption, unmeasured). Bare minimum of ideas space; separates couch from chair. Recorded in wiki 17.
-- **Word list v3.0.** `calibration/calibration_v3_en_zh.tsv`, frozen: 512 × 2, single Chinese characters. **Bins:** `clean/test_english_v3.0.bin` (M3) and `clean/test_chinese_v3.0.bin` (M4), exact zeros, no token filter, no A edges.
+- **Word list v3.0.** `calibration/calibration_v3_en_zh.tsv`, frozen: 512 × 2, single Chinese characters. **Bins:** `clean/test_english_v3.bin` (M3) and `clean/test_chinese_v3.bin` (M4), exact zeros, no token filter, no A edges.
 - **First survey:** English 732 occupied slots with 210 words on slot 0 (M1 float-seed defect carried by M3); Chinese 996 occupied slots, at most 3 per slot; same concept in the same slot in 0 of 1 024 rows. X6 (assign English words to Chinese idea slots) is the next discussion, not started.
-- **Assignment experiment (2026-10-21):** `clean/test_chinese_english_v3.0.bin`: English words assigned to the slot of their Chinese partner, each keeping its own energy; 611 Chinese / 385 English labels. All three v3.0 bins are silent on "what is your name" (no edges; β below the engine's GAP floor; one phase-filter rejection). Assessments in `clean/assessment/`; the assessors misgrade single-character and mixed-script bins (data, not repaired). See wiki 17.
+- **Assignment experiment (2026-10-21):** `clean/test_chinese_english_v3.bin`: English words assigned to the slot of their Chinese partner, each keeping its own energy; 611 Chinese / 385 English labels. All three v3.0 bins are silent on "what is your name" (no edges; β below the engine's GAP floor; one phase-filter rejection). Assessments in `clean/assessment/`; the assessors misgrade single-character and mixed-script bins (data, not repaired). See wiki 17.
+
+
+## 10 · Naming convention (Cody, 2026-10-22)
+
+Recorded in full in `SpecTools/NAMING_CONVENTION.md`: version numbers are integers (`v3`, no `.0`) and track the experiment battery; `test_{L}_v{V}.bin`, `test_{M}_{A}_v{V}.bin`, `TestMonad_{S}_v{V}.py`, `TestMonad_{M}_{S}_v{V}.py`; all `test_*` bins built by the UNS mappings only; speakers sit next to the experiment data; `mappings/{UNS,Flat}/` centralises the mapping algorithms. All REQUIRED. The assignment speaker (`TestMonad_chinese_english_v3.py`) is the translator indicator; none of the TestMonad files exist yet.

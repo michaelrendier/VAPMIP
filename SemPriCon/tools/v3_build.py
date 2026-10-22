@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """v3_build.py — Fresh Start v3.0: the two UNS bins built from the v3.0 word list (calibration/calibration_v3_en_zh.tsv).
 
-  test_english_v3.0.bin   the 1 024 English words addressed by M3 (English in Universal Native Space: golden-angle turns on the π/2 equator; tools/uns_mech.en_uns, the eb28ce8 float seed)
-  test_chinese_v3.0.bin   the 1 024 Chinese characters addressed by M4 (Chinese in UNS: dictionary-order turn, key-component radius; tools/uns_mech.zh_uns)
+  test_english_v3.bin   the 1 024 English words addressed by M3 (English in Universal Native Space: golden-angle turns on the π/2 equator; tools/uns_mech.en_uns, the eb28ce8 float seed)
+  test_chinese_v3.bin   the 1 024 Chinese characters addressed by M4 (Chinese in UNS: dictionary-order turn, key-component radius; tools/uns_mech.zh_uns)
 
 Each single-language bin is: ground state → one learning pass over its half of the list (one word per line) → frozen, state version 6.  The learning step is the monad's own (monad_py.Monad.learn_ex):
 β[slot] += E²·ALPHA_LEARN·|sin γ|·π/2 (capped at BETA_SAT), the slot's label is the highest-E arrival, word_count += 1.  Differences from the engine's ingest, all deliberate:
@@ -10,7 +10,7 @@ Each single-language bin is: ground state → one learning pass over its half of
   * γ in the β update is the EXACT zero of the slot (SpecTools/zeros), for both languages (UNS: the 25 000 exact zeros are the marks on the equator);
   * the engine's token filter (hex strings, vowel ratio, length ...) is NOT applied: every word of the list is addressed.  What the filter would have rejected is counted and reported;
   * a list of single words has no sentences, so there are no A edges.
-Also builds test_chinese_english_v3.0.bin (build_assigned).  Also writes data/v3_map.tsv (one row per list row, both languages) and data/v3_build_summary.json.
+Also builds test_chinese_english_v3.bin (build_assigned).  Also writes data/v3_map.tsv (one row per list row, both languages) and data/v3_build_summary.json.
 
     .venv/bin/python tools/v3_build.py
 """
@@ -54,7 +54,7 @@ def build(rows, key, addr, gamma, path):
 
 
 def build_assigned(rows, en, zh, gamma, path):
-    """test_chinese_english_v3.0.bin: pass 1 the Chinese characters at their M4 addresses; pass 2 each English word ASSIGNED to the slot of its Chinese partner (same row of the list).
+    """test_chinese_english_v3.bin: pass 1 the Chinese characters at their M4 addresses; pass 2 each English word ASSIGNED to the slot of its Chinese partner (same row of the list).
     The English word keeps its own M3 energy E (its own radius on the equator); only the slot (the azimuth, the idea) is taken from the Chinese."""
     ev = [(r["zh_trad"], zh[r["id"]]["slot"], zh[r["id"]]["E"]) for r in rows] + [(r["en_us"], zh[r["id"]]["slot"], en[r["id"]]["E"]) for r in rows]
     return build_events(ev, gamma, path)
@@ -67,12 +67,12 @@ def main():
     T = Table()
     en = {r["id"]: en_uns(r["en_us"]) for r in rows}; zh = {r["id"]: zh_uns(T, r["zh_trad"]) for r in rows}
     out = os.path.join(ROOT, "clean"); os.makedirs(out, exist_ok=True)
-    pe = os.path.join(out, "test_english_v3.0.bin"); pz = os.path.join(out, "test_chinese_v3.0.bin")
+    pe = os.path.join(out, "test_english_v3.bin"); pz = os.path.join(out, "test_chinese_v3.bin")
     for p in (pe, pz):
         if os.path.exists(p): os.chmod(p, 0o644)
     ps_en, st_en = build(rows, "en_us", en_uns, gamma, pe)
     ps_zh, st_zh = build(rows, "zh_trad", lambda c: zh_uns(T, c), gamma, pz)
-    pce = os.path.join(out, "test_chinese_english_v3.0.bin")
+    pce = os.path.join(out, "test_chinese_english_v3.bin")
     if os.path.exists(pce): os.chmod(pce, 0o644)
     ps_ce, st_ce = build_assigned(rows, en, zh, gamma, pce)
     reject = {r["en_us"] for r in rows if not mp.token_accept(r["en_us"], mp.NS_FT_PROSE)}
@@ -118,9 +118,9 @@ def main():
         f.write("# clean/ — Fresh Start v3.0 (2026-10-21)\n# Two single-language Universal Native Space bins, read-only, built by tools/v3_build.py from calibration/calibration_v3_en_zh.tsv (sha256 below).\n"
                 "# Each is: ground state -> one learning pass over its half of the 1 024-row list -> frozen.  State format v6.  v2.0 is archived in dirty/v2.0/ (bins) and clean/archive/v2.0/.\n"
                 "file\tsha256\taddress\tword list\n")
-        f.write(f"test_english_v3.0.bin\t{summ['bins']['test_english_v3.0.bin']}\tM3: English in UNS (tools/uns_mech.en_uns; eb28ce8 float seed, golden-angle turns on the pi/2 equator)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (en_us column)\n")
-        f.write(f"test_chinese_english_v3.0.bin\t{summ['bins']['test_chinese_english_v3.0.bin']}\tpass 1: M4 Chinese characters; pass 2: each English word ASSIGNED to the slot of its Chinese partner (the English word keeps its own M3 energy)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (zh_trad then en_us)\n")
-        f.write(f"test_chinese_v3.0.bin\t{summ['bins']['test_chinese_v3.0.bin']}\tM4: Chinese in UNS (tools/uns_mech.zh_uns; dictionary-order turn, key-component radius, exact zeros)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (zh_trad column)\n")
+        f.write(f"test_english_v3.bin\t{summ['bins']['test_english_v3.bin']}\tM3: English in UNS (tools/uns_mech.en_uns; eb28ce8 float seed, golden-angle turns on the pi/2 equator)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (en_us column)\n")
+        f.write(f"test_chinese_english_v3.bin\t{summ['bins']['test_chinese_english_v3.bin']}\tpass 1: M4 Chinese characters; pass 2: each English word ASSIGNED to the slot of its Chinese partner (the English word keeps its own M3 energy)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (zh_trad then en_us)\n")
+        f.write(f"test_chinese_v3.bin\t{summ['bins']['test_chinese_v3.bin']}\tM4: Chinese in UNS (tools/uns_mech.zh_uns; dictionary-order turn, key-component radius, exact zeros)\tcalibration_v3_en_zh.tsv {summ['list_sha256'][:16]} (zh_trad column)\n")
     print(json.dumps({k: summ[k] for k in summ if k != "english"}, ensure_ascii=False, indent=1)); print(json.dumps({k: v for k, v in summ["english"].items() if k != "rejected_words"}, indent=1))
 
 
