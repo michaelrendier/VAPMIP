@@ -7,6 +7,9 @@ only if its label is a single Han character (TESTMONAD-C1); the character is emi
 
 Both v3 speakers are copies of the same engine step (monad_py.Monad.speak: hear, spread, golden walk), so that the two language mechanisms can be
 observed side by side. Every deviation from the engine is marked  # TESTMONAD-Fn  and listed in clean/ notepad (wiki_notepad/v3/).
+  TESTMONAD-S1  (attempt 2) the spread radius and decay are rescaled by the bin's mean vocabulary spacing N/|vocab| (spread was +-3 slots, e^-dn; a 732-word bin has a word every 34 slots).
+  TESTMONAD-S2  (attempt 2) say(): the reply framed as a sentence (English: spaces, capital, full stop; Chinese: 。).
+  TESTMONAD-F3  (attempt 2) SEP was an empty range, so separators were never recognised (the same slip is in tools/v3_speak.py, left as is).
   TESTMONAD-F2  trace only: tr['funnel'] counts the candidates left after each gate.
   TESTMONAD-F1  the absolute floor GAP is dropped from J_floor (found 2026-10-22: all three v3 bins spoke '' because J_max < GAP).
 
@@ -24,7 +27,7 @@ import monad_pyu as pyu
 from uns_mech import en_uns, zh_uns
 from zh_half_line import Table, zeros as exact_zeros
 T = Table()
-SEP = {chr(c) for c in range(0x200B, 0x2004)}
+SEP = {chr(c) for c in list(range(0x2003, 0x200A)) + [0x200B]}      # TESTMONAD-F3: the eight Fermat spaces; range(0x200B, 0x2004) is empty
 
 
 def uns_coords(surface, N=mp.N_DEFAULT):
@@ -55,11 +58,14 @@ class TestMonadChinese(pyu.MonadU):
         J = np.zeros(N)
         for idx, E in psi:
             J[idx] += beta[idx] * E * E * math.exp(-mp.LAMBDA * age[idx])
+        _g = N / max(len(self.vocab), 1)                         # TESTMONAD-S1: mean slot spacing of this bin's vocabulary (the engine assumed ~1: a 25 000-word store)
+        _R, _dec = max(mp.SPREAD_RADIUS, int(math.ceil(3 * _g))), mp.SPREAD_DECAY / _g   # spread reaches ~3 vocabulary neighbours a side, e-fold per mean spacing
+        tr["spread"] = dict(mean_spacing=_g, radius=_R, decay=_dec)
         for idx, E in psi:                                       # spectral spread, sequential as in C
             Jc = J[idx]
             if Jc <= 0.0: continue
-            for dn in range(1, mp.SPREAD_RADIUS + 1):
-                ws = math.exp(-mp.SPREAD_DECAY * dn)
+            for dn in range(1, _R + 1):
+                ws = math.exp(-_dec * dn)
                 if idx - dn >= 0: J[idx - dn] += Jc * ws
                 if idx + dn < N: J[idx + dn] += Jc * ws
         Ai, Aj, Aw = self._arrays()
@@ -125,6 +131,11 @@ class TestMonadChinese(pyu.MonadU):
                        golden_step=step, target_E=target_E, demotic=dem, emitted=emitted, phi_rot=phi_rot))
         return out
 
+    def say(self, query, max_tokens=50, tr=None):
+        """TESTMONAD-S2 (attempt 2): the reply as a Chinese sentence: the characters in walk order, closed with the ideographic full stop 。"""
+        out = self.speak_wick(query, max_tokens, tr)
+        return out + "。" if out else ""
+
     def speak_wick(self, query, max_tokens=50, tr=None):
         saved = self.affect; self.affect = -1.0
         try: return self.speak(query, max_tokens, tr)
@@ -145,6 +156,9 @@ def main(argv):
         if exact: Z = exact_zeros(); m.zeros = [Z[k + 1] for k in range(m.N)]
         tr = {}; out = m.speak_wick(p, 50, tr)
         print(f"=== {p!r}\n  reply: {show(out)!r}")
+        m2 = TestMonadChinese.from_bin(path)
+        if exact: m2.zeros = m.zeros
+        print(f"  sentence: {m2.say(p)}")
         print(f"  heard: {[(t, i, 'known' if k else 'new') for i, E, k, t in m.hear_raw(p)]}")
         print(f"  lag {tr['lag_ratio']:.3f}  target_E {tr['target_E']:.5f}  J_max {tr['J_max']:.3g}  floor {tr['J_floor']:.3g}  demotic {tr['demotic']}  emitted {[(e[0], e[1], e[2]) for e in tr['emitted']]}\n  funnel {tr['funnel']}")
 
