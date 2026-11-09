@@ -1,5 +1,7 @@
 # The Sedenion Box-Kite as Relations — from nothing to a strut
 
+> **Atlas note (2026-11-09):** "the atlas" in this document is the **Box-Kite Atlas** (the 42-vertex sedenion graph glued at e₀). It is not the Riemann–Fermat Atlas (RiemannHypothesisProof) nor the Abrikosov Atlases (AbrikosovTree). Registry: `ContextPlease/claude/ATLAS_REGISTRY.md`.
+
 **Written 2026-10-13** (Claude Sonnet 5.5, with Cody). Everything marked **[MEASURED]** was computed from the multiplication
 table by a script in `.claude/scratchpad/2026-10-13_portals_inventory_moving_kite/` (genealogy.py, genealogy2.py, g2decomp.py,
 portals.py, invariants.py, spinor_braid.py, lambert3.py; captured outputs beside them) or in
