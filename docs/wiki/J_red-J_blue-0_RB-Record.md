@@ -42,3 +42,10 @@ Operational reading used (mine, pending Cody's definition of 0_BR): for a state 
 * **Rerun of §2–§5 [MEASURED]** `jb.py`, `jgreen.py`, `anticomm.py`, `muscle2.py`, `trine.py`: output byte-identical to the 2026-10-13 records (5 of 5).
 * **Shape [MEASURED]** `GenerationalLineage/engine/valaquenta_calibration.decompose_h_rb_hat()`: the operator's shape matches the tier-0 floor (2·ADD / 3·SCALE / 4·SIGN); the one import the equation carries and the geometry does not is the dense self-adjoint domain (unchanged open item).
 * **Names** The chronology of the object's names is `Ainulindale/wiki/127_names_of_the_null_operator.md`.
+
+## 7. J₂ as the swap, tested as an operator (2026-11-11; `RiemannHypothesisProof/rhp/j2.py`, `docs/j2_definition_2026-11-11.md`)
+*Claude Sonnet 5.5. Cody asked for the J₂ involution (wiki 51/60) to be tested against the 'two strokes, four-cycle, two rotations to return' reading. Machinery only.*
+* **J2-1 [MEASURED] A swap by multiplication is a four-cycle.** L₄ swaps red ↔ blue (bit 4), L₄² = −I, L₄⁴ = I at T_8…T_64; every L_k² = −I. On rays it is an involution. e₀ → e₄ → −e₀ → −e₄ → e₀.
+* **J2-2 [MEASURED] The strict involution is the bare index swap P₄** (order 2, swaps colour, moves e₀ to e₄, not a unit product). Neither swap is an algebra automorphism or anti-automorphism (defects 18–55).
+* **J2-3 [MEASURED] The Klein group of the functional equation** (s → 1−s, s → s̄) holds to 6e−32 for ξ and 1e−31 for Λ(s,χ₋₄); all 25,000 tabulated zeros have orbit size 2.
+* **J2-4 [MEASURED] Arithmetic J₂** = Galois conjugation; hole = fixed point (inert), half the primes at every one of the seven levels; the slot rule `char` is the Frobenius element in (ℤ/2)^m.
