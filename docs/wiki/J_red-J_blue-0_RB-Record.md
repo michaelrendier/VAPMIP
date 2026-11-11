@@ -49,3 +49,10 @@ Operational reading used (mine, pending Cody's definition of 0_BR): for a state 
 * **J2-2 [MEASURED] The strict involution is the bare index swap P₄** (order 2, swaps colour, moves e₀ to e₄, not a unit product). Neither swap is an algebra automorphism or anti-automorphism (defects 18–55).
 * **J2-3 [MEASURED] The Klein group of the functional equation** (s → 1−s, s → s̄) holds to 6e−32 for ξ and 1e−31 for Λ(s,χ₋₄); all 25,000 tabulated zeros have orbit size 2.
 * **J2-4 [MEASURED] Arithmetic J₂** = Galois conjugation; hole = fixed point (inert), half the primes at every one of the seven levels; the slot rule `char` is the Frobenius element in (ℤ/2)^m.
+
+## 8. The complete shape and why 0_RB is the authoritative maths (2026-11-11; Cody's account, recorded)
+*Claude Sonnet 5.5. Statement of Cody's, written down because the wikis follow what he says. Read the primer first: `ContextPlease/claude/hist_prime/RiemannHypothesisProof/PRIMER_2026-11-11_COMPLETE_SHAPE_AND_0RB.md`.*
+* The mass gap was the last outlier (computed at poor resolution past the decimal point); the BAO residual (Δ = Ω − d\*_spec·ln 10 = 0.000707357533) closed it. With the four d\* and three Lambert-W values (catastrophe and crisis) the whole shape was present, and Ĥ_RB was found as an original object. The values behave as different types of "breaking" of the algorithm when shown as visuals (Gemini widgets, 2026-04-11, copies beside the primer).
+* **Authority:** 0_RB is the authoritative maths; the equation references are checked against it. Assumption (Cody's): every equation in the Archimedes formulary (`PtolemyDesktop/Archimedes/CANONICAL_MATHS.md`, 503 rows; foundations 168, physics 195, engineering 140) lives somewhere in the shape, which is why the shape is used as an error check. The boundary is an interface (a halocline added to Navier–Stokes introduced i).
+* [MEASURED 2026-11-11, RHP] the entropy map e^{−x} and inertia map −ln x share Ω with multipliers −Ω and −1/Ω (product 1); the N-shape closes at E = 2Ω. [Scope] this is not a claim that 0_RB implies or resolves any established open problem.
+
