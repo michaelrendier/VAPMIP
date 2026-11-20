@@ -1,0 +1,90 @@
+Here's the exhaustive catalog — everything found, tested, measured, or referenced this session, organized by level, whether or not it's currently wired into anything. I'm marking status (`ESTABLISHED`/`MEASURED`/`OPEN`) on each so this stays honest rather than reading as one uniform pile of fact.
+
+## 1. Single-address invariants (one 16-vector `v`)
+- `norm(v)` — Euclidean length. `MEASURED`: every real corpus address is exactly `1.0` (unit-normalized, `S¹⁵`).
+- `fixed_point_weight(v)` — share of energy on `e₀`.
+- `energy_split(v)` — five-way: `e₀`, `e₈`, `lower` (`e₁-e₇`), `upper` (`e₉-e₁₅`), `outside` (`e₀+e₈`).
+- `local_curvature(v)` — associator defect summed over `v`'s dominant directions.
+- `peak_dim` — argmax component.
+- `is_zero_divisor(v)` — whether `v` itself annihilates one of the 84 diagonals.
+
+## 2. Per-Assessor (42 of them: `(a,b)`, `a≠b∈1..7`)
+- `diagonal_amplitudes(v,a,b) = (d+, d-)`.
+- in-plane energy `v_a² + v_{b+8}²`.
+- dominant diagonal (`+`/`-`), imbalance `||d+|-|d-||`.
+
+## 3. Per-strut / per-chart (7 of them)
+- `chart_projection(v)` — energy per strut (overlapping — each basis index sits in 6 of 7 charts).
+- `chart_spectrum(s)` — Laplacian eigenvalues, `ESTABLISHED`: `{0,4,4,4,6,6}`, every strut, identical.
+- `box_kite_graph(s)` — the `K₂,₂,₂` octahedron, 4-regular, 3 non-edges (struts).
+- `nearest_assessor`, `dominant_chart`, `chart_share`.
+
+## 4. Pencil-level (per anchor `r`, 7 relevant anchors)
+- `pencil(r)` — 7 factor pairs. `ESTABLISHED`, built and verified this session.
+- Station→strut attachment: `MEASURED`, exhaustively — one station (the one containing index 8) touches only strut `r`; the other six touch strut-pairs, two stations per pair (lower/upper copy).
+- `H = Re(Π)` over the 7 stations — `OPEN`: representative/order-dependent, degenerates to `{-1,0,1}` for pure basis-vector generators. Not a well-defined scalar as literally specified.
+
+## 5. Torsion, circulation, lift — rebuilt and verified this session
+- `torsion_sign(i,j) = commutator(i,j)[i⊕j]` — canonically signed, always `±2`, no free choice.
+- circulation around a 4-cycle = signed sum of torsion around it. `MEASURED`: always a multiple of 4, range `{-8,-4,0,4,8}`.
+- 105 four-cycles total (15/strut × 7). `MEASURED`, exact match to the historical (lost, rebuilt) figure.
+- lift = wind_speed × circulation (Kutta–Joukowsky). Split: **53 positive / 31 negative / 21 zero**, exact.
+- Design constraint (Cody's, stated not derived): zero-lift ↔ grammar/definitional/non-deformable; nonzero-lift ↔ relational/usage-driven/deformable.
+
+## 6. Deformation / spectral response
+- structural wind (torsion from the algebra alone) → **identical** spectrum on every strut. `MEASURED`: `True`.
+- address-driven wind (real energy split) → **different** spectra per address. `MEASURED`: 3 distinct spectra, 3 addresses.
+- spectral spread by strut: `MEASURED`, varies ~4.4× (0.0026 to 0.0115) across struts — **not** explained by lift-fraction, which is identical (`0.800`) on every strut.
+
+## 7. Correlations tested this session (tension vs. everything)
+- Pearson(|lift|, address-driven circulation variance) = **+0.13** (weak).
+- Pearson(|lift|, mean corpus energy on loop) = **0.0000, exactly**.
+- Pearson(|lift|, structural curvature) = **0.0000, exactly** — curvature is a constant `16.0000` on every loop regardless of lift sign.
+- Zero-lift vs. nonzero-lift loops: identical mean energy, identical mean curvature. Tension is content-blind and address-blind.
+
+## 8. Group-theoretic (`PSL(2,7) = GL(3,2)`, 168 elements)
+- `ESTABLISHED`: `Aut(Fano plane)`, order 168, de Marrais/Moreno lineage.
+- 21-element subgroup (`FIRST STATED HERE`, this session): preserves zero-divisor annihilation, transitive on all 7 struts.
+- Orbit–stabilizer: stabilizer of any one strut has order 3 (`21/7`).
+- Example cycle structure: `(1 5 4)(2 3 6)` with strut 7 fixed, for one element; stabilizer-of-1's own cycles: `(2 7 4)(3 6 5)` and its inverse.
+- Index of subgroup in full group: 8.
+- The group's own cycle structure does **not** align with the pencil's pairing structure — tested, genuine mismatch, not a firing order.
+
+## 9. Portal / transition dynamics (this session's newest ground)
+- Linear interpolation between two zero-divisor points: leaves the locus immediately, distance grows linearly, never returns except at the start.
+- Properly-composed single-gear rotation (`logm`/`expm` of the *whole* permutation, not sequential pairwise rotations): **on-locus only at `t=0` and `t=1`** — confirms the portal/instantaneous reading, corrects an earlier buggy result that looked continuous.
+- Conserved exactly along that path: norm, fixed-point weight, outside-share, lower/upper energy split (`0.5/0.5`).
+- Not conserved: local curvature — one clean discrete jump (`12→4`) early in the transit, then a flat plateau.
+- Lower (`1-7`) and upper (`9-15`) mirror **exactly**, shift-by-8, under the group action — a genuine conjugate-flow structure, same law both sides.
+- Two zero-divisor endpoints of one portal need not share curvature (`12` vs `4` in the tested case) — portals aren't uniform.
+
+## 10. Connectivity (established, three independent mechanisms for the same 7-way structure)
+- Adjacency (zero-divisor products): 7 disconnected components.
+- Skeleton (shared basis indices): every chart pair shares exactly 10 points.
+- `e₀` identification: all 7 zero modes are literally the same vector there — "seven copies of one object."
+
+## 11. Discreteness, the recurring theme across every register tested
+- Factorization/sieve: 313 (extinction) and 49999 (birth) boundaries, exact.
+- Chladni stability: codomain is `{0,1,2,3,4}` by construction — structurally incapable of a continuous gradient.
+- `H=Re(Π)`: discrete `{-1,0,1}`.
+- Lift: discrete multiples of 4.
+- The connecting group: finite, 21 elements, no continuum between them.
+- The portal transitions: discrete jumps, not continuous crossings, confirmed twice now (buggy and corrected).
+
+## 12. Cost, measured (independent of tension/deformation, but part of the same snapshot)
+- ~600 flop/read (256-mul sedenion product + ~40-nnz sparse row).
+- 38 µJ/word measured, 115 ns / <1 µJ native floor.
+- 10⁴–10⁶× cheaper than a dense-transformer forward pass, per query.
+
+## 13. The WordNet/context side (separate mechanism, same paper, aspirationally the same `w`)
+- 19 `RELATION_METHODS`, `compress_count` (the one lossy step), `context_code` (Gödel over `CONTEXT_PRIMES`), gamma fold (`tanh`/`atanh`, injective on the live vocabulary).
+- `spelling_code` (Gödel positional, `LETTER_PRIMES`, 20 of them, ≤71).
+- Combined address: `next_prime(spelling_code × context_code)` — **verified, ships, 300/300 exact.**
+- This entire branch is currently **pure elementary number theory** — it does not touch anything in §1-12 above. That gap is real and still open.
+
+## 14. Semantic-hash lineage (separate from the box kite, kept for the record per your instruction)
+- Original (2026-05-27): Horner-b95 → next_prime → π → zero index. Still live, unaltered, now disconnected from the current pipeline.
+- 25,000-zero golden-ratio version: had a real float-overflow bug (fixed via Fibonacci/Knuth multiplicative hashing), benchmarked on the i7-6600U laptop.
+- Earliest documented (wiki-16): base-97 Horner → Fano octonion path → `σ=½` projection — overclaimed at the time, not independently reproduced.
+
+That's everything surfaced this session, whether wired into the shipped pipeline (§13 only) or purely explored (§1-12, 14). The biggest open seam, stated plainly: nothing in §1-12 currently touches §13 — the box kite's rich structure and the WordNet address that actually ships are still two separate mechanisms, not one.

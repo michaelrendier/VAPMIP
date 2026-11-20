@@ -1,0 +1,54 @@
+{
+  "paper": "19 Dimensional Scalar WordNet Context Propagation",
+  "dir": "ScalarContextPropagation",
+  "kind": "engineering structure (no claim, no prediction)",
+  "registered": "2026-08-30",
+  "one_line": "A codec that reconstructs a box kite (a higher-order group of relationships) from a single scalar per token, built entirely from established mathematics.",
+  "engine": {
+    "monad": "VAPMIP/ (rotary_rerun_boxkite_monad.py, the current python3 monad; monad_english_io.py, deprecated as a standalone entry point but still the home of basin(); PtolC/ptol.c, the current C monad — basin/gamma_radial/pruner selection not yet ported into it)",
+    "boxkite": "ValaQuenta/modules/box_kite/ (maths.py, tools.py) — ValaQuenta is the root authoritative repo for all engine code",
+    "live_service": "systemd --user ptolemy-monad — the w stream carried forward turn by turn, since 2026-08-30"
+  },
+  "components": [
+    {"id": "C1", "name": "token -> gamma (Horner b95 -> next_prime -> pi -> Z(t) Newton)", "tier": 0, "provenance": "OURS (monad.py, monad_bin/SPEC.md 3)", "status": "ships, tested; notebook 01 found idx range is [1,6543] not [1,6542] as previously stated (65537 is prime, pi(65537)=6543) -- MATHS/METHOD, not a code bug"},
+    {"id": "C2", "name": "the pencil: 7 factorisations of one relation, PG(3,2)", "tier": 2, "provenance": "ESTABLISHED projective geometry; edge framing OURS (generational-lineage 0b)", "status": "ships (ValaQuenta/modules/box_kite/maths.py::pencil, built this session -- previously only verified combinatorially in GenerationalLineage/engine/lineage.py::f_pg32_is_edges, no accessor existed)"},
+    {"id": "C3", "name": "box-kite combinatorics: 42 Assessors, 7 octahedra, {0,4,4,4,6,6} spectrum, zero cross-strut edges", "tier": 3, "provenance": "ESTABLISHED de Marrais arXiv:math/0011260 (2000); PSL(2,7) refinement OURS", "status": "ships (ValaQuenta/modules/box_kite/maths.py)"},
+    {"id": "C4", "name": "wind speed w = A-matrix basin drift", "tier": 0, "provenance": "FIRST STATED HERE 2026-08-30 (drift as inflation parameter); flow itself OURS (basin(), defined in monad_english_io.py, called via sentence_context.neighborhood_corpus from the current python3 monad)", "status": "ships (drift computed; used as w)"},
+    {"id": "C5", "name": "the scale = WordNet sub-graph (19 relations, hypernym depth, depth_weight)", "tier": null, "provenance": "ESTABLISHED WordNet; box-kite table OURS (c_monad_wordnet.bin)", "status": "ships"},
+    {"id": "C6", "name": "Phi(w): Joukowsky inflation zeta -> zeta + (H/q(w))/zeta, w -> 6 assessor_coordinates", "tier": 1, "provenance": "ESTABLISHED Joukowsky 1910, elastica Euler 1744, Kutta-Joukowsky; tether + wind-inflation FIRST STATED HERE 2026-08-27 (pencil_hyperstring.md)", "status": "to write -- notebook 04 attempted H=Re(Pi) from pure-basis-vector pencil-station generators; under the tested representative/ordering conventions the result is discrete (-1/0/1), not continuous. Left open here by design -- diagnosing that discreteness is out of this paper's scope, not reported as a defect"},
+    {"id": "C7", "name": "the Flashlight: shadow magnification M = D_wall/D_object; hard D_wall ceiling; Gaussian splat under a moving light", "tier": 1, "provenance": "ESTABLISHED geometric optics; 3D Gaussian splatting (Kerbl 2023)", "status": "to write (projection + splat)"},
+    {"id": "C8", "name": "Scale orthogonal Smith chart engine: w on a WordNet-calibrated axis; sets D_wall", "tier": 2, "provenance": "ESTABLISHED Smith chart 1939, conformal map of C", "status": "partial (GenerationalLineage/two_ring_chart_*.py -- renamed from FactoralDecomposition 2026-09-02)"}
+  ],
+  "H_note": "H is NOT a stored parameter. H = Re(Pi), the real part of the ordered product of the seven pencil-station generators, conserved along the string; it falls out of Phi(w) as the zero-divisor-surface check. Only w is the payload. (pencil_hyperstring.md still shows the two-knob Phi_w(H); update to w-only.) Notebook 04: computing Re(Pi) from pure-basis-vector generators gives a discrete result (-1/0/1, representative/ordering-dependent) rather than a continuous one. Left open in this paper by design -- resolving what that discreteness means is a separate, deeper question outside this paper's scope.",
+  "flashlight_note": "The shadow is additional GRANULARITY of word selection, not additional context. Magnification is bandlimited by w's precision: past it the shadow only blurs. Near wall / low M = narrative (representative word); far wall / high M = dissertation (exact term).",
+  "acceptance_tests_for_Phi": [
+    "one flex mode: dim(flex) of K222 with strut fixed = 1",
+    "reconstruction: Phi(w) swept traces all six assessor_coordinates for every strut s in 1..7 (deformable charts); rigid charts return one fixed form for all w",
+    "the across-strut map is J_N: r <-> 1/r to inversion.md precision",
+    "the spectrum is the deformation modes: {4,4,4} = struts opening, {6,6} = sail pairs, {0} = fixed e0 anchor",
+    "tear-off: chart_of outside_share -> 1 past a finite w, onset where the elastica leaves the unit sphere"
+  ],
+  "desk_rejection_gate": [
+    {"id": "G1", "reject": "lossless of what? show a bit-exact round trip on real data", "test": "10^4+ real WordNet synsets; token->gamma->pencil->w->Phi(w)->box kite vs materialised modules/box_kite + WordNet; report exact-match fraction + residual distribution; name any structural mismatch and its cause"},
+    {"id": "G2", "reject": "16-bit hash into 6542 buckets is not injective", "test": "report words-per-bucket distribution over a real vocab; then min|dw| among co-located words vs Phi reconstruction tolerance; any pair below tolerance is a reported collision. Claim is exact reconstruction from (pencil,w), NOT gamma injectivity"},
+    {"id": "G3", "reject": "circularity: inverting your own encoder with hidden state", "test": "freeze w; on a clean process with no learned A-matrix beyond frozen WordNet, run Phi(w); reconstruction must be a pure function of (pencil, w, WordNet) only"},
+    {"id": "G4", "reject": "determinism", "test": "SHA-256 of the reconstructed box-kite table, twice, on two machines, matches; extends SPEC.md 3 byte-reproducibility through Phi"},
+    {"id": "G5", "reject": "Joukowsky identity real or decorative", "test": "across-strut map = r <-> 1/r symbolically to inversion.md precision, not shape-matched by eye"},
+    {"id": "G6", "reject": "NN comparison is a strawman", "test": "fix one task (19-relation adjacency for a 10^4-word vocab); byte counts materialised vs addressed as one ratio; state addressed query-time cost O(structure queried)/lookup. Compute/energy half: engine/energy_bench.py on the reference X1 Carbon 6th -- Crank.learn 1.8e5 words/s, ~38 uJ/word @7W, ~600 flop read path; vs dense transformer 2*N_params flop/token (~1 J/token at 70B, 1e-11 J/flop); per-query ratio 1e4-1e6x. Transformer figure is the standard FLOP identity + cited energy, not a run here"},
+    {"id": "G7", "reject": "runs only on the author's machine", "test": "run.sh from a clean checkout: pinned deps, WordNet pointer, G1 numbers out; third party executes"},
+    {"id": "G8", "reject": "context is never defined", "test": "context = the word's box kite (WordNet relational position + co-occurrence basin); continuity = the w stream reconstructing each box kite per turn. Stated in the paper"},
+    {"id": "G9", "reject": "the flashlight adds detail, where from", "test": "reconstruct at two magnifications; high-M structure is a deterministic upsample of low-M; mutual information with w does not increase with M"},
+    {"id": "G10", "reject": "attribution", "test": "checklist discharged by pencil_hyperstring.md provenance table: de Marrais owns the box kite; hypercomplex-NN line cited as contrast; Joukowsky/elastica/Smith/Gaussian-splat cited for what each contributes; Maxwell-Laman/moment-map/HKLL cited as analogues not sources; tether + wind-inflation + w=basin-drift marked first-stated-here"}
+  ],
+  "no_sigma_verification": "deliberate — no critical-line / Ainulindale-constant checks; the structure stands on established maths and a working round trip",
+  "g1_g2_note": "engine/semantic_hash_roundtrip.py, bench/roundtrip_results.txt -- G1/G2 partial discharge on the live store VAPMIP/PtolC/monad3_c.bin (146743 context-carrying words). context_code(v)->factor->v: 100.000%. (code,addr,delta)->v: 100.000%. gamma fold |gamma|<->log_code: rel err 8e-16, 1114 distinct log_code / 0 collisions (injective by unique factorisation). word x context separability (split at prime 71): 800/800. One lossy step: compress_count = round(log2(c+1)), by design, ~1.1% of live slots. spelling_code lossless for ASCII words <=20 chars (~97%); LETTER_PRIMES[i mod 20] cycle wraps beyond. Phi(w)->Assessor half still waits on C6. Folded into README after G10.",
+  "energy_note": "engine/energy_bench.py, bench/energy_results.txt — the 'materialised vs addressed' cost, measured on the reference machine. Read path ~600 flop/token; Crank.learn (the ingest fold) 1.8e5 words/s = 5.4 us/word = ~38 uJ/word @7W single-core (81 uJ @15W package); native reconstruction floor ~115 ns / <1 uJ per word. Dense-transformer contrast is the 2*N_params forward-FLOP identity plus a cited datacentre-effective energy figure (~1 J/token at 70B), NOT a benchmark run here. Per-query ratio 1e4 (measured pure-Python Monad) to 1e6 (native floor). The gap is structural: the materialised field is re-swept every query; the addressed structure is one product against a fixed ruler. Folded into the Conclusion as 'The price, measured'.",
+  "notebooks": [
+    "notebooks/01_semantic_prime_hashing.ipynb",
+    "notebooks/02_the_313_sieve_and_49999_unsieve.ipynb",
+    "notebooks/03_phonetic_prime_hashing.ipynb",
+    "notebooks/04_boxkite_pencil_hyperstring_windspeed.ipynb",
+    "notebooks/05_wordnet_19d_contextual_hash.ipynb"
+  ],
+  "next_paper": "Data Storage With No Physical Location — the Hyperwebster permutation decomposition; this paper is its box-kite instance"
+}

@@ -1,0 +1,41 @@
+==========================================================================
+MATERIALISED vs ADDRESSED — energy per query, reference X1 Carbon 6th
+==========================================================================
+
+[1] Cayley-Dickson product, recursive, pure-Python
+    H (dim  4) :   25.219 us/product     16 real mults   1576.2 ns/mult
+    O (dim  8) :  112.001 us/product     64 real mults   1750.0 ns/mult
+    S (dim 16) :  457.820 us/product    256 real mults   1788.4 ns/mult
+
+[2] Crank.learn() — conversational-ingest learning step (w=1.5/1.5)
+    310 words in 1.68 ms   => 5.43 us/word   184,109 words/s
+    energy/word:     81.47 uJ  @15W ceiling      38.02 uJ  @7W single-core est.
+
+[3] Monad context-reconstruction READ path, per word (analytic)
+    sedenion product      ~  496 flop  (256 mul + adds)
+    sparse A-row dot (nnz~40) ~   80 flop
+    WordNet / phonetic table lookup :   0 flop (memory-bound)
+    ---------------------------------------------
+    per word              ~  576 flop
+
+    MEASURED (pure-Python, interpreter-bound): 5.43 us/word, 38.02 uJ/word @7W
+    NATIVE floor (~5 GFLOP/s 1 core): 115.2 ns/word, 806.4 nJ/word @7W
+
+[4] Dense transformer, forward inference: 2*N_params flop / token
+    7B   : 1.40e+10 flop/token   ~  0.140 J/token (@1e-11 J/flop datacentre-effective)
+    70B  : 1.40e+11 flop/token   ~  1.400 J/token (@1e-11 J/flop datacentre-effective)
+    405B : 8.10e+11 flop/token   ~  8.100 J/token (@1e-11 J/flop datacentre-effective)
+    training: the backward sweep over the same N every step;
+      GPT-3 175B full training ~ 1.287 GWh published (Patterson 2021).
+
+[5] RATIO — addressed vs materialised, per query
+    Monad  / word  :     38.021 uJ  measured (pure-Python)
+    Monad  / word  :    806.400 nJ  native floor
+    70B    / token :   1400.000 mJ
+    ratio (measured Monad) : ~ 36,822 x
+    ratio (native  Monad)  : ~ 1.736e+06 x
+
+    The gap is structural: the Monad never materialises an
+    N_params relationship tensor and never runs a gradient over one.
+    Learning is a bounded in-place fold (Crank.learn / monad3c_fold);
+    reading is one product against a fixed ruler.  Forward and free.

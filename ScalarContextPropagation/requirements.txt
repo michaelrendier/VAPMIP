@@ -1,0 +1,21 @@
+# 19 Dimensional Scalar WordNet Context Propagation — paper code requirements
+#
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#   python3 -c "import nltk; nltk.download('wordnet')"
+#
+# The five notebooks in notebooks/ are pure-stdlib (struct, mmap, math,
+# random, functools) EXCEPT where they import wordnet_boxkite.py directly —
+# nltk is required to load that module and to build/refresh the live
+# WordNet-derived store (monad3_c.bin) from scratch; it is NOT required
+# merely to read an already-built monad3_c.bin (the notebooks do that with
+# stdlib struct/mmap only).
+#
+# The notebooks also import sibling modules from VAPMIP/ and
+# ValaQuenta/modules/box_kite/ by relative path (see each notebook's first
+# code cell) — this requirements.txt covers PACKAGES only; those two repos
+# must be checked out as siblings of this one for the imports to resolve.
+
+nltk>=3.8
+jupyter>=1.0

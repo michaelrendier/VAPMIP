@@ -1,0 +1,53 @@
+LIVE STORE  /home/rendier/Projects/ThePlace/VAPMIP/PtolC/monad3_c.bin
+  version 1   n_words 347,119   n_eng 164,283   n_wn 146,743   n_phon 123,455
+  words carrying a stored 19-vector (context): 146,743
+
+[1] context_code(v) -> factor -> v
+    exact: 146,743/146,743  (100.000%)   non-CP-smooth residue: 0   all-zero vectors: 9210
+    largest code: 98 bits
+
+[2] context_addr = (code, next_prime(code), delta);  code = addr - delta
+    exact: 146,743/146,743  (100.000%)
+
+[3] compress_count(c) = round(log2(c+1))  -- raw count -> bucket
+    bucket  raw-count range it stands for      width
+        0   [   0 ..    0]                    1
+        1   [   1 ..    1]                    1
+        2   [   2 ..    4]                    3
+        3   [   5 ..   10]                    6
+        4   [  11 ..   21]                    11
+        5   [  22 ..   44]                    23
+        6   [  45 ..   89]                    45
+        7   [  90 ..  180]                    91
+        8   [ 181 ..  361]                    181
+        9   [ 362 ..  723]                    362
+       10   [ 724 .. 1447]                    724
+       11   [1448 .. 2895]                    1448
+    live exponent-value frequency (all 19 dims, all words):
+      exp  0: 2,562,523  (91.91%)  stands for raw 0..0
+      exp  1:   195,361  ( 7.01%)  stands for raw 1..1
+      exp  2:    21,485  ( 0.77%)  stands for raw 2..4
+      exp  3:     5,806  ( 0.21%)  stands for raw 5..10
+      exp  4:     1,957  ( 0.07%)  stands for raw 11..21
+      exp  5:       699  ( 0.03%)  stands for raw 22..44
+      exp  6:       201  ( 0.01%)  stands for raw 45..89
+      exp  7:        59  ( 0.00%)  stands for raw 90..180
+      exp  8:        17  ( 0.00%)  stands for raw 181..361
+      exp  9:         9  ( 0.00%)  stands for raw 362..723
+    -> the round trip recovers the BUCKET, not the raw count. loss = width above.
+
+[4] gamma fold  gamma_radial = tanh(0.5 ln(log_code / LOG_ANCHOR))
+    log_code round trip (tanh->atanh) max rel err: 8.02e-16
+    tanh saturations (|gamma_radial| = 1): 0
+    distinct log_code values: 1,114 / 137,533 folded
+    distinct 19-vectors sharing an already-seen log_code: 0
+    -> |gamma| is lossless for log_code; log_code -> v is injective on this vocab.
+
+[5] spelling_code(w)  Godel positional, LETTER_PRIMES[i % 20]
+
+=== steps 5-6-x (30k / 800 / 400 samples) ===
+[5] spelling_code round trip, 30k sample
+    exact word recovery: 27382/28724 (95.328%)
+    <=20 chars: 28259  exact 27382 (96.897%)   >20 chars: 465 (lossy by cycle wrap)
+[6] combined = spelling_code*context_code, split at 71 -> recover BOTH: 800/800
+[x] stored 19-vec == context_vector(synsets(w)[0]) today: 372/400

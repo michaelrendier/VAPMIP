@@ -1,0 +1,30 @@
+==========================================================================
+THE GROUP
+==========================================================================
+  |GL(3,2)| = 168   (expect 168 = |PSL(2,7)| = ZD_COMPOSITE)
+  strut map is linear:  M(a)^M(b) == M(a^b)  ->  True
+  orbit of strut 1 under the group: [1, 2, 3, 4, 5, 6, 7]
+  TRANSITIVE on the 7 struts: True
+
+  assessor diagonals: 84  (42 planes x 2)
+  ordered annihilating pairs: 336  (expect 336 = 84 x 4)
+
+==========================================================================
+THE TEST — does the action preserve the ZD structure?
+==========================================================================
+  basis action:  e_k -> e_{M.k}  for k in 1..7
+                 e_{k+8} -> e_{(M.k)+8}
+                 e_0, e_8 fixed  (the two in no Assessor)
+
+  group elements PRESERVING annihilation : 21 / 168
+  group elements BREAKING  annihilation : 147 / 168
+
+  orbit of strut 1 under the PRESERVING subgroup: [1, 2, 3, 4, 5, 6, 7]
+  TRANSITIVE on struts using only preserving elements: True
+
+  ==> THE CONJECTURE HOLDS. Every pair of charts is joined by a group
+      element that carries the ZD structure with it. The atlas is
+      connected by GROUP ACTION, exactly as Phase 25 proposed.
+
+  |preserving subgroup| = 21   index in GL(3,2) = 8.000
+  closed under composition (sampled): True
