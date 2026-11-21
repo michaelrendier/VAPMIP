@@ -1,0 +1,63 @@
+{
+ "repo": "~/Projects/ThePlace/VAPMIP",
+ "out_dir": "holcus_paths_gallery",
+ "scan": [
+  "holcus_paths"
+ ],
+ "name": "Holcus 16D Paths Gallery",
+ "slug": "Holcus_16D_Paths_Gallery",
+ "port": 8773,
+ "svg_meta": true,
+ "also_scan": [
+  "~/.ptolemy/papers"
+ ],
+ "tagline": "The original SVG outputs of ptol.c, Holcus's 16-dimensional path papers: each prompt is projected onto the 16 sedenion basis elements; the spokes are e₀…e₁₅ (σ = ½ ring dashed), node distance is the scalar, the words on the spokes are the prompt hashed. Unmodified copies of ~/.ptolemy/papers/*.svg. Stays in VAPMIP.",
+ "exclude": [],
+ "groups": [
+  {
+   "name": "“what should we call you”",
+   "match": "^holcus_paths/ptol_what_should_we_call_you_\\d{10}\\.svg$",
+   "blurb": "Seven runs on the same prompt."
+  },
+  {
+   "name": "“why is the mass gap 1/root(2000)”",
+   "match": "^holcus_paths/ptol_why_is_the_mass_gap_\\d{10}\\.svg$",
+   "blurb": "Six runs; the prompt is the title text of each paper."
+  },
+  {
+   "name": "“what is a tree”",
+   "match": "^holcus_paths/ptol_what_is_a_tree_\\d{10}\\.svg$",
+   "blurb": "Four runs."
+  },
+  {
+   "name": "“neutron generation in different reactors”",
+   "match": "^holcus_paths/ptol_neutron_generation",
+   "blurb": "Two runs."
+  },
+  {
+   "name": "“zero divisors …”",
+   "match": "^holcus_paths/ptol_zero_divisor",
+   "blurb": "Zero-divisor prompts."
+  },
+  {
+   "name": "“it is sung”",
+   "match": "^holcus_paths/ptol_it_is_sung",
+   "blurb": "One prompt, kept with its bitmap/HTML siblings in ~/.ptolemy/papers."
+  },
+  {
+   "name": "Command-line test runs",
+   "match": "^holcus_paths/ptol_(--help|-h|-lv)",
+   "blurb": "Help and flag runs of ptol.c (the prompt is the flag text)."
+  },
+  {
+   "name": "Other prompts",
+   "match": "^holcus_paths/ptol_(can_you|finger|good_morning|hello|how_do|the_critical|the_first|attact)",
+   "blurb": "One-off prompts."
+  },
+  {
+   "name": "Pathway diff",
+   "match": "^holcus_paths/pathway_diff",
+   "blurb": "The 16-channel delta between the two most recent papers (the pathway skill)."
+  }
+ ]
+}

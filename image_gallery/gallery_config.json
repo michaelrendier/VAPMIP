@@ -6,7 +6,8 @@
  "tagline": "Figures and renders in VAPMIP: the paper figures, SemPriCon, ScalarContextPropagation, the epicycle drawings and the portrait state. App icons and the TOTP enrolment code are not included.",
  "exclude": [
   "^face/assets/",
-  "holcus_totp_enroll"
+  "holcus_totp_enroll",
+  "^holcus_paths/"
  ],
  "groups": [
   {

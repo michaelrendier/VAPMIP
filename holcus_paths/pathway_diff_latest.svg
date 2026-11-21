@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="520" viewBox="0 0 500 520">
+
+  <defs>
+    <!-- Difference blend: highlights what changed between prev and curr -->
+    <filter id="delta" x="0" y="0" width="100%" height="100%">
+      <feImage href="/home/rendier/.ptolemy/papers/ptol_why_is_the_mass_gap_1781371680.svg" result="prev" x="0" y="0" width="500" height="520"/>
+      <feImage href="/home/rendier/.ptolemy/papers/ptol_attactttaaaaatttttattttataaaagtaaaaaatataatttcaaattcaaaaattttta_1781480852.svg" result="curr" x="0" y="0" width="500" height="520"/>
+      <!-- arithmetic: k1*prev*curr + k2*prev + k3*curr + k4 -->
+      <!-- k2=-1 k3=1 k4=0.12 = curr - prev + lift (signed diff, lifted) -->
+      <feComposite in="curr" in2="prev" operator="arithmetic"
+                   k1="0" k2="-0.6" k3="1" k4="0.08" result="delta"/>
+      <feComposite in="curr" in2="delta" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="520" fill="#0a0a0a"/>
+
+  <!-- Ghost: previous state, desaturated -->
+  <image href="/home/rendier/.ptolemy/papers/ptol_why_is_the_mass_gap_1781371680.svg" width="500" height="520" opacity="0.18"/>
+
+  <!-- Delta layer: SVG arithmetic diff rendered natively -->
+  <rect width="500" height="520" fill="none" filter="url(#delta)" opacity="0.55"/>
+
+  <!-- Current state: full pathway on top -->
+  <image href="/home/rendier/.ptolemy/papers/ptol_attactttaaaaatttttattttataaaagtaaaaaatataatttcaaattcaaaaattttta_1781480852.svg" width="500" height="520" opacity="0.85"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="500" height="22" fill="#0a0a0a" opacity="0.7"/>
+  <text x="250" y="14" font-family="monospace" font-size="9"
+        fill="#607060" text-anchor="middle">Δ ATTACTTTAAAAATTTTTATTTTATAAAAGTAAAAAATATAATTTCAAATTCAAA</text>
+
+  <!-- σ¹⁶ state — polyline carried as text for context -->
+  <rect x="0" y="494" width="500" height="26" fill="#0a0a0a" opacity="0.8"/>
+  <text x="4" y="504" font-family="monospace" font-size="6.5"
+        fill="#334433">σ¹⁶: 250.00,260.00 250.00,258.59 253.20,258.67 254.92,255.08 262.05,260.00 263.78,265.71 257.78,241.22 266.71,276.71 265</text>
+  <text x="4" y="513" font-family="monospace" font-size="6.5"
+        fill="#334433">.00,296.21 250.00,301.18 234.13,298.31 200.78,239.61 201.77,308.23 185.41,286.76 188.93,198.93 155.56,260.00 213.71,172.40</text>
+
+</svg>

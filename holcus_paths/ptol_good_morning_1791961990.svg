@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="520" viewBox="0 0 500 520">
+  <rect width="500" height="520" fill="#0a0a0a"/>
+  <text x="250" y="16" font-family="monospace" font-size="11" fill="#444" text-anchor="middle">good morning</text>
+  <circle cx="250.0" cy="260.0" r="52.5" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="105.0" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="157.5" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="210.0" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="105.0" fill="none" stroke="#2a4a2a" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="357.0" y="260.0" font-family="monospace" font-size="8" fill="#2a4a2a" text-anchor="start">σ=½</text>
+  <line x1="250.00" y1="260.00" x2="250.00" y2="50.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="250.00" cy="255.87" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="250.0" y="36.0" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p2</text>
+  <line x1="250.00" y1="260.00" x2="330.36" y2="65.99" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="252.07" cy="255.00" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="335.7" y="53.1" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p3</text>
+  <line x1="250.00" y1="260.00" x2="398.49" y2="111.51" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="263.05" cy="246.95" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="408.4" y="101.6" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p5</text>
+  <line x1="250.00" y1="260.00" x2="444.01" y2="179.64" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="258.76" cy="256.37" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="456.9" y="174.3" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p7</text>
+  <line x1="250.00" y1="260.00" x2="460.00" y2="260.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="277.49" cy="260.00" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="476.0" y="260.0" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">aliment</text>
+  <line x1="250.00" y1="260.00" x2="444.01" y2="340.36" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="272.00" cy="269.11" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="458.8" y="346.5" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">colourless</text>
+  <line x1="250.00" y1="260.00" x2="398.49" y2="408.49" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="283.85" cy="293.85" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="408.4" y="418.4" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p17</text>
+  <line x1="250.00" y1="260.00" x2="330.36" y2="454.01" stroke="#333" stroke-width="0.8"/>
+  <circle cx="273.44" cy="316.60" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="336.5" y="468.8" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">gurls</text>
+  <English x="273.44" y="316.60">gurls</English>
+  <line x1="250.00" y1="260.00" x2="250.00" y2="470.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="250.00" cy="278.09" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="250.0" y="486.0" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">penned</text>
+  <line x1="250.00" y1="260.00" x2="169.64" y2="454.01" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="232.51" cy="302.22" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="163.5" y="468.8" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">gaule</text>
+  <line x1="250.00" y1="260.00" x2="101.51" y2="408.49" stroke="#333" stroke-width="0.8"/>
+  <circle cx="212.02" cy="297.98" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="90.2" y="419.8" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">seemes</text>
+  <English x="212.02" y="297.98">seemes</English>
+  <line x1="250.00" y1="260.00" x2="55.99" y2="340.36" stroke="#333" stroke-width="0.8"/>
+  <circle cx="182.21" cy="288.08" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="41.2" y="346.5" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">winningly</text>
+  <English x="182.21" y="288.08">winningly</English>
+  <line x1="250.00" y1="260.00" x2="40.00" y2="260.00" stroke="#333" stroke-width="0.8"/>
+  <circle cx="165.44" cy="260.00" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="24.0" y="260.0" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">lexicogrammat…</text>
+  <English x="165.44" y="260.00">lexicogrammat…</English>
+  <line x1="250.00" y1="260.00" x2="55.99" y2="179.64" stroke="#333" stroke-width="0.8"/>
+  <circle cx="173.58" cy="228.35" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="43.1" y="174.3" font-family="monospace" font-size="9" fill="#666" text-anchor="middle" dominant-baseline="central">p43</text>
+  <line x1="250.00" y1="260.00" x2="101.51" y2="111.51" stroke="#333" stroke-width="0.8"/>
+  <circle cx="194.22" cy="204.22" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="90.2" y="100.2" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">birdseye</text>
+  <English x="194.22" y="204.22">birdseye</English>
+  <line x1="250.00" y1="260.00" x2="169.64" y2="65.99" stroke="#333" stroke-width="0.8"/>
+  <circle cx="221.99" cy="192.38" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="163.5" y="51.2" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">aughty</text>
+  <English x="221.99" y="192.38">aughty</English>
+  <polyline fill="none" stroke="#40a060" stroke-width="1.2" opacity="0.8" points="250.00,260.00 250.00,255.87 252.07,255.00 258.76,256.37 250.00,278.09 263.05,246.95 272.00,269.11 277.49,260.00 232.51,302.22 283.85,293.85 212.02,297.98 273.44,316.60 221.99,192.38 182.21,288.08 194.22,204.22 173.58,228.35 165.44,260.00"/>
+  <circle cx="250.0" cy="260.0" r="3" fill="#806020" opacity="0.9"/>
+  <text x="250.0" y="272.0" font-family="monospace" font-size="8" fill="#806020" text-anchor="middle">ZD</text>
+  <text x="257.8" y="252.2" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e2</text>
+  <text x="255.3" y="257.8" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e3</text>
+  <text x="266.5" y="260.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e4</text>
+  <text x="263.2" y="265.5" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e5</text>
+  <text x="270.3" y="280.3" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e6</text>
+  <text x="264.1" y="294.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e7</text>
+  <text x="250.0" y="270.9" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e8</text>
+  <text x="239.5" y="285.3" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e9</text>
+  <text x="227.2" y="282.8" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e10</text>
+  <text x="209.3" y="276.8" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e11</text>
+  <text x="199.3" y="260.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e12</text>
+  <text x="204.1" y="241.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e13</text>
+  <text x="216.5" y="226.5" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e14</text>
+  <text x="233.2" y="219.4" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e15</text>
+</svg>
