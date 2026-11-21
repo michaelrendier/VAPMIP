@@ -1,0 +1,22 @@
+corpus: 10 train texts, 7,866,684 chars; held out abbott_flatland_1884.txt, 196,120 chars
+
+bits per character on the held-out text (spaces included; uniform: base 27 = 4.755, base 95 = 6.570):
+   order 0: 4.093 bits/char   table cells 28
+   order 1: 3.359 bits/char   table cells 784
+   order 2: 2.758 bits/char   table cells 17,444
+   order 3: 2.254 bits/char   table cells 202,776
+   order 4: 1.990 bits/char   table cells 1,219,148
+
+how many characters fit in a 256-bit address (windows of the held-out text, phrase + end mark, order 3):
+    30 chars: 100.0% of 5,300 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+    38 chars: 100.0% of 5,300 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+    53 chars: 100.0% of 5,300 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+    70 chars:  99.8% of 5,299 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+    90 chars:  95.4% of 5,299 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+   110 chars:  25.1% of 5,298 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+   130 chars:   0.1% of 5,298 windows fit   (Horner base 27 fits 53, base 95 fits 38)
+
+lexicographic order kept by the exact intervals: True; intervals pairwise disjoint (injective): True  (1326 sorted distinct words)
+single words (mean over 600 distinct): arithmetic 36.7 bits vs Horner base 27 32.6 bits (letters only)
+
+PREDICTIONS: P1 order-3 < 3.2 bits/char: HELD (2.254); P3: HELD
