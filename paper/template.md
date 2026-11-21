@@ -87,7 +87,7 @@ Maths is written in Unicode, never LaTeX, and code identifiers are given as the 
 ### 2.3 Conventions
 
 - One running example, the prompt `what is a tree`, carries every named-step description; six test prompts are used for every measurement.
-- Mechanism is given as named steps, tables and literal transcripts. Source is quoted verbatim only for the GPL v3 parts (the harness and everything built around it); none of the Monad's source is reproduced in this text. Companion notebooks (§19) run the real code.
+- Mechanism is given as named steps, tables and literal transcripts. Source is quoted verbatim only for the harness and everything built around it, which the author chose to show; none of the Monad's source is reproduced in this text. Companion notebooks (§19) run the real code.
 - Every figure comes from a script that can be re-run (`VAPMIP/paper/make_paper.py`); measured times are marked as such.
 - Where the code disagrees with its own comments or with a second program, the paper reports the disagreement as a result.
 - The author's screenshots of the programs running (`VAPMIP/paper/figures/`) are results, numbered 1–7 in his order (`/home/rendier/Desktop/SpaceClaude/ptol/`, which is not in a repository). Each is transcribed in the text, dated by what its own screen shows, and checked against the code where the code can reproduce it.
@@ -308,7 +308,7 @@ Verbs per operator in the compiled table: @@PARSER_OPS@@.
 
 ### 9.2 The harness
 
-`monad_harness.c` is the seam `ptol` crosses to drive the Python tabbed curses console: `ptol -w` forks the console onto the terminal and keeps the other end of a socket pair, reading newline-delimited JSON frames (`attach`, `say`, `cmd`, `mode`, `ping`, `quit`) and answering with `chat` frames. A passive "radio" frame carrying a support line is parsed (`mh_parse_support_line`) and folded into the Monad (`mh_ingest_support`). Frames are GPL v3 harness code.
+`monad_harness.c` is the seam `ptol` crosses to drive the Python tabbed curses console: `ptol -w` forks the console onto the terminal and keeps the other end of a socket pair, reading newline-delimited JSON frames (`attach`, `say`, `cmd`, `mode`, `ping`, `quit`) and answering with `chat` frames. A passive "radio" frame carrying a support line is parsed (`mh_parse_support_line`) and folded into the Monad (`mh_ingest_support`). Frames are harness code (proprietary; see LICENSE).
 
 ---
 

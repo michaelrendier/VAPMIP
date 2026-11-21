@@ -185,7 +185,7 @@ Full table, transcripts and the census: `docs/wiki/Tuning-the-Engine/42_every_vo
 
 ## License and third-party notices
 
-Short-term licensing available upon request with offer: the.wandering.god@gmail.com. See `LICENSE`.
+Proprietary. All rights reserved. See `LICENSE`.
 
 The project uses and derives data from WordNet 3.0, Copyright 2006 Princeton University; the WordNet license is in
 `WORDNET_LICENSE.txt` and the notices (WordNet, Open English WordNet, NLTK, the UD treebanks, Infocom/Zork) are in `NOTICE`.

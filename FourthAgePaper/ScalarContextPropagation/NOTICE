@@ -35,4 +35,4 @@ Infocom / Zork
 The verb-governed sentence parser follows the Infocom ZIL / Z-machine design (Blank, Lebling et al.; Nelson's Inform 6/7);
 it is built-against prior work, not a copy of any Infocom source.
 
-This directory moved to the VAPMIP repository on 2026-11-20 and is covered by VAPMIP's LICENSE (proprietary; short-term licensing on request). It was previously published in FourthAgePapers under GPL v3; copies obtained under that licence remain under it. The mathematics is not copyrightable.
+This directory moved to the VAPMIP repository on 2026-11-20 and is covered by VAPMIP's LICENSE (proprietary; all rights reserved). It was previously published in FourthAgePapers under GPL v3; copies obtained under that licence remain under it. The mathematics is not copyrightable.

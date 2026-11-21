@@ -79,9 +79,10 @@ no role in how the code was written.
 The box-kite context-hashing method and all code described in this
 paper — the addressing pipeline, `spelling_code`, `context_code`, the
 gamma fold, the windspeed recovery, and every notebook this paper cites —
-is released under the **GNU General Public License, version 3 (GPLv3)**.
-Free to use, study, modify, and redistribute, for research and commercial
-purposes alike, under that license's terms.
+is **proprietary**: Copyright (c) 2026 Cody Michael Allison (Michael Rendier),
+all rights reserved. The mathematics it uses is not copyrightable and is
+published under the GNU licence in the repositories outside VAPMIP.
+Copies obtained while this paper was published under GPLv3 remain under it.
 
 This paper describes an address, not the whole system it is a component
 of. Nothing in the broader, undisclosed system that address feeds is

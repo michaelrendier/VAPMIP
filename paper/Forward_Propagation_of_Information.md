@@ -87,7 +87,7 @@ Maths is written in Unicode, never LaTeX, and code identifiers are given as the 
 ### 2.3 Conventions
 
 - One running example, the prompt `what is a tree`, carries every named-step description; six test prompts are used for every measurement.
-- Mechanism is given as named steps, tables and literal transcripts. Source is quoted verbatim only for the GPL v3 parts (the harness and everything built around it); none of the Monad's source is reproduced in this text. Companion notebooks (§19) run the real code.
+- Mechanism is given as named steps, tables and literal transcripts. Source is quoted verbatim only for the harness and everything built around it, which the author chose to show; none of the Monad's source is reproduced in this text. Companion notebooks (§19) run the real code.
 - Every figure comes from a script that can be re-run (`VAPMIP/paper/make_paper.py`); measured times are marked as such.
 - Where the code disagrees with its own comments or with a second program, the paper reports the disagreement as a result.
 - The author's screenshots of the programs running (`VAPMIP/paper/figures/`) are results, numbered 1–7 in his order (`/home/rendier/Desktop/SpaceClaude/ptol/`, which is not in a repository). Each is transcribed in the text, dated by what its own screen shows, and checked against the code where the code can reproduce it.
@@ -361,7 +361,7 @@ Verbs per operator in the compiled table: identity 14, negate 14, bind 15, name 
 
 ### 9.2 The harness
 
-`monad_harness.c` is the seam `ptol` crosses to drive the Python tabbed curses console: `ptol -w` forks the console onto the terminal and keeps the other end of a socket pair, reading newline-delimited JSON frames (`attach`, `say`, `cmd`, `mode`, `ping`, `quit`) and answering with `chat` frames. A passive "radio" frame carrying a support line is parsed (`mh_parse_support_line`) and folded into the Monad (`mh_ingest_support`). Frames are GPL v3 harness code.
+`monad_harness.c` is the seam `ptol` crosses to drive the Python tabbed curses console: `ptol -w` forks the console onto the terminal and keeps the other end of a socket pair, reading newline-delimited JSON frames (`attach`, `say`, `cmd`, `mode`, `ping`, `quit`) and answering with `chat` frames. A passive "radio" frame carrying a support line is parsed (`mh_parse_support_line`) and folded into the Monad (`mh_ingest_support`). Frames are harness code (proprietary; see LICENSE).
 
 ---
 
@@ -620,7 +620,7 @@ Every path is `REPO/directory/file` under `https://github.com/michaelrendier/`.
 - **§14 Fault handling and NULL behaviour:** `VAPMIP/rotary_rerun_monad.py`
 - **§17 Tuning and the surface:** `VAPMIP/monad.py`, `VAPMIP/docs/wiki/Tuning-the-Engine/00_index.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/02b_the_halocline_j_blue_j_red_h_hat_rb.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/06_definition_from_above_the_shadow_cascade.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/09_the_void_named_itself.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/15_the_negative_space_response_equation.md`
 - **§2.2 Inside Out:** `ValaQuenta/modules/inversion/maths.py`
-- **§2 licences and third-party notices:** `VAPMIP/NOTICE`, `VAPMIP/WORDNET_LICENSE.txt`, `VAPMIP/LICENSE`, `VAPMIP/LICENSE-GPL-3.0.txt`
+- **§2 licences and third-party notices:** `VAPMIP/NOTICE`, `VAPMIP/WORDNET_LICENSE.txt`, `VAPMIP/LICENSE`
 
 ### 19.2 Notebooks
 

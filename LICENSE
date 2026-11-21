@@ -1,4 +1,11 @@
-VAPMIP — the Monad
-Copyright (c) 2026 Cody Michael Allison (Michael Rendier).
+VAPMIP: the Monad
+Copyright (c) 2026 Cody Michael Allison (Michael Rendier). All rights reserved.
 
-Short-term licensing available upon request with offer: the.wandering.god@gmail.com
+Proprietary. The code, methods and machinery in this repository (the Monad, the boxkite engineering, the Broca/Wernicke
+trees, SemPriCon, ScalarContextPropagation, the harness and everything built around them) are the author's intellectual
+property. Not for sale or licensing.
+
+The mathematics the Monad uses is not copyrightable and is published separately, under the GNU licence, in the
+repositories outside VAPMIP; that licence does not extend to anything in this repository.
+
+Third-party notices: NOTICE.
