@@ -59,5 +59,6 @@
    "match": "^holcus_paths/pathway_diff",
    "blurb": "The 16-channel delta between the two most recent papers (the pathway skill)."
   }
- ]
+ ],
+ "thumb_bright": true
 }
