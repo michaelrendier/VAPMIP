@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="520" viewBox="0 0 500 520">
+  <rect width="500" height="520" fill="#0a0a0a"/>
+  <text x="250" y="16" font-family="monospace" font-size="11" fill="#444" text-anchor="middle">can you play the piano?</text>
+  <circle cx="250.0" cy="260.0" r="52.5" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="105.0" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="157.5" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="210.0" fill="none" stroke="#222" stroke-width="0.5"/>
+  <circle cx="250.0" cy="260.0" r="105.0" fill="none" stroke="#2a4a2a" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="357.0" y="260.0" font-family="monospace" font-size="8" fill="#2a4a2a" text-anchor="start">σ=½</text>
+  <line x1="250.00" y1="260.00" x2="250.00" y2="50.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="250.00" cy="239.48" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="250.0" y="36.0" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p2</text>
+  <line x1="250.00" y1="260.00" x2="330.36" y2="65.99" stroke="#1a1a1a" stroke-width="0.4"/>
+  <text x="336.5" y="51.2" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">water's-edge</text>
+  <line x1="250.00" y1="260.00" x2="398.49" y2="111.51" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="250.85" cy="259.15" r="2.5" fill="#4060c0" opacity="0.9"/>
+  <text x="409.8" y="100.2" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">folcwalda's</text>
+  <line x1="250.00" y1="260.00" x2="444.01" y2="179.64" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="256.06" cy="257.49" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="458.8" y="173.5" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">refute</text>
+  <line x1="250.00" y1="260.00" x2="460.00" y2="260.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="274.00" cy="260.00" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="476.0" y="260.0" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">patrolling</text>
+  <line x1="250.00" y1="260.00" x2="444.01" y2="340.36" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="277.44" cy="271.37" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="458.8" y="346.5" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">swarming-time</text>
+  <line x1="250.00" y1="260.00" x2="398.49" y2="408.49" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="284.80" cy="294.80" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="409.8" y="419.8" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">alemannicus</text>
+  <line x1="250.00" y1="260.00" x2="330.36" y2="454.01" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="266.07" cy="298.79" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="336.5" y="468.8" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">vagabonds</text>
+  <line x1="250.00" y1="260.00" x2="250.00" y2="470.00" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="250.00" cy="281.52" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="250.0" y="486.0" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">confabulation…</text>
+  <line x1="250.00" y1="260.00" x2="169.64" y2="454.01" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="246.87" cy="267.56" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="163.5" y="468.8" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">assiduously</text>
+  <line x1="250.00" y1="260.00" x2="101.51" y2="408.49" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="244.36" cy="265.64" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="90.2" y="419.8" font-family="monospace" font-size="8" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">industriously</text>
+  <line x1="250.00" y1="260.00" x2="55.99" y2="340.36" stroke="#1a1a1a" stroke-width="0.4"/>
+  <circle cx="234.08" cy="266.59" r="2.5" fill="#c04040" opacity="0.9"/>
+  <text x="43.1" y="345.7" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">p37</text>
+  <line x1="250.00" y1="260.00" x2="40.00" y2="260.00" stroke="#333" stroke-width="0.8"/>
+  <circle cx="160.60" cy="260.00" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="24.0" y="260.0" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">marja-liisa</text>
+  <English x="160.60" y="260.00">marja-liisa</English>
+  <line x1="250.00" y1="260.00" x2="55.99" y2="179.64" stroke="#333" stroke-width="0.8"/>
+  <circle cx="163.77" cy="224.28" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="43.1" y="174.3" font-family="monospace" font-size="9" fill="#666" text-anchor="middle" dominant-baseline="central">p43</text>
+  <line x1="250.00" y1="260.00" x2="101.51" y2="111.51" stroke="#333" stroke-width="0.8"/>
+  <circle cx="180.04" cy="190.04" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="90.2" y="100.2" font-family="monospace" font-size="10" fill="#40a060" font-weight="bold" text-anchor="middle" dominant-baseline="central">mcarthur</text>
+  <English x="180.04" y="190.04">mcarthur</English>
+  <line x1="250.00" y1="260.00" x2="169.64" y2="65.99" stroke="#333" stroke-width="0.8"/>
+  <circle cx="210.59" cy="164.85" r="4.0" fill="#c04040" opacity="0.9"/>
+  <text x="164.3" y="53.1" font-family="monospace" font-size="9" fill="#666" text-anchor="middle" dominant-baseline="central">p53</text>
+  <polyline fill="none" stroke="#40a060" stroke-width="1.2" opacity="0.8" points="250.00,260.00 250.19,259.54 250.85,259.15 256.06,257.49 244.36,265.64 246.87,267.56 234.08,266.59 250.00,239.48 250.00,281.52 274.00,260.00 277.44,271.37 266.07,298.79 284.80,294.80 160.60,260.00 163.77,224.28 180.04,190.04 210.59,164.85"/>
+  <circle cx="250.0" cy="260.0" r="3" fill="#806020" opacity="0.9"/>
+  <text x="250.0" y="272.0" font-family="monospace" font-size="8" fill="#806020" text-anchor="middle">ZD</text>
+  <text x="250.0" y="247.7" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e0</text>
+  <text x="264.4" y="260.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e4</text>
+  <text x="266.5" y="266.8" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e5</text>
+  <text x="270.9" y="280.9" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e6</text>
+  <text x="259.6" y="283.3" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e7</text>
+  <text x="250.0" y="272.9" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e8</text>
+  <text x="248.1" y="264.5" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e9</text>
+  <text x="240.4" y="264.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e11</text>
+  <text x="196.4" y="260.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e12</text>
+  <text x="198.3" y="238.6" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e13</text>
+  <text x="208.0" y="218.0" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e14</text>
+  <text x="226.4" y="202.9" font-family="monospace" font-size="7" fill="#555" text-anchor="middle" dominant-baseline="central">e15</text>
+</svg>

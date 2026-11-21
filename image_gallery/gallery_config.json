@@ -1,0 +1,44 @@
+{
+ "repo": "~/Projects/ThePlace/VAPMIP",
+ "name": "VAPMIP Gallery",
+ "slug": "VAPMIP_Gallery",
+ "port": 8772,
+ "tagline": "Figures and renders in VAPMIP: the paper figures, SemPriCon, ScalarContextPropagation, the epicycle drawings and the portrait state. App icons and the TOTP enrolment code are not included.",
+ "exclude": [
+  "^face/assets/",
+  "holcus_totp_enroll",
+  "^holcus_paths/"
+ ],
+ "groups": [
+  {
+   "name": "VAPMIP paper figures",
+   "match": "^paper/figures/",
+   "blurb": "Figures of the VAPMIP paper."
+  },
+  {
+   "name": "Scalar Context Propagation figures",
+   "match": "ScalarContextPropagation/",
+   "blurb": "Figures and the SHA-1 Chladni figures; identical copies elsewhere are listed as 'also at'."
+  },
+  {
+   "name": "SemPriCon figures",
+   "match": "^SemPriCon/",
+   "blurb": "SemPriCon figures."
+  },
+  {
+   "name": "Epicycles (docs)",
+   "match": "docs/figures/epicycles",
+   "blurb": "Epicycle drawings."
+  },
+  {
+   "name": "Portrait state",
+   "match": "^gallery/",
+   "blurb": "Saved portrait states."
+  },
+  {
+   "name": "Sedenion answer and art",
+   "match": "ANSWER_|WanShiTong",
+   "blurb": "Root-level images."
+  }
+ ]
+}
