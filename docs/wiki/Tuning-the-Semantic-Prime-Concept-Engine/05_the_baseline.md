@@ -18,7 +18,7 @@ Contents (v1 scope is Cody's call; the options are A: characters + MOE-learned s
 Spot checks of purity: no Cantonese content in the MOE dictionary (the flagged characters are classical Mandarin uses); a handful of Taiwan-Mandarin loans from Hokkien (囝仔, 歌仔戲); Simplified-only characters ≈ 0.002 % of the text.
 
 ## Frozen
-The Baseline is a **read-only store + manifest** (source hashes, `MANIFEST.tsv`) with a push-first assessment, archived under the Fresh Start Protocol. Nothing writes to it. Fits are **overlays** that can be deleted; Fresh Start deletes the overlays and restores the Baseline byte for byte. *(Status: not built yet.)*
+The Baseline is a **read-only store + manifest** (source hashes, `MANIFEST.tsv`) with a push-first assessment, archived under the Fresh Start Protocol. Nothing writes to it. Fits are **overlays** that can be deleted; Fresh Start deletes the overlays and restores the Baseline byte for byte. *(Status, 2026-11-21: the full store described here is not built; the v3 bins are its first, word-list-sized form.)*
 
 ## Fitting (the scoped exception)
 English (US, UK) and the other languages are fitted **to** The Baseline, never the reverse. A fit is permitted because it:
@@ -35,4 +35,4 @@ A value put in by hand with none of these is a guess, and is not allowed. Mathem
 
 
 ## Test bins
-The first frozen pair, `test_chinese_v1.0.bin` and `test_english_v1.0.bin`, is described in [09](09_the_test_bins.md). It is not yet The Baseline: nothing has been fitted.
+The Chinese bin of the current battery is `test_chinese_v3.bin` (M4, single characters, exact zeros; [09](09_the_test_bins.md), [17](17_v3_word_list_and_uns_bins.md)). It is the baseline language of the measurement. It is not yet The Baseline store of this page: nothing has been fitted, and the assignment bin `test_chinese_english_v3.bin` is the first experiment in fitting English to it.

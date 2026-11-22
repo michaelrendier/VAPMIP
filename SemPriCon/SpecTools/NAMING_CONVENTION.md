@@ -3,7 +3,7 @@
 Recorded 2026-10-22 from Cody's specification (SemPriCon control grouping). The version number in a file name points directly at the files used in that experiment battery.
 
 ## Grammar
-`{L}` = a language token: lowercase full English name (`english`, `chinese`). `chinese` = the frozen Traditional Mandarin baseline. `{M}` = mapped language (the language whose address shape is walked). `{A}` = assigned language (the language whose words are slotted into `{M}`'s slots). `{S}` = spoken language (the language of the reply). `{V}` = integer experiment-battery number. **No `.0`**: `v3`, never `v3.0`.
+`{L}` = a language token: lowercase full English name (`english`, `chinese`). `chinese` = the Traditional Mandarin baseline (read-only). `{M}` = mapped language (the language whose address shape is walked). `{A}` = assigned language (the language whose words are slotted into `{M}`'s slots). `{S}` = spoken language (the language of the reply). `{V}` = integer experiment-battery number. **No `.0`**: `v3`, never `v3.0`.
 
 | thing | pattern | example | meaning |
 |---|---|---|---|
@@ -30,7 +30,7 @@ Order rule: mapped first, assigned/spoken second, always. Reverse experiments ar
 
 ## Where things stand (2026-10-22)
 - Renamed `*_v3.0*` → `*_v3*`: three bins, nine assessment files, and every reference to them in `clean/MANIFEST.tsv`, `data/v3_build_summary.json`, `tools/v3_build.py`, `v3_speak.py`, `v3_pdf.py`, `SpecTools/README.md`, `SemPriCon_requ_conf.md` and wiki page 17. Bin sha256 unchanged and matches the manifest.
-- No `TestMonad_*_v3.py` file exists yet. `tools/v3_speak.py` (driving `monad_pyu.MonadU`) is the stand-in speaker. Nothing is built until Cody says go.
+- `TestMonad_english_v3.py` and `TestMonad_chinese_v3.py` exist (2026-10-22; wiki page 18). Not built: `TestMonad_chinese_english_v3.py`, `TestMonad_english_chinese_v3.py`. `tools/v3_speak.py` remains the stand-in.
 - Older names stay as they were (`test_*_v1.0.bin`, `test_*_v2.0.bin`, `test_*_v2.bin`): archived, deprecated and left.
 - `mappings/UNS/` and `mappings/Flat/` exist as empty homes (see `mappings/README.md`); the code has not moved.
 - A script of version `V` named without a dot is also importable as a Python module (`import TestMonad_english_v3`), which `v3.0` was not.

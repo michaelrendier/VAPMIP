@@ -2,7 +2,7 @@
 
 > File naming: see `../../../SemPriCon/SpecTools/NAMING_CONVENTION.md` (versions are integers, `_v3`, no `.0`).
 
-**Job.** Record the v3.0 word list, the two UNS bins built from it, why Chinese is the baseline, and the first side-by-side survey of M3 and M4. Flat mechanisms (M1, M2) are not used. Nothing is assigned or aligned yet; the assignment of English words to Chinese idea slots is the next discussion.
+**Job.** Record the v3.0 word list, the two UNS bins built from it, why Chinese is the baseline, and the first side-by-side survey of M3 and M4. Flat mechanisms (M1, M2) are not used. The assignment experiment (English words slotted into Chinese idea slots) is the last section; its speaker is not built ([18](18_v3_speakers.md)).
 
 ## Why Chinese is the baseline (Cody's stated rationale, 2026-10-21)
 A) it is **ideographic**: a character is an idea, not a spelling (an ideographic system keeps *couch* and *chair* from being two versions of one idea); B) it is **alive and spoken well today** (not dead, not recently dead, not dying like Navajo and Comanche); C) it has existed for **over five millennia**; D) it is believed to be **one of the most efficient partitionings of idea space** in language form. It is taken as the bare minimum of ideas space. Hieroglyphs would have been chosen were the language not dead; Demotic put one character at the start of a word to carry its tone, which became the invisible tone / tense / conjugation marks the orbweaver will carry ([10](10_design_notes.md)). A, B, C are Cody's statements; D is his assumption and is **not measured here**.

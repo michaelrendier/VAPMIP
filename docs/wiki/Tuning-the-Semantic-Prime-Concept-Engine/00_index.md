@@ -9,7 +9,7 @@ The functional reference for **SemPriCon**: the semantic prime-concept hashing e
 > 4. **The code is authoritative.** If a page and the code disagree, the page is wrong; fix the page.
 > 5. **Fitting is allowed here and only here** (see [05](05_the_baseline.md)): English and the other languages are fitted to The Baseline. It stays forbidden in all mathematics work.
 
-Working directory: `VAPMIP/SemPriCon/`. Test bed: Chinese (Traditional), English (US, UK), Finnish and Indonesian, each in its own single-language store; Swahili and Quechua are on hold.
+Working directory: `VAPMIP/SemPriCon/`. Current battery: v3 (Fresh Start 2026-10-21): English and Chinese (Traditional, the baseline) in their own Universal Native Space bins, and one assignment bin; the v2 stores (Chinese, English, Finnish, Indonesian) are archived under `SemPriCon/clean/archive/v2.0/`. Swahili and Quechua are on hold. Version numbers are integers (`SemPriCon/SpecTools/NAMING_CONVENTION.md`).
 
 | Page | Part | What it specifies |
 |---|---|---|
@@ -21,15 +21,16 @@ Working directory: `VAPMIP/SemPriCon/`. Test bed: Chinese (Traditional), English
 | [06_the_calibration_set.md](06_the_calibration_set.md) | calibration | the frozen 1 024-word testing-and-debugging set (English + Chinese; 512 simple, 512 deeper synonyms) |
 | [07_data_and_tools.md](07_data_and_tools.md) | data | corpora, licences, closed doors, and every tool with its command |
 | [08_verification.md](08_verification.md) | tests | what is verified against the compiled binary, how to re-run it, what is weak |
-| [09_the_test_bins.md](09_the_test_bins.md) | test bins | `test_{chinese,english,finnish,indonesian}_v2.0.bin`: one alphabet each, how they were built, versioning |
-| [10_design_notes.md](10_design_notes.md) | design notes | decided-but-unbuilt ideas, e.g. the invisible tone / tense / conjugation prefix |
+| [09_the_test_bins.md](09_the_test_bins.md) | test bins | the v3 bins (`test_english_v3`, `test_chinese_v3`, `test_chinese_english_v3`), the archived v2.0 stores, versioning |
+| [10_design_notes.md](10_design_notes.md) | design notes | decided-but-unbuilt ideas: the invisible tone / tense / conjugation prefix; the neuromodulator tone character |
 | [11_baseline_mapping_zh_en.md](11_baseline_mapping_zh_en.md) | workbench | LIVE SNAPSHOT: the four zh/en word-list bins, where every list word landed, pair offsets, second-pass effects, order effect, fault rows; pull a block with `tools/wb_pull.py` |
 | [12_four_mechanisms.md](12_four_mechanisms.md) | mechanisms | the four address mechanisms (M1 English ½ line, M2 Chinese ½ line, M3 English in UNS, M4 Chinese in UNS), why English and Chinese differ, shared constants, order of work |
 | [13_M1_english_to_half_line.md](13_M1_english_to_half_line.md) | M1 | the machinery behind `holcus·same·stuff·seemy` as it ran (eb28ce8), and what it measurably is |
 | [14_M2_chinese_to_half_line.md](14_M2_chinese_to_half_line.md) | M2 | single Chinese character → dictionary position → exact zero; E from the golden-ratio hash of the key component; self-test and held-out probes |
 | [15_M3_english_in_uns.md](15_M3_english_in_uns.md) | M3 | M1 as golden-angle rotations on the π/2 equatorial great circle of UNS; byte-identical replies |
 | [16_M4_chinese_in_uns.md](16_M4_chinese_in_uns.md) | M4 | M2 as an azimuth turn on the equator with the key component as radius |
-| [17_v3_word_list_and_uns_bins.md](17_v3_word_list_and_uns_bins.md) | v3.0 | the v3.0 word list (single Chinese characters), why Chinese is the baseline, the two UNS bins, M3 and M4 side by side, first survey |
+| [17_v3_word_list_and_uns_bins.md](17_v3_word_list_and_uns_bins.md) | v3 | the v3 word list (single Chinese characters), why Chinese is the baseline, the two UNS bins, M3 and M4 side by side, first survey, the assignment bin |
+| [18_v3_speakers.md](18_v3_speakers.md) | speakers | `TestMonad_english_v3.py`, `TestMonad_chinese_v3.py`: what each does, the deviations from the engine step, what the replies show |
 | [1024.md](1024.md) | word list | the English row headers, their Chinese words and the slot of each in every bin; updated in place |
 
-*18 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).
+*19 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).

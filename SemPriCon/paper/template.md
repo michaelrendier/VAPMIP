@@ -4,7 +4,7 @@
 
 **Cody Michael Allison** (Michael Rendier), independent researcher · the.wandering.god@gmail.com · ORCID 0009-0007-7239-6760\
 **Written by an AI assistant:** Claude Sonnet 5.5 (`claude-sonnet-5-5`), with the author's `cs-paper-code-conventions` skill running (`ContextPlease/claude/skills/cs-paper-code-conventions/SKILL.md`)\
-**Date:** 2026-10-18 · **Status:** first full draft · **Code:** `VAPMIP/SemPriCon` · **Reference source:** `VAPMIP/PtolC/`, commit `{{commit_short}}` ({{commit_date}}) · **Repository prefix:** every path below, written `REPO/directory/file`, lives under `https://github.com/michaelrendier/`
+**Date:** 2026-10-18 (symbols and state note 2026-11-21) · **Status:** first full draft · **Code:** `VAPMIP/SemPriCon` · **Reference source:** `VAPMIP/PtolC/`, commit `{{commit_short}}` ({{commit_date}}) · **Repository prefix:** every path below, written `REPO/directory/file`, lives under `https://github.com/michaelrendier/`
 
 ---
 
@@ -63,7 +63,7 @@ Maths is written in Unicode, never LaTeX, and code identifiers are given as the 
 | A | `m->am` | the link table: weight between two slots (§8) |
 | J | `J[idx]` | the weight a prompt puts on a slot while speaking (§12) |
 | φ | `MONAD_PHI` | the golden ratio, 1.6180339887498948482 |
-| d\*, Ω | `MONAD_D_STAR`, `MONAD_OMEGA_ZS` | the lower and upper bounds of E: 0.24600 and 0.56714 |
+| d\*, A_π | `MONAD_D_STAR`, `MONAD_OMEGA_ZS` | the lower and upper bounds of E: 0.24600 (d*, the rounded Ω_ζΣ = 0.2463) and 0.56714 (A_π = W(1); the code's name for it is `OMEGA_ZS`) |
 | `U+200B … U+2003` | `fermat_space_utf8` | the eight invisible separator characters (§12.10) |
 
 The code attaches physical and number-theoretic names to these quantities ("Riemann zero", "Noether", "Wick rotation", "Fermat", "Lagrangian", "octonion"). This paper uses the code's names where it must refer to the code and states what the computation is, in arithmetic, each time. It does not rely on any of the names for a claim.
@@ -236,7 +236,7 @@ Named steps:
 3. **A3 [shift].** If `v > 0`, `v ← v − 1`.
 4. **A4 [golden ratio].** `seed = fmod((double)v · φ, 1.0)`, taken in [0, 1).
 5. **A5 [slot].** `idx = floor(seed · N)`, clamped to [0, N−1].
-6. **A6 [energy].** `E = d* + seed · (Ω − d*)`, so E ∈ [0.24600, 0.56714).
+6. **A6 [energy].** `E = d* + seed · (A_π − d*)`, so E ∈ [0.24600, 0.56714).
 
 **Worked example, `holcus` (port; the compiled binary gives the same slot and E, §14.3).**
 
@@ -542,13 +542,13 @@ Because φ is irrational, repeated steps of `round(N/φ²)` modulo N visit slots
 
 ### 12.8 The first word
 
-**Listing 22 — first word (excerpt, `monad.c` lines {{EXCL:monad.c:0:2:double target_E::if (dE < best_dE)}}).** `target_E = (ΣV/(ΣV + ΣT)) · Ω`. Among all N slots that are occupied, have `J > J_floor`, pass the gate `cos(γ/2 + φ_rot) > 0`, and whose displayed word passes `token_accept` (prose rules), the slot whose *stored E* is nearest to `target_E` is chosen. The comment above this block says "first 200 qualifying walk candidates"; the code scans all N slots (§17.6).
+**Listing 22 — first word (excerpt, `monad.c` lines {{EXCL:monad.c:0:2:double target_E::if (dE < best_dE)}}).** `target_E = (ΣV/(ΣV + ΣT)) · A_π`. Among all N slots that are occupied, have `J > J_floor`, pass the gate `cos(γ/2 + φ_rot) > 0`, and whose displayed word passes `token_accept` (prose rules), the slot whose *stored E* is nearest to `target_E` is chosen. The comment above this block says "first 200 qualifying walk candidates"; the code scans all N slots (§17.6).
 
 ```c
 {{EXC:monad.c:0:2:double target_E::if (dE < best_dE)}}
 ```
 
-With `ΣT ≪ ΣV`, `target_E` is within 10⁻³ of Ω for any short prompt: here {{tr.target}}. The gate with `affect = −1` is `cos(γ/2 − π/2) = sin(γ/2) > 0`.
+With `ΣT ≪ ΣV`, `target_E` is within 10⁻³ of A_π for any short prompt: here {{tr.target}}. The gate with `affect = −1` is `cos(γ/2 − π/2) = sin(γ/2) > 0`.
 
 ### 12.9 Emission, and `near_canonical`
 
@@ -706,7 +706,7 @@ The first prompt is the screenshot's: `holcussamestuffseemy` is the reply `{{rep
 
 ### 15.1 The selector reads nothing of the prompt
 
-The rule of §12.8 compares stored E with a target that is within 10⁻³ of Ω for any short prompt. The only prompt-dependent inputs are which slots have `J > J_floor` and an open gate. Slot {{tr.demotic}} has E = {{hol.E}}, 0.0046 below Ω.
+The rule of §12.8 compares stored E with a target that is within 10⁻³ of A_π for any short prompt. The only prompt-dependent inputs are which slots have `J > J_floor` and an open gate. Slot {{tr.demotic}} has E = {{hol.E}}, 0.0046 below Ω.
 
 ### 15.2 The slot is the slot of the word *in*
 
@@ -811,6 +811,9 @@ Requirements the baseline imposes:
 ---
 
 ## 19. Limitations and conclusion
+
+**State of SemPriCon since this draft (2026-11-21).** This paper documents the baseline: the May-2026 C monad at the commit named above, as it ran. It has not been extended. Work after it, recorded in the wiki `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/` and not described in the sections below: the Fresh Start of 2026-10-21 (v3; the v2 stores archived); two Universal Native Space mappings, M3 (English) and M4 (Chinese, the baseline language); the 1 024-row word list of single Chinese characters; `test_english_v3.bin`, `test_chinese_v3.bin` and the assignment bin `test_chinese_english_v3.bin`; two speakers (`TestMonad_english_v3.py`, `TestMonad_chinese_v3.py`). Open: the assignment speaker, edges for selection by association, and the definition of a match.
+
 
 **Limitations of this paper.** The port covers learning and the `-W` speaking mode; it does not cover `-h`, `-O`, the REPL or the daemon. One store and one commit were examined. The store was identified by its header numbers and the screenshot text; the screenshot image itself was not re-measured. That the store was built with `-i` is an inference from the presence of all {{id.edges}} identity links; no ingest log exists. The statements about earlier Python-era experiments are the author's recollection and are not tested here. The literature in the References was cited, not fetched, except where a copy is noted.
 
