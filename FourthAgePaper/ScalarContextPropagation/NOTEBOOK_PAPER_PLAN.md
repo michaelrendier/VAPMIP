@@ -147,7 +147,7 @@ its anagram-blindness demonstrated directly (`cat`==`act`,
 (20-prime Gödel-positional tier, `LETTER_PRIMES ≤ 71`) fixing it (cells
 6–8), then measured on a live 30,000-word sample (cell 10): exact
 recovery %, split `≤20` vs `>20` letters (the tier-wraparound lossy case).
-Draft: `draft_section_05.md` — scoped exactly to the ordering/anagram
+Draft: `archive/draft_sections/draft_section_05.md` — scoped exactly to the ordering/anagram
 issue per Cody's instruction, real numbers from the notebook's own
 recorded cell outputs (710/1914801911 collisions; 95.290% overall,
 96.745% on ≤20-letter words). One open flag carried into the draft: §4's
@@ -172,7 +172,7 @@ vocabulary-update law's formulas (`monad_learn_ex` in C /
 only as "the store keeps growing," one line, no code. `phon:` checked
 directly and confirmed to have **no WordNet wiring** (built from
 `nltk.corpus.cmudict` alone) — one-line mention only. Draft:
-`draft_section_06.md`.
+`archive/draft_sections/draft_section_06.md`.
 
 **Notebook 06 should be a C-kernel notebook (Cling/Clang-style), not
 Python** — per Cody: "the Monad and the Monad Harness [are] strictly C
@@ -191,7 +191,7 @@ this section per scope).
 (`monad_learn_ex`'s β law / `prose_seen` ladder / A-matrix coupling,
 real constants from `ptolemy.h`) and only what the daemon *sends* to
 trigger it, not daemon internals — per Cody's instruction. Two real
-anomalies found by running it, both flagged in `draft_section_06.md`
+anomalies found by running it, both flagged in `archive/draft_sections/draft_section_06.md`
 §6.5: `MONAD_BETA_SAT=7.552` vs. `SPEC.md`'s stated `(0,1]`; and the
 `prose_seen` ladder's order-dependent asymmetry (WordNet→prose reaches
 "verified", prose→WordNet does not). Source `.c` files archived in
@@ -225,7 +225,7 @@ explicitly since the two easily get conflated under one word.
 > fold, then next_prime(spelling_code × context_code) — the actual
 > deliverable, verified.
 
-**Drafted (2026-09-20): `draft_section_07.md`.** Scoped per Cody: "this is
+**Drafted (2026-09-20): `archive/draft_sections/draft_section_07.md`.** Scoped per Cody: "this is
 The WordNet section... the code here is just the 'reading' mechanism of
 `monad3_c.bin`'s WordNet relationships... as they will be used directly
 in the boxkite section later" — so §7 stops at `gamma_radial`/
@@ -238,7 +238,7 @@ states "300/300" — stale, needs reconciling.
 **Resolved (2026-09-21):** `README.md`'s three "300/300" mentions
 (§7, §9 notebook table, G1 gate) corrected to **286/286** to match the
 notebook's own recorded run, which is authoritative. §7's `Flag` note
-removed from `draft_section_07.md` now that the two agree.
+removed from `archive/draft_sections/draft_section_07.md` now that the two agree.
 
 **`notebooks/05_wordnet_19d_contextual_hash.ipynb` — 13 cells, checked.**
 This is the paper's actual shipped result. `context_vector`→`context_code`
@@ -253,7 +253,7 @@ from one prime), plus one fully worked example end to end.
 > (keep — energy_bench.py, concrete flop counts, this is exactly
 > Fast-Inverse-Square-Root-flavored content).
 
-**Drafted (2026-09-20): `draft_section_08.md`.** Scoped narrowly per
+**Drafted (2026-09-20): `archive/draft_sections/draft_section_08.md`.** Scoped narrowly per
 Cody: not "backprop is wrong" (it remains the right tool for OCR/CNN-
 class problems) but "backprop is a hard wall for training on a laptop,"
 a compute-accessibility claim, not a correctness one. Cites the
@@ -356,7 +356,7 @@ either `ESTABLISHED` or newly verified. State
 this plainly in §9 as the target, correctly labeled `THEORETICAL`, not
 implied to already work.
 
-**§9 drafted (2026-09-20): `draft_section_09.md`.** Written after the full
+**§9 drafted (2026-09-20): `archive/draft_sections/draft_section_09.md`.** Written after the full
 windspeed-testing arc (§9.1 final assignment), the Native-Space/aperture
 corrections (§9.3, now also the `observer-position` skill), the `H`
 conservation result (§9.4, real but partial — struts 1/3/6 only, `{1,3,6}`'s

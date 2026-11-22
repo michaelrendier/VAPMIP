@@ -1,7 +1,7 @@
 # windspeed_reconstruction — the §9 investigation, in order
 
-Moved here from session scratch work, 2026-09-20, because `draft_section_09.md`
-and `draft_section_10.md` cite these results directly — they needed a
+Moved here from session scratch work, 2026-09-20, because `archive/draft_sections/draft_section_09.md`
+and `archive/draft_sections/draft_section_10.md` cite these results directly — they needed a
 permanent home, not `/tmp`. Run in this numbered order; each script is
 what it says, including the one that's flawed.
 

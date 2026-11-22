@@ -16,6 +16,8 @@
 >
 > **The method.** The author does not tell the assistant what result he is hoping for. Tasks are given as measurements ("run it", "chase that to its source"), so that he is not handed the answers he wants. This is a safeguard, not a guarantee; the real safeguards are fresh runs, exact comparison where an exact answer exists, and failures kept in the text.
 >
+> **Licence and symbols (2026-11-21).** The code and this method are proprietary: Copyright (c) 2026 Cody Michael Allison, all rights reserved (`VAPMIP/LICENSE`); the mathematics behind them is published under the GNU licence outside VAPMIP. Where the text quotes the code's constants, the code predates the author's symbol ruling: `OMEGA_ZS` = 0.56714 is A_π = W(1), and `D_STAR` = 0.24600 is the rounded Ω_ζΣ = d* = 0.2463; α is the fine-structure constant, which no measurement here uses. Quotations of code and of the `ptol.c` header are kept as they stand.
+>
 > **What kind of paper this is.** An engineering white paper about two pieces of finished code, shown running. It contains no proofs and makes no prediction. It describes the mechanism and shows the behaviour; it does not reproduce the Monad's source (§2.3). Every result is a measurement of the code as it stands at the commit above; nothing was changed to obtain it.
 
 ---

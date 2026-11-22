@@ -13,7 +13,9 @@
 >
 > - (lines 1617, 1620, 1628, 1638, 1934, 1944 …) A Noether-current / Noether-balance statement for the σ = ½ map. **Retired as a conserved-current statement**: s ↦ 1 − s is a discrete involution, so there is no continuous symmetry and no Noether current (Ainulindalë wiki 133 §3, ledger X-4). The J_red + J_blue = J_green balance stands as a measured relation of the sedenion grading. The statement is kept as written, because the maths started here.
 > - (lines 567, 601, 617, 622, 624, 629 …) Telperion / Laurelin labelling: the author's current assignment is **Telperion = the primes tree, Laurelin = the factors (Fermat side)**; Telperion is not the zero-divisor tree. Older octonion-half labels are being corrected to it (wiki 133 §7.10, ledger X-20).
-> - (lines 429, 547, 818, 864, 951, 958 …) d* has four faces (0.24631 Boundary; the RG face, numeric open; Ω/ln 10; d*·ln 10 = Ω) and 0.24600 is a measured value that is not one of them (wiki 133 §2.2).
+> - (lines 429, 547, 818, 864, 951, 958 …) d* has four faces (Ω_ζΣ = d* = 0.24631 Boundary; the RG face, numeric open; d*_taut = A_π/ln 10; d*·ln 10 = A_π) and 0.24600 is a measured value that is not one of them (wiki 133 §2.2). Symbols throughout: α = fine-structure constant; A_π = W(1) = 0.5671 (Fermat side); Ω_ζΣ = d* = 0.2463 (Riemann side) (`@RCCM_SYMBOLS`).
+>
+> **2026-11-21.** The licence is now proprietary (§12 Licensing; the mathematics is published under the GNU licence outside VAPMIP). The README is now an entry page; this file is the paper. Older versions (v2 to v3.4) and the draft sections are in `archive/`. Re-check dates: `RECHECK_LOG.md`.
 >
 > **Authority.** Notation and verified counts: Ainulindalë `wiki/133_canonical_maths.md`; every defect found: `wiki/135_engine_findings_ledger.md`; the audit of this repository: `AUDIT_2026-11-14.md`.
 
