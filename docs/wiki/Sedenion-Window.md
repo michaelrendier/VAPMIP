@@ -19,6 +19,12 @@ One object that reads and writes a sentence, one word per tick. **W_S** is the b
 
 The codebook (axes, levels, tense and conjugation lists) is provisional: the author has not fixed it.
 
+## Usage over time (added 2026-11-21)
+With `english=` (a `MonadEnglish`) every word read deepens the co-occurrence field (the A-matrix, `monad_english_io.hear`: windowed, weight decaying with distance, merged by max); new words enter; the same word used again deepens (`fire_count`). **He hears what he says**: a written sentence is fed back at echo 1, and `ECHO_CAP` (5) makes a fifth loop a no-op, which is the feedback-cancelling cap on the ears (tested). With `vocab=` (a `LiveVocabulary`) definitional sentences add senses and edges with history ([Live-Vocabulary](Live-Vocabulary.md)). Sensor block `USAGE` reports edges deepened and new words per read.
+
+## The window as a two-way mirror
+The window is the shared tool of Broca (discrete, the scalar boxkite) and Wernicke (continuous, the scaled boxkite): the same statement in both maths. In the Scale engine's terms it is the fold Γ = (Z − Z₀)/(Z + Z₀) with Z = Wernicke + i·Broca and its inversion (Γ → −Γ). **Bad lighting is measurable here:** the two readings live on different scales (Wernicke 1 + γ lies in 0.1 … 0.9, Broca counts 1 … 7), so the fold saturates, |Γ| of 0.85 to 0.92 in the run above: the mirror reflects almost everything and the other side cannot see through. Rescaling Broca to Wernicke's range, or choosing Z₀ per point, is the adjustment; which one is the author's call.
+
 ## A run (2026-11-21, the standard corpus as the language model)
 ```
 VAGCOM=1  write("I HATE the king, he is stupid!")

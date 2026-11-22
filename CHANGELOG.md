@@ -6,6 +6,10 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
+- **Dual boxkite.** `dual_boxkite.py` (2 tests): every boxkite exploration runs on the project's pencil boxkite and de Marrais's control; first result: F21's order-3 stabiliser preserves de Marrais's kite and its 12 edges with orbits 3+3 on the six Assessors, and preserves pencil(s) with orbits 1+3+3 (the extra fixed station is the pivot).
+- **Context landscape.** `map/landscape.py`: 2D and 3D pictures of the 1,276 classes and the multi-context words (19,270 lemmas in two or more classes).
+- **Skill.** spatial-simulation v1.3.0: Penrose space and the 3D overview function (ContextPlease).
+- **Window usage learning.** the window deepens the co-occurrence field with every word read and every sentence it says (echo-capped).
 - **Sedenion window.** `sedenion_window.py` (11 tests): reads and writes a sentence one word per tick (W_S shrink, w_s pick, rescale, repass), pathway rings, VAG-COM style sensors (`VAGCOM=1`), invisible tone/tense/conjugation Tag markers, Pascal meet-then-lead tone trajectory. `docs/wiki/Sedenion-Window.md`.
 - **Scalar Boxkite context map.** `FourthAgePaper/ScalarContextPropagation/map/` : every lemma-in-synset of WordNet 3.0 (206,978 rows) with class, basins, gamma_radial, vec19, context code and address; 1,276 classes; 171 attractor basins, one holding 88% of the synsets.
 - **Blackjack group.** `bench/blackjack_pencil.py`: F21 acts on the 15 sedenion labels and, for every strut, its order-3 stabiliser preserves pencil(s) and splits the 7 stations 1+3+3 (pivot, axes, shadows). No mapping onto the 19 relations exists.

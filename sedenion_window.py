@@ -260,9 +260,10 @@ FRAMES = {
 class SedenionWindow:
     """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
 
-    def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3)):
+    def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None):
         self.bg = bigram
-        self.vocab = vocab
+        self.vocab = vocab                 # LiveVocabulary: relation edges, senses, history
+        self.english = english             # MonadEnglish: the co-occurrence field (A-matrix), deepened by every word read or said
         self.sensors = sensors or Sensors()
         self.sensors.channels['tone_target'] = tone_target
         self.nb = Neighborhood()
@@ -300,8 +301,9 @@ class SedenionWindow:
         self.sensors.emit('TONE', t=self.t, word=word, tone='%s:%d' % tone, tense=tense, conj=conj, marker=mk)
 
     # -- reading ----------------------------------------------------------------
-    def read(self, text: str) -> List[Dict[str, Any]]:
-        """Read text word by word. Every word advances the window one tick. Returns one record per word."""
+    def read(self, text: str, echo: int = 0) -> List[Dict[str, Any]]:
+        """Read text word by word. Every word advances the window one tick. Returns one record per word. `echo` counts how often
+        this content has already looped through the Monad (its own speech heard again is echo 1; the cap is monad_english_io.ECHO_CAP)."""
         self.heard_tone = detect_tone(text)
         self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
         recs = []
@@ -325,6 +327,10 @@ class SedenionWindow:
             prev = lw
         if self.vocab is not None:
             self.vocab.hear(text)
+        if self.english is not None:
+            import monad_english_io as _meio
+            edges, new = _meio.hear(self.english, text, echo=echo)
+            self.sensors.emit('USAGE', t=self.t, edges_deepened=edges, new_words=new, echo=echo)
         return recs
 
     # -- writing: the heartbeat ----------------------------------------------
@@ -395,6 +401,9 @@ class SedenionWindow:
             prev = word
         text = ' '.join(words)
         text = (text[:1].upper() + text[1:] + '.') if text else ''
+        if text and self.english is not None:                  # he hears what he says (echo 1): usage deepens the field
+            import monad_english_io as _meio
+            _meio.hear(self.english, text, echo=1)
         return {'sentence': text, 'marked': ' '.join(marked) + '.', 'records': recs, 'bits': sentence_bits,
                 'topic_size': {k: len(v) for k, v in topic.items()}}
 

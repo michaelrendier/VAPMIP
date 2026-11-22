@@ -1,0 +1,57 @@
+{
+ "lemmas": 147306,
+ "lemmas_with_2plus_senses": 26876,
+ "lemmas_in_2plus_classes": 19270,
+ "lemmas_in_2plus_attractor_basins": 4022,
+ "max_classes_one_lemma": 26,
+ "widest_gamma_spread": [
+  [
+   0.786297,
+   "metropolis"
+  ],
+  [
+   0.786297,
+   "city"
+  ],
+  [
+   0.786224,
+   "state"
+  ],
+  [
+   0.786224,
+   "land"
+  ],
+  [
+   0.755705,
+   "os"
+  ],
+  [
+   0.755705,
+   "bone"
+  ],
+  [
+   0.755362,
+   "ship"
+  ],
+  [
+   0.754163,
+   "building"
+  ],
+  [
+   0.753732,
+   "tree"
+  ],
+  [
+   0.74986,
+   "philosopher"
+  ],
+  [
+   0.746111,
+   "soul"
+  ],
+  [
+   0.746111,
+   "person"
+  ]
+ ]
+}

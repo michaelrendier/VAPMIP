@@ -132,3 +132,33 @@ def test_window_learns_from_what_it_reads(bg, tmp_path):
     w = SW.SedenionWindow(bg, vocab=v)
     w.read('A phasor is a kind of vector.')
     assert v.lookup('phasor') and v.lookup('phasor')[0]['source'] == 'live'
+
+
+def _empty_english():
+    import monad_english_io as M
+    return M.MonadEnglish(version='t', vocab={}, words=[], beta=[], E=[], A=[], age=[], fire_count=[], stratum=[],
+                          psi_prev=[0.0] * 16, word_count=0, correction_mask={})
+
+
+def test_usage_deepens_the_cooccurrence_field_over_time_and_he_hears_himself(bg):
+    me = _empty_english()
+    w = SW.SedenionWindow(bg, english=me)
+    w.read('The king wears a golden crown')
+    n1 = len(me.words); e1 = sum(len(a) for a in me.A)
+    assert n1 >= 5 and me.A[me.idx('king')].get(me.idx('crown'), 0) > 0
+    w.read('The king lost his golden crown')
+    assert me.fire_count[me.idx('king')] >= 2                       # the same word, used again, deepens
+    assert len(me.words) > n1 and sum(len(a) for a in me.A) > e1    # new words enter, new edges form
+    before = sum(len(a) for a in me.A)
+    out = w.write('the king reads the book')
+    assert sum(len(a) for a in me.A) > before                        # what he said was heard (echo 1)
+    usage = w.sensors.read('USAGE')
+    assert usage and all(u['echo'] == 0 for u in usage)
+
+
+def test_his_own_speech_cannot_feed_back_forever(bg):
+    import monad_english_io as M
+    me = _empty_english()
+    w = SW.SedenionWindow(bg, english=me)
+    w.read('the dog chases the cat', echo=M.ECHO_CAP)                # already looped the cap: a no-op
+    assert len(me.words) == 0
