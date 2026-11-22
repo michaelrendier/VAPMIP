@@ -6,6 +6,13 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
+## Unreleased — 2026-11-22 (Neurochemical Recipe Book)
+
+- **Neurochemical Recipe Book** (`docs/wiki/Neurochemical-Recipe-Book.md`, `neuro_recipes.py`, `neuro_recipes.json`, 9 tests): 30 recipes (Panksepp's seven systems, 15 user states, 8 dispensations) as seven-level setpoints in kite and rainbow order, each with its sources, language signature, use and test; built from 40 open-access PMC papers (`references/NeuroRecipes/` holds the 15 CC-BY ones; the rest are local, listed in `ContextPlease/claude/references/INDEX.md`).
+- **The seven re-picked from the evidence:** CB1 replaced by the mu-opioid system (126 emotion-linked sentences in 13 papers against 23 in 7; Panksepp names opioids as inhibitors of RAGE and GRIEF). Silk map: OXT ANCHOR, GLU SPAN, NE SCAFFOLD, 5HT ELABORATE, DA HOOK, GABA WRAP, OPI SHELL. Reserve list: ACh, CRF/cortisol, CB1, vasopressin.
+- **Dispenser (noise cancelling, not mirroring):** conjugate v1 (centred on baseline) failed its test (over-calmed PLAY and SEEKING; cancelled states up to 0.96 from RECEPTIVE); v2 centres on the RECEPTIVE recipe with a dead-band: cancelled states end about 40% closer. Meet-then-lead trajectory (Pascal) and the serious-news procedure (Rusinova 2026) are specified in the book.
+- Nothing in the engine reads the recipes yet; no code outside `neuro_recipes.py` changed.
+
 - **Tao 41 in the harness** (`three_hearers.py`, `harness.py`, 4 tests): laughter is classified as expected (no irritation, no retraction); only an explicit correction can retract; diligent / wavering / laughing hearer tracked per subject. The C side (`monad_harness.c`) is to follow after testing in Python.
 - **English field in the Scale rings** (`docs/wiki/English-Field-Rings.md`): the stored A-matrix has out-degree equal to in-degree for all 164,283 words (no direction); the shipped bin's E is not the C monad's E; a directed model separates pathway words by produce/comprehend asymmetry.
 - **Personal library:** Art of War (Giles) and The Prince added to `Ainulindale/media/add-reading/` and `~/Documents/books/`.

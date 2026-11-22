@@ -1,0 +1,401 @@
+{
+ "axes": [
+  "OPI",
+  "GLU",
+  "GABA",
+  "DA",
+  "5HT",
+  "NE",
+  "OXT"
+ ],
+ "colours": {
+  "OPI": "red",
+  "GLU": "orange",
+  "GABA": "yellow",
+  "DA": "green",
+  "5HT": "blue",
+  "NE": "indigo",
+  "OXT": "violet"
+ },
+ "silks": {
+  "OXT": "ANCHOR",
+  "GLU": "SPAN",
+  "NE": "SCAFFOLD",
+  "5HT": "ELABORATE",
+  "DA": "HOOK",
+  "GABA": "WRAP",
+  "OPI": "SHELL"
+ },
+ "baseline": {
+  "DA": 0.5,
+  "5HT": 0.75,
+  "NE": 0.3,
+  "OXT": 0.5,
+  "GLU": 0.45,
+  "GABA": 0.65,
+  "OPI": 0.5
+ },
+ "k_cancel": 0.6,
+ "recipes": {
+  "SEEKING": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.9,
+    "5HT": 0.6,
+    "NE": 0.55,
+    "OXT": 0.5,
+    "GLU": 0.7,
+    "GABA": 0.5,
+    "OPI": 0.5
+   }
+  },
+  "RAGE": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.7,
+    "5HT": 0.1,
+    "NE": 0.9,
+    "OXT": 0.2,
+    "GLU": 0.9,
+    "GABA": 0.1,
+    "OPI": 0.1
+   }
+  },
+  "FEAR": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.3,
+    "NE": 0.9,
+    "OXT": 0.2,
+    "GLU": 0.8,
+    "GABA": 0.1,
+    "OPI": 0.3
+   }
+  },
+  "CARE": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.6,
+    "5HT": 0.7,
+    "NE": 0.3,
+    "OXT": 0.9,
+    "GLU": 0.4,
+    "GABA": 0.6,
+    "OPI": 0.8
+   }
+  },
+  "ATTACHMENT": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.85,
+    "5HT": 0.7,
+    "NE": 0.4,
+    "OXT": 0.95,
+    "GLU": 0.6,
+    "GABA": 0.5,
+    "OPI": 0.8
+   }
+  },
+  "GRIEF": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.3,
+    "NE": 0.6,
+    "OXT": 0.1,
+    "GLU": 0.7,
+    "GABA": 0.3,
+    "OPI": 0.1
+   }
+  },
+  "PLAY": {
+   "group": "Primary systems (Panksepp)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.6,
+    "NE": 0.5,
+    "OXT": 0.7,
+    "GLU": 0.6,
+    "GABA": 0.5,
+    "OPI": 0.8
+   }
+  },
+  "DESPAIR": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.1,
+    "5HT": 0.2,
+    "NE": 0.25,
+    "OXT": 0.2,
+    "GLU": 0.3,
+    "GABA": 0.3,
+    "OPI": 0.15
+   }
+  },
+  "OVERWHELMED": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.3,
+    "NE": 0.95,
+    "OXT": 0.3,
+    "GLU": 0.8,
+    "GABA": 0.15,
+    "OPI": 0.2
+   }
+  },
+  "PANICKED": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.1,
+    "5HT": 0.15,
+    "NE": 0.95,
+    "OXT": 0.1,
+    "GLU": 0.9,
+    "GABA": 0.1,
+    "OPI": 0.05
+   }
+  },
+  "MANIA": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.95,
+    "5HT": 0.3,
+    "NE": 0.65,
+    "OXT": 0.3,
+    "GLU": 0.8,
+    "GABA": 0.3,
+    "OPI": 0.5
+   }
+  },
+  "PSYCHOSIS": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.95,
+    "5HT": 0.3,
+    "NE": 0.6,
+    "OXT": 0.2,
+    "GLU": 0.25,
+    "GABA": 0.2,
+    "OPI": 0.4
+   }
+  },
+  "PARANOIA": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.3,
+    "NE": 0.85,
+    "OXT": 0.1,
+    "GLU": 0.5,
+    "GABA": 0.2,
+    "OPI": 0.2
+   }
+  },
+  "VINDICTIVE": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.15,
+    "NE": 0.7,
+    "OXT": 0.1,
+    "GLU": 0.7,
+    "GABA": 0.3,
+    "OPI": 0.1
+   }
+  },
+  "VICIOUS": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.6,
+    "5HT": 0.05,
+    "NE": 0.8,
+    "OXT": 0.05,
+    "GLU": 0.8,
+    "GABA": 0.1,
+    "OPI": 0.05
+   }
+  },
+  "VORACIOUS": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.95,
+    "5HT": 0.35,
+    "NE": 0.7,
+    "OXT": 0.2,
+    "GLU": 0.8,
+    "GABA": 0.2,
+    "OPI": 0.3
+   }
+  },
+  "VIBRANT": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.7,
+    "NE": 0.6,
+    "OXT": 0.7,
+    "GLU": 0.7,
+    "GABA": 0.55,
+    "OPI": 0.7
+   }
+  },
+  "CONTENTMENT": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.5,
+    "5HT": 0.75,
+    "NE": 0.3,
+    "OXT": 0.65,
+    "GLU": 0.45,
+    "GABA": 0.65,
+    "OPI": 0.6
+   }
+  },
+  "PREMEDITATED": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.5,
+    "5HT": 0.7,
+    "NE": 0.3,
+    "OXT": 0.2,
+    "GLU": 0.7,
+    "GABA": 0.8,
+    "OPI": 0.3
+   }
+  },
+  "PREMATURE": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.15,
+    "NE": 0.6,
+    "OXT": 0.4,
+    "GLU": 0.6,
+    "GABA": 0.2,
+    "OPI": 0.4
+   }
+  },
+  "PONTIFICATING": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.7,
+    "5HT": 0.6,
+    "NE": 0.4,
+    "OXT": 0.1,
+    "GLU": 0.8,
+    "GABA": 0.3,
+    "OPI": 0.4
+   }
+  },
+  "PASSE": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.2,
+    "5HT": 0.5,
+    "NE": 0.15,
+    "OXT": 0.3,
+    "GLU": 0.3,
+    "GABA": 0.6,
+    "OPI": 0.5
+   }
+  },
+  "CYNICAL": {
+   "group": "Human states (user side)",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.4,
+    "NE": 0.5,
+    "OXT": 0.15,
+    "GLU": 0.5,
+    "GABA": 0.5,
+    "OPI": 0.3
+   }
+  },
+  "SETTLE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.8,
+    "NE": 0.15,
+    "OXT": 0.75,
+    "GLU": 0.35,
+    "GABA": 0.9,
+    "OPI": 0.8
+   }
+  },
+  "FOCUS": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.5,
+    "5HT": 0.65,
+    "NE": 0.55,
+    "OXT": 0.5,
+    "GLU": 0.7,
+    "GABA": 0.75,
+    "OPI": 0.5
+   }
+  },
+  "GUIDE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.6,
+    "5HT": 0.75,
+    "NE": 0.3,
+    "OXT": 0.7,
+    "GLU": 0.6,
+    "GABA": 0.65,
+    "OPI": 0.6
+   }
+  },
+  "ENCOURAGE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.8,
+    "5HT": 0.7,
+    "NE": 0.45,
+    "OXT": 0.7,
+    "GLU": 0.6,
+    "GABA": 0.6,
+    "OPI": 0.7
+   }
+  },
+  "DEFLATE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.35,
+    "5HT": 0.8,
+    "NE": 0.25,
+    "OXT": 0.55,
+    "GLU": 0.35,
+    "GABA": 0.85,
+    "OPI": 0.65
+   }
+  },
+  "WRATH": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.7,
+    "5HT": 0.1,
+    "NE": 0.9,
+    "OXT": 0.2,
+    "GLU": 0.9,
+    "GABA": 0.1,
+    "OPI": 0.1
+   }
+  },
+  "RECEPTIVE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.7,
+    "5HT": 0.65,
+    "NE": 0.5,
+    "OXT": 0.5,
+    "GLU": 0.75,
+    "GABA": 0.7,
+    "OPI": 0.6
+   }
+  }
+ }
+}

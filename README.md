@@ -43,6 +43,7 @@ Open: context flow, carrying the prompt's topic through the reply as discrete wo
 | the Cyclic Context Gearbox (DATA SELF and USER SELF, lossless FIFO odometer) | `docs/wiki/Context-Gearbox.md`, `context_gearbox.py` |
 | English usage statistics as one poll; levels by educational response | `docs/wiki/English-Statistics.md`, `english_stats.py` |
 | the sedenion window (reads and writes a sentence; sensors; tone/tense/conjugation markers) | `docs/wiki/Sedenion-Window.md`, `sedenion_window.py` |
+| the Neurochemical Recipe Book (Tone recipes from medical papers; the seven; the dispenser) | `docs/wiki/Neurochemical-Recipe-Book.md`, `neuro_recipes.py` |
 | every boxkite exploration on both boxkites | `dual_boxkite.py` |
 | the exhaustive Scalar Boxkite context map, basins and pictures | `FourthAgePaper/ScalarContextPropagation/map/README.md` |
 | the live vocabulary (the Monad adds and refines its own words) | `docs/wiki/Live-Vocabulary.md`, `live_vocabulary.py` |
