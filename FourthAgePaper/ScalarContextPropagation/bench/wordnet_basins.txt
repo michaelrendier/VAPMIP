@@ -1,0 +1,38 @@
+synsets 117659 no relations (gamma undefined) 7925
+pos {'a': 7463, 's': 10693, 'r': 3621, 'n': 82115, 'v': 13767}
+distinct 19-vectors 1276 largest class sizes [45441, 10430, 7925, 5370, 5122, 4878, 3244, 3096, 3078, 2606]
+ top 1 classes hold 38.6% of synsets
+ top 5 classes hold 63.1% of synsets
+ top 10 classes hold 77.5% of synsets
+ top 50 classes hold 92.3% of synsets
+ top 100 classes hold 95.5% of synsets
+ top 500 classes hold 99.2% of synsets
+ top 1000 classes hold 99.8% of synsets
+--- ten biggest exact neighbourhoods
+45441 gamma=-0.9049 hypernyms=1 | pos {'n': 37283, 'v': 8158} | e.g. ['congener.n.03', 'benthos.n.02', 'dwarf.n.03']
+10430 gamma=-0.8897 similar_tos=1 | pos {'s': 10049, 'a': 381} | e.g. ['emergent.s.02', 'dissilient.s.01', 'parturient.s.01']
+7925 gamma=None (none) | pos {'a': 4282, 'r': 3514, 'v': 129} | e.g. ['nonadsorbent.a.01', 'absorbable.a.01', 'adsorbable.a.01']
+5370 gamma=-0.8159 hypernyms=1, hyponyms=1 | pos {'n': 4319, 'v': 1051} | e.g. ['life.n.10', 'nutrient.n.02', 'dealings.n.01']
+5122 gamma=-0.7349 hypernyms=1, hyponyms=2 | pos {'n': 4309, 'v': 813} | e.g. ['living_thing.n.01', 'psychological_feature.n.01', 'social_relation.n.01']
+4878 gamma=-0.813 hypernyms=1, member_holon=1 | pos {'n': 4878} | e.g. ['hyphenation.n.02', 'cabinet_minister.n.02', 'attorney_general.n.03']
+3244 gamma=-0.9032 instance_hyp=1 | pos {'n': 3244} | e.g. ['hegira.n.01', 'underground_railroad.n.01', 'babylonian_captivity.n.01']
+3096 gamma=-0.8038 hypernyms=1, topic_domain=1 | pos {'n': 2234, 'v': 862} | e.g. ['res_gestae.n.02', 'mitzvah.n.02', 'absence_without_leave.n.01']
+3078 gamma=-0.7278 hypernyms=1, member_holon=1, member_meron=1 | pos {'n': 3078} | e.g. ['togaviridae.n.01', 'flaviviridae.n.01', 'division_archaebacteria.n.01']
+2606 gamma=-0.8118 hypernyms=1, part_holonym=1 | pos {'n': 2606} | e.g. ['footfault.n.01', 'call_option.n.02', 'put_option.n.02']
+--- gamma range -0.9049 -0.1186 median -0.8897
+density peaks (bin centre gamma, smoothed count): [(-0.905, 11990), (-0.805, 4940), (-0.715, 2705), (-0.645, 1277), (-0.575, 564), (-0.535, 275), (-0.465, 134)]
+density valleys: [(-0.855, 0), (-0.765, 44), (-0.695, 260), (-0.625, 226), (-0.545, 205), (-0.485, 113), (-0.425, 49), (-0.365, 27), (-0.265, 6), (-0.225, 3), (-0.185, 1), (-0.145, 1), (-0.115, 0), (-0.085, 0)]
+--- basins (between valleys)
+[-1.000, -0.855) n=59950 (51.0%) pos {'a': 984, 's': 10049, 'r': 104, 'n': 40527, 'v': 8286} mean_depth 5.8 | commonest vector: hypernyms=1 (x45441) | e.g. ['unable.a.01', 'abaxial.a.01', 'adaxial.a.01']
+[-0.855, -0.765) n=24698 (21.0%) pos {'a': 717, 's': 605, 'r': 3, 'n': 20393, 'v': 2980} mean_depth 7.2 | commonest vector: hypernyms=1, hyponyms=1 (x5370) | e.g. ['able.a.01', 'nascent.a.01', 'dying.a.01']
+[-0.765, -0.695) n=13524 (11.5%) pos {'a': 485, 's': 39, 'n': 11610, 'v': 1390} mean_depth 6.7 | commonest vector: hypernyms=1, hyponyms=2 (x5122) | e.g. ['abridged.a.01', 'potted.s.02', 'acceptable.a.01']
+[-0.695, -0.625) n=6030 (5.1%) pos {'a': 90, 'n': 5382, 'v': 558} mean_depth 7.0 | commonest vector: hypernyms=1, hyponyms=3 (x1818) | e.g. ['abstemious.a.01', 'scarce.a.01', 'accessible.a.01']
+[-0.625, -0.545) n=3200 (2.7%) pos {'a': 653, 'n': 2284, 'v': 263} mean_depth 5.5 | commonest vector: hypernyms=1, hyponyms=4 (x570) | e.g. ['absorbent.a.01', 'gluttonous.a.01', 'abstract.a.01']
+[-0.545, -0.485) n=1218 (1.0%) pos {'a': 99, 'n': 1020, 'v': 99} mean_depth 6.1 | commonest vector: hypernyms=1, hyponyms=5 (x173) | e.g. ['accurate.a.01', 'active.a.05', 'dead.a.01']
+[-0.485, -0.425) n=575 (0.5%) pos {'a': 67, 'n': 464, 'v': 44} mean_depth 5.8 | commonest vector: hypernyms=1, hyponyms=6 (x41) | e.g. ['agitated.a.01', 'backward.a.01', 'colorless.a.02']
+[-0.425, -0.365) n=312 (0.3%) pos {'a': 82, 'n': 218, 'v': 12} mean_depth 4.9 | commonest vector: attributes=1, also_sees=2, similar_tos=4 (x39) | e.g. ['abundant.a.01', 'adorned.a.01', 'afraid.a.01']
+[-0.365, -0.265) n=191 (0.2%) pos {'a': 4, 'n': 181, 'v': 6} mean_depth 6.8 | commonest vector: hypernyms=1, hyponyms=8, member_holon=1 (x10) | e.g. ['chromatic.a.03', 'simple.a.06', 'compound.a.01']
+[-0.265, -0.225) n=16 (0.0%) pos {'n': 16} mean_depth 6.0 | commonest vector: hypernyms=1, hyponyms=5, part_holonym=1, part_meronym=3, topic_domain=1 (x1) | e.g. ['cell.n.02', 'car.n.01', 'fabric.n.01']
+[-0.225, -0.185) n=9 (0.0%) pos {'n': 9} mean_depth 7.9 | commonest vector: instance_hyp=1, member_holon=2, part_holonym=1, member_meron=2, part_meronym=6 (x3) | e.g. ['war.n.01', 'bird.n.01', 'eye.n.01']
+[-0.185, -0.145) n=9 (0.0%) pos {'n': 9} mean_depth 7.2 | commonest vector: hypernyms=2, hyponyms=9, member_holon=1, part_meronym=2 (x1) | e.g. ['person.n.01', 'building.n.01', 'ship.n.01']
+[-0.145, -0.115) n=2 (0.0%) pos {'n': 2} mean_depth 7.5 | commonest vector: hypernyms=1, hyponyms=2, instance_hyp=9, part_meronym=3 (x1) | e.g. ['city.n.01', 'country.n.02']

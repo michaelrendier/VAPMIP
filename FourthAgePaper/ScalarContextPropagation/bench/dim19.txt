@@ -1,0 +1,38 @@
+per relation: synsets with >=1 target, total edge endpoints
+  hypernyms             87597   89089
+  instance_hypernyms     7730    8577
+  hyponyms              20008   89089
+  instance_hyponyms       945    8577
+  member_holonyms       12201   12293
+  substance_holonyms      551     797
+  part_holonyms          7859    9097
+  member_meronyms        5553   12293
+  substance_meronyms      666     797
+  part_meronyms          3699    9097
+  attributes              940    1278
+  entailments             390     408
+  causes                  218     220
+  also_sees              1334    2692
+  verb_groups            1498    1748
+  similar_tos           13205   21386
+  topic_domains          6428    6643
+  region_domains         1282    1345
+  usage_domains           933     967
+reciprocal hypernyms 89089 hyponyms 89089
+reciprocal instance_hypernyms 8577 instance_hyponyms 8577
+reciprocal member_holonyms 12293 member_meronyms 12293
+reciprocal substance_holonyms 797 substance_meronyms 797
+reciprocal part_holonyms 9097 part_meronyms 9097
+lemma-level relations not among the 19 (lemmas with >=1): {'antonyms': 7768, 'derivationally_related_forms': 50392, 'pertainyms': 7885}
+raw counts rank 19 comps for 90/99/99.9%: 3 7 14
+   top variances [0.666, 0.231, 0.034, 0.029, 0.022, 0.006, 0.003, 0.002]
+compressed (code vector) rank 19 comps for 90/99/99.9%: 9 16 19
+   top variances [0.414, 0.165, 0.088, 0.083, 0.052, 0.035, 0.032, 0.029]
+distinct vectors, 19 dims (compressed): 1276
+collapse holonym trio -> dims 17 distinct raw-count vectors 2383 distinct after log compress 1110
+collapse meronym trio -> dims 17 distinct raw-count vectors 2342 distinct after log compress 1069
+collapse domain trio -> dims 17 distinct raw-count vectors 2473 distinct after log compress 1184
+collapse holonym+meronym trios (17 dims)-> -> dims 15 distinct raw-count vectors 2129 distinct after log compress 913
+collapse all three trios -> dims 13 distinct raw-count vectors 2035 distinct after log compress 826
+F21 size 21 scale part a in [1, 2, 4] quadratic residues mod 7 [1, 2, 4] 2^3 mod 7 = 1
+orbits of x->2x on Z/7: [[0], [1, 2, 4], [1, 2, 4], [3, 5, 6], [1, 2, 4], [3, 5, 6], [3, 5, 6]]
