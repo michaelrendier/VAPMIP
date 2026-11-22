@@ -1,0 +1,15 @@
+tables found: {'DET': 26, 'PREP': 55, 'ADV_CLOSED': 38, 'PRON': 38, 'BE': 8, 'WH': 9, 'COORD': 5, 'MODAL': 10} union 188
+tokens 1515895 types 40645 closed-class table size 188 closed share of tokens 51.8% closed types present 187
+ top    10 types cover 26.1%
+ top    50 types cover 45.4%
+ top   100 types cover 53.8%
+ top   200 types cover 61.8%
+ top   500 types cover 71.4%
+ top  1000 types cover 78.2%
+ top  5000 types cover 91.7%
+after 'in': n=30112 distinct=3021 entropy=7.00 bits, top10 cover 48.0%, next is closed-class 62.1%; top: ['the', 'a', 'his', 'this', 'my', 'which', 'their', 'order', 'all', 'it']
+after 'of': n=57905 distinct=6795 entropy=7.93 bits, top10 cover 43.6%, next is closed-class 54.8%; top: ['the', 'a', 'his', 'all', 'this', 'my', 'which', 'their', 'it', 'our']
+after 'the': n=96071 distinct=11710 entropy=11.23 bits, top10 cover 9.1%, next is closed-class 2.7%; top: ['king', 'same', 'other', 'office', 'first', 'morning', 'world', 'whole', 'most', 'house']
+held-out 151582 words: unigram 10.03 bits/word, bigram 8.70 bits/word
+  closed-class targets (77547): unigram 6.66, bigram 5.60 | open-class targets (74035): unigram 13.55, bigram 11.94
+  = 1.62 bits/char (bigram, incl. one space per word)
