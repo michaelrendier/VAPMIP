@@ -1,5 +1,7 @@
 # PtolC — RedBlue Geometries Engine (C binary)
 
+> **Status 2026-11-21.** Written 2026-05; the benchmark table below was measured on an i7-6600U, not the current reference machine (ThinkPad X1 Carbon 6th, i7-8550U; current timings in `../README.md` and `../docs/Repository_Reference.md`). The three-term conservation line below (J_Red + J_Green + J_Blue = 0) is the older notation; the current one is J_red + J_blue = J_green (`../docs/wiki/J_red-J_blue-0_RB-Record.md`). Current tools: `../README.md`. Licence: Proprietary, all rights reserved (`../LICENSE`).
+
 `ptolemy` is the C implementation of the Monad: the RedBlue Geometries Engine.
 It encodes knowledge as depth across 25,000 Riemann zeros on σ=½, using no
 gradient descent, no token prediction, and no neural network weights.
@@ -48,8 +50,8 @@ Conservation law: **J_Red + J_Green + J_Blue = 0** — σ=½ is the only locus w
 # Dependencies: gcc, libm (always present), optional libxml2
 sudo apt install build-essential libxml2-dev   # libxml2 enables HTML/XML extraction
 
-git clone https://github.com/michaelrendier/Ptolemy ~/Ptolemy
-cd ~/Ptolemy/PtolC
+git clone https://github.com/michaelrendier/PtolemyHolcus ~/PtolemyHolcus
+cd ~/PtolemyHolcus/PtolC
 make
 ```
 

@@ -150,6 +150,37 @@ algebra that produced it.
 
 ---
 
+## Measured 2026-10-12 — the tension law, the Walsh rows, and the tear-off test
+
+Everything in this section is **MEASURED on the paper's proxy** — `H = Re(Π)` over
+the seven pencil stations, each a continuous `cos φ·e_a + sin φ·e_b` — not on
+`Φ_w`, which is still unbuilt. Scripts: `.claude/scratchpad/2026-10-12_windspeed_deformation_proxy/`
+and `…_pencil_tearoff_test/`. Write-up: `VAPMIP/docs/wiki/Tuning-the-Engine/40_strut_tension_law_walsh_rows_and_entry_modes.md`.
+
+**Tension law.** For the seven struts (and pencils r = 8, 9): `H = −cos(Σ ε_k φ_k)`, error ≤ 8e-16 over
+200 random φ-vectors per strut. Tension depends on one signed phase. Each station is exactly
+`e_a·exp(η e_r φ)`, and the bare product is `−e₀`, so `H(0) = −1` is derived; the residual sign
+factor `±(+++−−−−)` is fitted. The sign patterns ε are rows 0–3 of the Sylvester–Hadamard matrix
+on the station index. Pencils r = 10..15 do not satisfy the one-phase law. **Qualification (same day):** the pencils used here for strut r ≤ 7 contain no Assessor plane; the six Assessor planes of strut s are stations of `pencil(s+8)` (pencils 9–15), where the one-phase law holds only for strut 1 — for struts 2–7 H depends on 4–5 phase combinations. Details and the full De Marrais deformation battery: `VAPMIP/docs/wiki/Tuning-the-Engine/41_demarrais_deformation_battery_and_the_two_constructs.md` and `VAPMIP/marrais_boxkite_catalog.txt` §11–15.
+
+**Test 1 (one flex mode)** — supported *at proxy level*: the single-phase law is exactly "one flex
+mode" for r = 1..9. Not the Maxwell-counting version, which the paper already showed was the wrong frame.
+
+**Test 5 (tear-off)** — **not reproduced** by the literal reading. With `c = H/q(w)`, `q = ½ρw²`, the
+Joukowsky map tends to the *identity* as `w → ∞` (shift 2.5 at w=1, 0.025 at w=10, 2.5e-6 at w=1000)
+and blows up as `w → 0`: the opposite of the inflation sequence above. A real zero divisor stays a zero
+divisor with `outside_share = 0` at every `w` from 0.01 to 1000 (Joukowsky preserves the real and
+imaginary axes of `d₊ + i d₋`, where the diagonals sit). The six-vertex sum of diagonals is a zero
+divisor for 0 of 4096 sign choices on strut 1. Energy on e₀, e₈ cannot be moved by any map acting
+inside Assessor planes. **Not refuted for the real Φ_w**, whose station generators, circulations and
+reassembly are under-specified; but the sequence "w = 0 collapse … w ≫ w* tears" is not produced by the
+formula as written.
+
+**Which struts a wind can reach.** A scalar windspeed (rate, position or gusts) moves only the one signed
+phase: struts 2, 4, 5, 7 respond, struts 1, 3, 6 stay at zero swing. Only a station-unequal wind reaches
+1, 3, 6. This answers the paper's open question "why {1,3,6}": the signed Noether-path rate sum is
+exactly zero on Hadamard row 2.
+
 ## Provenance
 
 **Has anyone attached a load-bearing string to the box kites before?** Not
@@ -222,9 +253,9 @@ until the tests below run.
 |---|---|
 | the pencil (7 factorisations), box-kite combinatorics, {0,4,4,4,6,6} spectrum, e₀ zero mode | ESTABLISHED — `box_kite.md`, derived |
 | Joukowsky ↔ `J_N` operator identity | ESTABLISHED — [inversion.md](inversion.md) |
-| box kite has a **1-D** flex once the strut is fixed | CONJECTURE — test 1 |
-| a single scalar `H` + wind law `w` reconstructs all six Assessors | CONJECTURE — the central claim, tests 2–4 |
-| `Re(Π)` of seven imaginary stations = that scalar | CONJECTURE — needs `Φ_w` built |
+| box kite has a **1-D** flex once the strut is fixed | CONJECTURE — supported at proxy level (single-phase law, r = 1..9); not the Assessor-vertex geometry |
+| a single scalar `H` + wind law `w` reconstructs all six Assessors | CONJECTURE — the central claim, tests 2–4; the literal Joukowsky law does NOT give the stated inflation sequence (see Measured 2026-10-12) |
+| `Re(Π)` of seven imaginary stations = that scalar | MEASURED (proxy): `H = −cos(Σ ε_k φ_k)`, ≤ 8e-16; derivation partial |
 | attribution of every piece (inherited / assembled / first-stated-here) | see **Provenance** above — de Marrais owns the box kite and its vocabulary; the tether, the wind-inflation parameter and the `Re(Π)=H` identification are first stated here 2026-08-27 |
 
 ---

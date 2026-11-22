@@ -1,0 +1,27 @@
+To:       Christiane Fellbaum <fellbaum@princeton.edu>
+From:     Cody Michael Allison <the.wandering.god@gmail.com>
+Subject:  Your 19 relation pointers as coordinates: two papers, and a request from a WordNet outsider
+Attach:   19_Dimensional_Scalar_WordNet_Context_Propagation_v4.0_2026-10-13.pdf
+          Forward_Propagation_of_Information.pdf
+
+Dear Professor Fellbaum,
+
+My name is Cody Allison. I am an independent builder with no academic affiliation, and I write with real humility: everything I have made rests on WordNet, and I know how little I know beside those who built it.
+
+I asked one question of your database: what happens if the count of each of a sense's 19 relation pointers (hypernyms, hyponyms, meronyms and the rest) becomes the exponent of its own prime? Each sense becomes one integer that can be read back to the exact counts, and from it comes a single number for how general or specific the sense sits. That is the first paper, "19 Dimensional Scalar WordNet Context Propagation." The second, "Forward Propagation of Information," shows what I built on it: a small engine that reads a sentence into one sixteen-number element and speaks from WordNet's relations, offline, on a 2018 laptop, with no training and no GPU, at about 67 microwatt-hours a reply. Every number in both papers comes from code anyone can re-run, and the failures are kept in the text. The replies are still short fragments, and I do not claim they are good.
+
+Both papers are attached and live in public repositories, where the code, the notebooks and the transcripts are:
+  https://github.com/michaelrendier/FourthAgePapers/blob/main/ScalarContextPropagation/19_Dimensional_Scalar_WordNet_Context_Propagation_v4.0.pdf
+  https://github.com/michaelrendier/VAPMIP/blob/main/paper/Forward_Propagation_of_Information.pdf
+
+What I am asking for is simple. The part of the engine that gathers knowledge is built; the part I am missing is the shape of language, how the relations you recorded turn into a sentence that sounds like a person. If you or your colleagues could take a look, and show me where the structure really lies, or tell me plainly that I have misunderstood something, I would be deeply grateful. I am not asking for endorsement.
+
+WordNet's license and copyright notice are carried in the repositories, and I cite Miller (1995) and your 1998 volume throughout.
+
+Thank you for WordNet, and for your time.
+
+With respect,
+Cody Michael Allison (Michael Rendier)
+the.wandering.god@gmail.com
+ORCID 0009-0007-7239-6760
+github.com/michaelrendier

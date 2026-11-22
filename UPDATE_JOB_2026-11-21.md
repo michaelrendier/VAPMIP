@@ -1,5 +1,7 @@
 # VAPMIP documentation update job (2026-11-21)
 
+**Status 2026-11-21: steps 1–6 of section G are done (commits b531f6f, 9a16a44, 7e6f3d8 and the one after); step 7 (the engineering white paper) is open.** Corrections to this plan found while doing it: `skills/` at the root is the monad's skill-burning Python modules, not a mirror of the Claude skills (no job); the `README.md` of ScalarContextPropagation was a second copy of the paper (replaced by an entry page); the Scaled-Kite page was not short by design but overwritten (restored from git); the outreach emails moved to `outreach/`; the Broca/Wernicke copies are kept as declared copies (verified identical to their homes); `foundations.txt` and `SedenionOperators.txt` are source corpora/transcripts, not documentation, and were left unchanged.
+
 Documentation and papers only. No code, no tests, no builds, except rebuilding a paper's PDF from its own markdown. Nothing here changes how any program behaves.
 
 ## Rules for the whole job

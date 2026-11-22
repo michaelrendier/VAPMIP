@@ -1,6 +1,20 @@
 # Ptolemy Engine — Release Roadmap
 
-**Current:** v3.0.0 | **Self-coding:** v4.0 | **Code Corpora:** v3.1 | **Face:** v3.2
+*Rewritten head 2026-11-21. Below the "Current" block this file is a dated TODO history: items keep the date and wording they were written with. Symbols in the history: `OMEGA_ZS` = 0.56714 is A_π = W(1); `D_STAR` = 0.246 is the rounded Ω_ζΣ = d*; "BAO" is the code label `bao_mean`, and its identification with a baryon-acoustic scale is not supported (`FourthAgePapers/DStar/bao_test.txt`); "Yang-Mills mass gap" for `GAP` = 0.000707 is not supported (it is a rounding residual). Table: `@RCCM_SYMBOLS`.*
+
+## Current (2026-11-21) — open items for the three working tools
+
+Documentation: `UPDATE_JOB_2026-11-21.md` (steps 1–6 done 2026-11-21; step 7, the engineering white paper, open).
+
+* **Scalar boxkite** (`19D_rotary_boxkite_monad.py`, `Broca/`): discrete and static; nothing is to be added that moves.
+* **Scaled boxkite** (`scaled_mind_eye_boxkite_kernel_monad.py`, `Broca/`): windspeed must deform the kite (correction B); how zero divisors enter sentence construction (D, open); context flow as discrete words along a field scaled for the response; connection (tense/participle conjugation map; no grammatical tense code exists); the `repass()` (Recamán, inexact matches).
+* **Orbweaver monads** (`boxkite_orbweaver_monad.py`, `Wernicke/`): the S and G scorers; the seven-slot parse scored against the standard corpus; the monad played as a voice; the morphological `repass()`.
+* **SemPriCon**: the assignment speaker (`TestMonad_chinese_english_v3.py`), the reverse bin and speaker, edges for selection by association, the definition of a match (G1a); whether every tree maps to the same prime concept (the Chinese baseline assignment test); the neuromodulator tone character (`docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/10_design_notes.md`); new hyperindexing items to come.
+* **Engineering white paper** (CS framing, no narrative, the code's own names): last.
+* **Tuning-the-Engine**: a historical record, never edited; return to the work it records is planned.
+* Amygdala analogue for the scaled kite (below, 2026-10-22).
+
+**Current release line (historical heading):** v3.0.0 | Self-coding: v4.0 | Code Corpora: v3.1 | Face: v3.2. The repository's own version is v5.2.0 (`CHANGELOG.md`).
 
 ---
 
@@ -84,7 +98,7 @@ The null space IS why gravity resists quantisation. It has no eigenvalue to quan
 
 ## PRIORITY 0 — Separate ValaQuenta from Ainulindale
 
-*Added 2026-06-19. Engine codes belong in ValaQuenta, not Ainulindale.*
+*Added 2026-06-19. Engine codes belong in ValaQuenta, not Ainulindale.* **Status 2026-11-21: done in substance** — ValaQuenta is its own repository (`ValaQuenta/modules/`, 51 modules; GPL-3.0-only) and `Ainulindale/ValaQuenta` no longer exists; ValaQuenta is authoritative over Ainulindale. The list below is the original plan.
 
 ### What to move
 All 21 engine modules from `Ainulindale/ValaQuenta/modules/` → `/media/rendier/0123-4567/ValaQuenta/modules/` (create `modules/`):

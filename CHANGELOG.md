@@ -4,6 +4,19 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## Unreleased — 2026-11-21 (documentation pass; no code changed)
+
+- **Licence.** VAPMIP is proprietary, all rights reserved (`LICENSE`, `NOTICE`); the GPL file is removed; the mathematics is published under the GNU licence outside VAPMIP.
+- **Symbols.** The author's ruling is applied in the live pages: α = fine-structure constant; A_π = W(1) = 0.5671; Ω_ζΣ = d* = 0.2463; d*·ln 10 = A_π. The labels "BAO" and "Yang-Mills mass gap" for the residual 0.000707 are removed from live pages (tested, not supported: `FourthAgePapers/DStar/bao_test.txt`).
+- **README.** The root `README.md` is a front door; the old sections are in `docs/Repository_Reference.md` (section map at its top). `docs/wiki/Name-Table.md` is the one table of names; the old identity-query table is `docs/wiki/Identity-Query-Table-2026-05-19.md`.
+- **Broca/Wernicke.** Entry pages rewritten; the scaled-kite design page restored from git history (sections 10–24 had been overwritten on 2026-10-13); `docs/semantic_orbweaver_notes.md` has a status block.
+- **ScalarContextPropagation.** README is an entry page (it had been a second copy of the paper); v2–v3.4 and the draft sections moved to `archive/`; v4.0 PDF rebuilt (42 pages).
+- **SemPriCon.** README, requirements, naming convention and paper brought to the v3 state; wiki pages 00, 05, 09, 17 updated and 18 (speakers) added; paper PDF rebuilt.
+- **Papers.** `paper/Forward_Propagation_of_Information` gained a licence and symbols note; PDF rebuilt.
+- **Housekeeping.** `UPDATE_JOB_2026-11-21.md`, `AUDIT_2026-11-21.md`.
+
+---
+
 ## Unreleased — 2026-10-17
 
 - **Sanitiser and extractor dict view.** `Wernicke/sanitize/` (`sanitize_v0.py`, `build_bins.py`, `poison_notes.py`; pure `@staticmethod` rules in `ENV` dispatch dicts) and `rec["seed"]` in `Wernicke/extractor/extract_v0.py`. New sanitised maths and physics bins built in `PTorrent/bin_archive/clean/`; the 19 old domain bins moved to `dirty/` with poison notes.

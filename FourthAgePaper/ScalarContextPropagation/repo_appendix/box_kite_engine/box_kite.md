@@ -1,10 +1,15 @@
 # Engine: The Box-Kite Debugger — the ZD Geometry, Made Watchable
 
+> **Atlas note (2026-11-09):** "the atlas" in this document is the **Box-Kite Atlas** (the 42-vertex sedenion graph glued at e₀). It is not the Riemann–Fermat Atlas (RiemannHypothesisProof) nor the Abrikosov Atlases (AbrikosovTree). Registry: `ContextPlease/claude/ATLAS_REGISTRY.md`.
+
 **File:** `modules/box_kite/maths.py`
 **Class:** `BoxKiteModule`
 **Notebook:** `notebooks/engines/15_box_kite.ipynb`
 **Ainulindale wiki:** `Ainulindale/wiki/84_the_box_kite_debugger.md`
 **Claim:** The sedenion zero-divisor geometry is exactly enumerable, and its object is **PSL(2,7)** (order 168, Aut(Fano) = GL(3,2)) — **not G₂**. Seven box-kites, each an **octahedron**, six Assessors apiece, 42 in all. Chart-level dispersion relation {0,4,4,4,6,6}. The associator is the curvature.
+
+
+**Reference:** every equation with its parameters — [toolbox](toolbox/28_box_kite.md) · API — [box_kite](https://michaelrendier.github.io/ValaQuenta/api/modules/box_kite.html). This page is the record; it holds no API.
 
 ---
 
@@ -73,6 +78,54 @@ This is a result, not an instrument failure, and it **changes the shape of the o
 
 Also worth noting: **84 = ZD_PAIRS is also the atlas edge count.** 42 vertices at degree 4 → 42×4/2 = 84. Same number, second reading.
 
+## The Blackjack subgroup — F₂₁, named precisely (2026-09-25)
+
+`VAPMIP/Boxkite-Catalog.txt` §8 already recorded a 21-element subgroup of
+`PSL(2,7)` (transitive on the 7 struts, point-stabilizer order 3, index 8) —
+that subgroup is `F₂₁ = 7:3`, the **normalizer of a Sylow-7 subgroup**.
+Forced, not chosen: `PSL(2,7)` is simple, so its order-7 Sylow subgroups
+can't be normal; the Sylow count must divide 24 and be `≡1 mod 7`, forcing
+exactly 8 of them, and `168/8 = 21`. Same fact as the catalog's index-8
+entry, reached from subgroup-counting instead of orbit-counting.
+
+An independent abstract realization (label the struts `ℤ/7`):
+`F₂₁ = {x ↦ a·x + b : a ∈ {1,2,4}, b ∈ ℤ/7}`, where `{1,2,4}` is the
+order-3 (quadratic-residue) subgroup of `(ℤ/7)ˣ`. Point-stabilizer =
+`{x↦x, x↦2x, x↦4x}`, order 3 — the same number the catalog already has,
+via a second, different derivation. **Not yet checked:** whether this
+ℤ/7-affine model and the catalog's already-computed `GL(3,2)`/XOR-triple
+cycles are the same concrete permutation representation relabeled, or two
+genuinely different embeddings of the same abstract group into `Sym(7)`.
+
+Every one of the 21 elements is invertible by construction
+(`x↦a⁻¹(x−b)`), which suggested a *word* of Blackjack-group elements as a
+losslessly-reversible strut-permutation encoding — **tested 2026-09-25,
+does not work as proposed** (`VAPMIP/benchmarks/blackjack_vs_horner_bench.py`):
+composing the word collapses to one of only 21 final states (pigeonhole —
+concrete collision found at length 2), so the only way to stay lossless is
+to keep the full digit sequence rather than compose it, which reduces to
+plain bijective-base-21 Horner encoding — measured ~1.8–2× more digits and
+5–21× slower than base-97 for the same content. Not a viable direct
+replacement for Horner-summing. Still exactly what the confidence table
+below says otherwise: CONJECTURE on the *gluing* question — now with the
+concrete group identified, and one candidate application for it ruled out
+by measurement rather than left open.
+
+### The Amygdala reading (Cody, 2026-09-25)
+
+*"The Blackjack group is the Amygdala... the 'Lizard Brain.'"* The
+measurement above gives that framing real teeth, not just a label: F₂₁'s
+failure mode as a memory mechanism — fast, small (21 states), and
+information-collapsing under repeated composition — is structurally the
+amygdala's actual job description. It is not built for exact, lossless
+recall (that is what Horner/hippocampal-cortical-style addressing is for);
+it is built for fast, coarse, categorical response — "which of a small
+number of states is this," not "what exactly was this." Candidate
+reframing, not yet built: F₂₁ as a fast pre-classifier/triage layer sitting
+*alongside* the exact indexer, not as a replacement for it — matching the
+real neuroscience division of labor rather than contradicting the
+benchmark that just ruled out the replacement reading.
+
 ## Do the charts touch? — yes, in the skeleton (v0.2, 2026-08-05)
 
 Cody: *"i'm pretty sure that those 'surfaces' do actually touch somewhere… they are all from the fixed point anyway… but now we have a clue that 0_RB only points to 'fixed point space'… where the boundary and the geometries are the same thing, right?"*
@@ -137,6 +190,7 @@ acting through a Joukowsky / `J_N` deformation law, reconstructs all six
 Assessor coordinates from it. `w = 0` collapses the kite to the e₀ axis (σ→½,
 the shadow); `w = w*` is the regular octahedron; `w ≫ w*` tears it off the ZD
 surface. It is `e10`'s "writing fans it back out", with `w` the knob. THEORETICAL.
+**Update 2026-10-12:** on the paper's tension proxy `H = −cos(Σ ε_k φ_k)` exactly, with the sign patterns ε the Sylvester–Hadamard rows 0–3; struts 1, 3, 6 are pinned under any scalar wind and respond only to a station-unequal wind; the literal Joukowsky tear-off is not reproduced. See [pencil_hyperstring.md](pencil_hyperstring.md) § "Measured 2026-10-12".
 
 **Provenance** (full table on that page): the box kite, its sail/strut/vent
 vocabulary and the kite metaphor are **de Marrais** (arXiv:math/0011260, 2000);
@@ -193,7 +247,7 @@ hydrogen native space (separates in spherical, never in Cartesian).
 |---|---|
 | All counts (42/84/168/336/7), octahedral structure, chart spectra, PG(3,2) skeleton, associator census, e₀ exclusion | ESTABLISHED — derived and cross-checked |
 | Zero cross-strut edges | ESTABLISHED — computed |
-| PSL(2,7) action as the transition maps | CONJECTURE — the named next step |
+| PSL(2,7) action as the transition maps | CONJECTURE — the named next step (subgroup now identified: F₂₁ = N(Sylow-7), see "The Blackjack subgroup" above) |
 | Global dispersion relation on the ZD surface | OPEN |
 
 ---
@@ -208,3 +262,13 @@ Decomposed by `SedenionFactoralRelativity/engine/valaquenta_calibration.py` (`py
 
 
 Calibration: this verdict agrees with the page's stated status (**ESTABLISHED**).
+
+## Provenance
+
+Moved from the module docstring: a docstring instructs the caller and holds no history; this section is the record.
+
+> "how do we 'debug' the geometries / how do we watch the geometries
+> 
+> ::
+> 
+>  interact"   -- Cody Michael Allison, 2026-08-05

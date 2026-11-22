@@ -59,3 +59,6 @@ Snapshot for benchmarking baseline reference.
 - RAM is the likely constraint (7.5 GiB) for anything memory-heavy (e.g. large sedenion/monad computations, corpus builds) — swap is present (3.7 GiB) but will skew timing benchmarks if triggered.
 - SMART/NVMe wear stats and hdparm throughput were not captured this pass (require sudo password, not available non-interactively). Re-run with sudo for a fuller I/O baseline if needed:
   `sudo smartctl -a /dev/nvme0n1` and `sudo hdparm -t /dev/nvme0n1p2`
+
+## Update 2026-10-13 battery (sysfs BAT0, Claude)
+LGC Li-poly, model 01AV494; design 57.0 Wh; **full-charge energy now 25.65 Wh (45% of design)**, 399 cycles; the 2026-07-31 snapshot above recorded 49.51 Wh, so the reading dropped by about 24 Wh in 74 days (calibration drift is possible; the figure was read once). Used for the whole-laptop energy-per-reply measurements (`.claude/scratchpad/2026-10-13_monad_energy/`).

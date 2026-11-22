@@ -1,0 +1,226 @@
+READY TO SEND — Open English WordNet: collaboration request
+=============================================================
+Final pass 2026-09-27. No blanks left. See "WHAT CHANGED" at the end for
+everything touched this pass.
+
+RESOLVED (2026-09-27, Cody): email WordNet tomorrow as planned; the
+arXiv preprint waits for their response, not the other way around. That
+matches this draft's own Posture line and Question 2 exactly as
+written — no change needed to either. The earlier flag in this spot
+(same day) raised the conflict against a same-day "arXiv tomorrow, then
+email" plan; that plan is superseded by this note.
+
+Target:  globalwordnet/english-wordnet  (GitHub issue or Discussion),
+         addressed to the maintainers (John P. McCrae et al.).
+From:    Cody Michael Allison <the.wandering.god@gmail.com>
+Posture: requesting collaboration. Provenance first — the method is a pure
+         function of your relation graph, and I want the people who own the
+         graph involved before I put up a preprint. No preprint timeline is
+         set on purpose: their input is wanted before anything about this
+         goes further public, not after.
+
+---------------------------------------------------------------------
+
+TITLE
+
+  Collaboration request: a specification for structure above the sentence
+  over WordNet relations — what are paragraphs and chapters, as objects
+  built from the same relation inventory?
+
+BODY
+
+  This came out of an engineering experiment on the relation graph. I built
+  a context-addressing layer that is a pure function of the WordNet relation
+  structure: `context_addr(synset)` reads only the 19 relation counts per
+  synset (hypernyms, hyponyms, meronyms, and the rest) and never looks at
+  the surface word. It maps each synset to a compact fixed-size address — a
+  bijective encoding of the count vector, with the counts factored into a
+  small number of independent components.
+
+  On the current Open English WordNet build it round-trips bit-exact on
+  146,743 synsets: the 19-vector is recovered from the address exactly,
+  146,743/146,743 (100.000%), re-verified directly against the live build
+  this session. There is one deliberate lossy step — a log-compression of
+  the target counts — which affects about 1.1% of individual relation
+  slots (not synsets); the rest are exact single-value buckets. Code,
+  five executed notebooks, and the round-trip report — the paper is
+  titled *19 Dimensional Scalar WordNet Context Propagation*:
+  https://github.com/michaelrendier/FourthAgePapers/tree/scalar-context-propagation/ScalarContextPropagation
+
+  The repos behind it, if useful — not required reading for the
+  questions below, just the wider context this address sits inside:
+    VAPMIP            https://github.com/michaelrendier/VAPMIP
+    ValaQuenta        https://github.com/michaelrendier/ValaQuenta
+    Ainulindale       https://github.com/michaelrendier/Ainulindale
+    FourthAgePapers   https://github.com/michaelrendier/FourthAgePapers
+
+  Since the last draft of this note I also chained this address to a
+  word-spelling encoding (a separate, disjoint-prime-tier layer — it never
+  touches the relation graph, so it doesn't change anything above): the
+  two combine into one prime number per word that recovers both the exact
+  spelling and the full 19-vector, verified end to end on live samples.
+  Mentioned only so the relation-fingerprint half — the part I'm asking
+  about here — is understood as one composable layer in a larger address,
+  not the whole of it.
+
+  That gives a clean, comparable object for a word. Composing those objects,
+  a sentence is the result of two operators over the word addresses:
+
+    - additive — context accumulation: the component-wise sum of the word
+      vectors;
+    - multiplicative — grammatical action: a head operates on its dependent.
+      Some head/dependent pairs fail here — an agreement or category clash.
+
+  A sentence is complete when every obligatory argument is filled (no
+  unfilled slot).
+
+  WHAT I WANT TO DESIGN, AND WOULD LIKE YOUR HELP ON: the specification for
+  the levels above the sentence. If a word is a relation fingerprint and a
+  sentence is a composition of them, what is a paragraph? a chapter?
+
+  My working sketch (appendix): a paragraph is a chain of sentences linked
+  at coreference points (pronoun, definite article, ellipsis) — shared
+  relations that cross sentence boundaries; a chapter is a chain of those.
+  At each level a stable core persists — the part that is invariant under
+  paraphrase of the level below (a paragraph's topic is what survives when
+  you paraphrase away sentence-level detail) — and the rest is level-specific
+  detail that the next level up summarizes away. Reading runs the hierarchy
+  downward (chapter theme -> paragraph topic -> sentence assertion -> word
+  sense); writing runs it up.
+
+  That is a sketch, and it is exactly the kind of thing that should be
+  shaped by people who have spent years with the relation inventory.
+
+  QUESTIONS FOR YOU:
+
+    1. Is a compact relational fingerprint per synset — and a principled way
+       to compose it upward — useful to OEWN, for build-diffing, dedup,
+       similarity, or tooling?
+    2. Would you be open to co-designing the above-sentence spec, or
+       reviewing it before I put a preprint up? I don't have a fixed
+       date in mind — I'd rather this note's answer shape the timeline
+       than lock one in and work around whatever you say.
+    3. What should this connect to that I may be missing — RST, SDRT,
+       Centering Theory, DRT, the Global WordNet discourse-annotation work?
+
+  Attribution to OEWN (CC-BY) is in the paper regardless. I would rather
+  have you in the design than only in the citations.
+
+  — Cody Michael Allison (Michael Rendier)
+
+  Contact: the.wandering.god@gmail.com · GitHub: github.com/michaelrendier ·
+  ORCID: 0009-0007-7239-6760
+
+  License: the method and code above are GPLv3 (full text alongside the
+  code at the repo link) — free for any use, research or commercial,
+  under that license's terms.
+
+---------------------------------------------------------------------
+
+APPENDIX (link or attach) — the hierarchy sketch
+
+  level        object                              complete when
+  ---------    ---------------------------------    ----------------------------
+  letter       one directional "letter"            —
+  word         a relation fingerprint — the 19     the 19-vector is fixed
+               WN relation counts as a compact
+               fixed-size address
+  sentence     a composition of word addresses;    every obligatory argument
+               `+` context sum, `x` grammatical    of the predication is
+               action (head on dependent)          filled
+  paragraph    a chain of sentences joined at      a topic is introduced,
+               coreference points (shared          developed, and returned to
+               relations across sentence
+               boundaries)
+  chapter      a chain of paragraphs               setup -> complication ->
+                                                   resolution returns the
+                                                   setup transformed
+  book         a chain of chapters                 —
+
+  THE THROUGH-LINE: a layered structure where each level composes the one
+  below and carries roughly twice the state. Between levels there is a
+  consistent rule: a fixed core persists (the topic / theme — invariant
+  under paraphrase of the level below) and the remaining detail is
+  integrated out by the next level. Reading is running that rule down;
+  writing is running it up.
+
+  Prior art to align with: Rhetorical Structure Theory (Mann & Thompson) —
+  this is the graph, not tree, version; SDRT (Asher & Lascarides); Centering
+  Theory (Grosz, Joshi, Weinstein) — the coreference links are the
+  backward-looking center; DRT (Kamp). The WN relations are the atoms; the
+  spec extends the same relational vocabulary from synset level to discourse
+  level.
+
+---------------------------------------------------------------------
+
+WHAT CHANGED
+
+First pass (2026-09-17, morning):
+  - Re-verified the 146,743-synset round trip directly against the live
+    store: still 100.000% exact; wording tightened to "re-verified," not
+    just quoted from an earlier run.
+  - Corrected the lossy-step description: ~1.1% is a fraction of
+    individual relation SLOTS across the vocabulary, not 1% of synsets —
+    the earlier draft's "affects about 1% of entries" was ambiguous;
+    now says slots explicitly.
+  - Added one short paragraph noting the word-spelling layer that now
+    chains onto this address — kept brief and clearly scoped as a
+    separate layer, so it doesn't shift what's actually being asked
+    about (the relation-fingerprint design and the above-sentence spec,
+    both untouched).
+
+Final pass (2026-09-17, this pass — ready to send):
+  - [REPO LINK] filled and verified reachable (public, HTTP 200, no
+    auth) at the time of this pass:
+    github.com/michaelrendier/FourthAgePapers, branch
+    scalar-context-propagation, ScalarContextPropagation/ — worth a
+    quick re-check on send day in case that changes.
+  - [CONTACT] filled with the standing identity block: Cody Michael
+    Allison (Michael Rendier), email, GitHub, ORCID.
+  - License line corrected to GPLv3, matching what the paper itself now
+    states (free for any use including commercial) — the earlier draft
+    had described a different, source-available/paid-commercial policy
+    that applies to other work in this project, not to this one.
+  - [TIMELINE] resolved by removing it rather than filling it: no
+    preprint date is set, on purpose — you want their answer before
+    deciding when (or how) this goes further public, not the other way
+    around. Question 2 now says that directly instead of leaving a
+    bracket. Stated in the opening "Posture" line too.
+  - Did not touch the hierarchy sketch (paragraph/chapter/book) or the
+    three questions to the maintainers — that design is yours, untouched.
+
+Second final pass (2026-09-21, this pass — ready to send):
+  - Added links to the three repos behind the paper link
+    (VAPMIP, ValaQuenta, Ainulindale), alongside the existing
+    FourthAgePapers link — all four re-verified reachable (public,
+    HTTP 200, no auth) at the time of this pass. Framed as optional
+    context, not required reading, so they don't crowd the actual ask.
+  - The paper itself has grown substantially since the 09-17 pass
+    (a full code appendix mirroring every mechanism the paper touches,
+    plain-language definitions for every object used) — not
+    itemized here on purpose; the repo link is live, they'll find it.
+  - The 146,743/146,743 round-trip figure and the technical description
+    above are unchanged and still accurate against the current build;
+    nothing about the actual ask (the relation-fingerprint design, the
+    above-sentence spec, the three questions) needed correction.
+
+Third final pass (2026-09-27, this pass — ready to send):
+  - The paper (v4.0) is now the repo link's own README.md, not a file
+    a reader has to go find inside the tree — the same link in BODY
+    now opens straight onto the full paper, with the two original
+    "first run" screenshots actually embedded, not just named.
+  - Every code Listing that matters in the paper is now complete,
+    copy-paste runnable, and independently verified by actually
+    running it — including, worth flagging for this specific audience,
+    a real Miller–Rabin primality test now shown in full at the step
+    that places a synset's relation-fingerprint at its own prime
+    address; WordNet's own citation (Miller, 1995) is now a formal,
+    tagged reference in the paper rather than an informal mention.
+  - 146,743/146,743 and the 1.1% lossy-slot figure remain unchanged and
+    still accurate against the current build.
+  - See the flagged note at the top of this file — the preprint-timeline
+    promise in Posture/Question 2 was not touched, and now needs a
+    decision before send given the stated arXiv-tomorrow plan.
+
+No blanks remain except the flagged timeline question above. Ready to
+send once that's resolved.

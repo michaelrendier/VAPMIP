@@ -1,0 +1,30 @@
+To:       Christiane Fellbaum <fellbaum@princeton.edu>
+From:     Cody Michael Allison <the.wandering.god@gmail.com>
+Subject:  A request for help understanding the mathematics of a WordNet-based project
+Attach:   19_Dimensional_Scalar_WordNet_Context_Propagation_v4.0_2026-10-13.pdf
+
+Dear Professor Fellbaum,
+
+My name is Cody Allison. I am an independent builder with no academic affiliation, and I am writing to you with real humility. I cannot compare myself to those who have spent their lives on WordNet, and everything I have made rests on that work.
+
+For about six months I have been building a small language engine that runs entirely offline on a laptop. WordNet is its foundation: each word is stored with the counts of its 19 relation pointers, and I rebuilt that table against the WordNet C library and checked it against NLTK. I did not learn the mathematics first. I built it from processes I could watch in my head, and the code works, but I cannot yet show the mathematics properly, and I would like to be able to watch it clearly.
+
+The engine is a family of 24 small programs, and twelve of them speak. I have measured every one of the twelve on a 2018 laptop with no GPU and no network. A reply takes between a third of a millisecond and a second and a half, and the whole laptop, display included, spends between about one microwatt-hour and four milliwatt-hours per reply, which is between roughly 74 and 389,000 times less than the 0.3 watt-hours that public estimates give for one typical large language model query. I mention this only to show that the machinery runs. Most of the replies are short fragments, and I do not claim they are good.
+
+I have two requests, and I will understand completely if you are too busy for either:
+
+1. My paper, "19 Dimensional Scalar WordNet Context Propagation" (attached; also at https://github.com/michaelrendier/FourthAgePapers/tree/scalar-context-propagation/ScalarContextPropagation). Would you take a look at it?
+
+2. The engine itself, which I call the monad: https://github.com/michaelrendier/VAPMIP. The measurements, the transcripts, and a script that reruns all of them are there (docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md). Would you take a look at that as well?
+
+What I am hoping for is your help in showing me these mathematics, so that I can see them and watch them in my head. If you could show me the equations, or take me through how they work, I hope to get the shape of language clearly enough in my head to make the mathematics speak ordinary conversational English. The part of the engine that accumulates knowledge is already built; this is the part I am missing. I am not asking you to endorse anything, and I am not suggesting anything to the team. I would be grateful for whatever you are able to share, including a plain statement that I have misunderstood something.
+
+The code is publicly readable; the engine (the monad) is free for research and non-commercial use and licensed for commercial use, the mathematics is free to use, and the harness and console are GPL v3. WordNet's license and copyright notice are carried in the repositories, and I cite Miller (1995), "WordNet: A Lexical Database for English," and your 1998 volume, "WordNet: An Electronic Lexical Database."
+
+Thank you for WordNet, and for your time.
+
+With respect,
+Cody Michael Allison (Michael Rendier)
+the.wandering.god@gmail.com
+ORCID 0009-0007-7239-6760
+github.com/michaelrendier

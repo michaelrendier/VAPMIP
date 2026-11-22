@@ -1,5 +1,8 @@
 # Boxkite Deformation Record — 2026-10-12 / 13
 
+> **Symbols in this record (2026-11-21).** A dated record; its body is not edited. The code names `Omega_ZS`, `OMEGA_ZS` and `Ω` in the transcripts below denote the value 0.56714 = A_π = W(1); `d*` = 0.24600 is d*_spec; Ω_ζΣ = d* = 0.2463 is the Riemann-side constant. Table: `@RCCM_SYMBOLS`. The label "BAO" for the residual is not supported by the test in `FourthAgePapers/DStar/bao_test.txt`.
+
+
 **One document, everything.** This page records every experiment run in the 2026-10-12/13 session on how
 box kites deform: the four scratchpad experiments, the De Marrais deformation battery (parts 1–7), the
 follow-ups on the Blackjack subgroup, the {4:8:4} grading and bracketing/firing order, the comparison of

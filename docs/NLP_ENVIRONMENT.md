@@ -1,5 +1,7 @@
 # The NLP environment (set up 2026-10-17)
 
+> **Status 2026-11-21.** The "system `python3` has everything" row below is superseded: the system `python3` cannot be relied on (numpy/nltk ABI crash). Every repository uses its own `.venv` (`VAPMIP/.venv`, `PtolemyDesktop/.venv`, `ValaQuenta/.venv`, `SemPriCon/.venv`); create one rather than using the system python. NLTK is the content-processing base (decision of 2026-10-13, `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md` §16). The table records what was measured on 2026-10-17.
+
 What the machine has for content extraction and scaling, where it lives, and how to check it. Verified by
 `tools/verify_nlp_environment.py` (run it under every interpreter; each line says PASS, MISS or FAIL).
 
