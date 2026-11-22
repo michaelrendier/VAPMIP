@@ -38,6 +38,8 @@ Open: context flow, carrying the prompt's topic through the reply as discrete wo
 | the orbweaver | `Currentwork/Wernicke/README.md`, `docs/semantic_orbweaver_notes.md` |
 | the context-flow tests | `docs/context_flow_spec/` (95 tests) |
 | SemPriCon | `Currentwork/SemPriCon/README.md`, `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/00_index.md` |
+| the English field in the Scale engine's rings (the stored A-matrix has no direction) | `docs/wiki/English-Field-Rings.md` |
+| Tao 41 in the harness (laughter is expected, not correction) | `three_hearers.py`, `harness.py` |
 | the Cyclic Context Gearbox (DATA SELF and USER SELF, lossless FIFO odometer) | `docs/wiki/Context-Gearbox.md`, `context_gearbox.py` |
 | English usage statistics as one poll; levels by educational response | `docs/wiki/English-Statistics.md`, `english_stats.py` |
 | the sedenion window (reads and writes a sentence; sensors; tone/tense/conjugation markers) | `docs/wiki/Sedenion-Window.md`, `sedenion_window.py` |

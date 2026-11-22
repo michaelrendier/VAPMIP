@@ -1,0 +1,20 @@
+english words 164283
+E   min 0.00045 max 0.20609 mean 0.0015 | beta min 7.647e-05 max 7.552 mean 0.0634 | fire max 142 | degree max 32056 median 2
+share beta==0: 0.000  share beta at cap(7.552): 0.001
+seed range -0.7646..-0.1243
+E (continuous address) vs beta (learned)     corr +0.013 | sum range 7.58 (std 0.411) | |Gamma| mean 0.337 p5 0.019 p95 0.983 | sv ratio 0.008
+seed fraction in slot vs slot/N (one number split) corr -0.019 | sum range 1.56 (std 0.288) | |Gamma| mean 1.711 p5 1.099 p95 2.913 | sv ratio 0.035
+beta vs A-degree                             corr +0.300 | sum range 3.21e+04 (std 182) | |Gamma| mean 0.228 p5 0.000 p95 0.897 | sv ratio 0.002
+E vs log2(1+fire)                            corr -0.005 | sum range 6.2 (std 1.64) | |Gamma| mean 0.110 p5 0.005 p95 0.542 | sv ratio 0.002
+beta vs E^2 (J = beta E^2 seed)              corr +0.006 | sum range 7.55 (std 0.411) | |Gamma| mean 0.258 p5 0.000 p95 0.983 | sv ratio 0.001
+J = beta*E^2: mean 0.0000  max 0.0176 ; corr(J, exp(-E)) -0.288
+cross-ratio is scale blind (Scale engine control): True
+--- usage rings (directed co-occurrence): production = out-degree, comprehension = in-degree ---
+words with both: 164283 of 164283 | corr(log out, log in) 1.000 | std(log out - log in) 0.000 | std(log out + log in) 2.081
+product out*in: median 4.0, IQR 4.0..25.0 (a Cassini product-constant would make this a spike)
+log out-degree vs log in-degree (rescaled rings) corr +1.000 | sum range 20.8 (std 2.08) | |Gamma| mean 0.199 p5 0.000 p95 0.693 | sv ratio 0.000
+log beta vs log E (rescaled rings)           corr +0.018 | sum range 15.9 (std 1.75) | |Gamma| mean 1.363 p5 1.326 p95 1.436 | sv ratio 0.459
+
+--- directed model (EnglishStats.bigram, 12,669 words, 65,307 ordered pairs, 60k tokens per corpus work): production = distinct followers, comprehension = distinct predecessors ---
+corr(log out, log in) 0.960; std(log out - log in) 0.267; 24.5% of words have out != in
+most produce-heavy: be 326/96, have 244/130, not 343/191, a 1068/619, the 3004/1743; most comprehension-heavy: in 565/1198, as 260/532, for 262/534, it 289/515, by 291/509

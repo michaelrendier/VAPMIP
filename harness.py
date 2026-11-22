@@ -453,6 +453,9 @@ class Harness:
                           # Ptolemy to compare against, not an audit log
 
     def __init__(self) -> None:
+        from three_hearers import ThreeHearers          # Tao 41: laughter is expected, not correction
+        self.hearers = ThreeHearers()
+        self.last_reaction: Optional[Dict[str, Any]] = None
         self._monad: Any = None
         self._roots: Dict[str, Any] = {}   # name -> browsable root (module/package/live scope)
         self.toolset_registry = ToolsetRegistry()
@@ -815,6 +818,8 @@ class Harness:
         if pol is None:
             return FaceResult(ok=False, error=f"unknown ingest class {cls!r}")
         prose = strip_to_prose(text)
+        if cls == 'external':
+            self.last_reaction = self.hearers.note(pair_id or 'conversation', prose)    # laughter never raises the monad's emote
         if not prose:
             return FaceResult(ok=True, data='(nothing to hear)',
                               handled_by='observe')

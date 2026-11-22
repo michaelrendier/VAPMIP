@@ -6,6 +6,9 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
+- **Tao 41 in the harness** (`three_hearers.py`, `harness.py`, 4 tests): laughter is classified as expected (no irritation, no retraction); only an explicit correction can retract; diligent / wavering / laughing hearer tracked per subject. The C side (`monad_harness.c`) is to follow after testing in Python.
+- **English field in the Scale rings** (`docs/wiki/English-Field-Rings.md`): the stored A-matrix has out-degree equal to in-degree for all 164,283 words (no direction); the shipped bin's E is not the C monad's E; a directed model separates pathway words by produce/comprehend asymmetry.
+- **Personal library:** Art of War (Giles) and The Prince added to `Ainulindale/media/add-reading/` and `~/Documents/books/`.
 - **Cyclic Context Gearbox** (`context_gearbox.py`, 7 tests): lossless FIFO odometer compaction; DATA SELF and USER SELF; reaction and thread retrieval after compaction; canonical shortcut variables.
 - **English statistics** (`english_stats.py`, 7 tests): one data class, frequency and context-class counts, levels by educational response; learns (bits per word 10.06 → 9.41 over four rounds) where the A-matrix did not; the context class does not improve the prediction.
 - **Tone chord and the seven tones** (`tone_chord.py`, 4 tests): DTMF-style chord with Goertzel decoding; `Tone7.knobs()`; the window reads them; effect of each axis measured.
