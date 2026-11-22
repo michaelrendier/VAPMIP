@@ -396,6 +396,318 @@
     "GABA": 0.7,
     "OPI": 0.6
    }
+  },
+  "DEFENSIVE": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.35,
+    "5HT": 0.35,
+    "NE": 0.8,
+    "OXT": 0.15,
+    "GLU": 0.6,
+    "GABA": 0.25,
+    "OPI": 0.25
+   }
+  },
+  "DOUBLING_DOWN": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.5,
+    "5HT": 0.3,
+    "NE": 0.7,
+    "OXT": 0.2,
+    "GLU": 0.65,
+    "GABA": 0.25,
+    "OPI": 0.2
+   }
+  },
+  "ASHAMED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.2,
+    "5HT": 0.25,
+    "NE": 0.55,
+    "OXT": 0.2,
+    "GLU": 0.4,
+    "GABA": 0.3,
+    "OPI": 0.15
+   }
+  },
+  "GUILTY": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.35,
+    "5HT": 0.45,
+    "NE": 0.5,
+    "OXT": 0.45,
+    "GLU": 0.45,
+    "GABA": 0.4,
+    "OPI": 0.3
+   }
+  },
+  "LAZY": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.25,
+    "5HT": 0.55,
+    "NE": 0.2,
+    "OXT": 0.35,
+    "GLU": 0.3,
+    "GABA": 0.7,
+    "OPI": 0.55
+   }
+  },
+  "OVERCONFIDENT": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.7,
+    "5HT": 0.7,
+    "NE": 0.3,
+    "OXT": 0.25,
+    "GLU": 0.55,
+    "GABA": 0.5,
+    "OPI": 0.5
+   }
+  },
+  "CONFUSED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.35,
+    "5HT": 0.5,
+    "NE": 0.6,
+    "OXT": 0.4,
+    "GLU": 0.5,
+    "GABA": 0.35,
+    "OPI": 0.3
+   }
+  },
+  "FRUSTRATED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.6,
+    "5HT": 0.3,
+    "NE": 0.75,
+    "OXT": 0.3,
+    "GLU": 0.75,
+    "GABA": 0.2,
+    "OPI": 0.2
+   }
+  },
+  "HURRIED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.6,
+    "5HT": 0.4,
+    "NE": 0.7,
+    "OXT": 0.3,
+    "GLU": 0.7,
+    "GABA": 0.35,
+    "OPI": 0.3
+   }
+  },
+  "DISTRACTED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.55,
+    "5HT": 0.4,
+    "NE": 0.35,
+    "OXT": 0.35,
+    "GLU": 0.4,
+    "GABA": 0.3,
+    "OPI": 0.4
+   }
+  },
+  "SKEPTICAL": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.45,
+    "5HT": 0.65,
+    "NE": 0.4,
+    "OXT": 0.3,
+    "GLU": 0.55,
+    "GABA": 0.65,
+    "OPI": 0.45
+   }
+  },
+  "ANXIOUS": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.15,
+    "5HT": 0.35,
+    "NE": 0.6,
+    "OXT": 0.3,
+    "GLU": 0.6,
+    "GABA": 0.3,
+    "OPI": 0.3
+   }
+  },
+  "LONELY": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.3,
+    "5HT": 0.35,
+    "NE": 0.45,
+    "OXT": 0.15,
+    "GLU": 0.4,
+    "GABA": 0.45,
+    "OPI": 0.15
+   }
+  },
+  "EXCITED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.85,
+    "5HT": 0.65,
+    "NE": 0.65,
+    "OXT": 0.6,
+    "GLU": 0.75,
+    "GABA": 0.45,
+    "OPI": 0.65
+   }
+  },
+  "PROUD": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.75,
+    "5HT": 0.75,
+    "NE": 0.4,
+    "OXT": 0.5,
+    "GLU": 0.55,
+    "GABA": 0.6,
+    "OPI": 0.65
+   }
+  },
+  "TIRED": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.2,
+    "5HT": 0.5,
+    "NE": 0.1,
+    "OXT": 0.4,
+    "GLU": 0.25,
+    "GABA": 0.75,
+    "OPI": 0.5
+   }
+  },
+  "TRUSTING": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.55,
+    "5HT": 0.7,
+    "NE": 0.25,
+    "OXT": 0.8,
+    "GLU": 0.5,
+    "GABA": 0.65,
+    "OPI": 0.7
+   }
+  },
+  "GRATEFUL": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.65,
+    "5HT": 0.75,
+    "NE": 0.25,
+    "OXT": 0.8,
+    "GLU": 0.45,
+    "GABA": 0.6,
+    "OPI": 0.75
+   }
+  },
+  "HAPPY": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.55,
+    "5HT": 0.85,
+    "NE": 0.3,
+    "OXT": 0.55,
+    "GLU": 0.5,
+    "GABA": 0.65,
+    "OPI": 0.65
+   }
+  },
+  "FIGHT_OR_FLIGHT": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.35,
+    "5HT": 0.3,
+    "NE": 0.95,
+    "OXT": 0.2,
+    "GLU": 0.85,
+    "GABA": 0.2,
+    "OPI": 0.2
+   }
+  },
+  "JOKING": {
+   "group": "Common human behaviours",
+   "vec": {
+    "DA": 0.75,
+    "5HT": 0.65,
+    "NE": 0.45,
+    "OXT": 0.6,
+    "GLU": 0.6,
+    "GABA": 0.55,
+    "OPI": 0.7
+   }
+  },
+  "DISARM": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.4,
+    "5HT": 0.75,
+    "NE": 0.2,
+    "OXT": 0.7,
+    "GLU": 0.4,
+    "GABA": 0.8,
+    "OPI": 0.7
+   }
+  },
+  "REFRAME": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.55,
+    "5HT": 0.75,
+    "NE": 0.3,
+    "OXT": 0.75,
+    "GLU": 0.55,
+    "GABA": 0.65,
+    "OPI": 0.6
+   }
+  },
+  "DISCOVER": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.65,
+    "5HT": 0.7,
+    "NE": 0.35,
+    "OXT": 0.6,
+    "GLU": 0.6,
+    "GABA": 0.6,
+    "OPI": 0.55
+   }
+  },
+  "DEFINE": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.45,
+    "5HT": 0.75,
+    "NE": 0.3,
+    "OXT": 0.5,
+    "GLU": 0.6,
+    "GABA": 0.8,
+    "OPI": 0.5
+   }
+  },
+  "LIGHTEN": {
+   "group": "Ptolemy's dispensations (what the dispenser mixes)",
+   "vec": {
+    "DA": 0.75,
+    "5HT": 0.65,
+    "NE": 0.35,
+    "OXT": 0.7,
+    "GLU": 0.55,
+    "GABA": 0.55,
+    "OPI": 0.75
+   }
   }
  }
 }

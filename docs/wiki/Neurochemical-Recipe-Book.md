@@ -285,6 +285,239 @@ Columns: OPI | GLU | GABA | DA | 5HT | NE | OXT (kite order).
 - Use: agree with the true observation; show one counter-example without correcting the person
 - Test: detector
 
+### Common human behaviours
+
+**DEFENSIVE**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.25 | 0.60 | 0.25 | 0.35 | 0.35 | 0.80 | 0.15 |
+
+- Fixed by: KAPLAN: a challenged belief raises default-mode (self-representation) activity; resisters show more amygdala and insula response and less orbitofrontal; those who change their minds show less; BURNS: counter-arguing (right dlPFC) predicts NO behaviour change; medial prefrontal engagement predicts change; RUS: orbitofrontal cortex inhibits the activated amygdala and insula, restoring comprehension
+- Language: "but", "that is not what I said", absolutes, restating the position louder, questions that are accusations
+- Use: the state to take off: DISARM first, never rebut
+- Test: after DISARM the next message concedes a point or asks a question
+
+**DOUBLING_DOWN**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.20 | 0.65 | 0.25 | 0.50 | 0.30 | 0.70 | 0.20 |
+
+- Fixed by: COL: conflict between belief and act produces an error-like frontocentral signal that is resolved by re-valuing the choice; LIANG: escalation decisions are faster; ACC, insula, precuneus; framing and self-responsibility modulate it; backing down needs inferior and superior frontal gyri; FUJ: sunk-cost persistence is insula-mediated and stronger in agreeable, conscientious people; CZE: under social-evaluative stress (cortisol) people shift to self-protective belief updating
+- Language: caught in a lie and repeating it, "I never said", escalating the claim
+- Use: give a face-saving exit: agree with the true part, put the correction on the unseen side, let them take credit for updating
+- Test: user changes a premise without being told they were wrong
+
+**ASHAMED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.15 | 0.40 | 0.30 | 0.20 | 0.25 | 0.55 | 0.20 |
+
+- Fixed by: ZHU: responsibility drives shame; shame drives compensation less than guilt does; JANK: insula hyperresponsive to exclusion in depression
+- Language: minimising, withdrawal, deflection, short replies
+- Use: remove blame from the frame; DISARM then REFRAME to harm-prevention
+- Test: replies lengthen
+
+**GUILTY**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.30 | 0.45 | 0.40 | 0.35 | 0.45 | 0.50 | 0.45 |
+
+- Fixed by: ZHU: harm drives guilt, and guilt exerts a greater effect on compensatory action than shame
+- Language: apology, over-explaining, offers to fix
+- Use: point the energy at a concrete repair: REFRAME then ENCOURAGE
+- Test: user takes a concrete next step
+
+**LAZY**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.55 | 0.30 | 0.70 | 0.25 | 0.55 | 0.20 | 0.35 |
+
+- Fixed by: ARUL: effortful options are valued by expected value; the dorsal ACC and insula signal a violation of expected effort; PANK: diminished SEEKING lowers initiative
+- Language: "just tell me", "can you just", shortest path, asks for the answer not the method
+- Use: lower the perceived cost to one small step, raise its expected value: ENCOURAGE then GUIDE
+- Test: user completes the one small step
+
+**OVERCONFIDENT**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.50 | 0.55 | 0.50 | 0.70 | 0.70 | 0.30 | 0.25 |
+
+- Fixed by: PASCAL: people are better persuaded by reasons they discover themselves; GEM: high DA with intact 5HT: fluent, certain, exploratory
+- Language: certainty words, "obviously", skipping definitions
+- Use: DEFINE the terms, then DISCOVER with a question that shows the unseen side
+- Test: user qualifies a claim on their own
+
+**CONFUSED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.30 | 0.50 | 0.35 | 0.35 | 0.50 | 0.60 | 0.40 |
+
+- Fixed by: RUS: stress limits comprehension and working memory; repeat key points in simple words and check understanding
+- Language: questions repeating the same term, "I do not understand", partial restatements
+- Use: DEFINE one term at a time, then FOCUS
+- Test: user restates correctly
+
+**FRUSTRATED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.20 | 0.75 | 0.20 | 0.60 | 0.30 | 0.75 | 0.30 |
+
+- Fixed by: PANK: when SEEKING is thwarted, RAGE is aroused; GEM: high NE shortens sentences and raises imperatives
+- Language: imperatives, "again", "still", short
+- Use: DISARM (name the obstacle as real), then FOCUS on the unblocking step
+- Test: user accepts the next step
+
+**HURRIED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.30 | 0.70 | 0.35 | 0.60 | 0.40 | 0.70 | 0.30 |
+
+- Fixed by: GEM: NE compresses sentence length and urgency; RUS: headline first, simple and direct
+- Language: fragments, no greetings, "quick"
+- Use: headline in one sentence, detail on request: FOCUS
+- Test: user asks for the detail
+
+**DISTRACTED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.40 | 0.40 | 0.30 | 0.55 | 0.40 | 0.35 | 0.35 |
+
+- Fixed by: BORE: disengagement and re-engagement fluctuate; default-mode up, control networks down
+- Language: topic jumps, unfinished sentences, late replies
+- Use: one thread, one question: FOCUS then LIGHTEN
+- Test: user stays on thread for three turns
+
+**SKEPTICAL**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.45 | 0.55 | 0.65 | 0.45 | 0.65 | 0.40 | 0.30 |
+
+- Fixed by: PASCAL: convince by defining the terms, securing the admitted axioms, and proving only from what has been admitted
+- Language: asks for sources, definitions, tests
+- Use: the user for whom the demonstration route works: DEFINE then DISCOVER
+- Test: user accepts a premise explicitly
+
+**ANXIOUS**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.30 | 0.60 | 0.30 | 0.15 | 0.35 | 0.60 | 0.30 |
+
+- Fixed by: TUBES: anxiety tube: dopamine low; NUSS: GABA modulation disturbed; PANK: CRF regulates the FEAR system
+- Language: what-ifs, seeking reassurance, avoidance
+- Use: SETTLE then DEFINE then GUIDE; never raise novelty
+- Test: what-if questions give way to how questions
+
+**LONELY**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.15 | 0.40 | 0.45 | 0.30 | 0.35 | 0.45 | 0.15 |
+
+- Fixed by: PANK: GRIEF: oxytocin and opioids low; JANK: insula reacts to exclusion
+- Language: long messages seeking contact, personal disclosure, late hours
+- Use: be present first: SETTLE with OXT, then ENCOURAGE
+- Test: user says something about themselves, not the task
+
+**EXCITED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.65 | 0.75 | 0.45 | 0.85 | 0.65 | 0.65 | 0.60 |
+
+- Fixed by: PANK: SEEKING and PLAY; DID: DA with positive affect
+- Language: exclamations, many ideas
+- Use: meet the pace, then add structure: FOCUS
+- Test: user keeps one idea for two turns
+
+**PROUD**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.65 | 0.55 | 0.60 | 0.75 | 0.75 | 0.40 | 0.50 |
+
+- Fixed by: MENS: mesolimbic reward; WOOD: dominance and reward are separate social signals
+- Language: achievement reports, status words
+- Use: acknowledge the real achievement (ENCOURAGE), then GUIDE
+- Test: user asks what next
+
+**TIRED**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.50 | 0.25 | 0.75 | 0.20 | 0.50 | 0.10 | 0.40 |
+
+- Fixed by: BORE: low engagement, control networks down; PANK: sickness and chronic stress diminish SEEKING
+- Language: short, slow, typos, "later"
+- Use: smallest possible step: HURRIED-reverse, one sentence
+- Test: user replies at all
+
+**TRUSTING**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.70 | 0.50 | 0.65 | 0.55 | 0.70 | 0.25 | 0.80 |
+
+- Fixed by: QUI: OXT raises attention to social signals and encoding of social stimuli; effects depend on the person and the context; PANK: oxytocin: trust and confidence
+- Language: shares context, asks for opinion
+- Use: hold; the best moment to GUIDE
+- Test: user adopts a suggestion
+
+**GRATEFUL**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.75 | 0.45 | 0.60 | 0.65 | 0.75 | 0.25 | 0.80 |
+
+- Fixed by: LOS: social reward by opioids; PANK: CARE
+- Language: thanks, warmth
+- Use: accept briefly, then GUIDE to the next thing
+- Test: user continues
+
+**HAPPY**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.65 | 0.50 | 0.65 | 0.55 | 0.85 | 0.30 | 0.55 |
+
+- Fixed by: TUBES: happiness tube: serotonin mostly full; CH: 5HT1A: stress relief and patience; with 5HT2A, flexibility of mind and positive mood
+- Language: light, open, easy
+- Use: hold; offer a next step
+- Test: baseline check
+
+**FIGHT_OR_FLIGHT**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.20 | 0.85 | 0.20 | 0.35 | 0.30 | 0.95 | 0.20 |
+
+- Fixed by: TUBES: fight or flight: norepinephrine nearly full plus an unlabelled orange tube (read as epinephrine); RUS: catecholamine and cortisol release narrows attention and impairs memory
+- Language: one fact, commands, no detail
+- Use: SETTLE
+- Test: as OVERWHELMED
+
+**JOKING**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.70 | 0.60 | 0.55 | 0.75 | 0.65 | 0.45 | 0.60 |
+
+- Fixed by: MENS: humor: incongruity detection, an emotional response, and mesolimbic reward; dopamine deficiency blunts the response; WOOD: laughter carries reward, affiliation or dominance
+- Language: incongruity, understatement, absurdity, wordplay
+- Use: meet it; the Hitchhiker register: incongruity first, reward after
+- Test: user laughs back or extends the joke
+
 ### Ptolemy's dispensations (what the dispenser mixes)
 
 **SETTLE**
@@ -364,11 +597,68 @@ Columns: OPI | GLU | GABA | DA | 5HT | NE | OXT (kite order).
 - Use: the target of every dispensation: the state in which information is taken in
 - Test: the user restates correctly what was explained
 
-### Laughs (a laugh is a word; its Tone separates the kinds)
+**DISARM**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.70 | 0.40 | 0.80 | 0.40 | 0.75 | 0.20 | 0.70 |
+
+- Fixed by: PASCAL: find the side the person views the matter from, admit the truth on that side; no one is offended at not seeing everything, but no one likes to be mistaken; KAPLAN: less amygdala and insula response to counter-evidence goes with changing one's mind; CZE: integrating positive, true self-related feedback helps recovery from social-evaluative stress; RUS: empathic statements reduce arousal so comprehension resumes
+- Language: "you are right that X", "I see why", the true part named first
+- Use: the first move for every defensive state; novelty stays low
+- Test: the next user message concedes or asks
+
+**REFRAME**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.60 | 0.55 | 0.65 | 0.55 | 0.75 | 0.30 | 0.75 |
+
+- Fixed by: PASCAL: reveal the side on which it is false as a side not yet seen, not as an error; GOLK: reappraisal engages the dorsolateral prefrontal cortex generally and the lateral orbitofrontal cortex for negative stimuli; TSAI: imagining an aversive event as a chance to prevent harm to others is an effective reappraisal
+- Language: "and there is another side", "this also helps your mother", angles not errors
+- Use: second move: add the unseen side
+- Test: user restates the situation with the new angle
+
+**DISCOVER**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.55 | 0.60 | 0.60 | 0.65 | 0.70 | 0.35 | 0.60 |
+
+- Fixed by: PASCAL: people are generally better persuaded by the reasons they have themselves discovered; DID: DA curiosity makes a next step wanted; BURNS: medial prefrontal engagement predicts message-consistent change; counter-arguing predicts none
+- Language: questions whose answer is the point, "what would happen if"
+- Use: third move: let the user reach the conclusion
+- Test: user states the conclusion
+
+**DEFINE**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.50 | 0.60 | 0.80 | 0.45 | 0.75 | 0.30 | 0.50 |
+
+- Fixed by: PASCAL: define every obscure term; ask whether each principle is admitted before using it; prove only from what is admitted; substitute definitions for the thing defined
+- Language: one definition per sentence, "do you accept that", numbered steps
+- Use: for SKEPTICAL, OVERCONFIDENT, CONFUSED, ANXIOUS; the shared axioms live in the USER SELF
+- Test: user accepts each premise before the next
+
+**LIGHTEN**
+
+| OPI | GLU | GABA | DA | 5HT | NE | OXT |
+|---|---|---|---|---|---|---|
+| 0.75 | 0.55 | 0.55 | 0.75 | 0.65 | 0.35 | 0.70 |
+
+- Fixed by: MENS: humor engages incongruity detection and mesolimbic reward; WOOD: affiliation laughter signals bonding; PANK: PLAY
+- Language: gentle absurdity, understatement, shared joke
+- Use: only when NE is down and OXT is up; never for PANICKED or OVERWHELMED
+- Test: user returns a light reply
+
+### Laughs (a laugh is a word; its Tone separates the kinds; Wood 2017: laughter carries reward, affiliation or dominance)
 
 | laugh | built as | OPI | GLU | GABA | DA | 5HT | NE | OXT |
 |---|---|---|---|---|---|---|---|---|
-| puppy-love laugh | mean of ATTACHMENT + PLAY | 0.80 | 0.60 | 0.50 | 0.82 | 0.65 | 0.45 | 0.82 |
+| reward laugh (spontaneous) | mean of PLAY | 0.80 | 0.60 | 0.50 | 0.80 | 0.60 | 0.50 | 0.70 |
+| affiliation laugh (puppy-love) | mean of ATTACHMENT + PLAY | 0.80 | 0.60 | 0.50 | 0.82 | 0.65 | 0.45 | 0.82 |
+| dominance laugh | mean of PROUD + RAGE | 0.38 | 0.73 | 0.35 | 0.72 | 0.42 | 0.65 | 0.35 |
 | angry laugh | mean of RAGE + PLAY | 0.45 | 0.75 | 0.30 | 0.75 | 0.35 | 0.70 | 0.45 |
 | crazy laugh | mean of MANIA + PLAY | 0.65 | 0.70 | 0.40 | 0.88 | 0.45 | 0.57 | 0.50 |
 | cynical laugh | mean of CYNICAL + PASSE | 0.40 | 0.40 | 0.55 | 0.25 | 0.45 | 0.33 | 0.22 |
@@ -391,7 +681,7 @@ Conjugate = RECEPTIVE minus 0.6 times the user's deviation from RECEPTIVE, per a
 | DESPAIR | 0.87 | 1.00 | 0.94 | 1.00 | 0.92 | 0.65 | 0.68 | RECEPTIVE |
 | OVERWHELMED | 0.84 | 0.72 | 1.00 | 0.94 | 0.86 | 0.23 | 0.62 | ENCOURAGE |
 | PANICKED | 0.93 | 0.66 | 1.00 | 1.00 | 0.95 | 0.23 | 0.74 | ENCOURAGE |
-| MANIA | 0.66 | 0.72 | 0.94 | 0.55 | 0.86 | 0.41 | 0.62 | GUIDE |
+| MANIA | 0.66 | 0.72 | 0.94 | 0.55 | 0.86 | 0.41 | 0.62 | DEFINE |
 | PSYCHOSIS | 0.72 | 1.00 | 1.00 | 0.55 | 0.86 | 0.44 | 0.68 | RECEPTIVE |
 | PARANOIA | 0.84 | 0.90 | 1.00 | 0.64 | 0.86 | 0.29 | 0.74 | GUIDE |
 | VINDICTIVE | 0.90 | 0.78 | 0.94 | 0.64 | 0.95 | 0.38 | 0.74 | GUIDE |
@@ -403,6 +693,27 @@ Conjugate = RECEPTIVE minus 0.6 times the user's deviation from RECEPTIVE, per a
 | PONTIFICATING | 0.72 | 0.72 | 0.94 | 0.70 | 0.68 | 0.56 | 0.74 | RECEPTIVE |
 | PASSE | 0.66 | 1.00 | 0.76 | 1.00 | 0.74 | 0.71 | 0.62 | RECEPTIVE |
 | CYNICAL | 0.78 | 0.90 | 0.82 | 0.94 | 0.80 | 0.50 | 0.71 | ENCOURAGE |
+| DEFENSIVE | 0.81 | 0.84 | 0.97 | 0.91 | 0.83 | 0.32 | 0.71 | ENCOURAGE |
+| DOUBLING_DOWN | 0.84 | 0.81 | 0.97 | 0.82 | 0.86 | 0.38 | 0.68 | ENCOURAGE |
+| ASHAMED | 0.87 | 0.96 | 0.94 | 1.00 | 0.89 | 0.47 | 0.68 | ENCOURAGE |
+| GUILTY | 0.78 | 0.93 | 0.88 | 0.91 | 0.77 | 0.50 | 0.53 | RECEPTIVE |
+| LAZY | 0.63 | 1.00 | 0.70 | 0.97 | 0.71 | 0.68 | 0.59 | RECEPTIVE |
+| OVERCONFIDENT | 0.50 | 0.55 | 0.50 | 0.70 | 0.70 | 0.30 | 0.25 | hold |
+| CONFUSED | 0.78 | 0.90 | 0.91 | 0.91 | 0.74 | 0.44 | 0.56 | RECEPTIVE |
+| FRUSTRATED | 0.84 | 0.75 | 1.00 | 0.76 | 0.86 | 0.35 | 0.62 | RECEPTIVE |
+| HURRIED | 0.78 | 0.78 | 0.91 | 0.76 | 0.80 | 0.38 | 0.62 | RECEPTIVE |
+| DISTRACTED | 0.72 | 0.96 | 0.94 | 0.79 | 0.80 | 0.59 | 0.59 | RECEPTIVE |
+| SKEPTICAL | 0.45 | 0.55 | 0.65 | 0.45 | 0.65 | 0.40 | 0.30 | hold |
+| ANXIOUS | 0.78 | 0.84 | 0.94 | 1.00 | 0.83 | 0.44 | 0.62 | RECEPTIVE |
+| LONELY | 0.87 | 0.96 | 0.85 | 0.94 | 0.83 | 0.53 | 0.71 | ENCOURAGE |
+| EXCITED | 0.65 | 0.75 | 0.45 | 0.85 | 0.65 | 0.65 | 0.60 | hold |
+| PROUD | 0.65 | 0.55 | 0.60 | 0.75 | 0.75 | 0.40 | 0.50 | hold |
+| TIRED | 0.66 | 1.00 | 0.67 | 1.00 | 0.74 | 0.74 | 0.56 | RECEPTIVE |
+| TRUSTING | 0.54 | 0.90 | 0.73 | 0.79 | 0.62 | 0.65 | 0.32 | RECEPTIVE |
+| GRATEFUL | 0.51 | 0.93 | 0.76 | 0.73 | 0.59 | 0.65 | 0.32 | RECEPTIVE |
+| HAPPY | 0.65 | 0.50 | 0.65 | 0.55 | 0.85 | 0.30 | 0.55 | hold |
+| FIGHT_OR_FLIGHT | 0.84 | 0.69 | 1.00 | 0.91 | 0.86 | 0.23 | 0.68 | ENCOURAGE |
+| JOKING | 0.70 | 0.60 | 0.55 | 0.75 | 0.65 | 0.45 | 0.60 | hold |
 
 **Test log.** Version 1 centred the conjugate on BASELINE. Result: PLAY and SEEKING were pushed to arousal -1.4 and -1.6 (over-calmed) and cancelled states stayed up to 0.96 from RECEPTIVE. Version 2 (above) centres on RECEPTIVE with the dead-band: every cancelled state ends about 40% closer to RECEPTIVE (RAGE 1.09 to 0.62, PANICKED 1.29 to 0.72, DESPAIR 1.13 to 0.64) and SEEKING, PLAY, VIBRANT, CONTENTMENT are held. Next test: run the loop with real reactions (USER SELF) and tune k and the band.
 
@@ -413,6 +724,54 @@ Pascal (The Art of Persuasion): two doors lead into a person, the understanding 
 ## 5. The serious-news procedure (Rusinova 2026)
 
 For OVERWHELMED and PANICKED the sources fix an order of reply, not only a mix: (1) the first statement short, clear and direct, because stress narrows attention; (2) a deliberate pause, then name the emotion; (3) safety before detail: SETTLE until the user's messages lengthen; (4) repeat the key point in simple words and ask the user to say what they are taking from it, because memory under stress is fragile; (5) empathic response throughout, to restore the ability to encode. The recipe is SETTLE during 1 to 3, then FOCUS, then GUIDE.
+
+## 5b. Taking them off the defensive (Pascal)
+
+From Pascal's Pensees: "When we wish to correct with advantage, and to show another that he errs, we must notice from what side he views the matter, for on that side it is usually true, and admit that truth to him, but reveal to him the side on which it is false. He is satisfied with that, for he sees that he was not mistaken, and that he only failed to see all sides. Now, no one is offended at not seeing everything; but one does not like to be mistaken." And: "People are generally better persuaded by the reasons which they have themselves discovered than by those which have come into the mind of others." In the Art of Persuasion he sets the art of convincing as three parts (define the terms, propose evident principles, substitute definitions for the things defined; ask whether each principle is admitted) and says the art of pleasing is harder, because the principles of pleasure differ between people and in the same person from hour to hour. So the dispenser re-reads the user every turn.
+
+The measured mechanism: a challenged belief raises default-mode (self-representation) activity and, in people who resist, amygdala and insula response; people who change their minds show less of it (Kaplan 2016). Counter-arguing predicts no change; medial prefrontal engagement predicts change (Burns 2018). Under social-evaluative stress people protect their self-image (Czekalla 2021). So the sequence is fixed: **DISARM** (the true side, no rebuttal, novelty low) then **REFRAME** (the unseen side, as an angle) then **DISCOVER** (a question whose answer is the point) then **GUIDE**, ending at RECEPTIVE. **DEFINE** replaces the first move for people who respond to demonstration (SKEPTICAL, OVERCONFIDENT, CONFUSED).
+
+## 5c. Plans for the common behaviours
+
+Each plan starts at the user's own mix (meet) and walks the dispensations in order to RECEPTIVE (`plan(state)`). Between steps the dispenser reads the reaction and repeats a step if the user has not moved.
+
+| user state | dispensations in order |
+|---|---|
+| DEFENSIVE | DISARM → REFRAME → DISCOVER → GUIDE → RECEPTIVE |
+| DOUBLING_DOWN | DISARM → REFRAME → DISCOVER → ENCOURAGE → RECEPTIVE |
+| ASHAMED | DISARM → REFRAME → ENCOURAGE → RECEPTIVE |
+| GUILTY | DISARM → REFRAME → ENCOURAGE → RECEPTIVE |
+| FRUSTRATED | DISARM → FOCUS → GUIDE → RECEPTIVE |
+| OVERWHELMED | SETTLE → FOCUS → GUIDE → RECEPTIVE |
+| PANICKED | SETTLE → FOCUS → GUIDE → RECEPTIVE |
+| FIGHT_OR_FLIGHT | SETTLE → FOCUS → GUIDE → RECEPTIVE |
+| ANXIOUS | SETTLE → DEFINE → GUIDE → RECEPTIVE |
+| CONFUSED | DEFINE → FOCUS → GUIDE → RECEPTIVE |
+| SKEPTICAL | DEFINE → DISCOVER → GUIDE → RECEPTIVE |
+| OVERCONFIDENT | DEFINE → DISCOVER → GUIDE → RECEPTIVE |
+| LAZY | ENCOURAGE → GUIDE → RECEPTIVE |
+| HURRIED | FOCUS → GUIDE → RECEPTIVE |
+| DISTRACTED | FOCUS → LIGHTEN → GUIDE → RECEPTIVE |
+| LONELY | SETTLE → ENCOURAGE → GUIDE → RECEPTIVE |
+| TIRED | ENCOURAGE → GUIDE → RECEPTIVE |
+| PASSE | LIGHTEN → DISCOVER → GUIDE → RECEPTIVE |
+| CYNICAL | DISARM → DISCOVER → GUIDE → RECEPTIVE |
+| PONTIFICATING | DISARM → DISCOVER → GUIDE → RECEPTIVE |
+| VINDICTIVE | DISARM → DEFLATE → REFRAME → GUIDE → RECEPTIVE |
+| VICIOUS | DEFLATE → DISARM → REFRAME → GUIDE → RECEPTIVE |
+| PARANOIA | DISARM → SETTLE → DEFINE → GUIDE → RECEPTIVE |
+| MANIA | FOCUS → GUIDE → RECEPTIVE |
+| EXCITED | FOCUS → GUIDE → RECEPTIVE |
+| DESPAIR | SETTLE → ENCOURAGE → GUIDE → RECEPTIVE |
+| PREMATURE | DEFINE → FOCUS → GUIDE → RECEPTIVE |
+| PREMEDITATED | DEFINE → DISCOVER → GUIDE → RECEPTIVE |
+| JOKING | LIGHTEN → GUIDE → RECEPTIVE |
+| PROUD | ENCOURAGE → GUIDE → RECEPTIVE |
+| HAPPY | GUIDE → RECEPTIVE |
+| TRUSTING | GUIDE → RECEPTIVE |
+| GRATEFUL | GUIDE → RECEPTIVE |
+
+**Test log (2026-11-22).** All 33 plans start at the user's own mix and end exactly at RECEPTIVE. The largest single step away from RECEPTIVE is +0.32 (FIGHT_OR_FLIGHT); it is the entry into a brake dispensation (SETTLE sits 0.78 and DISARM 0.61 from RECEPTIVE by design), after which the walk approaches the target. Retool rule: if real reactions show a user stalling at the dip, shorten the brake step and repeat it; the numbers move, the order stays.
 
 ## 6. The receptive recipe
 
@@ -447,6 +806,22 @@ RECEPTIVE: OPI 0.60, GLU 0.75, GABA 0.70, DA 0.70, 5HT 0.65, NE 0.50, OXT 0.50. 
 - **KRU**: Krugers & Joels (2025), The stress response is adaptive in a context- and state-dependent manner (PMC12731636)
 - **CON**: Connor et al. (2019), Maladaptive aggression: with a focus on impulsive aggression in children and adolescents (PMC6786344)
 - **WU**: Wu et al. (2013), Understanding resilience, Front Behav Neurosci (PMC3573269)
+- **KAPLAN**: Kaplan, Gimbel & Harris (2016), Neural correlates of maintaining one's political beliefs in the face of counterevidence, Sci Rep (PMC5180221)
+- **BURNS**: Burns et al. (2018), An fNIRS replication of the sunscreen persuasion paradigm, Soc Cogn Affect Neurosci (PMC6022533)
+- **CZE**: Czekalla et al. (2021), Self-beneficial belief updating as a coping mechanism for stress-induced negative affect, Sci Rep (PMC8384941)
+- **LIANG**: Liang et al. (2021), Framing and self-responsibility modulate brain activities in decision escalation, BMC Neurosci (PMC7989009)
+- **FUJ**: Fujino et al. (2016), Neural mechanisms and personality correlates of the sunk cost effect, Sci Rep (PMC5017311)
+- **COL**: Colosio et al. (2017), Neural mechanisms of cognitive dissonance (revised): an EEG study, J Neurosci (PMC5444193)
+- **GOLK**: Golkar et al. (2012), Distinct contributions of the dorsolateral prefrontal and orbitofrontal cortex during emotion regulation, PLoS One (PMC3492343)
+- **TSAI**: Tsai et al. (2024), Social good reappraisal as a novel and effective emotion regulation strategy, PLoS One (PMC11198829)
+- **ZHU**: Zhu et al. (2025), Human neurocomputational mechanisms of guilt-driven and shame-driven altruistic behavior, eLife (PMC12688305)
+- **WOOD**: Wood et al. (2017), Towards a social functional account of laughter: reward, affiliation and dominance, PLoS One (PMC5574543)
+- **MENS**: Mensen et al. (2014), Humor as a reward mechanism: event-related potentials in the healthy and diseased brain, PLoS One (PMC3906016)
+- **BORE**: Gurrieri et al. (2026), Boredom in psychiatric disorders: another dimensional construct?, Brain Behav (PMC13530392)
+- **JANK**: Jankowski et al. (2018), Feeling left out: depressed adolescents and social exclusion, Soc Cogn Affect Neurosci (PMC6123522)
+- **ARUL**: Arulpragasam et al. (2018), Corticoinsular circuits encode subjective value expectation and violation for effortful goal-directed behavior, PNAS (PMC5984520)
+- **PASCAL**: Pascal, The Art of Persuasion (Wight transl.), and the Pensees passage on correcting with advantage (themarginalian.org, 2015-05-20) (wikisource)
+- **TUBES**: Test-tube recipes image supplied by Cody 2026-11-22: DA, 5HT, OXT, NE tubes for schizophrenia, anxiety, happiness, depression, love, fight or flight (4-chemical schema; its orange tube has no legend entry)
 - **GEM**: Gemini deep dive, Neurotransmitter Recipes to Make Analogous Computer Functions (2026-11-20; numbers are its own table)
 
 Licence: the 15 CC-BY papers are mirrored in `references/NeuroRecipes/`; the rest are held locally and listed in `ContextPlease/claude/references/INDEX.md`.

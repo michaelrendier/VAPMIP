@@ -47,6 +47,22 @@ SRC = {
     'KRU': ('Krugers & Joels (2025), The stress response is adaptive in a context- and state-dependent manner', 'PMC12731636'),
     'CON': ('Connor et al. (2019), Maladaptive aggression: with a focus on impulsive aggression in children and adolescents', 'PMC6786344'),
     'WU': ('Wu et al. (2013), Understanding resilience, Front Behav Neurosci', 'PMC3573269'),
+    'KAPLAN': ('Kaplan, Gimbel & Harris (2016), Neural correlates of maintaining one\'s political beliefs in the face of counterevidence, Sci Rep', 'PMC5180221'),
+    'BURNS': ('Burns et al. (2018), An fNIRS replication of the sunscreen persuasion paradigm, Soc Cogn Affect Neurosci', 'PMC6022533'),
+    'CZE': ('Czekalla et al. (2021), Self-beneficial belief updating as a coping mechanism for stress-induced negative affect, Sci Rep', 'PMC8384941'),
+    'LIANG': ('Liang et al. (2021), Framing and self-responsibility modulate brain activities in decision escalation, BMC Neurosci', 'PMC7989009'),
+    'FUJ': ('Fujino et al. (2016), Neural mechanisms and personality correlates of the sunk cost effect, Sci Rep', 'PMC5017311'),
+    'COL': ('Colosio et al. (2017), Neural mechanisms of cognitive dissonance (revised): an EEG study, J Neurosci', 'PMC5444193'),
+    'GOLK': ('Golkar et al. (2012), Distinct contributions of the dorsolateral prefrontal and orbitofrontal cortex during emotion regulation, PLoS One', 'PMC3492343'),
+    'TSAI': ('Tsai et al. (2024), Social good reappraisal as a novel and effective emotion regulation strategy, PLoS One', 'PMC11198829'),
+    'ZHU': ('Zhu et al. (2025), Human neurocomputational mechanisms of guilt-driven and shame-driven altruistic behavior, eLife', 'PMC12688305'),
+    'WOOD': ('Wood et al. (2017), Towards a social functional account of laughter: reward, affiliation and dominance, PLoS One', 'PMC5574543'),
+    'MENS': ('Mensen et al. (2014), Humor as a reward mechanism: event-related potentials in the healthy and diseased brain, PLoS One', 'PMC3906016'),
+    'BORE': ('Gurrieri et al. (2026), Boredom in psychiatric disorders: another dimensional construct?, Brain Behav', 'PMC13530392'),
+    'JANK': ('Jankowski et al. (2018), Feeling left out: depressed adolescents and social exclusion, Soc Cogn Affect Neurosci', 'PMC6123522'),
+    'ARUL': ('Arulpragasam et al. (2018), Corticoinsular circuits encode subjective value expectation and violation for effortful goal-directed behavior, PNAS', 'PMC5984520'),
+    'PASCAL': ('Pascal, The Art of Persuasion (Wight transl.), and the Pensees passage on correcting with advantage (themarginalian.org, 2015-05-20)', 'wikisource'),
+    'TUBES': ('Test-tube recipes image supplied by Cody 2026-11-22: DA, 5HT, OXT, NE tubes for schizophrenia, anxiety, happiness, depression, love, fight or flight (4-chemical schema; its orange tube has no legend entry)', 'local'),
     'GEM': ('Gemini deep dive, Neurotransmitter Recipes to Make Analogous Computer Functions (2026-11-20; numbers are its own table)', 'local'),
 }
 
@@ -141,6 +157,7 @@ add(G2, 'CYNICAL', V(.30, .40, .50, .15, .50, .50, .30),
     'discounting, "of course", "typical"', 'agree with the true observation; show one counter-example without correcting the person', 'detector')
 
 G3 = "Ptolemy's dispensations (what the dispenser mixes)"
+G4 = 'Common human behaviours'
 add(G3, 'SETTLE', V(.30, .80, .15, .75, .35, .90, .80),
     [('RUS', 'pause, name the emotion, create safety: prefrontal-limbic regulation restores the ability to encode'), ('PANK', 'opioids and GABA inhibit RAGE and FEAR; opioids and oxytocin inhibit GRIEF'), ('NUSS', 'GABA in the amygdala reduces fear')],
     'short frames, concrete nouns, one fact per sentence, user words returned', 'for OVERWHELMED, PANICKED, FEAR, RAGE', 'user replies lengthen and move to the next question')
@@ -252,7 +269,7 @@ def book() -> str:
     w('')
     w('Columns: ' + ' | '.join(AXES) + ' (kite order).')
     w('')
-    for g in (G1, G2, G3):
+    for g in (G1, G2, G4, G3):
         w('### ' + g)
         w('')
         for n, r in R.items():
@@ -269,11 +286,11 @@ def book() -> str:
             w('- Use: ' + r['use'])
             w('- Test: ' + r['test'])
             w('')
-    w('### Laughs (a laugh is a word; its Tone separates the kinds)')
+    w('### Laughs (a laugh is a word; its Tone separates the kinds; Wood 2017: laughter carries reward, affiliation or dominance)')
     w('')
     w('| laugh | built as | ' + ' | '.join(AXES) + ' |')
     w('|---|---|' + '---|' * 7)
-    for nm, parts in (('puppy-love laugh', ('ATTACHMENT', 'PLAY')), ('angry laugh', ('RAGE', 'PLAY')), ('crazy laugh', ('MANIA', 'PLAY')), ('cynical laugh', ('CYNICAL', 'PASSE'))):
+    for nm, parts in (('reward laugh (spontaneous)', ('PLAY',)), ('affiliation laugh (puppy-love)', ('ATTACHMENT', 'PLAY')), ('dominance laugh', ('PROUD', 'RAGE')), ('angry laugh', ('RAGE', 'PLAY')), ('crazy laugh', ('MANIA', 'PLAY')), ('cynical laugh', ('CYNICAL', 'PASSE'))):
         w('| %s | mean of %s | %s |' % (nm, ' + '.join(parts), _vec_row(blend(*parts))))
     w('')
     w('**Sarcasm** is a pair, not a point: the words read as one recipe (CONTENTMENT-like) while the situation reads as another (CYNICAL, OVERWHELMED). '
@@ -309,6 +326,7 @@ def book() -> str:
       'then name the emotion; (3) safety before detail: SETTLE until the user\'s messages lengthen; (4) repeat the key point in simple words and ask the user to say what they are taking from it, '
       'because memory under stress is fragile; (5) empathic response throughout, to restore the ability to encode. The recipe is SETTLE during 1 to 3, then FOCUS, then GUIDE.')
     w('')
+    _plans(w)
     w('## 6. The receptive recipe')
     w('')
     w('RECEPTIVE: ' + ', '.join('%s %.2f' % (a, RECEPTIVE[a]) for a in AXES) + '. NE sits mid-range (phasic gain, not tonic), DA keeps the curiosity, GABA and OPI keep the container, 5HT keeps patience.')
@@ -336,6 +354,176 @@ RECEPTIVE = V(.70, .65, .50, .50, .75, .70, .60)
 add(G3, 'RECEPTIVE', RECEPTIVE,
     [('JACK', 'phasic NE: task-specific focus and learning'), ('DID', 'DA curiosity and flexibility'), ('RUS', 'reduced arousal restores encoding'), ('CH', '5HT patience'), ('GEM', 'flow-state row: DA .70 5HT .60 NE .55 GLU .85 GABA .75')],
     'steady, curious, builds on the previous turn', 'the target of every dispensation: the state in which information is taken in', 'the user restates correctly what was explained')
+
+
+# ── common behaviours, image rows, Pascal dispensations, plans ─────────────
+TB = ('TUBES', 'the popular four-tube schema (DA, 5HT, OXT, NE)')
+add(G4, 'DEFENSIVE', V(.35, .35, .80, .15, .60, .25, .25),
+    [('KAPLAN', 'a challenged belief raises default-mode (self-representation) activity; resisters show more amygdala and insula response and less orbitofrontal; those who change their minds show less'), ('BURNS', 'counter-arguing (right dlPFC) predicts NO behaviour change; medial prefrontal engagement predicts change'), ('RUS', 'orbitofrontal cortex inhibits the activated amygdala and insula, restoring comprehension')],
+    '"but", "that is not what I said", absolutes, restating the position louder, questions that are accusations', 'the state to take off: DISARM first, never rebut', 'after DISARM the next message concedes a point or asks a question')
+add(G4, 'DOUBLING_DOWN', V(.50, .30, .70, .20, .65, .25, .20),
+    [('COL', 'conflict between belief and act produces an error-like frontocentral signal that is resolved by re-valuing the choice'), ('LIANG', 'escalation decisions are faster; ACC, insula, precuneus; framing and self-responsibility modulate it; backing down needs inferior and superior frontal gyri'), ('FUJ', 'sunk-cost persistence is insula-mediated and stronger in agreeable, conscientious people'), ('CZE', 'under social-evaluative stress (cortisol) people shift to self-protective belief updating')],
+    'caught in a lie and repeating it, "I never said", escalating the claim', 'give a face-saving exit: agree with the true part, put the correction on the unseen side, let them take credit for updating', 'user changes a premise without being told they were wrong')
+add(G4, 'ASHAMED', V(.20, .25, .55, .20, .40, .30, .15),
+    [('ZHU', 'responsibility drives shame; shame drives compensation less than guilt does'), ('JANK', 'insula hyperresponsive to exclusion in depression')],
+    'minimising, withdrawal, deflection, short replies', 'remove blame from the frame; DISARM then REFRAME to harm-prevention', 'replies lengthen')
+add(G4, 'GUILTY', V(.35, .45, .50, .45, .45, .40, .30),
+    [('ZHU', 'harm drives guilt, and guilt exerts a greater effect on compensatory action than shame')],
+    'apology, over-explaining, offers to fix', 'point the energy at a concrete repair: REFRAME then ENCOURAGE', 'user takes a concrete next step')
+add(G4, 'LAZY', V(.25, .55, .20, .35, .30, .70, .55),
+    [('ARUL', 'effortful options are valued by expected value; the dorsal ACC and insula signal a violation of expected effort'), ('PANK', 'diminished SEEKING lowers initiative')],
+    '"just tell me", "can you just", shortest path, asks for the answer not the method', 'lower the perceived cost to one small step, raise its expected value: ENCOURAGE then GUIDE', 'user completes the one small step')
+add(G4, 'OVERCONFIDENT', V(.70, .70, .30, .25, .55, .50, .50),
+    [('PASCAL', 'people are better persuaded by reasons they discover themselves'), ('GEM', 'high DA with intact 5HT: fluent, certain, exploratory')],
+    'certainty words, "obviously", skipping definitions', 'DEFINE the terms, then DISCOVER with a question that shows the unseen side', 'user qualifies a claim on their own')
+add(G4, 'CONFUSED', V(.35, .50, .60, .40, .50, .35, .30),
+    [('RUS', 'stress limits comprehension and working memory; repeat key points in simple words and check understanding')],
+    'questions repeating the same term, "I do not understand", partial restatements', 'DEFINE one term at a time, then FOCUS', 'user restates correctly')
+add(G4, 'FRUSTRATED', V(.60, .30, .75, .30, .75, .20, .20),
+    [('PANK', 'when SEEKING is thwarted, RAGE is aroused'), ('GEM', 'high NE shortens sentences and raises imperatives')],
+    'imperatives, "again", "still", short', 'DISARM (name the obstacle as real), then FOCUS on the unblocking step', 'user accepts the next step')
+add(G4, 'HURRIED', V(.60, .40, .70, .30, .70, .35, .30),
+    [('GEM', 'NE compresses sentence length and urgency'), ('RUS', 'headline first, simple and direct')],
+    'fragments, no greetings, "quick"', 'headline in one sentence, detail on request: FOCUS', 'user asks for the detail')
+add(G4, 'DISTRACTED', V(.55, .40, .35, .35, .40, .30, .40),
+    [('BORE', 'disengagement and re-engagement fluctuate; default-mode up, control networks down')],
+    'topic jumps, unfinished sentences, late replies', 'one thread, one question: FOCUS then LIGHTEN', 'user stays on thread for three turns')
+add(G4, 'SKEPTICAL', V(.45, .65, .40, .30, .55, .65, .45),
+    [('PASCAL', 'convince by defining the terms, securing the admitted axioms, and proving only from what has been admitted')],
+    'asks for sources, definitions, tests', 'the user for whom the demonstration route works: DEFINE then DISCOVER', 'user accepts a premise explicitly')
+add(G4, 'ANXIOUS', V(.15, .35, .60, .30, .60, .30, .30),
+    [('TUBES', 'anxiety tube: dopamine low'), ('NUSS', 'GABA modulation disturbed'), ('PANK', 'CRF regulates the FEAR system')],
+    'what-ifs, seeking reassurance, avoidance', 'SETTLE then DEFINE then GUIDE; never raise novelty', 'what-if questions give way to how questions')
+add(G4, 'LONELY', V(.30, .35, .45, .15, .40, .45, .15),
+    [('PANK', 'GRIEF: oxytocin and opioids low'), ('JANK', 'insula reacts to exclusion')],
+    'long messages seeking contact, personal disclosure, late hours', 'be present first: SETTLE with OXT, then ENCOURAGE', 'user says something about themselves, not the task')
+add(G4, 'EXCITED', V(.85, .65, .65, .60, .75, .45, .65),
+    [('PANK', 'SEEKING and PLAY'), ('DID', 'DA with positive affect')],
+    'exclamations, many ideas', 'meet the pace, then add structure: FOCUS', 'user keeps one idea for two turns')
+add(G4, 'PROUD', V(.75, .75, .40, .50, .55, .60, .65),
+    [('MENS', 'mesolimbic reward'), ('WOOD', 'dominance and reward are separate social signals')],
+    'achievement reports, status words', 'acknowledge the real achievement (ENCOURAGE), then GUIDE', 'user asks what next')
+add(G4, 'TIRED', V(.20, .50, .10, .40, .25, .75, .50),
+    [('BORE', 'low engagement, control networks down'), ('PANK', 'sickness and chronic stress diminish SEEKING')],
+    'short, slow, typos, "later"', 'smallest possible step: HURRIED-reverse, one sentence', 'user replies at all')
+add(G4, 'TRUSTING', V(.55, .70, .25, .80, .50, .65, .70),
+    [('QUI', 'OXT raises attention to social signals and encoding of social stimuli; effects depend on the person and the context'), ('PANK', 'oxytocin: trust and confidence')],
+    'shares context, asks for opinion', 'hold; the best moment to GUIDE', 'user adopts a suggestion')
+add(G4, 'GRATEFUL', V(.65, .75, .25, .80, .45, .60, .75),
+    [('LOS', 'social reward by opioids'), ('PANK', 'CARE')],
+    'thanks, warmth', 'accept briefly, then GUIDE to the next thing', 'user continues')
+add(G4, 'HAPPY', V(.55, .85, .30, .55, .50, .65, .65),
+    [('TUBES', 'happiness tube: serotonin mostly full'), ('CH', '5HT1A: stress relief and patience; with 5HT2A, flexibility of mind and positive mood')],
+    'light, open, easy', 'hold; offer a next step', 'baseline check')
+add(G4, 'FIGHT_OR_FLIGHT', V(.35, .30, .95, .20, .85, .20, .20),
+    [('TUBES', 'fight or flight: norepinephrine nearly full plus an unlabelled orange tube (read as epinephrine)'), ('RUS', 'catecholamine and cortisol release narrows attention and impairs memory')],
+    'one fact, commands, no detail', 'SETTLE', 'as OVERWHELMED')
+add(G4, 'JOKING', V(.75, .65, .45, .60, .60, .55, .70),
+    [('MENS', 'humor: incongruity detection, an emotional response, and mesolimbic reward; dopamine deficiency blunts the response'), ('WOOD', 'laughter carries reward, affiliation or dominance')],
+    'incongruity, understatement, absurdity, wordplay', 'meet it; the Hitchhiker register: incongruity first, reward after', 'user laughs back or extends the joke')
+
+add(G3, 'DISARM', V(.40, .75, .20, .70, .40, .80, .70),
+    [('PASCAL', 'find the side the person views the matter from, admit the truth on that side; no one is offended at not seeing everything, but no one likes to be mistaken'), ('KAPLAN', 'less amygdala and insula response to counter-evidence goes with changing one\'s mind'), ('CZE', 'integrating positive, true self-related feedback helps recovery from social-evaluative stress'), ('RUS', 'empathic statements reduce arousal so comprehension resumes')],
+    '"you are right that X", "I see why", the true part named first', 'the first move for every defensive state; novelty stays low', 'the next user message concedes or asks')
+add(G3, 'REFRAME', V(.55, .75, .30, .75, .55, .65, .60),
+    [('PASCAL', 'reveal the side on which it is false as a side not yet seen, not as an error'), ('GOLK', 'reappraisal engages the dorsolateral prefrontal cortex generally and the lateral orbitofrontal cortex for negative stimuli'), ('TSAI', 'imagining an aversive event as a chance to prevent harm to others is an effective reappraisal')],
+    '"and there is another side", "this also helps your mother", angles not errors', 'second move: add the unseen side', 'user restates the situation with the new angle')
+add(G3, 'DISCOVER', V(.65, .70, .35, .60, .60, .60, .55),
+    [('PASCAL', 'people are generally better persuaded by the reasons they have themselves discovered'), ('DID', 'DA curiosity makes a next step wanted'), ('BURNS', 'medial prefrontal engagement predicts message-consistent change; counter-arguing predicts none')],
+    'questions whose answer is the point, "what would happen if"', 'third move: let the user reach the conclusion', 'user states the conclusion')
+add(G3, 'DEFINE', V(.45, .75, .30, .50, .60, .80, .50),
+    [('PASCAL', 'define every obscure term; ask whether each principle is admitted before using it; prove only from what is admitted; substitute definitions for the thing defined')],
+    'one definition per sentence, "do you accept that", numbered steps', 'for SKEPTICAL, OVERCONFIDENT, CONFUSED, ANXIOUS; the shared axioms live in the USER SELF', 'user accepts each premise before the next')
+add(G3, 'LIGHTEN', V(.75, .65, .35, .70, .55, .55, .75),
+    [('MENS', 'humor engages incongruity detection and mesolimbic reward'), ('WOOD', 'affiliation laughter signals bonding'), ('PANK', 'PLAY')],
+    'gentle absurdity, understatement, shared joke', 'only when NE is down and OXT is up; never for PANICKED or OVERWHELMED', 'user returns a light reply')
+
+PLANS = {
+    'DEFENSIVE': ['DISARM', 'REFRAME', 'DISCOVER', 'GUIDE'],
+    'DOUBLING_DOWN': ['DISARM', 'REFRAME', 'DISCOVER', 'ENCOURAGE'],
+    'ASHAMED': ['DISARM', 'REFRAME', 'ENCOURAGE'],
+    'GUILTY': ['DISARM', 'REFRAME', 'ENCOURAGE'],
+    'FRUSTRATED': ['DISARM', 'FOCUS', 'GUIDE'],
+    'OVERWHELMED': ['SETTLE', 'FOCUS', 'GUIDE'],
+    'PANICKED': ['SETTLE', 'FOCUS', 'GUIDE'],
+    'FIGHT_OR_FLIGHT': ['SETTLE', 'FOCUS', 'GUIDE'],
+    'ANXIOUS': ['SETTLE', 'DEFINE', 'GUIDE'],
+    'CONFUSED': ['DEFINE', 'FOCUS', 'GUIDE'],
+    'SKEPTICAL': ['DEFINE', 'DISCOVER', 'GUIDE'],
+    'OVERCONFIDENT': ['DEFINE', 'DISCOVER', 'GUIDE'],
+    'LAZY': ['ENCOURAGE', 'GUIDE'],
+    'HURRIED': ['FOCUS', 'GUIDE'],
+    'DISTRACTED': ['FOCUS', 'LIGHTEN', 'GUIDE'],
+    'LONELY': ['SETTLE', 'ENCOURAGE', 'GUIDE'],
+    'TIRED': ['ENCOURAGE', 'GUIDE'],
+    'PASSE': ['LIGHTEN', 'DISCOVER', 'GUIDE'],
+    'CYNICAL': ['DISARM', 'DISCOVER', 'GUIDE'],
+    'PONTIFICATING': ['DISARM', 'DISCOVER', 'GUIDE'],
+    'VINDICTIVE': ['DISARM', 'DEFLATE', 'REFRAME', 'GUIDE'],
+    'VICIOUS': ['DEFLATE', 'DISARM', 'REFRAME', 'GUIDE'],
+    'PARANOIA': ['DISARM', 'SETTLE', 'DEFINE', 'GUIDE'],
+    'MANIA': ['FOCUS', 'GUIDE'],
+    'EXCITED': ['FOCUS', 'GUIDE'],
+    'DESPAIR': ['SETTLE', 'ENCOURAGE', 'GUIDE'],
+    'PREMATURE': ['DEFINE', 'FOCUS', 'GUIDE'],
+    'PREMEDITATED': ['DEFINE', 'DISCOVER', 'GUIDE'],
+    'JOKING': ['LIGHTEN', 'GUIDE'],
+    'PROUD': ['ENCOURAGE', 'GUIDE'],
+    'HAPPY': ['GUIDE'],
+    'TRUSTING': ['GUIDE'],
+    'GRATEFUL': ['GUIDE'],
+}
+
+
+def plan(state: str, steps_each: int = 2) -> List[Dict[str, float]]:
+    """The mixes the dispenser walks for a state: meet at the user's own mix, then each named dispensation in order, ending at RECEPTIVE."""
+    seq = [R[state]['vec']] + [R[d]['vec'] for d in PLANS[state]] + [RECEPTIVE]
+    out: List[Dict[str, float]] = []
+    for a, b in zip(seq, seq[1:]):
+        out.extend(meet_then_lead(a, b, steps_each + 1)[:-1])
+    out.append(RECEPTIVE)
+    return out
+
+
+def max_rise() -> Tuple[float, str]:
+    """The largest single step, over all plans, that moves AWAY from RECEPTIVE (the entry into a brake dispensation), and the state it belongs to."""
+    best = (0.0, '')
+    for k in PLANS:
+        d = [dist(x, RECEPTIVE) for x in plan(k)]
+        r = max(d[i + 1] - d[i] for i in range(len(d) - 1))
+        if r > best[0]:
+            best = (r, k)
+    return best
+
+
+def _plans(w) -> None:
+    w('## 5b. Taking them off the defensive (Pascal)')
+    w('')
+    w('From Pascal\'s Pensees: "When we wish to correct with advantage, and to show another that he errs, we must notice from what side he views the matter, for on that side it is usually true, '
+      'and admit that truth to him, but reveal to him the side on which it is false. He is satisfied with that, for he sees that he was not mistaken, and that he only failed to see all sides. '
+      'Now, no one is offended at not seeing everything; but one does not like to be mistaken." And: "People are generally better persuaded by the reasons which they have themselves discovered '
+      'than by those which have come into the mind of others." In the Art of Persuasion he sets the art of convincing as three parts (define the terms, propose evident principles, '
+      'substitute definitions for the things defined; ask whether each principle is admitted) and says the art of pleasing is harder, because the principles of pleasure differ between people '
+      'and in the same person from hour to hour. So the dispenser re-reads the user every turn.')
+    w('')
+    w('The measured mechanism: a challenged belief raises default-mode (self-representation) activity and, in people who resist, amygdala and insula response; people who change their minds show less of it (Kaplan 2016). '
+      'Counter-arguing predicts no change; medial prefrontal engagement predicts change (Burns 2018). Under social-evaluative stress people protect their self-image (Czekalla 2021). '
+      'So the sequence is fixed: **DISARM** (the true side, no rebuttal, novelty low) then **REFRAME** (the unseen side, as an angle) then **DISCOVER** (a question whose answer is the point) then **GUIDE**, ending at RECEPTIVE. '
+      '**DEFINE** replaces the first move for people who respond to demonstration (SKEPTICAL, OVERCONFIDENT, CONFUSED).')
+    w('')
+    w('## 5c. Plans for the common behaviours')
+    w('')
+    w('Each plan starts at the user\'s own mix (meet) and walks the dispensations in order to RECEPTIVE (`plan(state)`). Between steps the dispenser reads the reaction and repeats a step if the user has not moved.')
+    w('')
+    w('| user state | dispensations in order |')
+    w('|---|---|')
+    for k, v in PLANS.items():
+        w('| %s | %s |' % (k, ' → '.join(v + ['RECEPTIVE'])))
+    w('')
+    r, st = max_rise()
+    w('**Test log (2026-11-22).** All %d plans start at the user\'s own mix and end exactly at RECEPTIVE. The largest single step away from RECEPTIVE is +%.2f (%s); it is the entry into a brake dispensation (SETTLE sits %.2f and DISARM %.2f from RECEPTIVE by design), after which the walk approaches the target. '
+      'Retool rule: if real reactions show a user stalling at the dip, shorten the brake step and repeat it; the numbers move, the order stays.' % (len(PLANS), r, st, dist(R['SETTLE']['vec'], RECEPTIVE), dist(R['DISARM']['vec'], RECEPTIVE)))
+    w('')
 
 
 def write() -> None:

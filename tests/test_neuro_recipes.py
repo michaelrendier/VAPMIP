@@ -59,3 +59,36 @@ def test_nearest_dispensation_for_panic_is_a_brake_recipe():
 def test_book_is_written_from_the_data():
     b = n.book()
     assert '# Neurochemical Recipe Book' in b and all(name in b for name in n.R)
+
+
+def test_every_plan_names_known_states_and_dispensations_and_ends_at_receptive():
+    for state, steps in n.PLANS.items():
+        assert state in n.R and n.R[state]['group'] != n.G3, state
+        assert all(d in n.R and n.R[d]['group'] == n.G3 for d in steps), state
+        pl = n.plan(state)
+        assert pl[0] == n.R[state]['vec'] and pl[-1] == n.RECEPTIVE
+
+
+def test_plans_never_step_far_away_from_receptive():
+    r, _ = n.max_rise()
+    assert r < 0.35
+
+
+def test_defensive_states_start_with_disarm_not_rebuttal():
+    for st in ('DEFENSIVE', 'DOUBLING_DOWN', 'ASHAMED', 'GUILTY', 'VINDICTIVE', 'CYNICAL', 'PONTIFICATING', 'PARANOIA'):
+        assert 'DISARM' in n.PLANS[st][:2], st
+
+
+def test_every_common_behaviour_has_a_plan():
+    for name, r in n.R.items():
+        if r['group'] == n.G4:
+            assert name in n.PLANS, name
+
+
+def test_image_rows_agree_with_the_book():
+    assert n.R['DESPAIR']['vec']['DA'] < .2 and n.R['DESPAIR']['vec']['5HT'] < .3          # depression tubes: DA and 5HT low
+    assert n.R['ANXIOUS']['vec']['DA'] < .2                                              # anxiety tube: DA low
+    assert n.R['PSYCHOSIS']['vec']['DA'] > .9                                            # schizophrenia tube: DA full
+    assert n.R['FIGHT_OR_FLIGHT']['vec']['NE'] > .9                                      # fight or flight: NE full
+    love = n.R['ATTACHMENT']['vec']
+    assert love['DA'] > .7 and love['5HT'] > .6 and love['OXT'] > .9                     # love: DA, 5HT, OXT high
