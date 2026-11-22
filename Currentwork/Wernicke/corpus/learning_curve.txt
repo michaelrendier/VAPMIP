@@ -1,0 +1,5 @@
+2026-11-21 learning curve of the existing A-matrix field (monad_english_io.MonadEnglish.hear) as a next-word predictor; held-out 30,848 tokens; training rounds of up to 60k tokens per work; stopped after round 3 (each round slower).
+round 3 {'vocab': 25550, 'edges': 1630821, 'bits_per_word': 12.27, 'top1': 0.019, 'top10': 0.185, 'in_vocab': 0.927} share of edges with weight 1.0: 0.239 (62s)
+round 4 {'vocab': 28806, 'edges': 2028357, 'bits_per_word': 12.28, 'top1': 0.019, 'top10': 0.176, 'in_vocab': 0.936} share of edges with weight 1.0: 0.239 (79s)
+weight A[of][the]= 1.0  fire_count[of]= 253389  | an adjacent pair seen once: weights near [0.2, 0.4, 0.6, 1.0]
+baseline for comparison (corpus/entropy_baseline.txt): bigram 8.70 bits/word
