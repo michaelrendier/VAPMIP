@@ -83,14 +83,14 @@ def test_tone_detection_and_pascal_meet_then_lead():
     path = SW.Persuader((axis, level), ('GABA', 3)).trajectory(8)
     assert path[0] == ('NE', level - 1)                        # meets their side first, one level below
     ne = [l for a, l in path if a == 'NE']
-    assert ne == sorted(ne, reverse=True)                      # then eases down, one level per word
+    assert ne == sorted(ne, reverse=True) and ne[-1] < ne[0]    # then eases down
     assert path[-1] == ('GABA', 3)                             # and arrives at the target
-    assert SW.detect_tone('Thank you, dear friend, please')[0] == 'OT'
+    assert SW.detect_tone('Thank you, dear friend, please')[0] == 'OXT'
 
 
 def test_markers_stream_with_each_written_word_and_follow_the_persuader(bg):
     w = SW.SedenionWindow(bg)
-    out = w.write('I HATE the king, he is stupid!')
+    out = w.write('I HATE the king, he is stupid!', frame='svo')
     marks = [SW.decode_marker(r['marker']) for r in out['records']]
     assert marks[0]['axis'] == 'NE'                            # starts on their side
     assert marks[-1]['axis'] == 'GABA'                         # ends calm
@@ -104,7 +104,7 @@ def test_writable_channel_overrides_the_tone(bg):
     w = SW.SedenionWindow(bg)
     w.sensors.channels['tone_override'] = ('OT', 5)
     out = w.write('the king reads the book')
-    assert all(SW.decode_marker(r['marker'])['axis'] == 'OT' for r in out['records'])
+    assert all(SW.decode_marker(r['marker'])['axis'] == 'OXT' for r in out['records'])
 
 
 def test_sensor_blocks_and_vagcom_stream(bg, monkeypatch):
@@ -162,3 +162,44 @@ def test_his_own_speech_cannot_feed_back_forever(bg):
     w = SW.SedenionWindow(bg, english=me)
     w.read('the dog chases the cat', echo=M.ECHO_CAP)                # already looped the cap: a no-op
     assert len(me.words) == 0
+
+
+def test_each_neurotransmitter_changes_the_constructor_in_its_own_way(bg):
+    def run(axis, level):
+        w = SW.SedenionWindow(bg)
+        w.sensors.channels['tone_override'] = (axis, level)
+        out = w.write('the king reads the book', frame='svo')
+        return out, [r for r in out['records'] if not r['pathway']]
+    base_out, base_c = run('GABA', 2)                                  # a neutral tone
+    _, ne_c = run('NE', 6)
+    _, glu_c = run('GLU', 6)
+    assert max(r['candidates'] for r in ne_c) < max(r['candidates'] for r in base_c) < max(r['candidates'] for r in glu_c)   # NE narrows, GLU widens
+    da_out, _ = run('DA', 6)
+    assert da_out['sentence'] != base_out['sentence']                  # DA explores down the ranking
+    ne_out = SW.SedenionWindow(bg); ne_out.sensors.channels['tone_override'] = ('NE', 6)
+    assert len(ne_out.write('the king reads the book')['records']) == 4          # NE: the short frame (sva)
+    gaba_out, gaba_c = run('GABA', 6)
+    assert max(r['candidates'] for r in gaba_c) <= max(r['candidates'] for r in base_c)        # GABA prunes
+
+
+def test_oxytocin_pulls_toward_the_users_own_words(bg):
+    w0 = SW.SedenionWindow(bg); w0.sensors.channels['tone_override'] = ('GABA', 2)
+    w1 = SW.SedenionWindow(bg); w1.sensors.channels['tone_override'] = ('OXT', 6)
+    p = 'the queen reads the book'
+    s0 = w0.write(p, frame='svo')['sentence'].lower(); s1 = w1.write(p, frame='svo')['sentence'].lower()
+    users = {'queen', 'reads', 'book'}
+    assert len(users & set(s1.strip('.').split())) >= len(users & set(s0.strip('.').split()))
+
+
+def test_window_with_statistics_and_two_selves(bg, tmp_path):
+    import context_gearbox as G, english_stats as ES
+    st = ES.EnglishStats(chash=None); st.observe(CORPUS)
+    sc = G.SelfContexts(gears=[(8, 4), (4, 4)])
+    w = SW.SedenionWindow(bg, stats=st, selfctx=sc)
+    tokens_before = st.n_tokens
+    out = w.write('the king reads the book')
+    assert st.n_tokens > tokens_before and w.level in ES.LEVELS            # usage statistics update as the user speaks
+    assert out['seq'] > 0 and sc.data.find(out['seq'])['payload']['sentence'] == out['sentence']
+    sc.user_says('reaction', responds_to=out['seq'], text='no, wrong', tone={'NE': 0.7})
+    assert sc.reaction_to(out['seq'])[0]['payload']['text'] == 'no, wrong'
+    assert st.n_tokens == st.n_tokens                                     # his own speech does not feed the statistics

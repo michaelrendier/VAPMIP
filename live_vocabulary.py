@@ -210,6 +210,8 @@ class LiveVocabulary:
                 self._emit('seen', word=ev['word'], count=ev.get('count', 1))
             elif k == 'split':
                 self.split_sense(ev['sense'], ev['moved'], _from_replay=True)
+            elif k == 'retract':
+                self.retract_edge(ev['sense'], ev['relation'], ev['target'], reason=ev.get('reason', ''), _from_replay=True)
         finally:
             self.clock = saved
 
@@ -308,6 +310,34 @@ class LiveVocabulary:
         out['vec_before'] = before
         out['vec_after'] = s.vector()
         return out
+
+    def retract_edge(self, sid: str, relation: str, target: str, reason: str = '', _from_replay: bool = False) -> Dict[str, Any]:
+        """Take an edge back (the user's correction, or Ptolemy's own): the edge and its reciprocal are removed, the vector
+        recomputed, and a 'retract' event is journaled (nothing is erased from the history)."""
+        s, t = self.senses[sid], self.senses[target]
+        if target not in s.added[relation]:
+            return {'retracted': False}
+        before = s.vector()
+        s.added[relation].remove(target)
+        s.support.pop((relation, target), None)
+        inv = INVERSE.get(relation)
+        if inv and sid in t.added[inv]:
+            t.added[inv].remove(sid)
+            t.support.pop((inv, sid), None)
+        ev = self._emit('retract', sense=sid, relation=relation, target=target, reason=reason,
+                        vec_before=before, vec_after=s.vector())
+        s.events.append(ev['seq']); t.events.append(ev['seq'])
+        return {'retracted': True, 'vec_before': before, 'vec_after': s.vector()}
+
+    def apply_to_combined(self, cm) -> int:
+        """Merge the changed senses into a monad_combine.CombinedMonad's WordNet table (cm.wordnet: word -> pos/offset/vec19/
+        depth_weight), so its own checkpoint(also_c=True) writes them into monad3_c.bin. Returns rows applied."""
+        rows = self.bin_rows()
+        for k, r in rows.items():
+            cm.wordnet[k] = {'pos': r['pos'], 'offset': r['offset'], 'vec19': list(r['vec19']), 'depth_weight': r['depth_weight']}
+        if rows and hasattr(cm, 'english'):
+            cm.english.dirty = True
+        return len(rows)
 
     # ── hearing ─────────────────────────────────────────────────────────
     def note_unknown(self, word: str) -> None:

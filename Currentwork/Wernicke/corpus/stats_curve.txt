@@ -1,0 +1,17 @@
+2026-11-21 learning curve of the frequency layer (english_stats.EnglishStats), same held-out text as corpus/learning_curve.txt (30,848 tokens), training up to 60k tokens per work in 4 rounds.
+word+class+unigram (with context hash)
+  round 1 tokens 153273 vocab 14805 bits/word 10.06 (6s)
+  round 2 tokens 306547 vocab 21249 bits/word 9.82 (1s)
+  round 3 tokens 459820 vocab 25550 bits/word 9.63 (1s)
+  round 4 tokens 613095 vocab 28806 bits/word 9.41 (1s)
+word pairs + unigram only (no hash)
+  round 1 tokens 153273 vocab 14805 bits/word 9.88 (0s)
+  round 2 tokens 306547 vocab 21249 bits/word 9.70 (0s)
+  round 3 tokens 459820 vocab 25550 bits/word 9.54 (0s)
+  round 4 tokens 613095 vocab 28806 bits/word 9.34 (0s)
+level child bits/word 9.70
+level general bits/word 9.49
+level college bits/word 9.41
+level specialist bits/word 9.41
+poll: {'tokens': 613095, 'vocabulary': 28806, 'pairs': 260479, 'classes_seen': 755, 'granularity': 'class', 'mix': (0.6, 0.3, 0.1), 'levels': {'child': 1000, 'general': 5000, 'college': 20000, 'specialist': 28806}, 'top_class_share': 0.31427266573695756}
+compare: the A-matrix field (learning_curve.txt) went 11.88 -> 12.27 bits/word over 3 rounds; bigram baseline on 1.4M training tokens: 8.70 (entropy_baseline.txt).

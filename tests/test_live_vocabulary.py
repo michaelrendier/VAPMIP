@@ -161,3 +161,32 @@ def test_repack_adds_words_and_ptol_sees_them(tmp_path):
     out = subprocess.run([str(work / 'ptol'), '-M', 'phasor'], capture_output=True, text=True, timeout=60).stdout
     assert 'wn_idx=' in out and 'vec19=[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]' in out
     assert 'gamma_radial' in out
+
+
+def test_retract_takes_an_edge_back_keeps_history_and_replays(tmp_path):
+    p = str(tmp_path / 'j.jsonl')
+    v = LV.LiveVocabulary(journal_path=p, clock=clock())
+    v.hear('A phasor is a kind of vector.')
+    s = v.lookup('phasor')[0]['sense']
+    tgt = v.senses[s].added['hypernyms'][0]
+    r = v.retract_edge(s, 'hypernyms', tgt, reason='the user said no')
+    assert r['retracted'] and v.senses[s].vector()[LV._REL_IDX['hypernyms']] == 0
+    assert s not in v.senses[tgt].added['hyponyms']                       # the reciprocal is gone too
+    assert [e['kind'] for e in v.history('phasor')][-1] == 'retract'       # nothing erased from the history
+    assert v.retract_edge(s, 'hypernyms', tgt)['retracted'] is False
+    b = LV.LiveVocabulary(journal_path=p, clock=clock())                  # replay reproduces it
+    assert b.senses[s].vector() == v.senses[s].vector()
+
+
+def test_apply_to_combined_feeds_the_monads_own_checkpoint(tmp_path):
+    class CM:                                                           # the shape monad_combine.CombinedMonad exposes here
+        def __init__(self):
+            self.wordnet = {}
+            class E: dirty = False
+            self.english = E()
+    v = LV.LiveVocabulary(journal_path=str(tmp_path / 'j.jsonl'), clock=clock())
+    v.hear('A phasor is a kind of vector.')
+    cm = CM()
+    n = v.apply_to_combined(cm)
+    assert n >= 2 and cm.wordnet['phasor']['vec19'][LV._REL_IDX['hypernyms']] == 1 and cm.english.dirty
+    assert set(cm.wordnet['phasor']) == {'pos', 'offset', 'vec19', 'depth_weight'}

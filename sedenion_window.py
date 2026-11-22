@@ -48,17 +48,22 @@ import unicodedata
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import wordnet_boxkite as WB
+from tone_chord import Tone7
 
 # ── markers: tone, tense, conjugation as invisible Tag characters ───────────────────────────────────
 TAG0 = 0xE0020                                   # TAG SPACE .. TAG TILDE = U+E0020..U+E007E (95 characters)
-NEURO = ['DA', '5HT', 'NE', 'OT', 'GLU', 'GABA', 'eCB', 'ACh', 'OPI']       # dopamine serotonin noradrenaline oxytocin
+NEURO = ['DA', '5HT', 'NE', 'OXT', 'GLU', 'GABA', 'CB1', 'ACh', 'OPI']       # dopamine serotonin noradrenaline oxytocin
 LEVELS = 7                                                                    # glutamate GABA endocannabinoid acetylcholine opioid
 TENSES = ['base', 'past', 'present', 'future', 'perfect', 'progressive', 'imperative', 'conditional']
 CONJ = ['base', '3sg', 'past', 'pastpart', 'ing', 'plural', 'comparative', 'superlative']
 _T_TONE, _T_TENSE, _T_CONJ = 0, 64, 72           # offsets inside the Tag block (tone uses 0..62)
 
 
+_ALIAS = {'OT': 'OXT', 'eCB': 'CB1'}
+
+
 def tone_char(axis: str, level: int) -> str:
+    axis = _ALIAS.get(axis, axis)
     return chr(TAG0 + _T_TONE + NEURO.index(axis) * LEVELS + max(0, min(LEVELS - 1, level)))
 
 
@@ -121,7 +126,7 @@ _LEX = {
     'NE':  "angry anger furious rage hate hated stupid idiot damn shut liar never always worst terrible awful useless".split(),
     'OPI': "sad sorry grief lonely hopeless tired empty cry crying lost hurt pain".split(),
     'DA':  "great love wonderful excited yes amazing fantastic win happy glad".split(),
-    'OT':  "thanks thank please friend together dear kind welcome care".split(),
+    'OXT': "thanks thank please friend together dear kind welcome care".split(),
     'GABA': "calm quiet peace easy gentle slow rest okay fine".split(),
 }
 
@@ -146,16 +151,18 @@ class Persuader:
         self.heard, self.target = heard, target
 
     def trajectory(self, n: int) -> List[Tuple[str, int]]:
+        """Tone for each of n words: meet the heard tone one level below its strength, ease toward calm, ARRIVE on the target by
+        the last word (the levels of the heard axis fall linearly over the first n-1 words)."""
         ax, lv = self.heard
         tax, tlv = self.target
+        if n <= 1:
+            return [(tax, tlv)] if ax == tax else [(ax, max(0, lv - 1))]
+        start = max(0, lv - 1)
         out = []
-        cur = max(0, lv - 1)                       # grant their side, one level below its strength
-        for k in range(n):
-            if k == 0 or (cur > 0 and ax != tax):
-                out.append((ax, cur))
-                cur = max(0, cur - 1)
-            else:
-                out.append((tax, min(LEVELS - 1, tlv)))
+        for k in range(n - 1):
+            level = start if n - 1 <= 1 else int(round(start * (1 - k / (n - 1))))
+            out.append((ax, level))
+        out.append((tax, min(LEVELS - 1, tlv)))
         return out
 
 
@@ -260,8 +267,15 @@ FRAMES = {
 class SedenionWindow:
     """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
 
-    def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None):
-        self.bg = bigram
+    def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None,
+                 stats=None, selfctx=None):
+        self.bg = stats if stats is not None else bigram      # EnglishStats (usage frequency, levels) or the plain Bigram
+        self.stats = stats                  # EnglishStats: learns from what the user says (outside text only), never from his own speech
+        self.selfctx = selfctx              # context_gearbox.SelfContexts: DATA SELF (what he says/does) and USER SELF (how the user reacts)
+        self.tone7 = Tone7()                # the seven neuromodulator levels now in force (the constructor reads knobs() from it)
+        self.level = 'general'              # the assumed educational response desire
+        self._user_words: set = set()
+        self._last_user: Optional[int] = None
         self.vocab = vocab                 # LiveVocabulary: relation edges, senses, history
         self.english = english             # MonadEnglish: the co-occurrence field (A-matrix), deepened by every word read or said
         self.sensors = sensors or Sensors()
@@ -272,6 +286,11 @@ class SedenionWindow:
         self.cum_bits = 0.0
         self.persuader: Optional[Persuader] = None
         self.heard_tone: Tuple[str, int] = ('GABA', 2)
+
+    def _p(self, w: str, prev: Optional[str]) -> float:
+        if self.stats is not None:
+            return self.stats.p(w, prev, self.level)
+        return self.bg.p(w, prev)
 
     # -- sedenion ring --------------------------------------------------------
     def _place(self, word: str) -> None:
@@ -306,12 +325,19 @@ class SedenionWindow:
         this content has already looped through the Monad (its own speech heard again is echo 1; the cap is monad_english_io.ECHO_CAP)."""
         self.heard_tone = detect_tone(text)
         self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
+        self._user_words = set(re.findall(r"[a-z']+", text.lower())) - CLOSED
+        if echo == 0 and self.stats is not None:
+            self.stats.observe(text)                                   # usage statistics update as time passes
+            self.level = self.stats.level_for(text)
+        if echo == 0 and self.selfctx is not None:
+            self._last_user = self.selfctx.user_says('prompt', text=text, tone={self.heard_tone[0]: self.heard_tone[1] / 6.0},
+                                                      level=self.level)
         recs = []
         prev = None
         for w in re.findall(r"[A-Za-z']+", text):
             lw = w.lower()
             pathway = lw in CLOSED
-            p = self.bg.p(lw, prev)
+            p = self._p(lw, prev)
             bits = -math.log2(p)
             if pathway:
                 bits = min(bits, -math.log2(max(p, 1e-9)))
@@ -355,10 +381,25 @@ class SedenionWindow:
             cand = {}
         if not cand:
             return ('', 1.0, 0)
-        weights = {w: self.bg.p(w, prev) * (x if slot in ('N', 'V', 'ADJ') else 1.0) for w, x in cand.items()}
+        if slot not in ('N', 'V', 'ADJ'):                                 # a pathway ring: a few dozen words, picked cheaply
+            weights = {w: self._p(w, prev) for w in cand}
+            tot = sum(weights.values())
+            best = max(weights, key=lambda w: (weights[w], w))
+            return (best, weights[best] / tot, len(weights))
+        kn = self.tone7.knobs()                                           # the seven tones act here
+        weights = {}
+        for w, x in cand.items():
+            v = (self._p(w, prev) ** kn['coherence']) * x                 # 5HT: weight on the word-to-word statistics
+            if w in self._user_words:
+                v *= kn['user_boost']                                     # OXT: alignment with the user's own words
+            weights[w] = v
+        mx = max(weights.values())
+        weights = {w: v for w, v in weights.items() if v >= kn['prune_floor'] * mx}          # GABA: prune weak candidates
+        ranked = sorted(weights, key=lambda w: (-weights[w], w))[:kn['pool_size']]            # NE narrows, GLU widens
+        weights = {w: weights[w] for w in ranked}
         tot = sum(weights.values())
-        best = max(weights, key=lambda w: (weights[w], w))
-        return (best, weights[best] / tot, len(cand))
+        best = ranked[min(kn['novelty_rank'], len(ranked) - 1)]            # DA: explore down the ranking
+        return (best, weights[best] / tot, len(weights))
 
     def write(self, prompt: str, frame: Optional[str] = None, tense: str = 'present') -> Dict[str, Any]:
         """Write one sentence in answer to `prompt`. Returns the sentence (plain and marked), the per-word records."""
@@ -372,12 +413,18 @@ class SedenionWindow:
                 for k, x in self.nb.around(w, pos).items():
                     topic[pos][k] = max(topic[pos].get(k, 0.0), x)
         nouns = [w for w in toks if w not in CLOSED and self.nb.wn.synsets(w, 'n')]
-        slots = FRAMES[frame or ('svo' if len(nouns) >= 2 else 'sv_prep')]
+        first = self.sensors.channels.get('tone_override') or (self.persuader.trajectory(1)[0] if self.persuader else self.heard_tone)
+        t0 = Tone7.from_axis(first[0], first[1] / 6.0)
+        short = t0.knobs()['short_frame']                                  # NE: shorter frames under urgency
+        slots = FRAMES[frame or ('sva' if short else ('svo' if len(nouns) >= 2 else 'sv_prep'))]
         traj = self.persuader.trajectory(len(slots)) if self.persuader else [self.heard_tone] * len(slots)
         words, marked, recs, taken, prev = [], [], [], set(), None
         sentence_bits = 0.0
         for k, slot in enumerate(slots):
             r_big = 1.0                                    # W_S: the whole sentence, full scale
+            ov = self.sensors.channels.get('tone_override')
+            ax, lv = ov or traj[k]
+            self.tone7 = Tone7.from_axis(ax, lv / 6.0)                 # the tone in force for this slot
             word, P, ncand = self._pick(slot, prev, topic, taken)      # W_S shrinks to the slot; w_s picks
             if not word:
                 continue
@@ -404,8 +451,12 @@ class SedenionWindow:
         if text and self.english is not None:                  # he hears what he says (echo 1): usage deepens the field
             import monad_english_io as _meio
             _meio.hear(self.english, text, echo=1)
-        return {'sentence': text, 'marked': ' '.join(marked) + '.', 'records': recs, 'bits': sentence_bits,
-                'topic_size': {k: len(v) for k, v in topic.items()}}
+        out = {'sentence': text, 'marked': ' '.join(marked) + '.', 'records': recs, 'bits': sentence_bits,
+               'topic_size': {k: len(v) for k, v in topic.items()}, 'level': self.level}
+        if self.selfctx is not None and text:
+            out['seq'] = self.selfctx.ptolemy('say', responds_to=self._last_user, sentence=text, bits=round(sentence_bits, 3),
+                                              tone=dict(self.tone7.levels), level=self.level)
+        return out
 
     def _repass(self, word: str, slot: str, tense: str, said: List[str]) -> Tuple[str, str]:
         """Tense and conjugation of the placed word; returns (surface form, conjugation code)."""

@@ -22,6 +22,21 @@ The codebook (axes, levels, tense and conjugation lists) is provisional: the aut
 ## Usage over time (added 2026-11-21)
 With `english=` (a `MonadEnglish`) every word read deepens the co-occurrence field (the A-matrix, `monad_english_io.hear`: windowed, weight decaying with distance, merged by max); new words enter; the same word used again deepens (`fire_count`). **He hears what he says**: a written sentence is fed back at echo 1, and `ECHO_CAP` (5) makes a fifth loop a no-op, which is the feedback-cancelling cap on the ears (tested). With `vocab=` (a `LiveVocabulary`) definitional sentences add senses and edges with history ([Live-Vocabulary](Live-Vocabulary.md)). Sensor block `USAGE` reports edges deepened and new words per read.
 
+## The seven tones and what each does to the constructor (2026-11-21)
+`tone_chord.py`: the tone is a 7-level vector (DA 5HT NE OXT GLU GABA CB1) played as a dial-tone chord: one frequency per axis, amplitude = level, plus a DTMF pair for tense and one for conjugation; a Goertzel decoder identifies the chord exactly (all 64 tense × conjugation keys, and under noise; 4 tests). `Tone7.knobs()` turns the levels (relative to a neutral baseline) into the constructor's real controls; `SedenionWindow` reads them in every pick:
+
+| axis | knob in the constructor | measured (prompt "the king reads the book") |
+|---|---|---|
+| DA | explore: pick the k-th ranked candidate, k = round(3·DA) | different words ("The monarch reads the authority.", 15.5 bits against 5.5) |
+| 5HT | coherence: exponent on the word-to-word statistics | same words, fewer bits (2.8 against 5.5) |
+| NE | pool shrinks, frames shorten (`sva`, 4 words) | pool 5 against 12; "The king was only." |
+| OXT | boost for the user's own words | no change here: the prompt's words already led |
+| GLU | pool and neighbourhood depth grow | pool 30 against 12 |
+| GABA | prune candidates below a fraction of the best; lower echo cap | pool 3 against 12 |
+| CB1 | every level relaxes toward baseline after each word | no change inside one sentence (it acts across words) |
+
+The effects are design: the author's analogy table (computational analogues from the Gemini pass of 2026-11-20) made operational. The sentences are weak ("The king times the book."): candidate verbs come from relation neighbours and statistics, and no step yet checks a sentence for sense.
+
 ## The window as a two-way mirror
 The window is the shared tool of Broca (discrete, the scalar boxkite) and Wernicke (continuous, the scaled boxkite): the same statement in both maths. In the Scale engine's terms it is the fold Γ = (Z − Z₀)/(Z + Z₀) with Z = Wernicke + i·Broca and its inversion (Γ → −Γ). **Bad lighting is measurable here:** the two readings live on different scales (Wernicke 1 + γ lies in 0.1 … 0.9, Broca counts 1 … 7), so the fold saturates, |Γ| of 0.85 to 0.92 in the run above: the mirror reflects almost everything and the other side cannot see through. Rescaling Broca to Wernicke's range, or choosing Z₀ per point, is the adjustment; which one is the author's call.
 

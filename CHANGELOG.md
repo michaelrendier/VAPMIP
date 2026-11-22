@@ -6,6 +6,10 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
+- **Cyclic Context Gearbox** (`context_gearbox.py`, 7 tests): lossless FIFO odometer compaction; DATA SELF and USER SELF; reaction and thread retrieval after compaction; canonical shortcut variables.
+- **English statistics** (`english_stats.py`, 7 tests): one data class, frequency and context-class counts, levels by educational response; learns (bits per word 10.06 → 9.41 over four rounds) where the A-matrix did not; the context class does not improve the prediction.
+- **Tone chord and the seven tones** (`tone_chord.py`, 4 tests): DTMF-style chord with Goertzel decoding; `Tone7.knobs()`; the window reads them; effect of each axis measured.
+- **Live vocabulary:** `retract_edge` (a correction, journaled) and `apply_to_combined` (into `CombinedMonad.wordnet` for its own checkpoint).
 - **Dual boxkite.** `dual_boxkite.py` (2 tests): every boxkite exploration runs on the project's pencil boxkite and de Marrais's control; first result: F21's order-3 stabiliser preserves de Marrais's kite and its 12 edges with orbits 3+3 on the six Assessors, and preserves pencil(s) with orbits 1+3+3 (the extra fixed station is the pivot).
 - **Context landscape.** `map/landscape.py`: 2D and 3D pictures of the 1,276 classes and the multi-context words (19,270 lemmas in two or more classes).
 - **Skill.** spatial-simulation v1.3.0: Penrose space and the 3D overview function (ContextPlease).
