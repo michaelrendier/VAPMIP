@@ -4,7 +4,10 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
-## Unreleased — 2026-11-21 (documentation pass; no code changed)
+## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
+
+- **Live vocabulary.** `live_vocabulary.py` (9 tests): a journaled sense store over WordNet and the context bin; new words and relation edges learned from definitional sentences; history of when learned, refined and split; sedenion-shaped dirty frames; `repack_monad3c` writes the changes into a copy of `monad3_c.bin`, checked with the C binary (`ptol -M`). Limits (narrative prose yields almost nothing; one row per word in the bin) are in `docs/wiki/Live-Vocabulary.md`.
+- (The entries below this one are the documentation pass; no engine code changed in them.)
 
 - **Licence.** VAPMIP is proprietary, all rights reserved (`LICENSE`, `NOTICE`); the GPL file is removed; the mathematics is published under the GNU licence outside VAPMIP.
 - **Symbols.** The author's ruling is applied in the live pages: α = fine-structure constant; A_π = W(1) = 0.5671; Ω_ζΣ = d* = 0.2463; d*·ln 10 = A_π. The labels "BAO" and "Yang-Mills mass gap" for the residual 0.000707 are removed from live pages (tested, not supported: `FourthAgePapers/DStar/bao_test.txt`).

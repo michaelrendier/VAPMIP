@@ -38,6 +38,7 @@ Open: context flow, carrying the prompt's topic through the reply as discrete wo
 | the orbweaver | `Currentwork/Wernicke/README.md`, `docs/semantic_orbweaver_notes.md` |
 | the context-flow tests | `docs/context_flow_spec/` (95 tests) |
 | SemPriCon | `Currentwork/SemPriCon/README.md`, `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/00_index.md` |
+| the live vocabulary (the Monad adds and refines its own words) | `docs/wiki/Live-Vocabulary.md`, `live_vocabulary.py` |
 | how to run it | `docs/wiki/Operating-the-Monad.md`, `docs/NLP_ENVIRONMENT.md` |
 | names and symbols | `docs/wiki/Name-Table.md` |
 | everything else that was in this README | `docs/Repository_Reference.md` (section map at its top) |
