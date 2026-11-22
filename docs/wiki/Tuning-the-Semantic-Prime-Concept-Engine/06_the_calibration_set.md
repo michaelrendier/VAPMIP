@@ -8,7 +8,7 @@
 3. **It does not mutate.** `calibration/calibration_v1_en_zh.tsv` is read-only and pinned by `calibration/FROZEN.sha256`. A correction is a **new version** (`calibration_v2_…`), never an edit.
 4. **Each language gets its own ruleset.** Languages differ in how writing carries meaning: strongly phonetic alphabets (Spanish and the other Romance languages), near-phonemic agglutinative writing (Finnish), opaque alphabetic orthography (English), logographic writing in which a character is a morpheme (Chinese). Their semantics differ, so each type of semantic association is its own experiment and its own ruleset. The current engine has one generic ruleset ([02](02_the_tokenizer.md)); this page fixes only the standard to measure against.
 
-## How version 1 was built (`SemPriCon/tools/calibration_v1.py`; nothing typed by hand)
+## How version 1 was built (`Currentwork/SemPriCon/tools/calibration_v1.py`; nothing typed by hand)
 - **Concept:** a WordNet synset with at least two single-word English lemmas and two single-token Mandarin lemmas in the Open Multilingual WordNet (Mandarin converted to Traditional with OpenCC `s2twp`); S's word is one of the synset's first three senses.
 - **English:** S = the most frequent lemma in English Wikipedia text; L = a rarer lemma (at most 2/3 of S's frequency, at least 8 occurrences) with the most WordNet senses.
 - **Chinese:** the same over the synset's Mandarin lemmas, each **confirmed by CC-CEDICT** (its definition contains a lemma of the synset); L has the most CEDICT definitions among the rarer ones.
@@ -36,7 +36,7 @@ WordNet's senses and OMW alignments are not perfect: a few pairs are a near rath
 - *Fitting:* the set is the held-out check for the fit of English to The Baseline ([05](05_the_baseline.md)): fit on other alignments, test on these.
 
 ## On hold: the six-language set
-Swahili, Finnish, Indonesian and Quechua are on hold (Quechua and Swahili data are thin: only 158 of the earlier 1 024-concept six-language set were data-verified). The earlier files are kept, unchanged, in `SemPriCon/calibration/on_hold/` and are not part of this specification.
+Swahili, Finnish, Indonesian and Quechua are on hold (Quechua and Swahili data are thin: only 158 of the earlier 1 024-concept six-language set were data-verified). The earlier files are kept, unchanged, in `Currentwork/SemPriCon/calibration/on_hold/` and are not part of this specification.
 
 
 ## Version 2 candidate: Finnish and Indonesian

@@ -6,7 +6,7 @@
 `PtolC/monad.c: monad_word_coords` at `eb28ce8`. Base-95 Horner over printable ASCII bytes in `uint64`, then `seed = fmod((double)v · φ, 1.0)`, `idx = ⌊seed · N⌋`, `E = d* + seed (Ω − d*)`. Two defects, both measured: the float seed has no fractional bits once `v·φ > 2⁵²`, so **every word of ≥ 8 letters addresses to slot 0**; every non-ASCII byte contributes digit 0. Example: `holcus` → slot 24639, E 0.5625142; `philadelphos` → slot 0, E 0.246.
 
 ## The current code (Unicode build, `STATE_VERSION 5`)
-`SemPriCon/src/PtolC_unicode/monad.c: monad_word_coords`.
+`Currentwork/SemPriCon/src/PtolC_unicode/monad.c: monad_word_coords`.
 
 ```
 v    = 0
@@ -32,7 +32,7 @@ Constants: N = 25 000, d* = 0.24600, Ω = 0.56714. Every code point of a word of
 
 Old stores (versions 1–4) are **refused** by `state_load`: their slots were made by the ASCII address and would not match.
 
-**Check:** `python3 SemPriCon/tools/verify_unicode_against_c.py` (binary vs port, learned state exact); `SemPriCon/tools/unicode_address_measure.py` (resolution on real headwords).
+**Check:** `python3 Currentwork/SemPriCon/tools/verify_unicode_against_c.py` (binary vs port, learned state exact); `Currentwork/SemPriCon/tools/unicode_address_measure.py` (resolution on real headwords).
 **Open:** the address is a function of spelling. The prime-concept hash replaces it with a function of concept, placed by The Baseline ([05](05_the_baseline.md)); this page will then specify the concept key in front of this code.
 
 

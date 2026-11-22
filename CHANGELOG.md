@@ -13,7 +13,8 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 - **ScalarContextPropagation.** README is an entry page (it had been a second copy of the paper); v2–v3.4 and the draft sections moved to `archive/`; v4.0 PDF rebuilt (42 pages).
 - **SemPriCon.** README, requirements, naming convention and paper brought to the v3 state; wiki pages 00, 05, 09, 17 updated and 18 (speakers) added; paper PDF rebuilt.
 - **Papers.** `paper/Forward_Propagation_of_Information` gained a licence and symbols note; PDF rebuilt.
-- **Housekeeping.** `UPDATE_JOB_2026-11-21.md`, `AUDIT_2026-11-21.md`.
+- **Housekeeping.** `records/UPDATE_JOB_2026-11-21.md`, `records/AUDIT_2026-11-21.md`.
+- **Restructure (2026-11-21).** `Broca/`, `Wernicke/` and `SemPriCon/` moved under `Currentwork/` (old path → new path: `Currentwork/README.md`); audits, job list and loose notes to `records/`; the two `.docx` source documents to `archive/source_documents/`; the outreach emails into `outreach/` (PDFs in `outreach/archive/`); `docs/FILE_MAP.md` indexes the root. Paths in live docs were updated; history pages (Tuning-the-Engine wiki, its notebooks, dated entries of this file and of `TODO.md`) keep the old paths. Five relative paths in moved code were lengthened by one level; the SemPriCon venv's script paths were rewritten. The Python modules did not move (console discovery and flat imports; see `docs/FILE_MAP.md`).
 
 ---
 

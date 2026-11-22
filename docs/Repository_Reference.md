@@ -10,7 +10,7 @@ Dated sections are records of their date. Where a section and `docs/wiki/` disag
 | section | date | status |
 |---|---|---|
 | Start Here (abstract, voices table, Try it, Not done yet) | 2026-10-14 | measurements of the paper; kept as measured |
-| Current machinery: the Broca/Wernicke split | 2026-10-17 | superseded by `Broca/README.md`, `Wernicke/README.md` |
+| Current machinery: the Currentwork/Broca/Wernicke split | 2026-10-17 | superseded by `Currentwork/Broca/README.md`, `Currentwork/Wernicke/README.md` |
 | Current Repo Focus | 2026-09-26 … 10-17 | history; current focus is in the front-door README |
 | Reference Machine, All-Voices Benchmark, HyperWebster Indexing baseline | 2026-09/10 | measurements |
 | Prime Directives (1–6) | standing | current |
@@ -81,14 +81,14 @@ If the system `python3` cannot import `nltk` (a pandas/numpy ABI mismatch), use 
 
 ### Where to read next
 
-`docs/semantic_orbweaver_notes.md` (the live notes on the current work) · `Wernicke/README.md` · `Broca/README.md` ·
-`Wernicke/corpus/README.md` (the standard testing corpus) · `docs/NLP_ENVIRONMENT.md` (the content-extraction stack, data and C access) · `docs/figures/epicycles/EPICYCLES.md` · `docs/paper_drafts/` (the paper draft) · `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript and the census) ·
+`docs/semantic_orbweaver_notes.md` (the live notes on the current work) · `Currentwork/Wernicke/README.md` · `Currentwork/Broca/README.md` ·
+`Currentwork/Wernicke/corpus/README.md` (the standard testing corpus) · `docs/NLP_ENVIRONMENT.md` (the content-extraction stack, data and C access) · `docs/figures/epicycles/EPICYCLES.md` · `docs/paper_drafts/` (the paper draft) · `docs/wiki/Tuning-the-Engine/42_every_voice_benchmark.md` (every transcript and the census) ·
 `docs/wiki/Tuning-the-Engine/00_index.md` (the engineering log, phase by phase) ·
 `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md` (the context-flow design record) · `CHANGELOG.md` · `LICENSE`.
 
 ---
 
-## Current machinery: the Broca/Wernicke split (2026-10-17)
+## Current machinery: the Currentwork/Broca/Wernicke split (2026-10-17)
 
 The sentence constructor needs a semantic part, a structural part and (later) a morphological part. The repository now keeps the first
 two as separate work trees, each with its own branch so that people can work on the half they can help with. The names are an analogy
@@ -96,19 +96,19 @@ used as a division of labour, not neuroscience.
 
 | tree | branch | what it is | start here |
 |---|---|---|---|
-| `Wernicke/` | `orbweaver` | the **semantic orbweaver**: which words and ideas, chosen because of their relation to the prompt; open vocabulary, graded weights; no box kite | `Wernicke/README.md` |
-| `Broca/` | `boxkite` | the **scalar and scaled boxkite**: the context relations, the struts, the Mind's-Eye kite in motion, context flow; constrains and orders | `Broca/README.md` |
+| `Currentwork/Wernicke/` | `orbweaver` | the **semantic orbweaver**: which words and ideas, chosen because of their relation to the prompt; open vocabulary, graded weights; no box kite | `Currentwork/Wernicke/README.md` |
+| `Currentwork/Broca/` | `boxkite` | the **scalar and scaled boxkite**: the context relations, the struts, the Mind's-Eye kite in motion, context flow; constrains and orders | `Currentwork/Broca/README.md` |
 
 Both trees hold **copies**; the originals stay where they are in the repository. Neither is a finished engine. The orbweaver is a design
 with a test bench (`boxkite_orbweaver_monad.py`, Phase 35), not yet a working voice, and the kite supplies constraints but no candidates.
 
 What is new and runnable:
 
-* **The standard testing corpus** (`Wernicke/corpus/`): 11 public-domain works (8.7 MB), 134 sampled sentences, 24 chat prompts and
+* **The standard testing corpus** (`Currentwork/Wernicke/corpus/`): 11 public-domain works (8.7 MB), 134 sampled sentences, 24 chat prompts and
   model-provided reference answers (seven-slot decompositions; unreviewed). Every orbweaver function is tested against it.
 * **The seven deconstruction names** (design, not code): `ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP SHELL`, the seven spider silks read as
   the roles a sentence decomposes into, to replace the Zork parser's syntactic categories. See `docs/semantic_orbweaver_notes.md`.
-* **The Broca/Wernicke monitor** (`tools/lemniscate_monitor.py`, tests in `tests/`): the aphasia diagram (damage, lemniscate, damage) and a
+* **The Currentwork/Broca/Wernicke monitor** (`tools/lemniscate_monitor.py`, tests in `tests/`): the aphasia diagram (damage, lemniscate, damage) and a
   Taoist mode (a yin-yang whose halves deform and whose spin throws off the barycentre). It needs two scores per reply (semantic S,
   structure G, optionally the seam M); **those scorers do not exist yet**, so it only draws what it is fed.
 * **The epicycle outputs, versioned** (`tools/epicycles/`, `docs/figures/epicycles/`, index `EPICYCLES.md`): v1 (rigid-body physics) is kept as
@@ -151,7 +151,7 @@ The console loader now selects all twelve speaking monads (`EntryPointMonadAdapt
 WordNet's license notice (`NOTICE`, `WORDNET_LICENSE.txt`) and the license statement (`LICENSE`) now sit in this repository. The paper draft is `docs/paper_drafts/` (labelled DRAFT).
 Open thread: context flow, carrying the prompt's topic through the reply.
 
-**2026-10-17 (Phase 43):** the semantic orbweaver work starts, split into the Broca/Wernicke trees above. The first monad's trace is
+**2026-10-17 (Phase 43):** the semantic orbweaver work starts, split into the Currentwork/Broca/Wernicke trees above. The first monad's trace is
 done (its "name" reply was a selector rule, not a learned association); the standard testing corpus is chosen; the next build is the
 seven-slot parse of a prompt (`ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP SHELL`), scored on coverage against the corpus's reference
 answers, then the S and G scorers that feed the monitor. Nothing of that is built yet. NLTK's tagger data are not on this machine.

@@ -19,4 +19,4 @@ N = 25 000 · φ (and the golden angle 2π/φ²) · Ω = W(1) = 0.5671432904… 
 
 M1 documented → M2 designed and tested → M2 documented → M3, M4 as UNS conversions → Fresh Start Protocol (assessments pushed, v2 bins archived dirty, version v3.0) → each mechanism runs its own language alone.
 
-Requirements, faults and open decisions for all four: `SemPriCon/SemPriCon_requ_conf.md`.
+Requirements, faults and open decisions for all four: `Currentwork/SemPriCon/SemPriCon_requ_conf.md`.

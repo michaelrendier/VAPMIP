@@ -19,4 +19,4 @@ Two kinds:
 - **Semantic collisions** (intended, Cody 2026-10-18): two words of the same concept in different languages, or a simple word and its layered analogue, landing on one slot or on neighbours. These are what the calibration set ([06](06_the_calibration_set.md)) measures.
 - **Accidental collisions** (errors): two unrelated words sharing a slot because the address is a function of spelling. The Baseline's placement is an assignment, not a hash, so it has none; the fits of other languages inherit the Baseline's slots and add residuals instead.
 
-**Check:** `python3 SemPriCon/tools/unicode_address_measure.py`; the occupancy table is reproduced by the snippet in `SemPriCon/paper/` evidence and in this page's history.
+**Check:** `python3 Currentwork/SemPriCon/tools/unicode_address_measure.py`; the occupancy table is reproduced by the snippet in `Currentwork/SemPriCon/paper/` evidence and in this page's history.

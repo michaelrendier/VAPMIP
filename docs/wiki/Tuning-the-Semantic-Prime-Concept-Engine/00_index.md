@@ -4,12 +4,12 @@ The functional reference for **SemPriCon**: the semantic prime-concept hashing e
 
 > **Protocol (Cody, 2026-10-18).**
 > 1. **Functionality, not provenance.** Each page says what a part does *now*, how to run it, and how to check it. It is not a log. Pages are edited **in place**; git preserves the history, and nothing is archived by hand.
-> 2. **Only the semantic prime-concept hash.** Other exploratory methodologies live in [Tuning the Engine](../Tuning-the-Engine/00_index.md). This wiki starts from the original code (`PtolC/monad.c` at `eb28ce8`, documented as it ran in `SemPriCon/paper/The_Golden_Ratio_Monad.pdf`) and follows the code from there.
+> 2. **Only the semantic prime-concept hash.** Other exploratory methodologies live in [Tuning the Engine](../Tuning-the-Engine/00_index.md). This wiki starts from the original code (`PtolC/monad.c` at `eb28ce8`, documented as it ran in `Currentwork/SemPriCon/paper/The_Golden_Ratio_Monad.pdf`) and follows the code from there.
 > 3. **A repass on this index is part of every update**: add or change the page, then re-check that every row below is current.
 > 4. **The code is authoritative.** If a page and the code disagree, the page is wrong; fix the page.
 > 5. **Fitting is allowed here and only here** (see [05](05_the_baseline.md)): English and the other languages are fitted to The Baseline. It stays forbidden in all mathematics work.
 
-Working directory: `VAPMIP/SemPriCon/`. Current battery: v3 (Fresh Start 2026-10-21): English and Chinese (Traditional, the baseline) in their own Universal Native Space bins, and one assignment bin; the v2 stores (Chinese, English, Finnish, Indonesian) are archived under `SemPriCon/clean/archive/v2.0/`. Swahili and Quechua are on hold. Version numbers are integers (`SemPriCon/SpecTools/NAMING_CONVENTION.md`).
+Working directory: `VAPMIP/Currentwork/SemPriCon/`. Current battery: v3 (Fresh Start 2026-10-21): English and Chinese (Traditional, the baseline) in their own Universal Native Space bins, and one assignment bin; the v2 stores (Chinese, English, Finnish, Indonesian) are archived under `Currentwork/SemPriCon/clean/archive/v2.0/`. Swahili and Quechua are on hold. Version numbers are integers (`Currentwork/SemPriCon/SpecTools/NAMING_CONVENTION.md`).
 
 | Page | Part | What it specifies |
 |---|---|---|
@@ -33,4 +33,4 @@ Working directory: `VAPMIP/SemPriCon/`. Current battery: v3 (Fresh Start 2026-10
 | [18_v3_speakers.md](18_v3_speakers.md) | speakers | `TestMonad_english_v3.py`, `TestMonad_chinese_v3.py`: what each does, the deviations from the engine step, what the replies show |
 | [1024.md](1024.md) | word list | the English row headers, their Chinese words and the slot of each in every bin; updated in place |
 
-*19 pages* (and, outside the wiki: `../../../SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).
+*19 pages* (and, outside the wiki: `../../../Currentwork/SemPriCon/SemPriCon_requ_conf.md`, the required-configurations list, and `../../../Currentwork/SemPriCon/SpecTools/README.md`, the specification toolset: exact zeros, bin-creation recipes by version, word lists, probes).

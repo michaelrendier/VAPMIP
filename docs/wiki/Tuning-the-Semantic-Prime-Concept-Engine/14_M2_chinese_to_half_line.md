@@ -1,6 +1,6 @@
 # 14 · M2 — Chinese to the ½ line (single characters)
 
-**Job.** Put one Chinese character on a zero of ζ on the critical line σ = ½, by reading its structure. Code: `SemPriCon/tools/zh_half_line.py` (+ `zh_structure.py`, `zeros_exact.py`); self-test `python3 tools/zh_half_line.py --selftest` → `data/zh_half_line_selftest.json`; every address in `data/zh_half_line_addresses.tsv`. **Single characters only**: a character is an ideogram, one idea; a two-character word is two addresses and a relation (`Table.pair`).
+**Job.** Put one Chinese character on a zero of ζ on the critical line σ = ½, by reading its structure. Code: `Currentwork/SemPriCon/tools/zh_half_line.py` (+ `zh_structure.py`, `zeros_exact.py`); self-test `python3 tools/zh_half_line.py --selftest` → `data/zh_half_line_selftest.json`; every address in `data/zh_half_line_addresses.tsv`. **Single characters only**: a character is an ideogram, one idea; a two-character word is two addresses and a relation (`Table.pair`).
 
 ## The mechanism
 1. **Dictionary order.** All 97,518 Han characters of the engine's alphabet, sorted by Kangxi radical, residual strokes, key component, code point (Unihan `kRSUnicode`; cjkvi-ids).

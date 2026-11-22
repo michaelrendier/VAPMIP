@@ -47,14 +47,14 @@ Source: `@RCCM_FOUR_DSTAR`, `Ainulindale/wiki/17`, `FourthAgePapers/DStar/paper/
 | Zork parser | `zork_parser.py`, `PtolC/zork.c` | verb-governed selection of 16 operators |
 | prime hash | `prime_hash.py` | words land on primes |
 | add_scale_sign | `add_scale_sign.py` (`ASS`, `ASSWord`) | engine name locked |
-| SemPriCon | `SemPriCon/` | prime-concept baseline, Chinese first |
+| SemPriCon | `Currentwork/SemPriCon/` | prime-concept baseline, Chinese first |
 
 ## The trees
 
 | directory | branch | holds |
 |---|---|---|
-| `Broca/` | `boxkite` | scalar and scaled boxkite: the structure side (copies) |
-| `Wernicke/` | `orbweaver` | the semantic orbweaver: the meaning side (copies) |
+| `Currentwork/Broca/` | `boxkite` | scalar and scaled boxkite: the structure side (copies) |
+| `Currentwork/Wernicke/` | `orbweaver` | the semantic orbweaver: the meaning side (copies) |
 
 Never write "the two trees" for these two; use the directory names.
 

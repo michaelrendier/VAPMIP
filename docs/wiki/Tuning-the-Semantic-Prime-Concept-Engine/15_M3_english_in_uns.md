@@ -1,6 +1,6 @@
 # 15 · M3 — English in Universal Native Space (the π/2 equatorial great circle)
 
-**Job.** Restate M1 ([13](13_M1_english_to_half_line.md)) as an algorithm in Universal Native Space (UNS): the radial, complex, spherical-polar chart that holds the shape of mathematics and, with it, the shape of the real world. Destination: the π/2 equatorial great circle. Code: `SemPriCon/tools/uns_mech.py` (`en_uns`).
+**Job.** Restate M1 ([13](13_M1_english_to_half_line.md)) as an algorithm in Universal Native Space (UNS): the radial, complex, spherical-polar chart that holds the shape of mathematics and, with it, the shape of the real world. Destination: the π/2 equatorial great circle. Code: `Currentwork/SemPriCon/tools/uns_mech.py` (`en_uns`).
 
 ## The chart (as used here; Cody to correct)
 

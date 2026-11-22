@@ -7,11 +7,11 @@ marked [HYP] is a candidate, not a result.*
 ## Status, 2026-11-21 (read first)
 
 * **Page restored.** Between 2026-10-13 and today this page had shrunk to one section (§24) because each later append replaced the file instead of adding to it. Sections 0–23 were recovered from git history (commit 6f4d66e for §0–9, then one commit per later section) and §24 is as it stood. Nothing in §0–24 was reworded.
-* **What is current on this page** is the design record for the *scaled* boxkite (the Mind's-Eye kite in motion; `scaled_mind_eye_boxkite_kernel_monad.py`, `Broca/`) and how it meets the *scalar* boxkite (discrete, static: seven ordered pairs, pencil, string, flashlight, tension law; `19D_rotary_boxkite_monad.py`). The scalar kite is never given motion; the scaled kite never gets static functions.
+* **What is current on this page** is the design record for the *scaled* boxkite (the Mind's-Eye kite in motion; `scaled_mind_eye_boxkite_kernel_monad.py`, `Currentwork/Broca/`) and how it meets the *scalar* boxkite (discrete, static: seven ordered pairs, pencil, string, flashlight, tension law; `19D_rotary_boxkite_monad.py`). The scalar kite is never given motion; the scaled kite never gets static functions.
 * **Corrections A–F of 2026-10-13 (§8) still govern**: the weaver and topic shift are design targets, not authoritative (A); windspeed must deform the kite (B); basin attractors extinguish response possibilities (C); how zero divisors enter sentence construction is open (D); the Contractor (Lagrangian, stable-action path) and the Dilator (cardioid attractor) are the same object (E); the granular `.bin` poison was improper sanitisation and never exercised (F).
 * **Symbols:** where this page says "d* / W" (§7) it predates the ruling: Ω_ζΣ = d* = 0.2463 (Riemann: Hagedorn, entropy) and A_π = W(1) = 0.5671 (Fermat: causality, inertia). `@RCCM_SYMBOLS`.
 * **Still open (from §7 and §10–13):** windspeed as emission of a sentence part, with the Recamán repass for inexact matches; connection (tense/participle conjugation map; no grammatical tense code exists); context flow; the orbweaver scorers. NLP content processing stays on NLTK (decision §16).
-* Copies: this page is at `docs/wiki/` (home) and `Broca/docs/` (copy).
+* Copies: this page is at `docs/wiki/` (home) and `Currentwork/Broca/docs/` (copy).
 
 ## 0. Rule for reading this page
 The sentence/document-planner design is NOT new. It is the spider-web (orb-weaver) composition cycle (`Tuning-the-Engine/35`), the Kings-Maille rings

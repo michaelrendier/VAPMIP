@@ -1,6 +1,6 @@
 # 07 — Data and tools
 
-Everything is under `VAPMIP/SemPriCon/`. Data is gitignored; the fetch scripts, `corpora/MANIFEST.tsv` (source URL, size, sha256, licence, date) and `corpora/README.md` are committed.
+Everything is under `VAPMIP/Currentwork/SemPriCon/`. Data is gitignored; the fetch scripts, `corpora/MANIFEST.tsv` (source URL, size, sha256, licence, date) and `corpora/README.md` are committed.
 
 ## Data
 | path | what | licence |
@@ -13,7 +13,7 @@ Everything is under `VAPMIP/SemPriCon/`. Data is gitignored; the fetch scripts, 
 
 **Closed doors:** Leipzig Corpora Collection (bot challenge); Wikimedia API rate limit (the fetcher honours Retry-After). **Excluded on purpose:** Hokkien dictionary, Cantonese and Min sources.
 
-## Tools (`SemPriCon/tools/`)
+## Tools (`Currentwork/SemPriCon/tools/`)
 | tool | does |
 |---|---|
 | `corpora/fetch.sh`, `corpora/fetch_zh.sh` | resumable, rate-limited downloads, recorded in the manifest |

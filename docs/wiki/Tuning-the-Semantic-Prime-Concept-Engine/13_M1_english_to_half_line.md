@@ -1,6 +1,6 @@
 # 13 · M1 — English to the ½ line (the machinery behind `holcus·same·stuff·seemy`)
 
-**Job.** Write down, exactly, how the May-2026 C monad (`PtolC/monad.c` at `eb28ce8`) puts an English word on the critical line σ = ½. The code is authoritative; this page is the mechanism as it ran. Full account: `SemPriCon/paper/The_Golden_Ratio_Monad.md` §5, §6, §12. Executable port: `SemPriCon/tools/monad_py.py` (8 of 8 replies identical to the compiled binary).
+**Job.** Write down, exactly, how the May-2026 C monad (`PtolC/monad.c` at `eb28ce8`) puts an English word on the critical line σ = ½. The code is authoritative; this page is the mechanism as it ran. Full account: `Currentwork/SemPriCon/paper/The_Golden_Ratio_Monad.md` §5, §6, §12. Executable port: `Currentwork/SemPriCon/tools/monad_py.py` (8 of 8 replies identical to the compiled binary).
 
 Label: `OURS` for the construction; the golden-ratio multiplication is `Post-Hoc:` Fibonacci hashing (Knuth 1973); the golden-angle step is `Post-Hoc:` Vogel 1979 / three-distance theorem (Sós 1958).
 

@@ -2,7 +2,7 @@
 
 **Job.** Say what `TestMonad_english_v3.py` and `TestMonad_chinese_v3.py` do, how they differ from the engine step they copy, and what their replies show.
 
-**Files.** `SemPriCon/clean/TestMonad_english_v3.py`, `SemPriCon/clean/TestMonad_chinese_v3.py`; each reads its own `clean/test_{L}_v3.bin` (read-only). Run from `SemPriCon/`: `.venv/bin/python clean/TestMonad_{L}_v3.py [--bin P] [--exact-zeros] [prompt…]`. The English speaker also takes `--wordnet [--order given|english|chain|all]`. They import the mapping machinery from `mappings/{UNS,Flat}/` and `monad_pyu` from `tools/`. Both are copies of the engine step `monad_py.Monad.speak` (the Python port of `monad.c` at `eb28ce8`); each deviation is tagged `# TESTMONAD-<tag>` in the code. The port itself is never changed.
+**Files.** `Currentwork/SemPriCon/clean/TestMonad_english_v3.py`, `Currentwork/SemPriCon/clean/TestMonad_chinese_v3.py`; each reads its own `clean/test_{L}_v3.bin` (read-only). Run from `Currentwork/SemPriCon/`: `.venv/bin/python clean/TestMonad_{L}_v3.py [--bin P] [--exact-zeros] [prompt…]`. The English speaker also takes `--wordnet [--order given|english|chain|all]`. They import the mapping machinery from `mappings/{UNS,Flat}/` and `monad_pyu` from `tools/`. Both are copies of the engine step `monad_py.Monad.speak` (the Python port of `monad.c` at `eb28ce8`); each deviation is tagged `# TESTMONAD-<tag>` in the code. The port itself is never changed.
 
 | tag | where | what | why |
 |---|---|---|---|

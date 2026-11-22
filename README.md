@@ -18,28 +18,32 @@ Three tools, in the order they are used. None is a finished voice.
 
 | tool | what it is | where |
 |---|---|---|
-| **Scalar boxkite** | the discrete, static kite: seven ordered pairs, pencil, string, flashlight, tension law. One word. Never given motion. | `19D_rotary_boxkite_monad.py`, `Broca/` |
-| **Scaled boxkite** | the Mind's-Eye kite that moves: context relations, struts, the kite in motion, context flow. A sentence. Constrains and orders; supplies no candidates. | `scaled_mind_eye_boxkite_kernel_monad.py`, `Broca/` |
-| **Orbweaver monads** | the semantic web: which words, chosen by their relation to the prompt; open vocabulary, graded weights; seven deconstruction names `ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP SHELL`. Benched, not yet played as a voice; the content extractor v0, the sanitiser and the standard testing corpus are built (`Wernicke/`). | `boxkite_orbweaver_monad.py` (`OrbWeaverMonad.weave`), `Wernicke/` |
+| **Scalar boxkite** | the discrete, static kite: seven ordered pairs, pencil, string, flashlight, tension law. One word. Never given motion. | `19D_rotary_boxkite_monad.py`, `Currentwork/Broca/` |
+| **Scaled boxkite** | the Mind's-Eye kite that moves: context relations, struts, the kite in motion, context flow. A sentence. Constrains and orders; supplies no candidates. | `scaled_mind_eye_boxkite_kernel_monad.py`, `Currentwork/Broca/` |
+| **Orbweaver monads** | the semantic web: which words, chosen by their relation to the prompt; open vocabulary, graded weights; seven deconstruction names `ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP SHELL`. Benched, not yet played as a voice; the content extractor v0, the sanitiser and the standard testing corpus are built (`Currentwork/Wernicke/`). | `boxkite_orbweaver_monad.py` (`OrbWeaverMonad.weave`), `Currentwork/Wernicke/` |
 
-Beside them: **SemPriCon** (the prime-concept baseline, Chinese first; `SemPriCon/`) and **ScalarContextPropagation** (the paper on carrying context along the field; `FourthAgePaper/ScalarContextPropagation/`).
+Beside them: **SemPriCon** (the prime-concept baseline, Chinese first; `Currentwork/SemPriCon/`) and **ScalarContextPropagation** (the paper on carrying context along the field; `FourthAgePaper/ScalarContextPropagation/`).
 
 Open: context flow, carrying the prompt's topic through the reply as discrete words along a field scaled for the response; scorers for the orbweaver; the engineering white paper.
+
+## Layout (restructured 2026-11-21)
+
+`Currentwork/` (Broca, Wernicke, SemPriCon) · `docs/` · `paper/` and `FourthAgePaper/` · `outreach/` · `records/` · `archive/` · the engine files at the root (`docs/FILE_MAP.md` maps them). Old path → new path: `Currentwork/README.md`.
 
 ## Where to read
 
 | to learn | read |
 |---|---|
-| the scaled/scalar boxkite | `Broca/README.md`, `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md`, `docs/wiki/Boxkite-Relational-Atlas.md` |
-| the orbweaver | `Wernicke/README.md`, `docs/semantic_orbweaver_notes.md` |
+| the scaled/scalar boxkite | `Currentwork/Broca/README.md`, `docs/wiki/Scaled-Kite-English-Thought-Center-Context.md`, `docs/wiki/Boxkite-Relational-Atlas.md` |
+| the orbweaver | `Currentwork/Wernicke/README.md`, `docs/semantic_orbweaver_notes.md` |
 | the context-flow tests | `docs/context_flow_spec/` (95 tests) |
-| SemPriCon | `SemPriCon/README.md`, `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/00_index.md` |
+| SemPriCon | `Currentwork/SemPriCon/README.md`, `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/00_index.md` |
 | how to run it | `docs/wiki/Operating-the-Monad.md`, `docs/NLP_ENVIRONMENT.md` |
 | names and symbols | `docs/wiki/Name-Table.md` |
 | everything else that was in this README | `docs/Repository_Reference.md` (section map at its top) |
 | the chronology of how the engine was tuned | `docs/wiki/Tuning-the-Engine/00_index.md` (a record; not edited) |
 | what changed, and when | `CHANGELOG.md`, `TODO.md` |
-| the open documentation job | `UPDATE_JOB_2026-11-21.md`, `AUDIT_2026-11-21.md` |
+| the open documentation job | `records/UPDATE_JOB_2026-11-21.md`, `records/AUDIT_2026-11-21.md` |
 
 ## Symbols (author's standing ruling)
 

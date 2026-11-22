@@ -1,6 +1,6 @@
 # 16 · M4 — Chinese in Universal Native Space (the π/2 equatorial great circle)
 
-**Job.** Restate M2 ([14](14_M2_chinese_to_half_line.md)) in UNS ([15](15_M3_english_in_uns.md) defines the chart). Code: `SemPriCon/tools/uns_mech.py` (`zh_uns`).
+**Job.** Restate M2 ([14](14_M2_chinese_to_half_line.md)) in UNS ([15](15_M3_english_in_uns.md) defines the chart). Code: `Currentwork/SemPriCon/tools/uns_mech.py` (`zh_uns`).
 
 ## The algorithm
 1. **Turn.** The character's place in the dictionary order, i of M: `turn = (i + ½)/M`. No hash; the circle is the dictionary closed into a ring.

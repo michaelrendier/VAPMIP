@@ -1,6 +1,6 @@
 # 04 — Learn and speak
 
-**Job.** The engine's two verbs, as they run now. The ASCII-era mechanism, function by function, is `SemPriCon/paper/The_Golden_Ratio_Monad.pdf` (§4–§13); the Unicode build changes only what is listed under *Changed*.
+**Job.** The engine's two verbs, as they run now. The ASCII-era mechanism, function by function, is `Currentwork/SemPriCon/paper/The_Golden_Ratio_Monad.pdf` (§4–§13); the Unicode build changes only what is listed under *Changed*.
 
 ## Learn (`monad_learn_ex`)
 Split into sentences; tokenise ([02](02_the_tokenizer.md)); for each accepted token: address ([01](01_the_address.md)), `β ← min(β + E² · 0.01 · |sin γ| · π/2, 7.552)`, the slot displays the highest-`E` arrival, `prose_seen` set per slot; then for every pair within 12 accepted tokens `w = Eᵢ Eⱼ · couple / ((|γᵢ − γⱼ| + 0.000707) · d)` (`couple` 2 if same Dirac pole, else 1; `d` = distance in tokens) added to A.
@@ -16,7 +16,7 @@ Seed `J` from the prompt's slots (`β E² e^{−0.05 age}`) → spread to ±3 sl
 ## Not changed (and therefore still true)
 The zeros are Newton approximations; reply length is ≈ 4 for short prompts; β saturates at 7.552; `MONAD_TAU`, `MONAD_WINDOW_MIN`, `MONAD_EMIT_THRESH` are unused; the stored `emission_threshold` is never read. Each is measured in the paper's §17.
 
-**Check:** `python3 SemPriCon/tools/verify_unicode_against_c.py` and `verify_learn_against_c.py`.
+**Check:** `python3 Currentwork/SemPriCon/tools/verify_unicode_against_c.py` and `verify_learn_against_c.py`.
 
 
 ## State version 6
