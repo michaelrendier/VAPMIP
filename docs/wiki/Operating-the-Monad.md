@@ -1,6 +1,6 @@
 # Operating the Monad
 
-*Ptolemy Monad Engine — `ptolemy-monad` C binary, v1.218+*
+*Ptolemy Monad Engine — `ptolemy-monad` C binary, v1.218+. Page written 2026-05-19; constants and labels updated 2026-11-21. The command-line text below describes the C binary as of v1.218; it has not been re-run against the current build (see the 2026-11-21 note at the end).*
 
 ---
 
@@ -18,9 +18,11 @@ These three numbers govern everything. You will see them in every report.
 
 | Constant | Value | Meaning |
 |----------|-------|---------|
-| `OMEGA_ZS` | 0.56714 | Lambert W(1). BAO spectral gap. The engine's idle RPM. |
-| `GAP` | 0.000707 | Yang-Mills mass gap. Semantic vacuum floor. No word's β ever falls below this. |
-| `D_STAR` | 0.246 | Fermat proximity threshold. Zero-divisor danger zone in sedenion space. |
+| `OMEGA_ZS` (code name; the value is **A_π**) | 0.56714 | A_π = W(1), the Lambert W fixed point. The engine's idle RPM. |
+| `GAP` | 0.000707 | A_π − d*_spec·ln 10, a rounding residual. The engine's floor: no word's β falls below it. Not identified with a physical mass gap. |
+| `D_STAR` (the value is d*_spec) | 0.246 | The rounded spectral value of **Ω_ζΣ** = d* = 0.2463072. The zero-divisor danger zone in sedenion space. |
+
+d*·ln 10 = A_π. The code's names predate the author's symbol ruling (`@RCCM_SYMBOLS`): read `OMEGA_ZS` as A_π.
 
 ---
 
@@ -134,9 +136,9 @@ ptolemy-monad --load-bin ~/.ptolemy/monad.ptol --report
 This is the engine's "My Location" function. Output includes:
 
 - **Vocabulary count** — total words in the field
-- **BAO mean vs OMEGA_ZS** — how close the field is to operating temperature
+- **`bao_mean` vs A_π (`OMEGA_ZS`)** — how close the field is to operating temperature
 - **Field health** — 1.0 = perfect BAO convergence, 0.0 = DTC P0087 fault
-- **DTC P0087 count** — number of times BAO diverged beyond ±0.25 from OMEGA_ZS
+- **DTC P0087 count** — number of times `bao_mean` diverged beyond ±0.25 from A_π
 - **SEGFAULT count** — zero-divisor encounters corrected by Fermat rotation
 - **UNS coordinates** — Universal Native Space: which sedenion dimensions dominate
 - **Top activated words** — highest β×E² words in the field
@@ -188,17 +190,17 @@ A healthy English field will show moderate activation across e3 (nouns), e4 (ver
 
 ### BAO and Field Health
 
-The **BAO mean** is the mean of `β × E²` across the vocabulary. It should converge to `OMEGA_ZS = 0.56714`. This is the Lambert W fixed point — the semantic equivalent of the Baryon Acoustic Oscillation scale, the lowest non-zero eigenvalue of the field's Laplacian.
+The **`bao_mean`** is the mean of `β × E²` across the vocabulary. It is designed to converge to A_π = 0.56714 (code name `OMEGA_ZS`), the Lambert W fixed point. `bao_mean` is a code label: no identification with the Baryon Acoustic Oscillation scale is claimed (tested and not supported, `FourthAgePapers/DStar/bao_test.txt`).
 
-- **BAO near OMEGA_ZS, health near 1.0** → engine is at operating temperature
-- **BAO below OMEGA_ZS, DTC P0087 incrementing** → field is too sparse, needs more ingest
-- **BAO above OMEGA_ZS** → field is oversaturated, redundant corpus
+- **`bao_mean` near A_π, health near 1.0** → engine is at operating temperature
+- **`bao_mean` below A_π, DTC P0087 incrementing** → field is too sparse, needs more ingest
+- **`bao_mean` above A_π** → field is oversaturated, redundant corpus
 
 ### DTC Codes
 
 | Code | Name | Meaning |
 |------|------|---------|
-| P0087 | BAO Fault | β×E² mean diverged >±0.25 from OMEGA_ZS |
+| P0087 | BAO Fault | β×E² mean diverged >±0.25 from A_π |
 | SEGFAULT | Zero-Divisor Encounter | Fermat scan detected proximity to sedenion zero-divisor; rotation applied |
 
 These are not errors — they are diagnostic flags. A few P0087 faults during initial corpus ingest is normal. Persistent high counts mean the corpus needs more variety.
@@ -278,7 +280,7 @@ ptolemy-monad --load-bin ~/.ptolemy/monad-english.ptol --query "the"
 | 50 | ~55,000 | 0.85–0.95 |
 | 100+ (2nd pass) | ~65,000 | 0.90–0.98 |
 
-The field saturates around 65,000–80,000 words — most English running text. On the second pass (books already cached), the engine reinforces β values on known words rather than allocating new vocabulary. BAO mean converges toward OMEGA_ZS as the field deepens.
+The field saturates around 65,000–80,000 words — most English running text. On the second pass (books already cached), the engine reinforces β values on known words rather than allocating new vocabulary. `bao_mean` converges toward A_π as the field deepens.
 
 ### Loading the trained state into generation
 
@@ -366,3 +368,7 @@ Daemon: nc localhost 7297              (send text, receive +N word count)
 
 OMEGA_ZS = 0.56714  GAP = 0.000707  D_STAR = 0.246
 ```
+
+---
+
+*2026-11-21 note.* Not re-checked against the current harness: the build steps, the flags, the daemon port and the overnight-teaching recipe. The current voices are run through `ptol -w` (`/monad use <name>`) and `ptolemy -r`; see `docs/Repository_Reference.md` (Try it) and `PtolC/README.md`. The 12 speaking monad modules and the current tools (scalar boxkite, scaled boxkite, orbweaver) are in the root `README.md`.

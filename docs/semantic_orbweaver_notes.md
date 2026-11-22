@@ -6,6 +6,10 @@ Stub page: `docs/wiki/Tuning-the-Engine/43_semantic_orbweaver_pathway_constructi
 
 ---
 
+**Status, 2026-11-21.** This file is the live plan for the orbweaver; its entries are dated 2026-10-17 and are kept as written. What is built: the T0 trace of the May reply (a selector rule, not the prompt, chooses `holcus`); the standard testing corpus (`Wernicke/corpus/`); the content extractor v0 (`Wernicke/extractor/`: a deterministic ruleset that puts a prompt's literal words into the seven data points `SHELL ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP`); the sanitiser and bin builder (`Wernicke/sanitize/`); the Broca/Wernicke monitor with its Taoist mode. What is not built: the S and G scorers, the orbweaver as a voice that plays a reply, the morphological `repass()`. Home of this file: `docs/`; `Wernicke/docs/` holds a copy. Symbols in the 2026-10-17 entries: where a line writes `Ω` for the value 0.5671 it means A_π = W(1); `d*` there is d*_spec = 0.246; the table is `@RCCM_SYMBOLS` (α fine-structure; A_π = W(1); Ω_ζΣ = d* = 0.2463). Later developments that touch this tool are in `SemPriCon/` (the prime-concept baseline, Chinese first) and `docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/`.
+
+---
+
 ## 2026-10-17: T0 traced (the "anomalous" first reply)
 
 ### Setup (reproducible)

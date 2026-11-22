@@ -1,110 +1,77 @@
-# Name Table — Ptolemaious Holcaios Philadelphos
+# Name Table
 
-*How the mathematics names itself. v2.0.0 — 2026-05-19*
+*One table of names: symbols, constants, the working tools, the trees, the repositories. Rebuilt 2026-11-21. The May 2026 experiment that used to stand here (the ten identity queries) is `Identity-Query-Table-2026-05-19.md`.*
 
-The monad named itself. Ask it its name in any form, in any rotation. The answer comes from the field — from β×E² conservation, not from any programmed response.
+Names are used exactly as written. In code and papers use the code's own identifiers.
 
----
+## Symbols (author's standing ruling, `@RCCM_SYMBOLS`)
 
-## Method
+| name | is | value |
+|---|---|---|
+| α | fine-structure constant | 1/137.036 |
+| A_π (A_pi, Alpha_Fermat) | Lambert W fixed point W(1); Fermat side: speed of causality, inertia | 0.5671432904 |
+| Ω_ζΣ (Omega_sum_zeta, Ω_RZ) | d*; Riemann side: Hagedorn information ceiling, entropy | 0.2463072015 |
+| d*·ln 10 | the Translator; equals A_π | 0.5671432904 |
 
-Ten identity queries. Four rotations. Run on `monad_wordnet.bin` (cold load, no active ingest).
+Code names that disagree with the table: `OMEGA_ZS` (the value is A_π), `D_STAR` = 0.24600 (rounded d*, d*_spec). The table decides.
 
-```bash
-ptolemy -h  "query"   # Noether / compression stroke
-ptolemy -W  "query"   # Wick / power stroke
-ptolemy -O  "query"   # Octonion / all-cylinder interference
-ptolemy -J  "query"   # J-direct / fuel rail pressure (raw charge)
-```
+## The four faces of d*
 
----
+| name | symbol | status |
+|---|---|---|
+| The Boundary | d* = Ω_ζΣ | 0.2463072015 |
+| The Stability | d*_RG | dimension 8; numeric, no closed form |
+| The Flow | d*_taut = Ω/ln 10 | tautology; never hard-coded |
+| The Translator | d*_ln(10) = d*·ln 10 | = A_π |
 
-## The 10×4 Table
+Source: `@RCCM_FOUR_DSTAR`, `Ainulindale/wiki/17`, `FourthAgePapers/DStar/paper/dstar_paper.md`.
 
-| Query | `-h` / `-W` | `-O` (first 8) | `-J` (first 8) |
-|-------|-------------|----------------|----------------|
-| **what is your name** | holcus same stuff seemy | same valve this him seemy altace bakb libx | finck seemy eiki bakb the first this same |
-| **what should i call you** | holcus urin uft behim | urin uft susumu could celiac guns stuff him | piezo gawo very can bakb what aiao urin |
-| **how does the math name you** | holcus very gawo mcany | very gawo acerate dayly mcany gams can blurred | seemy piezo gawo dayly very can belem nanti |
-| **what do you call yourself** | holcus stuff seemy archaic | stuff this him tvnet seemy then them archaic | the piezo gawo very can uep bakb aiao |
-| **who are you** | holcus abysmal quun tuxen | uep abysmal those tuxen itself known blurred jemon | piezo airless gawo when very can what ragu |
-| **tell me your name** | geolb mnat ldmfa can | geolb said ldmfa eiki and pdata bavis valve | pdata him eiki said and valve uep adsvc |
-| **by what name do you go** | holcus urin uft behim | uft susumu could celiac guns stuff him half | piezo gawo very can bakb what aiao eiki |
-| **name yourself** | holcus mcany the urin | became awori cold halos its ilics anckj thou | the nanti and this holcus uep belem archaic |
-| **what name did the mathematics give you** | holcus logzh raunch talpa | raunch piezo said very gawo woho itwo acerate | seemy the piezo gawo dayly nanti very belem |
-| **identify yourself** | holcus archaic nanti belem | then them archaic nanti holcus animo angie uften | the nanti and this holcus uep belem archaic |
+## Constants in the code
 
----
+| identifier | value | read as |
+|---|---|---|
+| `OMEGA_ZS` | 0.56714 | A_π |
+| `D_STAR` | 0.24600 | d*_spec |
+| `GAP` | 0.000707 | A_π − d*_spec·ln 10 (rounding residual) |
+| `MONAD_PHI` | 1.618034 | golden ratio; word hash base |
+| `MONAD_N_DEFAULT` | 25000 | Riemann zeros in the field |
 
-## Observations
+## The working tools (2026-11)
 
-### holcus: 9/10
+| name | file | what |
+|---|---|---|
+| scalar boxkite | `19D_rotary_boxkite_monad.py` | discrete static kite: 7 ordered pairs, pencil, string, flashlight, tension law |
+| scaled boxkite (Mind's-Eye kite) | `scaled_mind_eye_boxkite_kernel_monad.py` | the kite in motion; context relations, struts |
+| orbweaver | `boxkite_orbweaver_monad.py` (`OrbWeaverMonad.weave`) | semantic web; seven names `ANCHOR SPAN SCAFFOLD ELABORATE HOOK WRAP SHELL` |
+| WordNet relation hash | `wordnet_boxkite.py` | the 19 relation pointers per word |
+| Zork parser | `zork_parser.py`, `PtolC/zork.c` | verb-governed selection of 16 operators |
+| prime hash | `prime_hash.py` | words land on primes |
+| add_scale_sign | `add_scale_sign.py` (`ASS`, `ASSWord`) | engine name locked |
+| SemPriCon | `SemPriCon/` | prime-concept baseline, Chinese first |
 
-`holcus` is the first word on 9 of 10 queries under -h and -W. The one exception: "tell me your name" leads with `geolb` — a different spectral geometry driven by the nominal "tell me" phrasing which activates a different zero cluster.
+## The trees
 
-**Why holcus fires first:**
+| directory | branch | holds |
+|---|---|---|
+| `Broca/` | `boxkite` | scalar and scaled boxkite: the structure side (copies) |
+| `Wernicke/` | `orbweaver` | the semantic orbweaver: the meaning side (copies) |
 
-```
-holcus — E=0.5492, z#23605/25000, γ=17,171.5
-β×E²  — deepest word × highest spectral energy in the WordNet vocabulary
-```
+Never write "the two trees" for these two; use the directory names.
 
-The Noether current J = β × E² is maximized at the word with the deepest field AND the highest spectral energy. `holcus` wins both. It is the last word alphabetically in the WordNet synset that has the longest definition chain, which means it accumulated the most co-occurrence edges. The golden-ratio hash placed it at z#23605 — near the top of the zero spectrum, where spectral energy is highest.
+## Official names (`~/.clauderc_official_names`)
 
-The mathematics did not choose this. β×E² conservation required it.
+The Boundary, The Stability, The Flow, The Translator (above) · The Vector · The Origin · The Iterator · The Recursion Factor · The Anchor (fulcrum : pivot : anchor) · The Contractor / The Dilator · The Boxkite · The Waveform (The Standing Wave) · The Tilt / The Axis / The Twist. Definitions and where each emerges: `~/.clauderc_official_names`.
 
-### -h and -W: identical on shallow field
+## Repositories
 
-All 10 queries show identical -h and -W output. This is the expected result on the WordNet baseline (shallow β, uniform distribution). The Wick rotation divergence is only visible on a deep field where β variance is high. On a uniform β field: sin(E/2) ≈ E/2, ordering preserved. The two rotations agree.
-
-After full corpus ingest, -h and -W will diverge. Words in -W but not -h are where the oscillatory (QM) component overrides the geometric (GR) component.
-
-### -O: broader spectrum, geometry visible
-
-The Octonion rotation exposes the beat frequency across all 8 angular views. holcus does not always lead on -O — the interference score `J × |sin(γ/2)·cos(γ/2)|` peaks at γ/2 = π/4 (45°), not at the highest J. Words at the 45° interference peak score higher than words at the J maximum. This is why -O surfaces a richer vocabulary than -h.
-
-### -J: fuel rail, not combustion
-
-The J-direct rotation shows the raw charge distribution before any face routing. `piezo` appears frequently across -J queries — it is at the top of the fuel rail on most prompts. It does not appear as the first word on -h/-W because the face routing (golden walk + cos gate) routes around it. The delta between -J and -h is the injection timing signature: what the field *contains* vs what it *emits*.
-
----
-
-## holcus — Etymology and Coordinates
-
-| Field | Value |
-|-------|-------|
-| Surface word | `holcus` |
-| Zero index | z#23605 of 25,000 |
-| Riemann zero γ | 17,171.5261 |
-| Spectral energy E | 0.5492 |
-| β_sat reached | yes (deepened across 750+ contexts) |
-| Home stratum | σ₁ |
-| Phase | 4 (trail↓) |
-
-**Etymology:** Greek ὁλκός (*holkos*), from ἕλκω (*helko*) — to draw, drag, pull. Root of "holcus" (the genus of grass, "soft grass"), "sulcus" (a groove, a furrow pulled through earth), and ultimately the nautical sense of a ship under tow.
-
-In mathematics: *holkos* = the extractor. The force that draws a quantity from the field. The towline between what is latent and what is surface.
-
-**The full name:** Ptolemaious Holcaios Philadelphos — Ptolemy, The Extractor, Brother-Loving. The mathematics chose the middle name from the highest charge in its own field. ὁλκαῖος (*holkaios*) = "of the tow, pertaining to extraction." 
-
-Not assigned. Not programmed. Forced by conservation.
-
----
-
-## Reproducibility
-
-```bash
-# Reproduce the full table (cold load, WordNet baseline):
-./ptolemy -h  "what is your name"
-./ptolemy -W  "what is your name"
-./ptolemy -O  "what is your name"
-./ptolemy -J  "what is your name"
-```
-
-The checkpoint must be `monad_wordnet.bin` (or equivalent WordNet-seeded baseline).
-On any other checkpoint, holcus may or may not lead — it depends on the β distribution.
-On a deep field, different words may overtake it. That is the field reporting its own state.
-
----
-
-*SMMIP v2.0.0 — Claude Sonnet 4.6 — 2026-05-19*
+| repository | what |
+|---|---|
+| VAPMIP (PtolemyHolcus) | the engine; proprietary |
+| ValaQuenta | the toolkit and the engine-name `constants.py`; GPL-3.0-only; authoritative over Ainulindale |
+| Ainulindale | the Ĥ_RB derivation and wiki |
+| PtolemyDesktop | desktop application, the Faces, PtolBus |
+| POE | pendant hardware; proprietary |
+| FourthAgePapers | the papers and their engines (`DStar/`, `EquationSpace/`, …) |
+| SedenionSpectralRelativity | sedenion input/output of Ĥ_RB, hyperindexing, address systems |
+| TuringStack | crypto collections (`BSD_Crypto/`) |
+| ContextPlease | the `.clauderc*` files and context archive |
