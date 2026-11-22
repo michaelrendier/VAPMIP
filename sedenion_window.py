@@ -1,0 +1,424 @@
+#!/usr/bin/env python3
+"""
+sedenion_window.py -- the one object that reads and writes a sentence, word by word.
+
+Cody, 2026-11-21. The window holds the machinery described over the day:
+
+  W_S  the big web (Web_scaled): the sentence. It holds the frame (the slots of the sentence) and the
+       16-slot sedenion ring of the context heard so far (slot 0 = e0, the anchor).
+  w_s  the little web (Web_scalar): one word. It looks at the neighbourhood of the topic in the Scalar
+       Boxkite context hash (relation neighbours in WordNet, their exact context class and gamma_radial basin)
+       and at the word-to-word statistics of a corpus, and picks ONE word for the open slot.
+
+  One heartbeat per word:   W_S shrinks to the open slot   ->   w_s picks the word   ->   W_S places it
+  and the web is RESCALED back to the whole sentence   ->   repass (tone, tense, conjugation)   ->   next slot.
+  "Rescale" (big -> scale small, small -> scale big) is the only word used for that step.
+
+  PATHWAY words (the closed class: the, of, in, is, and ...) are not picked from the whole language: the open slot
+  is a RING of a few dozen words, so choosing one costs a few bits. CONTENT words are picked from the context
+  neighbourhood. The cost of every pick is -log2 P, summed per sentence (the compression reading: the sentence is
+  a point in nested intervals, each pick narrows it by P).
+
+  Invisible markers, three per word: TONE (a neuromodulator axis and a level), TENSE, CONJUGATION, as Unicode Tag
+  characters (category Cf, no glyph). PROVISIONAL codebook: the neuromodulator set and the level scale are
+  the design notes of 2026-11-20 (docs/wiki/Tuning-the-Semantic-Prime-Concept-Engine/10_design_notes.md) made
+  concrete enough to run; the author has not fixed them.
+
+  Sensors: a VAG-COM style live harness (the dPrint idea, altered): read/write, in the loop. `VAGCOM=1` prints
+  `[vag]` measuring blocks and `[tone]` state lines as the window streams; writable channels (tone_target,
+  pathway_ring) are read by the next step. Always recorded in `sensors.log` for tests.
+
+  Persuasion: `Persuader` follows Pascal's rule from "De l'art de persuader" as the author named it (INTERPRETATION,
+  to be confirmed): start from the side the other person views the matter from (grant what is true there), then
+  lead. In tone terms: the first replies meet the detected tone one level below its strength, then move one level
+  per word toward the target tone.
+
+Limits (stated, not hidden): the generated sentences are frame-filled and are only as good as the neighbourhood and the
+corpus given; the tests check the machinery (accounting, rescale, markers, determinism), not literary quality.
+Python first; port to ptol.c only after the tests are green and the author says so.
+"""
+from __future__ import annotations
+
+import collections
+import math
+import os
+import re
+import sys
+import unicodedata
+from typing import Any, Dict, List, Optional, Sequence, Tuple
+
+import wordnet_boxkite as WB
+
+# ── markers: tone, tense, conjugation as invisible Tag characters ───────────────────────────────────
+TAG0 = 0xE0020                                   # TAG SPACE .. TAG TILDE = U+E0020..U+E007E (95 characters)
+NEURO = ['DA', '5HT', 'NE', 'OT', 'GLU', 'GABA', 'eCB', 'ACh', 'OPI']       # dopamine serotonin noradrenaline oxytocin
+LEVELS = 7                                                                    # glutamate GABA endocannabinoid acetylcholine opioid
+TENSES = ['base', 'past', 'present', 'future', 'perfect', 'progressive', 'imperative', 'conditional']
+CONJ = ['base', '3sg', 'past', 'pastpart', 'ing', 'plural', 'comparative', 'superlative']
+_T_TONE, _T_TENSE, _T_CONJ = 0, 64, 72           # offsets inside the Tag block (tone uses 0..62)
+
+
+def tone_char(axis: str, level: int) -> str:
+    return chr(TAG0 + _T_TONE + NEURO.index(axis) * LEVELS + max(0, min(LEVELS - 1, level)))
+
+
+def tense_char(t: str) -> str:
+    return chr(TAG0 + _T_TENSE + TENSES.index(t))
+
+
+def conj_char(c: str) -> str:
+    return chr(TAG0 + _T_CONJ + CONJ.index(c))
+
+
+def marker(axis: str, level: int, tense: str, conj: str) -> str:
+    return tone_char(axis, level) + tense_char(tense) + conj_char(conj)
+
+
+def decode_marker(m: str) -> Dict[str, Any]:
+    a, b, c = (ord(x) - TAG0 for x in m[:3])
+    return {'axis': NEURO[(a - _T_TONE) // LEVELS], 'level': (a - _T_TONE) % LEVELS,
+            'tense': TENSES[b - _T_TENSE], 'conj': CONJ[c - _T_CONJ]}
+
+
+def strip_markers(s: str) -> str:
+    return ''.join(ch for ch in s if not (0xE0020 <= ord(ch) <= 0xE007E))
+
+
+def show_markers(s: str) -> str:
+    """The debugging view: the invisible markers made visible as <axis:level|tense|conj>."""
+    out, i = [], 0
+    while i < len(s):
+        if 0xE0020 <= ord(s[i]) <= 0xE007E and i + 2 < len(s):
+            d = decode_marker(s[i:i + 3]); out.append('<%s:%d|%s|%s>' % (d['axis'], d['level'], d['tense'], d['conj'])); i += 3
+        else:
+            out.append(s[i]); i += 1
+    return ''.join(out)
+
+
+# ── the VAG-COM style sensor harness ───────────────────────────────────────────────────────────────
+class Sensors:
+    """Live measuring blocks (read) and adaptation channels (write). Prints when VAGCOM=1; always records."""
+
+    def __init__(self, stream=None):
+        self.flag = os.environ.get('VAGCOM', '0') == '1'
+        self.stream = stream or sys.stderr
+        self.log: List[Tuple[str, Dict[str, Any]]] = []
+        self.channels: Dict[str, Any] = {'tone_target': ('GABA', 3), 'pathway_ring': None}
+
+    def emit(self, group: str, **f) -> None:
+        self.log.append((group, f))
+        if self.flag:
+            tag = '[tone]' if group == 'TONE' else '[vag]'
+            body = ' '.join('%s=%s' % (k, (show_markers(v) if k == 'marker' else v)) for k, v in f.items())
+            print('%s %-7s %s' % (tag, group, body), file=self.stream, flush=True)
+
+    def read(self, group: str) -> List[Dict[str, Any]]:
+        return [f for g, f in self.log if g == group]
+
+
+# ── tone: detection, and Pascal's meet-then-lead ──────────────────────────────────────────────────
+_LEX = {
+    'NE':  "angry anger furious rage hate hated stupid idiot damn shut liar never always worst terrible awful useless".split(),
+    'OPI': "sad sorry grief lonely hopeless tired empty cry crying lost hurt pain".split(),
+    'DA':  "great love wonderful excited yes amazing fantastic win happy glad".split(),
+    'OT':  "thanks thank please friend together dear kind welcome care".split(),
+    'GABA': "calm quiet peace easy gentle slow rest okay fine".split(),
+}
+
+
+def detect_tone(text: str) -> Tuple[str, int]:
+    """(axis, level) of the dominant neuromodulator axis by lexicon count; ('GABA', 2) when nothing matches."""
+    words = re.findall(r"[a-z']+", text.lower())
+    score = {a: sum(w in lex for w in words) for a, lex in _LEX.items()}
+    bang = text.count('!') + sum(1 for w in re.findall(r"\b[A-Z]{3,}\b", text))
+    if score['NE']:
+        score['NE'] += bang
+    axis = max(score, key=lambda a: score[a])
+    if score[axis] == 0:
+        return ('GABA', 2)
+    return (axis, min(LEVELS - 1, 1 + score[axis]))
+
+
+class Persuader:
+    """Pascal's rule: meet the other side first, then lead. trajectory(k) gives the tone for the k-th word."""
+
+    def __init__(self, heard: Tuple[str, int], target: Tuple[str, int] = ('GABA', 3)):
+        self.heard, self.target = heard, target
+
+    def trajectory(self, n: int) -> List[Tuple[str, int]]:
+        ax, lv = self.heard
+        tax, tlv = self.target
+        out = []
+        cur = max(0, lv - 1)                       # grant their side, one level below its strength
+        for k in range(n):
+            if k == 0 or (cur > 0 and ax != tax):
+                out.append((ax, cur))
+                cur = max(0, cur - 1)
+            else:
+                out.append((tax, min(LEVELS - 1, tlv)))
+        return out
+
+
+# ── the language statistics (word to word) ────────────────────────────────────────────────────────
+DET = set("a an the this that these those my your his her its our their some any each every no".split())
+PREP = set(("of in on at for with by from about into through over under between among against during before after "
+            "above below up down out off near to toward upon within without").split())
+CONJ_W = set("and or but nor yet so".split())
+AUX = set("is are was were be been am has have had will would can could may might shall should do does did".split())
+PRON = set("i you he she it we they me him her us them who which what".split())
+RING = {'DET': DET, 'PREP': PREP, 'CONJ': CONJ_W, 'AUX': AUX}
+CLOSED = set().union(*RING.values()) | PRON
+
+
+class Bigram:
+    """Word-to-word probabilities from a corpus: P(w | prev) = lam*bigram + (1-lam)*unigram (add-0.1 floor)."""
+
+    def __init__(self, lam: float = 0.7):
+        self.uni: collections.Counter = collections.Counter()
+        self.bi: collections.Counter = collections.Counter()
+        self.ctx: collections.Counter = collections.Counter()
+        self.lam = lam
+        self.total = 0
+
+    def fit(self, texts: Sequence[str]) -> 'Bigram':
+        for t in texts:
+            toks = re.findall(r"[a-z]+(?:'[a-z]+)?", t.lower())
+            self.uni.update(toks)
+            for a, b in zip(toks, toks[1:]):
+                self.bi[(a, b)] += 1
+                self.ctx[a] += 1
+        self.total = sum(self.uni.values())
+        return self
+
+    def p(self, w: str, prev: Optional[str]) -> float:
+        pu = (self.uni.get(w, 0) + 0.1) / (self.total + 0.1 * (len(self.uni) + 1))
+        if prev is None or not self.ctx.get(prev):
+            return pu
+        return self.lam * self.bi.get((prev, w), 0) / self.ctx[prev] + (1 - self.lam) * pu
+
+    def frequent(self, wn, pos: str, n: int) -> List[str]:
+        out = []
+        for w, _ in self.uni.most_common():
+            if w in CLOSED or len(w) < 3:
+                continue
+            if wn.synsets(w, pos):
+                out.append(w)
+                if len(out) >= n:
+                    break
+        return out
+
+
+# ── the context neighbourhood in the Scalar Boxkite hash ───────────────────────────────────────────
+class Neighborhood:
+    """Relation neighbours of a topic word in WordNet, each with its exact context class and gamma_radial."""
+
+    def __init__(self):
+        from nltk.corpus import wordnet as wn
+        self.wn = wn
+        self._cls: Dict[tuple, int] = {}
+
+    def point(self, synset) -> Dict[str, Any]:
+        v = tuple(WB.context_vector(synset))
+        cls = self._cls.setdefault(v, len(self._cls) + 1)
+        g = WB.gamma_radial(list(v))
+        return {'vec19': v, 'class': cls, 'gamma': g, 'broca': sum(1 for x in v if x), 'wernicke': None if g is None else 1.0 + g}
+
+    def around(self, word: str, pos: str, hops: int = 2) -> Dict[str, float]:
+        """lemma -> weight, over the relation neighbourhood of the first sense of `word` (itself weight 1.0)."""
+        ss = self.wn.synsets(word, pos)
+        out: Dict[str, float] = {}
+        if not ss:
+            return out
+        s0 = ss[0]
+
+        def add(syn, w):
+            for l in syn.lemma_names():
+                if '_' in l or not l.isalpha():
+                    continue
+                out[l.lower()] = max(out.get(l.lower(), 0.0), w)
+        add(s0, 1.0)
+        rel = ('hypernyms', 'hyponyms', 'member_holonyms', 'part_holonyms', 'member_meronyms', 'part_meronyms',
+               'similar_tos', 'also_sees', 'entailments', 'verb_groups', 'attributes')
+        for m in rel:
+            for t in getattr(s0, m)():
+                add(t, 0.6)
+        if hops >= 2:
+            for h in s0.hypernyms():
+                for sib in h.hyponyms():
+                    add(sib, 0.35)
+        return out
+
+
+# ── the window ─────────────────────────────────────────────────────────────────────────────────────
+FRAMES = {
+    'svo': ['DET', 'N', 'V', 'DET', 'N'],
+    'sv_prep': ['DET', 'N', 'V', 'PREP', 'DET', 'N'],
+    'sva': ['DET', 'N', 'AUX', 'ADJ'],
+}
+
+
+class SedenionWindow:
+    """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
+
+    def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3)):
+        self.bg = bigram
+        self.vocab = vocab
+        self.sensors = sensors or Sensors()
+        self.sensors.channels['tone_target'] = tone_target
+        self.nb = Neighborhood()
+        self.t = 0                                   # words processed (read and written), one tick each
+        self.ring: List[Optional[str]] = [None] * 16     # the sedenion ring: slot 0 = e0 (anchor)
+        self.cum_bits = 0.0
+        self.persuader: Optional[Persuader] = None
+        self.heard_tone: Tuple[str, int] = ('GABA', 2)
+
+    # -- sedenion ring --------------------------------------------------------
+    def _place(self, word: str) -> None:
+        if self.ring[0] is None:
+            self.ring[0] = word
+        else:
+            self.ring = [self.ring[0]] + [word] + self.ring[1:15]      # e0 stays; newest enters slot 1
+
+    # -- sensors --------------------------------------------------------------
+    def _read_blocks(self, word: str, pos: str, slot: str, r_before: float, r_after: float, bits: float,
+                     pathway: bool, mk: str, tone: Tuple[str, int], tense: str, conj: str) -> None:
+        pt = None
+        ss = self.nb.wn.synsets(word, pos if pos in ('n', 'v', 'a', 'r') else 'n')
+        if ss:
+            pt = self.nb.point(ss[0])
+        self.sensors.emit('STEP', t=self.t, slot=slot, r_before=round(r_before, 6), r_after=round(r_after, 6),
+                          bits=round(bits, 3), cum_bits=round(self.cum_bits, 3))
+        self.sensors.emit('WORD', t=self.t, word=word, pathway=pathway,
+                          cls=None if pt is None else pt['class'], gamma=None if not pt or pt['gamma'] is None else round(pt['gamma'], 4))
+        if pt and pt['gamma'] is not None:
+            Z = complex(pt['wernicke'], pt['broca'])
+            Z0 = 1.0
+            gin = (Z - Z0) / (Z + Z0)
+            gout = ((Z0 * Z0 / Z) - Z0) / ((Z0 * Z0 / Z) + Z0)
+            self.sensors.emit('BALANCE', t=self.t, wernicke=round(Z.real, 4), broca=int(Z.imag), gamma_in=round(abs(gin), 4),
+                              gamma_out=round(abs(gout), 4), balance=round(abs(gin + gout), 12))
+        self.sensors.emit('TONE', t=self.t, word=word, tone='%s:%d' % tone, tense=tense, conj=conj, marker=mk)
+
+    # -- reading ----------------------------------------------------------------
+    def read(self, text: str) -> List[Dict[str, Any]]:
+        """Read text word by word. Every word advances the window one tick. Returns one record per word."""
+        self.heard_tone = detect_tone(text)
+        self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
+        recs = []
+        prev = None
+        for w in re.findall(r"[A-Za-z']+", text):
+            lw = w.lower()
+            pathway = lw in CLOSED
+            p = self.bg.p(lw, prev)
+            bits = -math.log2(p)
+            if pathway:
+                bits = min(bits, -math.log2(max(p, 1e-9)))
+            self.t += 1
+            self.cum_bits += bits
+            if not pathway:
+                self._place(lw)
+                if self.vocab is not None:
+                    self.vocab.note_unknown(lw)
+            mk = marker(self.heard_tone[0], self.heard_tone[1], 'present', 'base')
+            self._read_blocks(lw, 'n', 'heard', 1.0, p, bits, pathway, mk, self.heard_tone, 'present', 'base')
+            recs.append({'t': self.t, 'word': lw, 'pathway': pathway, 'bits': bits, 'ring': list(self.ring)})
+            prev = lw
+        if self.vocab is not None:
+            self.vocab.hear(text)
+        return recs
+
+    # -- writing: the heartbeat ----------------------------------------------
+    def _pick(self, slot: str, prev: Optional[str], topic: Dict[str, Dict[str, float]], taken: set
+              ) -> Tuple[str, float, int]:
+        """w_s: one word for the open slot. Returns (word, P, candidate count). P is the pick's weight rescaled over
+        the candidate set. Pathway slots draw from a RING; content slots from the topic neighbourhood."""
+        ring = self.sensors.channels.get('pathway_ring')
+        if slot in RING:
+            cand = {w: 1.0 for w in (ring if ring and slot == 'DET' else RING[slot])}
+            if slot == 'DET':
+                cand = {w: 1.0 for w in ('the', 'a', 'an', 'this', 'that', 'its')}
+        elif slot in ('N', 'V', 'ADJ'):
+            pos = {'N': 'n', 'V': 'v', 'ADJ': 'a'}[slot]
+            cand = {}
+            for src in topic.get(pos, {}):
+                cand[src] = topic[pos][src]
+            if not cand:
+                cand = {w: 0.2 for w in self.bg.frequent(self.nb.wn, pos, 60)}
+            cand = {w: x for w, x in cand.items() if w not in taken}
+        else:
+            cand = {}
+        if not cand:
+            return ('', 1.0, 0)
+        weights = {w: self.bg.p(w, prev) * (x if slot in ('N', 'V', 'ADJ') else 1.0) for w, x in cand.items()}
+        tot = sum(weights.values())
+        best = max(weights, key=lambda w: (weights[w], w))
+        return (best, weights[best] / tot, len(cand))
+
+    def write(self, prompt: str, frame: Optional[str] = None, tense: str = 'present') -> Dict[str, Any]:
+        """Write one sentence in answer to `prompt`. Returns the sentence (plain and marked), the per-word records."""
+        self.read(prompt)
+        toks = re.findall(r"[a-z']+", prompt.lower())
+        topic: Dict[str, Dict[str, float]] = {'n': {}, 'v': {}, 'a': {}}
+        for w in toks:
+            if w in CLOSED:
+                continue
+            for pos in ('n', 'v', 'a'):
+                for k, x in self.nb.around(w, pos).items():
+                    topic[pos][k] = max(topic[pos].get(k, 0.0), x)
+        nouns = [w for w in toks if w not in CLOSED and self.nb.wn.synsets(w, 'n')]
+        slots = FRAMES[frame or ('svo' if len(nouns) >= 2 else 'sv_prep')]
+        traj = self.persuader.trajectory(len(slots)) if self.persuader else [self.heard_tone] * len(slots)
+        words, marked, recs, taken, prev = [], [], [], set(), None
+        sentence_bits = 0.0
+        for k, slot in enumerate(slots):
+            r_big = 1.0                                    # W_S: the whole sentence, full scale
+            word, P, ncand = self._pick(slot, prev, topic, taken)      # W_S shrinks to the slot; w_s picks
+            if not word:
+                continue
+            r_small = r_big * P                            # the interval narrowed by the pick
+            bits = -math.log2(P)
+            sentence_bits += bits
+            self.cum_bits += bits
+            self.t += 1
+            surface, conj = self._repass(word, slot, tense, words)
+            axis, level = self.sensors.channels.get('tone_override') or traj[k]
+            mk = marker(axis, level, tense if slot == 'V' else 'base', conj)
+            if slot in ('N', 'V', 'ADJ'):
+                self._place(word); taken.add(word)
+            self._read_blocks(word, {'N': 'n', 'V': 'v', 'ADJ': 'a'}.get(slot, 'n'), slot, r_big, r_small, bits,
+                              slot in RING, mk, (axis, level), tense if slot == 'V' else 'base', conj)
+            r_big = 1.0                                    # RESCALED: back to the whole sentence, word in place
+            words.append(surface)
+            marked.append(mk + surface)
+            recs.append({'t': self.t, 'slot': slot, 'word': surface, 'P': P, 'bits': bits, 'candidates': ncand,
+                         'pathway': slot in RING, 'r_after_pick': r_small, 'r_rescaled': r_big, 'marker': mk})
+            prev = word
+        text = ' '.join(words)
+        text = (text[:1].upper() + text[1:] + '.') if text else ''
+        return {'sentence': text, 'marked': ' '.join(marked) + '.', 'records': recs, 'bits': sentence_bits,
+                'topic_size': {k: len(v) for k, v in topic.items()}}
+
+    def _repass(self, word: str, slot: str, tense: str, said: List[str]) -> Tuple[str, str]:
+        """Tense and conjugation of the placed word; returns (surface form, conjugation code)."""
+        if slot != 'V':
+            return word, 'base'
+        try:
+            from lemminflect import getInflection
+            tag = {'past': 'VBD', 'present': 'VBZ', 'progressive': 'VBG', 'perfect': 'VBN'}.get(tense, 'VBZ')
+            f = getInflection(word, tag=tag)
+            surf = f[0] if f else word
+        except Exception:
+            surf = word + ('ed' if tense == 'past' else 's')
+        conj = {'past': 'past', 'present': '3sg', 'progressive': 'ing', 'perfect': 'pastpart'}.get(tense, '3sg')
+        return surf, conj
+
+    # -- rings: the Broca-Wernicke reading, for the Scale engine ---------------
+    def scale_point(self, word: str, pos: str = 'n') -> Optional[Dict[str, Any]]:
+        """Z = wernicke + i*broca for the word's first sense (feed to ValaQuenta scale: broca_wernicke_ring_chart)."""
+        ss = self.nb.wn.synsets(word, pos)
+        if not ss:
+            return None
+        pt = self.nb.point(ss[0])
+        if pt['wernicke'] is None:
+            return None
+        return {'word': word, 'Z': complex(pt['wernicke'], pt['broca']), 'class': pt['class'], 'gamma': pt['gamma']}

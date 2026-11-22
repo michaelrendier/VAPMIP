@@ -1,0 +1,10 @@
+group order on 15 labels: 21
+linear on all 15 labels: True
+strut 1 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 2 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 3 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 4 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 5 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 6 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+strut 7 |stab| 3 pencil preserved: True orbit sizes on the 7 stations: [1, 3, 3]
+pencil(1): [(2, 3), (4, 5), (6, 7), (8, 9), (10, 11), (12, 13), (14, 15)]

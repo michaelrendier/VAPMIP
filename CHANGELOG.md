@@ -6,6 +6,9 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
+- **Sedenion window.** `sedenion_window.py` (11 tests): reads and writes a sentence one word per tick (W_S shrink, w_s pick, rescale, repass), pathway rings, VAG-COM style sensors (`VAGCOM=1`), invisible tone/tense/conjugation Tag markers, Pascal meet-then-lead tone trajectory. `docs/wiki/Sedenion-Window.md`.
+- **Scalar Boxkite context map.** `FourthAgePaper/ScalarContextPropagation/map/` : every lemma-in-synset of WordNet 3.0 (206,978 rows) with class, basins, gamma_radial, vec19, context code and address; 1,276 classes; 171 attractor basins, one holding 88% of the synsets.
+- **Blackjack group.** `bench/blackjack_pencil.py`: F21 acts on the 15 sedenion labels and, for every strut, its order-3 stabiliser preserves pencil(s) and splits the 7 stations 1+3+3 (pivot, axes, shadows). No mapping onto the 19 relations exists.
 - **Live vocabulary.** `live_vocabulary.py` (9 tests): a journaled sense store over WordNet and the context bin; new words and relation edges learned from definitional sentences; history of when learned, refined and split; sedenion-shaped dirty frames; `repack_monad3c` writes the changes into a copy of `monad3_c.bin`, checked with the C binary (`ptol -M`). Limits (narrative prose yields almost nothing; one row per word in the bin) are in `docs/wiki/Live-Vocabulary.md`.
 - (The entries below this one are the documentation pass; no engine code changed in them.)
 
