@@ -4,3 +4,7 @@ raw_cache.jsonl
 run_raw.log
 out/results.jsonl
 out_local/
+kafka_paras.jsonl
+kafka_raw.jsonl
+kafka_raw.log
+usage_model.joblib

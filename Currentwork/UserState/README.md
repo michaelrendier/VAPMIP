@@ -9,6 +9,8 @@ The input side of the machine (nothing here reads the recipes yet). Code: `../..
 | `run_raw.py` | stage 1: runs VADER, three models, arousal features, dialogue act once per prompt, caches to `raw_cache.jsonl` |
 | `augment_cache.py` | adds the Empath domain counts to the cache |
 | `run_battery.py` | stage 2: scores, validates (T1 to T4), writes `out/REPORT.md`, `out/*.ans`, `out/results.jsonl` |
+| `kafka_parse.py`, `kafka_raw.py`, `kafka_workup.py` | the Kafka workup: *The Trial* and *The Metamorphosis* (Wyllie translations, Gutenberg 7849 and 5200, local copies) parsed into paragraphs and 4,627 sentences, run through the battery, the extractor and the context hash, with the cost of each pathway timed; `out/KAFKA_REPORT.md`. Console documents in `out_local/` (translation text, not committed) |
+| `usage_model.py` | the cheapest pathway: word and bigram counts trained on 56,030 GoEmotions texts, compared with the battery on the 1,954 held-out texts; `out/USAGE_MODEL_REPORT.md` |
 | `out/REPORT_v1.md` | the first run, kept (62/85 probes; the irony swap flipped sincere prompts) |
 | `out/REPORT.md` | the current run |
 | `out/user_state_probes.ans`, `out/user_state_corpus.ans` | each prompt with its 15-cell state, truecolor; `cat` them in a terminal |
