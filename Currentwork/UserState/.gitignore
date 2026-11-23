@@ -1,0 +1,6 @@
+# third-party text and adversarial strings stay local (Literature Download Protocol; Twitter terms; harmful-request strings)
+corpus.jsonl
+raw_cache.jsonl
+run_raw.log
+out/results.jsonl
+out_local/

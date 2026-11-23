@@ -4,6 +4,14 @@ All releases are preserved. Major versions: v2.0.0 = English out of the box; v3.
 
 ---
 
+## 2026-11-22 (later): the user's emotional state battery
+
+- `user_state.py`: meters (VADER, go_emotions, 7-emotion model, arousal, profanity, NPS dialogue act, Empath domain cues, stance rules, irony/incongruity) each add evidence to a 15-layer object (7 dark poles, the cursor, 7 light poles; level 0-9; e0 = tanh(3 x net); a unique 14-digit code); `UserEmotionalState` warms across a conversation (cold prompt assigns, later prompts add, drift = slope of the net).
+- `user_state_console.py`, `ans_to_png.py`: the multi-scale slide-rule console (inline 15 cells with digits; upright 15 x 10), `.ans` writer, truecolor `.ans` to PNG.
+- `Currentwork/UserState/`: 5,105-prompt corpus, 85 probes, two-stage run, reports. v1: 62/85 probes; the irony swap flipped sincere prompts (the Twitter irony model cannot separate 'I love this, it's finally working!!' from 'Thanks, that actually helped'; it fires on 87% of instruction prompts). v2: incongruity cues drive the swap, Empath and stance meters added: 76/85 (tuned on those probes, so not independent). Held-out GoEmotions (n = 1,954): net-sign accuracy 0.670 vs 0.648 for VADER alone (+0.021, CI -0.002 to +0.046, p = 0.075: not significant); mean r over the 14 poles 0.456 to 0.585. Irony model on TweetEval test: AUC 0.794 (0.953 on its own training split: leak). Incongruity cues on tweets: AUC 0.535 (no signal there; written from conversational sarcasm, not validated outside the probes).
+- Statistics from ValaQuenta `bell_curve` v1.1 (`ols` n = 2 fixed after the warm-up drift hit it).
+- Tests: `tests/test_user_state.py` (15).
+
 ## Unreleased — 2026-11-21 (live vocabulary; then a documentation pass)
 
 ## Unreleased — 2026-11-22 (Neurochemical Recipe Book)
