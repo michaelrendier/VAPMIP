@@ -14,6 +14,7 @@ from nltk.corpus import wordnet as wn, semcor
 from nltk.tree import Tree
 from user_state import BC
 random.seed(5)
+SURFACE = os.environ.get('SURFACE') == '1'; TESTN = int(os.environ.get('TESTN', '800'))
 from sentence_transformers import SentenceTransformer
 M = SentenceTransformer(os.path.expanduser('~/Desktop/SpaceClaude/local_only_references/models/all-MiniLM-L6-v2'), device='cpu')
 items = []
@@ -21,7 +22,7 @@ for f in semcor.fileids()[:60]:
     for sent in semcor.tagged_sents(f, tag='sem'):
         toks = [(ch.label().name().lower(), ch.label().synset().name()) for ch in sent if isinstance(ch, Tree) and hasattr(ch.label(), 'synset')]
         if len(toks) >= 4: items.append((' '.join(w for w in sent.leaves() if isinstance(w, str)) if hasattr(sent, 'leaves') else '', toks))
-random.shuffle(items); tr, te, va = items[:4000], items[4000:4800], items[4800:5099]
+random.shuffle(items); tr, te, va = items[:4000], items[4000:4000 + TESTN], items[4800:4800 + min(150, TESTN)]
 def surface(sent):  # SemCor leaves are lists of words; rebuild a readable sentence
     return ' '.join(w for w in (sent if isinstance(sent, list) else sent.leaves()))
 # need surface text: re-read the same sentences keyed by position is awkward; rebuild from lemma tokens (content words) instead: context = the content lemmas joined
@@ -34,8 +35,8 @@ def gloss_vec(sid, lemma):
     return cache[k]
 def build_features(data):
     rows = []
-    for toks, in ((t,) for _, t in data):
-        e = M.encode(ctx_text(toks), normalize_embeddings=True); lems = [l for l, _ in toks]
+    for txt, toks in data:
+        e = M.encode(txt if SURFACE else ctx_text(toks), normalize_embeddings=True); lems = [l for l, _ in toks]
         for i, (l, gold) in enumerate(toks):
             ss = st.senses_of(l)
             if len(ss) < 2: continue
@@ -62,8 +63,8 @@ def acc(F, w):
 grid = [(a, b, c) for a in (0, .5, 1, 2) for b in (0, .5, 1, 2, 4) for c in (0, .5, 1, 2)]
 fit = max((g for g in grid if any(g)), key=lambda g: acc(Fv, g)[0])
 rows = [('rank prior only (first sense)', (1, 0, 0)), ('embedding only', (0, 1, 0)), ('usage memory only', (0, 0, 1)), ('rank + embedding', (1, 1, 0)), ('rank + usage', (1, 0, 1)), (f'all three, weights fitted on validation {fit}', fit)]
-out = ['# Disambiguation, both ways (SemCor gold senses)', '', f'train (confirmed senses for the usage memory) {len(tr)} sentences, validation {len(va)}, test {len(te)}. Embedding = all-MiniLM-L6-v2, context = the sentence\'s tagged content lemmas, sense = "<lemma>: <WordNet gloss>".', '', '| method | test accuracy | ambiguous tokens |', '|---|---|---|']
+out = ['# Disambiguation, both ways (SemCor gold senses)', '', f'train (confirmed senses for the usage memory) {len(tr)} sentences, validation {len(va)}, test {len(te)}. Embedding = all-MiniLM-L6-v2, context = ' + ('the real sentence text' if SURFACE else 'the sentence\'s tagged content lemmas') + ', sense = "<lemma>: <WordNet gloss>".', '', '| method | test accuracy | ambiguous tokens |', '|---|---|---|']
 res = {}
 for n, w in rows:
     a, k = acc(Ft, w); res[n] = a; out.append(f'| {n} | {a:.3f} | {k} |')
-open(os.path.join(H, 'out', 'WSD_EMBED_REPORT.md'), 'w').write('\n'.join(out) + '\n'); print('\n'.join(out))
+open(os.path.join(H, 'out', 'WSD_EMBED_REPORT_surface.md' if SURFACE else 'WSD_EMBED_REPORT.md'), 'w').write('\n'.join(out) + '\n'); print('\n'.join(out))
