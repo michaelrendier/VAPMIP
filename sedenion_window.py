@@ -268,7 +268,7 @@ class SedenionWindow:
     """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
 
     def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None,
-                 stats=None, selfctx=None):
+                 stats=None, selfctx=None, state=None):
         self.bg = stats if stats is not None else bigram      # EnglishStats (usage frequency, levels) or the plain Bigram
         self.stats = stats                  # EnglishStats: learns from what the user says (outside text only), never from his own speech
         self.selfctx = selfctx              # context_gearbox.SelfContexts: DATA SELF (what he says/does) and USER SELF (how the user reacts)
@@ -286,6 +286,7 @@ class SedenionWindow:
         self.cum_bits = 0.0
         self.persuader: Optional[Persuader] = None
         self.heard_tone: Tuple[str, int] = ('GABA', 2)
+        self.state = state                 # state_repass.StateRepass (optional): the user's 14 poles read into the repass (2026-11-25)
 
     def _p(self, w: str, prev: Optional[str]) -> float:
         if self.stats is not None:
@@ -293,6 +294,10 @@ class SedenionWindow:
         return self.bg.p(w, prev)
 
     # -- sedenion ring --------------------------------------------------------
+    def fill(self) -> int:
+        """Slots of the 16-slot ring that hold a word. The resolution is always 16; this is how many of them have evidence."""
+        return sum(1 for x in self.ring if x is not None)
+
     def _place(self, word: str) -> None:
         if self.ring[0] is None:
             self.ring[0] = word
@@ -323,8 +328,15 @@ class SedenionWindow:
     def read(self, text: str, echo: int = 0) -> List[Dict[str, Any]]:
         """Read text word by word. Every word advances the window one tick. Returns one record per word. `echo` counts how often
         this content has already looped through the Monad (its own speech heard again is echo 1; the cap is monad_english_io.ECHO_CAP)."""
-        self.heard_tone = detect_tone(text)
-        self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
+        if self.state is not None and echo == 0:                     # the user's turn: read the 14-pole state, heal, cancel, re-plan (state_repass.py)
+            import state_repass as _sr
+            summ = self.state.observe(text, fill=self.fill())
+            self.heard_tone = self.state.heard_tone()
+            self.persuader = _sr.StatePersuader(self.state, self.sensors.channels['tone_target'])
+            self.sensors.emit('STATE', t=self.t, fill=self.fill(), held=summ['held'], healed=summ['healed_poles'], k_eff=summ['k_eff'], axis=summ['axis'])
+        else:
+            self.heard_tone = detect_tone(text)
+            self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
         self._user_words = set(re.findall(r"[a-z']+", text.lower())) - CLOSED
         if echo == 0 and self.stats is not None:
             self.stats.observe(text)                                   # usage statistics update as time passes
