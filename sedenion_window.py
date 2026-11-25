@@ -174,6 +174,7 @@ CONJ_W = set("and or but nor yet so".split())
 AUX = set("is are was were be been am has have had will would can could may might shall should do does did".split())
 PRON = set("i you he she it we they me him her us them who which what".split())
 RING = {'DET': DET, 'PREP': PREP, 'CONJ': CONJ_W, 'AUX': AUX}
+_BE = set('is are was were be been am'.split()); _HAVE = set('has have had'.split())
 CLOSED = set().union(*RING.values()) | PRON
 
 
@@ -268,7 +269,7 @@ class SedenionWindow:
     """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
 
     def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None,
-                 stats=None, selfctx=None, state=None, usage=None):
+                 stats=None, selfctx=None, state=None, usage=None, web=False):
         self.bg = stats if stats is not None else bigram      # EnglishStats (usage frequency, levels) or the plain Bigram
         self.stats = stats                  # EnglishStats: learns from what the user says (outside text only), never from his own speech
         self.selfctx = selfctx              # context_gearbox.SelfContexts: DATA SELF (what he says/does) and USER SELF (how the user reacts)
@@ -288,6 +289,9 @@ class SedenionWindow:
         self.heard_tone: Tuple[str, int] = ('GABA', 2)
         self.usage = usage                 # conversation_usage.ConversationUsage (optional): the user's own usage mixed into every P, and the bw_correction channel
         self.state = state                 # state_repass.StateRepass (optional): the user's 14 poles read into the repass (2026-11-25)
+        self.web = web                     # the orbweaver step at sentence scale (weave_cycle.py): a thin-margin pick is re-picked along the strut (2026-11-25)
+        self._last_pick: Dict[str, Any] = {}
+        self._mt: Optional[str] = None     # the marker tense of the last repass
 
     def _p(self, w: str, prev: Optional[str]) -> float:
         p = self.stats.p(w, prev, self.level) if self.stats is not None else self.bg.p(w, prev)
@@ -396,6 +400,7 @@ class SedenionWindow:
             cand = {}
         if not cand:
             return ('', 1.0, 0)
+        self._last_pick = {}
         if slot not in ('N', 'V', 'ADJ'):                                 # a pathway ring: a few dozen words, picked cheaply
             weights = {w: self._p(w, prev) for w in cand}
             tot = sum(weights.values())
@@ -415,11 +420,18 @@ class SedenionWindow:
         weights = {w: weights[w] for w in ranked}
         tot = sum(weights.values())
         best = ranked[min(kn['novelty_rank'], len(ranked) - 1)]            # DA: explore down the ranking
+        self._last_pick = {'weights': dict(weights), 'tot': tot}
         return (best, weights[best] / tot, len(weights))
 
-    def write(self, prompt: str, frame: Optional[str] = None, tense: str = 'present') -> Dict[str, Any]:
-        """Write one sentence in answer to `prompt`. Returns the sentence (plain and marked), the per-word records."""
-        self.read(prompt)
+    def write(self, prompt: str, frame: Optional[str] = None, tense: Optional[str] = 'present', depth: Optional[int] = None, reach: Optional[int] = None,
+              number: str = 'sg', read: bool = True) -> Dict[str, Any]:
+        """Write one sentence in answer to `prompt`. Returns the sentence (plain and marked), the per-word records.
+        `tense`: any name lyndon_conjugation.parse_tense understands ('past', 'future progressive', 'past perfect' ...); 'auto' takes it from the lemniscate
+        station (`depth` of `reach`, tenseplan.py); 'mirror' follows the user's own tense; None is 'present'.  `read=False`: the prompt was already read (a paragraph)."""
+        import tenseplan as _tp
+        tense = _tp.resolve(tense, prompt, depth, reach)
+        if read:
+            self.read(prompt)
         toks = re.findall(r"[a-z']+", prompt.lower())
         topic: Dict[str, Dict[str, float]] = {'n': {}, 'v': {}, 'a': {}}
         for w in toks:
@@ -444,18 +456,25 @@ class SedenionWindow:
             word, P, ncand = self._pick(slot, prev, topic, taken)      # W_S shrinks to the slot; w_s picks
             if not word:
                 continue
+            if self.web and slot in ('N', 'V', 'ADJ'):                 # the orbweaver step at sentence scale: thin margin -> reverse along the strut
+                word, P, ncand, (ax, lv) = self._revisit(slot, prev, topic, taken, (word, P, ncand), (ax, lv))
+                self.tone7 = Tone7.from_axis(ax, lv / 6.0)
+                import weave_cycle as _wc
+                ww = _wc.word_web(self, word, toks)                    # the same step at word scale (scalar kite, read-only): which sense, which spokes
+                if ww: self.sensors.emit('WEB', t=self.t, scale='word', word=word, sense=ww['sense'], senses=ww['senses'], spokes=ww['spokes'], turbulent=ww['turbulent'], reversed=ww['reversed'])
             r_small = r_big * P                            # the interval narrowed by the pick
             bits = -math.log2(P)
             sentence_bits += bits
             self.cum_bits += bits
             self.t += 1
-            surface, conj = self._repass(word, slot, tense, words)
-            axis, level = self.sensors.channels.get('tone_override') or traj[k]
-            mk = marker(axis, level, tense if slot == 'V' else 'base', conj)
+            surface, conj = self._repass(word, slot, tense, words, number)
+            axis, level = self.sensors.channels.get('tone_override') or (ax, lv)
+            mt = self._mt or ('base' if slot != 'V' else 'present')
+            mk = marker(axis, level, mt, conj)
             if slot in ('N', 'V', 'ADJ'):
                 self._place(word); taken.add(word)
             self._read_blocks(word, {'N': 'n', 'V': 'v', 'ADJ': 'a'}.get(slot, 'n'), slot, r_big, r_small, bits,
-                              slot in RING, mk, (axis, level), tense if slot == 'V' else 'base', conj)
+                              slot in RING, mk, (axis, level), mt, conj)
             r_big = 1.0                                    # RESCALED: back to the whole sentence, word in place
             words.append(surface)
             marked.append(mk + surface)
@@ -474,19 +493,42 @@ class SedenionWindow:
                                               tone=dict(self.tone7.levels), level=self.level)
         return out
 
-    def _repass(self, word: str, slot: str, tense: str, said: List[str]) -> Tuple[str, str]:
-        """Tense and conjugation of the placed word; returns (surface form, conjugation code)."""
-        if slot != 'V':
-            return word, 'base'
-        try:
-            from lemminflect import getInflection
-            tag = {'past': 'VBD', 'present': 'VBZ', 'progressive': 'VBG', 'perfect': 'VBN'}.get(tense, 'VBZ')
-            f = getInflection(word, tag=tag)
-            surf = f[0] if f else word
-        except Exception:
-            surf = word + ('ed' if tense == 'past' else 's')
-        conj = {'past': 'past', 'present': '3sg', 'progressive': 'ing', 'perfect': 'pastpart'}.get(tense, '3sg')
-        return surf, conj
+    def _revisit(self, slot, prev, topic, taken, pick, tone):
+        """Sentence-scale web step (weave_cycle.web_step): when >= 3 candidates sit within half of the best (the orbweaver's turbulence rule) the
+        spiral reverses along a strut: the slot is picked again under the antagonist tone (GLU|GABA, DA|5HT, NE|OXT) and the sharper pick is kept."""
+        import weave_cycle as WC
+        word, P, ncand = pick; ax, lv = tone
+        w0 = dict(self._last_pick.get('weights') or {})
+        if not w0 or ax not in WC.STRUT_PARTNER:
+            return word, P, ncand, tone
+        keep = self.tone7; alt: Dict[str, Any] = {}
+
+        def reverse():
+            self.tone7 = Tone7.from_axis(WC.STRUT_PARTNER[ax], lv / 6.0)
+            w2, P2, n2 = self._pick(slot, prev, topic, taken); alt.update(word=w2, P=P2, n=n2, w=dict(self._last_pick.get('weights') or {}))
+            return w2, alt['w'] or {w2: 1.0}
+        info = WC.web_step('sentence', w0, reverse, chosen=word)
+        self.tone7 = keep
+        self.sensors.emit('WEB', t=self.t, scale='sentence', slot=slot, peaks=info['peaks'], turbulent=info['turbulent'], reversed=info['reversed'])
+        if info['reversed']:
+            return alt['word'], alt['P'], alt['n'], (WC.STRUT_PARTNER[ax], lv)
+        return word, P, ncand, tone
+
+    def _repass(self, word: str, slot: str, tense: str, said: List[str], number: str = 'sg') -> Tuple[str, str]:
+        """Tense and conjugation of the placed word through the Lyndon verb group (lyndon_conjugation.py); returns (surface, conjugation code).
+        The marker tense of this word is left in self._mt."""
+        import lyndon_conjugation as LC
+        self._mt = None
+        if slot == 'V':
+            fr = LC.inflection_frame(tense, word, number, 3 if number == 'sg' else 3)
+            self._mt = fr['tense']
+            return ' '.join(fr['surface']), fr['conj']
+        if slot == 'AUX' and tense != 'present' and word in _BE | _HAVE:                  # the auxiliary of an 'sva' frame follows the tense; 'present' keeps the ring's word
+            lemma = 'be' if word in _BE else 'have'
+            fr = LC.inflection_frame(tense, lemma, number, 3)
+            self._mt = fr['tense']
+            return ' '.join(fr['surface']), fr['conj']
+        return word, 'base'
 
     # -- rings: the Broca-Wernicke reading, for the Scale engine ---------------
     def scale_point(self, word: str, pos: str = 'n') -> Optional[Dict[str, Any]]:

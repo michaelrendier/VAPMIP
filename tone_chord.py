@@ -24,7 +24,7 @@ from typing import Dict, List, Tuple
 import numpy as np
 
 NEURO7 = ['DA', '5HT', 'NE', 'OXT', 'GLU', 'GABA', 'CB1']
-_ALIAS = {'OT': 'OXT', 'eCB': 'CB1'}
+_ALIAS = {'OT': 'OXT', 'eCB': 'CB1', 'OPI': 'CB1'}      # OPI: the Recipe Book's hub (mu-opioid) takes the CB1 slot's relaxation knob (2026-11-25; before, from_axis('OPI') was silently ignored)
 FS, N = 16000, 1600
 F_NEURO = {'DA': 350, '5HT': 440, 'NE': 560, 'OXT': 700, 'GLU': 880, 'GABA': 1100, 'CB1': 1380}
 TENSE_ROWS, TENSE_COLS = [1800, 2000, 2250, 2500], [2800, 3100]

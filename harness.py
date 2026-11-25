@@ -865,6 +865,14 @@ class Harness:
             self._cu = False if getattr(self, '_cu', None) is None else self._cu
             self.present(f"harness: usage channel failed ({e})", center=None)
 
+    def respond(self, prompt: str, tense: Optional[str] = None) -> Dict[str, Any]:
+        """One turn through the whole wired path (responder.py): observe the prompt as 'external', read the user's state, weave the reply (orbweaver plan,
+        window sentences, Lyndon verb groups), observe the reply as 'internal' under the same pair id. Returns the reply and what moved."""
+        if getattr(self, '_responder', None) is None:
+            import responder
+            self._responder = responder.Responder(harness=self)
+        return self._responder.turn(prompt, tense)
+
     @property
     def usage(self):
         """The ConversationUsage in force (its `.store`, `.vocab`, `.drift`, `.channels['bw_correction']`), or None."""
