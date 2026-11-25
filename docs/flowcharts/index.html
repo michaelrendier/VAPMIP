@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monad and Harness Flow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316202c'/%3E%3Crect x='10' y='10' width='20' height='12' rx='6' fill='%23cdebd6'/%3E%3Crect x='34' y='26' width='20' height='12' rx='2' fill='%23dbe7f6'/%3E%3Cpath d='M20 22v10h14M44 38v10' stroke='%23fbfaf6' stroke-width='3' fill='none'/%3E%3Cpolygon points='44,44 54,52 34,52' fill='%23fbe6b8'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f5f3ec;--fg:#16202c;--mut:#3a4656;--card:#fbfaf6;--line:#d6d1c3;--acc:#1f5fa8;--badge:#ffd34d;--badge-fg:#000}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151c;--fg:#e8edf3;--mut:#b9c3d0;--card:#18202a;--line:#33404f;--acc:#8ec0ff}}
+:root[data-theme="dark"]{--bg:#10151c;--fg:#e8edf3;--mut:#b9c3d0;--card:#18202a;--line:#33404f;--acc:#8ec0ff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,sans-serif}
+header,main,footer{max-width:1500px;margin:0 auto;padding:0 16px}header{padding-top:22px}
+h1{margin:.1em 0 .2em;font-size:1.7rem}p.lead{margin:.2em 0 1em;color:var(--mut);max-width:70ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:.6em 0 1.2em}.bar a,.bar button{color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px;text-decoration:none;font:inherit;cursor:pointer}
+.fig{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 22px;padding:12px}
+.imgno{position:absolute;top:10px;left:10px;z-index:2;background:var(--badge);color:var(--badge-fg);font-weight:800;border-radius:8px;padding:2px 10px;box-shadow:0 1px 4px #0006}
+.fig h2{margin:.1em 0 .1em 92px;font-size:1.15rem}.fig p{margin:.1em 0 .8em 92px;color:var(--mut);font-size:.95rem}
+.wrap{overflow:auto;max-height:84vh;border:1px solid var(--line);border-radius:8px;background:#fbfaf6}
+.wrap img{display:block;width:100%;height:auto;min-width:980px}
+.cap{font-size:.9rem;color:var(--mut);margin:.5em 0 0}
+code{font-family:ui-monospace,DejaVu Sans Mono,monospace;font-size:.92em}
+footer{padding-bottom:40px;color:var(--mut);font-size:.92rem}footer a{color:var(--acc)}
+</style></head><body>
+<header>
+<h1>The Monad and the Harness: code flow</h1>
+<p class="lead">Two code flow charts of one conversation turn: the <b>Monad</b> (<code>PtolC/ptol.c</code>, section <i>The child's voice</i>) and the <b>Harness</b> (<code>PtolC/monad_harness.c</code>, <i>The harness hears</i>). Every title is a name that exists in the C source (checked by <code>tests/test_flowcharts.py</code>); the Python twins that the C was ported from and tested against are named in each subtitle. A picture shows the machinery; it is not evidence that the replies are good.</p>
+<div class="bar"><a href="monad_flow.svg" target="_blank">Image 1 · SVG</a><a href="monad_flow.png" target="_blank">Image 1 · PNG</a><a href="harness_flow.svg" target="_blank">Image 2 · SVG</a><a href="harness_flow.png" target="_blank">Image 2 · PNG</a><button id="theme" type="button">theme</button></div>
+</header>
+<main>
+<section class="fig" id="img1"><span class="imgno">Image 1</span><h2>The Monad: one turn through <code>ptol.c</code></h2>
+<p>Left to right: <code>cv_read</code> (state, tone, ring), <code>cv_turn</code> (the resident turn), <code>cv_compose</code> (the scaled orbweaver: plan the web), <code>cv_write</code> (one sentence, slot by slot), one word (<code>cv_pick</code>, <code>cv_revisit</code>, <code>cv_inflect</code>), and the stored data it reads. A yellow numbered circle marks a call and the place it lands.</p>
+<div class="wrap"><img src="monad_flow.svg" alt="Code flow chart of the Monad: cv_turn calls cv_read, cv_compose, cv_write; cv_write calls cv_pick, cv_revisit, cv_inflect" width="2000" height="2696"></div>
+<p class="cap">Source: <a href="https://github.com/michaelrendier/VAPMIP/blob/main/PtolC/ptol.c">VAPMIP/PtolC/ptol.c</a>. Python twins: <code>responder.py</code>, <code>sedenion_window.py</code>, <code>scaled_boxkite_orbweaver_monad.py</code>, <code>weave_cycle.py</code>, <code>tenseplan.py</code>, <code>lyndon_conjugation.py</code>, <code>tone_chord.py</code>.</p></section>
+<section class="fig" id="img2"><span class="imgno">Image 2</span><h2>The Harness: hearing a turn in <code>monad_harness.c</code></h2>
+<p>The frame link to the Python console; <code>mh_ear_hear</code> for the user (counted and priced) and for the reply (priced, moves the Broca–Wernicke drift); <code>mh_split_numbers</code> (numbers are not words); <code>mh_ear_user_turn</code> (the user's 14 poles to a 7-axis mix to a target); the files it keeps.</p>
+<div class="wrap"><img src="harness_flow.svg" alt="Code flow chart of the Harness: the frame link, mh_ear_hear for external and internal turns, mh_split_numbers, mh_ear_user_turn, stored data" width="2000" height="1356"></div>
+<p class="cap">Source: <a href="https://github.com/michaelrendier/VAPMIP/blob/main/PtolC/monad_harness.c">VAPMIP/PtolC/monad_harness.c</a>, <a href="https://github.com/michaelrendier/VAPMIP/blob/main/PtolC/monad_harness.h">monad_harness.h</a>. Python twins: <code>numeric.py</code>, <code>conversation_usage.py</code>, <code>bw_drift.py</code>, <code>vocab_store.py</code>, <code>state_repass.py</code>, <code>neuro_recipes.py</code>, <code>prompt_to_state.py</code> (usage meter), <code>three_hearers.py</code>.</p></section>
+</main>
+<footer>
+<p><b>How to read them.</b> The symbols are the ISO 5807:1985 flowchart set (ANSI lineage): oval = start/end, rectangle = step, diamond = decision, parallelogram = input/output, double-barred rectangle = a sub-process defined elsewhere (another lane, or the other chart), cylinder = stored data. See the <a href="https://www.wikipedia.org/wiki/ECMA-4">ECMA-4 / ISO flowchart standard lineage</a> and <a href="https://creately.com/guides/flowchart-symbols/">Creately's symbol guide</a>. Built by <code>docs/flowcharts/make_flowcharts.py</code> (SVG, then <code>rsvg-convert</code> to PNG); drawn with <code>flowlib.py</code>. Parity with the Python monad is tested in <code>tests/test_c_parity.py</code>. Differences between the C and the Python are listed in <code>PtolC/docs/CHILD_VOICE.md</code>.</p>
+<p>Page: <a href="https://github.com/michaelrendier/VAPMIP/tree/main/docs/flowcharts">VAPMIP/docs/flowcharts</a> · contact <a href="https://orcid.org/0009-0007-7239-6760">ORCID 0009-0007-7239-6760</a></p></footer>
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}
+document.getElementById('theme').onclick=function(){var d=document.documentElement,n=(d.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}}</script>
+</body></html>

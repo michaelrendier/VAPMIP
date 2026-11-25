@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1832" height="1242" viewBox="0 0 1832 1242" font-family="DejaVu Sans, Verdana, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a4656"/></marker></defs>
+<rect width="1832" height="1242" fill="#fbfaf6"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#16202c">The Harness: hearing a turn  (monad_harness.c, THE HARNESS HEARS)</text>
+<text x="40" y="74" font-size="14" fill="#16202c">Python twins: numeric.py · conversation_usage.py · bw_drift.py · vocab_store.py · state_repass.py · neuro_recipes.py · prompt_to_state.py (usage meter) · three_hearers.py   |   the Monad is the other chart</text>
+<rect x="46" y="98" width="280" height="1104" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="186.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">the frame link</text>
+<text x="186.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">mh_open · mh_pump · mh_send_chat</text>
+<rect x="338" y="98" width="280" height="1104" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="478.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">MH_EXTERNAL</text>
+<text x="478.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the user: counted and priced</text>
+<rect x="630" y="98" width="280" height="1104" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="770.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">MH_INTERNAL</text>
+<text x="770.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the reply: priced, moves the drift</text>
+<rect x="922" y="98" width="280" height="1104" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="1062.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">mh_split_numbers</text>
+<text x="1062.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">numbers are not words</text>
+<rect x="1214" y="98" width="280" height="1104" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="1354.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">mh_ear_user_turn</text>
+<text x="1354.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the user's state</text>
+<rect x="1506" y="98" width="280" height="1104" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="1646.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">stored data</text>
+<text x="1646.0" y="134" font-size="11" fill="#16202c" text-anchor="middle"></text>
+<path d="M186.0,173.0 L186.0,183.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,249.0 L186.0,259.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,325.0 L186.0,324.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,412.0 L186.0,411.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,477.0 L186.0,487.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,629.0 L186.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M186.0,705.0 L186.0,715.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M60.0,368.0 L40.0,368.0 L40.0,596.0 L60.0,596.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M60.0,520.0 L16.0,520.0 L16.0,292.0 L60.0,292.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,249.0 L478.0,259.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,325.0 L478.0,335.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,401.0 L478.0,400.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,488.0 L478.0,487.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,553.0 L478.0,563.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M478.0,629.0 L478.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,477.0 L770.0,476.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,564.0 L770.0,563.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,629.0 L770.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,705.0 L770.0,715.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,781.0 L770.0,780.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,868.0 L770.0,867.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M770.0,933.0 L770.0,943.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M604.0,444.0 L644.0,444.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M896.0,824.0 L916.0,824.0 L916.0,976.0 L896.0,976.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,249.0 L1062.0,248.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,336.0 L1062.0,324.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,412.0 L1062.0,400.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,488.0 L1062.0,563.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,553.0 L1062.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1062.0,629.0 L1062.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1188.0,292.0 L1208.0,292.0 L1208.0,520.0 L1188.0,520.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1188.0,368.0 L1228.0,368.0 L1228.0,520.0 L1188.0,520.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M936.0,444.0 L916.0,444.0 L916.0,520.0 L936.0,520.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,249.0 L1354.0,259.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,325.0 L1354.0,335.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,401.0 L1354.0,411.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,477.0 L1354.0,487.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,553.0 L1354.0,563.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,629.0 L1354.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,705.0 L1354.0,715.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,781.0 L1354.0,780.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1228.0,824.0 L1208.0,824.0 L1208.0,900.0 L1228.0,900.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,868.0 L1354.0,943.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1228.0,900.0 L1208.0,900.0 L1208.0,1052.0 L1228.0,1052.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1354.0,1009.0 L1354.0,1019.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="60.0" y="107.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="136.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">console (Python, curses)</text>
+<text x="186.0" y="151.7" font-size="10.8" fill="#16202c" text-anchor="middle">ptolemy_console.py</text>
+<polygon points="76.0,183.0 312.0,183.0 296.0,249.0 60.0,249.0" fill="#e4d9f2" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="205.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">socketpair frames</text>
+<text x="186.0" y="221.2" font-size="10.8" fill="#16202c" text-anchor="middle">newline-delimited JSON: say cmd</text>
+<text x="186.0" y="234.2" font-size="10.8" fill="#16202c" text-anchor="middle">mode ping attach quit radio</text>
+<rect x="60.0" y="259.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="71.0" y1="259.0" x2="71.0" y2="325.0" stroke="#3a4656" stroke-width="1.6"/><line x1="301.0" y1="259.0" x2="301.0" y2="325.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="281.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_open · mh_recv</text>
+<text x="186.0" y="297.1" font-size="10.8" fill="#16202c" text-anchor="middle">poll; EOF or hard error ends the</text>
+<text x="186.0" y="310.1" font-size="10.8" fill="#16202c" text-anchor="middle">session</text>
+<polygon points="186.0,324.0 312.0,368 186.0,412.0 60.0,368" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="370.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">radio frame?</text>
+<rect x="60.0" y="411.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="440.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_parse_support_line</text>
+<text x="186.0" y="455.6" font-size="10.8" fill="#16202c" text-anchor="middle">« face » post · « Ptolemy » judgement</text>
+<rect x="60.0" y="487.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="509.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ingest_support</text>
+<text x="186.0" y="525.1" font-size="10.8" fill="#16202c" text-anchor="middle">HARDEN THROTTLE ESCALATE raise emote;</text>
+<text x="186.0" y="538.1" font-size="10.8" fill="#16202c" text-anchor="middle">DEFER HOLD change nothing</text>
+<rect x="60.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="592.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">say · cmd · mode · … → ptol.c</text>
+<text x="186.0" y="607.6" font-size="10.8" fill="#16202c" text-anchor="middle">the monad answers (cv_turn / cv_command)</text>
+<polygon points="76.0,639.0 312.0,639.0 296.0,705.0 60.0,705.0" fill="#e4d9f2" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="668.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_send_chat</text>
+<text x="186.0" y="683.6" font-size="10.8" fill="#16202c" text-anchor="middle">text, σ, Γ, primes, mode</text>
+<rect x="60.0" y="715.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="186.0" y="750.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">console shows the reply</text>
+<rect x="352.0" y="183.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="205.3" font-size="11.9" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_hear(text, cls, pair)</text>
+<text x="478.0" y="219.7" font-size="10.8" fill="#16202c" text-anchor="middle">called by cv_turn before the user</text>
+<text x="478.0" y="232.7" font-size="10.8" fill="#16202c" text-anchor="middle">is answered</text>
+<rect x="352.0" y="259.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="363.0" y1="259.0" x2="363.0" y2="325.0" stroke="#3a4656" stroke-width="1.6"/><line x1="593.0" y1="259.0" x2="593.0" y2="325.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="288.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_split_numbers</text>
+<text x="478.0" y="303.6" font-size="10.8" fill="#16202c" text-anchor="middle">prose, nums</text>
+<rect x="352.0" y="335.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="364.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">n_numbers += nums</text>
+<text x="478.0" y="379.6" font-size="10.8" fill="#16202c" text-anchor="middle">not for MH_DOCUMENT</text>
+<polygon points="478.0,400.0 604.0,444 478.0,488.0 352.0,444" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="446.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cls?</text>
+<rect x="352.0" y="487.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="503.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_bits_per_word(prose)</text>
+<text x="478.0" y="518.6" font-size="10.8" fill="#16202c" text-anchor="middle">priced BEFORE it is counted: mean −log₂</text>
+<text x="478.0" y="531.6" font-size="10.8" fill="#16202c" text-anchor="middle">mh_ear_p_word; p_word = λ·usage +</text>
+<text x="478.0" y="544.6" font-size="10.8" fill="#16202c" text-anchor="middle">(1−λ)·general, λ = N/(N+200)</text>
+<rect x="352.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="585.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">u_observe</text>
+<text x="478.0" y="601.1" font-size="10.8" fill="#16202c" text-anchor="middle">tokens, stop-words, length ≥ 3, no</text>
+<text x="478.0" y="614.1" font-size="10.8" fill="#16202c" text-anchor="middle">digits, known by the monad</text>
+<rect x="352.0" y="639.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="478.0" y="668.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">pending[pair] = bits</text>
+<text x="478.0" y="683.6" font-size="10.8" fill="#16202c" text-anchor="middle">16 slots; the oldest is dropped</text>
+<rect x="644.0" y="411.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="439.6" font-size="11.3" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">bits = mh_ear_bits_per_word(reply)</text>
+<text x="770.0" y="453.4" font-size="10.8" fill="#16202c" text-anchor="middle">the monad's own words, same prices</text>
+<polygon points="770.0,476.0 896.0,520 770.0,564.0 644.0,520" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="522.2" font-size="11.7" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">pending[pair] found?</text>
+<rect x="644.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="591.8" font-size="12.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">w = pending bits, b = reply bits</text>
+<text x="770.0" y="606.3" font-size="10.8" fill="#16202c" text-anchor="middle">only if b &gt; 0 ∧ w &gt; 0</text>
+<rect x="644.0" y="639.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="655.0" y1="639.0" x2="655.0" y2="705.0" stroke="#3a4656" stroke-width="1.6"/><line x1="885.0" y1="639.0" x2="885.0" y2="705.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="668.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_bw_correction(w, b)</text>
+<text x="770.0" y="683.6" font-size="10.8" fill="#16202c" text-anchor="middle">bw_drift.py</text>
+<rect x="644.0" y="715.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="743.5" font-size="10.9" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">δ = ln(b/w) ;  Γ = tanh(ln(Z/Z₀)/2)</text>
+<text x="770.0" y="757.0" font-size="10.8" fill="#16202c" text-anchor="middle">Z = w + ib, Z₀ = √(wb)(1+i)</text>
+<polygon points="770.0,780.0 896.0,824 770.0,868.0 644.0,824" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="812.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">|δ| &gt; 0.35  ∨</text>
+<text x="770.0" y="826.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">(active ∧ |δ| &gt;</text>
+<text x="770.0" y="840.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">0.15)?</text>
+<rect x="644.0" y="867.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="881.7" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">bw_corr =</text>
+<text x="770.0" y="895.7" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">sign(δ)·(|δ|−0.15)/0.85, clipped</text>
+<text x="770.0" y="909.7" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">to ±1</text>
+<text x="770.0" y="923.7" font-size="10.8" fill="#16202c" text-anchor="middle">&gt; 0 favour probable words; &lt; 0 flatten</text>
+<rect x="644.0" y="943.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="770.0" y="972.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_bw_correction()</text>
+<text x="770.0" y="987.6" font-size="10.8" fill="#16202c" text-anchor="middle">read by cv_pick: exponent coherence·(1+g)</text>
+<rect x="936.0" y="183.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="218.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">(A) mh_split_numbers</text>
+<polygon points="1062.0,248.0 1188.0,292 1062.0,336.0 936.0,292" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="288.4" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">version?</text>
+<text x="1062.0" y="303.9" font-size="10.2" fill="#16202c" text-anchor="middle">1.2.3  (digits, 2+ dots)</text>
+<polygon points="1062.0,324.0 1188.0,368 1062.0,412.0 936.0,368" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="358.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">number?</text>
+<text x="1062.0" y="373.8" font-size="10.2" fill="#16202c" text-anchor="middle">sign $ int .dec % st nd rd</text>
+<text x="1062.0" y="386.1" font-size="10.2" fill="#16202c" text-anchor="middle">th</text>
+<polygon points="1062.0,400.0 1188.0,444 1062.0,488.0 936.0,444" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="440.4" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">code?</text>
+<text x="1062.0" y="455.9" font-size="10.2" fill="#16202c" text-anchor="middle">x2 · h264 · 3d</text>
+<rect x="936.0" y="487.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="509.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">one space; record mh_number</text>
+<text x="1062.0" y="525.1" font-size="10.8" fill="#16202c" text-anchor="middle">integer decimal percent ordinal currency</text>
+<text x="1062.0" y="538.1" font-size="10.8" fill="#16202c" text-anchor="middle">signed code</text>
+<rect x="936.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="592.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">copy the byte</text>
+<text x="1062.0" y="607.6" font-size="10.8" fill="#16202c" text-anchor="middle">no match here</text>
+<rect x="936.0" y="639.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1062.0" y="661.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">prose out</text>
+<text x="1062.0" y="677.1" font-size="10.8" fill="#16202c" text-anchor="middle">tested on 4,000 random strings against</text>
+<text x="1062.0" y="690.1" font-size="10.8" fill="#16202c" text-anchor="middle">numeric.py</text>
+<rect x="1228.0" y="183.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="211.8" font-size="11.9" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_user_turn(text, fill)</text>
+<text x="1354.0" y="226.2" font-size="10.8" fill="#16202c" text-anchor="middle">called by cv_read</text>
+<rect x="1228.0" y="259.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="281.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">ms_dose</text>
+<text x="1354.0" y="297.1" font-size="10.8" fill="#16202c" text-anchor="middle">more than 3 sentences: read each, average</text>
+<text x="1354.0" y="310.1" font-size="10.8" fill="#16202c" text-anchor="middle">by length</text>
+<rect x="1228.0" y="335.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="357.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_meter_raw</text>
+<text x="1354.0" y="373.1" font-size="10.8" fill="#16202c" text-anchor="middle">tokens (1–2-grams) → TF-IDF (sublinear,</text>
+<text x="1354.0" y="386.1" font-size="10.8" fill="#16202c" text-anchor="middle">l2) → ridge → clip 0..1 → 4.5×</text>
+<rect x="1228.0" y="411.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="440.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">× gain, capped at 9</text>
+<text x="1354.0" y="455.6" font-size="10.8" fill="#16202c" text-anchor="middle">calibration gain per pole</text>
+<rect x="1228.0" y="487.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="515.7" font-size="11.6" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">solution: C = (V·C + v·d)/(V + v)</text>
+<text x="1354.0" y="529.8" font-size="10.8" fill="#16202c" text-anchor="middle">v = clip(words/25, 0.5, 3); V ≤ 8</text>
+<rect x="1228.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="585.3" font-size="12.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">heal: |conc − base| ≤ spread → 0</text>
+<text x="1354.0" y="599.8" font-size="10.8" fill="#16202c" text-anchor="middle">a reading inside the noise is not acted</text>
+<text x="1354.0" y="612.8" font-size="10.8" fill="#16202c" text-anchor="middle">on</text>
+<rect x="1228.0" y="639.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="667.4" font-size="10.6" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mix[a] = BASELINE + (light − dark)/9</text>
+<text x="1354.0" y="680.6" font-size="10.8" fill="#16202c" text-anchor="middle">OPI GLU GABA DA 5HT NE OXT; clamp 0..1</text>
+<rect x="1228.0" y="715.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="737.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">k_eff = 0.6·√(fill/16)</text>
+<text x="1354.0" y="753.1" font-size="10.8" fill="#16202c" text-anchor="middle">fewer words in the 16-slot ring, smaller</text>
+<text x="1354.0" y="766.1" font-size="10.8" fill="#16202c" text-anchor="middle">correction</text>
+<polygon points="1354.0,780.0 1480.0,824 1354.0,868.0 1228.0,824" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="819.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">dist(mix, RECEPTIVE)</text>
+<text x="1354.0" y="833.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">&lt; 0.5?</text>
+<rect x="1228.0" y="867.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="902.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">target = mix  (held)</text>
+<rect x="1228.0" y="943.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="964.7" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">target = RECEPTIVE − k_eff(mix −</text>
+<text x="1354.0" y="978.7" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">RECEPTIVE)</text>
+<text x="1354.0" y="992.7" font-size="10.8" fill="#16202c" text-anchor="middle">conjugate: the noise-cancelling reply</text>
+<rect x="1228.0" y="1019.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1354.0" y="1040.9" font-size="10.6" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_state_heard · mh_state_trajectory</text>
+<text x="1354.0" y="1054.1" font-size="10.8" fill="#16202c" text-anchor="middle">meet the mix, lead to the target, per</text>
+<text x="1354.0" y="1067.1" font-size="10.8" fill="#16202c" text-anchor="middle">word</text>
+<path d="M1520.0,268.0 A126.0,9 0 0 1 1772.0,268.0 L1772.0,316.0 A126.0,9 0 0 1 1520.0,316.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1520.0,268.0 A126.0,9 0 0 0 1772.0,268.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1646.0" y="287.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">user_state.bin</text>
+<text x="1646.0" y="303.1" font-size="10.8" fill="#16202c" text-anchor="middle">ridge: 45,448 features × 14 poles, gain,</text>
+<text x="1646.0" y="316.1" font-size="10.8" fill="#16202c" text-anchor="middle">base, spread</text>
+<path d="M1520.0,496.0 A126.0,9 0 0 1 1772.0,496.0 L1772.0,544.0 A126.0,9 0 0 1 1520.0,544.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1520.0,496.0 A126.0,9 0 0 0 1772.0,496.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1646.0" y="522.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">usage_c.txt</text>
+<text x="1646.0" y="537.6" font-size="10.8" fill="#16202c" text-anchor="middle">n_obs and one count per lemma</text>
+<path d="M1520.0,648.0 A126.0,9 0 0 1 1772.0,648.0 L1772.0,696.0 A126.0,9 0 0 1 1520.0,696.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1520.0,648.0 A126.0,9 0 0 0 1772.0,648.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1646.0" y="674.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">numbers_c.txt</text>
+<text x="1646.0" y="689.6" font-size="10.8" fill="#16202c" text-anchor="middle">how many numbers were heard</text>
+<path d="M1520.0,800.0 A126.0,9 0 0 1 1772.0,800.0 L1772.0,848.0 A126.0,9 0 0 1 1520.0,848.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1520.0,800.0 A126.0,9 0 0 0 1772.0,800.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1646.0" y="819.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_close</text>
+<text x="1646.0" y="835.1" font-size="10.8" fill="#16202c" text-anchor="middle">saves usage_c.txt and numbers_c.txt on</text>
+<text x="1646.0" y="848.1" font-size="10.8" fill="#16202c" text-anchor="middle">exit</text>
+<text x="193.0" y="406.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="44.0" y="362.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="485.0" y="482.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">EXTERNAL</text>
+<text x="777.0" y="558.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="777.0" y="862.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="620.0" y="438.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">INTERNAL</text>
+<text x="912.0" y="818.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no (0)</text>
+<text x="1069.0" y="330.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="1069.0" y="406.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="1069.0" y="503.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="1204.0" y="286.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="1204.0" y="362.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="920.0" y="438.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="1212.0" y="818.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="1361.0" y="883.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<circle cx="608.0" cy="265.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="608.0" y="269.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">A</text>
+<circle cx="932.0" cy="189.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="932.0" y="193.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">A</text>
+<text x="186.0" y="818" font-size="11" font-style="italic" fill="#16202c" text-anchor="middle">the Monad calls mh_ear_hear and</text>
+<text x="186.0" y="831" font-size="11" font-style="italic" fill="#16202c" text-anchor="middle">mh_ear_user_turn (ptol.c, cv_turn / cv_read)</text>
+<text x="478.0" y="810" font-size="11" font-style="italic" fill="#16202c" text-anchor="middle">MH_DOCUMENT: nothing is counted</text>
+<text x="40" y="1216" font-size="11.5" fill="#16202c">symbols (ISO 5807): oval = start/end · rectangle = step · diamond = decision · parallelogram = input/output · double-barred rectangle = sub-process (another lane, or the other chart) · cylinder = stored data · every title is a name in the code</text>
+</svg>

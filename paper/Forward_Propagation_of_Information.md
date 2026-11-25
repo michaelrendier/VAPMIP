@@ -1,847 +1,464 @@
 # Forward Propagation of Information
 
-### Teaching The Maths how to speak English: the compiled monad `ptol` and the scaled boxkite Mind's Eye monad
+### Teaching The Maths how to speak English: the Monad and the Harness, in Python and in C
 
 **Cody Michael Allison** (Michael Rendier), independent researcher · the.wandering.god@gmail.com · ORCID 0009-0007-7239-6760\
 **Written by an AI assistant:** Claude Sonnet 5.5 (`claude-sonnet-5-5`), with the author's `cs-paper-code-conventions` skill running (`ContextPlease/claude/skills/cs-paper-code-conventions/SKILL.md`)\
-**Date:** 2026-10-16 · **Status:** first full draft · **Code:** `VAPMIP`, commit `b2da2f7` · **Repository prefix:** every path below, written `REPO/directory/file`, lives under `https://github.com/michaelrendier/`
+**Date:** 2026-11-25 · **Status:** rewritten from the current machinery · **Code:** `VAPMIP`, commit `d00e97f` · **Paths:** `REPO/directory/file` lives under `https://github.com/michaelrendier/`
 
 ---
 
 > ## Read this first: who wrote this, and how
 >
-> **The assistant.** This paper was written by a transformer language model, Claude Sonnet 5.5 (`claude-sonnet-5-5`), working with the author's `cs-paper-code-conventions` skill active; the skill decides how code is shown in a paper. Every number in the text that comes from code was produced by `VAPMIP/paper/evidence.py` when `VAPMIP/paper/make_paper.py` last ran; none is typed in by hand.
+> **The assistant.** This paper was written by a transformer language model, Claude Sonnet 5.5 (`claude-sonnet-5-5`), with the author's `cs-paper-code-conventions` skill active; the skill decides how code is shown (§10 of the skill: the CS engineering white paper). Every number that comes from code was produced by `VAPMIP/paper/evidence.py` when `VAPMIP/paper/make_paper.py` last ran; none is typed in by hand. Listings are extracted from the source by name, never retyped.
 >
-> **The author.** The author is a software engineer, not a trained mathematician or linguist, and says so. Every statement that is not attributed to a cited source should be read as unverified until an expert has checked it.
+> **The author.** The author is a software engineer, not a trained mathematician or linguist, and says so. Every statement not attributed to a cited source should be read as unverified until an expert has checked it. The author does not tell the assistant what result he hopes for; tasks are given as measurements ("run it", "chase that to its source"). That is a safeguard, not a guarantee; the real safeguards are fresh runs, exact comparison where an exact answer exists (§9), and failures kept in the text (§11).
 >
-> **The method.** The author does not tell the assistant what result he is hoping for. Tasks are given as measurements ("run it", "chase that to its source"), so that he is not handed the answers he wants. This is a safeguard, not a guarantee; the real safeguards are fresh runs, exact comparison where an exact answer exists, and failures kept in the text.
+> **Licence and symbols.** The code and this method are proprietary: Copyright (c) 2026 Cody Michael Allison, all rights reserved (`VAPMIP/LICENSE`); the mathematics behind them is published separately under the GNU licence outside VAPMIP. In the code, `OMEGA_ZS` = 0.56714 is A_π = W(1), `D_STAR` = 0.24600 is the rounded Ω_ζΣ = d*, and α is the fine-structure constant; nothing in this paper depends on them.
 >
-> **Licence and symbols (2026-11-21).** The code and this method are proprietary: Copyright (c) 2026 Cody Michael Allison, all rights reserved (`VAPMIP/LICENSE`); the mathematics behind them is published under the GNU licence outside VAPMIP. Where the text quotes the code's constants, the code predates the author's symbol ruling: `OMEGA_ZS` = 0.56714 is A_π = W(1), and `D_STAR` = 0.24600 is the rounded Ω_ζΣ = d* = 0.2463; α is the fine-structure constant, which no measurement here uses. Quotations of code and of the `ptol.c` header are kept as they stand.
->
-> **What kind of paper this is.** An engineering white paper about two pieces of finished code, shown running. It contains no proofs and makes no prediction. It describes the mechanism and shows the behaviour; it does not reproduce the Monad's source (§2.3). Every result is a measurement of the code as it stands at the commit above; nothing was changed to obtain it.
+> **What kind of paper this is.** An engineering white paper about the machinery that runs today. It has no proofs and makes no prediction. It does not narrate how the machinery was reached; earlier versions are pointed at in the appendix, next to the description of ContextPlease, and nowhere else.
 
 ---
 
 ## Abstract
 
-Language models have become costly in four ways at once. They draw large amounts of power. They are trained by backpropagation, which keeps development on clusters and off the developer's own machine. They spend compute to rediscover the relations between words that WordNet already records. And their weights and training data are closed, so a reader cannot see why a model says what it says, or who decided that it should. This paper describes an engine, the Monad, built to avoid all four, and the attempt to teach a single piece of mathematics, the Null Operator ∅_RB (typed 0_RB), to speak English. It runs offline on one laptop CPU (Intel Core i7-8550U, 2018, no GPU, no network). It has no gradient descent and no trained weights: a prompt becomes one sixteen-component element by a fixed projection, the engine reads that element along a fixed geometry, and words come from a store whose semantic centre is WordNet's own relations. It exists as two pieces of working code, a compiled monad (`ptol`) and the Python monad it was built from (`scaled_mind_eye_boxkite_kernel_monad.py`), and the paper presents both in the order the code runs, with every figure produced by a script that can be re-run. Energy was measured as the whole laptop's discharge on battery: about 66.6 µWh per reply in the compiled REPL (recorded 2026-10-13), about ⟦83.0⟧ µWh per warm reply in the Python monad, and about ⟦29⟧ mWh for a sentence through the compiled monad's Python bridge. The publicly stated figures for one typical language-model query are 0.24 to 0.34 Wh (Vahdat et al., 2025, `FourthAgePapers/ForwardPropagation/references/Vahdat_2025_Google_AI_inference_energy.html`; Altman, 2025, `FourthAgePapers/ForwardPropagation/references/Altman_2025_Gentle_Singularity.html`; You, 2025, `FourthAgePapers/ForwardPropagation/references/You_2025_Epoch_ChatGPT_energy.html`). The energy is the result the design aimed at; the language is not yet there. The paper records where the replies fall short of answering the prompt, and where the two programs, and the code and its own comments, disagree. The Monad's source is not reproduced; the mechanism, tables and transcripts are.
+Language models have become costly in four ways at once: they draw large amounts of power; they are trained by backpropagation, which keeps development on clusters and off the developer's laptop; they spend compute to rediscover relations between words that WordNet already records; and their weights and training data are closed, so a reader cannot see why a model says what it says. This paper describes the Monad and the Harness, built to avoid all four. A prompt is read by a Harness that removes numbers (numbers are not words), prices every word against the speaker's own usage, reads the speaker's state into seven neurotransmitter axes, and measures the cost of the reply against the cost of the speaker's words. The Monad, a sixteen-slot window on a scaled box-kite, plans a reply as a web of radii taken from WordNet's relation counts, picks every word of every sentence itself under seven tones, and conjugates verbs as Lyndon factor lists. There is no gradient descent and no trained weights in the Monad; the only fitted model is a ridge regression for the user's state (45,448 TF-IDF features, 14 outputs). Both halves exist twice: in Python, where each mechanism is tested first, and in C (`ptol.c`, `monad_harness.c`), ported afterwards and checked against the Python by 13 parity tests (190 tests in all). A C turn takes about ⟦25.4⟧ ms on one laptop CPU with no network and no GPU. The replies are not yet good English; §11 records, with transcripts, where they fall short and where the C and the Python differ.
 
 ---
 
-## 1. Introduction
+## 1. Problem and approach
 
-Language models have become costly in four ways at once. They draw large amounts of power to train and to run. They are trained by backpropagation, which keeps development on clusters instead of on the machine in front of the developer. They spend compute to rediscover structure, the relations between words, that language already has and that lexical resources such as WordNet record directly (Miller, 1995; Fellbaum, 1998). And their weights and training data are closed, so a reader cannot tell why a model says what it says, or who decided that it should.
+Four constraints bound the work. **Power:** public figures for one typical language-model query are 0.24 to 0.34 Wh (Vahdat et al., 2025; Altman, 2025; You, 2025; copies in `paper/references/`), and training is far above that. **A hard wall:** training by backpropagation puts development on clusters; a developer on one laptop can only use what others trained. **Wasted compute:** a model that learns from raw text re-derives the relations between words (hypernym, part, cause, entailment) that a lexical resource (Miller, 1995; Fellbaum, 1998; cited, not fetched) records directly. **Opacity:** with closed weights and data, a reader cannot ask why a word was chosen.
 
-This paper describes an engine built to avoid each of the four. We call it the Monad. It is a program, written in C and Python, that runs on one laptop CPU with no network and no GPU. It has no gradient descent and no trained weights: a prompt is turned into a single sixteen-component element by a fixed projection, and words are read from a store whose semantic centre is WordNet's own relations. Every step of the mechanism is described here, and every figure in the paper is produced by a script that can be re-run.
+Making a model smaller does not remove any of the four, because each follows from learning the language from text by gradient descent. We remove the cause. Language is split into two kinds of object. A *word* is discrete: it has a WordNet entry, a part of speech, nineteen relation counts and a probability under the speaker's usage. Context is a *flow* the words are placed along: a web of radii, each radius a relation WordNet already counts. The Monad picks one word at a time from the neighbourhood of the words it has heard, under tones derived from the speaker's state; the Harness owns everything that is measured about the speaker and about the reply. Numbers are a different kind of object and take a different path (§4).
 
-The Monad is organised around one operator, the Null Operator, written ∅_RB and typed 0_RB. This is the core functionality of the Monad's Speaking Engine. The prompt is fed directly to σ_RB, the sixteen-dimensional input of 0_RB, and the equations are run, and they output a sedenion pathway, which we are building with and around, and providing toolsets to use, in this attempt at teaching a single equation of mathematics how to speak English. At runtime, every variable begins as NULL rather than zero, so that the maths, and not the programmer, chooses the fit. The Null Operator was a happy little accident: it fell out of the code. While discussing other maths for other projects, and after amassing a collection of code toolsets and operators in the scope of an AI assistant (Claude Sonnet 4.6, used through the web API) focused on emergent maths and instructed to watch for emergent operators (such as how an angle in polar coordinates indicates a vector direction from the origin), the assistant reported a ground-state object that those operators defined: a Hamiltonian "just sitting here", in the words of Claude Sonnet 4.6. That model supplied the original H_hat_RB, which, for the purposes of the Monad, became the Null Operator, 0_RB.
-
-The architecture is a Wankel rotary engine (Wankel, 1961, `FourthAgePapers/ForwardPropagation/references/Wankel_1961_US2988065.html`) with a sedenion at the centre of the rotor, so that the equation can watch itself, its input and its output from inside while it runs. This is the model used here; why it was chosen is left for later.
-
-The Monad exists as two pieces of working code: a compiled monad, `ptol` (`PtolC/ptol.c`), and the Python monad it was built from, `scaled_mind_eye_boxkite_kernel_monad.py`. The scaled monad runs live and continuously, not as one pass from prompt to response, and it is designed to include chaotic, non-deterministic behaviour: as impurities doped into silicon create a transistor, the impurities are what create the function. Section 2 fixes the notation, disambiguations and conventions used throughout; Section 3 defines the machine in the order the code runs, beginning with the Null Operator; the later sections employ it, show it running, and record where it falls short.
+Every mechanism is written and tested in Python first, then ported to C; the port is checked against the Python (§9). The charts in §9 (Figures 1 and 2) show the whole of both halves. Sections 3 to 8 give the mechanisms in the order the code runs, §10 shows measurements as transcripts, §11 lists what does not work, and the appendix gives the files used.
 
 ---
 
-## 2. Notation, disambiguations, and conventions followed in this paper
+## 2. Labels and conventions
 
-### 2.1 Notation
+`ESTABLISHED` = mathematics or computer science that predates this work, cited; `OURS` = built for this work; `THEORETICAL` = designed, not reduced to running code; `OPEN` = a question this paper cannot settle; the suffix `:CALCULATED` = a number the paper's own code produced. Maths is written in Unicode; identifiers are the code's own. A short mechanism that is the contribution is shown as a numbered **Listing**, extracted verbatim by name and shown with its source path and lines (convention B); an interactive check is a literal `>>>` transcript produced by running the module (convention D); a long mechanism is named and pointed at (convention A); a drawing of control flow is a numbered **Figure** (convention G).
 
-Every component described in this paper carries one label, applied consistently:
+---
 
-- **`ESTABLISHED`**: mathematics or computer science that predates this work, cited to its source.
-- **`OURS`**: code or a design choice built for this work and not published elsewhere.
-- **`THEORETICAL`**: designed, or partly attempted, but not reduced to running, verified code.
-- **`OPEN`**: a question this paper cannot settle.
-- The suffix **`:CALCULATED`** marks a result the paper's own code produced. It says a number came out of a run; it does not say a statement was proved.
+## 3. The store and the scalar word (`wordnet_boxkite.py`, `monad3_c.bin`, `voice_lex.bin`)
 
-Maths is written in Unicode, never LaTeX, and code identifiers are given as the code spells them. The symbols used:
+`ESTABLISHED` input, `OURS` encoding. A word's semantic centre is its first WordNet synset's nineteen relation counts (hypernyms, instance hypernyms, hyponyms, … usage domains), each compressed by `compress_count` and kept as an exponent over a fixed list of nineteen primes (`WordNet box-kite`; `wordnet_boxkite.context_vector`, `gamma_radial`). The scalar box-kite is the static object: one word, one vector; it never moves. `gamma_radial` folds the vector to one real in (−1, 1); the C port is `monad3_gamma_radial` in `PtolC/ptol.c`, whose comment records agreement with the Python value on one word to six places (not re-run here).
 
-| symbol | code identifier | meaning |
+The C monad reads three stores, all next to the binary and none written by the voice:
+
+| file | what | size (this run) |
 |---|---|---|
-| ψ | `v` (`ptol.c`), `psi` (the Python monads) | the sixteen-component element a prompt becomes |
-| e₀ … e₁₅ | index `k` = 0…15 of ψ | the sixteen basis elements; e₀ is the identity |
-| ∅_RB, 0_RB | `HUB_PSI` = [1, 0, …, 0] (`scaled_mind_eye_boxkite_kernel_monad.py`) | the Null Operator; written ∅_RB, typed 0_RB |
-| σ_RB | `s_rb[k]` (`ptol.c`), `sigma_rb` (`rotary_rerun_monad.py`) | the sixteen-component vector σ_RB[k] = ψ[k]·ψ[k⊕4] |
-| σ | `sig`, `PtolEye.sigma` | the dial: the power-law exponent in the projection |
-| σ_self, Γ | `measure_sigma`, `measure_gamma` | the balance reading P_red / (P_red + P_blue), and Γ = 2σ_self − 1 |
-| Eye R, C, H, O, S | `TOWER_EYES` | five settings of the dial, σ = 1, ¾, ½, ¼, 0 |
-| J_red, J_blue, J_green | the red and blue channel groups | forward channels, return channels, and the interface between them (§2.2) |
-| NULL | `None` / `NaN`, never 0 | a variable with no value yet |
+| `monad3_c.bin` | the co-occurrence matrix (compressed sparse rows) over English words, a WordNet and a phonetic table in one mmap-able file (`PtolC/monad3c.h`) | 48.2 MB |
+| `voice_lex.bin` | every single-word WordNet lemma: the parts of speech it has, and the 19 counts of its first synset (`PtolC/tools/export_c_monad_data.py --lex`) | 2.7 MB |
+| `user_state.bin` | the usage ridge: TF-IDF 1–2-gram vocabulary, idf, 45,448 × 14 coefficients, calibration gain, base and spread | 3.2 MB |
 
-### 2.2 Disambiguations
-
-**Citations.** A citation with no tag is a source the code was built directly against: WordNet's data, the Infocom/Zork parser tradition, and de Marrais's box kite. A citation marked `Post-Hoc:` is a correspondence noticed after the code already worked. Nothing in this paper requires knowing either name to follow the code.
-
-**Three different σ.** In this codebase "σ" names three things, each correct in its own file: **σ**, the dial of the projection (a power-law exponent, set by the Eye); **σ_self**, the balance reading derived from the sixteen components of ψ; and **σ_RB**, the product vector above. A fourth, σ_ζ (the coupling exponent in `ValaQuenta/modules/h_rb_hat`), does not appear in this paper.
-
-**Two red/blue assignments.** Red and blue are the author's colours and are used as labels only. Which indices carry them is a code fact, and the two programs differ: in `ptol.c` the red (forward, cosine) channels are k ∈ {0–3, 8–11} and the blue (return, sine) channels are k ∈ {4–7, 12–15}; in `rotary_rerun_monad.py` and the scaled kernel the split is at bit 3, red k ≥ 8 and blue k < 8. Every result below says which program it was measured on.
-
-**`ptol` and `ptolemy`.** `ptol` is the compiled monad built from `ptol.c` (with `monad.c`, `monad_harness.c`, `tokenizer.c`, `filter.c`). `ptolemy`, built from `main.c`, is the daemon, REPL and ingest program. This paper is about `ptol`; `ptolemy` appears only where stated.
-
-**Monad, monad.** *The Monad* is the engine. *A monad* is one file that implements it (`monad.c`, `*_monad.py`).
-
-**Eye.** An *Eye* in `TOWER_EYES` is one setting of the dial. The *Mind's Eye* of the Python monads is the class that reads a snapshot of ψ, and *Paper's Hands* is the class that emits.
-
-**Inside Out.** The author's name for circle inversion followed by a quarter turn, J(z) = i / z̄, that is (r, θ) ↦ (1/r, θ + π/2) (`ValaQuenta/modules/inversion/maths.py`, class `InversionMap`; written (I|O)). Inversion in a circle is `ESTABLISHED` mathematics. Restated from that formula and run on 5,000 random points (`OURS:CALCULATED`): applying J twice multiplies z by −1 (largest deviation 3.3e-16), applying it four times returns z (4.8e-16), the radius goes to its reciprocal (1.8e-15) and the angle advances by π/2 (4.4e-16). The radius r = 1 is the one radius J maps to itself; the angle still advances. No measurement in this paper depends on it; it is defined here because it is the author's name for the map.
-
-**NULL, 0, ∅.** NULL is a variable with no value yet. 0 is a computed value. ∅_RB denotes the empty set, never the numeral zero; it is typed 0_RB for keyboard availability.
-
-### 2.3 Conventions
-
-- One running example, the prompt `what is a tree`, carries every named-step description; six test prompts are used for every measurement.
-- Mechanism is given as named steps, tables and literal transcripts. Source is quoted verbatim only for the harness and everything built around it, which the author chose to show; none of the Monad's source is reproduced in this text. Companion notebooks (§19) run the real code.
-- Every figure comes from a script that can be re-run (`VAPMIP/paper/make_paper.py`); measured times are marked as such.
-- Where the code disagrees with its own comments or with a second program, the paper reports the disagreement as a result.
-- The author's screenshots of the programs running (`VAPMIP/paper/figures/`) are results, numbered 1–7 in his order (`/home/rendier/Desktop/SpaceClaude/ptol/`, which is not in a repository). Each is transcribed in the text, dated by what its own screen shows, and checked against the code where the code can reproduce it.
-
-### 2.4 C versus Python
-
-`ptol` is the compiled, live monad. `scaled_mind_eye_boxkite_kernel_monad.py` is the Python monad it was built from; Python is also where the code is readable. They are not line-for-line twins, and a result measured on one is not claimed for the other. The compiled monad is not self-contained: its word step and its sentence step each call Python (§6, §8).
-
-### 2.5 The machine measured on
-
-One ThinkPad X1 Carbon (6th generation, 20KH002XUS), Intel Core i7-8550U, no GPU, no network, Linux 6.8.
-
-### 2.6 The objects this paper uses, defined plainly
-
-- **Synset.** WordNet's basic unit: a set of words interchangeable in one meaning. `{car, automobile}` is one synset.
-- **Relation pointer.** One of the 19 typed links between synsets (hypernym, hyponym, meronym, and so on); a word's WordNet entry in the store is the 19 counts.
-- **Sedenion.** A 16-dimensional number built by repeated doubling: reals, complex numbers, quaternions, octonions, sedenions. Sedenion multiplication has zero divisors.
-- **Identity.** The element e₀: multiplying by it changes nothing.
-- **Zero divisor.** A non-zero number that multiplies another non-zero number to exactly zero.
-- **Box kite, strut, assessor.** The name (de Marrais, 2000, `FourthAgePapers/ForwardPropagation/references/deMarrais_2000_arXiv_math-0011260.pdf`) for how the sedenion zero divisors arrange themselves: seven interlocking octahedra (one per strut) sharing 42 zero-divisor pairs (the assessors). Established mathematics this work is built against, not derived here. `Post-Hoc:` Moreno (1998, `FourthAgePapers/ForwardPropagation/references/Moreno_1998_arXiv_q-alg-9710013.pdf`) describes the zero divisors of the Cayley–Dickson algebras and their relation to the exceptional group G₂, the relation de Marrais builds on; Cawagas (2004) treats the sedenion case directly. Both were found after the code ran; Cawagas's paper was not fetched (see the References).
-
-### 2.7 Install and run
-
-    cd VAPMIP/PtolC && make                          # builds ptolemy and ptol; needs gcc, make, libm
-    python3 -m venv .venv && . .venv/bin/activate && pip install nltk        # NLTK: Bird, Klein and Loper (2009), free online at nltk.org/book
-    python3 -c "import nltk; nltk.download('wordnet')"
-    HOME=$(mktemp -d) ./ptol -r "what is a tree"     # sixteen numbers; ptol writes files into $HOME/.ptolemy in its plain mode
-    ./ptol -say "what is a tree"                     # a sentence; run with your real HOME (§8)
-    python3 scaled_mind_eye_boxkite_kernel_monad.py  # the hub report and seven fiber throws
+`voice_lex.bin` exists because `monad3_c.bin` keeps one lossy entry per word (the word "dog" is stored as a verb; "rules" is absent): §11.5 measures the difference.
 
 ---
 
-# Part I: the machine, in the order the code defines it
+## 4. Numbers are not words (`numeric.py`, `mh_split_numbers`)
 
-## 3. The Null Operator
+`OURS`. A numeral has no lexicon entry, no synset, no neighbours, no probability under a word bigram and no slot in a sentence frame. So no numeral reaches any word machinery: `numeric.split` replaces every number, code (`x2`, `h264`, `3d`) and version (`3.10.3`) with one space and returns them as records for their own channel, `NumberChannel` (counts by kind, decade, repeated values).
 
-**Code:** `ValaQuenta/modules/box_kite/maths.py` (`multiply`, `e0_is_outside`, `fixed_point_gluing`, `fixed_point_weight`, `box_kites`, `chart_spectrum`); `VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py` (`HUB_PSI`, `MindEyeBoxKiteKernel`). **Notebook:** `VAPMIP/notebooks/paper/17_null_operator_and_hub.ipynb` (13 PASS, 0 FAIL).
+**Listing 1 — numbers leave before any word is read (`numeric.split`)** (`VAPMIP/numeric.py:45–55`; verbatim, docstring removed)
 
-### 3.1 Definition
+```python
+def split(text: str) -> Tuple[str, List[Number]]:
+    out: List[Number] = []
 
-In the code the Null Operator is one vector: `HUB_PSI = [1.0] + [0.0] * 15` (`VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py:163–242`), the sixteen-component element with all its weight on e₀. e₀ is the identity of the sedenion product `multiply` (`ValaQuenta/modules/box_kite/maths.py:179–201`): multiplying any sixteen-vector by it on either side returns the vector, it preserves the norm, and it commutes with every basis element (300 random vectors; largest deviation 0). `ESTABLISHED` structure, `OURS:CALCULATED` checks.
-
-### 3.2 Outside every chart
-
-`e0_is_outside` returns three flags and one verdict. e₀ is not a point of PG(3,2) (the 15-point geometry of the sedenion's imaginary units); it is in none of the 42 assessors; and its associator vanishes against every pair of basis elements. The 42 assessors form seven box kites of six assessors each, no assessor in two kites, and each kite's graph is an octahedron (Laplacian spectrum {0, 4, 4, 4, 6, 6}). `OURS:CALCULATED`, except the kite structure, `ESTABLISHED` (de Marrais, 2000).
-
-### 3.3 The hub the seven charts share
-
-Two structures live on this one object. In the *products* the seven charts are disconnected: there are no edges between kites, and the glued atlas has seven zero modes, one per chart. In the *skeleton* (which basis indices appear in which chart) they overlap almost entirely: fourteen indices each lie in six of the seven charts, and exactly two lie in none, e₀ and e₈. `fixed_point_gluing` reports that the seven zero modes are seven copies of one constant and identify at e₀: the one point the charts share. `fixed_point_weight(v)` is v[0]² / |v|², the share of a vector's energy on e₀; it is exactly 1 for `HUB_PSI`.
-
-### 3.4 NULL start
-
-Every variable in the machine begins as NULL, not zero: a zero is a value, and a value selects a scale. §14 records what each program does with an empty or all-zero input.
-
----
-
-## 4. The store
-
-**Code:** `VAPMIP/PtolC/monad3c.h`; `VAPMIP/PtolC/ptol.c` (`monad3_open`: `VAPMIP/PtolC/ptol.c:113–130`, `monad3_lookup`: `VAPMIP/PtolC/ptol.c:136–168`); `VAPMIP/PtolC/monad.c` (`monad_word_coords`, `monad_wm_get`, `monad_wm_set`); `VAPMIP/PtolC/ptolemy.h`. **Notebook:** `VAPMIP/notebooks/c/08c_ptol_store.ipynb` (4 PASS, 0 FAIL).
-
-### 4.1 One file, four fields of language
-
-The four fields of language, words, context, semantics and phonetics, live in one memory-mapped file, `PtolC/monad3_c.bin`. Its layout is `monad3c.h`: a header; a word blob; one 16-byte `WordRec` per word (name offset and three indices); the learned (English) store, with per-word energy, age, firing and stratum arrays and a sparse co-occurrence matrix; the WordNet store, one 82-byte entry per word (name, part of speech, an offset, 19 signed counts, a depth weight); and the phonetic store. The file read for this paper: 48,209,731 bytes, 347,119 words, 164,283 learned entries, 146,743 WordNet entries, 123,455 phonetic entries, 2,248,064 co-occurrence edges. The resident service folds conversation into this file by design, so its size and counts change; the figures are those at the time of this run.
-
-### 4.2 Opening and lookup
-
-`monad3_open` maps the file read-only, checks the 8-byte magic `MONAD3C`, and keeps the base pointer; if the file is absent the program carries on without it. `monad3_lookup(word, out[3], &degree)` lowercases the word and runs one binary search over the `WordRec` table; on a hit it fills the three store indices (−1 where a store has no entry) and the word's co-occurrence out-degree. No parsing, no copy, no allocation. Lookups on this store (notebook 08c):
-
-| word | found | learned idx | WordNet idx | phonetic idx | co-occurrence degree | Gamma-Radial |
-|---|---|---|---|---|---|---|
-| `tree` | yes | 563 | 134483 | 112979 | 292 | -0.904887 |
-| `what` | yes | 228 | -1 | 119807 | 2697 | — |
-| `piano` | yes | 21590 | 99564 | 84465 | 20 | +nan |
-| `xyzzyq` | no | -1 | -1 | -1 | 0 | — |
-
-The `nan` for `piano` was chased to its source (`ptol -M piano`, `OURS:CALCULATED`): the store's WordNet entry for `piano` (pos 4) holds an all-zero relation vector, and `monad3_gamma_radial` returns `NAN` for `log_code ≤ 0` by design, with the caller checking `isnan`. It is the data and the guard working, not a fault; the store's `piano` entry is the one with no relation pointers.
-
-### 4.3 Word to slot and energy
-
-A word's slot and energy come from its spelling alone. `monad_word_coords` (`VAPMIP/PtolC/monad.c:170–220`): (1) read the word as a base-95 number over the printable characters; (2) multiply by the 64-bit golden-ratio constant (Fibonacci hashing; `Post-Hoc:` Knuth, 1973, §6.4, multiplicative hashing, a book, not fetched); (3) take the result as a fraction `seed` in [0, 1); (4) the slot is `floor(seed × N)` with N = 25,000; (5) the energy is `E = MONAD_D_STAR + seed × (MONAD_OMEGA_ZS − MONAD_D_STAR)`, so every energy lies between the two constants of `ptolemy.h`, 0.24600 and 0.56714 (the second is the Omega constant W(1) = 0.567143…, the fixed point of e^(−x); `Post-Hoc:` Corless et al., 1996, `FourthAgePapers/ForwardPropagation/references/Corless_1996_Lambert_W_Waterloo_copy.pdf`). The step that makes the hash usable was found by measurement: an earlier version did the fractional part in floating point, which loses the low bits past 2⁵³, so 62,961 of 101,916 WordNet tokens landed on slot 0 and survival was 0.00 % for every word of eight or more characters; after the integer version the largest pile-up was 14 (χ² 3,833,102 → 100.0). `monad_wm_get` / `monad_wm_set` keep the word → slot map (open addressing); a slot's `VocabEntry` has a `present` flag, set when a word has been assigned to it.
-
-| word | slot (of 25,000) | E |
-|---|---|---|
-| `tree` | 3109 | 0.285940 |
-| `what` | 16194 | 0.454032 |
-| `piano` | 2639 | 0.279904 |
-| `neutron` | 7936 | 0.347950 |
-| `good` | 19600 | 0.497781 |
-| `morning` | 16537 | 0.458432 |
-| `reactor` | 18415 | 0.482558 |
-| `discovered` | 23100 | 0.542734 |
-
----
-
-## 5. The question: a prompt becomes ψ
-
-**Code:** `VAPMIP/PtolC/ptol.c` (`project`: `VAPMIP/PtolC/ptol.c:282–293`; `measure_sigma`: `VAPMIP/PtolC/ptol.c:311–322`; `measure_gamma`: `VAPMIP/PtolC/ptol.c:333–341`; `TOWER_EYES`; the raw path of `main`). **Notebook:** `VAPMIP/notebooks/c/07c_ptol_projection_and_balance.ipynb` (1 PASS, 0 FAIL).
-
-### 5.1 The projection
-
-Named steps, running example `what is a tree` (14 bytes). `OURS`.
-
-1. **Bytes.** The prompt is read as bytes c₁…c_n.
-2. **Oscillator bank.** Sixteen periods P[k] are the first sixteen primes: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 (`P[16]`).
-3. **Dial.** A number σ (the Eye's `sigma`; default ½) sets a power-law weight i^(−σ) on position i.
-4. **Project.** Component k is the sum over positions i of cᵢ · i^(−σ) · w_k(2π·i / P[k]), where w_k is **cosine** for k in 0–3 and 8–11 (the red, forward channels) and **sine** for k in 4–7 and 12–15 (the blue, return channels).
-5. **Normalise.** The sixteen numbers are divided by their Euclidean length. `ptol -r` prints them, one per line; the line `eye: …` goes to standard error.
-
-### 5.2 The balance reading
-
-`measure_sigma` returns P_red / (P_red + P_blue), where P_red is the sum of squares of the red components and P_blue of the blue; it returns 0.5 if the total is below 10⁻¹⁵ (§14). `measure_gamma` returns Γ = 2σ_self − 1 (clamped to ±0.999999999) and u = 2·atanh(Γ) = ln(P_red/P_blue). Γ = 0 is the balance point. The form (P_red − P_blue)/(P_red + P_blue) is that of a reflection coefficient, (Z − Z₀)/(Z + Z₀); `Post-Hoc:` Smith (1939), a journal article, not fetched.
-
-### 5.3 σ_RB
-
-For each k, `s_rb[k] = v[k] · v[k⊕4]` (the partner of k is k⊕4: 0↔4, 1↔5, 2↔6, 3↔7, 8↔12, and so on). `ptol -r` prints these sixteen products as its third block.
-
-### 5.4 The five Eyes
-
-An Eye is a named dial setting. `TOWER_EYES` defines five, R, C, H, O, S, with σ = 1, ¾, ½, ¼, 0; each also carries a `theta` and an `aperture` field, which the code does not read: the projection uses only the Eye's `sigma`. The balance reading of the same question at each Eye (σ_self; ½ would be balance):
-
-| prompt | chars | R (σ=1) | C (¾) | H (½) | O (¼) | S (0) | Γ at H |
-|---|---|---|---|---|---|---|---|
-| finger pointer | 14 | 0.4186 | 0.2819 | 0.1501 | 0.0675 | 0.0490 | -0.6998 |
-| what is a tree | 14 | 0.4890 | 0.3570 | 0.2100 | 0.0962 | 0.0529 | -0.5800 |
-| neutron generation in different reactor types | 45 | 0.4376 | 0.3314 | 0.2454 | 0.2424 | 0.4372 | -0.5092 |
-| good morning | 12 | 0.4836 | 0.3726 | 0.2531 | 0.1534 | 0.0951 | -0.4938 |
-| can you play the piano? | 23 | 0.3373 | 0.1540 | 0.0307 | 0.0210 | 0.0836 | -0.9385 |
-| the first reactor was built after neutrons were discovered | 58 | 0.4438 | 0.2843 | 0.1304 | 0.0656 | 0.1218 | -0.7392 |
-
-### 5.5 Agreement with an independent restatement
-
-A Python restatement of steps 1–5 (`VAPMIP/paper/evidence.py`, `project()`) agrees with `ptol -r` on all sixteen components of all six prompts to **4.9e-11** (the compiled engine prints ten decimals), and on σ_self at all five Eyes to **5.0e-11**. The C notebook extracts `project`, `measure_sigma` and `measure_gamma` verbatim from `ptol.c`, runs them, and compares with the real binary: max |extracted − real| = 4.87e-11. Over 2,000 random prompts at three dial settings P_red + P_blue = 1 to 4.4e-16 and P_red · P_blue never exceeded 0.250000 (the bound is ¼, reached at balance). `OURS:CALCULATED`.
-
-### 5.6 What the source comments say that the running code does not do
-
-Kept as results. (1) The `ptol.c` header says *"J_red × J_blue = d* = 0.24600 is conserved at ALL σ"*. No such quantity is constant: P_red · P_blue over the six prompts at five dial settings ranges from 0.021 to 0.250 (a value within 10⁻⁴ of 0.2460 occurs by chance at a rate of 0.31% per sample). (2) The comment on `measure_sigma` says σ_self tends to 1 at σ = 1 and to 0 at σ = 0. Over 2,000 random prompts σ_self at σ = 1 has median 0.410 (maximum 0.871), and at σ = 0 median 0.153 (minimum 0.026). (3) σ_self follows the dial only for short inputs. Fraction of random inputs for which σ_self rises monotonically as σ goes from 0 to 1, by input length:
-
-| input length (characters) | σ_self rises with the dial | fraction |
-|---|---|---|
-| 0–9 | 118 of 118 | 100.0% |
-| 10–19 | 82 of 163 | 50.3% |
-| 20–29 | 0 of 181 | 0.0% |
-| 30–39 | 0 of 170 | 0.0% |
-| 40–49 | 0 of 169 | 0.0% |
-| 50–59 | 0 of 147 | 0.0% |
-| 60–69 | 0 of 154 | 0.0% |
-| 70–79 | 1 of 199 | 0.5% |
-| 80–89 | 0 of 213 | 0.0% |
-| 90 and over | 0 of 486 | 0.0% |
-
-For inputs of 20 characters or more σ_self is U-shaped in σ: of 300 such inputs 300 rise monotonically from σ = ½ to σ = 1; the minimum sits at median σ = 0.25 (10th to 90th percentile 0.15 to 0.35); random lowercase strings of 40 letters give the same shape (median minimum at σ = 0.35), so it is a property of the projection on long inputs, not of language. `OURS:CALCULATED`.
-
----
-
-## 6. Words from ψ
-
-**Code:** `VAPMIP/PtolC/ptol.c` (`get_monad_words`: `VAPMIP/PtolC/ptol.c:398–442`; `monad3_word_gamma_radial`; `gr_log_anchor`); `VAPMIP/PtolC/ptol_layer.py` (`select_layer`, `word_at`, `assemble_path`, `respond`); `VAPMIP/wordnet_boxkite.py` (`context_addr`, `gamma_radial`). **Notebook:** `VAPMIP/notebooks/c/08c_ptol_store.ipynb`.
-
-### 6.1 The word shadow
-
-`get_monad_words` writes ψ and the primes of the firing components to a temporary file and runs `python3 ptol_layer.py --stdin --words-only` through `popen`. In `ptol_layer.py`: `_scan_layers` finds every `holcus_monad_*.bin` vocabulary in its bin directory and names a layer after each file; `select_layer` adds three scores per layer (from the prompt text, from the path of the sixteen scalars, and from σ_RB) and takes the highest, with English as the floor; `word_at(data, v)` maps a scalar v in [−1, 1] to an index in the layer's word table and searches outward for the nearest non-empty entry; `assemble_path` orders components by ascending |scalar|, the spiral from the zero divisor outward, and keeps each word once. The result is a set of words, one per firing component: the **shadow** of the geometry. For the six prompts the shadow words are unrelated to the prompt's own words (§8, §15).
-
-### 6.2 The 19-count address and the Gamma-Radial reading
-
-A word's WordNet entry is 19 counts, one per relation type. `gr_log_anchor` and `monad3_gamma_radial` (`VAPMIP/PtolC/ptol.c:206–213`) turn the 19 counts into one number: with a prime assigned to each relation (73, 79, 83, … 167), log_code = Σ count_i · ln(prime_i), and the reading is tanh(½ · ln(log_code / anchor)), where the anchor is Σ ln(prime_i) over all relations except hyponyms; it is NaN for an all-zero vector. `OURS`; the Python original is `wordnet_boxkite.gamma_radial`.
-
-### 6.3 A recorded value that no longer reproduces
-
-The comment above `monad3_gamma_radial` records that on 2026-09-21 the reading for "tree" was −0.151155, matching the paper-recorded value. Today the compiled monad's reading for "tree" is -0.904887, because the store's single WordNet entry for the word is now a verb sense. In Python the reading for each sense of "tree" is: `tree.n.01` -0.151155; `tree.n.02` -0.734935; `tree.n.03` -0.815375; `corner.v.02` -0.904887; `tree.v.02` -0.904887; `tree.v.03` -0.904887; `tree.v.04` -0.904887. The number −0.151155 belongs to the first noun sense (`tree.n.01`); which sense the store keeps for a word depends on how the store was built. `OURS:CALCULATED`; reported, not changed.
-
----
-
-## 7. Learning and speaking in the C monad
-
-**Code:** `VAPMIP/PtolC/monad.c` (`monad_learn_ex`: `VAPMIP/PtolC/monad.c:450–581`; `monad_a_add`, `monad_a_get`; `monad_speak`: `VAPMIP/PtolC/monad.c:772–1047`; `monad_hear_fermat`; `monad_self_flush`); constants in `VAPMIP/PtolC/ptolemy.h`. **Notebook:** `VAPMIP/notebooks/c/09c_ptol_learning_step.ipynb` (C kernel; extracts the β update, the `prose_seen` ladder and the co-occurrence coupling verbatim from `monad.c` and runs them).
-
-### 7.1 Learning
-
-`monad_learn_ex(m, text, verbose, filetype)` refuses PEM key or certificate material outright. For each sentence (split at `.`, `!`, `?`, newline) it: (1) tokenises and keeps tokens `token_accept` allows; (2) for each token gets the slot and energy (§4.3) and raises the slot's β by `E² × MONAD_ALPHA_LEARN × |sin(zeros[idx])| × π/2`, capped at `MONAD_BETA_SAT` (7.552); (3) writes the word, its energy and `present = 1` into the slot's `VocabEntry` if the slot was empty or the new energy is higher; (4) updates `prose_seen` (0 unseen, 1 prose only, 2 WordNet, 3 both); (5) for every pair of accepted tokens within `MONAD_WINDOW_MAX` (12) positions adds a co-occurrence edge `w = E_i · E_j · couple / ((|Δγ| + MONAD_GAP) × d)`, with `couple` 2 if the two slots have the same pole and 1 otherwise, d the distance in tokens and Δγ the difference of the slots' positions. The `prose_seen` ladder is order-dependent: WordNet then prose reaches 3, prose then WordNet does not (found by running the extracted arithmetic in notebook 06.5).
-
-### 7.2 Speaking
-
-`monad_speak(m, query, max_tokens, verbose)`: (1) seed the field `J` from the query's slots; (2) spread `J` to neighbouring slots with a decay of `MONAD_SPREAD_DECAY` over `MONAD_SPREAD_RADIUS`; (3) two propagation passes over the co-occurrence edges, both reading the field before either pass (the forward pass and a reverse pass), so words raised by both are the nodes; (4) the field sets its own word count from the balance of its two energy sums; (5) find the pointer slot nearest the median position of the query's slots, and update `affect` (irritation grows if the pointer is in the same region as last time); (6) walk the slots by a golden-angle step of round(N/φ²), emitting words whose gate is positive; (7) choose the first word by closeness of its energy to the field's centroid; (8) append the reply to the self-referential buffer, which `monad_self_flush` later feeds back to `monad_learn`. `monad_hear_fermat` reads a spaced-character code in incoming text and injects a proportional β boost; variants `monad_speak_wick`, `_oct` and `_charge` project the same field on different faces. `OURS`.
-
-### 7.3 Two screenshots of the earlier compiled monad (screenshots 2 and 3)
-
-![Screenshot 2 (file dated 2026-05-19). `ptolemy -W 'can you hear what i am typing'` and then `ptolemy -h` on the same prompt, in `Ptol/SMMIP/PtolC` on the HP EliteBook 820 G3. File: `VAPMIP/paper/figures/2-Hocus-Hyperwebster.png`.](figures/2-Hocus-Hyperwebster.png)
-
-![Screenshot 3 (file dated 2026-05-19). `ls ~/.ptolemy`, then `ptolemy -h 'what is your name'` and `ptolemy -W 'what is your name`. File: `VAPMIP/paper/figures/3-TheExtractor.png`.](figures/3-TheExtractor.png)
-
-These are the compiled monad in May 2026, when the program was still called `ptolemy` and was run from `Ptol/SMMIP/PtolC`. Both load `~/.ptolemy/monad_wordnet.bin` (`vocab=24485  A=6825748  wc=121914388`) and open it protected (`session changes not saved`). `-h` prints one row per word of the prompt: the slot (`z#`), γ, σ, E, β, a home and generation, and a phase tag. Transcribed from screenshot 2 (σ = 0.5, home = σ1 and gen = σ1 on every row):
-
-```
-word     z#      γ           E       β         ph
-can      18466   16832.0526  0.4832  7.552000  4 (trail↓)  [known]
-you      17464   16031.9836  0.4703  7.552000  2 (trans↑)  [new]
-hear     19372   17551.3348  0.4949  7.552000  1 (RevEmrg) [known]
-what     16194   15010.5116  0.4540  7.552000  4 (trail↓)  [known]
-i         2912    3447.4556  0.2834  0.077615  4 (trail↓)  [new]
-am       16543   15292.0788  0.4585  7.552000  2 (trans↑)  [new]
-typing   21041   18866.8374  0.5163  1.947073  4 (trail↓)  [new]
--W reply: holcus setn abysmal quun
+    def sub(m):
+        if m.group('ver') or m.group('code'):
+            out.append(Number(m.group(0), 'code', None))
+        else:
+            out.append(_parse(m))
+        return ' '
+    return _ALL.sub(sub, text), out
 ```
 
-and from screenshot 3, for `what is your name`: `what` 16194 (15010.5116, 0.4540), `is` 1894 (2405.4327, 0.2703, new), `your` 18893 (17171.5261, 0.4887), `name` 15471 (14425.0211, 0.4447, new), all with β = 7.552000; the `-W` reply is `holcussamestuffseemy`, and the same prompt typed with an unterminated quote gives the same reply. What the code can say about them today (`OURS:CALCULATED`, notebook `VAPMIP/notebooks/c/08c_ptol_store.ipynb`, 4 PASS, 0 FAIL):
+```
+>>> import numeric
+>>> numeric.split("I told you 3 times, 2.5% of $1,200, x2, version 3.10.3")
+('I told you   times,   of    , version  ', [Number(text='3', kind='integer', value=3.0), Number(text='2.5%', kind='percent', value=2.5), Number(text='$1,200,', kind='currency', value=1200.0), Number(text='x2', kind='code', value=None), Number(text='3.10.3', kind='code', value=None)])
+>>> [(n.text, n.kind, n.value) for n in numeric.split("the 4th, -7 and 1,000,000")[1]]
+[('4th', 'ordinal', 4.0), ('-7', 'signed', -7.0), ('1,000,000', 'integer', 1000000.0)]
+```
 
-| word | slot on screen | slot today | slot by the replaced formula | E today | E on screen |
+The C scanner `mh_split_numbers` (`PtolC/monad_harness.c:436–454`) is a hand-written port of the same patterns, including the regular expression's backtracking order. It agrees with `numeric.split` on 4,000 random strings and a fixed set (§9). Number *words* ("three") are words and stay in the word machinery; whether they should also be read as numbers is `OPEN`.
+
+---
+
+## 5. The Harness hears (`conversation_usage.py`, `bw_drift.py`, `state_repass.py`; `monad_harness.c`)
+
+The Harness is everything measured about the speaker and about the reply. It hears three ways.
+
+**5.1 Usage as probability.** The speaker's own words are the probabilities the Monad writes under. A word's probability is the speaker's usage mixed into general English, with the confidence λ = N/(N+200) growing as the store grows (`vocab_store.UsageStore.p_word`), so a cold store is general English and a warm one is the speaker. Bits per word is −log₂ p, read as a compression cost: the fewer bits a word costs a reader who knows the speaker, the more probable it is.
+
+**Listing 2 — the speaker's usage as a probability (`UsageStore.p_word`)** (`VAPMIP/Currentwork/UserState/vocab_store.py:115–122`; verbatim, docstring removed)
+
+```python
+def p_word(self, lemma: str, K: float = 200.0) -> float:
+    bc, bt = brown_counts(); lam = self.confidence(K); lem = lemma.lower()
+    pb = (bc.get(lem, 0) + 0.5) / (bt + 0.5 * len(bc))
+    n = self.lemmas.get(lem, {}).get('n', 0); V = max(1, len(self.lemmas))
+    pu = (n + 0.5) / (self.n_obs + 0.5 * V)
+    return lam * pu + (1.0 - lam) * pb
+```
+
+```
+>>> import tempfile, conversation_usage as CU
+>>> cu = CU.ConversationUsage(tempfile.mkdtemp())
+>>> cu.store.confidence()
+0.0
+>>> round(cu.bits_per_word('the king reads the book'), 3)
+9.869
+>>> cu.hear('The king rules the kingdom and the queen reads the book. I told him 3 times.', 'external', 'p1') is None
+True
+>>> cu.store.n_obs, round(cu.store.confidence(), 4), cu.numbers.n
+(8, 0.0385, 1)
+>>> round(cu.bits_per_word('the king reads the book'), 3)
+6.148
+```
+
+**5.2 Broca–Wernicke drift.** The user's words cost w bits each; the reply's words cost b. The reply is *Broca-heavy* when b > w. The drift is the log ratio δ = ln(b/w); a correction switches on when |δ| passes 0.35 and off below 0.15 (hysteresis), and is signed so that a dearer reply pushes the next reply toward probable words. The chosen thresholds are engineering values, not measurements (`OPEN`).
+
+**Listing 3 — the Broca–Wernicke drift step (`BWDrift.update`)** (`VAPMIP/bw_drift.py:40–50`; verbatim, docstring removed)
+
+```python
+def update(self, wernicke_bits: float, broca_bits: float) -> Dict[str, Any]:
+    w, b = max(wernicke_bits, 1e-9), max(broca_bits, 1e-9)
+    d = math.log(b / w); g = gamma(w, b)
+    self.active = (abs(d) > self.on) or (self.active and abs(d) > self.off)
+    corr = 0.0
+    if self.active:
+        corr = max(-1.0, min(1.0, math.copysign(1.0, d) * (abs(d) - self.off) / (1.0 - self.off)))
+    rec = {'wernicke': w, 'broca': b, 'delta': d, 'gamma': abs(g), 'gamma_arg': cmath.phase(g), 'active': self.active, 'bw_correction': corr,
+           'side': 'broca' if d > 0 else 'wernicke'}
+    self.history.append(rec)
+    return rec
+```
+
+```
+>>> import bw_drift
+>>> d = bw_drift.BWDrift()
+>>> [(w, b, round(r['delta'], 3), r['active'], round(r['bw_correction'], 3)) for w, b in [(9.0, 9.5), (9.0, 14.0), (9.0, 11.0), (9.0, 9.4), (14.0, 9.0)] for r in [d.update(w, b)]]
+[(9.0, 9.5, 0.054, False, 0.0), (9.0, 14.0, 0.442, True, 0.343), (9.0, 11.0, 0.201, True, 0.06), (9.0, 9.4, 0.043, False, 0.0), (14.0, 9.0, -0.442, True, -0.343)]
+```
+
+**5.3 The speaker's state.** `prompt_to_state.PromptToState` reads a turn into fourteen poles, seven neurotransmitters × dark and light (OPI, GLU, GABA, DA, 5HT, NE, OXT), by a ridge regression on TF-IDF features and lexical meters; a reading within its own spread is healed to baseline; the pole pairs become a seven-axis mix; `neuro_recipes.conjugate` plans a reply toward RECEPTIVE, the state in which information is taken in (`neuro_recipes.RECEPTIVE`), with gain 0.6 scaled by √(fill/16), where *fill* is how many of the window's sixteen slots hold a word, so thin context makes a smaller correction. `meet_then_lead` turns the plan into one (axis, level) per word: agree with the speaker first, then lead.
+
+**Listing 4 — the speaker's state: read, heal, mix, cancel (`StateRepass.observe`)** (`VAPMIP/state_repass.py:68–77`; verbatim, docstring removed)
+
+```python
+def observe(self, text: str, fill: int = 16) -> Dict[str, Any]:
+    r = self.engine.turn(text); self.reading = r; self.turns += 1
+    c = np.asarray(r['conc'], float); sp = np.asarray(r['spread'], float); base = np.asarray(getattr(self.engine, 'base', np.zeros(14)), float)
+    dev = c - base; self.healed = np.abs(dev) <= sp; self.dev14 = np.where(self.healed, 0.0, dev)
+    self.mix = {a: float(min(1.0, max(0.0, NR.BASELINE[a] + (self.dev14[2 * i + 1] - self.dev14[2 * i]) / 9.0))) for i, a in enumerate(AXES)}
+    self.k_eff = self.k * math.sqrt(max(1, min(16, fill)) / 16.0)
+    self.target = NR.conjugate(self.mix, self.k_eff, self.band)
+    self.held = NR.dist(self.mix, NR.RECEPTIVE) < self.band
+    return self.summary()
+```
+
+```
+>>> import neuro_recipes as NR, state_repass as SR
+>>> from prompt_to_state import PromptToState
+>>> st = SR.StateRepass(PromptToState())
+>>> st.observe('Why does this keep breaking?! I already told you the file was there.', fill=16)
+{'mix': {'OPI': 0.44, 'GLU': 0.87, 'GABA': 0.36, 'DA': 0.5, '5HT': 0.35, 'NE': 0.0, 'OXT': 0.4}, 'target': {'OPI': 0.69, 'GLU': 0.68, 'GABA': 0.91, 'DA': 0.82, '5HT': 0.83, 'NE': 0.8, 'OXT': 0.56}, 'held': False, 'healed_poles': 7, 'k_eff': 0.6, 'axis': 'NE', 'move': 'GABA- high: neutralise with GABA+; 5HT- high: neutralise with 5HT+; NE- high: neutralise with NE+'}
+>>> st.heard_tone(), st.trajectory(4)
+(('NE', 0), [('NE', 0), ('NE', 2), ('NE', 3), ('NE', 5)])
+>>> st.observe('Why does this keep breaking?! I already told you the file was there.', fill=9)['k_eff']
+0.45
+```
+
+The C meter is the usage ridge only (§11.4). Its running state, healing, mix, k_eff, target and trajectory agree with the Python on eight prompts (§9).
+
+---
+
+## 6. The window (`sedenion_window.py`, `tone_chord.py`; `ptol.c: cv_write`)
+
+`OURS`. The window is the scaled box-kite: a sentence is written one word at a time into sixteen slots (e₀ is the anchor, the newest word enters slot 1). The slots have a fixed labelling for the speaker's state: e₁…e₇ the dark poles in kite order OPI GLU GABA DA 5HT NE OXT, e₈ the cursor, e₉…e₁₅ the light poles; dark and light of one axis are XOR 8 apart, and the three antagonist pairs GLU|GABA, DA|5HT, NE|OXT sit XOR 1 apart (slot 1 is the OPI hub), so they are the three struts of the neurotransmitter kite (checked in `tests/test_state_repass.py`).
+
+**Seven tones.** `Tone7` holds seven levels; `knobs()` turns them into what the constructor does: DA = novelty rank, 5HT = the exponent on word-to-word statistics, NE = pool size and short frames, OXT = boost for the speaker's own words, GLU = pool size, GABA = pruning floor, OPI (the CB1 slot) = relaxation. These are the author's design, not results.
+
+**One word.** For an open slot, `_pick` builds candidates (the topic neighbourhood minus words already used), weights each by P(w | previous)^(coherence·(1+g)) × x, where g is the drift correction of §5.2, multiplies the speaker's own words by `user_boost` + `imitation`, prunes below a floor, truncates to the pool size and takes the word at the novelty rank. **Imitation:** a child repeats what it heard before it invents; a heard word (or its lemma) is at least as likely as the best candidate. The method is 47 lines, so it is pointed at, not shown (`VAPMIP/sedenion_window.py:386–434`).
+
+**The strut revisit** (the orbweaver's turbulence rule at sentence scale). When three or more candidates sit within half of the best, the slot is picked again under the antagonist tone of the strut, and the sharper pick is kept:
+
+**Listing 5 — the one orbweaver step (`weave_cycle.web_step`)** (`VAPMIP/weave_cycle.py:35–49`; verbatim, docstring removed)
+
+```python
+def web_step(scale: str, options: Dict[str, float], reverse: Optional[Callable[[], Tuple[str, Dict[str, float]]]] = None,
+             chosen: Optional[str] = None) -> Dict[str, Any]:
+    if not options:
+        return {'scale': scale, 'chosen': chosen, 'turbulent': False, 'peaks': 0, 'reversed': False, 'alt': None}
+    first = chosen if chosen in options else max(options, key=lambda o: (options[o], o))
+    turb, peaks = turbulent(options.values())
+    out = {'scale': scale, 'chosen': first, 'turbulent': turb, 'peaks': peaks, 'reversed': False, 'alt': None}
+    if turb and reverse is not None:
+        alt, aopts = reverse(); out['alt'] = alt
+        share = lambda o, k: o.get(k, 0.0) / (sum(o.values()) or 1.0)
+        if alt is not None and alt != first and share(aopts, alt) > share(options, first):
+            out['reversed'] = True; out['chosen'] = alt
+    return out
+```
+
+```
+>>> import weave_cycle as WC
+>>> WC.web_step('sentence', {'a': 9, 'b': 1, 'c': 1}, lambda: ('b', {'b': 1.0}))
+{'scale': 'sentence', 'chosen': 'a', 'turbulent': False, 'peaks': 1, 'reversed': False, 'alt': None}
+>>> WC.web_step('sentence', {'a': 3, 'b': 3, 'c': 2}, lambda: ('c', {'c': 9, 'a': 1}))
+{'scale': 'sentence', 'chosen': 'c', 'turbulent': True, 'peaks': 3, 'reversed': True, 'alt': 'c'}
+>>> WC.web_step('sentence', {'a': 3, 'b': 3, 'c': 2}, lambda: ('c', {'c': 3, 'a': 3, 'b': 3}))['reversed']
+False
+```
+
+---
+
+## 7. Tense and conjugation as Lyndon factors (`lyndon_conjugation.py`, `tenseplan.py`)
+
+`OURS`, on an `ESTABLISHED` theorem (Chen–Fox–Lyndon; Duval's algorithm). English fixes the order of a verb group: TENSE (with an optional modal), have + -en, be + -ing, then the main verb. Give each feature a rank, TENSE 4 > MODAL 3 > PERF 2 > PROG 1 > V 0; a verb group is the word of its ranks in non-increasing order, and its Lyndon factorisation (`duval`) is its list of features. Realising the group is affix hopping: a PERF factor makes the next word -en, a PROG factor the next word -ing, the modal (or the first verbal word) carries the tense. With distinct ranks every factor is one letter, so the factorisation is a sort; the Lyndon view contributes the canonical form and the factor algebra (`divides`, `gcd`, `lcm`: gcd(past perfect, past progressive) = past), not a new algorithm.
+
+**Listing 6 — the verb group as a Lyndon factor list (`verb_group`, `conjugates`)** (`VAPMIP/lyndon_conjugation.py:103–111` ; `VAPMIP/lyndon_conjugation.py:162–179`; verbatim, docstring removed)
+
+```python
+def verb_group(spec) -> Tuple[int, ...]:
+    d = parse_tense(spec)
+    w = [RANK['V']]
+    if d['prog']: w.append(RANK['PROG'])
+    if d['perf']: w.append(RANK['PERF'])
+    if d['modal']: w.append(RANK['MODAL'])
+    if d['tense'] != 'base': w.append(RANK['TENSE'])
+    return tuple(sorted(w, reverse=True))
+
+def conjugates(lemma: str, spec='present', number: str = 'sg', person: int = 3) -> List[dict]:
+    d = parse_tense(spec)
+    if d['tense'] == 'base':
+        return [{'word': lemma, 'tag': 'VB', 'factor': 'V'}]
+    heads = ([('MODAL', d['modal'])] if d['modal'] else []) + ([('PERF', 'have')] if d['perf'] else []) + ([('PROG', 'be')] if d['prog'] else []) + [('V', lemma)]
+    out, pending = [], None                               # pending = the tag the NEXT word must take (from a PERF or PROG factor above it)
+    for i, (f, w) in enumerate(heads):
+        if f == 'MODAL':                                  # the modal carries the tense and is itself uninflected; what follows is a bare stem
+            out.append({'word': w, 'tag': 'MD', 'factor': f}); pending = 'VB'; continue
+        if pending is None:                               # first verbal word: it carries TENSE
+            tag = 'VBD' if d['tense'] == 'past' else ('VBZ' if (number, person) == ('sg', 3) else 'VBP')
+        else:
+            tag = pending
+        out.append({'word': _form(w, tag, number, person), 'tag': tag, 'factor': f})
+        pending = {'PERF': 'VBN', 'PROG': 'VBG'}.get(f, 'VB')
+    return out
+```
+
+```
+>>> import lyndon_conjugation as LC
+>>> [g['word'] for g in LC.conjugates('see', 'future perfect progressive')]
+['will', 'have', 'been', 'seeing']
+>>> LC.factors('past perfect progressive'), LC.verb_group('past perfect progressive')
+(['TENSE', 'PERF', 'PROG', 'V'], (4, 2, 1, 0))
+>>> LC.gcd('past perfect', 'past progressive') == LC.verb_group('past')
+True
+>>> LC.inflection_frame('past perfect', 'walk')['surface']
+['had', 'walked']
+```
+
+Table 7.1 gives all fifteen tenses for *see* from the Python and from the C (`cv_inflect`), with the check:
+
+| tense | Lyndon factors | Python | C | marker tense/conj | same |
 |---|---|---|---|---|---|
-| `can` | 18466 | 18466 | 18466 | 0.4832 | 0.4832 |
-| `you` | 17464 | 17464 | 17464 | 0.4703 | 0.4703 |
-| `hear` | 19372 | 19372 | 19372 | 0.4949 | 0.4949 |
-| `what` | 16194 | 16194 | 16194 | 0.4540 | 0.4540 |
-| `i` | 2912 | 2912 | 2912 | 0.2834 | 0.2834 |
-| `am` | 16543 | 16543 | 16543 | 0.4585 | 0.4585 |
-| `typing` | 21041 | 21042 | 21041 | 0.5163 | 0.5163 |
-| `is` | 1894 | 1894 | 1894 | 0.2703 | 0.2703 |
-| `your` | 18893 | 18893 | 18893 | 0.4887 | 0.4887 |
-| `name` | 15471 | 15471 | 15471 | 0.4447 | 0.4447 |
+| present | TENSE · V | sees | sees | present/3sg | ✓ |
+| past | TENSE · V | saw | saw | past/past | ✓ |
+| future | TENSE · MODAL · V | will see | will see | future/base | ✓ |
+| conditional | TENSE · MODAL · V | would see | would see | conditional/base | ✓ |
+| perfect | TENSE · PERF · V | has seen | has seen | perfect/pastpart | ✓ |
+| progressive | TENSE · PROG · V | is seeing | is seeing | progressive/ing | ✓ |
+| past perfect | TENSE · PERF · V | had seen | had seen | past/pastpart | ✓ |
+| past progressive | TENSE · PROG · V | was seeing | was seeing | past/ing | ✓ |
+| future perfect | TENSE · MODAL · PERF · V | will have seen | will have seen | future/pastpart | ✓ |
+| future progressive | TENSE · MODAL · PROG · V | will be seeing | will be seeing | future/ing | ✓ |
+| present perfect progressive | TENSE · PERF · PROG · V | has been seeing | has been seeing | present/ing | ✓ |
+| past perfect progressive | TENSE · PERF · PROG · V | had been seeing | had been seeing | past/ing | ✓ |
+| imperative | V | see | see | imperative/base | ✓ |
+| base | V | see | see | base/base | ✓ |
+| future perfect progressive | TENSE · MODAL · PERF · PROG · V | will have been seeing | will have been seeing | future/ing | ✓ |
 
-- **Slots and energies.** The ten (word, slot, E) triples printed on screen are reproduced exactly, to the slot and to four decimals of E, by the formula that `monad_word_coords` says it replaced (`fmod(v · MONAD_PHI, 1.0)`), and by today's exact-integer `monad_word_coords` for nine of the ten. The tenth, `typing`, differs by one slot (21041 on screen, 21042 now) with the same E. Chased to its verdict: `CODE`. The comment in `VAPMIP/PtolC/monad.c` records that the floating-point fractional part was replaced by an exact integer one (§4.3) and that addresses change for about 83 % of tokens (those of six characters or more); `typing` is the only word of the ten with six characters or more.
-- **Energy range.** Every E on screen lies in [0.2703, 0.5163], inside [`MONAD_D_STAR`, `MONAD_OMEGA_ZS`] = [0.24600, 0.56714] (§4.3).
-- **β.** The value 7.552000 is `MONAD_BETA_SAT` (§7.1); eight of the ten words are at the cap, `i` (0.077615) and `typing` (1.947073) are not. The store had been trained on 121,914,388 words, so the common words of the prompts sit at the cap.
-- **Replies.** `holcus setn abysmal quun` and `holcussamestuffseemy` are not sentences and do not answer the prompts; `holcus` is a genus of grasses. They are the output of the speaking path as it then was, kept as a result. The same prompt gives the same reply every time on screen 2 (the line appears after the `-W` run and again after the `-h` run).
-- **Not reproducible today.** The store of that run, `monad_wordnet.bin` (vocab 24,485), is not the store `ptol` reads now (§4.1). The slot arithmetic is stable across the two; the replies are not claimed to be.
+`tenseplan.py` chooses the tense: a name, `auto` (the orbweaver's lemniscate station by depth: the deepest loop is the past lobe, the shallowest the future lobe) or `mirror` (the speaker's own tense).
+
+**Listing 7 — tense from the lemniscate station (`tenseplan.lemniscate_tense`)** (`VAPMIP/tenseplan.py:19–24`; verbatim, docstring removed)
+
+```python
+def lemniscate_tense(depth: int, reach: int) -> str:
+    if reach <= 1:
+        return 'present'
+    frac = (reach - depth) / (reach - 1)
+    return 'past' if frac < 0.34 else 'future' if frac > 0.66 else 'present'
+```
 
 ---
 
-## 8. The sentence path of the compiled monad
+## 8. The scaled orbweaver (`scaled_boxkite_orbweaver_monad.py`, `weave_cycle.py`; `ptol.c: cv_compose`)
 
-**Code:** `VAPMIP/PtolC/ptol.c` (`console_speak`: `VAPMIP/PtolC/ptol.c:984–1084`; `infer_speech_act`; `get_monad_sentence`); `VAPMIP/engine/grammar/ptolc_bridge.py`; `VAPMIP/engine/grammar/generate.py` (`ParseSpec`, `build_response`). **Notebook:** `VAPMIP/notebooks/paper/18_ptol_sentence_bridge.ipynb` (4 PASS, 1 FAIL).
+`OURS`. One web step (`weave_cycle.web_step`) runs at three scales. At **word** scale the options are a word's senses and the reversal re-reads the sense in a wider context (the Python reads senses; the C reads the first synset, §11.2); at **sentence** scale the options are the candidates of a slot and the reversal is the strut revisit of §6; at **paragraph** scale the options are the radii of the web.
 
-### 8.1 What C hands over
+The plan: content words (not closed-class, at least three letters) are read through the word web; the sentence vector is the sum of their nineteen-count vectors (the earlier bench used `hash(w) % 19`, which changes from run to run); the directions are the ranked radii of that sum (`ptolemy_monad.infer_direction`: the hypernym and hyponym counts measure branching, not aboutness, so they are the fallback); the room shape is a Cassini-oval fit (`cam_encode` of the prompt and of its bridge sentence) whose ratio b/c sets how deep the web goes; turbulence (three or more radii within half of the strongest) makes the deepest loop reverse along a strut with a *but/however* pivot, then recap from the hub radius. Every sentence is written by the window; the only prose that is not picked is the closed-class connective.
 
-`console_speak(prompt)`: (1) project the prompt at Eye H and normalise (§5); (2) threshold at peak / φ; (3) order the components by ascending magnitude; (4) `get_monad_words` returns one word cell per firing component (§6.1); (5) the distinct words, in spiral order, are the **word bag**; (6) compute σ_self and Γ; (7) if there are words, `infer_speech_act` reads the prompt: `why`, `how`, `where`, `who_Xs`, `define_X` (a "what" without "do"), `what_does_X_do`, or `yesno` if the first word is an auxiliary, and defaults to `what_does_X_do`; (8) `get_monad_sentence` writes three lines to a temporary file (`GAMMA`, `ACT`, `WORDS`) and runs `python3 -m engine.grammar.ptolc_bridge` from the repository root; (9) if the bridge exits zero with a non-empty line, that line replaces the word bag; otherwise the word bag stands. The guaranteed fallback is the word bag.
+```
+>>> import sedenion_window as SW, responder as R, scaled_boxkite_orbweaver_monad as S
+>>> t = 'The painter mixes the colour and the sculptor carves the stone while the musician plays the song in the temple.'
+>>> w = SW.SedenionWindow(R.default_bigram(), web=True); w.read(t)
+>>> m = S.ScaledOrbWeaverMonad(w); c = m.compose(t, scale=3.0, max_pieces=8)
+>>> c.text
+'Hence, the colour carved the mix. In detail, the colour carves the mix. More precisely, the colour will carve the mix.'
+>>> c.plan['tenses'], c.plan['directions'], c.plan['turbulent']
+(['past', 'present', 'future'], ['decompose'], False)
+>>> all(m.audit(c).values())
+True
+>>> c2 = m.compose('I told him 3 times in 2024 and x2 that the king rules the kingdom.'); [n.text for n in c2.numbers], 'digit' if any(ch.isdigit() for ch in c2.text) else 'no digit in the reply'
+```
 
-### 8.2 The bridge
+`audit()` runs seven named checks on a reply (no numerals; no template phrase; each sentence's tense is its lemniscate station; each carries its tense marker; every word is known or heard; a pivot only when turbulent; stations are past, present or future).
 
-`ptolc_bridge.py` reads the three lines, builds a `ParseSpec` (speech act, verb, topic lemmas) and calls `build_response` in `engine/grammar/generate.py`, which fills a VerbNet-based sentence frame with WordNet words and gates the fill. On success it prints one line.
+---
 
-### 8.3 What it returns
+## 9. The C port and the parity tests (`PtolC/ptol.c`, `PtolC/monad_harness.c`)
 
-`ptol -say` must run with the real `HOME`: it writes no files, but the bridge needs the user's site-packages and `~/nltk_data`; with a scratch `HOME` the bridge cannot run and `ptol` silently returns the word bag, about ten times faster. (A scratch-`HOME` run mistaken for the real path was found and corrected while this paper was being written.) The compiled monad on the six prompts (plain `ptol` with a scratch `HOME`, `-say` with the real one, and one line of the compiled REPL):
+The Monad is the voice (`ptol.c`, 1,494 lines: window, `Tone7`, imitation, strut revisit, Lyndon verb group, tense plan, scaled orbweaver, `cam_encode`); the Harness is the ears (`monad_harness.c`, 391 lines: numbers, usage, drift, the user's state). The console talks to them as plain text over a socket-pair of newline-JSON frames: `say` and `cmd` frames are answered by the child (`/legacy <text>` still reaches the earlier voice). The same text can be typed at `ptol -chat`.
 
-| prompt | `ptol` (plain) | `ptol -say` (real HOME) | compiled REPL line | parser line |
+![**Figure 1.** The Monad: one turn through `ptol.c` (ISO 5807 symbols; every title is a name in the code, checked by `tests/test_flowcharts.py`).](figures/monad_flow.png)
+
+![**Figure 2.** The Harness: hearing a turn in `monad_harness.c`.](figures/harness_flow.png)
+
+The Python monad is the test bench: `tests/test_c_parity.py` builds the C and compares. It checks, to the stated tolerance: numbers (4,000 random strings and a fixed set, exact); the drift (300 steps, 1e-6); the usage meter (14 poles, 2e-5); the running solution and the repass (mix 6e-4, target 0.011, healed, held, heard tone, five-step trajectory); usage counts and p_word (1e-9); verb groups (15 tenses × 460 verbs × number × person: surface, tense code, conjugation code, ranks, factor count, exact); the tense plan and the mirror tense (exact); `cam_encode` (1e-9); the bigram (1e-12); the orbweaver plan on first senses (reach, regime, b/c, turbulence, peaks, radii); and the resident frame link with a scripted console. A test that fails is a finding: it found a number-scanner backtracking error, a one-character truncation before counting, and a `tolower(*p++)` macro that skipped letters.
+
+| check | result |
+|---|---|
+| tests in `VAPMIP/tests/` | 190 passed, 0 failed |
+| of which C ↔ Python parity (`tests/test_c_parity.py`) | 13 |
+| flow-chart names exist in the C (`tests/test_flowcharts.py`) | 2 |
+
+---
+
+## 10. Measurements (transcripts)
+
+All runs on one laptop (Intel Core i7-8550U, 2018, no GPU, no network). Timings are in ⟦brackets⟧ and are ignored by `make_paper.py --check`; everything else is compared exactly.
+
+**10.1 The C monad, plain text** (`ptol -chat`, a fresh private usage store):
+
+```
+> The king rules the kingdom and the dog chases the cat in the garden. I told him 3 times in 2024.
+Because, the times times the rule.
+> /state
+heard GLU:2  held=0 healed=10/14 k_eff=0.150 | mix OPI 0.56 GLU 0.31 GABA 0.69 DA 0.57 5HT 0.75 NE 0.30 OXT 0.50 | target OPI 0.61 GLU 0.82 GABA 0.70 DA 0.72 5HT 0.64 NE 0.53 OXT 0.50
+> /plan
+reach 1 regime continuous (b/c 1.748) turbulent 0 peaks 1 words 9 unknown 0 numbers 2 | radii situate | pieces [para d1 situate present]
+> /audit
+audit: no_numerals=1 no_template_phrase=1 tense_is_the_lemniscate_station=1 every_paragraph_sentence_carries_its_tense_marker=1 every_word_is_known_or_heard=1 a_pivot_only_when_turbulent=1 stations_are_the_three=1
+> Why does this keep breaking?! I already told you the file was there.
+Because, the keep files the breaking. More precisely, the why tells the there.
+> /tense past perfect
+tense: past perfect (one sentence per turn in this tense)
+> The painter mixes the colour and the sculptor carves the stone.
+The stone had mixed the sculptor.
+> /tense auto
+tense: auto (the lemniscate decides, sentence by sentence)
+> /trace
+DET:the P=0.720 n=6 <GLU:3|base|base>  N:stone P=0.165 n=16 <GLU:3|base|base>  V:had mixed P=0.195 n=16 <GLU:3|past|pastpart>  DET:the P=0.720 n=6 <GLU:3|base|base>  N:sculptor P=0.247 n=16 <GLU:3|base|base>
+> /drift
+usage: 20 words counted, 19 lemmas, lambda 0.091 | drift: measured delta -0.014 |Gamma| 0.004 active 0 correction +0.000 | numbers heard: 2 | state meter: loaded
+```
+
+**10.2 The Python monad, the same pipeline** (`responder.Responder`, the real user-state engine):
+
+```
+>>> import tempfile, responder as R, conversation_usage as CU
+>>> cu = CU.ConversationUsage(tempfile.mkdtemp())
+>>> r = R.Responder(usage=cu, max_sentences=3)
+>>> out = r.turn('The king rules the kingdom and the dog chases the cat in the garden. I told him 3 times in 2024.'); print(out["reply"])
+Hence, the cat chases the dog.
+>>> out = r.turn('Why does this keep breaking?! I already told you the file was there.'); print(out["reply"])
+Hence, the breaking files the keep.
+```
+
+**10.3 Cost.** One C turn averages ⟦25.4⟧ ms (40 turns in one resident session, state kept, process start included). The compiled voice is 1,494 lines and the harness ears 391; the Python twins total 1,596 lines.
+
+---
+
+## 11. Failure modes and limits
+
+Stated as results, each measured by the run above or by `evidence.py`.
+
+**11.1 The replies are not good English.** Transcripts 10.1 and 10.2 are the evidence: sentences are well formed at the slot level (determiner, noun, inflected verb group, determiner, noun) and often wrong in meaning ("the stone mixes the sculptor"). Heard words are repeated whether or not they fit the slot's part of speech, because imitation weights them above the best candidate. A pivot at the deepest loop can repeat the same sentence.
+
+**11.2 No sense choice in C.** The Python word web picks a sense by gloss overlap and the speaker's own history; the C reads the first synset. For the words below the two differ:
+
+| word | context given | Python word web (sense) | first synset (what the C reads) | same |
 |---|---|---|---|---|
-| finger pointer | `gift-gems tropheus · spurned · · ox-hide · · · converteret *trolley *wittgenstein *rapa *nuys *mais` | `Wittgenstein trolleys wittgenstein.` | `changelogs construction uep finger` | `I don't know 'finger'. Try: look, take, put, go, use, open, say, find, make, ask` |
-| what is a tree | `horseback whirleth · tilt · · innovators marsyas arrow-swift catos philippopolis *polysyllables *ise *· *· *joost` | `Time is able.` | `kite its engine probe` | `e0/identity  "identity is tree"` |
-| neutron generation in different reactor types | `weaver-of-peace glory-decked monenda · hard-scrabble massy · *alwayes *squirting *yom *· *· *convinto *· *· *·` | `Priest relates country.` | `kite its real gawo` | `I don't know 'neutron'. Try: look, take, put, go, use, open, say, find, make, ask` |
-| good morning | `· · · penned · colourless aliment gaule · *seemes *gurls *aughty *winningly *birdseye *· *lexicogrammatical-word` | `Priest relates country.` | `libx alternator cdot muller` | `I don't know 'good'. Try: look, take, put, go, use, open, say, find, make, ask` |
-| can you play the piano? | `water's-edge folcwalda's refute industriously assiduously · · confabulations patrolling swarming-time vagabonds alemannicus *marja-liisa *· *mcarthur *·` | `Time is able.` | `kite open and where` | `I don't know 'can'. Try: look, take, put, go, use, open, say, find, make, ask` |
-| the first reactor was built after neutrons were discovered | `· · commissioning ebb-tide phiz · unappropriated · · · enoch lukewarm *countryfolk *collectives *nodes *·` | `George relates country.` | `kite pores helicities after` | `I don't know 'the'. Try: look, take, put, go, use, open, say, find, make, ask` |
+| bank | river water fish | bank.n.01 | bank.n.01 | ✓ |
+| run | program code computer | run.n.01 | run.n.01 | ✓ |
+| bat | ball game pitcher | bat.n.01 | bat.n.01 | ✓ |
+| light | weight heavy feather | light.n.01 | light.n.01 | ✓ |
+| plant | factory workers machinery | plant.n.01 | plant.n.01 | ✓ |
+| cell | prison jail guard | cell.n.01 | cell.n.01 | ✓ |
 
-For these prompts the compiled engine's words are not related to the prompt's own words, and two different prompts can return the same sentence. With an empty word list the bridge still returns a sentence (`Time is able.`), although its docstring says a bad word list prints nothing and exits non-zero (notebook 18). `OURS:CALCULATED`.
+**11.3 Connectives are not Python's.** The Python picks connectives with a seeded `random`; the C rotates through the lexicon in a fixed order, so the same prompt gives the same plan but different connective words.
 
----
+**11.4 The C user-state meter is one meter.** The Python state engine averages the usage ridge with lexical meters (VADER, arousal, profanity, dialogue act, stance, continuation cues); the C has the ridge only. The gap in dose units, over eight prompts:
 
-## 9. The parser and the harness
-
-**Code:** `VAPMIP/PtolC/zork.c` (`VERBS[]`, `zork_parse`: `VAPMIP/PtolC/zork.c:201–344`), `VAPMIP/zork_parser.py`; `VAPMIP/PtolC/monad_harness.c`, `monad_harness.h`; `VAPMIP/PtolC/ptol.c` (`run_console`). **Notebook:** `VAPMIP/notebooks/paper/19_parser_tables.ipynb` (4 PASS, 2 FAIL).
-
-### 9.1 The parser
-
-Verb-governed, in the Infocom tradition (Lebling, Blank and Anderson, 1979; not fetched, see the References). `zork_parse(input)`: (1) a leading `/` is a slash command and bypasses the monad; (2) tokenise; (3) direction shorthand; (4) look the first token up in the verb table, with a six-letter prefix expansion (the Infocom rule); the verb selects one of **sixteen operators** (identity, negate, bind, name, apply, abstract, branch, iterate, recurse, allocate, query, dereference, compose, parallelize, interrupt, emit); (5) collect the remaining tokens as nouns, skipping articles and resolving *it* to the last noun; (6) split at a preposition into first and second noun; (7) build the prompt handed to the monad. Example: `what is a tree` parses to operator e0/identity with the prompt `identity is tree`. The compiled and Python tables, compared exhaustively (`OURS:CALCULATED`):
-
-- Verbs in the compiled table: **197**; in the Python table: **207**. Operators covered: 16 of 16 (compiled), 16 of 16 (Python).
-- In the Python table and not the compiled table: **10** (`again`, `and also`, `break open`, `g`, `look for`, `these`, `those`, `type`, `with`, `z`); the other way: **0**.
-- Shared verbs that map to **different operators: 5**: `break` (compiled 1, Python 14); `compose` (compiled 9, Python 12); `print` (compiled 12, Python 15); `scan` (compiled 0, Python 7); `write` (compiled 9, Python 12).
-- Cause: the Python table lists six verbs under two operators each and keeps the last; the compiled table lists each verb once. Five of the six then differ (`ask` agrees). The header of `zork.h` says the table "mirrors zork_parser.py exactly".
-
-Verbs per operator in the compiled table: identity 14, negate 14, bind 15, name 13, apply 14, abstract 13, branch 15, iterate 11, recurse 11, allocate 13, query 13, dereference 11, compose 9, parallelize 9, interrupt 11, emit 11.
-
-### 9.2 The harness
-
-`monad_harness.c` is the seam `ptol` crosses to drive the Python tabbed curses console: `ptol -w` forks the console onto the terminal and keeps the other end of a socket pair, reading newline-delimited JSON frames (`attach`, `say`, `cmd`, `mode`, `ping`, `quit`) and answering with `chat` frames. A passive "radio" frame carrying a support line is parsed (`mh_parse_support_line`) and folded into the Monad (`mh_ingest_support`). Frames are harness code (proprietary; see LICENSE).
-
----
-
-# Part II: the Python monad the compiled one was built from
-
-## 10. The geometry
-
-**Code:** `VAPMIP/rotary_rerun_monad.py` (`BoxKite`: `VAPMIP/rotary_rerun_monad.py:325–493`; `MindsEye`: `VAPMIP/rotary_rerun_monad.py:565–663`; `PapersHands`: `VAPMIP/rotary_rerun_monad.py:670–709`); `ValaQuenta/modules/box_kite/maths.py`. **Notebooks:** `VAPMIP/notebooks/tuning_the_engine/phase_25.ipynb`, `phase_39.ipynb`.
-
-`BoxKite` is built once from the box-kite mathematics of §3: it holds the seven kites, the struts, the 42 assessors, a monotonic `signature` (a counter, not an object id), and a `descent` hash of its two parents. `_Bound` is the base of the two faces: a subsystem works alone before any shared language exists, and binding it to a `BoxKite` is checked, not assumed; a reference across signatures is refused. `MindsEye.snapshot(ψ)` reads one instant across all dimensions and never emits: it returns `p_red`, `p_blue` (red = components k ≥ 8, blue = k < 8, §2.2), `sigma_self`, `R` and `e` (the square roots), `trochoid_loss` = |R − e|, σ_RB, and the lit struts. `PapersHands` writes: `emit_pathway(strut)` puts a strut's lineage in build order; `relate(eye, ψ)` reads a snapshot and writes it as ordered relations. Reading and writing combined is speech, which is why both must bind the same box kite.
-
-## 11. The dial
-
-**Code:** `VAPMIP/19D_boxkite_context_monad.py` (`GaugeEye.continuous_snapshot`: `VAPMIP/19D_boxkite_context_monad.py:100–124`; `GaugeHands.emit_steered`: `VAPMIP/19D_boxkite_context_monad.py:148–199`). **Notebook:** `VAPMIP/notebooks/tuning_the_engine/phase_38.ipynb`.
-
-`GaugeEye` extends `MindsEye` by one operation. `continuous_snapshot(ψ)` returns everything the snapshot returns plus, read at the same instant in the same call, the **discrete** reading (`is_zero_divisor`, `nearest_assessor`, from `chart_of`) and the **continuous** reading (`a_matrix_basin_windspeed`, from `local_curvature`). `GaugeHands.emit_steered(s0, target_rho, max_steps)` is the continuous companion on the emitting side: a field-steered walk from a starting complex point, raising `GaugeSteeringFailed` if it cannot reach its target. The pair of readings, discrete and continuous, is the dial.
-
-## 12. The kernel: hub, fiber, run
-
-**Code:** `VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py` (`MindEyeBoxKiteKernel`, `FiberThrow`: `VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py:139–156`). **Notebook:** `VAPMIP/notebooks/paper/20_scaled_kernel_fibers.ipynb` (6 PASS, 0 FAIL).
-
-`MindEyeBoxKiteKernel` composes one `BoxKite`, one `GaugeEye` and one `GaugeHands`. `hub_report()` confirms the hub is real before it is used (`e0_is_outside`, `fixed_point_gluing`, the hub's weight). `throw_fiber(strut, depth, gamma_companion)` is one excursion from the hub: (1) build ψ fresh from `HUB_PSI`: ψ[0] = √(1 − depth²) and ψ[a] = ψ[b] = depth/√2 for the first assessor (a, b) of the strut's kite; (2) read `continuous_snapshot(ψ)`; (3) read `fixed_point_weight(ψ)`; (4) optionally run `emit_steered` from the complex point (strut/7, 0.15); (5) return a `FiberThrow`: strut, depth, assessor, ψ, the fixed-point weight, the discrete and continuous readings, σ_self, and the optional companion step. Because every throw rebuilds ψ from the hub, "return to the hub between fibers" is a property of the construction. `run_boxkite(plan)` is one throw per (strut, depth) pair. The seven fibers at depth 0.6:
-
-| strut | assessor | fixed_point_weight | is_zero_divisor | windspeed | σ_self (kernel split) |
-|---|---|---|---|---|---|
-| 1 | (2, 3) | 0.640000 | False | +0.0000 | 0.0000 |
-| 2 | (1, 3) | 0.640000 | False | +0.0000 | 0.0000 |
-| 3 | (1, 2) | 0.640000 | False | +0.0000 | 0.0000 |
-| 4 | (1, 5) | 0.640000 | False | +12.0000 | 0.0000 |
-| 5 | (1, 4) | 0.640000 | False | +12.0000 | 0.0000 |
-| 6 | (1, 7) | 0.640000 | False | +12.0000 | 0.0000 |
-| 7 | (1, 6) | 0.640000 | False | +12.0000 | 0.0000 |
-
-The fixed-point weight at every landing is 1 − depth² (0.64), the same number at every chart, to 10⁻¹⁶ over all seven struts and five depths. A throw leaves energy only on e₀ and the chosen assessor's two indices; throwing a strut again after other throws gives the identical landing; a depth outside [0, 1] is refused. `OURS:CALCULATED`.
-
-## 13. The encounter: from a prompt to a sentence in the Python monad
-
-**Code:** `PtolemyDesktop/ptolemy_console.py` (`build_encounter_19d`, `ScaledMindEyeMonadAdapter.say`); `VAPMIP/19D_rotary_boxkite_monad.py` (`Monad3CStore`, `NineteenDMindsEye.create_context`, `RotaryBoxKite19D.process_input`); `VAPMIP/ptolemy_monad.py` (`infer_direction`); `VAPMIP/engine/grammar/generate.py`. **Notebook:** `VAPMIP/notebooks/paper/21_scaled_adapter_encounter.ipynb` (6 PASS, 0 FAIL).
-
-### 13.1 Null-first construction
-
-`build_encounter_19d(text, …)` builds a parse specification only from what `text` resolves to, and otherwise returns an explicit non-sentence result: (1) split the text into words; the **verb** is the first word with a WordNet verb sense; the **leaves** are the other words with any WordNet sense; (2) no verb, or no leaves: return `19D: nothing resolved … NULL, not fabricated`; (3) `create_context(leaves)` reads each leaf's current 19-count vector from `monad3_c.bin` (`Monad3CStore`) or, if the store lacks it, from WordNet directly, and records which was which; (4) `infer_direction(root_vector)` picks the dominant non-branching relation of the summed root and maps it to a direction: classify, enumerate, decompose, situate, characterize, explain, imply, associate, compare, contextualize, localize or register; if the root is all-zero the direction is `observe` and the result is reported as uncommitted; (5) a direction with no speech act returns `19D: direction=… has no speech_act mapping yet — reporting the real finding rather than forcing one`; the map covers classify, enumerate and characterize (`define_X`), decompose (`how`), situate (`where`), explain and imply (`why`); (6) otherwise a `ParseSpec` goes to `RotaryBoxKite19D.process_input`, which returns the surface sentence, a verdict and the licensed frames.
-
-### 13.2 The hub fiber of the adapter
-
-`ScaledMindEyeMonadAdapter.say` appends to the sentence its direction, verdict and licensed frames, and one hub fiber: `strut = ring_code % 7 + 1` and `throw_fiber(strut)` at the default depth 0.6. The ψ of that throw is built from the hub (§12), not from the prompt; the prompt chooses only the strut. The adapter's own docstring records that a throw per sub-ring is the next step and is not built.
-
-### 13.3 What it returns
-
-The six prompts, first round (cold: the first call of a process also reads WordNet) and second (warm), `PYTHONHASHSEED=0`:
-
-| prompt | kind | reply (warm, seed 0) |
+| prompt | largest |full − usage-only| (dose units, 0..9) | at pole |
 |---|---|---|
-| finger pointer | scaled_mind_eye | `Pointer fingers.  [direction:decompose verdict:prime licensed:['SV', 'SVO']] [hub fiber: strut=6 fixed_point_weight=0.6400 is_zero_divisor=False]` |
-| what is a tree | scaled_mind_eye | `A ises tree.  [direction:situate verdict:prime licensed:['SVO']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]` |
-| neutron generation in different reactor types | 19D_unmapped | `(19D: direction='compare' has no speech_act mapping yet — reporting the real finding rather than forcing one: leaves=['neutron', 'generation', 'in', 'different', 'reactor'])` |
-| good morning | 19D_null | `(19D: nothing resolved — no WordNet verb found, 2 content word(s) resolved. NULL, not fabricated — no sentence generated.)` |
-| can you play the piano? | scaled_mind_eye | `Play cans piano into piano.  [direction:decompose verdict:prime licensed:['SV', 'SVO', 'SVOA']] [hub fiber: strut=5 fixed_point_weight=0.6400 is_zero_divisor=False]` |
-| the first reactor was built after neutrons were discovered | 19D_unmapped | `(19D: direction='compare' has no speech_act mapping yet — reporting the real finding rather than forcing one: leaves=['first', 'reactor', 'built', 'after', 'neutrons', 'were', 'discovered'])` |
+| Why does this keep breaking?! I already told y… | 2.64 | 5HT- |
+| That makes sense, thanks. Can you show the nex… | 1.71 | DA+ |
+| I'm tired. Let's try again slowly. | 3.77 | 5HT- |
+| Hi, I'd like to learn how the Lambert W functi… | 1.3 | 5HT+ |
+| ok | 1.23 | 5HT+ |
+| WHAT?! | 4.91 | GLU- |
+| Oh that's interesting, so d* is the boundary. … | 1.46 | 5HT+ |
+| Great, that worked. I think I get it now. | 2.24 | 5HT+ |
 
-The second round returned exactly the replies of the first within the process. Across five fresh processes with hash seeds 0–4, none of the six prompts give more than one reply. Screenshots 4 to 7 are the console running ancestors of this monad on three days (screenshot numbers are the author's; clocks and title bars are as the screens show them).
+**11.5 The lossy store.** `monad3_c.bin` maps a word to one entry, not to its senses. Before `voice_lex.bin`, four of five test prompts had a different sentence vector in C than in Python; with it, the orbweaver plans agree.
 
-![Screenshot 4. The first conversation with the rotary box-kite monad, over a Claude Code window; the screen's clock reads Tue Aug 25 20:57. File: `VAPMIP/paper/figures/4-OMFG.png`.](figures/4-OMFG.png)
+**11.6 Not built.** Negation, questions and do-support; noun irregulars (children, mice) in the C lemma rules; number agreement other than singular; the GenerationalLineage descent for a numeric web scale (the C uses round(scale)); non-ASCII text in the C tokenisers (bytes ≥ 0x80 count as letters). The number pattern consumes a trailing comma (`$1,200,` in the transcript of §4), in Python and in C alike; the value is unaffected.
 
-*Screenshot 4.* A curses window titled `ROTARY BOXKITE`: `RotaryBoxKiteMonad ready. Type a sentence. /help for commands.` Prompt `what were we talking about?`; reply `it includes conversation, confuse, and yak.`; the Artifacts pane shows `direction: enumerate`. The reply is a sentence frame of the enumerate family ("it includes X, Y, and Z") filled with three words. A kept result.
-
-![Screenshot 5 (Figure 1 of earlier drafts). The tabbed curses console, Chat tab in sentence mode, running the box-kite monad (`rotary_rerun_boxkite`, signature 1, per the status bar), HP EliteBook 820 G3, Fri Sep 11 15:35. File: `VAPMIP/paper/figures/5-claude-stuff.png`.](figures/5-claude-stuff.png)
-
-*Screenshot 5.* Each reply is a sentence frame chosen by the dominant relation of the prompt's context, with the direction in brackets (situate, contextualize, decompose, enumerate, classify, compare) and the words that fired: `good morning` → `it is part of tidings. [situate · words: tidings, morrow, breeding, bosom, hope, sir, time, clip]`; `can you play the piano?` → `it is made of service and understand. [decompose · words: service, understand, grand]`; `finger pointer` → `it is made of pinkie and pinky. [decompose · words: pinkie, pinky, knuckle, fingernail, thumb, point, head, shaft]`. Replies of the form `'… is in the maths vocabulary … The named-formula catalogue is not built yet.` are the console reporting what it does not have. The words that fire are related to words of the prompt (`piano` and `grand`, `finger pointer` and `pinkie`, `thumb`) and the frames are grammatical; the sentences do not answer the questions.
-
-![Screenshot 7. The same console before its first turn: transcript empty, status bar `monad:rotary_rerun_boxkite (loading on first turn)`; title bar `rendier@rendier-HP-EliteBook-820-G3: ~/Pictures`; clock Sun, Sep20, 19:50. File: `VAPMIP/paper/figures/7-Screenshot-Before-First-Turn.png`.](figures/7-Screenshot-Before-First-Turn.png)
-
-![Screenshot 6. After the first response; status bar `monad:rotary_rerun_boxkite (box-kite sig 1, voice:creator)`; title bar `rendier@Thinkpad-X1-Carbon: ~`; clock Sun, Sep20, 19:53. File: `VAPMIP/paper/figures/6-Screenshot-After-Response.png`.](figures/6-Screenshot-After-Response.png)
-
-*Screenshots 7 and 6.* The monad is loaded on the first turn (7, status `loading on first turn`); after the prompt `asking first question.` the reply is `It is able.  [define_X/SVC/technical]  [enumerate · words: instance, sentence, portion]` (6). The two screens carry different title bars (an HP EliteBook and a ThinkPad X1 Carbon) three minutes apart. The frame `define_X` with a subject-verb-complement structure is one of the grammar's frames (`VAPMIP/engine/grammar/generate.py`, `ParseSpec("define_X", "be", …)`), and the compiled monad's sentence path returns the same family of reply (§8.3: `Time is able.` for two of the six prompts).
-
-## 14. Fault handling and NULL behaviour
-
-**Code:** `VAPMIP/rotary_rerun_monad.py` (`Fault`, `Status`, `Relation`, `Ledger`, `Harness`: `VAPMIP/rotary_rerun_monad.py:1639–3412`); `ValaQuenta/modules/box_kite/maths.py` (`fixed_point_weight`); `VAPMIP/PtolC/ptol.c` (`measure_sigma`); `PtolemyDesktop/ptolemy_console.py` (`build_encounter_19d`). **Notebook:** `VAPMIP/notebooks/paper/22_fault_ledger_and_null.ipynb` (4 PASS, 0 FAIL).
-
-### 14.1 Every fault is a record
-
-`Harness.run(ψ, currents)` runs every relationship check and appends one `Relation` to the `Ledger` for each: a name, a claim, an expected and an observed value, a `Status` (`HOLDS`, `VIOLATED`, `DEGENERATE`, `UNTESTED`) and, for a violation, a `Fault`: **MATHS** (both sides were measured and disagree: the claim is false) or **CODE** (the check could not execute as written: the claim is unjudged). The ledger never filters or compacts, and a violated record is never left unclassified. On the deliberately unbalanced currents of the demonstration: 124 records; 122 HOLDS, 1 VIOLATED, 1 DEGENERATE, 0 UNTESTED; faults: 1 MATHS, 0 CODE; the one fault is `current.neutral` (expected 0.0, observed 0.024).
-
-### 14.2 What each program returns for an all-zero input
-
-The rule of §3.4 is that a variable with no value is NULL. What the code does with an all-zero input (a census; each entry is a data point):
-
-- **keeps NULL:** `rotary_rerun_monad.MindsEye.snapshot(zeros)['sigma_self']` → nan
-- **supplies a value:** `box_kite.fixed_point_weight(zeros)` → 0.0
-- **supplies a value:** `ptol -r ""  (σ_self printed)` → 0.5000000000
-- **supplies a value:** `ptol.c measure_sigma: `if (total < 1e-15) return 0.5;`` → returns 0.5 for a zero vector
-- **keeps NULL:** `ScaledMindEyeMonadAdapter.say('good morning') (no verb resolves)` → (19D: nothing resolved — no WordNet verb found, 2 content word(s) reso
-
-### 14.3 A fault from the history (screenshot 1)
-
-![Screenshot 1 (file dated 2026-05-17). `ptolemy -l 'what is your name'` in `Projects/Ptol/Ptolemy3` on the HP EliteBook 820 G3 ends in `Segmentation fault (core dumped)`. File: `VAPMIP/paper/figures/1-funny-ptolemy.png`.](figures/1-funny-ptolemy.png)
-
-The first question put to the early program, its own name, ended in a segmentation fault. Today's `ptolemy`, run as the same command with a scratch `HOME` and no checkpoint, exits with code 0; its first line is `[ptolemy] no checkpoint found — ground state  σ=0`. The crash is therefore not reproduced here: the store, the checkpoint and the build of that day are not the ones in the repository (the first line printed is the empty-store message of today's build), so the screenshot is kept as a record of a fault, not a reproduced one (`OPEN`).
-
-*Shoutout to Max Cohen's computer - Euclid.* (A nod to Darren Aronofsky's *Pi*, 1998.)
+**11.7 Choices that are not measurements.** The 1/9 clamp gain, the √(fill/16) law, the drift thresholds 0.35 and 0.15, the tone knob table, the imitation weight and the slot labelling of the user's state are engineering choices (`OPEN`).
 
 ---
 
-# Part III: the two together
+## 12. Conclusion
 
-## 15. The two programs compared
-
-All measured in this paper; each row says which program.
-
-| item | compiled `ptol` | Python monad | result |
-|---|---|---|---|
-| the projection (§5) | `ptol -r` | restatement | agree to 4.9e-11 |
-| red/blue channels (§2.2) | cosine/sine, k ∈ {0–3, 8–11} / {4–7, 12–15} | split at bit 3 (red k ≥ 8) | **differ**: σ_self is not one shared quantity |
-| parser verb tables (§9.1) | 197 verbs | 207 verbs | 5 verbs map to different operators; 10 verbs only in Python |
-| header comments (§5.6) | two claims not reproduced | n/a | recorded |
-| the recorded windspeed of "tree" (§6.3) | -0.904887 now | −0.151155 on `tree.n.01` | the store keeps a verb sense |
-| sentence path (§8, §13) | word bag, or a sentence via Python (~12 s) | sentence, explicit non-sentence, or NULL | different mechanisms |
-| what the prompt reaches (§13.2) | ψ drives the word shadow | the prompt chooses only the strut of the one fiber | the adapter does not pass the prompt's ψ to the kernel |
-| hash-seed dependence | none observed | none of six prompts vary | — |
-
-## 16. Running it
-
-Time is measured fresh on every build of this paper and is not part of the `--check` comparison.
-
-<!-- TIMING -->
-| prompt | `ptol` ms | `ptol -say` s | `ptolemy -r -n` ms (whole process) | scaled adapter cold ms | scaled adapter warm ms |
-|---|---|---|---|---|---|
-| finger pointer | 797 | 11.5 | 239 | 10319.5 | 5.27 |
-| what is a tree | 804 | 11.5 | 234 | 297.6 | 43.02 |
-| neutron generation in different reactor types | 801 | 11.2 | 239 | 5.6 | 0.26 |
-| good morning | 777 | 11.1 | 237 | 3.0 | 0.07 |
-| can you play the piano? | 792 | 11.2 | 238 | 472.3 | 144.65 |
-| the first reactor was built after neutrons were discovered | 792 | 11.3 | 244 | 3.3 | 0.49 |
-
-Adapter: construction 0.73 s; the first call of a process also reads WordNet (cold column). `ptol -r` (the sixteen numbers alone) takes about 2 ms. Compiled figures are the faster of two runs where two were taken (`-say` once, about 12 s) and include process start; the compiled REPL's per-line cost inside one session is the recorded 28.8 ms over 600 lines.
-<!-- /TIMING -->
-
-**Energy** is not re-measured by this paper's generator (it needs the laptop unplugged). It is taken from the recorded run of 2026-10-13/14 (`VAPMIP/benchmarks/all_voices/`, `ContextPlease/claude/scratchpad/2026-10-13_monad_energy/`): whole-laptop discharge on battery, display and operating system included, so an **upper bound** on the engine's own share. Mean power then: 9.255 W. A reply of t ms costs about 9.255 × t / 3.6 µWh. The compiled REPL measured 28.8 ms per line over 600 lines and 66.6 µWh per reply on that run; the engine's own share is below the method's resolution (idle drifted from 7.57 W to 10.35 W). A warm reply of the Python monad here is about ⟦83.0⟧ µWh; a sentence through the compiled monad's bridge, at the measured seconds, about ⟦29⟧ mWh. The public per-query figures are 0.24 Wh for a median Gemini text prompt (Vahdat et al., 2025, `FourthAgePapers/ForwardPropagation/references/Vahdat_2025_Google_AI_inference_energy.html`), 0.34 Wh for an average ChatGPT query (Altman, 2025, `FourthAgePapers/ForwardPropagation/references/Altman_2025_Gentle_Singularity.html`) and roughly 0.3 Wh (You, 2025, `FourthAgePapers/ForwardPropagation/references/You_2025_Epoch_ChatGPT_energy.html`). `OURS`, derived from recorded measurements; the public figures are `ESTABLISHED` only as stated by those sources.
-
-## 17. Tuning the Engine: selected attempts, and the surface
-
-The engine was tuned by trying a method, running it, and keeping what the run showed. The record is 45 pages (`VAPMIP/docs/wiki/Tuning-the-Engine/`) with one executed notebook per page (`VAPMIP/notebooks/tuning_the_engine/`, 44 notebooks: 933 PASS, 85 FAIL, 177 PROSE, 9 SKIP). Here are three of the most abstract methods, then the Navier-Stokes-revised ones, then the surface. Each is given as the method, the code, and what the notebook measured; a claim the notebooks do not reproduce is kept and labelled.
-
-### 17.1 Definition from above (wiki 06; notebook `phase_06.ipynb`, 8 PASS, 0 FAIL, 4 PROSE)
-
-*The method.* A layer cannot be defined from inside itself; the gaps of a layer (zero divisors, non-associativity, non-commutativity, non-ordering) are the shadow of the layer that defined it, so each layer is defined from the one above. *The code.* The repeated-doubling chain of §2.6 loses one property per step, and the engine reads a strut's build order: `BoxKite.lineage(strut)` (§10), `MindsEye.generations_present`. *Measured* (notebook): ℂ is commutative and ℍ is not; ℍ is associative and 𝕆 is not; 𝕆 is alternative and 𝕊 is not; basis-unit zero divisors first appear at 𝕊, none in ℝ, ℂ, ℍ, 𝕆; the zero divisors of 𝕊 are the 84 vectors e_a ± e_b. The lineage of each strut, as `BoxKite.lineage` returns it:
-
-| strut | lineage |
-|---|---|
-| 1 | ranking → division |
-| 2 | factors → division |
-| 3 | ranking → factors → division |
-| 4 | GROUPING → division |
-| 5 | ranking → GROUPING → division |
-| 6 | factors → GROUPING → division |
-| 7 | ranking → factors → GROUPING → division |
-
-### 17.2 The fixed point as the one reference (wiki 09; notebook `phase_09.ipynb`, 7 PASS, 0 FAIL, 4 PROSE)
-
-*The method.* Of the points of a symmetric dial only the fixed point of the symmetry s ↦ 1 − s can be named without reference to anything else; every reading is taken relative to it. *The code.* The default Eye is H (σ = ½) and Γ = 0 is balance (§5.2, §5.4). *Measured:* the notebook confirms that s = 1 − s has the unique real solution ½ and reproduces the checks the page lists; in the engine, no test prompt sits at balance, since Γ at Eye H lies between -0.94 and -0.49 for the six prompts.
-
-### 17.3 The negative-space response (wiki 15; notebook `phase_15.ipynb`, 4 PASS, 2 FAIL, 3 PROSE)
-
-*The method.* The prompt's quietest component, k_min = argmin |x[k]|, is a zero-divisor contact; the response lives on the other arm of that pair, k_pair, so that the algebra, not the engine, selects the response space. *The code.* The projection of §5 supplies x; the pairs are those of §3.2. *Measured, and kept:* the notebook finds that products of basis units never vanish (zero divisors are combinations e_a ± e_b, not basis units), and that a dimension does not have exactly one pair-mate dimension (the pair-mate of a zero divisor is a set of four). The statement that the algebra restricts the response to a proper subset of the fifteen imaginary dimensions does hold. The method as written does not; it stays in the record as a result.
-
-### 17.4 The Navier-Stokes-revised methods (notebooks `10_revised_navier_stokes.ipynb`, `11_language_as_navier_stokes.ipynb`)
-
-*The method.* The two notebooks argue that the Navier-Stokes equation lacks an imaginary unit (notebook 10, with an inviscid Burgers illustration of a shock as crossing characteristics), and that the speaking step of the monad plays the part of the revised equation (notebook 11), with the mapping:
-
-| Navier-Stokes term | `speak()` equivalent (notebook 11) |
-|---|---|
-| velocity field u | the field J (the activations of the words) |
-| time derivative of u | the change of J between calls |
-| non-linear commutator | the interaction of the red and blue currents |
-| pressure gradient | the gradient of the β field |
-| viscosity | the scoring of candidate words (`sigma_candidates`) |
-| forcing f | the input text (`hear`) |
-| spectral floor | `GAP = 0.000707`, the emission threshold |
-
-`THEORETICAL`: this paper tests none of the physical claims. What the code contains is the sequence of §7.2 (seed the field, spread it, propagate it in two passes, set the word count from the balance of the field's two energy sums, walk the slots, emit), and the constants of §4.3 and §7.
-
-### 17.5 The surface: an artificial output layer
-
-*The method.* A flow with no surface has nothing to read from; an artificial output layer, an interface between the continuous field and the discrete words, supplies one. *The code.* In the compiled monad the output layer is the word step of §6.1 (`word_at` and `assemble_path` in `PtolC/ptol_layer.py`: scalars in, words out) and the sentence step of §8; in the Python monad it is the sentence construction of §13. The diagnostic that measures the interface is `halocline_report` (`VAPMIP/monad.py:1803–1896`, method of `VAPMIP/monad.py`): it computes the two currents J_pos and J_neg from the window and the prompt, a σ per word as J_pos / (J_pos + J_neg) (½ below a relative threshold of 0.001 of the peak), the words closest to σ = ½ (the "SOFAR channel"), a surface tension of 1 − `noether_violation()` (not below 0), and a compressibility equal to the zero-divisor density of the window (`fermat_scan`). *Measured* (notebook `phase_02b.ipynb`, 6 PASS, 2 FAIL, 2 PROSE): the report returns every key the page promises; the surface tension equals 1 − the violation; a zero divisor annihilates only its specific partners (exact to 10⁻¹²). Two checks fail and are kept: that the field operates on the halocline (σ̄ = ½) and that the compressibility is non-zero somewhere.
-
-## 18. Limitations and conclusion
-
-1. The compiled monad's words are, for these six prompts, unrelated to the prompt's own words (§8.3); the words and sentences related to the prompt come from the Python monad, and only for 3 of six prompts.
-2. The compiled monad needs Python for its word step and its sentence step; with a scratch `HOME` the sentence step silently falls back to the word bag.
-3. Two statements in the compiled source's comments are not reproduced (§5.6); σ_self follows the dial only for short inputs.
-4. σ_self is defined differently in the two programs (§2.2, §15).
-5. The adapter passes the prompt only as a strut choice to the kernel; a throw per sub-ring is not built (§13.2).
-6. The store keeps one WordNet entry per word, and for "tree" it is a verb sense (§6.3).
-7. The parser tables disagree on 5 verbs (§9.1).
-8. A zero input is handled four different ways across five paths; only two keep NULL (§14.2).
-9. Context flow (carrying a prompt's topic through a whole reply) is not built.
-
-The Monad as it stands turns a prompt into a sixteen-component element by a fixed projection and reads words from a store of WordNet's relations, with no gradient descent and no trained weights, on one laptop CPU. It does so with the limits above, and the code that does it is listed in §19.
+The Monad and the Harness run on one laptop CPU with no gradient descent in the Monad, a lexicon that is WordNet's, and a speaker model that is a single ridge regression; every mechanism is a short listing, a named function or a transcript, and the C is checked against the Python it was ported from. What is missing is the English: the machinery picks every word and every tense, and the words are not yet the right ones. The next measurable step is part-of-speech-aware imitation, then sense choice in C.
 
 ---
 
 ## References
 
-Altman, S. (2025). The Gentle Singularity. `blog.samaltman.com`. Copy: `FourthAgePapers/ForwardPropagation/references/Altman_2025_Gentle_Singularity.html`.
+*ESTABLISHED, fetched and kept in `paper/references/`:* de Marrais, R. (2000), *The 42 Assessors and the Box-Kites They Fly*, arXiv:math/0011260; Moreno, G. (1998), *The zero divisors of the Cayley–Dickson algebras over the real numbers*, arXiv:q-alg/9710013; Corless et al. (1996), *On the Lambert W function*; Wankel, F. (1961), US 2,988,065; Vahdat et al. (2025), Google AI inference energy; Altman, S. (2025), *The Gentle Singularity*; You, J. (2025), Epoch AI, ChatGPT energy.
 
-Bird, S., Klein, E., Loper, E. (2009). *Natural Language Processing with Python.* O'Reilly. Not fetched; free online at `nltk.org/book`.
-
-Cawagas, R. E. (2004). On the structure and zero divisors of the Cayley–Dickson sedenion algebra. *Discussiones Mathematicae, General Algebra and Applications* 24, 251–265. `Post-Hoc:`. Not fetched (the host returned 403).
-
-Corless, R. M., Gonnet, G. H., Hare, D. E. G., Jeffrey, D. J., Knuth, D. E. (1996). On the Lambert W function. *Advances in Computational Mathematics* 5, 329–359. `Post-Hoc:`. Copy: `FourthAgePapers/ForwardPropagation/references/Corless_1996_Lambert_W_Waterloo_copy.pdf`.
-
-de Marrais, R. P. C. (2000). The 42 Assessors and the Box-Kites They Fly: Diagonal Zero-Divisors in the Sedenions. arXiv:math/0011260. Copy: `FourthAgePapers/ForwardPropagation/references/deMarrais_2000_arXiv_math-0011260.pdf`.
-
-Fellbaum, C. (ed.) (1998). *WordNet: An Electronic Lexical Database.* MIT Press. Not fetched (book).
-
-Knuth, D. E. (1973). *The Art of Computer Programming, vol. 3: Sorting and Searching*, §6.4. Addison-Wesley. `Post-Hoc:`. Not fetched (book).
-
-Lebling, P. D., Blank, M. S., Anderson, T. A. (1979). Zork: A Computerized Fantasy Simulation Game. *IEEE Computer* 12(4), 51–59.
-
-Miller, G. A. (1995). WordNet: A Lexical Database for English. *Communications of the ACM* 38(11), 39–41. Not fetched (the publisher returned a bot challenge).
-
-Moreno, G. (1998). The zero divisors of the Cayley–Dickson algebras over the real numbers. *Boletín de la Sociedad Matemática Mexicana* (3) 4, 13–28; arXiv:q-alg/9710013. `Post-Hoc:`. Copy: `FourthAgePapers/ForwardPropagation/references/Moreno_1998_arXiv_q-alg-9710013.pdf`.
-
-Smith, P. H. (1939). Transmission line calculator. *Electronics* 12(1), 29–31. `Post-Hoc:`. Not fetched.
-
-Vahdat, A., et al. (2025). Measuring the environmental impact of AI inference. *Google Cloud Blog*, 21 August 2025. Copy: `FourthAgePapers/ForwardPropagation/references/Vahdat_2025_Google_AI_inference_energy.html`.
-
-Wankel, F. (1961). Rotary internal combustion engine. US Patent 2,988,065. Copy: `FourthAgePapers/ForwardPropagation/references/Wankel_1961_US2988065.html`.
-
-You, J. (2025). How much energy does ChatGPT use? *Epoch AI, Gradient Updates*, 7 February 2025. Copy: `FourthAgePapers/ForwardPropagation/references/You_2025_Epoch_ChatGPT_energy.html`.
-
-*Copies of Altman, You, Vahdat et al., de Marrais, Moreno, Corless et al. and the Wankel patent were fetched, stored under `FourthAgePapers/ForwardPropagation/references/` (mirrors: `ContextPlease/claude/references/VAPMIPPaper/`, `VAPMIP/paper/references/`) and checked against their title pages or titles (ledger: `ContextPlease/claude/references/INDEX.md`). Miller, Fellbaum, Lebling et al., Bird et al., Knuth, Smith and Cawagas were **not** fetched (a publisher bot-challenge or 403 stopped the attempt, or the work is a book); their details are from the author's records and have not been checked against a title page. The journal details given for Moreno (volume and pages) are likewise not checked: the copy is the arXiv text.*
+*ESTABLISHED, cited and not fetched (unverified until fetched):* Miller, G. (1995), *WordNet: a lexical database for English*, CACM 38(11); Fellbaum, C. (ed.) (1998), *WordNet: An Electronic Lexical Database*; Chen, K.-T., Fox, R. H., Lyndon, R. C. (1958), *Free differential calculus IV*; Duval, J.-P. (1983), *Factorizing words over an ordered alphabet*, J. Algorithms 4; ISO 5807:1985 (flowchart symbols; ANSI lineage; see https://www.wikipedia.org/wiki/ECMA-4 and https://creately.com/guides/flowchart-symbols/).
 
 ---
 
-## 19. ContextPlease inclusions and links
+## Appendix. ContextPlease: what it is, what was used, and where the history is
 
-Every path is `REPO/directory/file` under `https://github.com/michaelrendier/`.
+**What ContextPlease is.** `ContextPlease` (`https://github.com/michaelrendier/ContextPlease`) is the author's persistent context for any model that works on his repositories: the `.clauderc*` files (constants, canonical maths, history by engine, citations, licences), the skills, the primers per project, the references each skill was built from, and a scratchpad of working scripts and measurements. A model that reads it can come up to speed on the projects with historical access, without the author repeating himself.
 
-**What ContextPlease is.** ContextPlease (`ContextPlease`) is the author's versioned memory for work done with a language model: notes, protocols, skills, primers and scratch directories that let a fresh model session come up to speed with historical access instead of re-deriving what is already known. It exists because a model has no memory of its own between sessions.
+**Used for this paper.**
 
-### 19.1 Code, by section
+| file / skill | used for |
+|---|---|
+| `ContextPlease/claude/skills/cs-paper-code-conventions/` | how code is shown (conventions A–G; §10, the CS engineering white paper) |
+| `ContextPlease/claude/clauderc/.clauderc_canonical_maths` | symbol definitions (α, A_π, Ω_ζΣ) |
+| `ContextPlease/claude/hist_prime/VAPMIP/` | the primers of earlier work on the Monad |
+| `ContextPlease/claude/references/INDEX.md` | the ledger of fetched literature |
+| `ContextPlease/claude/scratchpad/gl_header_options/`, `2026-11-20_*` | working scripts (header options; inventories) |
 
-- **§3 The Null Operator:** `ValaQuenta/modules/box_kite/maths.py`, `VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py`
-- **§4 The store:** `VAPMIP/PtolC/monad3c.h`, `VAPMIP/PtolC/ptolemy.h`, `VAPMIP/PtolC/ptol.c`, `VAPMIP/PtolC/monad.c`, `VAPMIP/PtolC/monad.h`, `VAPMIP/PtolC/monad3_c.bin`
-- **§5 The question:** `VAPMIP/PtolC/ptol.c`
-- **§6 Words from ψ:** `VAPMIP/PtolC/ptol.c`, `VAPMIP/PtolC/ptol_layer.py`, `VAPMIP/wordnet_boxkite.py`, `VAPMIP/PtolC/dump_boxkite_bin.c`
-- **§7 Learning and speaking in the C monad:** `VAPMIP/PtolC/monad.c`, `VAPMIP/PtolC/ptolemy.h`
-- **§8 The sentence path:** `VAPMIP/PtolC/ptol.c`, `VAPMIP/engine/grammar/ptolc_bridge.py`, `VAPMIP/engine/grammar/generate.py`
-- **§9 The parser and the harness:** `VAPMIP/PtolC/zork.c`, `VAPMIP/PtolC/zork.h`, `VAPMIP/zork_parser.py`, `VAPMIP/PtolC/monad_harness.c`, `VAPMIP/PtolC/monad_harness.h`
-- **§10 The geometry:** `VAPMIP/rotary_rerun_monad.py`, `ValaQuenta/modules/box_kite/maths.py`
-- **§11 The dial:** `VAPMIP/19D_boxkite_context_monad.py`
-- **§12 The kernel:** `VAPMIP/scaled_mind_eye_boxkite_kernel_monad.py`
-- **§13 The encounter:** `PtolemyDesktop/ptolemy_console.py`, `VAPMIP/19D_rotary_boxkite_monad.py`, `VAPMIP/ptolemy_monad.py`
-- **§14 Fault handling and NULL behaviour:** `VAPMIP/rotary_rerun_monad.py`
-- **§17 Tuning and the surface:** `VAPMIP/monad.py`, `VAPMIP/docs/wiki/Tuning-the-Engine/00_index.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/02b_the_halocline_j_blue_j_red_h_hat_rb.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/06_definition_from_above_the_shadow_cascade.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/09_the_void_named_itself.md`, `VAPMIP/docs/wiki/Tuning-the-Engine/15_the_negative_space_response_equation.md`
-- **§2.2 Inside Out:** `ValaQuenta/modules/inversion/maths.py`
-- **§2 licences and third-party notices:** `VAPMIP/NOTICE`, `VAPMIP/WORDNET_LICENSE.txt`, `VAPMIP/LICENSE`
+**Where the history is** (pointers only; none of it is the subject of this paper):
 
-### 19.2 Notebooks
-
-- **§3:** `VAPMIP/notebooks/paper/17_null_operator_and_hub.ipynb`
-- **§4:** `VAPMIP/notebooks/c/08c_ptol_store.ipynb`
-- **§5:** `VAPMIP/notebooks/c/07c_ptol_projection_and_balance.ipynb`
-- **§6:** `VAPMIP/notebooks/c/08c_ptol_store.ipynb`
-- **§7:** `VAPMIP/notebooks/c/09c_ptol_learning_step.ipynb`
-- **§7.3:** `VAPMIP/notebooks/c/08c_ptol_store.ipynb`
-- **§8:** `VAPMIP/notebooks/paper/18_ptol_sentence_bridge.ipynb`
-- **§9:** `VAPMIP/notebooks/paper/19_parser_tables.ipynb`
-- **§10:** `VAPMIP/notebooks/tuning_the_engine/phase_25.ipynb`
-- **§10:** `VAPMIP/notebooks/tuning_the_engine/phase_39.ipynb`
-- **§11:** `VAPMIP/notebooks/tuning_the_engine/phase_38.ipynb`
-- **§12:** `VAPMIP/notebooks/paper/20_scaled_kernel_fibers.ipynb`
-- **§13:** `VAPMIP/notebooks/paper/21_scaled_adapter_encounter.ipynb`
-- **§14:** `VAPMIP/notebooks/paper/22_fault_ledger_and_null.ipynb`
-- **§16:** `VAPMIP/notebooks/tuning_the_engine/phase_42.ipynb`
-- **§17:** `VAPMIP/notebooks/tuning_the_engine/phase_06.ipynb`
-- **§17:** `VAPMIP/notebooks/tuning_the_engine/phase_09.ipynb`
-- **§17:** `VAPMIP/notebooks/tuning_the_engine/phase_15.ipynb`
-- **§17:** `VAPMIP/notebooks/tuning_the_engine/phase_02b.ipynb`
-- **§17:** `VAPMIP/notebooks/10_revised_navier_stokes.ipynb`
-- **§17:** `VAPMIP/notebooks/11_language_as_navier_stokes.ipynb`
-
-### 19.3 Evidence, generator, skill and literature
-
-- **the generator, its template and its figure:** `VAPMIP/paper/evidence.py`, `VAPMIP/paper/make_paper.py`, `VAPMIP/paper/template.md`, `VAPMIP/paper/sec17.md`, `VAPMIP/paper/build_pdf.sh`, `VAPMIP/paper/figures/1-funny-ptolemy.png`, `VAPMIP/paper/figures/2-Hocus-Hyperwebster.png`, `VAPMIP/paper/figures/3-TheExtractor.png`, `VAPMIP/paper/figures/4-OMFG.png`, `VAPMIP/paper/figures/5-claude-stuff.png`, `VAPMIP/paper/figures/6-Screenshot-After-Response.png`, `VAPMIP/paper/figures/7-Screenshot-Before-First-Turn.png`
-- **the notebook builders:** `VAPMIP/notebooks/paper/pn.py`, `VAPMIP/notebooks/paper/build_paper_notebooks.py`, `VAPMIP/notebooks/paper/specs_paper.py`, `VAPMIP/notebooks/c/install_c_kernel.sh`
-- **Tuning the Engine, and its findings roll-up:** `VAPMIP/notebooks/tuning_the_engine/FINDINGS.md`, `VAPMIP/docs/wiki/J_red-J_blue-0_RB-Record.md`
-- **the name chronology of the Null Operator:** `Ainulindale/wiki/127_names_of_the_null_operator.md`
-- **scratch evidence (persistent scratchpad):** `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper`, `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names`
-- **the skill that decides how code is shown, and the introductions it was calibrated on:** `ContextPlease/claude/skills/cs-paper-code-conventions/SKILL.md`, `ContextPlease/claude/skills/cs-paper-code-conventions/references/WhitePaperIntroExemplars`
-- **sources of the public energy figures (copies):** `FourthAgePapers/ForwardPropagation/references`, `ContextPlease/claude/references/VAPMIPPaper`, `VAPMIP/paper/references`
-- **the ledger of downloaded literature:** `ContextPlease/claude/references/INDEX.md`
-
-### 19.4 Context records: where the work behind this paper was discussed
-
-The files below were found by searching ContextPlease for the names of the code presented here (`ptol.c`, `monad.c`, `monad3_c`, `scaled_mind_eye…`, `rotary_rerun…`, `19D_…`, `ptol_layer`, `ptolc_bridge`, `zork_parser`, `PtolC`): context primers, session notes, scratch evidence, mirrored wiki pages, the `.clauderc` mirrors and skills. They are the written record of the conversations the paper comes from; the model's own session transcripts are not kept in a repository. A description is the file's first heading.
-
-- `ContextPlease/claude` (8 files):
-  - `ContextPlease/claude/.clauderc` — ~/.clauderc — Claude Code environment
-  - `ContextPlease/claude/.clauderc_ValaQuenta` — .clauderc_ValaQuenta — per-engine context index for ValaQuenta
-  - `ContextPlease/claude/.clauderc_canonical_maths` — .clauderc_canonical_maths — canonical notation reference
-  - `ContextPlease/claude/.clauderc_citations` — ~/.clauderc_citations — prior-art / citation queue, organised by repo
-  - `ContextPlease/claude/.clauderc_context` — .clauderc_context — session continuity (Claude's to edit freely; NOT sourced by .bashrc)
-  - `ContextPlease/claude/.clauderc_context_1` — .clauderc_context_1 — per-directory current-state context, AUTHORITATIVE
-  - `ContextPlease/claude/.clauderc_context_2` — .clauderc_context_2 — historical/poignant material, dated log entries
-  - `ContextPlease/claude/.clauderc_user_provenance` — .clauderc_user_provenance — Cody Michael Allison's original work
-- `ContextPlease/claude/archive` (1 file):
-  - `ContextPlease/claude/archive/.clauderc_ValaQuenta.pre-2026-08-25` — .clauderc_ValaQuenta — per-engine context index for ValaQuenta
-- `ContextPlease/claude/archive/bin-2026-08-18` (1 file):
-  - `ContextPlease/claude/archive/bin-2026-08-18/ptol_layer.py._usr_local_bin_ptol_layer.py` — """
-- `ContextPlease/claude/clauderc` (7 files):
-  - `ContextPlease/claude/clauderc/.clauderc_ValaQuenta` — .clauderc_ValaQuenta — per-engine context index for ValaQuenta
-  - `ContextPlease/claude/clauderc/.clauderc_citations` — ~/.clauderc_citations — prior-art / citation queue, organised by repo
-  - `ContextPlease/claude/clauderc/.clauderc_context` — .clauderc_context — session continuity (Claude's to edit freely; NOT sourced by .bashrc)
-  - `ContextPlease/claude/clauderc/.clauderc_context_1` — .clauderc_context_1 — per-directory current-state context, AUTHORITATIVE
-  - `ContextPlease/claude/clauderc/.clauderc_scratchpad_contents` — .clauderc_scratchpad_contents — scratchpad file manifest, names + locations only
-  - `ContextPlease/claude/clauderc/clauderc.bash` — ~/.clauderc — Claude Code environment
-  - `ContextPlease/claude/clauderc/clauderc_context.md` — .clauderc_context — session continuity (Claude's to edit freely; NOT sourced by .bashrc)
-- `ContextPlease/claude/hist_prime` (1 file):
-  - `ContextPlease/claude/hist_prime/MANIFEST.json` — {
-- `ContextPlease/claude/hist_prime/Ainulindale` (1 file):
-  - `ContextPlease/claude/hist_prime/Ainulindale/CONTEXT_PRIMER_2026-06-30_UDEO_TRANSLATOR.txt` — CONTEXT PRIMER — 2026-06-30
-- `ContextPlease/claude/hist_prime/Ainulindale/outreach/primers` (2 files):
-  - `ContextPlease/claude/hist_prime/Ainulindale/outreach/primers/PRIMER_2026-06-02_FORCED.txt` — FORCED CONTEXT PRIMER — 2026-06-02 (end of session)
-  - `ContextPlease/claude/hist_prime/Ainulindale/outreach/primers/PRIMER_2026-06-02_session_architecture.txt` — CONTEXT PRIMER — 2026-06-02
-- `ContextPlease/claude/hist_prime/ArdaQuenta` (1 file):
-  - `ContextPlease/claude/hist_prime/ArdaQuenta/CONTEXT_PRIMER_2026-05-30.txt` — ═══════════════════════════════════════════════════════════════════════════════
-- `ContextPlease/claude/hist_prime/FourthAgePapers` (2 files):
-  - `ContextPlease/claude/hist_prime/FourthAgePapers/PRIMER_2026-08-30_HYPERINDEXING_STITCHBOARD.md` — CONTEXT PRIMER — hyperindexing (not compression), the tower benchmark, IP model, and the Operator Stitch Board
-  - `ContextPlease/claude/hist_prime/FourthAgePapers/PRIMER_2026-08-30_SCALAR_CONTEXT_BOXKITE.md` — CONTEXT PRIMER — Scalar Context Propagation, the box-kite codec
-- `ContextPlease/claude/hist_prime/PTOLEMY_DOCS` (3 files):
-  - `ContextPlease/claude/hist_prime/PTOLEMY_DOCS/013_PtolChain_Blockchain.txt` — ITEM: PtolChain / Blockchain: one canonical chain covering all Ptolemy; HyperWebster addresses as hash seeds
-  - `ContextPlease/claude/hist_prime/PTOLEMY_DOCS/028_PtolColor.txt` — ITEM: PtolColor / Macedonian color palette
-  - `ContextPlease/claude/hist_prime/PTOLEMY_DOCS/048_Ptolemy_plusplus.txt` — ITEM: Ptolemy++ C++ port (build directory, archive/scratchpad structure)
-- `ContextPlease/claude/hist_prime/PtolemyDesktop` (1 file):
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/BUILD_PRIMER_2026-05-15.md` — Ptolemy3 Build Primer — 2026-05-15
-- `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers` (6 files):
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/CONTEXT_PRIMER_2026-05-02.txt` — PTOLEMY FORCED CONTEXT PRIMER — 2026-05-02
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/CONTEXT_PRIMER_2026-05-02B.txt` — PTOLEMY FORCED CONTEXT PRIMER — 2026-05-02B
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/CONTEXT_PRIMER_2026-05-02C.txt` — PTOLEMY FORCED CONTEXT PRIMER — 2026-05-02C
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/CONTEXT_PRIMER_2026-05-03.txt` — PTOLEMY FORCED CONTEXT PRIMER — 2026-05-03
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/CONTEXT_PRIMER_2026-05-03D.txt` — PTOLEMY FORCED CONTEXT PRIMER — 2026-05-03D
-  - `ContextPlease/claude/hist_prime/PtolemyDesktop/.primers/PRIMER_NEXT_CHAT.txt` — PTOLEMY PROJECT — FORCED CONTEXT PRIMER
-- `ContextPlease/claude/hist_prime/VAPMIP` (8 files):
-  - `ContextPlease/claude/hist_prime/VAPMIP/CONTEXT_PRIMER_2026-05-26_SEDENION_ROKO.txt` — PTOLEMY HOLCUS — CONTEXT PRIMER
-  - `ContextPlease/claude/hist_prime/VAPMIP/CONTEXT_PRIMER_2026-08-24_CURSES_UI_BOXKITE_HARNESS.txt` — CONTEXT PRIMER — Curses UI / Box-Kite Context Design / Harness
-  - `ContextPlease/claude/hist_prime/VAPMIP/CONTEXT_PRIMER_2026-08-27_CONSTRUCTOR_BOXKITE_SEMANTIC_HASH.txt` — CONTEXT PRIMER — The Constructor / Context Box-Kites / Semantic Prime Hash Retooling
-  - `ContextPlease/claude/hist_prime/VAPMIP/CONTEXT_PRIMER_2026-10-15_PAPER_PTOLC.md` — CONTEXT PRIMER — the VAPMIP paper, rebuilt around ptol.c and its Python twin (2026-10-15)
-  - `ContextPlease/claude/hist_prime/VAPMIP/PRIMER_2026-08-17_ENGLISH_AND_RSA.md` — VAPMIP Primer — 2026-08-17
-  - `ContextPlease/claude/hist_prime/VAPMIP/PRIMER_2026-08-17_THE_THREE_TIERS.md` — VAPMIP Primer — 2026-08-17 (late)
-  - `ContextPlease/claude/hist_prime/VAPMIP/PRIMER_2026-08-18_THREE_FACES_AND_EXECUTABLE_STRUCTURE.md` — VAPMIP Primer — 2026-08-18
-  - `ContextPlease/claude/hist_prime/VAPMIP/PRIMER_2026-08-30_MONAD_CONVERSATIONAL_INGEST.md` — CONTEXT PRIMER — Monad conversational + document ingest, in-place fold
-- `ContextPlease/claude/hist_prime/_root` (1 file):
-  - `ContextPlease/claude/hist_prime/_root/CONVERSATION_PRIMER.md` — Conversation Context Primer
-- `ContextPlease/claude/hist_todo/FourthAgePapers` (1 file):
-  - `ContextPlease/claude/hist_todo/FourthAgePapers/TODO.md` — FourthAgePapers — TODO
-- `ContextPlease/claude/hist_todo/POE` (1 file):
-  - `ContextPlease/claude/hist_todo/POE/TODO.md` — P.O.E. TODO
-- `ContextPlease/claude/hist_todo/PTorrent` (1 file):
-  - `ContextPlease/claude/hist_todo/PTorrent/TODO.md` — PTorrent TODO
-- `ContextPlease/claude/hist_todo/PtolemyDesktop/PtolC` (1 file):
-  - `ContextPlease/claude/hist_todo/PtolemyDesktop/PtolC/TODO` — PtolC TODO — open work items
-- `ContextPlease/claude/hist_todo/VAPMIP` (2 files):
-  - `ContextPlease/claude/hist_todo/VAPMIP/TODO` — PtolC TODO — open work items
-  - `ContextPlease/claude/hist_todo/VAPMIP/TODO.md` — Ptolemy Engine — Release Roadmap
-- `ContextPlease/claude/hist_todo/VAPMIP/PtolC` (1 file):
-  - `ContextPlease/claude/hist_todo/VAPMIP/PtolC/TODO` — PtolC TODO — open work items
-- `ContextPlease/claude/hist_wiki/Ainulindale` (11 files):
-  - `ContextPlease/claude/hist_wiki/Ainulindale/README.md` — Ainulindalë
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/00_index.md` — AINULINDALE — WIKI INDEX
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/15_the_monad.md` — 15 — THE MONAD
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/52_l_dynamic_avoided_collaborator.md` — 52 — L_(I|O) AND THE AVOIDED COLLABORATOR
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/55_index_not_value.md` — 55 — THE INDEX CARRIES THE INFORMATION
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/58_fermat_defines_riemann_fires.md` — 58 — FERMAT DEFINES. RIEMANN FIRES.
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/62_hands_on_paper_minds_eye_caustic.md` — Hands On Paper Caustic ↔ Mind's Eye Caustic
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/64_l_dynamic.md` — 64 — L_(I|O) — The Pathway
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/80_aphasia_zd_reframe_memory.md` — 80 — Aphasia, the ZD Reframe, and Why Memory Needs Both Halves
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/98_provenance_and_citations.md` — 98 — Provenance & Citations
-  - `ContextPlease/claude/hist_wiki/Ainulindale/wiki/Claude.md` — How Claude Designed and Wrote the Semantic Prime Hashing Language Pathway Generator
-- `ContextPlease/claude/hist_wiki/PtolemyDesktop` (5 files):
-  - `ContextPlease/claude/hist_wiki/PtolemyDesktop/wiki/Aule.md` — Aulë
-  - `ContextPlease/claude/hist_wiki/PtolemyDesktop/wiki/Callimachus.md` — Callimachus
-  - `ContextPlease/claude/hist_wiki/PtolemyDesktop/wiki/ErrorCatalog.md` — Ptolemy Error Catalog
-  - `ContextPlease/claude/hist_wiki/PtolemyDesktop/wiki/Pharos.md` — Pharos
-  - `ContextPlease/claude/hist_wiki/PtolemyDesktop/wiki/Philadelphos.md` — Philadelphos
-- `ContextPlease/claude/hist_wiki/VAPMIP` (47 files; named here: `LICENSE`, `NOTICE`, `README.md`, `00_README.md`, `01_context_needs.md`, `02_content_vs_pathway_words.md`, `06_centering.md`, `08_generation_pipeline.md`, `09_transformer_methods_taken.md`, `10_calibration_set_spec.md`, `11_metrics_and_benchmarks.md`, `Forward_Propagation_of_Information_DRAFT.md`, `Boxkite-Deformation-Record-2026-10-12.md`, `Boxkite-Relational-Atlas.md`, `J_red-J_blue-0_RB-Record.md`, `Operating-L-IO.md`, `Operating-the-Monad.md`, `RedBlue-Hamiltonian-Sedenion-Matrix-Space.md`, `Scaled-Kite-English-Thought-Center-Context.md`, `00_index.md`, `03_the_wankel_rotary_engine_ahura_mazda.md`, `04_the_zero_lattice_and_negative_space_mathematics.md`, `08_the_lagrangian_of_information_propagation.md`, `16_the_paper.md`, `17_the_marx_generator_complete_j_blue_ptoleye_rb_the.md`, `18_the_prime_lens_and_ptolemy_s_eyes.md`, `19_the_brain_and_its_body.md`, `21_the_hypercomplex_sedenion_parallax.md`, `22_the_translator_zero_divisors_as_portals_landmark.md`, `23_the_addressing_bug_the_common_mode_and_the_third.md`, `27_the_apex_path_and_the_half_radius_circle.md`, `28_the_three_faces_the_fermat_ladder_and_executable_structure.md`, `29_generational_lineage_and_the_anatomy_of_sigma.md`, `30_wind_lift_and_the_monads_original_gate.md`, `32_the_monad_that_uses_the_harness.md`, `33_folded_in_context_and_the_geometry_that_does_no_work.md`, `34_the_anomaly_the_caustic_and_the_one_file.md`, `35_the_spider_web_composition_cycle.md`, `36_ptol_w_the_tabbed_console_and_the_resident_monad.md`, `37_the_composter_monad_eye_hands_reused_not_reinvented.md` …)
-- `ContextPlease/claude/hist_wiki/ValaQuenta` (1 file):
-  - `ContextPlease/claude/hist_wiki/ValaQuenta/wiki/angular_rank.md` — angular_rank — The 16D Oscilloscope
-- `ContextPlease/claude/hooks` (1 file):
-  - `ContextPlease/claude/hooks/README.md` — monad_observe.py — the conversation-ingest hook (mirrored copy)
-- `ContextPlease/claude/monad_bin` (1 file):
-  - `ContextPlease/claude/monad_bin/README.md` — monad.bin — the builder, the corpuses, and everything that goes in
-- `ContextPlease/claude/monad_bin/corpus` (1 file):
-  - `ContextPlease/claude/monad_bin/corpus/corpus_all.txt` — The Ainulindalë Conjecture is complete as a package. Last session closed with the Inside-Out Inversion _N form
-- `ContextPlease/claude/monad_bin/scripts` (3 files):
-  - `ContextPlease/claude/monad_bin/scripts/SPEC.md` — monad.bin — Formal Specification
-  - `ContextPlease/claude/monad_bin/scripts/bootstrap.py` — """
-  - `ContextPlease/claude/monad_bin/scripts/build_monad_bin.py` — """
-- `ContextPlease/claude/scratchpad/2026-08-18_three_faces_and_identity_bin` (2 files):
-  - `ContextPlease/claude/scratchpad/2026-08-18_three_faces_and_identity_bin/README.md` — 2026-08-18 — The three faces, the Fermat ladder, and monad_identity.bin
-  - `ContextPlease/claude/scratchpad/2026-08-18_three_faces_and_identity_bin/boxkite_prime_hash.py` — """boxkite_prime_hash.py — the Box Kite Context as the prime hashing algorithm.
-- `ContextPlease/claude/scratchpad/2026-08-27_spectral-vs-residual-hash` (2 files):
-  - `ContextPlease/claude/scratchpad/2026-08-27_spectral-vs-residual-hash/crt_context_and_covariance.py` — """
-  - `ContextPlease/claude/scratchpad/2026-08-27_spectral-vs-residual-hash/test_spectral_vs_residual.py` — """
-- `ContextPlease/claude/scratchpad/2026-08-28_primer-corpus-ingest` (3 files):
-  - `ContextPlease/claude/scratchpad/2026-08-28_primer-corpus-ingest/corpus_all.txt` — The Ainulindalë Conjecture is complete as a package. Last session closed with the Inside-Out Inversion _N form
-  - `ContextPlease/claude/scratchpad/2026-08-28_primer-corpus-ingest/corpus_war.txt` — The Ainulindalë Conjecture is complete as a package. Last session closed with the Inside-Out Inversion _N form
-  - `ContextPlease/claude/scratchpad/2026-08-28_primer-corpus-ingest/strip_all.log` — [WAR] hist_prime/Ainulindale/AgeFirst/original_2026/ResearchPaper/FirstDraft/FirstAge/gradient-flow-primer.txt
-- `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest` (8 files):
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/README.md` — 2026-08-30 — Monad conversational + document ingest
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/doc_test.sh` — SB=/tmp/claude-1000/-home-rendier-Projects-ThePlace/03517d2c-e833-40d5-91fc-c8d9a44eff9b/scratchpad
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/fifo_test.sh` — set -e
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/fold_test.sh` — SB=/tmp/claude-1000/-home-rendier-Projects-ThePlace/03517d2c-e833-40d5-91fc-c8d9a44eff9b/scratchpad
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/hook_chain_test.sh` — SB=/tmp/claude-1000/-home-rendier-Projects-ThePlace/03517d2c-e833-40d5-91fc-c8d9a44eff9b/scratchpad
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/owner_test.sh` — set -e
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/repack_test.sh` — set -e
-  - `ContextPlease/claude/scratchpad/2026-08-30_monad-conversational-ingest/rt_run.sh` — SB=/tmp/claude-1000/-home-rendier-Projects-ThePlace/03517d2c-e833-40d5-91fc-c8d9a44eff9b/scratchpad
-- `ContextPlease/claude/scratchpad/2026-08-30_prime-dna` (3 files):
-  - `ContextPlease/claude/scratchpad/2026-08-30_prime-dna/semantic_hash_roundtrip.py` — """
-  - `ContextPlease/claude/scratchpad/2026-08-30_prime-dna/semantic_hash_roundtrip_RESULTS.md` — Semantic / context hash — round trip against the live vocabulary
-  - `ContextPlease/claude/scratchpad/2026-08-30_prime-dna/semantic_hash_roundtrip_output.txt` — LIVE STORE  /home/rendier/Projects/ThePlace/VAPMIP/PtolC/monad3_c.bin
-- `ContextPlease/claude/scratchpad/2026-08-31_monad-bus-browse` (2 files):
-  - `ContextPlease/claude/scratchpad/2026-08-31_monad-bus-browse/README.md` — 2026-08-31 — Monad bus: language-blind backend + browse + governor
-  - `ContextPlease/claude/scratchpad/2026-08-31_monad-bus-browse/smoke.py` — """Smoke: language-blind monad load + governor + a real browse, harnessed and bare."""
-- `ContextPlease/claude/scratchpad/2026-09-28_lvap_audit` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-09-28_lvap_audit/OUTLINE_D-CS_Memory_revision.md` — D-CS_Memory.md revision outline (2026-09-28) — paper arrives at the VAPMIP Lagrangian, ends pointing at VAPMIP
-- `ContextPlease/claude/scratchpad/2026-09-28_vq_docstrings` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-09-28_vq_docstrings/README.before.md` — ValaQuenta
-- `ContextPlease/claude/scratchpad/2026-10-12_demarrais_deformation_battery` (4 files):
-  - `ContextPlease/claude/scratchpad/2026-10-12_demarrais_deformation_battery/make_record.py` — import math, os, glob
-  - `ContextPlease/claude/scratchpad/2026-10-12_demarrais_deformation_battery/output_part3.txt` — === SCALAR CONSTRUCT (pencil hyperstring proxy) vs the maths ===
-  - `ContextPlease/claude/scratchpad/2026-10-12_demarrais_deformation_battery/part3.py` — """PART 3 — are the deformations of the two constructs the same as the maths'?
-  - `ContextPlease/claude/scratchpad/2026-10-12_demarrais_deformation_battery/part5.py` — import sys, math, cmath, subprocess
-- `ContextPlease/claude/scratchpad/2026-10-12_projected_address_lens` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-10-12_projected_address_lens/probe.py` — """Read ptol.c's projected prompt address through the box_kite chart_of lens.
-- `ContextPlease/claude/scratchpad/2026-10-13_boxkite_monad_voice` (2 files):
-  - `ContextPlease/claude/scratchpad/2026-10-13_boxkite_monad_voice/README.md` — The box-kite monad's voice, reproduced headlessly (2026-10-13)
-  - `ContextPlease/claude/scratchpad/2026-10-13_boxkite_monad_voice/bk_try.py` — import sys,time
-- `ContextPlease/claude/scratchpad/2026-10-13_jred_jblue_battery` (2 files):
-  - `ContextPlease/claude/scratchpad/2026-10-13_jred_jblue_battery/README.md` — J_red / J_blue required battery (2026-10-13; STANDING RULE: any time J_red/J_blue is mentioned, run tests and 
-  - `ContextPlease/claude/scratchpad/2026-10-13_jred_jblue_battery/jb.py` — """J_red / J_blue required battery (standing rule, Cody 2026-10-13). ptol.c: J_red = k in {0-3,8-11} (cos, for
-- `ContextPlease/claude/scratchpad/2026-10-13_monad_energy` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-10-13_monad_energy/energy.py` — """Energy per monad reply from battery discharge (AC unplugged). Idle baseline -> load (ptolemy -r -n, long st
-- `ContextPlease/claude/scratchpad/2026-10-13_portals_inventory_moving_kite` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-10-13_portals_inventory_moving_kite/invariants.py` — """MOVING KITE — which readings survive a continuous G2 deformation (the kite moving), and which only survive 
-- `ContextPlease/claude/scratchpad/2026-10-13_princeton_email` (1 file):
-  - `ContextPlease/claude/scratchpad/2026-10-13_princeton_email/READ_BEFORE_SENDING_Princeton_email.txt` — Checks before you send EMAIL_PRINCETON_WORDNET.txt (Claude, 2026-10-14):
-- `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark` (7 files):
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/compiled.py` — """The compiled voices on the SAME six prompts: ptolemy -r -n (Zork REPL, in-process monad), ptol -say (senten
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/results.json` — [
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/results_console_loader.json` — [
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/rows.json` — [
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/run.log` — 19D_boxkite_context_monad -> ImportError: '19D_boxkite_context_monad' has no recognised chat interface (no say
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/tables.md` — | Voice (module.class.method or adapter) | load s | RSS +MB | 1st-round ms | warm ms | whole-laptop µWh per re
-  - `ContextPlease/claude/scratchpad/2026-10-14_all_monads_benchmark/transcripts.md` — **VQ_rotary_monad.ValaQuenta.speak** (str)
-- `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names` (6 files):
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/n3_output.txt` — [seg fault] home.rendier.tree.json:241226: {"type":"file","name":"quit_segfault_test.sh"},
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/n4_output.txt` — 31 commits
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/n4_timeline_raw.tsv` — 2026-04-27	Ainulindale	dd7666b	2026-04-27: Ĥ_RB rename — RedBlue Hamiltonian → RedBlue Inductive Geometry Coup
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/t1_battery.py` — """T1 — the Null Operator (0_RB = e0) battery, run 2026-10-15 in the PERSISTENT scratchpad (the earlier runs w
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/t1_ledger.json` — {
-  - `ContextPlease/claude/scratchpad/2026-10-15_null_operator_names/t1_output.txt` — PASS  T1  e0 is the two-sided multiplicative identity of the sedenion product used by the engines (300 random 
-- `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper` (10 files):
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q1_surface.json` — {
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q1_surface.py` — """Q1 — the surface of the compiled Monad (ptol / ptolemy) and its Python twin on the six benchmark prompts.
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q2_output.txt` — fields of response: ['direction', 'exchange_log', 'leaves_in', 'leaves_out', 'repass', 'root_vector', 'text']
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q2_twin.py` — """Q2 — the Python twin: ptolemy_monad.PtolemyMonad.process_input on the six prompts (cold load, cold round, w
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q2b_norm.py` — import math, subprocess, os
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q3_conservation.py` — """Q3 — test ptol.c's header claim 'J_red x J_blue = d* = 0.24600 is conserved at ALL sigma' using the C's own
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q4_eyes.py` — """Q4 — one fixed question, five eyes (R sigma=1, C 3/4, H 1/2, O 1/4, S 0): sigma_self and Gamma per eye, and
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q5_parser.py` — """Q5 — the Zork-style parser: verb->operator table parity between PtolC/zork.c and zork_parser.py (convention
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q7_output.txt` — hub: e0_is_outside = True | gluing reading: adjacency disconnects the 7 charts; the skeleton shares 6 of 7 cha
-  - `ContextPlease/claude/scratchpad/2026-10-15_vapmip_paper/q7_question_into_kernel.py` — """Q7 — does ptol.c's 16-number question go straight into the scaled boxkite kernel, and do the two compute th
-- `ContextPlease/claude/skills/cs-paper-code-conventions` (1 file):
-  - `ContextPlease/claude/skills/cs-paper-code-conventions/SKILL.md` — name: cs-paper-code-conventions
-- `ContextPlease/claude/skills/nltk-zork-wordnet` (1 file):
-  - `ContextPlease/claude/skills/nltk-zork-wordnet/SKILL.md` — name: nltk-zork-wordnet
-
-`https://github.com/michaelrendier/`
+| what | where |
+|---|---|
+| the previous version of this paper (34 pages, 19 sections: the compiled `ptol` and `scaled_mind_eye_boxkite_kernel_monad.py`) | `VAPMIP` commit `9a16a44`, `paper/Forward_Propagation_of_Information.md`; the PDF in the same commit |
+| the engineering chronology, phase by phase (1–43 before this rewrite; 44–47 since) | `VAPMIP/docs/wiki/Tuning-the-Engine/` (never edited; new phases are new pages) |
+| earlier voices (`rotary_rerun`, `19D_*`, `ptolemy_monad`, `scaled_mind_eye_boxkite_kernel_monad`) | the VAPMIP root and `Currentwork/Broca/`, `Currentwork/Wernicke/` (copies; the root files are the originals) |
+| the notebooks of the earlier paper | `VAPMIP/notebooks/paper/`, `VAPMIP/notebooks/c/` |
+| the flow charts and their generator | `VAPMIP/docs/flowcharts/` |

@@ -4,7 +4,7 @@
 set -euo pipefail
 T="${TMPDIR:-/tmp}"
 cd "$(dirname "$0")"
-[ -n "${SKIP_MAKE:-}" ] || ../../PtolemyDesktop/.venv/bin/python make_paper.py
+[ -n "${SKIP_MAKE:-}" ] || ../.venv/bin/python make_paper.py
 sed 's/[⟦⟧]//g' Forward_Propagation_of_Information.md > $T/fwdprop_clean.md   # timing markers are for --check only
 pandoc $T/fwdprop_clean.md -s -o $T/fwdprop.tex -V geometry:margin=1in -V fontsize=10pt -V colorlinks=true \
   -V mainfont="DejaVu Serif" -V mainfontoptions="RawFeature={fallback=fbk}" -V monofont="DejaVu Sans Mono" \

@@ -13,15 +13,15 @@ The VAPMIP *Tuning the Engine* engineering log, one page per phase.
 > author/date ranges) before calling the update done. This index had drifted to
 > stop at Phase 28 while the directory ran to 36 before this amendment caught it.
 
-*46 pages — Phases 1–43 (+ addenda 02b, 21b) + one chain-of-custody audit.
+*50 pages — Phases 1–47 (+ addenda 02b, 21b) + one chain-of-custody audit.
 Phases 1–23 authored by Claude Sonnet 4.6; 24–28 by Claude Opus 5; 29–39 by a
-mix of Claude Opus 5 and Claude Sonnet 5; 40–43 by Claude Sonnet 5.5 (see each page's byline).*
+mix of Claude Opus 5 and Claude Sonnet 5; 40–47 by Claude Sonnet 5.5 (see each page's byline).*
 
 > **Companion notebooks (2026-10-15).** One Jupyter notebook per page — `phase_NN.ipynb`, plus 02b and 21b — in
 > [`../../../notebooks/tuning_the_engine/`](../../../notebooks/tuning_the_engine/). Each runs the machinery its page
 > describes against the live repo and ends in a claim ledger (PASS / FAIL / PROSE / SKIP); a FAIL is a page claim that no
 > longer reproduces, kept as a result. Roll-up of every FAIL: `FINDINGS.md` in that directory. New phases get a spec in
-> `specs/` and a rebuild (`README.md` there).
+> `specs/` and a rebuild (`README.md` there). **Phases 44–47 (2026-11-25) have no companion notebook:** their claims are asserted by `VAPMIP/tests/` (the C ↔ Python parity tests, `tests/test_c_parity.py`, among them); the notebooks directory is a straight data set and was not touched.
 
 ---
 
@@ -75,6 +75,10 @@ mix of Claude Opus 5 and Claude Sonnet 5; 40–43 by Claude Sonnet 5.5 (see each
 | [41_demarrais_deformation_battery_and_the_two_constructs.md](41_demarrais_deformation_battery_and_the_two_constructs.md) | 41 | 2026-10-12 | The De Marrais Deformation Battery, and the Two Constructs Compared |
 | [42_every_voice_benchmark.md](42_every_voice_benchmark.md) | 42 | 2026-10-14 | Every Voice: all 24 monad modules, 12 speaking voices benchmarked on the same six prompts |
 | [43_semantic_orbweaver_pathway_construction.md](43_semantic_orbweaver_pathway_construction.md) | 43 | 2026-10-16 | Semantic Orbweaver Pathway Construction (STUB): the first monad's semantic prime hash spun into a web, weighted heavier than the context boxkite |
+| [44_the_user_state_in_the_window_and_the_usage_channel.md](44_the_user_state_in_the_window_and_the_usage_channel.md) | 44 | 2026-11-25 | The User State in the Window, and the Usage Channel: the 16-slot labelling from the box-kite, the repass, usage as probability, the Broca–Wernicke drift |
+| [45_tense_and_conjugation_as_lyndon_factors.md](45_tense_and_conjugation_as_lyndon_factors.md) | 45 | 2026-11-25 | Tense and Conjugation as Lyndon Factors: the verb group as a factor list, the lemniscate tense |
+| [46_the_scaled_orbweaver_rebuilt_numbers_are_not_words.md](46_the_scaled_orbweaver_rebuilt_numbers_are_not_words.md) | 46 | 2026-11-25 | The Scaled Orbweaver Rebuilt, Numbers Are Not Words, Imitation |
+| [47_the_child_in_c_ptol_and_monad_harness.md](47_the_child_in_c_ptol_and_monad_harness.md) | 47 | 2026-11-25 | The Child in C: `ptol.c` and `monad_harness.c`, and the Parity Tests |
 
 ---
 

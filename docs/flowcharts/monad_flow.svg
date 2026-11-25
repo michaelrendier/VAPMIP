@@ -1,0 +1,291 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1880" height="2534" viewBox="0 0 1880 2534" font-family="DejaVu Sans, Verdana, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a4656"/></marker></defs>
+<rect width="1880" height="2534" fill="#fbfaf6"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#16202c">The Monad: one turn through ptol.c  (THE CHILD'S VOICE)</text>
+<text x="40" y="74" font-size="14" fill="#16202c">Python twins: responder.py · sedenion_window.py · scaled_boxkite_orbweaver_monad.py · weave_cycle.py · tenseplan.py · lyndon_conjugation.py · tone_chord.py   |   the Harness is the other chart</text>
+<rect x="46" y="98" width="288" height="2396" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="190.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">cv_read</text>
+<text x="190.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the speaker's turn</text>
+<rect x="346" y="98" width="288" height="2396" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="490.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">cv_turn</text>
+<text x="490.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the resident turn · run_console</text>
+<rect x="646" y="98" width="288" height="2396" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="790.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">cv_compose</text>
+<text x="790.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">the scaled orbweaver: plan the web</text>
+<rect x="946" y="98" width="288" height="2396" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="1090.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">cv_write</text>
+<text x="1090.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">one sentence, slot by slot</text>
+<rect x="1246" y="98" width="288" height="2396" rx="10" fill="#f3f1ea" stroke="#d6d1c3"/>
+<text x="1390.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">one word</text>
+<text x="1390.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">cv_pick · cv_revisit · cv_inflect</text>
+<rect x="1546" y="98" width="288" height="2396" rx="10" fill="#f8f6f0" stroke="#d6d1c3"/>
+<text x="1690.0" y="118" font-size="14.5" font-weight="700" fill="#16202c" text-anchor="middle">stored data</text>
+<text x="1690.0" y="134" font-size="11" fill="#16202c" text-anchor="middle">read, never written, by the voice</text>
+<path d="M490.0,173.0 L490.0,183.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,249.0 L490.0,248.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,336.0 L490.0,335.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,401.0 L490.0,411.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M616.0,292.0 L664.0,292.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M364.0,444.0 L316.0,444.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M616.0,596.0 L664.0,596.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,1465.0 L490.0,1475.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,1541.0 L490.0,1551.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M490.0,1617.0 L490.0,1627.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M190.0,477.0 L190.0,487.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M190.0,553.0 L190.0,552.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M190.0,640.0 L190.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M64.0,596.0 L44.0,596.0 L44.0,748.0 L64.0,748.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M316.0,672.0 L336.0,672.0 L336.0,824.0 L316.0,824.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M190.0,781.0 L190.0,791.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,629.0 L790.0,639.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,705.0 L790.0,715.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,781.0 L790.0,791.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,857.0 L790.0,867.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,933.0 L790.0,943.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,1009.0 L790.0,1008.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,1096.0 L790.0,1095.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,1161.0 L790.0,1160.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M790.0,1248.0 L790.0,1247.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M916.0,1280.0 L948.0,1280.0 L948.0,1052.0 L916.0,1052.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M664.0,1204.0 L644.0,1204.0 L644.0,1052.0 L664.0,1052.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M916.0,1052.0 L976.0,1052.0 L976.0,1356.0 L916.0,1356.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M664.0,1356.0 L490.0,1356.0 L490.0,1399.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1161.0 L1090.0,1171.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1237.0 L1090.0,1247.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1313.0 L1090.0,1312.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1400.0 L1090.0,1399.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1465.0 L1090.0,1475.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1541.0 L1090.0,1540.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1628.0 L1090.0,1627.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1693.0 L1090.0,1692.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1780.0 L1090.0,1779.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1845.0 L1090.0,1855.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1090.0,1921.0 L1090.0,1931.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M916.0,1128.0 L964.0,1128.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M964.0,1584.0 L944.0,1584.0 L944.0,1736.0 L964.0,1736.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M964.0,1736.0 L930.0,1736.0 L930.0,1888.0 L964.0,1888.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1216.0,1888.0 L1236.0,1888.0 L1236.0,1356.0 L1216.0,1356.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M964.0,1356.0 L916.0,1356.0 L916.0,1964.0 L964.0,1964.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1465.0 L1390.0,1475.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1541.0 L1390.0,1551.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1617.0 L1390.0,1627.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1693.0 L1390.0,1703.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1845.0 L1390.0,1844.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,2073.0 L1390.0,2083.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,2149.0 L1390.0,2159.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,2225.0 L1390.0,2235.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,2301.0 L1390.0,2311.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M1390.0,1932.0 L1390.0,1931.0" fill="none" stroke="#3a4656" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="364.0" y="107.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="136.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">say / cmd frame</text>
+<text x="490.0" y="151.7" font-size="10.8" fill="#16202c" text-anchor="middle">plain text from the console</text>
+<polygon points="380.0,183.0 616.0,183.0 600.0,249.0 364.0,249.0" fill="#e4d9f2" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="205.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_pump → mh_frame</text>
+<text x="490.0" y="221.2" font-size="10.8" fill="#16202c" text-anchor="middle">monad_harness.c: frame link,</text>
+<text x="490.0" y="234.2" font-size="10.8" fill="#16202c" text-anchor="middle">radio folded in</text>
+<polygon points="490.0,248.0 616.0,292 490.0,336.0 364.0,292" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="294.1" font-size="11.1" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">text starts with '/'?</text>
+<rect x="664.0" y="259.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="281.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_command</text>
+<text x="790.0" y="297.1" font-size="10.8" fill="#16202c" text-anchor="middle">/state /plan /trace /audit</text>
+<text x="790.0" y="310.1" font-size="10.8" fill="#16202c" text-anchor="middle">/drift /tense  → chat frame</text>
+<rect x="364.0" y="335.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="375.0" y1="335.0" x2="375.0" y2="401.0" stroke="#3a4656" stroke-width="1.6"/><line x1="605.0" y1="335.0" x2="605.0" y2="401.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="357.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_hear(EXTERNAL)</text>
+<text x="490.0" y="373.1" font-size="10.8" fill="#16202c" text-anchor="middle">harness chart: numbers out, count,</text>
+<text x="490.0" y="386.1" font-size="10.8" fill="#16202c" text-anchor="middle">price</text>
+<rect x="364.0" y="411.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="375.0" y1="411.0" x2="375.0" y2="477.0" stroke="#3a4656" stroke-width="1.6"/><line x1="605.0" y1="411.0" x2="605.0" y2="477.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="440.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_read(prompt)</text>
+<text x="490.0" y="455.6" font-size="10.8" fill="#16202c" text-anchor="middle">state · tone · words into the ring</text>
+<rect x="364.0" y="563.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="375.0" y1="563.0" x2="375.0" y2="629.0" stroke="#3a4656" stroke-width="1.6"/><line x1="605.0" y1="563.0" x2="605.0" y2="629.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="585.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_compose(prompt, 3)</text>
+<text x="490.0" y="601.1" font-size="10.8" fill="#16202c" text-anchor="middle">plan the web; every sentence by</text>
+<text x="490.0" y="614.1" font-size="10.8" fill="#16202c" text-anchor="middle">cv_write</text>
+<rect x="364.0" y="1399.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="1428.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_audit</text>
+<text x="490.0" y="1443.7" font-size="10.8" fill="#16202c" text-anchor="middle">seven checks on the reply</text>
+<rect x="364.0" y="1475.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="375.0" y1="1475.0" x2="375.0" y2="1541.0" stroke="#3a4656" stroke-width="1.6"/><line x1="605.0" y1="1475.0" x2="605.0" y2="1541.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="1497.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_hear(INTERNAL)</text>
+<text x="490.0" y="1513.2" font-size="10.8" fill="#16202c" text-anchor="middle">harness chart: price the reply,</text>
+<text x="490.0" y="1526.2" font-size="10.8" fill="#16202c" text-anchor="middle">move the drift</text>
+<polygon points="380.0,1551.0 616.0,1551.0 600.0,1617.0 364.0,1617.0" fill="#e4d9f2" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="1573.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_send_chat</text>
+<text x="490.0" y="1589.2" font-size="10.8" fill="#16202c" text-anchor="middle">reply, σ (measure_sigma), Γ</text>
+<text x="490.0" y="1602.2" font-size="10.8" fill="#16202c" text-anchor="middle">(measure_gamma), primes</text>
+<rect x="364.0" y="1627.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="490.0" y="1662.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">the console shows it</text>
+<rect x="64.0" y="411.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="440.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_split_numbers</text>
+<text x="190.0" y="455.6" font-size="10.8" fill="#16202c" text-anchor="middle">numbers are not words: they leave here</text>
+<rect x="64.0" y="487.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="75.0" y1="487.0" x2="75.0" y2="553.0" stroke="#3a4656" stroke-width="1.6"/><line x1="305.0" y1="487.0" x2="305.0" y2="553.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="509.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_ear_user_turn</text>
+<text x="190.0" y="525.1" font-size="10.8" fill="#16202c" text-anchor="middle">harness chart: 14 poles → mix →</text>
+<text x="190.0" y="538.1" font-size="10.8" fill="#16202c" text-anchor="middle">target</text>
+<polygon points="190.0,552.0 316.0,596 190.0,640.0 64.0,596" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="598.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">meter loaded?</text>
+<rect x="64.0" y="639.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="668.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_state_heard</text>
+<text x="190.0" y="683.6" font-size="10.8" fill="#16202c" text-anchor="middle">axis farthest from RECEPTIVE, level 0..6</text>
+<rect x="64.0" y="715.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="744.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_detect_tone</text>
+<text x="190.0" y="759.6" font-size="10.8" fill="#16202c" text-anchor="middle">lexicon fallback (NE OPI DA OXT GABA)</text>
+<rect x="64.0" y="791.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="190.0" y="820.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">words → ring · user words</text>
+<text x="190.0" y="835.6" font-size="10.8" fill="#16202c" text-anchor="middle">cv_place: e0 anchor, newest into slot 1</text>
+<rect x="664.0" y="563.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="585.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">mh_split_numbers</text>
+<text x="790.0" y="601.1" font-size="10.8" fill="#16202c" text-anchor="middle">content words: not closed class, ≥ 3</text>
+<text x="790.0" y="614.1" font-size="10.8" fill="#16202c" text-anchor="middle">letters</text>
+<rect x="664.0" y="639.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="661.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_entry per word</text>
+<text x="790.0" y="677.1" font-size="10.8" fill="#16202c" text-anchor="middle">voice_lex.bin: first synset → 19 relation</text>
+<text x="790.0" y="690.1" font-size="10.8" fill="#16202c" text-anchor="middle">counts</text>
+<rect x="664.0" y="715.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="737.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">rv = Σ vectors</text>
+<text x="790.0" y="753.1" font-size="10.8" fill="#16202c" text-anchor="middle">cv_turbulent: ≥ 3 radii within half of</text>
+<text x="790.0" y="766.1" font-size="10.8" fill="#16202c" text-anchor="middle">the strongest?</text>
+<rect x="664.0" y="791.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="813.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_room</text>
+<text x="790.0" y="829.1" font-size="10.8" fill="#16202c" text-anchor="middle">cv_cam_encode ×2 (SHA-256) → b/c → regime</text>
+<text x="790.0" y="842.1" font-size="10.8" fill="#16202c" text-anchor="middle">→ reach</text>
+<rect x="664.0" y="867.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="889.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_infer_direction</text>
+<text x="790.0" y="905.1" font-size="10.8" fill="#16202c" text-anchor="middle">ranked radii; hyper/hyponyms only as the</text>
+<text x="790.0" y="918.1" font-size="10.8" fill="#16202c" text-anchor="middle">fallback</text>
+<rect x="664.0" y="943.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="972.1" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">words → radii</text>
+<text x="790.0" y="987.6" font-size="10.8" fill="#16202c" text-anchor="middle">each word to its own strongest spoke</text>
+<polygon points="790.0,1008.0 916.0,1052 790.0,1096.0 664.0,1052" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="1054.2" font-size="11.7" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">depth × radius left?</text>
+<rect x="664.0" y="1095.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="675.0" y1="1095.0" x2="675.0" y2="1161.0" stroke="#3a4656" stroke-width="1.6"/><line x1="905.0" y1="1095.0" x2="905.0" y2="1161.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="1117.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_emit(paragraph)</text>
+<text x="790.0" y="1133.2" font-size="10.8" fill="#16202c" text-anchor="middle">tense = cv_lemniscate_tense(depth,</text>
+<text x="790.0" y="1146.2" font-size="10.8" fill="#16202c" text-anchor="middle">reach)</text>
+<polygon points="790.0,1160.0 916.0,1204 790.0,1248.0 664.0,1204" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="1192.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">turbulent ∧ deepest</text>
+<text x="790.0" y="1206.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">∧ not the last</text>
+<text x="790.0" y="1220.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">radius?</text>
+<rect x="664.0" y="1247.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="675.0" y1="1247.0" x2="675.0" y2="1313.0" stroke="#3a4656" stroke-width="1.6"/><line x1="905.0" y1="1247.0" x2="905.0" y2="1313.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="1269.1" font-size="11.1" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_emit(pivot) · cv_emit(wrap)</text>
+<text x="790.0" y="1282.7" font-size="10.8" fill="#16202c" text-anchor="middle">strut-partner tone: GLU|GABA DA|5HT</text>
+<text x="790.0" y="1295.7" font-size="10.8" fill="#16202c" text-anchor="middle">NE|OXT</text>
+<rect x="664.0" y="1323.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="790.0" y="1352.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">join the pieces</text>
+<text x="790.0" y="1367.7" font-size="10.8" fill="#16202c" text-anchor="middle">connective + sentence; fixed rotation</text>
+<rect x="964.0" y="1095.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1124.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_resolve_tense</text>
+<text x="1090.0" y="1139.7" font-size="10.8" fill="#16202c" text-anchor="middle">name · auto (lemniscate) · mirror (yours)</text>
+<rect x="964.0" y="1171.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1193.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">topic</text>
+<text x="1090.0" y="1209.2" font-size="10.8" fill="#16202c" text-anchor="middle">cv_morphy_pos lemmas · cv_neighbours (co-</text>
+<text x="1090.0" y="1222.2" font-size="10.8" fill="#16202c" text-anchor="middle">occurrence) · imitation</text>
+<rect x="964.0" y="1247.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1269.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">frame · cv_trajectory</text>
+<text x="1090.0" y="1285.2" font-size="10.8" fill="#16202c" text-anchor="middle">NE&gt;0.3 sva · ≥2 nouns svo · else sv_prep;</text>
+<text x="1090.0" y="1298.2" font-size="10.8" fill="#16202c" text-anchor="middle">meet, then lead</text>
+<polygon points="1090.0,1312.0 1216.0,1356 1090.0,1400.0 964.0,1356" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1358.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">slot left?</text>
+<rect x="964.0" y="1399.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1428.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">Tone7 ← trajectory[k]</text>
+<text x="1090.0" y="1443.7" font-size="10.8" fill="#16202c" text-anchor="middle">cv_tone_from_axis → cv_knobs_of</text>
+<rect x="964.0" y="1475.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="975.0" y1="1475.0" x2="975.0" y2="1541.0" stroke="#3a4656" stroke-width="1.6"/><line x1="1205.0" y1="1475.0" x2="1205.0" y2="1541.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1504.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_pick</text>
+<text x="1090.0" y="1519.7" font-size="10.8" fill="#16202c" text-anchor="middle">one word for the open slot</text>
+<polygon points="1090.0,1540.0 1216.0,1584 1090.0,1628.0 964.0,1584" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1586.4" font-size="12.3" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">web ∧ content slot?</text>
+<rect x="964.0" y="1627.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="975.0" y1="1627.0" x2="975.0" y2="1693.0" stroke="#3a4656" stroke-width="1.6"/><line x1="1205.0" y1="1627.0" x2="1205.0" y2="1693.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1656.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_revisit</text>
+<text x="1090.0" y="1671.7" font-size="10.8" fill="#16202c" text-anchor="middle">thin margin → re-pick on the strut</text>
+<polygon points="1090.0,1692.0 1216.0,1736 1090.0,1780.0 964.0,1736" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1731.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">V slot, or AUX when</text>
+<text x="1090.0" y="1745.2" font-size="11.5" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">tense ≠ present?</text>
+<rect x="964.0" y="1779.0" width="252" height="66" rx="4" fill="#f6d5d5" stroke="#3a4656" stroke-width="1.6"/><line x1="975.0" y1="1779.0" x2="975.0" y2="1845.0" stroke="#3a4656" stroke-width="1.6"/><line x1="1205.0" y1="1779.0" x2="1205.0" y2="1845.0" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1808.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_inflect</text>
+<text x="1090.0" y="1823.7" font-size="10.8" fill="#16202c" text-anchor="middle">the Lyndon verb group</text>
+<rect x="964.0" y="1855.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1877.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_marker · cv_place</text>
+<text x="1090.0" y="1893.2" font-size="10.8" fill="#16202c" text-anchor="middle">invisible tone|tense|conj tag; ring;</text>
+<text x="1090.0" y="1906.2" font-size="10.8" fill="#16202c" text-anchor="middle">taken</text>
+<rect x="964.0" y="1931.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1090.0" y="1960.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">assemble the sentence</text>
+<text x="1090.0" y="1975.7" font-size="10.8" fill="#16202c" text-anchor="middle">capital, full stop; Piece.marked</text>
+<rect x="1264.0" y="1399.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1428.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">(2) cv_pick</text>
+<text x="1390.0" y="1443.7" font-size="10.8" fill="#16202c" text-anchor="middle">ring slot: DET PREP CONJ AUX</text>
+<rect x="1264.0" y="1475.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1497.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">candidates</text>
+<text x="1390.0" y="1513.2" font-size="10.8" fill="#16202c" text-anchor="middle">content: topic − taken, else corpus-</text>
+<text x="1390.0" y="1526.2" font-size="10.8" fill="#16202c" text-anchor="middle">frequent by POS</text>
+<rect x="1264.0" y="1551.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1579.5" font-size="10.9" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">w = P(w|prev)^(coherence·(1+g)) · x</text>
+<text x="1390.0" y="1593.0" font-size="10.8" fill="#16202c" text-anchor="middle">g = bw_correction; user_boost + imitation</text>
+<rect x="1264.0" y="1627.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1656.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">heard words ≥ 1.1 × max</text>
+<text x="1390.0" y="1671.7" font-size="10.8" fill="#16202c" text-anchor="middle">the child repeats what it heard</text>
+<rect x="1264.0" y="1703.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1725.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">prune · pool · novelty</text>
+<text x="1390.0" y="1741.2" font-size="10.8" fill="#16202c" text-anchor="middle">GABA floor · GLU/NE pool · DA rank →</text>
+<text x="1390.0" y="1754.2" font-size="10.8" fill="#16202c" text-anchor="middle">word, P, n</text>
+<rect x="1264.0" y="1779.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1814.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">(3) cv_revisit</text>
+<polygon points="1390.0,1844.0 1516.0,1888 1390.0,1932.0 1264.0,1888" fill="#fbe6b8" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1889.9" font-size="10.6" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_turbulent(weights)?</text>
+<rect x="1264.0" y="1931.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="1952.9" font-size="10.6" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">re-pick under cv_strut_partner(axis)</text>
+<text x="1390.0" y="1966.1" font-size="10.8" fill="#16202c" text-anchor="middle">keep it only if P₂ &gt; P and the word</text>
+<text x="1390.0" y="1979.1" font-size="10.8" fill="#16202c" text-anchor="middle">differs</text>
+<rect x="1264.0" y="2007.0" width="252" height="66" rx="33.0" fill="#cdebd6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="2042.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">(4) cv_inflect</text>
+<rect x="1264.0" y="2083.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="2105.6" font-size="12.8" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_parse_tense → cv_verb_group</text>
+<text x="1390.0" y="2120.9" font-size="10.8" fill="#16202c" text-anchor="middle">ranks TENSE 4 &gt; MODAL 3 &gt; PERF 2 &gt; PROG 1</text>
+<text x="1390.0" y="2133.9" font-size="10.8" fill="#16202c" text-anchor="middle">&gt; V 0; cv_duval</text>
+<rect x="1264.0" y="2159.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="2181.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_conjugates</text>
+<text x="1390.0" y="2197.2" font-size="10.8" fill="#16202c" text-anchor="middle">affix hopping: modal → bare stem; have →</text>
+<text x="1390.0" y="2210.2" font-size="10.8" fill="#16202c" text-anchor="middle">-en; be → -ing</text>
+<rect x="1264.0" y="2235.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="2257.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">cv_form</text>
+<text x="1390.0" y="2273.2" font-size="10.8" fill="#16202c" text-anchor="middle">be/have table · VERB_FORMS (irregular) ·</text>
+<text x="1390.0" y="2286.2" font-size="10.8" fill="#16202c" text-anchor="middle">cv_regular rules</text>
+<rect x="1264.0" y="2311.0" width="252" height="66" rx="4" fill="#dbe7f6" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1390.0" y="2339.8" font-size="12.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">surface · tense code · conj code</text>
+<text x="1390.0" y="2354.3" font-size="10.8" fill="#16202c" text-anchor="middle">will have seen · future · pastpart</text>
+<path d="M1564.0,648.0 A126.0,9 0 0 1 1816.0,648.0 L1816.0,696.0 A126.0,9 0 0 1 1564.0,696.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1564.0,648.0 A126.0,9 0 0 0 1816.0,648.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1690.0" y="667.6" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">voice_lex.bin · monad3_c.bin</text>
+<text x="1690.0" y="683.1" font-size="10.8" fill="#16202c" text-anchor="middle">words, parts of speech, 19 counts; co-</text>
+<text x="1690.0" y="696.1" font-size="10.8" fill="#16202c" text-anchor="middle">occurrence CSR</text>
+<path d="M1564.0,1104.0 A126.0,9 0 0 1 1816.0,1104.0 L1816.0,1152.0 A126.0,9 0 0 1 1564.0,1152.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1564.0,1104.0 A126.0,9 0 0 0 1816.0,1104.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1690.0" y="1130.2" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">english_corpus.txt</text>
+<text x="1690.0" y="1145.7" font-size="10.8" fill="#16202c" text-anchor="middle">the bigram P(w|prev), lam 0.7 (cv_bg_fit)</text>
+<path d="M1564.0,1560.0 A126.0,9 0 0 1 1816.0,1560.0 L1816.0,1608.0 A126.0,9 0 0 1 1564.0,1608.0 Z" fill="#e6e0cc" stroke="#3a4656" stroke-width="1.6"/><path d="M1564.0,1560.0 A126.0,9 0 0 0 1816.0,1560.0" fill="none" stroke="#3a4656" stroke-width="1.6"/>
+<text x="1690.0" y="1579.7" font-size="13.0" font-weight="700" fill="#16202c" text-anchor="middle" font-family="DejaVu Sans Mono, monospace">PTOL_USAGE_DIR</text>
+<text x="1690.0" y="1595.2" font-size="10.8" fill="#16202c" text-anchor="middle">usage_c.txt · numbers_c.txt (kept by the</text>
+<text x="1690.0" y="1608.2" font-size="10.8" fill="#16202c" text-anchor="middle">harness)</text>
+<text x="497.0" y="330.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="632.0" y="286.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="197.0" y="634.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="48.0" y="590.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="797.0" y="1090.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="797.0" y="1242.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="648.0" y="1198.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="932.0" y="1046.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="1097.0" y="1394.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="1097.0" y="1622.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="1097.0" y="1774.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<text x="948.0" y="1578.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="948.0" y="1730.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="948.0" y="1350.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="end" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">no</text>
+<text x="1397.0" y="1926.0" font-size="12" font-weight="700" fill="#16202c" text-anchor="start" paint-order="stroke" stroke="#fbfaf6" stroke-width="4">yes</text>
+<circle cx="920.0" cy="1101.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="920.0" y="1105.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">1</text>
+<circle cx="920.0" cy="1253.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="920.0" y="1257.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">1</text>
+<circle cx="960.0" cy="1101.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="960.0" y="1105.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">1</text>
+<circle cx="1220.0" cy="1481.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1220.0" y="1485.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">2</text>
+<circle cx="1220.0" cy="1633.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1220.0" y="1637.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">3</text>
+<circle cx="1220.0" cy="1785.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1220.0" y="1789.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">4</text>
+<circle cx="1260.0" cy="1405.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1260.0" y="1409.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">2</text>
+<circle cx="1260.0" cy="1785.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1260.0" y="1789.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">3</text>
+<circle cx="1260.0" cy="2013.0" r="12" fill="#ffd34d" stroke="#3a4656" stroke-width="1.6"/><text x="1260.0" y="2017.5" font-size="13" font-weight="700" fill="#000" text-anchor="middle">4</text>
+<text x="490.0" y="514" font-size="11" font-style="italic" fill="#16202c" text-anchor="middle">or  /tense &lt;name&gt; : one sentence</text>
+<text x="490.0" y="527" font-size="11" font-style="italic" fill="#16202c" text-anchor="middle">in that tense, straight to cv_write</text>
+<text x="40" y="2508" font-size="11.5" fill="#16202c">symbols (ISO 5807): oval = start/end · rectangle = step · diamond = decision · parallelogram = input/output · double-barred rectangle = sub-process (another lane, or the other chart) · cylinder = stored data · every title is a name in the code</text>
+</svg>
