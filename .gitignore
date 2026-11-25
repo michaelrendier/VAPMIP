@@ -93,3 +93,4 @@ Currentwork/Wernicke/corpus/session_prompts_*.jsonl
 Currentwork/SemPriCon/experiment_v2/logs/*.dprint.log
 Currentwork/SemPriCon/experiment_v2/home/
 Currentwork/SemPriCon/experiment_v2/text_*.txt
+references/Inference Engineering.pdf

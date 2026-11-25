@@ -18,6 +18,8 @@ H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(
 import joblib
 from user_state import NT, RawMeters, score, net, scalar, arousal_features, empath_counts
 from solution_tests import Solution, TABLE, B, vec14, mix_labels, cos, DSM_ROWS, LIGHT_OF
+from recipes_v2 import LIB2, R as _R
+RV2 = {k: v for k, v in _R(LIB2).items() if np.linalg.norm(v) > 0.05}
 
 LAYERS = [(a, 0) for a in reversed(NT)] + [(a, 1) for a in NT]          # dark V I B G Y O R | light R O Y G B I V  (cursor between)
 RGB = {'OPI': (220, 40, 40), 'GLU': (240, 130, 30), 'GABA': (230, 210, 40), 'DA': (50, 190, 70), '5HT': (50, 110, 230), 'NE': (90, 60, 200), 'OXT': (160, 70, 210)}
@@ -52,23 +54,49 @@ class PromptToState:
         json.dump({'gain': gain.tolist(), 'base': base.tolist(), 'n': len(txt)}, open(f, 'w'))
         return gain, base
 
+    CONT = [(re.compile(r"\bkee?ps?\s+(on\s+)?(?=\w+ing\b)|\bkept\s+(?=\w+ing\b)", re.I), 1.0), (re.compile(r"\bagain\b|\bstill\b|\banymore\b|\bevery\s+(single\s+)?(time|damn|day)\b|\bhow many times\b", re.I), 0.7),
+            (re.compile(r"\b(\d+|two|three|four|five|ten|many|several|hundred|thousand)\s+times\b|\balways\b|\bnever\b|\bcontinu\w+\b", re.I), 0.7)]
+    def continuation(self, text):
+        """Aspect cues: something that keeps happening (keep + -ing, again, still, every time, N times, always/never).  A repeated problem is what frustration is made of
+        (Cody, 2026-11-24): dark dose on 5HT-, GABA-, NE-; two hits at most."""
+        hits = min(2.0, sum(w for rx, w in self.CONT if rx.search(text)))
+        comp = self.rm.vader.polarity_scores(text)['compound']      # the aspect word takes its valence from the predicate: 'keep breaking' is a problem, 'keep going' is not
+        hits *= 2.0 if comp <= -0.2 else (1.0 if comp < 0.2 else 0.0)
+        d = np.zeros(14); d[2 * NT.index('5HT')] = 1.0 * hits; d[2 * NT.index('GABA')] = 0.8 * hits; d[2 * NT.index('NE')] = 0.5 * hits
+        return d, hits
+
     def dose(self, text):
+        """A long text is read sentence by sentence and averaged by length (one dose, not a saturated sum); short text is one reading.  Continuation cues add to it."""
+        ss = [x for x in re.split(r'(?<=[.?!])\s+|\.\.\.+', text) if len(x.strip()) > 3]
+        if len(ss) > 3:
+            parts = [self.dose1(x) for x in ss]; wt = np.array([max(1, len(x.split())) for x in ss], float); wt /= wt.sum()
+            d = sum(w * p[0] for w, p in zip(wt, parts)); sp = sum(w * p[1] for w, p in zip(wt, parts))
+        else: d, sp = self.dose1(text)
+        c, _ = self.continuation(text); return np.minimum(9.0, d + c), sp
+
+    def mask_aspect(self, text):
+        """The aspect words are scored once, by the continuation channel; the usage model never sees them (it reads 'keep going', 'always', 'still' as ordinary words)."""
+        for rx, _ in self.CONT: text = rx.sub(' ', text)
+        return text
+
+    def dose1(self, text):
         """text -> (dose 14 in 0..9 after calibration, spread 14)."""
-        d, sp = self.raw_dose(text); return np.minimum(9.0, d * self.gain), np.minimum(9.0, sp * self.gain)
+        d, sp = self.raw_dose(self.mask_aspect(text)); return np.minimum(9.0, d * self.gain), np.minimum(9.0, sp * self.gain)
 
     def turn(self, text):
         t0 = time.perf_counter()
         d, spread = self.dose(text)
-        words = len(re.findall(r"[A-Za-z']+", text)); v = float(min(2.0, max(0.5, words / 25.0)))   # longer prompt = more volume
+        words = len(re.findall(r"[A-Za-z']+", text)); v = float(min(3.0, max(0.5, words / 25.0)))   # longer prompt = more volume
         incoming_jump = (self.sol.c is not None) and bool((d[0::2] - self.sol.c[0::2]).max() >= 4 and d[0::2].max() >= 5)
         c = self.sol.add(d, v); self.n += 1
         e = c - self.base
-        syn = sorted(((cos(e, vec14(mix_labels({k: 1.0}, TABLE))), k) for k in DSM_ROWS), reverse=True)[0]
-        if np.linalg.norm(e) < 4.5 or syn[0] < 0.6: syn = (0.0, 'none')
+        ranked = sorted(((cos(np.maximum(e, 0), RV2[k]), k) for k in RV2), reverse=True)[:3]          # candidates, not a unique decomposition (R1: under-determined)
+        syn = ranked[0] if np.linalg.norm(np.maximum(e, 0)) >= 2.5 and ranked[0][0] >= 0.6 else (0.0, 'none')
+        self.ranked = [(k, round(c_, 2)) for c_, k in ranked]
         mx = float(np.max(np.abs(e))); self.on = (mx > THR_ON) or (self.on and mx > THR_OFF)
         move = self.move(c, e, incoming_jump)
         return dict(n=self.n, text=text, dose=d.round(1).tolist(), conc=c.round(2).tolist(), spread=spread.round(1).tolist(), volume=round(self.sol.V, 2),
-                    e0=float(np.tanh(3 * net_of(c))), syndrome=(syn[1], round(syn[0], 2)), move=move, jump=incoming_jump, ms=round((time.perf_counter() - t0) * 1e3, 1))
+                    e0=float(np.tanh(3 * net_of(c))), syndrome=(syn[1], round(syn[0], 2)), move=move, jump=incoming_jump, candidates=self.ranked, ms=round((time.perf_counter() - t0) * 1e3, 1))
 
     def move(self, c, e, jump):
         if jump and (c[0::2] - self.base[0::2]).max() > 1.5: return 'hold: abrupt rise; add baseline volume, no new solute (calm)'
@@ -97,7 +125,7 @@ def show(r, color=True, BASE=None):
     s = strip(r['conc']); s = s if color else re.sub(r'\x1b\[[0-9;]*m', '', s)
     top = sorted(range(14), key=lambda i: -abs(r['conc'][i] - BASE[i]))[:3]
     dev = ', '.join(f"{pname(i)} {r['conc'][i]:.1f}({r['conc'][i] - BASE[i]:+.1f}±{r['spread'][i]:.1f})" for i in top)
-    print(f"  {s}  e0 {r['e0']:+.2f}  vol {r['volume']}  {r['ms']} ms\n  largest from baseline: {dev}\n  nearest syndrome: {r['syndrome'][0]} (cos {r['syndrome'][1]})\n  move: {r['move']}", flush=True)
+    print(f"  {s}  e0 {r['e0']:+.2f}  vol {r['volume']}  {r['ms']} ms\n  largest from baseline: {dev}\n  candidates: {', '.join(f'{k} {c}' for k, c in r['candidates'])}\n  move: {r['move']}", flush=True)
 
 DEMO = ["Hi, I'd like to learn how the Lambert W function connects to the Riemann zeros.",
         "That makes sense, thanks. Can you show the next step?",
