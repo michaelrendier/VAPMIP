@@ -30,6 +30,14 @@ def brown_rank():
         _RANK = {w: i + 1 for i, (w, _) in enumerate(c.most_common())}
     return _RANK
 
+_BC = None
+def brown_counts():
+    """lemma -> Brown count and the total: the general-English prior the user's own usage is mixed into."""
+    global _BC
+    if _BC is None:
+        c = collections.Counter(w.lower() for w in brown.words() if w.isalpha()); _BC = (c, sum(c.values()))
+    return _BC
+
 def sentences(text): return [s.strip() for s in re.split(r'(?<=[.?!])\s+|\.\.\.+|\n+', text) if len(s.strip()) > 2]
 def content_lemmas(sent):
     out = []
@@ -98,6 +106,20 @@ class UsageStore:
                 h = e['senses'].setdefault(sid, {'n': 0, 'ctx': {}, 'reg': {}}); h['n'] += 1
                 for c in ctx: h['ctx'][c] = h['ctx'].get(c, 0) + 1
                 if register: h['reg'][register] = h['reg'].get(register, 0) + 1
+
+    # ───────── usage as probability (2026-11-25) ─────────
+    def confidence(self, K: float = 200.0) -> float:
+        """How much of the mix is this user's own usage: lambda = N/(N+K), N = tokens counted. 0 on a cold store, 1 as it grows."""
+        return self.n_obs / (self.n_obs + K)
+
+    def p_word(self, lemma: str, K: float = 200.0) -> float:
+        """P(lemma) = lambda * (user count + 0.5)/(N + 0.5 V_user) + (1 - lambda) * Brown(lemma): the usage field as the probability, backed off to general English
+        while the store is young. Never 0 (Brown smoothing). Compression reading: -log2 p_word is the bits this word costs a reader who knows this user."""
+        bc, bt = brown_counts(); lam = self.confidence(K); lem = lemma.lower()
+        pb = (bc.get(lem, 0) + 0.5) / (bt + 0.5 * len(bc))
+        n = self.lemmas.get(lem, {}).get('n', 0); V = max(1, len(self.lemmas))
+        pu = (n + 0.5) / (self.n_obs + 0.5 * V)
+        return lam * pu + (1.0 - lam) * pb
 
     # ───────── depth, and what is NOT used ─────────
     def profile(self):

@@ -268,7 +268,7 @@ class SedenionWindow:
     """Reads and writes sentences one word at a time. `vocab` (optional LiveVocabulary) learns from what is read."""
 
     def __init__(self, bigram: Bigram, vocab=None, sensors: Optional[Sensors] = None, tone_target=('GABA', 3), english=None,
-                 stats=None, selfctx=None, state=None):
+                 stats=None, selfctx=None, state=None, usage=None):
         self.bg = stats if stats is not None else bigram      # EnglishStats (usage frequency, levels) or the plain Bigram
         self.stats = stats                  # EnglishStats: learns from what the user says (outside text only), never from his own speech
         self.selfctx = selfctx              # context_gearbox.SelfContexts: DATA SELF (what he says/does) and USER SELF (how the user reacts)
@@ -286,12 +286,15 @@ class SedenionWindow:
         self.cum_bits = 0.0
         self.persuader: Optional[Persuader] = None
         self.heard_tone: Tuple[str, int] = ('GABA', 2)
+        self.usage = usage                 # conversation_usage.ConversationUsage (optional): the user's own usage mixed into every P, and the bw_correction channel
         self.state = state                 # state_repass.StateRepass (optional): the user's 14 poles read into the repass (2026-11-25)
 
     def _p(self, w: str, prev: Optional[str]) -> float:
-        if self.stats is not None:
-            return self.stats.p(w, prev, self.level)
-        return self.bg.p(w, prev)
+        p = self.stats.p(w, prev, self.level) if self.stats is not None else self.bg.p(w, prev)
+        if self.usage is not None:                                  # the user's own usage as probability: lambda = N/(N+200), cold store = general English
+            lam = self.usage.store.confidence()
+            p = (1.0 - lam) * p + lam * self.usage.store.p_word(w)
+        return p
 
     # -- sedenion ring --------------------------------------------------------
     def fill(self) -> int:
@@ -401,7 +404,8 @@ class SedenionWindow:
         kn = self.tone7.knobs()                                           # the seven tones act here
         weights = {}
         for w, x in cand.items():
-            v = (self._p(w, prev) ** kn['coherence']) * x                 # 5HT: weight on the word-to-word statistics
+            g = (self.usage.channels.get('bw_correction', 0.0) if self.usage is not None else 0.0) + self.sensors.channels.get('bw_correction', 0.0)
+            v = (self._p(w, prev) ** (kn['coherence'] * max(0.0, 1.0 + g))) * x        # 5HT: weight on the word-to-word statistics; g = Broca-Wernicke drift correction (bw_drift.py): >0 favour probable words (cheaper to write), <0 flatten
             if w in self._user_words:
                 v *= kn['user_boost']                                     # OXT: alignment with the user's own words
             weights[w] = v

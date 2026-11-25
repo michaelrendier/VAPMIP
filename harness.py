@@ -824,6 +824,8 @@ class Harness:
             return FaceResult(ok=True, data='(nothing to hear)',
                               handled_by='observe')
 
+        self._usage_hear(prose, cls, pair_id)           # usage, senses and Broca-Wernicke drift (conversation_usage.py); never raises
+
         hdr = cls if (not pair_id or cls == 'document') else f"{cls} {pair_id}"
         msg = f"{hdr}\n" + "\n".join(_sentences(prose)) + "\n.\n"
 
@@ -849,6 +851,24 @@ class Harness:
                      f"conversational ingest dropped a {cls} turn", center=None)
         return FaceResult(ok=False, error='nowhere to ingest',
                           handled_by='observe')
+
+    def _usage_hear(self, prose: str, cls: str, pair_id: Optional[str]) -> None:
+        """The daemon's usage channel (2026-11-25): in-process, lazy, off with PTOL_USAGE=0, a failure is a warning, not an error."""
+        if os.environ.get('PTOL_USAGE', '1') == '0':
+            return
+        try:
+            if getattr(self, '_cu', None) is None:
+                import conversation_usage
+                self._cu = conversation_usage.ConversationUsage()
+            self._cu.hear(prose, cls, pair_id)
+        except Exception as e:   # noqa: BLE001
+            self._cu = False if getattr(self, '_cu', None) is None else self._cu
+            self.present(f"harness: usage channel failed ({e})", center=None)
+
+    @property
+    def usage(self):
+        """The ConversationUsage in force (its `.store`, `.vocab`, `.drift`, `.channels['bw_correction']`), or None."""
+        return getattr(self, '_cu', None) or None
 
     def hear_turn(self, prompt: Optional[str] = None,
                   response: Optional[str] = None,
