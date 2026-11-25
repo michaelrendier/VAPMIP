@@ -22,7 +22,7 @@ Never insert static functionality into the scaled kite; never move the scalar ki
 
 | dir | what |
 |---|---|
-| `src/` | `19D_*`, `rotary_*`, `ZD_rotary_*`, `VQ_rotary_monad.py`, `scaled_mind_eye_boxkite_kernel_monad.py`, `zd_approach_directions.py`, `sentence_context.py`, `context_fill.py`, `context_pruner.py`, `lyndon_conjugation.py` (stub), `phonetic_face.py`, and the C kite sources (`rotary_rerun.c`, `boxkite_bin.h`, `dump_boxkite_bin.c`, `monad3c.h`) |
+| `src/` | `19D_*`, `rotary_*`, `ZD_rotary_*`, `VQ_rotary_monad.py`, `scaled_mind_eye_boxkite_kernel_monad.py`, `zd_approach_directions.py`, `sentence_context.py`, `context_fill.py`, `context_pruner.py`, `lyndon_conjugation.py` (built 2026-11-25: Lyndon verb group; copy, original in the VAPMIP root), `tenseplan.py` (copy), `phonetic_face.py`, and the C kite sources (`rotary_rerun.c`, `boxkite_bin.h`, `dump_boxkite_bin.c`, `monad3c.h`) |
 | `catalogs/` | `Boxkite-Catalog.txt`, `marrais_boxkite_catalog.txt`, `SedenionOperators.txt` (the de Marrais catalogues) |
 | `docs/` | the pages above |
 

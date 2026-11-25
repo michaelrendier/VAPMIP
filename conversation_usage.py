@@ -42,6 +42,9 @@ class ConversationUsage:
         self.vocab = live_vocabulary.LiveVocabulary(journal_path=os.path.join(self.dir, 'vocab.jsonl'), use_nltk=use_nltk)
         self.drift = bw_drift.BWDrift(); self.pending: Dict[str, float] = {}; self.last: Optional[Dict[str, Any]] = None
         self.channels: Dict[str, Any] = {'bw_correction': 0.0}
+        import numeric
+        self.npath = os.path.join(self.dir, 'numbers.json')
+        self.numbers = numeric.NumberChannel.from_json(json.load(open(self.npath))) if os.path.exists(self.npath) else numeric.NumberChannel()     # numbers are not words: their own channel
 
     def bits_per_word(self, text: str) -> float:
         ws = [w.lower() for w in TOK.findall(text)]
@@ -52,6 +55,10 @@ class ConversationUsage:
 
     def hear(self, prose: str, cls: str = 'external', pair_id: Optional[str] = None, register: Optional[str] = None) -> Optional[Dict[str, Any]]:
         out = None
+        import numeric
+        prose, nums = numeric.split(prose)                      # numerals leave before any word is counted or priced
+        if nums and cls != 'document':
+            self.numbers.hear(nums); json.dump(self.numbers.to_json(), open(self.npath + '.tmp', 'w')); os.replace(self.npath + '.tmp', self.npath)
         if cls == 'external':
             bits = self.bits_per_word(prose)                     # priced BEFORE it is counted: surprise against what the store knew
             self.store.observe(prose, register=register); self.vocab.hear(prose, source='external'); self._save()

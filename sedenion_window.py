@@ -289,6 +289,7 @@ class SedenionWindow:
         self.heard_tone: Tuple[str, int] = ('GABA', 2)
         self.usage = usage                 # conversation_usage.ConversationUsage (optional): the user's own usage mixed into every P, and the bw_correction channel
         self.state = state                 # state_repass.StateRepass (optional): the user's 14 poles read into the repass (2026-11-25)
+        self.imitation = 0.0               # a child repeats what it hears: extra weight on the speaker's own words (0 = off; responder/scaled orbweaver set it)
         self.web = web                     # the orbweaver step at sentence scale (weave_cycle.py): a thin-margin pick is re-picked along the strut (2026-11-25)
         self._last_pick: Dict[str, Any] = {}
         self._mt: Optional[str] = None     # the marker tense of the last repass
@@ -344,6 +345,9 @@ class SedenionWindow:
         else:
             self.heard_tone = detect_tone(text)
             self.persuader = Persuader(self.heard_tone, self.sensors.channels['tone_target'])
+        import numeric as _num
+        text, nums = _num.split(text)                                   # numbers are not words: they leave here and are never read, placed or priced as words
+        if nums: self.sensors.emit('NUM', t=self.t, numbers=[(n.text, n.kind) for n in nums])
         self._user_words = set(re.findall(r"[a-z']+", text.lower())) - CLOSED
         if echo == 0 and self.stats is not None:
             self.stats.observe(text)                                   # usage statistics update as time passes
@@ -412,9 +416,15 @@ class SedenionWindow:
             g = (self.usage.channels.get('bw_correction', 0.0) if self.usage is not None else 0.0) + self.sensors.channels.get('bw_correction', 0.0)
             v = (self._p(w, prev) ** (kn['coherence'] * max(0.0, 1.0 + g))) * x        # 5HT: weight on the word-to-word statistics; g = Broca-Wernicke drift correction (bw_drift.py): >0 favour probable words (cheaper to write), <0 flatten
             if w in self._user_words:
-                v *= kn['user_boost']                                     # OXT: alignment with the user's own words
+                v *= kn['user_boost'] + self.imitation                    # OXT: alignment with the user's own words (+ imitation: the child repeats what it heard)
             weights[w] = v
         mx = max(weights.values())
+        if self.imitation > 0 and self._user_words:                       # the child's own ear: a word it just heard is at least as likely as the best, whatever its frequency
+            mx0 = max(weights.values())
+            for w in list(weights):
+                if w in self._user_words or any(w == (self.nb.wn.morphy(u, 'n') or self.nb.wn.morphy(u, 'v') or u) for u in self._user_words):
+                    weights[w] = max(weights[w], 1.1 * mx0)
+            mx = max(weights.values())
         weights = {w: v for w, v in weights.items() if v >= kn['prune_floor'] * mx}          # GABA: prune weak candidates
         ranked = sorted(weights, key=lambda w: (-weights[w], w))[:kn['pool_size']]            # NE narrows, GLU widens
         weights = {w: weights[w] for w in ranked}
@@ -440,6 +450,12 @@ class SedenionWindow:
             for pos in ('n', 'v', 'a'):
                 for k, x in self.nb.around(w, pos).items():
                     topic[pos][k] = max(topic[pos].get(k, 0.0), x)
+        if self.imitation > 0:                                              # a child can say the words it just heard, in the parts of speech it knows them as
+            for w in toks:
+                if w in CLOSED: continue
+                for pos in ('n', 'v', 'a'):
+                    lem = self.nb.wn.morphy(w, pos) or w                  # 'rules' as a verb is the lemma 'rule' (the verb group inflects it; a surface form would be inflected twice)
+                    if self.nb.wn.synsets(lem, pos): topic[pos][lem] = max(topic[pos].get(lem, 0.0), 1.0)
         nouns = [w for w in toks if w not in CLOSED and self.nb.wn.synsets(w, 'n')]
         first = self.sensors.channels.get('tone_override') or (self.persuader.trajectory(1)[0] if self.persuader else self.heard_tone)
         t0 = Tone7.from_axis(first[0], first[1] / 6.0)

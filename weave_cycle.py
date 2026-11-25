@@ -8,7 +8,7 @@ each scale of the Monad supplies its own options and its own reversal:
     scale      kite                       options (the radii)                    reversal along the strut
     word       scalar boxkite             the senses of a word                   re-read the sense in the WIDER context (the topic and the ring)
     sentence   scaled boxkite (window)    the candidates for an open slot        re-pick under the ANTAGONIST tone: GLU|GABA, DA|5HT, NE|OXT
-    paragraph  the orbweaver proper       the section directions (relations)     the pivot + wrap blocks of OrbWeaverMonad.weave
+    paragraph  the orbweaver proper       the section directions (relations)     the pivot + wrap blocks of ScaledOrbWeaverMonad.compose (sentences by the window, never a template)
 Never insert static functionality into the scaled kite: the scalar word web only reads (senses and spokes); the window calls it, it does not call the window.
 """
 from __future__ import annotations
@@ -80,29 +80,11 @@ def word_web(window, word: str, ctx: List[str], k: int = 3) -> Optional[Dict[str
 
 
 # ── paragraph scale (the orbweaver proper) ────────────────────────────────────────────────────────
-_OW = None
-
-
 def paragraph(window, prompt: str, genre: str = 'paper', scale: Any = 'auto', max_sentences: int = 4, seed: int = 20260903) -> Dict[str, Any]:
-    """Plan with OrbWeaverMonad.weave (radii, scaffold, capture, the pivot on turbulence, tense per block from the lemniscate), then write each paragraph block as
-    a sentence with the window (tense = the block's station), leading with the block's connective.  The window must already have read the user's turn."""
-    global _OW
-    import boxkite_orbweaver_monad as B
-    import lyndon_conjugation as LC
-    from tenseplan import STATION
-    if _OW is None: _OW = B.OrbWeaverMonad()
-    doc = _OW.weave(prompt, scale=scale, genre=genre, seed=seed)
-    sents, tenses = [], []
-    for b in doc.blocks:
-        if len(sents) >= max_sentences: break
-        if b.kind in ('bridge', 'scope'): continue
-        tense = STATION.get(b.tense, 'present')
-        if b.kind == 'paragraph':
-            r = window.write(b.text, tense=tense, read=False)
-            body = r['sentence'].rstrip('.')
-            s = (b.connective_out.capitalize() + ', ' + body[:1].lower() + body[1:] + '.') if r['sentence'] else ''
-        else:                                                           # pivot / wrap: the orbweaver's own structural sentence
-            s = b.text
-        if s: sents.append(s); tenses.append(tense)
-    return {'text': ' '.join(sents), 'sentences': sents, 'tenses': tenses, 'reach': doc.reach, 'turbulent': doc.turbulent, 'regime': doc.room.regime,
-            'tense_phrases': LC.tense_phrases(tenses), 'monotony': LC.tense_monotony(tenses)}
+    """Paragraph scale: the REBUILT orbweaver (scaled_boxkite_orbweaver_monad.py) plans the web and the window writes every sentence (no template prose).
+    The window must already have read the user's turn."""
+    import scaled_boxkite_orbweaver_monad as S
+    m = S.ScaledOrbWeaverMonad(window, seed=seed)
+    c = m.compose(prompt, genre=genre, scale=scale, max_pieces=max_sentences)
+    return {'text': c.text, 'sentences': [p.sentence for p in c.pieces], 'tenses': [p.tense for p in c.pieces], 'numbers': c.numbers, 'unknown': c.unknown,
+            'audit': m.audit(c), **{k: c.plan[k] for k in ('reach', 'turbulent', 'regime', 'tense_phrases', 'monotony')}}

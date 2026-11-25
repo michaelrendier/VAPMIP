@@ -15,7 +15,7 @@
 
 | dir | what |
 |---|---|
-| `src/` | `boxkite_orbweaver_monad.py` (Phase 35 orbweaver), `wordnet_boxkite.py` (WordNet relation hash), `context_hash_v2.py`, `prime_hash.py`, `lineage_hash.py`, `monad_addressing.py`, `monad_english_io.py`, `semantic_paragraph.py`, `zork_parser.py`, `speak.py`, `sem_hash.py`, `eval_checkpoint.py`, `math_isolate.py`, `grammar/` |
+| `src/` | `boxkite_orbweaver_monad.py` (Phase 35 orbweaver, template prose, kept as it was), `scaled_boxkite_orbweaver_monad.py` (2026-11-25 rebuild: window-written sentences, numbers apart; test bench; copy), `weave_cycle.py`, `numeric.py` (copies), `wordnet_boxkite.py` (WordNet relation hash), `context_hash_v2.py`, `prime_hash.py`, `lineage_hash.py`, `monad_addressing.py`, `monad_english_io.py`, `semantic_paragraph.py`, `zork_parser.py`, `speak.py`, `sem_hash.py`, `eval_checkpoint.py`, `math_isolate.py`, `grammar/` |
 | `extractor/` | the content extractor v0 (original work, not a copy) |
 | `sanitize/` | the sanitiser and `build_bins.py` (original work) |
 | `corpus/` | the standard testing corpus: 11 public-domain works, 134 sampled sentences, 24 chat prompts, model-provided reference answers (unreviewed) |

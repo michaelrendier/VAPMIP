@@ -43,7 +43,7 @@ def content_lemmas(sent):
     out = []
     for w in TOK.findall(sent):
         lw = w.lower()
-        if lw in STOP or (len(lw) < 3 and not lw.isdigit()): continue
+        if lw in STOP or len(lw) < 3 or any(c.isdigit() for c in lw): continue      # numbers are not words (numeric.py): no digit token is ever a lemma
         out.append(lw)
     return out
 
