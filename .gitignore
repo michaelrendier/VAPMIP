@@ -94,3 +94,7 @@ Currentwork/SemPriCon/experiment_v2/logs/*.dprint.log
 Currentwork/SemPriCon/experiment_v2/home/
 Currentwork/SemPriCon/experiment_v2/text_*.txt
 references/Inference Engineering.pdf
+
+# generated C data spliced into ptol.c / monad_harness.c (tools/export_c_monad_data.py)
+PtolC/ptol_voice_data.txt
+PtolC/harness_data.txt
