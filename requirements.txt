@@ -28,3 +28,34 @@ six==1.17.0
 sympy==1.14.0
 tqdm==4.70.0
 wheel==0.48.0
+RapidFuzz>=3.14  # tested 3.14.6
+beautifulsoup4>=4.15  # tested 4.15.0
+chardet>=7.6  # tested 7.6.0
+empath>=0.89  # tested 0.89
+jupyter_client>=8.9  # tested 8.9.1
+lemminflect>=0.2  # tested 0.2.3
+nbclient>=0.11  # tested 0.11.0
+nbformat>=5.11  # tested 5.11.0
+pytest>=9.1  # tested 9.1.1
+openai-whisper>=20250625  # tested 20250625
+openpyxl>=3.1  # tested 3.1.5
+pdf2image>=1.17  # tested 1.17.0
+pdfminer.six>=20260107  # tested 20260107
+pyarrow>=26.0  # tested 26.0.1
+pyrtlsdr>=0.5  # tested 0.5.1
+pytesseract>=0.3  # tested 0.3.13
+python-docx>=1.2  # tested 1.2.0
+python-magic>=0.4  # tested 0.4.27
+qrcode>=8.2  # tested 8.2
+reportlab>=5.0  # tested 5.0.1
+scikit-learn>=1.9  # tested 1.9.1
+sentence-transformers>=6.3  # tested 6.3.0
+sounddevice>=0.5  # tested 0.5.5
+spacy>=3.8  # tested 3.8.16
+stanza>=1.15  # tested 1.15.1
+striprtf>=0.0  # tested 0.0.32
+textstat>=0.7  # tested 0.7.13
+torch>=2.15  # tested 2.15.0
+transformers>=5.24  # tested 5.24.0
+wn>=1.1  # tested 1.1.1
+ok>=0.1  # tested 0.1.1
