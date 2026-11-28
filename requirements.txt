@@ -58,4 +58,3 @@ textstat>=0.7  # tested 0.7.13
 torch>=2.15  # tested 2.15.0
 transformers>=5.24  # tested 5.24.0
 wn>=1.1  # tested 1.1.1
-ok>=0.1  # tested 0.1.1
